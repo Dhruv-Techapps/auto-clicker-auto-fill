@@ -135,7 +135,6 @@ const AddonProcessor = (() => {
         `${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${I18N_COMMON.CONDITION_SATISFIED}`
       );
     }
-    throw ACTION_STATUS.SKIPPED;
   };
   const check = async (addon?: Addon, actionSettings?: ActionSettings) => {
     if (addon) {
