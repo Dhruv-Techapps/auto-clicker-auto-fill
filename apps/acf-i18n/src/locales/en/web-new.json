@@ -197,7 +197,8 @@
       "info": "Action condition are used to add condition with relates to previous action status",
       "skip": "Skip Action",
       "goto": "Goto Action",
-      "proceed": "Proceed Action"
+      "proceed": "Proceed Action",
+      "hint": "Below are action which can be performed if condition is not matched by extension"
     },
     "ads": {
       "title": "Please allow ads on our site",

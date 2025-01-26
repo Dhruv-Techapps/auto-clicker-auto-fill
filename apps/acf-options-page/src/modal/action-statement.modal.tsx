@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent } from 'react';
 
-import { ACTION_CONDITION_OPR, ACTION_RUNNING, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
+import { ACTION_CONDITION_OPR, getDefaultActionCondition, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
-import { Alert, Button, Col, Form, Modal, Row, Table } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Form, Modal, Row, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -31,9 +31,9 @@ const ActionStatementModal = () => {
     dispatch(setActionStatementMessage());
   }, message);
 
-  const onUpdateThen = (then: ACTION_RUNNING) => {
+  const onUpdateThen = (then: RETRY_OPTIONS) => {
     dispatch(updateActionStatementThen(then));
-    if (then === ACTION_RUNNING.GOTO) {
+    if (then === RETRY_OPTIONS.GOTO) {
       const actionId = config?.actions[0].id;
       if (actionId) {
         dispatch(updateActionStatementGoto(actionId));
@@ -83,7 +83,7 @@ const ActionStatementModal = () => {
         </Modal.Header>
         <Modal.Body>
           <p className='text-muted'>{t('modal.actionCondition.info')}</p>
-          <h4 className='text-center mb-3'>IF</h4>
+
           <Table className='mb-0'>
             <thead>
               <tr>
@@ -103,52 +103,68 @@ const ActionStatementModal = () => {
               ))}
             </tbody>
           </Table>
-          <h4 className='text-center mt-3'>THEN</h4>
-          <Row className='mt-3'>
-            <Col>
-              <Form.Check
-                type='radio'
-                checked={statement.then === ACTION_RUNNING.SKIP}
-                value={ACTION_RUNNING.SKIP}
-                onChange={() => onUpdateThen(ACTION_RUNNING.SKIP)}
-                name='then'
-                label={t('modal.actionCondition.skip')}
-              />
-            </Col>
-            <Col>
-              <Form.Check
-                type='radio'
-                checked={statement.then === ACTION_RUNNING.PROCEED}
-                value={ACTION_RUNNING.PROCEED}
-                onChange={() => onUpdateThen(ACTION_RUNNING.PROCEED)}
-                name='then'
-                label={t('modal.actionCondition.proceed')}
-              />
-            </Col>
-            <Col>
-              <Form.Check
-                type='radio'
-                checked={statement.then === ACTION_RUNNING.GOTO}
-                value={ACTION_RUNNING.GOTO}
-                onChange={() => onUpdateThen(ACTION_RUNNING.GOTO)}
-                name='then'
-                label={t('modal.actionCondition.goto')}
-              />
-            </Col>
-          </Row>
-          {statement.then === ACTION_RUNNING.GOTO && (
-            <Row>
-              <Col xs={{ span: 4, offset: 8 }}>
-                <Form.Select value={statement.goto} onChange={onUpdateGoto} name='goto' required>
-                  {actions.map((_action, index) => (
-                    <option key={_action.id} value={_action.id}>
-                      {index + 1} . {_action.name ?? _action.elementFinder}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Col>
-            </Row>
-          )}
+          <Card bg='danger' text='white' className='mt-3'>
+            <Card.Body>
+              <Row>
+                <Col xs={12} className='mb-2'>
+                  {t('modal.actionCondition.hint')}
+                </Col>
+                <Col>
+                  <Form.Check
+                    type='radio'
+                    checked={statement.then === RETRY_OPTIONS.STOP}
+                    value={RETRY_OPTIONS.STOP}
+                    onChange={() => onUpdateThen(RETRY_OPTIONS.STOP)}
+                    name='then'
+                    label={t('modal.actionSettings.retry.stop')}
+                  />
+                </Col>
+                <Col>
+                  <Form.Check
+                    type='radio'
+                    checked={statement.then === RETRY_OPTIONS.SKIP}
+                    value={RETRY_OPTIONS.SKIP}
+                    onChange={() => onUpdateThen(RETRY_OPTIONS.SKIP)}
+                    name='then'
+                    label={t('modal.actionSettings.retry.skip')}
+                  />
+                </Col>
+                <Col>
+                  <Form.Check
+                    type='radio'
+                    checked={statement.then === RETRY_OPTIONS.RELOAD}
+                    value={RETRY_OPTIONS.RELOAD}
+                    onChange={() => onUpdateThen(RETRY_OPTIONS.RELOAD)}
+                    name='then'
+                    label={t('modal.actionSettings.retry.refresh')}
+                  />
+                </Col>
+                <Col>
+                  <Form.Check
+                    type='radio'
+                    checked={statement.then === RETRY_OPTIONS.GOTO}
+                    value={RETRY_OPTIONS.GOTO}
+                    onChange={() => onUpdateThen(RETRY_OPTIONS.GOTO)}
+                    name='then'
+                    label={t('modal.actionSettings.retry.goto')}
+                  />
+                </Col>
+              </Row>
+              {statement.then === RETRY_OPTIONS.GOTO && (
+                <Row>
+                  <Col xs={{ span: 4, offset: 8 }}>
+                    <Form.Select value={statement.goto} onChange={onUpdateGoto} name='goto' required>
+                      {actions.map((_action, index) => (
+                        <option key={_action.id} value={_action.id}>
+                          {index + 1} . {_action.name ?? _action.elementFinder}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Col>
+                </Row>
+              )}
+            </Card.Body>
+          </Card>
           {error && (
             <Alert className='mt-3' variant='danger'>
               {error}

@@ -1,4 +1,4 @@
-import { ACTION_RUNNING, ActionStatement, GOTO } from '@dhruv-techapps/acf-common';
+import { ActionStatement, GOTO, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../../../store';
@@ -18,7 +18,7 @@ export const openActionStatementModalAPI = createAsyncThunk<{ statement: ActionS
     }
     const { statement } = action;
     let goto = statement?.goto;
-    if (statement?.then === ACTION_RUNNING.GOTO && typeof statement.goto === 'number') {
+    if (statement?.then === RETRY_OPTIONS.GOTO && typeof statement.goto === 'number') {
       goto = config.actions[statement.goto].id;
     }
     return { statement: statement, selectedActionId, goto };

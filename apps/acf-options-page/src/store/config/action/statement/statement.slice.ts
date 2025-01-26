@@ -1,4 +1,4 @@
-import { ACTION_RUNNING, ActionCondition, ActionStatement, getDefaultActionStatement, GOTO } from '@dhruv-techapps/acf-common';
+import { ActionCondition, ActionStatement, getDefaultActionStatement, GOTO, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
@@ -36,14 +36,14 @@ const slice = createSlice({
     },
     removeActionStatementCondition: (state, action: PayloadAction<RANDOM_UUID>) => {
       const conditionIndex = state.statement.conditions.findIndex((condition) => condition.id === action.payload);
-      if (conditionIndex !== -1) {
+      if (conditionIndex === -1) {
         state.error = 'Invalid Condition';
         Sentry.captureException(state.error);
       } else {
         state.statement.conditions.splice(conditionIndex, 1);
       }
     },
-    updateActionStatementThen: (state, action: PayloadAction<ACTION_RUNNING>) => {
+    updateActionStatementThen: (state, action: PayloadAction<RETRY_OPTIONS>) => {
       state.statement.then = action.payload;
     },
     updateActionStatementGoto: (state, action: PayloadAction<GOTO>) => {

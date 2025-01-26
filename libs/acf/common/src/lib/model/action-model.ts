@@ -39,13 +39,13 @@ export const getDefaultActionCondition = (operator?: ACTION_CONDITION_OPR): Acti
 
 export type ActionStatement = {
   conditions: Array<ActionCondition>;
-  then: ACTION_RUNNING;
+  then: RETRY_OPTIONS;
   goto?: GOTO;
 };
 
 export const getDefaultActionStatement = (operator?: ACTION_CONDITION_OPR): ActionStatement => ({
   conditions: [getDefaultActionCondition(operator)],
-  then: ACTION_RUNNING.PROCEED,
+  then: RETRY_OPTIONS.STOP,
 });
 
 // Action Setting
