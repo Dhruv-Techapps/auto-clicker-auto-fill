@@ -6,9 +6,8 @@ import { RETRY_OPTIONS } from './setting-model';
 
 // Action Condition
 export enum ACTION_STATUS {
-  '~~ Select STATUS ~~' = '',
-  SKIPPED = 'skipped',
   DONE = 'done',
+  SKIPPED = 'skipped',
 }
 
 export enum ACTION_RUNNING {
@@ -32,7 +31,7 @@ export type ActionCondition = {
 export const getDefaultActionCondition = (operator?: ACTION_CONDITION_OPR): ActionCondition => ({
   id: generateUUID(),
   actionIndex: -1,
-  status: ACTION_STATUS['~~ Select STATUS ~~'],
+  status: ACTION_STATUS.DONE,
   operator,
 });
 
@@ -73,7 +72,7 @@ export type Action = {
   addon?: Addon;
   statement?: ActionStatement;
   settings?: ActionSettings;
-  status?: string;
+  status?: ACTION_STATUS;
   error?: string[];
   valueFieldType?: 'text' | 'textarea';
   elementType?: string;

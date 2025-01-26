@@ -16,6 +16,11 @@ const CONTEXT_MENU_I18N = {
 const registerConfigsContextMenus = () => {
   let contextMenuExist = false;
   chrome.tabs.onActivated.addListener(() => {
+    if (contextMenuExist) {
+      contextMenuExist = false;
+      chrome.contextMenus.remove('configs-list-separator');
+      chrome.contextMenus.remove('configs-list');
+    }
     chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
       const currentTab = tabs[0];
       if (currentTab?.url) {
@@ -38,10 +43,6 @@ const registerConfigsContextMenus = () => {
                 parentId: 'configs-list',
               });
             });
-          } else if (contextMenuExist) {
-            contextMenuExist = false;
-            chrome.contextMenus.remove('configs-list-separator');
-            chrome.contextMenus.remove('configs-list');
           }
         }
       }
