@@ -11,7 +11,7 @@ import {
   switchConfigRemoveModal,
   switchConfigReorderModal,
 } from '@apps/acf-options-page/src/store/config';
-import { Ban, Filter, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
+import { Ban, EyeSlashFill, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
 import { useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -61,8 +61,8 @@ export const ConfigSidebar = (props) => {
           <Form.Control className='d-flex' ref={searchRef} type='search' onChange={onSearchChange} placeholder='Search' id='search-configuration'></Form.Control>
         </Form>
         <Dropdown className='ml-2' id='config-detail-filter-wrapper'>
-          <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' className='fs-4' aria-label='Filter Action Column'>
-            <Filter />
+          <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' className='fs-4' aria-label='Toggle Action Column'>
+            <EyeSlashFill />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={onDetailChange} data-column='name' disabled={!detailVisibility.url} active={detailVisibility.name}>
