@@ -1,10 +1,10 @@
 import { Card, Col, Form, FormControl, Modal, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
-import { getFieldNameValue } from '../util/element';
+import { useTimeout } from '../_hooks/message.hooks';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { batchSelector, selectedConfigSelector, setBatchMessage, switchBatchModal, updateBatch } from '../store/config';
-import { useTimeout } from '../_hooks/message.hooks';
 import { REGEX } from '../util';
+import { getFieldNameValue } from '../util/element';
 
 const FORM_ID = 'batch-body';
 
@@ -47,7 +47,7 @@ const BatchModal = () => {
           <Modal.Title as='h6'>{t('batch.title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Card>
+          <Card bg='warning'>
             <Card.Body>
               <Row>
                 <Col md='12' sm='12'>
@@ -61,17 +61,17 @@ const BatchModal = () => {
                     <hr className='my-3' />
                     <Col md='6' sm='12'>
                       <Form.Group controlId='batch-repeat'>
-                        <FormControl type='number' name='repeat' pattern={REGEX.NUMBER} defaultValue={batch?.repeat} onBlur={onUpdate} autoComplete='off' placeholder='0' list='repeat' />
                         <Form.Label>{t('batch.repeat')}</Form.Label>
+                        <FormControl type='number' name='repeat' pattern={REGEX.NUMBER} defaultValue={batch?.repeat} onBlur={onUpdate} autoComplete='off' placeholder='0' list='repeat' />
                         <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
                       </Form.Group>
                     </Col>
                     <Col md='6' sm='12'>
                       <Form.Group controlId='batch-repeat-interval'>
-                        <FormControl name='repeatInterval' pattern={REGEX.INTERVAL} autoComplete='off' defaultValue={batch?.repeatInterval} onBlur={onUpdate} placeholder='0' list='interval' />
                         <Form.Label>
                           {t('batch.repeatInterval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
                         </Form.Label>
+                        <FormControl name='repeatInterval' pattern={REGEX.INTERVAL} autoComplete='off' defaultValue={batch?.repeatInterval} onBlur={onUpdate} placeholder='0' list='interval' />
                         <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
                       </Form.Group>
                     </Col>

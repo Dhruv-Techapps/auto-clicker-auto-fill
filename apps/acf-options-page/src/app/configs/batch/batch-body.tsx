@@ -1,10 +1,10 @@
+import { REGEX } from '@apps/acf-options-page/src/util';
 import { useEffect } from 'react';
 import { Card, Col, Form, FormControl, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { getFieldNameValue, updateForm } from '../../../util/element';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectedConfigSelector, updateBatch } from '../../../store/config';
-import { REGEX } from '@apps/acf-options-page/src/util';
+import { getFieldNameValue, updateForm } from '../../../util/element';
 
 const FORM_ID = 'batch-body';
 
