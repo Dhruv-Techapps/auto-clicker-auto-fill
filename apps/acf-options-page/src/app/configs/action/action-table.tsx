@@ -18,7 +18,7 @@ import { Button, Dropdown, Form, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { DropdownToggle } from '../../../components';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
-import { EyeSlashFill, Plus, REGEX, ThreeDots, Trash } from '../../../util';
+import { Ban, EyeSlashFill, Plus, REGEX, ThreeDots, Trash } from '../../../util';
 import { defaultColumn } from './editable-cell';
 
 type ActionMeta = { dataType: string; list: string; pattern: string; required: boolean; width?: string };
@@ -216,6 +216,7 @@ const ActionTable = ({ actions }: ActionProps) => {
                 <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
               ))}
               <td align='center'>
+                {actions[row.id].disabled && <Ban className='me-2' />}
                 <Button
                   variant='link'
                   data-testid='action-remove'

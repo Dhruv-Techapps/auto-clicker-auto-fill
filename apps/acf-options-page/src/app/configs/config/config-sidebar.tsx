@@ -1,3 +1,4 @@
+import { useConfirmationModalContext } from '@apps/acf-options-page/src/_providers/confirm.provider';
 import { DropdownToggle } from '@apps/acf-options-page/src/components';
 import { useAppDispatch, useAppSelector } from '@apps/acf-options-page/src/hooks';
 import {
@@ -12,6 +13,7 @@ import {
   switchConfigReorderModal,
 } from '@apps/acf-options-page/src/store/config';
 import { Ban, EyeSlashFill, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
+import { Configuration } from '@dhruv-techapps/acf-common';
 import { useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -21,12 +23,18 @@ export const ConfigSidebar = (props) => {
   const dispatch = useAppDispatch();
   const { selectedConfigId, detailVisibility } = useAppSelector(configSelector);
   const configs = useAppSelector(filteredConfigsSelector);
-
+  const modalContext = useConfirmationModalContext();
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const onRemoveConfig = (e, id) => {
+  const onRemoveConfig = async (e: React.MouseEvent<HTMLButtonElement>, config: Configuration) => {
     e.stopPropagation();
-    dispatch(removeConfig(id));
+    const name = config.name || config.url;
+    const result = await modalContext.showConfirmation({
+      title: t('confirm.configuration.remove.title'),
+      message: t('confirm.configuration.remove.message', { name }),
+      headerClass: 'text-danger',
+    });
+    result && dispatch(removeConfig(config.id));
   };
 
   const onSearchChange = (e) => {
@@ -119,7 +127,7 @@ export const ConfigSidebar = (props) => {
               </div>
               {!config.enable && <Ban className='link-secondary' title='Disabled' />}
             </div>
-            <Button variant='link' data-testid='remove-configuration' onClick={(e) => onRemoveConfig(e, config.id)} disabled={configs.length === 1}>
+            <Button variant='link' data-testid='remove-configuration' onClick={(e) => onRemoveConfig(e, config)} disabled={configs.length === 1}>
               <Trash className={configs.length === 1 ? '' : 'link-danger'} title='Delete' />
             </Button>
           </ListGroup.Item>
