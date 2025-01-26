@@ -216,7 +216,7 @@ const ActionTable = ({ actions }: ActionProps) => {
                 <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
               ))}
               <td align='center'>
-                {actions[row.id].disabled && <Ban className='me-2' />}
+                {actions[row.id].disabled && <Ban className='me-2' title='Disabled' />}
                 <Button
                   variant='link'
                   data-testid='action-remove'
@@ -225,7 +225,7 @@ const ActionTable = ({ actions }: ActionProps) => {
                   }}
                   disabled={actions.length === 1}
                 >
-                  <Trash className={actions.length === 1 ? '' : 'text-danger'} />
+                  <Trash className={actions.length === 1 ? '' : 'text-danger'} title='Delete' />
                 </Button>
                 {actions[row.id].elementFinder && (
                   <Dropdown id='acton-dropdown-wrapper' className='d-inline-block'>
