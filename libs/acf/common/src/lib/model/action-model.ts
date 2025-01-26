@@ -23,14 +23,15 @@ export enum ACTION_CONDITION_OPR {
 
 export type ActionCondition = {
   id: RANDOM_UUID;
-  actionIndex: number;
+  actionIndex?: number;
+  actionId: RANDOM_UUID;
   status: ACTION_STATUS;
   operator?: ACTION_CONDITION_OPR;
 };
 
-export const getDefaultActionCondition = (operator?: ACTION_CONDITION_OPR): ActionCondition => ({
+export const getDefaultActionCondition = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionCondition => ({
   id: generateUUID(),
-  actionIndex: -1,
+  actionId,
   status: ACTION_STATUS.DONE,
   operator,
 });
@@ -43,8 +44,8 @@ export type ActionStatement = {
   goto?: GOTO;
 };
 
-export const getDefaultActionStatement = (operator?: ACTION_CONDITION_OPR): ActionStatement => ({
-  conditions: [getDefaultActionCondition(operator)],
+export const getDefaultActionStatement = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionStatement => ({
+  conditions: [getDefaultActionCondition(actionId, operator)],
   then: RETRY_OPTIONS.STOP,
 });
 

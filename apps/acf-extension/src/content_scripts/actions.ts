@@ -17,8 +17,7 @@ const ACTION_I18N = {
 
 const Actions = (() => {
   const checkStatement = async (actions: Array<Action>, action: Action) => {
-    const actionStatus = actions.map((action) => action.status ?? ACTION_STATUS['~~ Select STATUS ~~']);
-    Statement.check(actionStatus, action.statement);
+    Statement.check(actions, action.statement);
   };
 
   const notify = async (action: Action) => {

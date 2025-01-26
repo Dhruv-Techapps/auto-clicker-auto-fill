@@ -50,8 +50,8 @@ const ActionStatementModal = () => {
     onHide();
   };
 
-  const addCondition = () => {
-    dispatch(addActionStatementCondition(getDefaultActionCondition(ACTION_CONDITION_OPR.AND)));
+  const addCondition = (actionId: RANDOM_UUID) => {
+    dispatch(addActionStatementCondition(getDefaultActionCondition(actionId, ACTION_CONDITION_OPR.AND)));
   };
 
   const onHide = () => {
@@ -91,7 +91,7 @@ const ActionStatementModal = () => {
                 <th>Action</th>
                 <th>Status</th>
                 <th>
-                  <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition()}>
+                  <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id)}>
                     <Plus />
                   </Button>
                 </th>
