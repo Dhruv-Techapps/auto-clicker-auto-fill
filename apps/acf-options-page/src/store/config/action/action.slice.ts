@@ -4,7 +4,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 
 const HIDDEN_COLUMN_KEY = 'columnVisibility';
-const defaultColumnVisibility = { initWait: false, repeat: false, repeatInterval: false };
+const defaultColumnVisibility = { name: true, initWait: false, repeat: false, repeatInterval: false };
 
 type ActionStore = {
   error?: string;

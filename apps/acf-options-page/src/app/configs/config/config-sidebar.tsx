@@ -11,7 +11,7 @@ import {
   switchConfigRemoveModal,
   switchConfigReorderModal,
 } from '@apps/acf-options-page/src/store/config';
-import { Filter, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
+import { Ban, Filter, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
 import { useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -117,9 +117,10 @@ export const ConfigSidebar = (props) => {
                 {detailVisibility.name && <div className='text-truncate'>{`${config.name || 'configuration - ' + (index + 1)}`}</div>}
                 {detailVisibility.url && <div className='text-truncate text-secondary'>{config.url}</div>}
               </div>
+              {!config.enable && <Ban className='link-secondary' title='Disabled' />}
             </div>
             <Button variant='link' data-testid='remove-configuration' onClick={(e) => onRemoveConfig(e, config.id)} disabled={configs.length === 1}>
-              <Trash className={configs.length === 1 ? '' : 'link-danger'} />
+              <Trash className={configs.length === 1 ? '' : 'link-danger'} title='Delete' />
             </Button>
           </ListGroup.Item>
         ))}

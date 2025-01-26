@@ -1,6 +1,15 @@
 import { useConfirmationModalContext } from '@apps/acf-options-page/src/_providers/confirm.provider';
 import { useAppDispatch, useAppSelector } from '@apps/acf-options-page/src/hooks';
-import { actionSelector, addAction, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI, removeAction, updateAction } from '@apps/acf-options-page/src/store/config';
+import {
+  actionSelector,
+  addAction,
+  openActionAddonModalAPI,
+  openActionSettingsModalAPI,
+  openActionStatementModalAPI,
+  removeAction,
+  setColumnVisibility,
+  updateAction,
+} from '@apps/acf-options-page/src/store/config';
 import { Action } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { ColumnDef, Row, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from '@tanstack/react-table';
@@ -9,7 +18,7 @@ import { Button, Dropdown, Form, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { DropdownToggle } from '../../../components';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
-import { Plus, REGEX, ThreeDots, Trash } from '../../../util';
+import { EyeSlashFill, Plus, REGEX, ThreeDots, Trash } from '../../../util';
 import { defaultColumn } from './editable-cell';
 
 type ActionMeta = { dataType: string; list: string; pattern: string; required: boolean; width?: string };
@@ -24,6 +33,11 @@ const ActionTable = ({ actions }: ActionProps) => {
   const { columnVisibility } = useAppSelector(actionSelector);
   const dispatch = useAppDispatch();
   const modalContext = useConfirmationModalContext();
+
+  const onColumnChange = (e) => {
+    const column = e.currentTarget.getAttribute('data-column');
+    dispatch(setColumnVisibility(column));
+  };
 
   const removeActionConfirm = async (actionId: RANDOM_UUID, index: number) => {
     const action = actions.find((action) => action.id === actionId);
@@ -170,7 +184,27 @@ const ActionTable = ({ actions }: ActionProps) => {
                   {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
-              <th style={{ width: '92px' }}>&nbsp;</th>
+              <th style={{ width: '92px', textAlign: 'center' }}>
+                <Dropdown className='ml-2' id='acton-column-filter-wrapper'>
+                  <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 fs-5' aria-label='Toggle Action Column'>
+                    <EyeSlashFill />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={onColumnChange} data-column='name' active={columnVisibility.name}>
+                      {t('action.name')}
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={onColumnChange} data-column='initWait' active={columnVisibility.initWait}>
+                      {t('action.initWait')}
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={onColumnChange} data-column='repeat' active={columnVisibility.repeat}>
+                      {t('action.repeat')}
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={onColumnChange} data-column='repeatInterval' active={columnVisibility.repeatInterval}>
+                      {t('action.repeatInterval')}
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </th>
             </tr>
           ))}
         </thead>

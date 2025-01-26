@@ -112,12 +112,11 @@ const AddonModal = () => {
                   </Form.Group>
                 </Col>
               </Row>
-              <div hidden={!(addon.elementFinder && addon.condition && addon.value)} data-testid='addon-recheck'>
-                <hr />
-                <AddonRecheck />
-              </div>
             </Card.Body>
           </Card>
+          <div hidden={!(addon.elementFinder && addon.condition && addon.value)} data-testid='addon-recheck'>
+            <AddonRecheck />
+          </div>
           {error && (
             <Alert className='mt-3' variant='danger'>
               {error}
