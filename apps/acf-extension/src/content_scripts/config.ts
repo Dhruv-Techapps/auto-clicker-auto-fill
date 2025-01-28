@@ -92,7 +92,7 @@ const ConfigProcessor = (() => {
             );
           }
         } else {
-          console.error(error.title, error.message);
+          console.error('%s: %s', error.title, error.message);
         }
         scope.captureEvent(e);
       } else {
