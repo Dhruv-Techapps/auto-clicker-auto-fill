@@ -12,7 +12,7 @@ type ActionStatementConditionProps = {
 };
 
 function ActionStatementCondition({ condition, index }: ActionStatementConditionProps) {
-  const { actionId, status, operator = ACTION_CONDITION_OPR.AND } = condition;
+  const { actionId, actionIndex, status, operator = ACTION_CONDITION_OPR.AND } = condition;
   const config = useAppSelector(selectedConfigSelector);
 
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function ActionStatementCondition({ condition, index }: ActionStatementCondition
   const { actions } = config;
 
   return (
-    <tr>
+    <tr className={actionIndex !== undefined && actionId === undefined ? 'table-danger' : ''}>
       <td className='fw-bold'>
         {index !== 0 && (
           <ButtonGroup>

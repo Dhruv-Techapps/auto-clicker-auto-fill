@@ -2,11 +2,18 @@ import { Action, ACTION_CONDITION_OPR, ACTION_RUNNING, ActionCondition, ActionSt
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
 
+const ACTION_CONDITION_I18N = {
+  TITLE: chrome.i18n.getMessage('@ACTION_CONDITION__TITLE'),
+};
+
 const Statement = (() => {
   const conditionResult = (conditions: Array<ActionCondition>, actions: Array<Action>) => {
+    if (conditions.filter((condition) => condition.actionIndex !== undefined && condition.actionId === undefined).length > 0) {
+      throw new ConfigError(I18N_ERROR.ACTION_CONDITION_CONFIG_ERROR, ACTION_CONDITION_I18N.TITLE);
+    }
     return conditions
-      .map(({ actionId, actionIndex, status, operator }) => ({
-        status: actionIndex === undefined ? actions.find((action) => action.id === actionId)?.status === status : actions[actionIndex].status === status,
+      .map(({ actionId, status, operator }) => ({
+        status: actions.find((action) => action.id === actionId)?.status === status,
         operator,
       }))
       .reduce((accumulator, currentValue) => {
@@ -18,7 +25,7 @@ const Statement = (() => {
   };
 
   const checkThen = (condition: boolean, then: RETRY_OPTIONS, goto?: GOTO) => {
-    window.__actionError = `↔️ ${chrome.i18n.getMessage('@ACTION__TITLE')} ${condition ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`;
+    window.__actionError = `↔️ ${ACTION_CONDITION_I18N.TITLE} ${condition ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`;
     if (!condition) {
       if (then === RETRY_OPTIONS.GOTO && goto) {
         throw goto;
@@ -31,7 +38,7 @@ const Statement = (() => {
           });
         }
       } else if (then === RETRY_OPTIONS.STOP) {
-        throw new ConfigError(`Action Condition`, I18N_ERROR.NO_MATCH);
+        throw new ConfigError(I18N_ERROR.NO_MATCH, ACTION_CONDITION_I18N.TITLE);
       }
       throw ACTION_RUNNING.SKIP;
     }

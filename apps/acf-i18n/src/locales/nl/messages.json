@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Toevoegen"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Actievoorwaarde"
+  },
   "@BATCH__TITLE": {
     "message": "Partij"
   },
@@ -72,7 +75,7 @@
     "message": "Elementzoeker is leeg"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Add-onvoorwaarde kwam niet overeen."
+    "message": "De conditie kwam niet overeen."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Verkeerde vergelijking"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Niet gevonden - HERLADEN"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Actie niet gevonden voor Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Geen element gevonden met de opgegeven selector"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Ga naar de configuratiepagina om de actievoorwaarde te controleren en bij te werken, zodat u zeker weet dat de configuratie correct is bijgewerkt."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Conditie voldaan"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Conditie niet voldaan"
   },
   "@ERROR": {
     "message": "Fout"

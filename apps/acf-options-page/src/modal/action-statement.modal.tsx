@@ -83,7 +83,6 @@ const ActionStatementModal = () => {
         </Modal.Header>
         <Modal.Body>
           <p className='text-muted'>{t('modal.actionCondition.info')}</p>
-
           <Table className='mb-0'>
             <thead>
               <tr>

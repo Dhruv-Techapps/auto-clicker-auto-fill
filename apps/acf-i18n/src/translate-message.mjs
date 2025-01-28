@@ -1,4 +1,4 @@
-import { TranslateCommon } from './translate.common';
+import { TranslateCommon } from './translate.common.mjs';
 
 class TranslateMessage extends TranslateCommon {
   constructor() {
@@ -11,7 +11,7 @@ class TranslateMessage extends TranslateCommon {
 
     for (const key in obj) {
       const value = obj[key];
-      const targetValue = targetJson?.[key];
+      let targetValue = targetJson?.[key];
       if (typeof value === 'string' && key === 'message') {
         translatedObject[key] = await this.translateStringValue(value, targetValue, targetLanguage);
       } else if (typeof value === 'object') {

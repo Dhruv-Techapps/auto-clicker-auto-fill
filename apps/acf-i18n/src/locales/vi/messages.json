@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Thêm vào"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Hành động Điều kiện"
+  },
   "@BATCH__TITLE": {
     "message": "Lô hàng"
   },
@@ -72,7 +75,7 @@
     "message": "Trình tìm kiếm phần tử trống"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Điều kiện addon không phù hợp."
+    "message": "tình trạng không khớp."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "So sánh không chính xác"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Không tìm thấy - TẢI LẠI"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Không tìm thấy hành động nào cho Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Không tìm thấy phần tử nào có bộ chọn đã cho"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Vui lòng truy cập trang cấu hình để xem lại và cập nhật Điều kiện hành động để đảm bảo cấu hình được cập nhật đúng cách."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Điều kiện thỏa mãn"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Điều kiện không thỏa mãn"
   },
   "@ERROR": {
     "message": "Lỗi"

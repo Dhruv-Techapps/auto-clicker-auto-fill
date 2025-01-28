@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Aggiungi su"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Condizione di azione"
+  },
   "@BATCH__TITLE": {
     "message": "Lotto"
   },
@@ -72,7 +75,7 @@
     "message": "Trova elemento è vuoto"
   },
   "@ERROR__NO_MATCH": {
-    "message": "La condizione del componente aggiuntivo non corrispondeva."
+    "message": "la condizione non corrispondeva."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Confronto errato"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Non trovato - RICARICA"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Azione non trovata per Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Nessun elemento trovato con il selettore specificato"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Visitare la pagina di configurazione per rivedere e aggiornare la Condizione azione per garantire che la configurazione sia aggiornata correttamente."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Condizione Soddisfatta"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Condizione non soddisfatta"
   },
   "@ERROR": {
     "message": "Errore"

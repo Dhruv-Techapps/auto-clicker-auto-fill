@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Hinzufügen Auf"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Aktionsbedingung"
+  },
   "@BATCH__TITLE": {
     "message": "Charge"
   },
@@ -72,7 +75,7 @@
     "message": "Der Elementfinder ist leer"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Die Add-On-Bedingung stimmte nicht überein."
+    "message": "Bedingung stimmte nicht überein."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Falscher Vergleich"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Nicht gefunden – NEU LADEN"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Für „Gehe zu“ wurde keine Aktion gefunden."
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Mit dem angegebenen Selektor wurde kein Element gefunden"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Bitte besuchen Sie die Konfigurationsseite, um die Aktionsbedingung zu überprüfen und zu aktualisieren, damit sichergestellt ist, dass die Konfiguration ordnungsgemäß aktualisiert wird."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Bedingung erfüllt"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Bedingung nicht erfüllt"
   },
   "@ERROR": {
     "message": "Fehler"

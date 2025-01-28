@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Adicionar"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Condição de ação"
+  },
   "@BATCH__TITLE": {
     "message": "Lote"
   },
@@ -72,7 +75,7 @@
     "message": "O Localizador de elementos está em branco"
   },
   "@ERROR__NO_MATCH": {
-    "message": "A condição do complemento não corresponde."
+    "message": "condição não correspondeu."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Comparação incorreta"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Não encontrado - RECARREGAR"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Ação não encontrada para Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Nenhum elemento encontrado com o seletor fornecido"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Acesse a página de configuração para revisar e atualizar a Condição de Ação para garantir que a configuração esteja atualizada corretamente."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Condição Satisfeita"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Condição não satisfeita"
   },
   "@ERROR": {
     "message": "Erro"

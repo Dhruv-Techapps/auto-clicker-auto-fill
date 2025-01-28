@@ -49,7 +49,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "node translate-web.js",
+        "command": "node translate-web.mjs",
         "cwd": "apps/acf-i18n/src"
       }
     },
@@ -57,7 +57,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "node translate-message.js",
+        "command": "node translate-message.mjs",
         "cwd": "apps/acf-i18n/src"
       }
     }

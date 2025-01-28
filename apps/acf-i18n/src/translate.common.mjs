@@ -1,6 +1,6 @@
 import gct from '@google-cloud/translate';
 import fs from 'fs';
-import { LANGUAGES } from './translate.constant.js';
+import { LANGUAGES } from './translate.constant.mjs';
 const { Translate } = gct.v2;
 
 class TranslateCommon {
