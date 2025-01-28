@@ -28,7 +28,7 @@ export const ConfigSidebar = (props) => {
 
   const onRemoveConfig = async (e: React.MouseEvent<HTMLButtonElement>, config: Configuration) => {
     e.stopPropagation();
-    const name = config.name || config.url;
+    const name = config.name ?? config.url;
     const result = await modalContext.showConfirmation({
       title: t('confirm.configuration.remove.title'),
       message: t('confirm.configuration.remove.message', { name }),
