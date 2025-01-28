@@ -94,7 +94,7 @@ const ConfigProcessor = (() => {
         } else {
           console.error(error.title, '\n', error.message);
         }
-        scope.captureEvent(e);
+        scope.captureMessage(e.message, 'warning', { data: { title: e.title } });
       } else {
         throw e;
       }

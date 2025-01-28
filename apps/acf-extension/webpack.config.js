@@ -34,7 +34,12 @@ module.exports = composePlugins(withNx(), (config, ctx) => {
         loader: 'file-loader',
         options: { publicPath: path.resolve(__dirname, 'dist'), outputPath: '/css', name: '[name].min.css' },
       },
-      'sass-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          api: 'modern',
+        },
+      },
     ],
   });
 

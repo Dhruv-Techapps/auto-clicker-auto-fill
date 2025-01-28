@@ -32,5 +32,21 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
       })
     );
   }
+  config.module.rules = config.module.rules.map((rule) => {
+    if (rule.test?.test('.sass')) {
+      rule.oneOf.map((oneOf) => {
+        if (oneOf.test?.test('.sass')) {
+          oneOf.use.map((use) => {
+            if (use.loader.includes('sass-loader')) {
+              use.options.api = 'modern';
+            }
+            return use;
+          });
+        }
+        return oneOf;
+      });
+    }
+    return rule;
+  });
   return config;
 });

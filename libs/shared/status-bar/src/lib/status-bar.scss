@@ -1,3 +1,5 @@
+@use 'sass:list';
+
 $sections: 'icon', 'text', 'batch', 'action', 'addon', 'timer';
 $colors: #140330, #290661, #3d0a91, #520dc2, #6610f2, #8540f5, #a370f7, #c29ffa, #e0cffc;
 $gray-colors: #212529, #343a40, #495057, #6c757d, #adb5bd, #ced4da, #dee2e6, #e9ecef, #f8f9fa;
@@ -42,8 +44,8 @@ $gray-colors: #212529, #343a40, #495057, #6c757d, #adb5bd, #ced4da, #dee2e6, #e9
     }
 
     @each $section in $sections {
-      $index: index($sections, $section);
-      $bg-color: nth($gray-colors, $index);
+      $index: list.index($sections, $section);
+      $bg-color: list.nth($gray-colors, $index);
 
       &.#{$section} {
         position: relative;

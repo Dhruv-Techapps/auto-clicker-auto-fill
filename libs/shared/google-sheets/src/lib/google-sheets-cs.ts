@@ -68,6 +68,7 @@ export class GoogleSheetsCS {
         throw new ConfigError('Please connect to Google Sheets from global menu', 'Google Sheets');
       }
       console.warn('Google Sheets', error);
+      throw error;
     }
     return undefined;
   }
