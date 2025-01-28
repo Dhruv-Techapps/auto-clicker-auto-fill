@@ -4,7 +4,6 @@ import { I18N_COMMON, I18N_ERROR } from './i18n';
 
 const Statement = (() => {
   const conditionResult = (conditions: Array<ActionCondition>, actions: Array<Action>) => {
-    console.log('conditions', conditions, 'actions', actions);
     return conditions
       .map(({ actionId, actionIndex, status, operator }) => ({
         status: actionIndex === undefined ? actions.find((action) => action.id === actionId)?.status === status : actions[actionIndex].status === status,

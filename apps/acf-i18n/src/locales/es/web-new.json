@@ -195,7 +195,8 @@
       "info": "Las condiciones de acción se utilizan para agregar condiciones relacionadas con el estado de la acción anterior.",
       "skip": "Saltar acción",
       "goto": "Ir a acción",
-      "proceed": "Continuar acción"
+      "proceed": "Continuar acción",
+      "hint": "A continuación se muestran las acciones que se pueden realizar si la condición no coincide con la extensión"
     },
     "ads": {
       "title": "Por favor permita anuncios en nuestro sitio",

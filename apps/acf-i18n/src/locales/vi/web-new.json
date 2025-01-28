@@ -195,7 +195,8 @@
       "info": "Điều kiện hành động được sử dụng để thêm điều kiện liên quan đến trạng thái hành động trước đó",
       "skip": "Bỏ qua hành động",
       "goto": "Đi đến hành động",
-      "proceed": "Tiến hành hành động"
+      "proceed": "Tiến hành hành động",
+      "hint": "Dưới đây là hành động có thể được thực hiện nếu điều kiện không khớp với phần mở rộng"
     },
     "ads": {
       "title": "Vui lòng cho phép quảng cáo trên trang web của chúng tôi",

@@ -195,7 +195,8 @@
       "info": "La condition d'action est utilisée pour ajouter une condition liée à l'état de l'action précédente",
       "skip": "Ignorer l'action",
       "goto": "Passer à l'action",
-      "proceed": "Continuer l'action"
+      "proceed": "Continuer l'action",
+      "hint": "Vous trouverez ci-dessous les actions qui peuvent être effectuées si la condition n'est pas remplie par extension"
     },
     "ads": {
       "title": "S'il vous plaît permettre aux annonces sur notre site",

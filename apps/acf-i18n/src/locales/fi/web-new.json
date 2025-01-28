@@ -195,7 +195,8 @@
       "info": "Toimintoehtoja käytetään lisäämään ehtoja, jotka liittyvät edelliseen toiminnan tilaan",
       "skip": "Ohita toiminto",
       "goto": "Siirry toimintoon",
-      "proceed": "Jatka toimintoa"
+      "proceed": "Jatka toimintoa",
+      "hint": "Alla on toiminto, joka voidaan suorittaa, jos ehto ei vastaa laajennusta"
     },
     "ads": {
       "title": "Salli mainokset sivustollamme",
