@@ -11,7 +11,7 @@ class TranslateMessage extends TranslateCommon {
 
     for (const key in obj) {
       const value = obj[key];
-      let targetValue = targetJson?.[key];
+      const targetValue = targetJson?.[key];
       if (typeof value === 'string' && key === 'message') {
         translatedObject[key] = await this.translateStringValue(value, targetValue, targetLanguage);
       } else if (typeof value === 'object') {
