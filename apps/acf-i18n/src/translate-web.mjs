@@ -1,4 +1,4 @@
-import { TranslateCommon } from './translate.common.js';
+import { TranslateCommon } from './translate.common.mjs';
 
 class TranslateWeb extends TranslateCommon {
   constructor() {
