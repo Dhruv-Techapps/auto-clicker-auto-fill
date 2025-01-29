@@ -47,7 +47,7 @@ const BatchModal = () => {
           <Modal.Title as='h6'>{t('batch.title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Card bg='warning'>
+          <Card bg='warning-subtle' text='warning-emphasis'>
             <Card.Body>
               <Row>
                 <Col md='12' sm='12'>
