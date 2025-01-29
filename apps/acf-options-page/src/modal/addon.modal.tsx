@@ -67,15 +67,18 @@ const AddonModal = () => {
               <Row className='mb-3'>
                 <Col md={6} sm={12}>
                   <Form.Group controlId='addon-element'>
-                    <Form.Control type='text' placeholder='Element Finder' defaultValue={addon.elementFinder} onBlur={onUpdate} list='elementFinder' name='elementFinder' required />
                     <Form.Label>
                       {t('modal.addon.elementFinder')} <small className='text-danger'>*</small>
                     </Form.Label>
+                    <Form.Control type='text' placeholder='Element Finder' defaultValue={addon.elementFinder} onBlur={onUpdate} list='elementFinder' name='elementFinder' required />
                     <Form.Control.Feedback type='invalid'>{t('error.elementFinder')}</Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col md={6} sm={12}>
                   <Form.Group controlId='addon-condition'>
+                    <Form.Label>
+                      {t('modal.addon.condition')} <small className='text-danger'>*</small>
+                    </Form.Label>
                     <Form.Select value={addon.condition} onChange={onUpdate} name='condition' required>
                       {Object.entries(ADDON_CONDITIONS).map((condition) => (
                         <option key={condition[1]} value={condition[1]}>
@@ -83,9 +86,6 @@ const AddonModal = () => {
                         </option>
                       ))}
                     </Form.Select>
-                    <Form.Label>
-                      {t('modal.addon.condition')} <small className='text-danger'>*</small>
-                    </Form.Label>
                     <Form.Control.Feedback type='invalid'>{t('error.condition')}</Form.Control.Feedback>
                   </Form.Group>
                 </Col>
@@ -93,21 +93,26 @@ const AddonModal = () => {
               <Row>
                 <Col md sm={12}>
                   <Form.Group controlId='addon-value'>
-                    <Form.Control type='text' placeholder='Value' defaultValue={addon.value} onBlur={onUpdate} name='value' required list='value' />
                     <Form.Label>
                       {t('modal.addon.value')} <small className='text-danger'>*</small>
                     </Form.Label>
+                    <Form.Control type='text' placeholder='Value' defaultValue={addon.value} onBlur={onUpdate} name='value' required list='value' />
                     <Form.Control.Feedback type='invalid'>{t('error.value')}</Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col md sm={12}>
                   <Form.Group controlId='addon-value-extractor' className='addon-value-extractor'>
+                    <Form.Label>{t('modal.addon.valueExtractor')}</Form.Label>
                     <InputGroup>
                       <Form.Control type='text' placeholder='Value Extractor' defaultValue={addon.valueExtractor} name='valueExtractor' list='valueExtractor' onBlur={onUpdate} />
-                      <AddonValueExtractorFlags />
+                      {addon?.valueExtractor ? (
+                        <AddonValueExtractorFlags />
+                      ) : (
+                        <InputGroup.Text>
+                          <ValueExtractorPopover />
+                        </InputGroup.Text>
+                      )}
                     </InputGroup>
-                    <Form.Label>{t('modal.addon.valueExtractor')}</Form.Label>
-                    {!addon?.valueExtractor && <ValueExtractorPopover />}
                     <Form.Control.Feedback type='invalid'>{t('error.valueExtractor')}</Form.Control.Feedback>
                   </Form.Group>
                 </Col>

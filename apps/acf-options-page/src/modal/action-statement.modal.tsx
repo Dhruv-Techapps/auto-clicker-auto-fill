@@ -102,7 +102,7 @@ const ActionStatementModal = () => {
               ))}
             </tbody>
           </Table>
-          <Card bg='danger' text='white' className='mt-3'>
+          <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>
             <Card.Body>
               <Row>
                 <Col xs={12} className='mb-2'>

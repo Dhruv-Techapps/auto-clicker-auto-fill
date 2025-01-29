@@ -1,7 +1,7 @@
 import { RECHECK_OPTIONS } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent } from 'react';
-import { Card, Col, Form, FormControl, Row } from 'react-bootstrap';
+import { Card, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { actionAddonSelector, selectedConfigSelector, updateActionAddon, updateActionAddonGoto } from '../../store/config';
@@ -39,29 +39,29 @@ function AddonRecheck() {
 
   return (
     <>
-      <Card bg='warning' className='mt-3'>
+      <Card bg='warning-subtle' text='warning-emphasis' className='mt-3'>
         <Card.Body>
           <Row>
             <Col md={6} sm={12}>
-              <Form.Group controlId='addon-recheck'>
-                <Form.Label>{t('modal.addon.recheck.title')}</Form.Label>
+              <InputGroup>
+                <InputGroup.Text>{t('modal.addon.recheck.title')}</InputGroup.Text>
                 <FormControl placeholder='0' onBlur={onUpdate} defaultValue={addon.recheck} type='number' pattern={REGEX.NUMBER} list='recheck' name='recheck' />
                 <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-              </Form.Group>
+              </InputGroup>
             </Col>
             <Col md={6} sm={12}>
-              <Form.Group controlId='addon-recheck-interval'>
-                <Form.Label>
+              <InputGroup>
+                <InputGroup.Text>
                   {t('modal.addon.recheck.interval')}&nbsp;<small>({t('common.sec')})</small>
-                </Form.Label>
+                </InputGroup.Text>
                 <FormControl placeholder='0' onBlur={onUpdate} defaultValue={addon.recheckInterval} list='interval' pattern={REGEX.INTERVAL} name='recheckInterval' />
                 <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-              </Form.Group>
+              </InputGroup>
             </Col>
           </Row>
         </Card.Body>
       </Card>
-      <Card bg='danger' text='white' className='mt-3'>
+      <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>
         <Card.Body>
           <Row>
             <Col xs={12} className='mb-2'>

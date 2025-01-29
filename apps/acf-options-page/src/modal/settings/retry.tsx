@@ -1,5 +1,5 @@
 import { RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
-import { Card, Form, FormControl } from 'react-bootstrap';
+import { Card, Form, FormControl, InputGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { settingsSelector, updateSettings } from '../../store/settings/settings.slice';
@@ -19,23 +19,23 @@ function SettingRetry() {
 
   return (
     <>
-      <Card bg='warning'>
+      <Card bg='warning-subtle' text='warning-emphasis'>
         <Card.Body className='d-flex gap-3'>
-          <Form.Group controlId='retry' className='w-100'>
-            <Form.Label>{t('modal.settings.retry.title')}</Form.Label>
+          <InputGroup>
+            <InputGroup.Text>{t('modal.settings.retry.title')}</InputGroup.Text>
             <FormControl placeholder='5' autoComplete='off' name='retry' defaultValue={settings.retry} onBlur={onUpdate} type='number' pattern={REGEX.NUMBER} list='retry' />
             <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId='retryInterval' className='w-100'>
-            <Form.Label>
+          </InputGroup>
+          <InputGroup>
+            <InputGroup.Text>
               {t('modal.settings.retry.interval')}&nbsp;<small>({t('common.sec')})</small>
-            </Form.Label>
+            </InputGroup.Text>
             <FormControl placeholder='1' autoComplete='off' name='retryInterval' defaultValue={settings.retryInterval} onBlur={onUpdate} pattern={REGEX.INTERVAL} list='interval' />
             <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-          </Form.Group>
+          </InputGroup>
         </Card.Body>
       </Card>
-      <Card bg='danger' text='white' className='mt-3'>
+      <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>
         <Card.Body>
           <p>{t('modal.settings.retry.hint')}</p>
           <div className='d-flex justify-content-between mt-3'>

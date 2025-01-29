@@ -1,6 +1,5 @@
 @use 'sidebar';
 @use 'configs';
-@use 'input';
 @use 'doc';
 @use 'subscription';
 
@@ -23,14 +22,6 @@ input::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
   opacity: 0;
   display: none;
-}
-/* Firefox */
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
-button.btn[data-toggle='dropdown'] {
-  color: var(--bs-body-color);
 }
 
 #main {
