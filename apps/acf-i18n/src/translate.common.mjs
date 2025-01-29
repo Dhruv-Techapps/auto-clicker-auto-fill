@@ -1,6 +1,7 @@
-import { Translate } from '@google-cloud/translate';
+import gct from '@google-cloud/translate';
 import fs from 'fs';
-import { LANGUAGES } from './translate.constant';
+import { LANGUAGES } from './translate.constant.mjs';
+const { Translate } = gct.v2;
 
 class TranslateCommon {
   file = '${file}';
@@ -57,6 +58,4 @@ class TranslateCommon {
   };
 }
 
-module.exports = {
-  TranslateCommon,
-};
+export { TranslateCommon };

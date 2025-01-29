@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Tillägg"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Åtgärdsvillkor"
+  },
   "@BATCH__TITLE": {
     "message": "Omgång"
   },
@@ -72,7 +75,7 @@
     "message": "Element Finder är tom"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Tilläggsvillkoret matchade inte."
+    "message": "skicket stämde inte."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Felaktig jämförelse"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Hittade inte - LADDA OM"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Åtgärden hittades inte för Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Inget element hittades med den givna väljaren"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Besök konfigurationssidan för att granska och uppdatera åtgärdsvillkoret för att säkerställa att konfigurationen är korrekt uppdaterad."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Tillstånd tillfredsställt"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Skick ej uppfyllt"
   },
   "@ERROR": {
     "message": "Fel"

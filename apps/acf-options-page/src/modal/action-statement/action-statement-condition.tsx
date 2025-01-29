@@ -12,7 +12,7 @@ type ActionStatementConditionProps = {
 };
 
 function ActionStatementCondition({ condition, index }: ActionStatementConditionProps) {
-  const { actionIndex, status, operator = ACTION_CONDITION_OPR.AND } = condition;
+  const { actionId, actionIndex, status, operator = ACTION_CONDITION_OPR.AND } = condition;
   const config = useAppSelector(selectedConfigSelector);
 
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function ActionStatementCondition({ condition, index }: ActionStatementCondition
   const { actions } = config;
 
   return (
-    <tr>
+    <tr className={actionIndex !== undefined && actionId === undefined ? 'table-danger' : ''}>
       <td className='fw-bold'>
         {index !== 0 && (
           <ButtonGroup>
@@ -53,10 +53,9 @@ function ActionStatementCondition({ condition, index }: ActionStatementCondition
         )}
       </td>
       <td>
-        <Form.Select value={actionIndex} onChange={onUpdate} name='actionIndex' required className='flex-grow-1 me-1'>
-          <option value=''>~~ SELECT ACTION ~~</option>
+        <Form.Select value={actionId} onChange={onUpdate} name='actionId' required className='flex-grow-1 me-1'>
           {actions.map((_action, index) => (
-            <option key={_action.id} value={index}>
+            <option key={_action.id} value={_action.id}>
               {index + 1} . {_action.name || _action.elementFinder}
             </option>
           ))}

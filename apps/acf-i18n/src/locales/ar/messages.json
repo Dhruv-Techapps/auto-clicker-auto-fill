@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "اضافه"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "حالة العمل"
+  },
   "@BATCH__TITLE": {
     "message": "حزمة"
   },
@@ -72,7 +75,7 @@
     "message": "الباحث عن العناصر فارغ"
   },
   "@ERROR__NO_MATCH": {
-    "message": "حالة الملحق غير متطابقة."
+    "message": "الحالة لم تتطابق."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "مقارنة غير صحيحة"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "لم يتم العثور عليه - أعد التحميل"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "لم يتم العثور على إجراء للانتقال إلى"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "لم يتم العثور على أي عنصر مع المحدد المحدد"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "يرجى زيارة صفحة التكوين لمراجعة وتحديث شرط الإجراء للتأكد من تحديث التكوين بشكل صحيح."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "الحالة مرضية"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "الحالة غير مرضية"
   },
   "@ERROR": {
     "message": "خطأ"

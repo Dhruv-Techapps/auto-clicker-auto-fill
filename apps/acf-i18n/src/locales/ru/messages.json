@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Добавить"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Действие Условие"
+  },
   "@BATCH__TITLE": {
     "message": "Партия"
   },
@@ -72,7 +75,7 @@
     "message": "Поиск элементов пуст"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Состояние аддона не соответствует."
+    "message": "условие не совпало."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Некорректное сравнение"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Не найдено – ПЕРЕЗАГРУЗИТЬ"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Действие не найдено для Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Элемент с указанным селектором не найден"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Посетите страницу конфигурации, чтобы просмотреть и обновить условие действия, чтобы убедиться, что конфигурация обновлена правильно."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Состояние удовлетворительное"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Состояние не выполнено"
   },
   "@ERROR": {
     "message": "Ошибка"

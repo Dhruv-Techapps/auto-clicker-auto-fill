@@ -195,7 +195,8 @@
       "info": "As condições de ação são usadas para adicionar condições relacionadas ao status da ação anterior",
       "skip": "Pular ação",
       "goto": "Ir para ação",
-      "proceed": "Continuar Ação"
+      "proceed": "Continuar Ação",
+      "hint": "Abaixo estão as ações que podem ser executadas se a condição não for correspondida pela extensão"
     },
     "ads": {
       "title": "Por favor, permita anúncios em nosso site",

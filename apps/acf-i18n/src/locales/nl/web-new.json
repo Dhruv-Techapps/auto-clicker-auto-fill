@@ -195,7 +195,8 @@
       "info": "Actievoorwaarden worden gebruikt om voorwaarden toe te voegen die betrekking hebben op de eerdere actiestatus",
       "skip": "Actie overslaan",
       "goto": "Ga naar Actie",
-      "proceed": "Ga door met actie"
+      "proceed": "Ga door met actie",
+      "hint": "Hieronder staan de acties die kunnen worden uitgevoerd als de extensie niet aan de voorwaarde voldoet"
     },
     "ads": {
       "title": "Sta advertenties op onze site toe",

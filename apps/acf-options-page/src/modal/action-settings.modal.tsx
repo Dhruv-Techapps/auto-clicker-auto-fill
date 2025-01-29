@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 
 import { RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
-import { Alert, Button, Card, Col, Form, FormControl, Modal, Row } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
@@ -85,7 +85,7 @@ const ActionSettingsModal = () => {
         </Modal.Header>
         <Modal.Body>
           <p className='text-muted'>{t('modal.actionSettings.info')}</p>
-          <Card className='mb-3'>
+          <Card>
             <Card.Body>
               <Row>
                 <Col md={12} sm={12}>
@@ -95,18 +95,21 @@ const ActionSettingsModal = () => {
               </Row>
             </Card.Body>
           </Card>
-          <Card>
+          <Card bg='warning-subtle' text='warning-emphasis' className='mt-3'>
             <Card.Body>
               <Row className='mb-2 mb-md-0'>
                 <Col md={6} sm={12}>
-                  <Form.Group controlId='retry'>
+                  <InputGroup>
+                    <InputGroup.Text>{t('modal.actionSettings.retry.title')}</InputGroup.Text>
                     <FormControl placeholder={t('modal.actionSettings.retry.title')} name='retry' type='number' onBlur={onUpdate} defaultValue={settings.retry} pattern={REGEX.NUMBER} list='retry' />
-                    <Form.Label>{t('modal.actionSettings.retry.title')}</Form.Label>
                     <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-                  </Form.Group>
+                  </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
-                  <Form.Group controlId='retryInterval'>
+                  <InputGroup>
+                    <InputGroup.Text>
+                      {t('modal.actionSettings.retry.interval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
+                    </InputGroup.Text>
                     <FormControl
                       placeholder={`${t('modal.actionSettings.retry.interval')} (${t('common.sec')})`}
                       list='interval'
@@ -115,14 +118,17 @@ const ActionSettingsModal = () => {
                       defaultValue={settings.retryInterval}
                       pattern={REGEX.INTERVAL}
                     />
-                    <Form.Label>
-                      {t('modal.actionSettings.retry.interval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
-                    </Form.Label>
                     <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-                  </Form.Group>
+                  </InputGroup>
                 </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+          <Card bg='danger-subtle' text='danger-subtle' className='mt-3'>
+            <Card.Body>
+              <Row>
                 <Col xs={12} className='mb-2'>
-                  <Form.Text className='text-muted'>{t('modal.actionSettings.retry.hint')}</Form.Text>
+                  {t('modal.actionSettings.retry.hint')}
                 </Col>
                 <Col>
                   <Form.Check

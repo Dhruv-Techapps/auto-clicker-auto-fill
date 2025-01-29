@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Ajouter sur"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Condition d'action"
+  },
   "@BATCH__TITLE": {
     "message": "Lot"
   },
@@ -72,7 +75,7 @@
     "message": "Le chercheur d'élément est vide"
   },
   "@ERROR__NO_MATCH": {
-    "message": "La condition d'addon ne correspondait pas."
+    "message": "l'état ne correspondait pas."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Comparaison incorrecte"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Non trouvé - Reload"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Action non trouvée pour Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Aucun élément trouvé avec le sélecteur donné"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Veuillez visiter la page de configuration pour vérifier et mettre à jour la condition d'action afin de vous assurer que la configuration est correctement mise à jour."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Condition satisfaite"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Condition non satisfaite"
   },
   "@ERROR": {
     "message": "Erreur"

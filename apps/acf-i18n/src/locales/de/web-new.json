@@ -195,7 +195,8 @@
       "info": "Aktionsbedingungen werden verwendet, um Bedingungen hinzuzufügen, die sich auf den vorherigen Aktionsstatus beziehen.",
       "skip": "Aktion überspringen",
       "goto": "Gehe zu Aktion",
-      "proceed": "Aktion fortsetzen"
+      "proceed": "Aktion fortsetzen",
+      "hint": "Nachfolgend finden Sie die Aktionen, die ausgeführt werden können, wenn die Bedingung nicht durch die Erweiterung erfüllt wird."
     },
     "ads": {
       "title": "Bitte erlauben Sie Anzeigen auf unserer Site",

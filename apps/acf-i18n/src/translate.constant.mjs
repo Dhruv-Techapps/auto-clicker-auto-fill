@@ -16,6 +16,4 @@ const LANGUAGES = [
   { lang: 'id', folder: 'id' },
 ];
 
-module.exports = {
-  LANGUAGES,
-};
+export { LANGUAGES };

@@ -73,7 +73,7 @@ const ConfigProcessor = (() => {
     } catch (e) {
       if (e instanceof ConfigError) {
         statusBar.error(e.message);
-        const error = { title: e.title, message: `url : ${config.url}\n${e.message}` };
+        const error = { title: e.title, message: `${e.message}\n on ${config.url}` };
         const { notifications } = await new SettingsStorage().getSettings();
         if (notifications?.onError) {
           const { sound, discord } = notifications;
@@ -92,7 +92,7 @@ const ConfigProcessor = (() => {
             );
           }
         } else {
-          console.error(error.title, '\n', error.message);
+          console.error('%s: %s', error.title, error.message);
         }
         scope.captureMessage(e.message, 'warning', { data: { title: e.title } });
       } else {

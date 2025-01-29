@@ -1,5 +1,5 @@
-import { ACTION_RUNNING, ActionCondition, ActionStatement, getDefaultActionStatement, GOTO } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { ActionCondition, ActionStatement, getDefaultActionStatement, GOTO, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
+import { generateUUID, RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../../../store';
@@ -12,7 +12,7 @@ type ActionStatementStore = {
   statement: ActionStatement;
 };
 
-const initialState: ActionStatementStore = { visible: false, statement: getDefaultActionStatement() };
+const initialState: ActionStatementStore = { visible: false, statement: getDefaultActionStatement(generateUUID()) };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StatementCondition = { name: string; value: any; id: RANDOM_UUID };
@@ -36,14 +36,14 @@ const slice = createSlice({
     },
     removeActionStatementCondition: (state, action: PayloadAction<RANDOM_UUID>) => {
       const conditionIndex = state.statement.conditions.findIndex((condition) => condition.id === action.payload);
-      if (conditionIndex !== -1) {
+      if (conditionIndex === -1) {
         state.error = 'Invalid Condition';
         Sentry.captureException(state.error);
       } else {
         state.statement.conditions.splice(conditionIndex, 1);
       }
     },
-    updateActionStatementThen: (state, action: PayloadAction<ACTION_RUNNING>) => {
+    updateActionStatementThen: (state, action: PayloadAction<RETRY_OPTIONS>) => {
       state.statement.then = action.payload;
     },
     updateActionStatementGoto: (state, action: PayloadAction<GOTO>) => {
@@ -68,7 +68,7 @@ const slice = createSlice({
       if (action.payload.statement) {
         state.statement = { ...action.payload.statement, goto: action.payload.goto };
       } else {
-        state.statement = getDefaultActionStatement();
+        state.statement = getDefaultActionStatement(action.payload.firstActionId);
       }
       state.visible = !state.visible;
     });

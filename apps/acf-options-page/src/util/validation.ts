@@ -1,5 +1,5 @@
 export const IN_VALID_CLASS = 'is-invalid';
-export const NUMBER_FIELDS = ['retry', 'retryInterval', 'recheck', 'recheckInterval', 'repeat', 'repeatInterval', 'initWait', 'actionIndex'];
+export const NUMBER_FIELDS = ['retry', 'retryInterval', 'recheck', 'recheckInterval', 'repeat', 'repeatInterval', 'initWait'];
 
 document.addEventListener('keyup', (e) => {
   const ele = e.target as HTMLInputElement;

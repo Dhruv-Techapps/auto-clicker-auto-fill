@@ -6,9 +6,8 @@ import { RETRY_OPTIONS } from './setting-model';
 
 // Action Condition
 export enum ACTION_STATUS {
-  '~~ Select STATUS ~~' = '',
-  SKIPPED = 'skipped',
   DONE = 'done',
+  SKIPPED = 'skipped',
 }
 
 export enum ACTION_RUNNING {
@@ -24,15 +23,16 @@ export enum ACTION_CONDITION_OPR {
 
 export type ActionCondition = {
   id: RANDOM_UUID;
-  actionIndex: number;
+  actionIndex?: number;
+  actionId: RANDOM_UUID;
   status: ACTION_STATUS;
   operator?: ACTION_CONDITION_OPR;
 };
 
-export const getDefaultActionCondition = (operator?: ACTION_CONDITION_OPR): ActionCondition => ({
+export const getDefaultActionCondition = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionCondition => ({
   id: generateUUID(),
-  actionIndex: -1,
-  status: ACTION_STATUS['~~ Select STATUS ~~'],
+  actionId,
+  status: ACTION_STATUS.DONE,
   operator,
 });
 
@@ -40,13 +40,13 @@ export const getDefaultActionCondition = (operator?: ACTION_CONDITION_OPR): Acti
 
 export type ActionStatement = {
   conditions: Array<ActionCondition>;
-  then: ACTION_RUNNING;
+  then: RETRY_OPTIONS;
   goto?: GOTO;
 };
 
-export const getDefaultActionStatement = (operator?: ACTION_CONDITION_OPR): ActionStatement => ({
-  conditions: [getDefaultActionCondition(operator)],
-  then: ACTION_RUNNING.PROCEED,
+export const getDefaultActionStatement = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionStatement => ({
+  conditions: [getDefaultActionCondition(actionId, operator)],
+  then: RETRY_OPTIONS.STOP,
 });
 
 // Action Setting
@@ -73,7 +73,7 @@ export type Action = {
   addon?: Addon;
   statement?: ActionStatement;
   settings?: ActionSettings;
-  status?: string;
+  status?: ACTION_STATUS;
   error?: string[];
   valueFieldType?: 'text' | 'textarea';
   elementType?: string;

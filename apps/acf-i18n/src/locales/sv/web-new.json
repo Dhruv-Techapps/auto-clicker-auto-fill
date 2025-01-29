@@ -195,7 +195,8 @@
       "info": "Åtgärdsvillkor används för att lägga till villkor med relaterade till tidigare åtgärdsstatus",
       "skip": "Skip Action",
       "goto": "Gå till Action",
-      "proceed": "Fortsätt åtgärd"
+      "proceed": "Fortsätt åtgärd",
+      "hint": "Nedan finns åtgärder som kan utföras om villkoret inte matchas genom förlängning"
     },
     "ads": {
       "title": "Tillåt annonser på vår webbplats",

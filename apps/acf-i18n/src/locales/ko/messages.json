@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "애도"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "동작 조건"
+  },
   "@BATCH__TITLE": {
     "message": "일괄"
   },
@@ -72,7 +75,7 @@
     "message": "요소 찾기는 비어 있습니다"
   },
   "@ERROR__NO_MATCH": {
-    "message": "애드온 조건이 일치하지 않았습니다."
+    "message": "조건이 일치하지 않습니다."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "잘못된 비교"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "찾을 수 없습니다 - 다시로드"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Goto에 대한 작업을 찾을 수 없습니다."
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "주어진 선택기로 요소를 찾을 수 없습니다."
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "구성이 올바르게 업데이트되었는지 확인하려면 구성 페이지를 방문하여 작업 조건을 검토하고 업데이트하세요."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "조건 만족됨"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "조건이 만족스럽지 않음"
   },
   "@ERROR": {
     "message": "오류"

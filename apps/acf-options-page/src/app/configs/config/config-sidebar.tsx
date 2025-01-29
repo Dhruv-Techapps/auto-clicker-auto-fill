@@ -1,3 +1,4 @@
+import { useConfirmationModalContext } from '@apps/acf-options-page/src/_providers/confirm.provider';
 import { DropdownToggle } from '@apps/acf-options-page/src/components';
 import { useAppDispatch, useAppSelector } from '@apps/acf-options-page/src/hooks';
 import {
@@ -11,7 +12,8 @@ import {
   switchConfigRemoveModal,
   switchConfigReorderModal,
 } from '@apps/acf-options-page/src/store/config';
-import { Filter, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
+import { Ban, EyeSlashFill, Plus, ThreeDots, Trash } from '@apps/acf-options-page/src/util';
+import { Configuration } from '@dhruv-techapps/acf-common';
 import { useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -21,12 +23,18 @@ export const ConfigSidebar = (props) => {
   const dispatch = useAppDispatch();
   const { selectedConfigId, detailVisibility } = useAppSelector(configSelector);
   const configs = useAppSelector(filteredConfigsSelector);
-
+  const modalContext = useConfirmationModalContext();
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const onRemoveConfig = (e, id) => {
+  const onRemoveConfig = async (e: React.MouseEvent<HTMLButtonElement>, config: Configuration) => {
     e.stopPropagation();
-    dispatch(removeConfig(id));
+    const name = config.name ?? config.url;
+    const result = await modalContext.showConfirmation({
+      title: t('confirm.configuration.remove.title'),
+      message: t('confirm.configuration.remove.message', { name }),
+      headerClass: 'text-danger',
+    });
+    result && dispatch(removeConfig(config.id));
   };
 
   const onSearchChange = (e) => {
@@ -61,8 +69,8 @@ export const ConfigSidebar = (props) => {
           <Form.Control className='d-flex' ref={searchRef} type='search' onChange={onSearchChange} placeholder='Search' id='search-configuration'></Form.Control>
         </Form>
         <Dropdown className='ml-2' id='config-detail-filter-wrapper'>
-          <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' className='fs-4' aria-label='Filter Action Column'>
-            <Filter />
+          <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' className='fs-4' aria-label='Toggle Action Column'>
+            <EyeSlashFill />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={onDetailChange} data-column='name' disabled={!detailVisibility.url} active={detailVisibility.name}>
@@ -117,9 +125,10 @@ export const ConfigSidebar = (props) => {
                 {detailVisibility.name && <div className='text-truncate'>{`${config.name || 'configuration - ' + (index + 1)}`}</div>}
                 {detailVisibility.url && <div className='text-truncate text-secondary'>{config.url}</div>}
               </div>
+              {!config.enable && <Ban className='link-secondary' title='Disabled' />}
             </div>
-            <Button variant='link' data-testid='remove-configuration' onClick={(e) => onRemoveConfig(e, config.id)} disabled={configs.length === 1}>
-              <Trash className={configs.length === 1 ? '' : 'link-danger'} />
+            <Button variant='link' data-testid='remove-configuration' onClick={(e) => onRemoveConfig(e, config)} disabled={configs.length === 1}>
+              <Trash className={configs.length === 1 ? '' : 'link-danger'} title='Delete' />
             </Button>
           </ListGroup.Item>
         ))}

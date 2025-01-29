@@ -1,8 +1,8 @@
-import { TranslateCommon } from './translate.common';
+import { TranslateCommon } from './translate.common.mjs';
 
-class TranslateWeb extends TranslateCommon {
+class TranslateMessage extends TranslateCommon {
   constructor() {
-    super('web-new.json');
+    super('messages.json');
   }
 
   // Function to recursively translate the values in an object
@@ -12,7 +12,7 @@ class TranslateWeb extends TranslateCommon {
     for (const key in obj) {
       const value = obj[key];
       const targetValue = targetJson?.[key];
-      if (typeof value === 'string') {
+      if (typeof value === 'string' && key === 'message') {
         translatedObject[key] = await this.translateStringValue(value, targetValue, targetLanguage);
       } else if (typeof value === 'object') {
         translatedObject[key] = await this.translateObject(value, targetLanguage, targetValue);
@@ -23,4 +23,4 @@ class TranslateWeb extends TranslateCommon {
   };
 }
 
-new TranslateWeb().start();
+new TranslateMessage().start();

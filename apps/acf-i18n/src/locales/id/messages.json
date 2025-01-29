@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Tambahan"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Kondisi Aksi"
+  },
   "@BATCH__TITLE": {
     "message": "Kelompok"
   },
@@ -72,7 +75,7 @@
     "message": "Pencari Elemen kosong"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Kondisi addon tidak cocok."
+    "message": "kondisi tidak cocok."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Perbandingan yang salah"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "Tidak Ditemukan - MUAT ULANG"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Tindakan tidak ditemukan untuk Goto"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "Tidak ada elemen yang ditemukan dengan pemilih yang diberikan"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Silakan kunjungi halaman konfigurasi untuk meninjau dan memperbarui Kondisi Tindakan guna memastikan konfigurasi diperbarui dengan benar."
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "Kondisi Memuaskan"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "Kondisi Tidak Memuaskan"
   },
   "@ERROR": {
     "message": "Kesalahan"

@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { LOAD_TYPES, START_TYPES, URL_MATCH, defaultHotkey } from '@dhruv-techapps/acf-common';
-import { Card, Col, Form, FormControl, Modal, Row } from 'react-bootstrap';
+import { Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { HotkeyPopover } from '../popover';
-import { StartTimePopover } from '../popover/start-time.popover';
 import { configSettingsSelector, selectedConfigSelector, setConfigSettingsMessage, switchConfigSettingsModal, updateConfigSettings } from '../store/config';
 import { REGEX } from '../util';
 import { getFieldNameValue } from '../util/element';
@@ -119,11 +118,13 @@ const ConfigSettingsModal = () => {
               <hr />
               <Row>
                 <Col md={12} sm={12} hidden={config.startType === START_TYPES.AUTO}>
-                  <Form.Group controlId='hotkey'>
+                  <InputGroup>
+                    <InputGroup.Text>{t('modal.configSettings.hotkey')}</InputGroup.Text>
                     <FormControl placeholder={defaultHotkey} onKeyDown={onKeyDown} defaultValue={config.hotkey || defaultHotkey} name='hotkey' onBlur={onUpdate} pattern={REGEX.HOTKEY} />
-                    <Form.Label>{t('modal.configSettings.hotkey')}</Form.Label>
-                    <HotkeyPopover />
-                  </Form.Group>
+                    <InputGroup.Text>
+                      <HotkeyPopover />
+                    </InputGroup.Text>
+                  </InputGroup>
                 </Col>
                 <Col md={12} sm={12} hidden={config.startType === START_TYPES.MANUAL}>
                   {t('modal.configSettings.extensionLoad')}&nbsp;
@@ -165,13 +166,13 @@ const ConfigSettingsModal = () => {
             <Card.Body>
               <Row>
                 <Col md='12' sm='12'>
-                  <Form.Group controlId='config-google-sheets-id'>
+                  <InputGroup>
+                    <InputGroup.Text>Google Sheets ID</InputGroup.Text>
                     <FormControl name='spreadsheetId' defaultValue={config.spreadsheetId} autoComplete='off' onBlur={onUpdate} placeholder='Google Sheets ID' />
-                    <Form.Label>Google Sheets ID</Form.Label>
-                    <Form.Text className='text-muted'>
-                      https://docs.google.com/spreadsheets/d/<code>1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA</code>/
-                    </Form.Text>
-                  </Form.Group>
+                  </InputGroup>
+                  <small className='text-muted'>
+                    https://docs.google.com/spreadsheets/d/<code>1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA</code>/
+                  </small>
                 </Col>
               </Row>
             </Card.Body>
@@ -180,12 +181,11 @@ const ConfigSettingsModal = () => {
             <Card.Body>
               <Row>
                 <Col md='12' sm='12'>
-                  <Form.Group controlId='config-start-time'>
+                  <InputGroup>
+                    <InputGroup.Text>{t('configuration.startTime')}</InputGroup.Text>
                     <FormControl name='startTime' pattern={REGEX.START_TIME} autoComplete='off' defaultValue={config.startTime} onBlur={onUpdate} placeholder='HH:mm:ss:fff' list='start-time' />
-                    <Form.Label>{t('configuration.startTime')}&nbsp;</Form.Label>
-                    <StartTimePopover />
                     <Form.Control.Feedback type='invalid'>{t('error.startTime')}</Form.Control.Feedback>
-                  </Form.Group>
+                  </InputGroup>
                 </Col>
               </Row>
             </Card.Body>
@@ -194,7 +194,8 @@ const ConfigSettingsModal = () => {
             <Card.Body>
               <Row>
                 <Col md='12' sm='12'>
-                  <Form.Group controlId='config-url-match'>
+                  <InputGroup>
+                    <InputGroup.Text>{t('modal.configSettings.urlMatch')}</InputGroup.Text>
                     <Form.Select value={config.url_match} onChange={onUpdate} name='url_match' required>
                       {Object.entries(URL_MATCH).map((condition) => (
                         <option key={condition[1]} value={condition[1]}>
@@ -202,8 +203,7 @@ const ConfigSettingsModal = () => {
                         </option>
                       ))}
                     </Form.Select>
-                    <Form.Label>{t('modal.configSettings.urlMatch')}</Form.Label>
-                  </Form.Group>
+                  </InputGroup>
                 </Col>
               </Row>
             </Card.Body>

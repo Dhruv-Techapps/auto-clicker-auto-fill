@@ -195,7 +195,8 @@
       "info": "Kondisi tindakan digunakan untuk menambahkan kondisi yang berkaitan dengan status tindakan sebelumnya",
       "skip": "Lewati Tindakan",
       "goto": "Aksi Goto",
-      "proceed": "Lanjutkan Tindakan"
+      "proceed": "Lanjutkan Tindakan",
+      "hint": "Berikut adalah tindakan yang dapat dilakukan jika kondisi tidak cocok dengan ekstensi"
     },
     "ads": {
       "title": "Harap izinkan iklan di situs kami",

@@ -195,7 +195,8 @@
       "info": "Le condizioni dell'azione vengono utilizzate per aggiungere condizioni relative allo stato dell'azione precedente",
       "skip": "Salta azione",
       "goto": "Vai a Azione",
-      "proceed": "Procedi all'azione"
+      "proceed": "Procedi all'azione",
+      "hint": "Di seguito sono riportate le azioni che possono essere eseguite se la condizione non corrisponde all'estensione"
     },
     "ads": {
       "title": "Si prega di consentire la pubblicità sul nostro sito",

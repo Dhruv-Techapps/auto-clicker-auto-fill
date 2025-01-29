@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "Addon"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "Action Condition"
+  },
   "@BATCH__TITLE": {
     "message": "Batch"
   },
@@ -72,7 +75,7 @@
     "message": "Element Finder is blank"
   },
   "@ERROR__NO_MATCH": {
-    "message": "Addon condition did not match."
+    "message": "condition did not match."
   },
   "@ERROR__WRONG_TITLE": {
     "message": "Incorrect comparison"
@@ -100,6 +103,9 @@
   },
   "@ERROR__NO_ELEMENT_FOUND": {
     "message": "No element found with the given selector"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "Please visit the configuration page to review and update the Action Condition to ensure the configuration is properly updated."
   },
   "@CONDITION_SATISFIED": {
     "message": "Condition Satisfied"

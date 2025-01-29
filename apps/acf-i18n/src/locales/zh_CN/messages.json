@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "添加在"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "动作条件"
+  },
   "@BATCH__TITLE": {
     "message": "批"
   },
@@ -72,7 +75,7 @@
     "message": "元素查找器是空白的"
   },
   "@ERROR__NO_MATCH": {
-    "message": "附加条件不匹配。"
+    "message": "条件不匹配。"
   },
   "@ERROR__WRONG_TITLE": {
     "message": "不正确的比较"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "找不到 - 重新加载"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "未找到 Goto 的操作"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "使用给定的选择器未找到元素"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "请访问配置页面来审查和更新操作条件，以确保配置正确更新。"
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "条件满足"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "条件不满足"
   },
   "@ERROR": {
     "message": "错误"

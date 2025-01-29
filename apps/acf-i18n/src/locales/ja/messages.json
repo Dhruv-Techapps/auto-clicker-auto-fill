@@ -62,6 +62,9 @@
   "@ADDON__TITLE": {
     "message": "アドオン"
   },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "アクション条件"
+  },
   "@BATCH__TITLE": {
     "message": "バッチ"
   },
@@ -72,7 +75,7 @@
     "message": "要素ファインダーが空白です"
   },
   "@ERROR__NO_MATCH": {
-    "message": "アドオン条件が一致しませんでした。"
+    "message": "条件が一致しませんでした。"
   },
   "@ERROR__WRONG_TITLE": {
     "message": "誤った比較"
@@ -94,6 +97,21 @@
   },
   "@ERROR__NOT_FOUND_RELOAD": {
     "message": "見つかりません - 再読み込み"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "Goto のアクションが見つかりません"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "指定されたセレクターで要素が見つかりません"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "構成が適切に更新されるように、構成ページにアクセスしてアクション条件を確認して更新してください。"
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "条件を満たしました"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "条件が満たされていない"
   },
   "@ERROR": {
     "message": "エラー"
