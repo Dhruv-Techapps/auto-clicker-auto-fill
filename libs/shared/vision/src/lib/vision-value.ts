@@ -25,12 +25,14 @@ export class VisionValue {
       throw new Error('No image found');
     }
     let content = '';
-    let imageUrl = '';
+    let imageUri = '';
     if (this.isBase64Image(src)) {
       content = this.extractBase64Data(src);
+    } else if (src.startsWith('https://') || src.startsWith('http://')) {
+      imageUri = src;
     } else {
-      imageUrl = src;
+      imageUri = new URL(src, window.location.origin).href;
     }
-    return { content, imageUrl };
+    return { content, imageUri };
   }
 }

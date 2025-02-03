@@ -1,6 +1,6 @@
 export type VisionImageRequest = {
   content: string;
-  imageUrl: string;
+  imageUri: string;
 };
 
 export type VisionImageResponse = {
