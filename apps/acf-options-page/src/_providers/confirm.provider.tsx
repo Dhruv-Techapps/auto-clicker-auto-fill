@@ -16,7 +16,7 @@ const ConfirmationModalContext = React.createContext<ModalContextType>({} as Mod
 const ConfirmationModalContextProvider: React.FC<ConfirmationModalContextProviderProps> = (props) => {
   const [show, setShow] = useState<boolean>();
   const [content, setContent] = useState<ModalRequestType>();
-  const resolver = useRef<(value: boolean | PromiseLike<boolean>) => void>(() => {});
+  const resolver = useRef<(value: boolean | PromiseLike<boolean>) => void | null>(null);
 
   const handleShow = ({ title, message, headerClass }: ModalRequestType): Promise<boolean> => {
     setContent({
