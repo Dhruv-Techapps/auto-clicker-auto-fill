@@ -28,13 +28,10 @@ export class VisionValue {
     let imageUri = '';
     if (this.isBase64Image(src)) {
       content = this.extractBase64Data(src);
+    } else if (src.startsWith('https://') || src.startsWith('http://')) {
+      imageUri = src;
     } else {
-      // If the src is already a full URL, return it
-      if (src.startsWith('https://') || src.startsWith('http://')) {
-        imageUri = src;
-      } else {
-        imageUri = new URL(src, window.location.origin).href;
-      }
+      imageUri = new URL(src, window.location.origin).href;
     }
     return { content, imageUri };
   }
