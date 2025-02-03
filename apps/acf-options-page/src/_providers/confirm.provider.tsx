@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { ConfirmModal } from '../modal';
 
-type ModalRequestType = { title: string; message: JSX.Element | string; headerClass: string };
+type ModalRequestType = { title: string; message: React.JSX.Element | string; headerClass: string };
 
 type ModalContextType = {
   showConfirmation: (request: ModalRequestType) => Promise<boolean>;
@@ -16,7 +16,7 @@ const ConfirmationModalContext = React.createContext<ModalContextType>({} as Mod
 const ConfirmationModalContextProvider: React.FC<ConfirmationModalContextProviderProps> = (props) => {
   const [show, setShow] = useState<boolean>();
   const [content, setContent] = useState<ModalRequestType>();
-  const resolver = useRef<(value: boolean | PromiseLike<boolean>) => void>();
+  const resolver = useRef<(value: boolean | PromiseLike<boolean>) => void>(() => {});
 
   const handleShow = ({ title, message, headerClass }: ModalRequestType): Promise<boolean> => {
     setContent({
