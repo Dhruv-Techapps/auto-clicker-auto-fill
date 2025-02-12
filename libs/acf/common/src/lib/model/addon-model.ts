@@ -37,5 +37,5 @@ export const defaultAddon: Addon = {
   elementFinder: '',
   value: '',
   condition: ADDON_CONDITIONS['~~ Select Condition ~~'],
-  recheckOption: RECHECK_OPTIONS.SKIP,
+  recheckOption: RECHECK_OPTIONS.STOP,
 };

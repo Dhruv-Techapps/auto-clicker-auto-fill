@@ -13,6 +13,7 @@ import {
   setActionStatementMessage,
   switchActionStatementModal,
   syncActionStatement,
+  updateActionStatementCondition,
   updateActionStatementGoto,
   updateActionStatementThen,
 } from '../store/config';
@@ -66,7 +67,15 @@ const ActionStatementModal = () => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     form.checkValidity();
-    dispatch(syncActionStatement(statement));
+    const conditions = statement.conditions.map((condition) => {
+      if (config !== undefined && condition.actionId === undefined && condition.actionIndex !== undefined) {
+        const actionId = config.actions[condition.actionIndex].id;
+        dispatch(updateActionStatementCondition({ name: 'actionId', value: actionId, id: condition.id }));
+        return { ...condition, actionId };
+      }
+      return condition;
+    });
+    dispatch(syncActionStatement({ ...statement, conditions }));
   };
 
   if (!config) {
@@ -111,6 +120,7 @@ const ActionStatementModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
+                    required
                     checked={statement.then === RETRY_OPTIONS.STOP}
                     value={RETRY_OPTIONS.STOP}
                     onChange={() => onUpdateThen(RETRY_OPTIONS.STOP)}
@@ -121,6 +131,7 @@ const ActionStatementModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
+                    required
                     checked={statement.then === RETRY_OPTIONS.SKIP}
                     value={RETRY_OPTIONS.SKIP}
                     onChange={() => onUpdateThen(RETRY_OPTIONS.SKIP)}
@@ -131,6 +142,7 @@ const ActionStatementModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
+                    required
                     checked={statement.then === RETRY_OPTIONS.RELOAD}
                     value={RETRY_OPTIONS.RELOAD}
                     onChange={() => onUpdateThen(RETRY_OPTIONS.RELOAD)}
@@ -141,6 +153,7 @@ const ActionStatementModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
+                    required
                     checked={statement.then === RETRY_OPTIONS.GOTO}
                     value={RETRY_OPTIONS.GOTO}
                     onChange={() => onUpdateThen(RETRY_OPTIONS.GOTO)}
