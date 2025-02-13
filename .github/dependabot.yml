@@ -7,4 +7,7 @@ updates:
     groups:
       dependencies:
         patterns:
-          - "*"
+          - '*'
+    ignore:
+      - dependency-name: 'esbuild'
+        versions: ['>=0.19.13']
