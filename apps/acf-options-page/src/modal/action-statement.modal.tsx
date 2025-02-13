@@ -10,6 +10,7 @@ import {
   actionStatementSelector,
   addActionStatementCondition,
   selectedConfigSelector,
+  setActionStatementError,
   setActionStatementMessage,
   switchActionStatementModal,
   syncActionStatement,
@@ -51,8 +52,8 @@ const ActionStatementModal = () => {
     onHide();
   };
 
-  const addCondition = (actionId: RANDOM_UUID) => {
-    dispatch(addActionStatementCondition(getDefaultActionCondition(actionId, ACTION_CONDITION_OPR.AND)));
+  const addCondition = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR) => {
+    dispatch(addActionStatementCondition(getDefaultActionCondition(actionId, operator)));
   };
 
   const onHide = () => {
@@ -67,6 +68,11 @@ const ActionStatementModal = () => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     form.checkValidity();
+    if (!statement.conditions || !statement.then) {
+      dispatch(setActionStatementError(t('error.condition')));
+      return;
+    }
+
     const conditions = statement.conditions.map((condition) => {
       if (config !== undefined && condition.actionId === undefined && condition.actionIndex !== undefined) {
         const actionId = config.actions[condition.actionIndex].id;
@@ -75,7 +81,8 @@ const ActionStatementModal = () => {
       }
       return condition;
     });
-    dispatch(syncActionStatement({ ...statement, conditions }));
+    const then = statement.then;
+    dispatch(syncActionStatement({ ...statement, then, conditions }));
   };
 
   if (!config) {
@@ -99,84 +106,88 @@ const ActionStatementModal = () => {
                 <th>Action</th>
                 <th>Status</th>
                 <th>
-                  <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id)}>
+                  <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id, ACTION_CONDITION_OPR.AND)}>
                     <Plus />
                   </Button>
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {statement.conditions.map((condition, index) => (
-                <ActionStatementCondition key={condition.id} index={index} condition={condition} />
-              ))}
-            </tbody>
+            <tbody>{statement.conditions?.map((condition, index) => <ActionStatementCondition key={condition.id} index={index} condition={condition} />)}</tbody>
           </Table>
-          <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>
-            <Card.Body>
-              <Row>
-                <Col xs={12} className='mb-2'>
-                  {t('modal.actionCondition.hint')}
-                </Col>
-                <Col>
-                  <Form.Check
-                    type='radio'
-                    required
-                    checked={statement.then === RETRY_OPTIONS.STOP}
-                    value={RETRY_OPTIONS.STOP}
-                    onChange={() => onUpdateThen(RETRY_OPTIONS.STOP)}
-                    name='then'
-                    label={t('modal.actionSettings.retry.stop')}
-                  />
-                </Col>
-                <Col>
-                  <Form.Check
-                    type='radio'
-                    required
-                    checked={statement.then === RETRY_OPTIONS.SKIP}
-                    value={RETRY_OPTIONS.SKIP}
-                    onChange={() => onUpdateThen(RETRY_OPTIONS.SKIP)}
-                    name='then'
-                    label={t('modal.actionSettings.retry.skip')}
-                  />
-                </Col>
-                <Col>
-                  <Form.Check
-                    type='radio'
-                    required
-                    checked={statement.then === RETRY_OPTIONS.RELOAD}
-                    value={RETRY_OPTIONS.RELOAD}
-                    onChange={() => onUpdateThen(RETRY_OPTIONS.RELOAD)}
-                    name='then'
-                    label={t('modal.actionSettings.retry.refresh')}
-                  />
-                </Col>
-                <Col>
-                  <Form.Check
-                    type='radio'
-                    required
-                    checked={statement.then === RETRY_OPTIONS.GOTO}
-                    value={RETRY_OPTIONS.GOTO}
-                    onChange={() => onUpdateThen(RETRY_OPTIONS.GOTO)}
-                    name='then'
-                    label={t('modal.actionSettings.retry.goto')}
-                  />
-                </Col>
-              </Row>
-              {statement.then === RETRY_OPTIONS.GOTO && (
+          {statement.conditions ? (
+            <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>
+              <Card.Body>
                 <Row>
-                  <Col xs={{ span: 4, offset: 8 }}>
-                    <Form.Select value={statement.goto} onChange={onUpdateGoto} name='goto' required>
-                      {actions.map((_action, index) => (
-                        <option key={_action.id} value={_action.id}>
-                          {index + 1} . {_action.name ?? _action.elementFinder}
-                        </option>
-                      ))}
-                    </Form.Select>
+                  <Col xs={12} className='mb-2'>
+                    {t('modal.actionCondition.hint')}
+                  </Col>
+                  <Col>
+                    <Form.Check
+                      type='radio'
+                      required
+                      checked={statement.then === RETRY_OPTIONS.STOP}
+                      value={RETRY_OPTIONS.STOP}
+                      onChange={() => onUpdateThen(RETRY_OPTIONS.STOP)}
+                      name='then'
+                      label={t('modal.actionSettings.retry.stop')}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Check
+                      type='radio'
+                      required
+                      checked={statement.then === RETRY_OPTIONS.SKIP}
+                      value={RETRY_OPTIONS.SKIP}
+                      onChange={() => onUpdateThen(RETRY_OPTIONS.SKIP)}
+                      name='then'
+                      label={t('modal.actionSettings.retry.skip')}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Check
+                      type='radio'
+                      required
+                      checked={statement.then === RETRY_OPTIONS.RELOAD}
+                      value={RETRY_OPTIONS.RELOAD}
+                      onChange={() => onUpdateThen(RETRY_OPTIONS.RELOAD)}
+                      name='then'
+                      label={t('modal.actionSettings.retry.refresh')}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Check
+                      type='radio'
+                      required
+                      checked={statement.then === RETRY_OPTIONS.GOTO}
+                      value={RETRY_OPTIONS.GOTO}
+                      onChange={() => onUpdateThen(RETRY_OPTIONS.GOTO)}
+                      name='then'
+                      label={t('modal.actionSettings.retry.goto')}
+                    />
                   </Col>
                 </Row>
-              )}
-            </Card.Body>
-          </Card>
+                {statement.then === RETRY_OPTIONS.GOTO && (
+                  <Row>
+                    <Col xs={{ span: 4, offset: 8 }}>
+                      <Form.Select value={statement.goto} onChange={onUpdateGoto} name='goto' required>
+                        {actions.map((_action, index) => (
+                          <option key={_action.id} value={_action.id}>
+                            {index + 1} . {_action.name ?? _action.elementFinder}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Col>
+                  </Row>
+                )}
+              </Card.Body>
+            </Card>
+          ) : (
+            <div className='p-5 d-flex justify-content-center'>
+              <Button type='button' aria-label='Add' onClick={() => addCondition(config.actions[0].id)}>
+                <Plus /> {t('modal.actionSettings.title')}
+              </Button>
+            </div>
+          )}
           {error && (
             <Alert className='mt-3' variant='danger'>
               {error}
@@ -192,7 +203,7 @@ const ActionStatementModal = () => {
           <Button type='reset' variant='outline-primary px-5' data-testid='action-statement-reset'>
             {t('common.clear')}
           </Button>{' '}
-          <Button type='submit' variant='primary' className='px-5 ml-3' data-testid='action-statement-save'>
+          <Button type='submit' variant='primary' className='px-5 ml-3' data-testid='action-statement-save' disabled={statement.conditions === undefined}>
             {t('common.save')}
           </Button>
         </Modal.Footer>
