@@ -1,10 +1,12 @@
+import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { FormEvent, useState } from 'react';
 import { Badge, Button, Form, ListGroup, Modal } from 'react-bootstrap';
-import Reorder, { reorder } from 'react-reorder';
 import { useTranslation } from 'react-i18next';
 import { ErrorAlert } from '../components';
-import { configReorderSelector, configReorderUpdateAPI, switchConfigReorderModal, updateConfigReorder } from '../store/config';
 import { useAppDispatch, useAppSelector } from '../hooks';
+import { configReorderSelector, configReorderUpdateAPI, switchConfigReorderModal, updateConfigReorder } from '../store/config';
 import { ArrowDown, ArrowUp } from '../util';
 
 const ReorderConfigsModal = () => {
@@ -21,9 +23,12 @@ const ReorderConfigsModal = () => {
     dispatch(switchConfigReorderModal());
   };
 
-  const onReorder = (_, previousIndex: number, nextIndex: number) => {
-    dispatch(updateConfigReorder(reorder(configs, previousIndex, nextIndex)));
-  };
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   const sortActions = () => {
     setSort(!sort);
@@ -43,6 +48,21 @@ const ReorderConfigsModal = () => {
   const onShow = () => {
     //:TODO
   };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (active.id !== over.id && configs) {
+      const oldIndex = configs.findIndex((config) => config.id === active.id);
+      const newIndex = configs.findIndex((config) => config.id === over.id);
+
+      dispatch(updateConfigReorder(arrayMove(configs, oldIndex, newIndex)));
+    }
+  };
+
+  if (!configs) {
+    return;
+  }
+
   return (
     <Modal show={visible} size='lg' onHide={handleClose} scrollable onShow={onShow} data-testid='reorder-configs-modal'>
       <Form onSubmit={onSubmit} id='reorder-configs'>
@@ -56,18 +76,12 @@ const ReorderConfigsModal = () => {
             Reorder {sort !== undefined && <span>{sort ? <ArrowUp /> : <ArrowDown />}</span>}
           </Button>
           <div className='list-group'>
-            <Reorder reorderId='configurations' draggedClassName='active' placeholderClassName='list-group' onReorder={onReorder}>
-              {configs?.map((config) => (
-                <ListGroup.Item key={config.id}>
-                  {config.name || 'configuration - ' + config.id}
-                  {!config.enable && (
-                    <Badge pill bg='secondary' className='ms-2'>
-                      {t('common.disabled')}
-                    </Badge>
-                  )}
-                </ListGroup.Item>
-              ))}
-            </Reorder>
+            <DndContext onDragEnd={handleDragEnd} sensors={sensors} collisionDetection={closestCenter}>
+              <SortableContext items={configs} strategy={verticalListSortingStrategy}>
+                {configs?.map((config) => <SortableItem key={config.id} {...config} />)}
+              </SortableContext>
+            </DndContext>
+            {/*<Reorder reorderId='configurations' draggedClassName='active' placeholderClassName='list-group' onReorder={onReorder}></Reorder>*/}
           </div>
         </Modal.Body>
         <Modal.Footer className='justify-content-between'>
@@ -82,4 +96,24 @@ const ReorderConfigsModal = () => {
     </Modal>
   );
 };
+
+export function SortableItem(props) {
+  const { t } = useTranslation();
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: props.id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+  return (
+    <ListGroup.Item key={props.id} ref={setNodeRef} {...attributes} {...listeners} style={style}>
+      {props.name || 'configuration - ' + props.id}
+      {!props.enable && (
+        <Badge pill bg='secondary' className='ms-2'>
+          {t('common.disabled')}
+        </Badge>
+      )}
+    </ListGroup.Item>
+  );
+}
+
 export { ReorderConfigsModal };
