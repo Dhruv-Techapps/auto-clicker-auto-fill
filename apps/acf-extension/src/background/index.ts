@@ -45,6 +45,29 @@ try {
   chrome.runtime.onInstalled.addListener(async (details) => {
     if (details.reason === 'install') {
       TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
+    } else if (details.reason === 'update') {
+      const { action } = await chrome.runtime.getManifest();
+      chrome.notifications.create(
+        'update-notification',
+        {
+          type: 'basic',
+          iconUrl: action.default_icon,
+          title: '⚠ Important Update',
+          message: `We've updated Action Condition & Addon Goto to use Action IDs instead of indexes. Review your settings to ensure compatibility.`,
+          buttons: [{ title: 'Review Now' }, { title: `Ignore - I don't use these features` }],
+          requireInteraction: true,
+        },
+        function () {
+          chrome.notifications.onButtonClicked.addListener(function (notificationId, btnIdx) {
+            if (notificationId === 'update-notification') {
+              if (btnIdx === 0) {
+                chrome.tabs.create({ url: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions/521' });
+              }
+              chrome.notifications.clear(notificationId);
+            }
+          });
+        }
+      );
     }
   });
 
