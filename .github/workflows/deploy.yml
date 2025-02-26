@@ -119,13 +119,22 @@ jobs:
         with:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       - name: Files
-        run: ls -la
+        run: |
+          cd apps
+          ls -la
+          cd acf-i18n
+          ls -la
+          cd src
+          ls -la
+          cd locales
+          ls -la
+          cd ../../../../
       - name: Upload Static Files to GCS
         if: ${{ inputs.publish_i18n }}
         uses: 'google-github-actions/upload-cloud-storage@v2'
         with:
           path: '/apps/acf-i18n/src/locales'
-          destination: 'acf-i18n'
+          destination: 'acf-i18n/locales'
       - name: Deploy Web
         if: ${{ inputs.publish_i18n }}
         uses: FirebaseExtended/action-hosting-deploy@v0
