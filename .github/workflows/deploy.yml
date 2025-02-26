@@ -10,7 +10,12 @@ on:
         default: Development
         required: true
       deploy_web:
-        description: 'Deploy web to azure static'
+        description: 'Deploy web to firebase hosting'
+        type: boolean
+        default: false
+        required: true
+      deploy_configs:
+        description: 'Deploy configs to firebase hosting'
         type: boolean
         default: false
         required: true
@@ -25,7 +30,7 @@ on:
         default: false
         required: true
       publish_i18n:
-        description: 'Publish i18n'
+        description: 'Copy static files from i18n to gcloud bucket'
         type: boolean
         default: false
         required: true
@@ -67,12 +72,35 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       - name: Build Projects and Library
-        run: npx nx run-many -t build  -p acf-options-page acf-extension --prod --base-href ${{vars.PUBLIC_URL}} --verbose --skip-nx-cache
+        run: |
+          CMD="npx nx run-many -t build -p"
+
+          # Conditionally add projects based on inputs
+          PROJECTS=()
+          if [[ "${{ inputs.deploy_web }}" == "true" ]]; then
+            PROJECTS+=("acf-options-page")
+          fi
+          if [[ "${{ inputs.deploy_configs }}" == "true" ]]; then
+            PROJECTS+=("acf-configs")
+          fi
+          if [[ "${{ inputs.upload_extension }}" == "true" ]]; then
+            PROJECTS+=("acf-extension")
+          fi
+
+          # Append selected projects to CMD
+          if [[ ${#PROJECTS[@]} -gt 0 ]]; then
+            CMD="$CMD ${PROJECTS[*]}"
+          fi
+
+          CMD="$CMD --prod --base-href ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache"
+
+          echo "Final Command: $CMD"
+          eval $CMD
         env:
           NX_PUBLIC_NAME: ${{vars.NX_PUBLIC_NAME}}
           NX_PUBLIC_VARIANT: ${{vars.NX_PUBLIC_VARIANT}}
           NX_PUBLIC_CHROME_EXTENSION_ID: ${{vars.NX_PUBLIC_CHROME_EXTENSION_ID}}
-          NX_PUBLIC_EDGE_EXTENSION_ID: ${{vars.NX_PUBLIC_EDGE_EXTENSION_ID  || 'DEV'}}
+          NX_PUBLIC_EDGE_EXTENSION_ID: ${{vars.NX_PUBLIC_EDGE_EXTENSION_ID || 'DEV'}}
           NX_PUBLIC_I18N: ${{vars.NX_PUBLIC_I18N}}
           NX_PUBLIC_GOOGLE_ANALYTICS_ID: ${{vars.NX_PUBLIC_GOOGLE_ANALYTICS_ID}}
           NX_PUBLIC_GOOGLE_ADS_SLOT: ${{vars.NX_PUBLIC_GOOGLE_ADS_SLOT}}
@@ -96,12 +124,6 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
       - name: Print Environment Info
         run: npx nx report
-      - name: Bundle Projects
-        run: |
-          mkdir bundle
-          cd dist/apps/acf-extension
-          zip -r ../../../bundle/acf-extension-${{vars.NX_PUBLIC_VARIANT}}.zip .
-          cd ../../../
       - name: Deploy Web
         if: ${{ inputs.deploy_web }}
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -110,12 +132,26 @@ jobs:
           projectId: auto-clicker-autofill
           target: auto-clicker-auto-fill-dev
           channelId: live
+      - name: Deploy Configs
+        if: ${{ inputs.deploy_configs }}
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-autofill-configs
+          channelId: live
+      - name: Bundle Projects
+        if: ${{ inputs.upload_extension }}
+        run: |
+          cd dist/apps/acf-extension
+          zip -r ../../../acf-extension-${{vars.NX_PUBLIC_VARIANT}}.zip .
+          cd ../../../
       - name: Upload Extension
         if: ${{ inputs.upload_extension }}
         uses: mnao305/chrome-extension-upload@v5.0.0
         id: chrome-extension-upload
         with:
-          file-path: bundle/acf-extension-${{vars.NX_PUBLIC_VARIANT}}.zip
+          file-path: acf-extension-${{vars.NX_PUBLIC_VARIANT}}.zip
           extension-id: ${{ vars.NX_PUBLIC_CHROME_EXTENSION_ID }}
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
@@ -127,7 +163,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         id: release
         with:
-          # token: $ {{ secrets.REPO_PAT }} # Use the PAT here
           prerelease: ${{ vars.NX_PUBLIC_VARIANT == 'BETA' || vars.NX_PUBLIC_VARIANT == 'DEV'}}
           generate_release_notes: true
           discussion_category_name: 'Release'
