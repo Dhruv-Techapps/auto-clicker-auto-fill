@@ -12,7 +12,7 @@
       ]
     },
     {
-      "site": "auto-clicker-autofill-dev",
+      "site": "auto-clicker-auto-fill-dev",
       "public": "dist/apps/acf-options-page",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [

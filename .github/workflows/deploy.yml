@@ -57,7 +57,7 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v2'
         with:
           path: 'apps/acf-i18n/src/locales'
-          destination: 'acf-i18n/locales'
+          destination: 'acf-i18n'
       - uses: actions/setup-node@v4
         with:
           node-version: 20
