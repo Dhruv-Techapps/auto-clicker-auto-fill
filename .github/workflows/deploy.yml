@@ -127,8 +127,8 @@ jobs:
         run: npx nx report
       - name: Determine Firebase Target
         run: |
-          VARIANT=$(echo "${{vars.NX_PUBLIC_VARIANT}}" | tr '[:upper:]' '[:lower:]')
-          TARGET="auto-clicker-autofill-$VARIANT"
+          VARIANT=$(echo "${{ vars.NX_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
+          TARGET="auto-clicker-auto-fill-$VARIANT"
           echo "TARGET=$TARGET" >> $GITHUB_ENV
       - name: Options Page to Firebase Hosting
         if: ${{ inputs.deploy_options_page }}
@@ -136,7 +136,7 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: $env.TARGET
+          target: ${{ env.TARGET }}
           channelId: live
       - name: Configs to Firebase Hosting
         if: ${{ inputs.deploy_configs }}
