@@ -125,13 +125,18 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
       - name: Print Environment Info
         run: npx nx report
+      - name: Determine Firebase Target
+        run: |
+          VARIANT=$(echo "${{ vars.NX_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
+          TARGET="auto-clicker-autofill-$VARIANT"
+          echo "TARGET=$TARGET" >> $GITHUB_ENV
       - name: Options Page to Firebase Hosting
         if: ${{ inputs.deploy_options_page }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-autofill-${{ vars.NX_PUBLIC_VARIANT || 'dev' }} | tr '[:upper:]' '[:lower:]'
+          target: ${{ env.TARGET }}
           channelId: live
       - name: Configs to Firebase Hosting
         if: ${{ inputs.deploy_configs }}
