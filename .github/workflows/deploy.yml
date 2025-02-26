@@ -120,11 +120,12 @@ jobs:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       - name: Upload Static Files to GCS
         if: ${{ inputs.publish_i18n }}
-        run: |
-          sudo apt-get update && sudo apt-get install -y google-cloud-sdk
-          gsutil -m cp -r ./apps/acf-i18n/src/locales gs://acf-i18n/
+        uses: 'google-github-actions/upload-cloud-storage@v2'
+        with:
+          path: '/apps/acf-i18n/src/locales'
+          destination: 'acf-i18n'
       - name: Deploy Web
-        if: ${{ inputs.deploy_web }}
+        if: ${{ inputs.publish_i18n }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
