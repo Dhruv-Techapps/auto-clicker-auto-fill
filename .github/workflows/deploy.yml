@@ -131,7 +131,7 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-dev
+          target: auto-clicker-autofill-${{ vars.NX_PUBLIC_VARIANT || 'dev' }} | tr '[:upper:]' '[:lower:]'
           channelId: live
       - name: Configs to Firebase Hosting
         if: ${{ inputs.deploy_configs }}
