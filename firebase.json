@@ -20,7 +20,24 @@
           "source": "**",
           "destination": "/index.html"
         }
-      ]
+      ],
+      "headers":[ {
+        "source": "/**",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://auto-clicker-auto-fill-dev.web.app"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://auto-clicker-auto-fill-dev.firebaseapp.com"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://dev.getautoclicker.com"
+          }
+        ]
+      }]
     },
     {
       "site": "auto-clicker-auto-fill-beta",
