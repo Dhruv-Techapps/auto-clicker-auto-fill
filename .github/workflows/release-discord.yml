@@ -31,7 +31,7 @@ jobs:
               body: JSON.stringify({
                 username: 'Release Bot',
                 avatar_url: 'https://getautoclicker.com/docs/4.x/assets/brand/bootstrap-social-logo.png',
-                content: '${{ github.actor }} published a new release: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})\n'+releaseBody,
+                content: '${{ github.actor }} published a new release: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})'+releaseBody,
               }),
             };
 
