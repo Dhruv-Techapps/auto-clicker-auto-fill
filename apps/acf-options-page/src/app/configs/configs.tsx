@@ -6,8 +6,7 @@ import { download } from '../../_helpers';
 import { Ads } from '../../components';
 import { CHROME_WEB_STORE } from '../../constants';
 import { useAppDispatch } from '../../hooks';
-import { ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal } from '../../modal';
-import { BatchModal } from '../../modal/config-batch.modal';
+import { BatchModal, ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal, ScheduleModal } from '../../modal';
 import { importAll, importConfig } from '../../store/config';
 import { configGetAllAPI } from '../../store/config/config.api';
 import { addToast } from '../../store/toast.slice';
@@ -94,6 +93,7 @@ function Configs(props) {
               <BatchModal />
               <ReorderConfigsModal />
               <RemoveConfigsModal />
+              <ScheduleModal />
             </main>
           </div>
         </Col>

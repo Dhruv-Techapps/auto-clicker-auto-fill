@@ -24,6 +24,7 @@ import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
 import { SyncConfig } from './sync-config';
 import { TabsMessenger } from './tab';
+import { AcfSchedule } from './acf-schedule';
 
 self['XMLHttpRequest'] = XMLHttpRequest;
 
@@ -45,7 +46,9 @@ try {
   chrome.runtime.onInstalled.addListener(async (details) => {
     if (details.reason === 'install') {
       TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
-    } else if (details.reason === 'update') {
+    } else {
+      new AcfSchedule().check();
+    } /* else if (details.reason === 'update') {
       const { action } = await chrome.runtime.getManifest();
       chrome.notifications.create(
         'update-notification',
@@ -68,7 +71,7 @@ try {
           });
         }
       );
-    }
+    }*/
   });
 
   /**
@@ -111,6 +114,7 @@ try {
    */
   const onMessageListener = {
     [RUNTIME_MESSAGE_ACF.TABS]: new TabsMessenger(),
+    [RUNTIME_MESSAGE_ACF.ACF_CONFIG_SCHEDULE]: new AcfSchedule(),
     [RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING]: new MainWorldBackground(),
     [RUNTIME_MESSAGE_DISCORD_OAUTH]: new DiscordOauth2Background(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID, DISCORD_CLIENT_ID),
     [RUNTIME_MESSAGE_DISCORD_MESSAGING]: new DiscordMessagingBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID, VARIANT),

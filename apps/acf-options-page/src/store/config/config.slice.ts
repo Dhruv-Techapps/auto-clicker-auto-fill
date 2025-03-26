@@ -9,6 +9,7 @@ import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, ope
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
 import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
+import { scheduleActions } from './schedule';
 
 const HIDDEN_DETAIL_KEY = 'config-detail-visibility';
 const defaultDetailVisibility = { name: true, url: true };
@@ -144,6 +145,7 @@ const slice = createSlice({
     },
     ...actionActions,
     ...batchActions,
+    ...scheduleActions,
   },
   extraReducers: (builder) => {
     builder.addCase(configGetAllAPI.fulfilled, (state, action) => {
@@ -205,6 +207,7 @@ export const {
   syncActionAddon,
   syncActionSettings,
   syncActionStatement,
+  syncSchedule,
   setSearch,
   setDetailVisibility,
 } = slice.actions;

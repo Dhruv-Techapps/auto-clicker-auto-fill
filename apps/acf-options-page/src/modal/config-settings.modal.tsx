@@ -10,6 +10,8 @@ import { configSettingsSelector, selectedConfigSelector, setConfigSettingsMessag
 import { REGEX } from '../util';
 import { getFieldNameValue } from '../util/element';
 
+const FORM_ID = 'config-settings';
+
 const ConfigSettingsModal = () => {
   const { t } = useTranslation();
 
@@ -73,7 +75,7 @@ const ConfigSettingsModal = () => {
 
   return (
     <Modal show={visible} size='lg' onHide={handleClose} onShow={onShow} data-testid='config-settings-modal'>
-      <Form>
+      <Form id={FORM_ID}>
         <Modal.Header closeButton>
           <Modal.Title as='h6'>{t('modal.configSettings.title')}</Modal.Title>
         </Modal.Header>
@@ -173,19 +175,6 @@ const ConfigSettingsModal = () => {
                   <small className='text-muted'>
                     https://docs.google.com/spreadsheets/d/<code>1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA</code>/
                   </small>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-          <Card className='mb-2'>
-            <Card.Body>
-              <Row>
-                <Col md='12' sm='12'>
-                  <InputGroup>
-                    <InputGroup.Text>{t('configuration.startTime')}</InputGroup.Text>
-                    <FormControl name='startTime' pattern={REGEX.START_TIME} autoComplete='off' defaultValue={config.startTime} onBlur={onUpdate} placeholder='HH:mm:ss:fff' list='start-time' />
-                    <Form.Control.Feedback type='invalid'>{t('error.startTime')}</Form.Control.Feedback>
-                  </InputGroup>
                 </Col>
               </Row>
             </Card.Body>

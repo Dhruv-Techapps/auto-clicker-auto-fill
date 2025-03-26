@@ -6,8 +6,18 @@ import { Alert, Badge, Button, ButtonGroup, Card, Col, Form, Row } from 'react-b
 import { useTranslation } from 'react-i18next';
 import { download } from '../../../_helpers';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { configSelector, duplicateConfig, importAll, importConfig, selectedConfigSelector, setConfigMessage, switchConfigSettingsModal, updateConfig } from '../../../store/config';
-import { Copy, Download, Gear, Upload } from '../../../util';
+import {
+  configSelector,
+  duplicateConfig,
+  importAll,
+  importConfig,
+  openScheduleModalAPI,
+  selectedConfigSelector,
+  setConfigMessage,
+  switchConfigSettingsModal,
+  updateConfig,
+} from '../../../store/config';
+import { Copy, Download, Gear, StockWatch, Upload } from '../../../util';
 import { getFieldNameValue } from '../../../util/element';
 import ConfigBody from './config-body';
 
@@ -78,6 +88,10 @@ function Config() {
     dispatch(duplicateConfig());
   };
 
+  const showSchedule = () => {
+    dispatch(openScheduleModalAPI());
+  };
+
   return (
     <Card className='mb-3 shadow-sm'>
       <Card.Header as='h6'>
@@ -85,7 +99,11 @@ function Config() {
           <Col className='d-flex align-items-center'>
             {t('configuration.title')}
             <div className='d-flex align-items-center'>
-              {!config.enable && (
+              {config.enable ? (
+                <Button className='fs-5' variant='link' onClick={showSchedule}>
+                  <StockWatch />
+                </Button>
+              ) : (
                 <Badge pill bg='secondary' className='ms-2 d-none d-md-block'>
                   {t('common.disabled')}
                 </Badge>

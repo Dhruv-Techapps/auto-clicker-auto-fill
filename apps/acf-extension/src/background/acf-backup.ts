@@ -4,7 +4,7 @@ import { LOCAL_STORAGE_KEY, defaultSettings, getDefaultConfig } from '@dhruv-tec
 import { BACKUP_ALARM, DriveFile, GoogleDriveBackground, GoogleDriveFile } from '@dhruv-techapps/google-drive';
 import { GOOGLE_SCOPES } from '@dhruv-techapps/google-oauth';
 import { NotificationHandler } from '@dhruv-techapps/notifications';
-import { EDGE_OAUTH_CLIENT_ID } from '../common/environments';
+import { EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL } from '../common/environments';
 import { auth } from './firebase';
 
 const ID = 'acf-backup';
@@ -68,7 +68,7 @@ auth.authStateReady().then(() => {
    */
   chrome.alarms.onAlarm.addListener(({ name }) => {
     if (name === BACKUP_ALARM) {
-      new AcfBackup(auth, EDGE_OAUTH_CLIENT_ID).backup();
+      new AcfBackup(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID).backup();
     }
   });
 });

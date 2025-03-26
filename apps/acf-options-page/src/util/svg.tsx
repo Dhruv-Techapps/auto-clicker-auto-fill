@@ -51,3 +51,4 @@ export { ReactComponent as VolumeUp } from 'bootstrap-icons/icons/volume-up.svg'
 export { ReactComponent as Whatsapp } from 'bootstrap-icons/icons/whatsapp.svg';
 export { ReactComponent as X } from 'bootstrap-icons/icons/x-lg.svg';
 export { ReactComponent as Youtube } from 'bootstrap-icons/icons/youtube.svg';
+export { ReactComponent as StockWatch } from 'bootstrap-icons/icons/stopwatch.svg'

@@ -218,6 +218,13 @@
         "refresh": "Refresh",
         "goto": "Goto Action"
       }
+    },
+    "schedule": {
+      "title": "Schedule",
+      "info": "Schedule configuration for specific date and time",
+      "date": "Date",
+      "time": "Time",
+      "repeat": "Repeat"
     }
   },
   "message": {
@@ -229,7 +236,8 @@
     "removeAction": "Action removed successfully!",
     "actionAddon": "Addon saved successfully!",
     "actionStatement": "Action Condition saved successfully!",
-    "actionSettings": "Action Settings saved successfully!"
+    "actionSettings": "Action Settings saved successfully!",
+    "schedule": "Schedule saved successfully!"
   },
   "configuration": {
     "title": "Configuration",
@@ -263,6 +271,9 @@
     "interval": "Only valid numbers are allowed",
     "url": "URL is required",
     "initWait": "Only valid numbers are allowed",
+    "scheduleDate": "Schedule date should match YYYY-MM-DD (2025-12-01) format",
+    "scheduleTime": "Schedule time should match HH:mm:ss.sss (23:59:59.000) format",
+    "scheduleRepeat": "Schedule repeat should be number only",
     "startTime": "Start time should match HH:mm:ss:fff (12:12:12:000) format",
     "json": "Selected Json is not valid",
     "hotKey": "Single letter without Ctrl/Command is not valid",
@@ -311,6 +322,7 @@
     "download": "Download",
     "disabled": "Disabled",
     "sec": "sec",
+    "min": "min",
     "no": "No",
     "yes": "Yes",
     "local": "LOCAL",

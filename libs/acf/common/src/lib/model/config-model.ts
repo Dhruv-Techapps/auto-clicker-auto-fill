@@ -32,6 +32,17 @@ export type Bypass = {
   prompt?: boolean;
 };
 
+export interface ISchedule {
+  date: string;
+  time: string;
+  repeat: number;
+}
+export const defaultSchedule: ISchedule = {
+  date: '',
+  time: '',
+  repeat: 0,
+};
+
 export type Configuration = {
   url: string;
   updated?: boolean;
@@ -43,7 +54,7 @@ export type Configuration = {
   configId?: number;
   name?: string;
   initWait?: number;
-  startTime?: string;
+  schedule?: ISchedule;
   spreadsheetId?: string;
   hotkey?: string;
   batch?: Batch;

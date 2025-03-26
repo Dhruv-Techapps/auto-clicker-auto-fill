@@ -8,3 +8,5 @@ export * from './remove-configs.modal';
 export * from './settings.modal';
 export * from './extension-not-found.modal';
 export * from './blog.modal';
+export * from './schedule.modal';
+export * from './config-batch.modal';

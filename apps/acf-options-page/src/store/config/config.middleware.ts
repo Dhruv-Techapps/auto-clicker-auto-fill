@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { AnyAction, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
@@ -30,12 +30,15 @@ import {
   syncActionAddon,
   syncActionSettings,
   syncActionStatement,
+  syncSchedule,
   updateAction,
   updateBatch,
   updateConfig,
   updateConfigSettings,
 } from './config.slice';
 import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
+import { setScheduleError, setScheduleMessage } from './schedule';
+import { ScheduleService } from '@dhruv-techapps/acf-service';
 
 const configsToastListenerMiddleware = createListenerMiddleware();
 configsToastListenerMiddleware.startListening({
@@ -69,6 +72,8 @@ const getMessageFunc = (action: AnyAction): { success: any; failure: any; messag
       return { success: setActionStatementMessage, failure: setActionStatementError, message: i18next.t(`message.actionStatement`) };
     case syncActionSettings.type:
       return { success: setActionSettingsMessage, failure: setActionSettingsError, message: i18next.t(`message.actionSettings`) };
+    case syncSchedule.type:
+      return { success: setScheduleMessage, failure: setScheduleError, message: i18next.t(`message.schedule`) };
     default:
       return { success: setConfigMessage, failure: setConfigError, message: i18next.t(`message.config`) };
   }
@@ -88,6 +93,7 @@ configsListenerMiddleware.startListening({
     reorderActions,
     removeAction,
     syncActionAddon,
+    syncSchedule,
     syncActionSettings,
     syncActionStatement
   ),
@@ -100,6 +106,13 @@ configsListenerMiddleware.startListening({
     StorageService.set({ [LOCAL_STORAGE_KEY.CONFIGS]: state.configuration.configs })
       .then(() => {
         const { success, message } = getMessageFunc(action);
+        if (success && action.type === syncSchedule.type) {
+          if (action.payload) {
+            ScheduleService.create(state.configuration.selectedConfigId, action.payload as ISchedule);
+          } else {
+            ScheduleService.clear(state.configuration.selectedConfigId);
+          }
+        }
         if (success && message) {
           listenerApi.dispatch(success(message));
         }
