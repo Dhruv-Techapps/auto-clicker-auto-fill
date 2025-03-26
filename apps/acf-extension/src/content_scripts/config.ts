@@ -14,6 +14,7 @@ import { Hotkey } from './hotkey';
 import { I18N_COMMON } from './i18n';
 import { statusBar } from './status-bar';
 import GoogleSheets from './util/google-sheets';
+import { Session } from '@dhruv-techapps/acf-util';
 
 const CONFIG_I18N = {
   TITLE: chrome.i18n.getMessage('@CONFIG__TITLE'),
@@ -46,6 +47,7 @@ const ConfigProcessor = (() => {
 
   const start = async (config: Configuration) => {
     try {
+      window.__sessionCount = new Session(config.id).getCount();
       if (config.bypass) {
         await MainWorldService.bypass(config.bypass);
       }

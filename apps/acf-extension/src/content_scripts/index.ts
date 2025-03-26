@@ -1,6 +1,5 @@
 import { LOAD_TYPES, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
-import { Session } from '@dhruv-techapps/acf-util';
 import { Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { Sheets } from '@dhruv-techapps/google-sheets';
 import { scope } from '../common/instrument';
@@ -51,7 +50,6 @@ async function loadConfig(loadType: LOAD_TYPES) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.__sessionCount = Session.getCount();
   loadConfig(LOAD_TYPES.DOCUMENT);
 });
 

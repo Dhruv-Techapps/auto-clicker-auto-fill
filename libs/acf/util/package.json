@@ -4,6 +4,7 @@
     "randexp": "^0.5.3"
   },
   "peerDependencies": {
+    "@dhruv-techapps/core-common": "*",
     "tslib": "^2.3.0"
   },
   "type": "commonjs",

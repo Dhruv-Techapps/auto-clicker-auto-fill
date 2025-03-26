@@ -1,28 +1,29 @@
-export const Session = (() => {
-  const SESSION_COUNT = 'acf-session-count';
-  const SESSION_CLEAR = 'clear-acf-session';
+import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 
-  const getCount = (): number => {
-    check();
-    const sessionCount = sessionStorage.getItem(SESSION_COUNT);
+export class Session {
+  private SESSION_COUNT_KEY;
+  private SESSION_CLEAR_PARAM = 'clear-acf-session';
+
+  constructor(id: RANDOM_UUID) {
+    this.SESSION_COUNT_KEY = `acf-session-count-${id}`;
+  }
+
+  getCount = (): number => {
+    this.check();
+    const sessionCount = sessionStorage.getItem(this.SESSION_COUNT_KEY);
     const count = sessionCount ? Number(sessionCount) : 1;
-    sessionStorage.setItem(SESSION_COUNT, String(count + 1));
+    sessionStorage.setItem(this.SESSION_COUNT_KEY, String(count + 1));
     return count;
   };
 
-  const check = () => {
+  check = () => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get(SESSION_CLEAR)) {
-      sessionStorage.removeItem(SESSION_COUNT);
+    if (urlParams.get(this.SESSION_CLEAR_PARAM)) {
+      sessionStorage.removeItem(this.SESSION_COUNT_KEY);
     }
-    const sessionCount = urlParams.get(SESSION_COUNT);
+    const sessionCount = urlParams.get(this.SESSION_COUNT_KEY);
     if (sessionCount && !isNaN(Number(sessionCount))) {
-      sessionStorage.setItem(SESSION_COUNT, sessionCount);
+      sessionStorage.setItem(this.SESSION_COUNT_KEY, sessionCount);
     }
   };
-
-  return {
-    check,
-    getCount,
-  };
-})();
+}

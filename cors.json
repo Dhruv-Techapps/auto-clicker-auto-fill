@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://getautoclicker.com", "https://*.getautoclicker.com", "http://localhost:3000"],
+    "method": ["GET", "OPTIONS"],
+    "responseHeader": ["Content-Type"],
+    "maxAgeSeconds": 86400
+  }
+]
