@@ -15,7 +15,47 @@ export function ValuePopover() {
               <tbody>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#select-option`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/ai`} target='_blank' rel='noopener noreferrer'>
+                      AI
+                    </a>
+                  </td>
+                  <td>
+                    <code>openai::your prompt</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href={`${APP_LINK.DOCS}action-value/captcha`} target='_blank' rel='noopener noreferrer'>
+                      Captcha
+                    </a>
+                  </td>
+                  <td>
+                    <code>Image:://img[@class="captcha-img"]</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href={`${APP_LINK.DOCS}action-value/google-sheets`} target='_blank' rel='noopener noreferrer'>
+                      Google Sheets
+                    </a>
+                  </td>
+                  <td>
+                    <code>GoogleSheets::Sheet1!A1</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href={`${APP_LINK.DOCS}action-value/clipboard`} target='_blank' rel='noopener noreferrer'>
+                      Clipboard
+                    </a>
+                  </td>
+                  <td>
+                    <code>Clipboard::Copy::[.]{6}</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href={`${APP_LINK.DOCS}action-value/select-option`} target='_blank' rel='noopener noreferrer'>
                       Select Option
                     </a>
                   </td>
@@ -25,7 +65,7 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#scroll-to-examples`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/scroll-to`} target='_blank' rel='noopener noreferrer'>
                       Scroll To
                     </a>
                   </td>
@@ -35,17 +75,17 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#click-events--mouse-events-examples`} target='_blank' rel='noopener noreferrer'>
-                      Click Events
+                    <a href={`${APP_LINK.DOCS}action-value/mouse-events`} target='_blank' rel='noopener noreferrer'>
+                      Mouse Events
                     </a>
                   </td>
                   <td>
-                    <code>ClickEvents::dblclick</code>
+                    <code>MouseEvents::dblclick</code>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#form-events-examples`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/form-events`} target='_blank' rel='noopener noreferrer'>
                       Form Events
                     </a>
                   </td>
@@ -55,7 +95,7 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#query-param`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/query-param`} target='_blank' rel='noopener noreferrer'>
                       Query Param
                     </a>
                   </td>
@@ -65,7 +105,7 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#batch-repeat`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/batch-repeat`} target='_blank' rel='noopener noreferrer'>
                       Batch Repeat
                     </a>
                   </td>
@@ -74,12 +114,12 @@ export function ValuePopover() {
                   </td>
                 </tr>
                 {/* <tr>
-          <td><a href={APP_LINK.DOCS + 'action/exec-command-examples'} target="_blank" rel="noopener noreferrer">Exec Command</a></td>
+          <td><a href={APP_LINK.DOCS + 'action/exec-command'} target="_blank" rel="noopener noreferrer">Exec Command</a></td>
           <td><code>ExecCommand::[&quot;cut&quot;,&quot;paste&quot;]</code></td>
         </tr> */}
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#location-command`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/location-command`} target='_blank' rel='noopener noreferrer'>
                       Location Command
                     </a>
                   </td>
@@ -89,7 +129,7 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#window-command`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/window-command`} target='_blank' rel='noopener noreferrer'>
                       Window Command
                     </a>
                   </td>
@@ -99,7 +139,7 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#attribute`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/attribute`} target='_blank' rel='noopener noreferrer'>
                       Attribute Command
                     </a>
                   </td>
@@ -109,7 +149,7 @@ export function ValuePopover() {
                 </tr>
                 <tr>
                   <td>
-                    <a href={`${APP_LINK.DOCS}action/value/#class`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`${APP_LINK.DOCS}action-value/class`} target='_blank' rel='noopener noreferrer'>
                       Class Command
                     </a>
                   </td>
@@ -126,7 +166,7 @@ export function ValuePopover() {
               </tbody>
             </Table>
             <div className='text-right'>
-              <a href={`${APP_LINK.DOCS}action/value`} target='_blank' rel='noopener noreferrer'>
+              <a href={`${APP_LINK.DOCS}action-value/overview`} target='_blank' rel='noopener noreferrer'>
                 more
               </a>
             </div>
