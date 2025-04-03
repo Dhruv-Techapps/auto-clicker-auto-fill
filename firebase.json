@@ -46,7 +46,7 @@
     },
     {
       "site": "auto-clicker-auto-fill-static",
-      "public": "dist/apps/acf-i18n/src/locales",
+      "public": "apps/acf-i18n/src/locales",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
