@@ -68,10 +68,12 @@ jobs:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       - name: I18n to gcloud bucket
         if: ${{ inputs.upload_i18n }}
-        uses: 'google-github-actions/upload-cloud-storage@v2'
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          path: 'apps/acf-i18n/src/locales'
-          destination: 'acf-i18n'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-auto-fill-static
+          channelId: live
       - name: Build Projects and Library
         run: |
           CMD="npx nx run-many -t build -p"

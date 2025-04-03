@@ -11,5 +11,3 @@ updates:
     ignore:
       - dependency-name: 'esbuild'
         versions: ['>=0.19.13']
-      - dependency-name: 'eslint-config-prettier'
-        versions: ['>=9.0.1']
