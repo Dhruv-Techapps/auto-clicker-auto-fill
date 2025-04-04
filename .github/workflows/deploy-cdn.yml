@@ -6,7 +6,7 @@ on:
 
 jobs:
   main:
-    name: Build & Bundle & Publish
+    name: I18n deploy to firebase hosting
     environment:
       name: ${{inputs.environment}}
       url: ${{ steps.release.outputs.url}}
@@ -17,11 +17,7 @@ jobs:
       discussions: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: I18n deploy to firebase hosting
-        if: ${{ inputs.upload_i18n }}
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
