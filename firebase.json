@@ -64,7 +64,7 @@
             },
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "https://getautoclicker.com, https://*.getautoclicker.com, http://localhost:3000"
+              "value": "*"
             },
             {
               "key": "Access-Control-Allow-Methods",
