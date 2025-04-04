@@ -2,7 +2,7 @@ import { TranslateCommon } from './translate.common.mjs';
 
 class TranslateWeb extends TranslateCommon {
   constructor() {
-    super('web-new.json');
+    super('web.json');
   }
 
   // Function to recursively translate the values in an object

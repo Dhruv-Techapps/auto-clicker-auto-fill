@@ -4,6 +4,7 @@
       "light": "Passer au thème de la lumière",
       "dark": "Passer au thème sombre"
     },
+    "google-group": "Groupe Google",
     "login": "Connexion",
     "logout": "Se déconnecter",
     "settings": "Paramètres globaux"
@@ -14,39 +15,56 @@
     "blog": "Blog",
     "configuration": "Configuration",
     "issues": "Problèmes",
+    "rate-us": "Évaluez nous",
+    "discussion": "Discussion",
     "test": "Formulaire de pratique",
     "about": "Sur",
     "contact": "Contact",
     "chat": "Discuter",
+    "connect": "Connecter",
+    "google-group": "Google Group",
     "privacy": "Politique de confidentialité",
     "social": "Sociale",
     "discord": "Discord",
+    "youtube": "Youtube",
+    "facebook": "Facebook",
+    "whatsapp": "Whatsapp",
     "instagram": "Instagram",
     "twitter": "Twitter",
     "github": "Github"
   },
   "toast": {
     "configuration": {
-      "add": {
+      "addConfig": {
         "header": "Configuration",
-        "body": "{{name}} ajouté avec succès"
+        "body": "[{{name}}] ajouté avec succès"
       },
-      "remove": {
+      "duplicateConfig": {
         "header": "Configuration",
-        "body": "{{name}} enlevé avec succès"
+        "body": "[{{name}}] Duplifié avec succès"
+      },
+      "removeConfig": {
+        "header": "Configuration",
+        "body": "[{{name}}] enlevé avec succès"
       },
       "exportAll": {
-        "header": "Exportation en masse"
+        "header": "Exportation en masse",
+        "body": "Configurations exportées avec succès"
       },
       "importAll": {
-        "header": "Importation en masse"
+        "header": "Importation en masse",
+        "body": "Configurations importées avec succès"
       },
       "importError": {
         "header": "Erreur d'importation"
       },
       "importSuccess": {
         "header": "Configuration",
-        "body": "{{name}} importé avec succès"
+        "body": "[{{name}}] importé avec succès"
+      },
+      "updateBatch": {
+        "header": "Lot",
+        "body": "lot enregistré avec succès !"
       }
     },
     "action": {
@@ -60,13 +78,19 @@
     "configuration": {
       "remove": {
         "title": "Supprimer Configuration",
-        "message": "Êtes-vous sûr de supprimer {{name}} Configuration?"
+        "message": "Êtes-vous sûr de supprimer [{{name}}] Configuration?"
+      }
+    },
+    "backup": {
+      "restore": {
+        "title": "Restaurer les configurations depuis le cloud",
+        "message": "Êtes-vous sûr de restaurer les configurations à partir du cloud. Il remplacera toutes vos configurations et ce processus n'est pas réversible."
       }
     },
     "action": {
       "remove": {
         "title": "Supprimer Action",
-        "message": "Êtes-vous sûr de supprimer {{name}} Action?"
+        "message": "Êtes-vous sûr de supprimer [{{name}}] Action?"
       }
     }
   },
@@ -75,6 +99,8 @@
       "title": "Paramètres globaux",
       "checkIFrames": "Vérifiez les iframes",
       "checkIFramesHint": "Cet élément de contrôle dans les iframes",
+      "reloadOnError": "Recharger les erreurs",
+      "reloadOnErrorHint": "Cette page de rechargement si une erreur se produit",
       "advance": "Avance",
       "advanceHint": "Activer le mode avancé pour plus de fonctionnalités",
       "notification": {
@@ -90,6 +116,15 @@
           "info": "Son actuellement en cours de développement et de fonctionnalité peut passer à <b>action</b> Notification spécifique dans la prochaine version"
         }
       },
+      "statusBar": {
+        "title": "Barre d'état",
+        "hint": "Afficher la barre d'état en bas de la page",
+        "hide": "Cacher",
+        "top-left": "En haut à gauche",
+        "top-right": "En haut à droite",
+        "bottom-left": "En bas à gauche",
+        "bottom-right": "En bas à droite"
+      },
       "retry": {
         "title": "Réessayez",
         "interval": "Intervalle de réessayer",
@@ -97,6 +132,18 @@
         "skip": "Passer non trouvé",
         "refresh": "Rafraîchir",
         "hint": "Vous trouverez ci-dessous une action qui peut être effectuée si XPath n'est pas trouvé par extension après la réparation"
+      },
+      "backup": {
+        "title": "Sauvegarde",
+        "last-backup": "Dernière sauvegarde:",
+        "backup": "Sauvegarde sur le cloud",
+        "restore": "Restaurer depuis le cloud",
+        "now": "Sauvegarder maintenant",
+        "auto-backup": "Sauvegarde automatique",
+        "daily": "Tous les jours",
+        "weekly": "Hebdomadaire",
+        "monthly": "Mensuel",
+        "off": "Désactivé"
       },
       "saveMessage": "Les paramètres enregistrés avec succès!"
     },
@@ -113,7 +160,9 @@
       "document": "Document",
       "hotkey": "Gamper",
       "documentHint": "<b>Document</b> Le navigateur charge l'extension avant que les scripts et les images soient chargés (plus rapides) (dangereux)",
-      "saveMessage": "Config enréglage enregistré avec succès !"
+      "urlMatch": "Correspondance d'URL",
+      "regex": "Expression régulière",
+      "exact": "Exact"
     },
     "reorder": {
       "title": "Réorganiser Configuration's",
@@ -121,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Extension non trouvée",
-      "subTitle": "Ceci est la page de configuration pour<b>{{REACT_APP_NAME}}</b> <Badge>{{REACT_APP_VARIANT}}</Badge> extension",
+      "subTitle": "Ceci est la page de configuration pour<b>[{{NX_PUBLIC_NAME}}]</b> extension",
       "hint": "Vous devez télécharger d'abord une extension afin de l'utiliser"
     },
     "actionSettings": {
@@ -135,18 +184,19 @@
         "interval": "Intervalle de réessayer",
         "stop": "Arrêter",
         "skip": "Passer non trouvé",
+        "goto": "Passer à l'action",
         "refresh": "Rafraîchir"
-      },
-      "saveMessage": "Action enréglage enregistré avec succès !"
+      }
     },
     "actionCondition": {
       "action": "Action",
-      "status": "Status",
+      "status": "Statut",
       "title": "Action État",
       "info": "La condition d'action est utilisée pour ajouter une condition liée à l'état de l'action précédente",
-      "saveMessage": "Condition d'action enregistrée avec succès !",
-      "skip": "Skip",
-      "proceed": "Proceed"
+      "skip": "Ignorer l'action",
+      "goto": "Passer à l'action",
+      "proceed": "Continuer l'action",
+      "hint": "Vous trouverez ci-dessous les actions qui peuvent être effectuées si la condition n'est pas remplie par extension"
     },
     "ads": {
       "title": "S'il vous plaît permettre aux annonces sur notre site",
@@ -165,14 +215,25 @@
         "interval": "Intervalle de revérificateur",
         "stop": "Arrêter",
         "skip": "Passer non trouvé",
-        "refresh": "Rafraîchir"
-      },
-      "saveMessage": "Addon enregistré avec succès !"
+        "refresh": "Rafraîchir",
+        "goto": "Passer à l'action"
+      }
     }
+  },
+  "message": {
+    "config": "Configuration enregistré avec succès !",
+    "configSettings": "Config enréglage enregistré avec succès !",
+    "batch": "Batch enregistré avec succès !",
+    "action": "Action enregistré avec succès !",
+    "reorderActions": "Action réorganisée avec succès!",
+    "removeAction": "Action supprimée avec succès!",
+    "actionAddon": "Addon enregistré avec succès !",
+    "actionStatement": "Instruction d'action enregistrée avec succès!",
+    "actionSettings": "Paramètres d'action enregistrés avec succès!"
   },
   "configuration": {
     "title": "Configuration",
-    "add": "Ajouter Configuration",
+    "add": "Nouvelle configuration",
     "exportAll": "Configuration de l'exportation en masse",
     "importAll": "Configuration de l'importation en bloc",
     "remove": "Supprimer Configuration",
@@ -187,14 +248,15 @@
     "name": "Nom",
     "initWait": "Attendre",
     "startTime": "Heure de début",
-    "saveMessage": "Configuration enregistré avec succès !"
+    "noConfig": "Aucune configuration trouvée, veuillez affiner votre recherche."
   },
   "batch": {
     "title": "Grouper",
     "repeat": "Répéter",
+    "repeatHint": "<b>Répéter</b> réexécutera toutes les actions sans recharger la page avec l'intervalle indiqué.",
     "repeatInterval": "R-intervalle",
     "refresh": "Rafraîchir",
-    "saveMessage": "Batch enregistré avec succès !"
+    "refreshHint": "<b>Actualiser</b> rechargera la page une fois toutes les actions terminées."
   },
   "error": {
     "number": "Seuls les nombres valides sont autorisés",
@@ -212,16 +274,19 @@
   "action": {
     "title": "action",
     "add": "Ajouter une action",
+    "addBefore": "Ajouter l'action ci-dessus",
+    "addAfter": "Ajouter l'action ci-dessous",
     "addon": "Ajouter",
     "remove": "Supprimer l'action",
     "settings": "Paramètres d'action",
+    "disable": "Désactiver l'action",
+    "enable": "Permettre l'action",
     "initWait": "Initive attend",
     "name": "Nom",
     "elementFinder": "Élévateur",
     "value": "Valeur",
     "repeat": "Répéter",
-    "repeatInterval": "R-intervalle",
-    "saveMessage": "Action enregistré avec succès !"
+    "repeatInterval": "R-intervalle"
   },
   "popover": {
     "valueExtractor": {
@@ -237,6 +302,7 @@
     }
   },
   "common": {
+    "appName": "Clic automatique - Remplissage automatique",
     "settings": "Paramètres",
     "error": "Erreur",
     "save": "sauvegarder",
@@ -250,15 +316,26 @@
     "local": "LOCALE",
     "dev": "Faire devenir",
     "stable": "stable",
-    "examples": "Exemples",
-    "translate": "Nous lançons l'effort de traduction officielle pour Auto Clicker. Veuillez consulter l'annonce pour savoir comment aider Auto Clicker en fournissant des traductions d'interface utilisateur pour votre langue.",
-    "clickHere": "Cliquez ici"
+    "examples": "Exemples"
   },
   "language": {
     "en": "Anglaise",
     "fr": "La France",
-    "kr": "Coréenne",
+    "ko": "Coréenne",
     "ca": "canada",
-    "hi": "hindi"
+    "hi": "hindi",
+    "zh_CN": "Chinois",
+    "sv": "suédois",
+    "pt": "Portugais",
+    "ja": "Japonais",
+    "nl": "Néerlandais",
+    "de": "Allemand",
+    "es": "Espagnol",
+    "vi": "vietnamien",
+    "fi": "finlandais",
+    "ar": "arabe",
+    "it": "italien",
+    "ru": "russe",
+    "id": "indonésien"
   }
 }
