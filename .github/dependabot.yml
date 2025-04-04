@@ -11,3 +11,5 @@ updates:
     ignore:
       - dependency-name: 'esbuild'
         versions: ['>=0.19.13']
+      - dependency-name: 'express'
+        versions: ['>=4.21.2']
