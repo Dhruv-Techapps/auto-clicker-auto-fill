@@ -4,7 +4,7 @@ import { GoogleAds } from './google-ads.components';
 
 export function Ads() {
   const { role } = useAppSelector(firebaseSelector);
-  if (role === undefined && /.getautoclicker.com/.exec(window.location.href) !== null) {
+  if (role === undefined && /\.getautoclicker\.com/.exec(window.location.href) !== null) {
     return <GoogleAds />;
   }
   return null;
