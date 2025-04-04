@@ -4,21 +4,10 @@
       "light": "切换到浅色主题",
       "dark": "切换到深色主题"
     },
-    "google-group": "Google群组",
+    "google-group": "Google Group",
     "login": "登录",
     "logout": "登出",
-    "settings": "全局设置",
-    "backup": {
-      "last-backup": "上次备份:",
-      "backup": "备份到云端",
-      "restore": "从云端恢复",
-      "now": "立即备份",
-      "auto-backup": "自动备份",
-      "daily": "每日",
-      "weekly": "每周",
-      "monthly": "每月",
-      "off": "关闭"
-    }
+    "settings": "全局设置"
   },
   "footer": {
     "resources": "资源",
@@ -26,40 +15,56 @@
     "blog": "博客",
     "configuration": "配置",
     "issues": "问题",
+    "rate-us": "评价我们",
+    "discussion": "讨论",
     "test": "练习表格",
     "about": "关于",
     "contact": "联系我们",
     "chat": "聊天",
+    "connect": "连接",
+    "google-group": "Google Group",
     "privacy": "隐私和政策",
     "social": "社交",
     "discord": "Discord",
     "youtube": "Youtube",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
     "instagram": "Instagram",
     "twitter": "Twitter",
     "github": "Github"
   },
   "toast": {
     "configuration": {
-      "add": {
+      "addConfig": {
         "header": "配置",
-        "body": "{{name}} 添加成功"
+        "body": "[{{name}}] 添加成功"
       },
-      "remove": {
+      "duplicateConfig": {
         "header": "配置",
-        "body": "{{name}} 移除成功"
+        "body": "[{{name}}] 复制成功"
+      },
+      "removeConfig": {
+        "header": "配置",
+        "body": "[{{name}}] 移除成功"
       },
       "exportAll": {
-        "header": "批量导出"
+        "header": "批量导出",
+        "body": "配置导出成功"
       },
       "importAll": {
-        "header": "批量导入"
+        "header": "批量导入",
+        "body": "配置导入成功"
       },
       "importError": {
         "header": "导入错误"
       },
       "importSuccess": {
         "header": "配置",
-        "body": "{{name}} 导入成功"
+        "body": "[{{name}}] 导入成功"
+      },
+      "updateBatch": {
+        "header": "批",
+        "body": "批量保存成功！"
       }
     },
     "action": {
@@ -73,7 +78,7 @@
     "configuration": {
       "remove": {
         "title": "移除配置",
-        "message": "确定移除 {{name}} 配置吗?"
+        "message": "确定移除 [{{name}}] 配置吗?"
       }
     },
     "backup": {
@@ -85,7 +90,7 @@
     "action": {
       "remove": {
         "title": "移除动作",
-        "message": "确定移除 {{name}} 动作吗?"
+        "message": "确定移除 [{{name}}] 动作吗?"
       }
     }
   },
@@ -94,6 +99,8 @@
       "title": "全局设置",
       "checkIFrames": "检查IFrames",
       "checkIFramesHint": "这将检查IFrames中的元素",
+      "reloadOnError": "重新加载错误",
+      "reloadOnErrorHint": "此重新加载页面如果发生任何错误",
       "advance": "高级",
       "advanceHint": "启用高级模式以获得更多功能",
       "notification": {
@@ -109,6 +116,15 @@
           "info": "这目前还在开发中,未来版本中此功能可能会移动到<b>动作</b>特定的通知中"
         }
       },
+      "statusBar": {
+        "title": "状态栏",
+        "hint": "在页面底部显示状态栏",
+        "hide": "隐藏",
+        "top-left": "左上角",
+        "top-right": "右上角",
+        "bottom-left": "左下角",
+        "bottom-right": "右下角"
+      },
       "retry": {
         "title": "重试",
         "interval": "重试间隔",
@@ -116,6 +132,18 @@
         "skip": "跳过未找到",
         "refresh": "刷新",
         "hint": "如果扩展在重试后未找到xpath,则可以执行以下操作"
+      },
+      "backup": {
+        "title": "备份",
+        "last-backup": "上次备份：",
+        "backup": "备份至云端",
+        "restore": "从云端还原",
+        "now": "立即备份",
+        "auto-backup": "自动备份",
+        "daily": "日常的",
+        "weekly": "每周",
+        "monthly": "每月",
+        "off": "离开"
       },
       "saveMessage": "设置保存成功!"
     },
@@ -132,7 +160,9 @@
       "document": "文档",
       "hotkey": "快捷键",
       "documentHint": "<b>文档</b>浏览器在加载脚本和图片之前加载扩展(更快)(不安全)",
-      "saveMessage": "配置设置保存成功!"
+      "urlMatch": "URL 匹配",
+      "regex": "正则表达式",
+      "exact": "精确的"
     },
     "reorder": {
       "title": "重新排序配置",
@@ -140,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "未找到扩展",
-      "subTitle": "这是 <b>{{REACT_APP_NAME}}</b> 扩展的配置页面",
+      "subTitle": "这是 <b>[{{NX_PUBLIC_NAME}}]</b> 扩展的配置页面",
       "hint": "您需要先下载扩展才能使用此功能"
     },
     "actionSettings": {
@@ -154,19 +184,19 @@
         "interval": "重试间隔",
         "stop": "停止",
         "skip": "跳过动作",
+        "goto": "转到操作",
         "refresh": "刷新"
-      },
-      "saveMessage": "动作设置保存成功!"
+      }
     },
     "actionCondition": {
       "action": "动作",
       "status": "状态",
       "title": "动作条件",
       "info": "动作条件用于添加与之前动作状态相关的条件",
-      "saveMessage": "动作条件保存成功!",
       "skip": "跳过",
       "goto": "跳转到",
-      "proceed": "继续"
+      "proceed": "继续",
+      "hint": "以下是当扩展不匹配条件时可以执行的操作"
     },
     "ads": {
       "title": "请允许我们网站上的广告",
@@ -185,14 +215,25 @@
         "interval": "重新检查间隔",
         "stop": "停止",
         "skip": "跳过动作",
-        "refresh": "刷新"
-      },
-      "saveMessage": "附加组件保存成功!"
+        "refresh": "刷新",
+        "goto": "转到操作"
+      }
     }
+  },
+  "message": {
+    "config": "配置保存成功!",
+    "configSettings": "配置设置保存成功!",
+    "batch": "批处理保存成功!",
+    "action": "动作保存成功!",
+    "reorderActions": "操作重新排序成功！",
+    "removeAction": "操作删除成功！",
+    "actionAddon": "附加组件保存成功!",
+    "actionStatement": "动作条件保存成功!",
+    "actionSettings": "动作设置保存成功!"
   },
   "configuration": {
     "title": "配置",
-    "add": "添加配置",
+    "add": "新配置",
     "exportAll": "批量导出配置",
     "importAll": "批量导入配置",
     "remove": "移除配置",
@@ -207,14 +248,15 @@
     "name": "名称",
     "initWait": "初始化等待",
     "startTime": "开始时间",
-    "saveMessage": "配置保存成功!"
+    "noConfig": "未找到配置，请优化您的搜索。"
   },
   "batch": {
     "title": "批处理",
     "repeat": "重复",
+    "repeatHint": "<b>重复</b>将重新运行所有操作，而无需按照给定的时间间隔重新加载页面。",
     "repeatInterval": "重复间隔",
     "refresh": "刷新",
-    "saveMessage": "批处理保存成功!"
+    "refreshHint": "所有操作完成后，<b>刷新</b>将重新加载页面。"
   },
   "error": {
     "number": "只允许有效数字",
@@ -232,16 +274,19 @@
   "action": {
     "title": "动作",
     "add": "添加动作",
+    "addBefore": "在上面添加动作",
+    "addAfter": "在下面添加动作",
     "addon": "附加组件",
     "remove": "移除动作",
     "settings": "动作设置",
+    "disable": "禁用动作",
+    "enable": "启用行动",
     "initWait": "初始化等待",
     "name": "名称",
     "elementFinder": "元素查找器",
     "value": "值",
     "repeat": "重复",
-    "repeatInterval": "重复间隔",
-    "saveMessage": "动作保存成功!"
+    "repeatInterval": "重复间隔"
   },
   "popover": {
     "valueExtractor": {
@@ -257,6 +302,7 @@
     }
   },
   "common": {
+    "appName": "自动点击器 - 自动填充",
     "settings": "设置",
     "error": "错误",
     "save": "保存",
@@ -270,15 +316,26 @@
     "local": "本地",
     "dev": "开发",
     "stable": "稳定",
-    "examples": "例子",
-    "translate": ""
+    "examples": "例子"
   },
   "language": {
     "en": "英语",
     "fr": "法语",
-    "kr": "韩语",
+    "ko": "韩语",
     "ca": "加拿大语",
     "hi": "印地语",
-    "cn": "中文"
+    "zh_CN": "中文",
+    "sv": "瑞典",
+    "pt": "葡萄牙语",
+    "ja": "日本人",
+    "nl": "荷兰语",
+    "de": "德语",
+    "es": "西班牙语",
+    "vi": "越南语",
+    "fi": "芬兰",
+    "ar": "阿拉伯",
+    "it": "意大利语",
+    "ru": "俄语",
+    "id": "印度尼西亚"
   }
 }

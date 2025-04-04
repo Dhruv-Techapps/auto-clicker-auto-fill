@@ -1,4 +1,4 @@
-name: mono-repo [deploy]
+name: Deploy
 run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }} on ${{ inputs.version || github.ref_name }}
 
 on:
@@ -29,11 +29,6 @@ on:
         type: boolean
         default: false
         required: true
-      upload_i18n:
-        description: 'I18n to gcloud bucket'
-        type: boolean
-        default: false
-        required: true
       version:
         description: 'Version (v4.0.0.0)'
         type: string
@@ -61,19 +56,6 @@ jobs:
           cache: 'npm'
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
-      - name: Authenticate with Google Cloud
-        if: ${{ inputs.upload_i18n }}
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-      - name: I18n to gcloud bucket
-        if: ${{ inputs.upload_i18n }}
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-static
-          channelId: live
       - name: Build Projects and Library
         run: |
           CMD="npx nx run-many -t build -p"

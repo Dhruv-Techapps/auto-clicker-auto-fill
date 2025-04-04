@@ -4,49 +4,67 @@
       "light": "라이트 테마로 전환하십시오",
       "dark": "어두운 테마로 전환하십시오"
     },
+    "google-group": "구글 그룹",
     "login": "로그인",
     "logout": "로그 아웃",
     "settings": "전역 설정"
   },
   "footer": {
     "resources": "자원",
-    "docs": "문서 도구",
+    "docs": "문서",
     "blog": "블로그",
     "configuration": "구성",
     "issues": "문제",
-    "test": "연습 양식",
+    "rate-us": "우리를 평가하십시오",
+    "discussion": "논의",
+    "test": "실습 양식",
     "about": "에 대한",
     "contact": "연락하다",
     "chat": "채팅",
+    "connect": "연결하다",
+    "google-group": "Google Group",
     "privacy": "개인 정보 정책",
     "social": "사회의",
-    "instagram": "Instagram",
     "discord": "Discord",
+    "youtube": "Youtube",
+    "facebook": "페이스 북",
+    "whatsapp": "whatsapp",
+    "instagram": "Instagram",
     "twitter": "Twitter",
     "github": "Github"
   },
   "toast": {
     "configuration": {
-      "add": {
+      "addConfig": {
         "header": "구성",
-        "body": "{{name}} 성공적으로 추가되었습니다"
+        "body": "[{{name}}] 성공적으로 추가되었습니다"
       },
-      "remove": {
+      "duplicateConfig": {
         "header": "구성",
-        "body": "{{name}} 성공적으로 제거되었습니다"
+        "body": "[{{name}}]이(가) 성공적으로 복제되었습니다."
+      },
+      "removeConfig": {
+        "header": "구성",
+        "body": "[{{name}}] 성공적으로 제거되었습니다"
       },
       "exportAll": {
-        "header": "대량 내보내기"
+        "header": "대량 내보내기",
+        "body": "구성을 성공적으로 내보냈습니다."
       },
       "importAll": {
-        "header": "대량 가져오기"
+        "header": "대량 가져오기",
+        "body": "구성이 성공적으로 가져옵니다"
       },
       "importError": {
         "header": "가져 오기 오류"
       },
       "importSuccess": {
         "header": "구성",
-        "body": "{{name}} 성공적으로 가져온 것"
+        "body": "[{{name}}] 성공적으로 가져온 것"
+      },
+      "updateBatch": {
+        "header": "일괄",
+        "body": "배치가 성공적으로 저장되었습니다!"
       }
     },
     "action": {
@@ -60,13 +78,19 @@
     "configuration": {
       "remove": {
         "title": "구성을 제거하십시오",
-        "message": "당신은 확실히 제거 할 것입니다 {{name}} 구성?"
+        "message": "당신은 확실히 제거 할 것입니다 [{{name}}] 구성?"
+      }
+    },
+    "backup": {
+      "restore": {
+        "title": "클라우드에서 구성을 복원하십시오",
+        "message": "클라우드에서 구성을 복원해야합니까?모든 구성을 대체 하며이 프로세스는 가역적이지 않습니다."
       }
     },
     "action": {
       "remove": {
         "title": "조치를 제거하십시오",
-        "message": "당신은 확실히 제거 할 것입니다 {{name}} 동작?"
+        "message": "당신은 확실히 제거 할 것입니다 [{{name}}] 동작?"
       }
     }
   },
@@ -75,6 +99,8 @@
       "title": "전역 설정",
       "checkIFrames": "확인을 확인하십시오",
       "checkIFramesHint": "이것은 iframe 내의 요소를 검사합니다",
+      "reloadOnError": "오류를 다시로드하십시오",
+      "reloadOnErrorHint": "이 오류가 발생하면 페이지를 다시로드합니다",
       "advance": "전진",
       "advanceHint": "더 많은 기능을 위해 고급 모드 활성화",
       "notification": {
@@ -90,6 +116,15 @@
           "info": "현재 개발중인 개발 및 기능으로 이동할 수 있습니다 <b>동작</b> 다가오는 릴리스의 특정 알림"
         }
       },
+      "statusBar": {
+        "title": "상태 표시 줄",
+        "hint": "페이지 하단에 상태 표시줄 표시",
+        "hide": "숨다",
+        "top-left": "왼쪽 위",
+        "top-right": "맨 위 오른쪽",
+        "bottom-left": "왼쪽 하단",
+        "bottom-right": "오른쪽 하단"
+      },
       "retry": {
         "title": "다시 해 보다",
         "interval": "재시도 간격",
@@ -97,6 +132,18 @@
         "skip": "건너 뛰지 않아",
         "refresh": "새로 고치다",
         "hint": "다음은 재시도 후에 XPath가 확장자가 발견하지 못하면 수행 할 수있는 동작입니다."
+      },
+      "backup": {
+        "title": "지원",
+        "last-backup": "마지막 백업:",
+        "backup": "클라우드에 백업",
+        "restore": "클라우드에서 복원",
+        "now": "백업 지금",
+        "auto-backup": "자동 백업",
+        "daily": "일일",
+        "weekly": "주간",
+        "monthly": "월간 간행물",
+        "off": "끄다"
       },
       "saveMessage": "설정이 성공적으로 저장되었습니다!"
     },
@@ -113,7 +160,9 @@
       "document": "문서",
       "hotkey": "핫키",
       "documentHint": "<b>문서</b> 브라우저는 스크립트와 이미지가로드되기 전에 확장자를로드합니다 (더 빠르지 않음) (안전하지 않음)",
-      "saveMessage": "Config 환경 저장 완료!"
+      "urlMatch": "URL 일치",
+      "regex": "정규식",
+      "exact": "정확한"
     },
     "reorder": {
       "title": "구성 재정렬",
@@ -121,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "확장명을 찾을 수 없습니다",
-      "subTitle": "이것은 구성 페이지입니다 <b>{{REACT_APP_NAME}}</b> <Badge>{{REACT_APP_VARIANT}}</Badge> 확대",
+      "subTitle": "이것은 구성 페이지입니다 <b>[{{NX_PUBLIC_NAME}}]</b> 확대",
       "hint": "이를 사용하려면 먼저 확장을 다운로드해야합니다."
     },
     "actionSettings": {
@@ -135,18 +184,19 @@
         "interval": "재시도 간격",
         "stop": "중지",
         "skip": "건너 뛰지 않아",
+        "goto": "액션으로 이동",
         "refresh": "새로 고치다"
-      },
-      "saveMessage": "Action 환경 저장 완료!"
+      }
     },
     "actionCondition": {
       "action": "동작",
       "status": "상태",
       "title": "동작 조건",
       "info": "동작 조건은 이전 동작 상태와 관련된 조건을 추가하는 데 사용됩니다.",
-      "saveMessage": "작업 조건이 성공적으로 저장되었습니다!",
       "skip": "건너 뛰다",
-      "proceed": "진행하다"
+      "goto": "액션으로 이동",
+      "proceed": "진행하다",
+      "hint": "조건이 확장자와 일치하지 않는 경우 수행할 수 있는 작업은 다음과 같습니다."
     },
     "ads": {
       "title": "우리 사이트에서 광고를 허용하십시오",
@@ -165,10 +215,21 @@
         "interval": "회계 간격",
         "stop": "중지",
         "skip": "건너 뛰지 않아",
-        "refresh": "새로 고치다"
-      },
-      "saveMessage": "Addon 저장 완료!"
+        "refresh": "새로 고치다",
+        "goto": "액션으로 이동"
+      }
     }
+  },
+  "message": {
+    "config": "Configuration 저장 완료!",
+    "configSettings": "Config 환경 저장 완료!",
+    "batch": "Batch 저장 완료!",
+    "action": "Action 저장 완료!",
+    "reorderActions": "액션은 성공적으로 재정렬되었습니다!",
+    "removeAction": "행동이 성공적으로 제거되었습니다!",
+    "actionAddon": "Addon 저장 완료!",
+    "actionStatement": "작업 조건이 성공적으로 저장되었습니다!",
+    "actionSettings": "Action 환경 저장 완료!"
   },
   "configuration": {
     "title": "구성",
@@ -187,14 +248,15 @@
     "name": "이름",
     "initWait": "기다려",
     "startTime": "시작 시간",
-    "saveMessage": "Configuration 저장 완료!"
+    "noConfig": "구성을 찾을 수 없습니다. 검색을 다시 확인해주세요."
   },
   "batch": {
     "title": "일괄",
     "repeat": "반복하다",
+    "repeatHint": "<b> 반복 </b>는 주어진 간격으로 페이지를 다시로드하지 않고 모든 작업을 다시 실행합니다.",
     "repeatInterval": "R 간격",
     "refresh": "새로 고치다",
-    "saveMessage": "Batch 저장 완료!"
+    "refreshHint": "<b> 새로 고침 </b> 모든 작업이 완료되면 페이지를 다시로드합니다."
   },
   "error": {
     "number": "유효한 숫자 만 허용됩니다",
@@ -212,16 +274,19 @@
   "action": {
     "title": "동작",
     "add": "조치를 추가하십시오",
+    "addBefore": "위에 액션을 추가하십시오",
+    "addAfter": "아래에 조치를 추가하십시오",
     "addon": "첨가본",
     "remove": "조치를 제거하십시오",
     "settings": "조치 설정",
+    "disable": "조치를 비활성화합니다",
+    "enable": "행동 활성화",
     "initWait": "기다려",
     "name": "이름",
     "elementFinder": "요소 파인더",
     "value": "값",
     "repeat": "반복하다",
-    "repeatInterval": "R 간격",
-    "saveMessage": "Action 저장 완료!"
+    "repeatInterval": "R 간격"
   },
   "popover": {
     "valueExtractor": {
@@ -237,6 +302,7 @@
     }
   },
   "common": {
+    "appName": "자동 클릭커 - 자동 완성",
     "settings": "설정",
     "error": "오류",
     "save": "구하다",
@@ -250,15 +316,26 @@
     "local": "현지의",
     "dev": "개구",
     "stable": "안정적인",
-    "examples": "예",
-    "translate": "Auto Clicker 의 공식 번역 작업을 시작합니다. 귀하의 언어에 대한 사용자 인터페이스 번역을 제공하여 Auto Clicker 를 돕는 방법에 대해 알아보려면 공지를 확인하십시오.",
-    "clickHere": "여기를 클릭"
+    "examples": "예"
   },
   "language": {
     "en": "영어",
     "fr": "프랑스",
-    "kr": "한국인",
+    "ko": "한국인",
     "ca": "캐나다",
-    "hi": "힌디 어"
+    "hi": "힌디 어",
+    "zh_CN": "언어 중국어",
+    "sv": "스웨덴어",
+    "pt": "포르투갈 인",
+    "ja": "일본어",
+    "nl": "네덜란드 사람",
+    "de": "독일 사람",
+    "es": "스페인의",
+    "vi": "베트남어",
+    "fi": "핀란드어",
+    "ar": "아라비아 말",
+    "it": "이탈리아 사람",
+    "ru": "러시아인",
+    "id": "인도네시아 인"
   }
 }
