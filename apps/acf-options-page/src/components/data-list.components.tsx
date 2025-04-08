@@ -28,6 +28,12 @@ export function DataList() {
         <option value='1'>1</option>
         <option value='1e5'>1e5</option>
       </datalist>
+      <datalist id='start-time'>
+        <option value='01:00:00:000'>at afternoon 1 AM</option>
+        <option value='00:00:00:000'>at midnight 12 AM</option>
+        <option value='13:00:00:000'>at afternoon 1 PM</option>
+        <option value='15:15:15:150'>at afternoon 3 PM and 15 mins and 15 seconds and 15 milliseconds</option>
+      </datalist>
       <datalist id='schedule-date'>
         <option value='2025-01-01'>1st Jan 2025</option>
         <option value='2025-01-31'>31st Jan 2025</option>

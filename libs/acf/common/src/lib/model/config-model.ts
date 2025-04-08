@@ -54,6 +54,7 @@ export type Configuration = {
   configId?: number;
   name?: string;
   initWait?: number;
+  startTime?: string;
   schedule?: ISchedule;
   spreadsheetId?: string;
   hotkey?: string;
