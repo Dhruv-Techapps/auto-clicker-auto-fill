@@ -26,24 +26,21 @@ const registerConfigsContextMenus = () => {
       if (currentTab?.url) {
         const configs = await new ConfigStorage().getAllConfigs(currentTab.url);
         if (configs) {
-          const filteredConfigs = configs.filter((config) => config.url === currentTab.url);
-          if (filteredConfigs.length > 0) {
-            contextMenuExist = true;
-            chrome.contextMenus.create({ id: 'configs-list-separator', type: 'separator', contexts: ['all'] });
+          contextMenuExist = true;
+          chrome.contextMenus.create({ id: 'configs-list-separator', type: 'separator', contexts: ['all'] });
+          chrome.contextMenus.create({
+            id: 'configs-list',
+            title: `${configs.length} Configs Found`,
+            contexts: ['all'],
+          });
+          configs.forEach((config) => {
             chrome.contextMenus.create({
-              id: 'configs-list',
-              title: `${configs.length} Configs Found`,
+              id: `config|${config.id}|${currentTab.id}`,
+              title: config.name,
               contexts: ['all'],
+              parentId: 'configs-list',
             });
-            configs.forEach((config) => {
-              chrome.contextMenus.create({
-                id: `config|${config.id}|${currentTab.id}`,
-                title: config.name,
-                contexts: ['all'],
-                parentId: 'configs-list',
-              });
-            });
-          }
+          });
         }
       }
     });
