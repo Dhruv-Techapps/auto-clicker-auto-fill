@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 
 import { FormEvent, useEffect } from 'react';
 import { useTimeout } from '../_hooks/message.hooks';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { scheduleSelector, setScheduleMessage, switchScheduleModal, updateSchedule } from '../store/config/schedule';
-import { getFieldNameValue, updateForm } from '../util/element';
 import { syncSchedule } from '../store/config';
+import { scheduleSelector, setScheduleMessage, switchScheduleModal, updateSchedule } from '../store/config/schedule';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { REGEX } from '../util';
+import { getFieldNameValue, updateForm } from '../util/element';
 
 const FORM_ID = 'schedule';
 

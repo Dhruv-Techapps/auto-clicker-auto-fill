@@ -1,4 +1,4 @@
-import { RootState } from '@apps/acf-options-page/src/store';
+import { RootState } from '@acf-options-page/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const openScheduleModalAPI = createAsyncThunk('schedule/open', async (_, thunkAPI) => {

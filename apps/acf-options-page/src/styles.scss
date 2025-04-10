@@ -1,3 +1,13 @@
+@use 'theme/main.scss';
+html,
+body {
+  height: 100%;
+  font-size: 14px;
+}
+.popover {
+  --bs-popover-max-width: 550px;
+}
+
 /* You can add global styles to this file, and also import other style files */
 .rainbow-text {
   background-image: repeating-linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red, violet);

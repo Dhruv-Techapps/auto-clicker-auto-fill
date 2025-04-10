@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react';
 import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
-import { APP_LANGUAGES } from '../constants';
+import { APP_LANGUAGES } from './constants';
 
 let lng = window.localStorage.getItem('language') || navigator.language.replace('-', '_');
 
@@ -30,7 +30,7 @@ i18n
     defaultNS: 'web',
     lng,
     backend: {
-      loadPath: `${process.env.NX_PUBLIC_I18N}/{{lng}}/{{ns}}.json`,
+      loadPath: `${import.meta.env.VITE_PUBLIC_I18N}/{{lng}}/{{ns}}.json`,
       addPath: '/locales/add/{{lng}}/{{ns}}',
       allowMultiLoading: true,
       reloadInterval: false,

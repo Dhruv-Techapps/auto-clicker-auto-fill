@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { Button, ButtonGroup, Card, CardBody, Col, Form, Modal, Row, ToggleButton } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 import { subscribeSelector, switchSubscribeModal } from '../store/subscribe';
 

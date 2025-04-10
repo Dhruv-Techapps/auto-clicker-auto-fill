@@ -1,7 +1,7 @@
 import { Modal } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSettingsMessage, settingsSelector } from '../../store/settings/settings.slice';
 import { useTimeout } from '../../_hooks/message.hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setSettingsMessage, settingsSelector } from '../../store/settings/settings.slice';
 
 export type SettingMessageRef = {
   showMessage: (message: string) => void;

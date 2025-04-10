@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { settingsSelector, updateSettingsNotification } from '../../store/settings/settings.slice';
 import { VolumeMute, VolumeUp } from '../../util';
 import { getFieldNameValue } from '../../util/element';

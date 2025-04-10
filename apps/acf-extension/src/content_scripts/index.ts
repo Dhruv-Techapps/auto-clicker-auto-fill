@@ -1,7 +1,7 @@
 import { LOAD_TYPES, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
 import { Logger, LoggerColor } from '@dhruv-techapps/core-common';
-import { Sheets } from '@dhruv-techapps/google-sheets';
+import { Sheets } from '@dhruv-techapps/shared-google-sheets';
 import { scope } from '../common/instrument';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';

@@ -3,8 +3,8 @@ import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent } from 'react';
 import { Card, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { actionAddonSelector, selectedConfigSelector, updateActionAddon, updateActionAddonGoto } from '../../store/config';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { REGEX } from '../../util';
 import { getFieldNameValue } from '../../util/element';
 

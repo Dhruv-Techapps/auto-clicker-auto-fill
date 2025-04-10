@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { ToastProps } from 'react-bootstrap';
 import { ReactNode } from 'react';
+import { ToastProps } from 'react-bootstrap';
+import { RootState } from './store';
 
 export type ToastHandlerProps = Omit<ToastProps, 'defaultValue'> & {
   header: string | ReactNode;

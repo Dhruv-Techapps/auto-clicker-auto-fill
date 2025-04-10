@@ -1,0 +1,20 @@
+{
+  "name": "shared-google-sheets",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/google-sheets/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/google-sheets/dist",
+        "main": "packages/shared/google-sheets/src/index.ts",
+        "tsConfig": "packages/shared/google-sheets/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

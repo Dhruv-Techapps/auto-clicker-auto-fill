@@ -1,0 +1,20 @@
+{
+  "name": "shared-google-drive",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/google-drive/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/google-drive/dist",
+        "main": "packages/shared/google-drive/src/index.ts",
+        "tsConfig": "packages/shared/google-drive/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

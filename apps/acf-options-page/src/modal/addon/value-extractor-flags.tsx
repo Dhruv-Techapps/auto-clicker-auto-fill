@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { actionAddonSelector, updateActionAddon } from '../../store/config';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const FLAGS = [
   {

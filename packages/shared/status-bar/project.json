@@ -1,0 +1,20 @@
+{
+  "name": "shared-status-bar",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/status-bar/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/status-bar/dist",
+        "main": "packages/shared/status-bar/src/index.ts",
+        "tsConfig": "packages/shared/status-bar/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

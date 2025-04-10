@@ -1,0 +1,20 @@
+{
+  "name": "shared-firebase-oauth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/firebase-oauth/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/firebase-oauth/dist",
+        "main": "packages/shared/firebase-oauth/src/index.ts",
+        "tsConfig": "packages/shared/firebase-oauth/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

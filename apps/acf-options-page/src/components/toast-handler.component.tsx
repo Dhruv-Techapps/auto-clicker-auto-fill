@@ -1,5 +1,5 @@
 import { Toast } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { hideToast, toastSelector } from '../store/toast.slice';
 
 export const ToastHandler = () => {

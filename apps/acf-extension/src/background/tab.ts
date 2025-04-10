@@ -1,4 +1,4 @@
-import { NotificationHandler } from '@dhruv-techapps/notifications';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
 
 let optionsTab: chrome.tabs.Tab | undefined;
 

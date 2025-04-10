@@ -1,11 +1,11 @@
-import { REGEX } from '@apps/acf-options-page/src/util';
+import { selectedConfigSelector, updateConfig } from '@acf-options-page/store/config';
+import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { REGEX } from '@acf-options-page/util';
+import { APP_LINK } from '@acf-options-page/util/constants';
+import { getFieldNameValue, updateForm } from '@acf-options-page/util/element';
 import { useEffect, useState } from 'react';
 import { Card, Col, Form, FormControl, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { APP_LINK } from '../../../constants';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { selectedConfigSelector, updateConfig } from '../../../store/config';
-import { getFieldNameValue, updateForm } from '../../../util/element';
 
 const FORM_ID = 'config-body';
 

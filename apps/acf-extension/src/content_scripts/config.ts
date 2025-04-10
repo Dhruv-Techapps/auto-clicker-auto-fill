@@ -1,12 +1,13 @@
 import { Configuration } from '@dhruv-techapps/acf-common';
 import { MainWorldService } from '@dhruv-techapps/acf-main-world';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
+import { Session } from '@dhruv-techapps/acf-util';
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { NotificationsService } from '@dhruv-techapps/core-service';
-import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/discord-messaging';
-import { GoogleAnalyticsService } from '@dhruv-techapps/google-analytics';
-import { GoogleSheetsCS } from '@dhruv-techapps/google-sheets';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/status-bar';
+import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
+import { GoogleSheetsCS } from '@dhruv-techapps/shared-google-sheets';
+import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { scope } from '../common/instrument';
 import BatchProcessor from './batch';
 import Common from './common';
@@ -14,7 +15,6 @@ import { Hotkey } from './hotkey';
 import { I18N_COMMON } from './i18n';
 import { statusBar } from './status-bar';
 import GoogleSheets from './util/google-sheets';
-import { Session } from '@dhruv-techapps/acf-util';
 
 const CONFIG_I18N = {
   TITLE: chrome.i18n.getMessage('@CONFIG__TITLE'),

@@ -1,0 +1,20 @@
+{
+  "name": "shared-google-analytics",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/google-analytics/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/google-analytics/dist",
+        "main": "packages/shared/google-analytics/src/index.ts",
+        "tsConfig": "packages/shared/google-analytics/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

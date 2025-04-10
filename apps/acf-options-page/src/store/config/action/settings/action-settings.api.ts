@@ -1,7 +1,7 @@
 import { ActionSettings, GOTO, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../../../store';
+import { RootState } from '../../../store';
 
 export const openActionSettingsModalAPI = createAsyncThunk<{ settings: ActionSettings | undefined; selectedActionId: RANDOM_UUID; retryGoto: GOTO | undefined }, RANDOM_UUID, { state: RootState }>(
   'action-setting/open',

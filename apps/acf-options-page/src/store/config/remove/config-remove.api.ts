@@ -1,7 +1,7 @@
 import { LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../../store';
+import { RootState } from '../../store';
 import { addToast } from '../../toast.slice';
 import { setConfigs } from '../config.slice';
 

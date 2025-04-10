@@ -1,0 +1,27 @@
+{
+  "name": "@dhruv-techapps/shared-vision",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "dependencies": {
+    "@swc/helpers": "~0.5.11",
+    "@dhruv-techapps/shared-firebase-functions": "0.0.1",
+    "@dhruv-techapps/core-common": "0.0.1",
+    "@dhruv-techapps/core-service": "0.0.1"
+  }
+}

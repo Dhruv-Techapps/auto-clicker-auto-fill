@@ -1,7 +1,7 @@
 import { Addon, GOTO, RECHECK_OPTIONS } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../../../store';
+import { RootState } from '../../../store';
 
 export const openActionAddonModalAPI = createAsyncThunk<{ addon: Addon | undefined; selectedActionId: RANDOM_UUID; recheckGoto: GOTO | undefined }, RANDOM_UUID, { state: RootState }>(
   'action-addon/open',

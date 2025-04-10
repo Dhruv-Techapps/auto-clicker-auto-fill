@@ -1,0 +1,20 @@
+{
+  "name": "shared-firebase-firestore",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/firebase-firestore/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/firebase-firestore/dist",
+        "main": "packages/shared/firebase-firestore/src/index.ts",
+        "tsConfig": "packages/shared/firebase-firestore/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

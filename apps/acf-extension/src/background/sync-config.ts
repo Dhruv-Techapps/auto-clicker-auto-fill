@@ -1,7 +1,7 @@
 import { Configuration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
-import { ConfigRequest, FirebaseFirestoreBackground } from '@dhruv-techapps/firebase-firestore';
-import { Auth } from '@dhruv-techapps/firebase-oauth';
-import { FirebaseStorageBackground } from '@dhruv-techapps/firebase-storage';
+import { ConfigRequest, FirebaseFirestoreBackground } from '@dhruv-techapps/shared-firebase-firestore';
+import { Auth } from '@dhruv-techapps/shared-firebase-oauth';
+import { FirebaseStorageBackground } from '@dhruv-techapps/shared-firebase-storage';
 import { EDGE_OAUTH_CLIENT_ID } from '../common/environments';
 import { scope } from '../common/instrument';
 

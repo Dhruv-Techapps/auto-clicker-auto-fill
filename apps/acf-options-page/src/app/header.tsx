@@ -2,13 +2,13 @@ import * as Sentry from '@sentry/react';
 import { useEffect, useState } from 'react';
 import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { APP_LANGUAGES, APP_LINK } from '../constants';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { SettingsModal } from '../modal';
 import { firebaseFirestoreSelector, firebaseSelector } from '../store/firebase';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { switchSettingsModal } from '../store/settings/settings.slice';
 import { switchTheme, themeSelector } from '../store/theme.slice';
 import { GearFill, Moon, Sun, ThreeDots } from '../util';
+import { APP_LANGUAGES, APP_LINK } from '../util/constants';
 import { HeaderGoogle } from './header_google';
 
 function Header() {
@@ -22,16 +22,16 @@ function Header() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    if (/(DEV|BETA|LOCAL)/.test(process.env.NX_PUBLIC_VARIANT || '')) {
-      window.document.title = `${t('common.appName')} [${process.env.NX_PUBLIC_VARIANT}]`;
+    if (/(DEV|BETA|LOCAL)/.test(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
+      window.document.title = `${t('common.appName')} [${import.meta.env.VITE_PUBLIC_VARIANT}]`;
     } else {
       window.document.title = t('common.appName');
     }
   }, [t]);
 
   useEffect(() => {
-    if (/(DEV|BETA|LOCAL)/.test(process.env.NX_PUBLIC_VARIANT || '')) {
-      window.document.title = `${t('common.appName')} [${process.env.NX_PUBLIC_VARIANT}]`;
+    if (/(DEV|BETA|LOCAL)/.test(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
+      window.document.title = `${t('common.appName')} [${import.meta.env.VITE_PUBLIC_VARIANT}]`;
     } else {
       window.document.title = t('common.appName');
     }
@@ -54,8 +54,8 @@ function Header() {
 
   let appName = t('common.appName');
 
-  if (/(DEV|BETA)/.test(process.env.NX_PUBLIC_VARIANT || '')) {
-    appName += ` [${process.env.NX_PUBLIC_VARIANT}]`;
+  if (/(DEV|BETA)/.test(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
+    appName += ` [${import.meta.env.VITE_PUBLIC_VARIANT}]`;
   }
 
   return (

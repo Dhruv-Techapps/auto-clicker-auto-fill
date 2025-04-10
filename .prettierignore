@@ -6,5 +6,6 @@
 /apps/acf-options-page/src/theme/_doc.css
 CHANGELOG.md
 **/CHANGELOG.md
-
+codecov.yml
 /.nx/workspace-data
+**/dist/**

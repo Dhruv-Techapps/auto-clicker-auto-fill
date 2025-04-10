@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
-import { CHROME_WEB_STORE } from '../constants';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { appSelector, switchExtensionNotFound } from '../store/app.slice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { CHROME_WEB_STORE } from '../util/constants';
 
 const ExtensionNotFoundModal = () => {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ const ExtensionNotFoundModal = () => {
 
   const downloadClick = () => {
     const webStore = CHROME_WEB_STORE;
-    const extensionId = process.env[`NX_PUBLIC_CHROME_EXTENSION_ID`];
+    const extensionId = import.meta.env[`NX_PUBLIC_CHROME_EXTENSION_ID`];
     window.open(`${webStore}${extensionId}`);
   };
 
@@ -34,7 +34,7 @@ const ExtensionNotFoundModal = () => {
       </Modal.Header>
       <Modal.Body className='text-center'>
         <p className='mb-0'>
-          <Trans i18nKey='modal.extensionNotFound.subTitle' components={{ b: <b />, Badge: <span className='text-info' /> }} values={process.env} />. {t('modal.extensionNotFound.hint')}
+          <Trans i18nKey='modal.extensionNotFound.subTitle' components={{ b: <b />, Badge: <span className='text-info' /> }} values={import.meta.env} />. {t('modal.extensionNotFound.hint')}
         </p>
         <p className='mt-5'>
           With{' '}

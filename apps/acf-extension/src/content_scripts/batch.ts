@@ -1,7 +1,7 @@
 import { Action, Batch } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { NotificationsService } from '@dhruv-techapps/core-service';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/status-bar';
+import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
 import Common from './common';
 import { I18N_COMMON } from './i18n';

@@ -1,10 +1,10 @@
+import { CONFIGURATIONS } from '@acf-options-page/data/configurations';
 import { CONFIG_SOURCE, Configuration, START_TYPES, getDefaultConfig } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { LocalStorage } from '../../_helpers';
-import { CONFIGURATIONS } from '../../data';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';

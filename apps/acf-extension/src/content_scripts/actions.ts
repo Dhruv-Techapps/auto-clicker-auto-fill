@@ -2,7 +2,7 @@ import { Action, ACTION_RUNNING, ACTION_STATUS } from '@dhruv-techapps/acf-commo
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, isValidUUID } from '@dhruv-techapps/core-common';
 import { NotificationsService } from '@dhruv-techapps/core-service';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/status-bar';
+import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import ActionProcessor from './action';
 import AddonProcessor from './addon';
 import Common from './common';

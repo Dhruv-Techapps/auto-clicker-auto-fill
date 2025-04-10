@@ -1,0 +1,20 @@
+{
+  "name": "shared-discord-messaging",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/discord-messaging/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/discord-messaging/dist",
+        "main": "packages/shared/discord-messaging/src/index.ts",
+        "tsConfig": "packages/shared/discord-messaging/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

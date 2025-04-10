@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 import { googleHasAccessAPI, googleLoginAPI } from './google-login.api';
 
 type GoogleStore = {

@@ -3,9 +3,10 @@ import { StorageService } from '@dhruv-techapps/core-service';
 import { AnyAction, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import i18next from 'i18next';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 import { addToast } from '../toast.slice';
 
+import { ScheduleService } from '@dhruv-techapps/acf-service';
 import {
   setActionAddonError,
   setActionAddonMessage,
@@ -36,9 +37,8 @@ import {
   updateConfig,
   updateConfigSettings,
 } from './config.slice';
-import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
 import { setScheduleError, setScheduleMessage } from './schedule';
-import { ScheduleService } from '@dhruv-techapps/acf-service';
+import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
 
 const configsToastListenerMiddleware = createListenerMiddleware();
 configsToastListenerMiddleware.startListening({

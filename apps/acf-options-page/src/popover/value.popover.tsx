@@ -1,6 +1,6 @@
 import { OverlayTrigger, Popover, Table } from 'react-bootstrap';
 import { InfoCircle } from '../util';
-import { APP_LINK } from '../constants';
+import { APP_LINK } from '../util/constants';
 
 export function ValuePopover() {
   return (

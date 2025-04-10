@@ -1,4 +1,4 @@
-import { RootState } from '@apps/acf-options-page/src/store';
+import { RootState } from '@acf-options-page/store';
 import { LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { createAsyncThunk } from '@reduxjs/toolkit';

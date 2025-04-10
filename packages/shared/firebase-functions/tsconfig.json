@@ -1,0 +1,28 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "../../core/service"
+    },
+    {
+      "path": "../../core/common"
+    },
+    {
+      "path": "../notifications"
+    },
+    {
+      "path": "../google-oauth"
+    },
+    {
+      "path": "../firebase-oauth"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

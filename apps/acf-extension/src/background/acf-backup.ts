@@ -1,9 +1,9 @@
 /*global chrome*/
 
 import { LOCAL_STORAGE_KEY, defaultSettings, getDefaultConfig } from '@dhruv-techapps/acf-common';
-import { BACKUP_ALARM, DriveFile, GoogleDriveBackground, GoogleDriveFile } from '@dhruv-techapps/google-drive';
-import { GOOGLE_SCOPES } from '@dhruv-techapps/google-oauth';
-import { NotificationHandler } from '@dhruv-techapps/notifications';
+import { BACKUP_ALARM, DriveFile, GoogleDriveBackground, GoogleDriveFile } from '@dhruv-techapps/shared-google-drive';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
 import { EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL } from '../common/environments';
 import { auth } from './firebase';
 
@@ -26,7 +26,7 @@ const BACKUP_FILE_NAMES = {
 };
 
 export default class AcfBackup extends GoogleDriveBackground {
-  scopes = [GOOGLE_SCOPES.DRIVE, GOOGLE_SCOPES.PROFILE];
+  override scopes = [GOOGLE_SCOPES.DRIVE, GOOGLE_SCOPES.PROFILE];
 
   async backup(now?: boolean): Promise<string> {
     const { configs = [getDefaultConfig()] } = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);

@@ -3,8 +3,8 @@ import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectedConfigSelector, updateActionStatementGoto, updateActionStatementThen } from '../../store/config';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 type ActionStatementRetryProps = Partial<Pick<ActionStatement, 'then' | 'goto'>>;
 
