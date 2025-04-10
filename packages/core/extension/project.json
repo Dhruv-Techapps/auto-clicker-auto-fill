@@ -1,0 +1,20 @@
+{
+  "name": "core-extension",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/core/extension/src",
+  "projectType": "library",
+  "tags": ["scope:core"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/core/extension/dist",
+        "main": "packages/core/extension/src/index.ts",
+        "tsConfig": "packages/core/extension/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

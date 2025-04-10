@@ -1,0 +1,20 @@
+{
+  "name": "shared-firebase-functions",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/firebase-functions/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/firebase-functions/dist",
+        "main": "packages/shared/firebase-functions/src/index.ts",
+        "tsConfig": "packages/shared/firebase-functions/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

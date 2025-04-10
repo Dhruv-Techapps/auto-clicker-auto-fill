@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<script>
+  window.onload = () => {
+    // console.log('Auto Clicker Auto Fill Sandbox initialized')
+    window.parent.postMessage({ type: 'sandbox-initialized' }, '*');
+  };
+  window.addEventListener('message', (event) => {
+    const { command, context, name } = event.data;
+    if (command === 'eval') {
+      try {
+        // eslint-disable-next-line no-eval
+        const result = eval(context);
+        console.log('Sandbox', context, '>>', result);
+        event.source.postMessage({ name, result }, event.origin);
+      } catch (error) {
+        event.source.postMessage({ name, error }, event.origin);
+      }
+    }
+  });
+</script>

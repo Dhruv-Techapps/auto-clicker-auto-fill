@@ -1,0 +1,31 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "../../shared/util"
+    },
+    {
+      "path": "../../shared/sandbox"
+    },
+    {
+      "path": "../../shared/google-analytics"
+    },
+    {
+      "path": "../../core/common"
+    },
+    {
+      "path": "../service"
+    },
+    {
+      "path": "../common"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

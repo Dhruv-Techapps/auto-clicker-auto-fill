@@ -1,0 +1,28 @@
+{
+  "name": "@dhruv-techapps/ui-components",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "dependencies": {
+    "@swc/helpers": "~0.5.11",
+    "bootstrap-icons": "^1.11.3",
+    "react-bootstrap": "^2.10.9",
+    "react-i18next": "^15.4.1",
+    "react": "19.0.0"
+  }
+}

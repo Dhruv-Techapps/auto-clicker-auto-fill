@@ -1,0 +1,20 @@
+{
+  "name": "acf-events",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/acf/events/src",
+  "projectType": "library",
+  "tags": ["scope:acf"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/acf/events/dist",
+        "main": "packages/acf/events/src/index.ts",
+        "tsConfig": "packages/acf/events/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

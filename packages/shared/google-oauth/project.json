@@ -1,0 +1,20 @@
+{
+  "name": "shared-google-oauth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/google-oauth/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/google-oauth/dist",
+        "main": "packages/shared/google-oauth/src/index.ts",
+        "tsConfig": "packages/shared/google-oauth/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

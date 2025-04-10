@@ -1,0 +1,20 @@
+{
+  "name": "shared-openai",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/openai/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/openai/dist",
+        "main": "packages/shared/openai/src/index.ts",
+        "tsConfig": "packages/shared/openai/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "acf-service",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/acf/service/src",
+  "projectType": "library",
+  "tags": ["scope:acf"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/acf/service/dist",
+        "main": "packages/acf/service/src/index.ts",
+        "tsConfig": "packages/acf/service/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "acf-main-world",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/acf/main-world/src",
+  "projectType": "library",
+  "tags": ["scope:acf"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/acf/main-world/dist",
+        "main": "packages/acf/main-world/src/index.ts",
+        "tsConfig": "packages/acf/main-world/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

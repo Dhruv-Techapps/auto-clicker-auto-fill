@@ -1,0 +1,20 @@
+{
+  "name": "shared-discord-oauth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/discord-oauth/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/discord-oauth/dist",
+        "main": "packages/shared/discord-oauth/src/index.ts",
+        "tsConfig": "packages/shared/discord-oauth/tsconfig.lib.json",
+
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}
