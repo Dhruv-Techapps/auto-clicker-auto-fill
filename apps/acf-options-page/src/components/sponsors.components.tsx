@@ -1,5 +1,5 @@
 import { Col, Container, Image, Row } from 'react-bootstrap';
-import { SPONSORS } from '../constants';
+import { SPONSORS } from '../util/constants';
 
 export function Sponsors() {
   return (

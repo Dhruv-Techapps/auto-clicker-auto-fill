@@ -3,8 +3,8 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import GoogleSignInDark from '../assets/btn_google_signin_dark_normal_web.png';
 import GoogleSignInLight from '../assets/btn_google_signin_light_normal_web.png';
 import { Loading } from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { firebaseLoginAPI, firebaseSelector, switchFirebaseLoginModal } from '../store/firebase';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { themeSelector } from '../store/theme.slice';
 
 const LoginModal = () => {

@@ -3,8 +3,8 @@ import { ChangeEvent, FormEvent } from 'react';
 import { Badge, Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ErrorAlert } from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { configRemoveSelector, configRemoveUpdateAPI, switchConfigRemoveModal, switchConfigRemoveSelection } from '../store/config';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const RemoveConfigsModal = () => {
   const { visible, configs, error } = useAppSelector(configRemoveSelector);

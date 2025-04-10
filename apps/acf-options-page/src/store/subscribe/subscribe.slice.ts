@@ -1,7 +1,7 @@
-import { FirebaseFirestoreService, Product, Subscription } from '@dhruv-techapps/firebase-firestore';
+import { FirebaseFirestoreService, Product, Subscription } from '@dhruv-techapps/shared-firebase-firestore';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 
 type SubscribeStore = { visible: boolean; isPortalLinkLoading: boolean; subscriptions?: Subscription[]; error?: string; products?: Product[]; isSubscribing: boolean };
 

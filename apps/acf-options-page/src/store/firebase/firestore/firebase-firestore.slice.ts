@@ -1,4 +1,4 @@
-import { RootState } from '@apps/acf-options-page/src/store';
+import { RootState } from '@acf-options-page/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { profileGetAPI, profileSetAPI } from './firebase-firestore.api';
 

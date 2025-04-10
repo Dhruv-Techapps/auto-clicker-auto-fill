@@ -1,8 +1,8 @@
 import { Alert, Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import Markdown from 'react-markdown';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { blogSelector, hideBlog } from '../store/blog/blog.slice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const BlogModal = () => {
   const { t } = useTranslation();

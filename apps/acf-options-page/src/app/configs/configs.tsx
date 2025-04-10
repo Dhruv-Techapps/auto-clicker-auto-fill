@@ -1,15 +1,15 @@
+import { download } from '@acf-options-page/_helpers';
+import { Ads } from '@acf-options-page/components';
+import { importAll, importConfig } from '@acf-options-page/store/config';
+import { configGetAllAPI } from '@acf-options-page/store/config/config.api';
+import { useAppDispatch } from '@acf-options-page/store/hooks';
+import { addToast } from '@acf-options-page/store/toast.slice';
+import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
 import { Configuration } from '@dhruv-techapps/acf-common';
 import { createRef, useEffect } from 'react';
 import { Alert, Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { download } from '../../_helpers';
-import { Ads } from '../../components';
-import { CHROME_WEB_STORE } from '../../constants';
-import { useAppDispatch } from '../../hooks';
 import { BatchModal, ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal, ScheduleModal } from '../../modal';
-import { importAll, importConfig } from '../../store/config';
-import { configGetAllAPI } from '../../store/config/config.api';
-import { addToast } from '../../store/toast.slice';
 import Footer from '../footer';
 import Action from './action';
 import Config from './config';
@@ -70,7 +70,7 @@ function Configs(props) {
           <p className='m-0'>
             {props.error}
             {props.errorButton && (
-              <Alert.Link href={`${CHROME_WEB_STORE}${process.env.NX_PUBLIC_CHROME_EXTENSION_ID}`} target='_blank' className='ms-2'>
+              <Alert.Link href={`${CHROME_WEB_STORE}${import.meta.env.VITE_PUBLIC_CHROME_EXTENSION_ID}`} target='_blank' className='ms-2'>
                 download
               </Alert.Link>
             )}

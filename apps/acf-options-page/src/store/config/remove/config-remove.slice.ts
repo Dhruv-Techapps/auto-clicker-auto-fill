@@ -2,7 +2,7 @@ import { Configuration } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
-import { RootState } from '../../../store';
+import { RootState } from '../../store';
 import { configRemoveUpdateAPI } from './config-remove.api';
 
 export type ConfigurationRemoveType = Configuration & { checked?: boolean };

@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { useTimeout } from '../_hooks/message.hooks';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import {
   actionSettingsSelector,
   selectedConfigSelector,
@@ -16,6 +15,7 @@ import {
   updateActionSettings,
   updateActionSettingsGoto,
 } from '../store/config';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { REGEX } from '../util';
 import { getFieldNameValue, updateForm } from '../util/element';
 

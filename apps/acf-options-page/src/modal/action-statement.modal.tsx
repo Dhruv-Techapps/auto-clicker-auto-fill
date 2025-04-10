@@ -5,7 +5,6 @@ import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { Alert, Button, Form, Modal, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import {
   actionStatementSelector,
   addActionStatementCondition,
@@ -16,6 +15,7 @@ import {
   syncActionStatement,
   updateActionStatementCondition,
 } from '../store/config';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Plus } from '../util/svg';
 import { ActionStatementCondition } from './action-statement/action-statement-condition';
 import { ActionStatementRetry } from './action-statement/action-statement-retry';
@@ -99,7 +99,11 @@ const ActionStatementModal = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>{statement.conditions?.map((condition, index) => <ActionStatementCondition key={condition.id} index={index} condition={condition} />)}</tbody>
+            <tbody>
+              {statement.conditions?.map((condition, index) => (
+                <ActionStatementCondition key={condition.id} index={index} condition={condition} />
+              ))}
+            </tbody>
           </Table>
           {statement.conditions ? (
             <ActionStatementRetry then={statement.then} goto={statement.goto} />

@@ -1,9 +1,9 @@
-import { GOOGLE_SCOPES } from '@dhruv-techapps/google-oauth';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
 import { useEffect } from 'react';
 import { Alert, Button } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { firebaseSelector, switchFirebaseLoginModal } from '../../store/firebase';
 import { googleHasAccessAPI, googleLoginAPI, googleSelector } from '../../store/google';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 function SettingGoogleSheets() {
   const { user } = useAppSelector(firebaseSelector);
@@ -23,7 +23,7 @@ function SettingGoogleSheets() {
     }
   }, [user, grantedScopes, scope, dispatch]);
 
-  if (['DEV', 'BETA'].includes(process.env.NX_PUBLIC_VARIANT || '')) {
+  if (['DEV', 'BETA'].includes(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
     return (
       <div className='d-flex flex-column align-items-start'>
         <Alert>

@@ -1,17 +1,17 @@
+import ConfirmationModalContextProvider from '@acf-options-page/_providers/confirm.provider';
 import * as Sentry from '@sentry/react';
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import ConfirmationModalContextProvider from './_providers/confirm.provider';
-import Configs from './app/configs/configs';
-import Header from './app/header';
-import { DataList, Loading, ToastHandler } from './components';
-import { useAppDispatch, useAppSelector } from './hooks';
-import { BlogModal, ExtensionNotFoundModal } from './modal';
-import { LoginModal } from './modal/login.modal';
-import { SubscribeModal } from './modal/subscribe.modal';
-import { getManifest } from './store/app.api';
-import { appSelector } from './store/app.slice';
-import { firebaseIsLoginAPI, firebaseSelector, profileGetAPI } from './store/firebase';
+import { DataList, Loading, ToastHandler } from '../components';
+import { BlogModal, ExtensionNotFoundModal } from '../modal';
+import { LoginModal } from '../modal/login.modal';
+import { SubscribeModal } from '../modal/subscribe.modal';
+import { getManifest } from '../store/app.api';
+import { appSelector } from '../store/app.slice';
+import { firebaseIsLoginAPI, firebaseSelector, profileGetAPI } from '../store/firebase';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import Configs from './configs/configs';
+import Header from './header';
 
 function App() {
   const { loading, error, errorButton } = useAppSelector(appSelector);

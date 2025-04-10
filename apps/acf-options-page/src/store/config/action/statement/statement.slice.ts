@@ -2,7 +2,7 @@ import { ActionCondition, ActionStatement, GOTO, RETRY_OPTIONS } from '@dhruv-te
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
-import { RootState } from '../../../../store';
+import { RootState } from '../../../store';
 import { openActionStatementModalAPI } from './statement.api';
 
 type ActionStatementStore = {

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
-import { RootState } from '../../../store';
+import { RootState } from '../../store';
 
 type ConfigSettingsStore = {
   visible: boolean;

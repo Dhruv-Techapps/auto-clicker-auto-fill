@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Button, Form, Image } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { firebaseSelector, switchFirebaseLoginModal } from '../../store/firebase';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { settingsSelector } from '../../store/settings';
 import { discordDeleteAPI, discordGetAPI, discordLoginAPI } from '../../store/settings/settings.api';
 

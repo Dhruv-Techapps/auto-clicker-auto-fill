@@ -1,5 +1,4 @@
-import { useConfirmationModalContext } from '@apps/acf-options-page/src/_providers/confirm.provider';
-import { useAppDispatch, useAppSelector } from '@apps/acf-options-page/src/hooks';
+import { useConfirmationModalContext } from '@acf-options-page/_providers/confirm.provider';
 import {
   actionSelector,
   addAction,
@@ -9,7 +8,8 @@ import {
   removeAction,
   setColumnVisibility,
   updateAction,
-} from '@apps/acf-options-page/src/store/config';
+} from '@acf-options-page/store/config';
+import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { Action } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { ColumnDef, Row, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from '@tanstack/react-table';

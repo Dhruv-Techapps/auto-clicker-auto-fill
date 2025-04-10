@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import { getI18n } from 'react-i18next';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 import { setSettingsError, setSettingsMessage, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
 
 const settingsListenerMiddleware = createListenerMiddleware();

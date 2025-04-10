@@ -1,7 +1,7 @@
 import { Discord, LOCAL_STORAGE_KEY, Settings } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
-import { DiscordOauthService } from '@dhruv-techapps/discord-oauth';
-import { FirebaseFirestoreService } from '@dhruv-techapps/firebase-firestore';
+import { DiscordOauthService } from '@dhruv-techapps/shared-discord-oauth';
+import { FirebaseFirestoreService } from '@dhruv-techapps/shared-firebase-firestore';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const settingsGetAPI = createAsyncThunk('settings/get', async () => {

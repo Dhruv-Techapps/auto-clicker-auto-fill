@@ -1,5 +1,5 @@
-import { useAppSelector } from '../hooks';
 import { firebaseSelector } from '../store/firebase';
+import { useAppSelector } from '../store/hooks';
 import { GoogleAds } from './google-ads.components';
 
 export function Ads() {

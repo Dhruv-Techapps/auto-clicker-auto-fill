@@ -1,8 +1,8 @@
 import { ACTION_CONDITION_OPR, ACTION_STATUS, ActionCondition } from '@dhruv-techapps/acf-common';
 import { ChangeEvent } from 'react';
 import { Button, ButtonGroup, Form } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { removeActionStatementCondition, selectedConfigSelector, updateActionStatementCondition } from '../../store/config';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { X } from '../../util';
 import { getFieldNameValue } from '../../util/element';
 

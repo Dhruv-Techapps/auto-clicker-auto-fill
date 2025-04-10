@@ -1,7 +1,7 @@
 import { Configuration } from '@dhruv-techapps/acf-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
-import { RootState } from '../../../store';
+import { RootState } from '../../store';
 import { configReorderUpdateAPI } from './config-reorder.api';
 
 type ConfigReorderStore = {

@@ -1,11 +1,5 @@
-import { useTimeout } from '@apps/acf-options-page/src/_hooks/message.hooks';
-import { addToast } from '@apps/acf-options-page/src/store/toast.slice';
-import { Configuration } from '@dhruv-techapps/acf-common';
-import { createRef } from 'react';
-import { Alert, Badge, Button, ButtonGroup, Card, Col, Form, Row } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import { download } from '../../../_helpers';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { download } from '@acf-options-page/_helpers';
+import { useTimeout } from '@acf-options-page/_hooks/message.hooks';
 import {
   configSelector,
   duplicateConfig,
@@ -16,9 +10,15 @@ import {
   setConfigMessage,
   switchConfigSettingsModal,
   updateConfig,
-} from '../../../store/config';
-import { Copy, Download, Gear, StockWatch, Upload } from '../../../util';
-import { getFieldNameValue } from '../../../util/element';
+} from '@acf-options-page/store/config';
+import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { addToast } from '@acf-options-page/store/toast.slice';
+import { Copy, Download, Gear, StockWatch, Upload } from '@acf-options-page/util';
+import { getFieldNameValue } from '@acf-options-page/util/element';
+import { Configuration } from '@dhruv-techapps/acf-common';
+import { createRef } from 'react';
+import { Alert, Badge, Button, ButtonGroup, Card, Col, Form, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import ConfigBody from './config-body';
 
 function Config() {

@@ -1,10 +1,59 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "types": ["node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"]
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "jsx": "react-jsx",
+    "lib": ["dom"],
+    "types": ["node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts", "vite/client", "vitest/importMeta"],
+    "rootDir": "src"
   },
-  "files": ["../../node_modules/@nx/react/typings/cssmodule.d.ts", "../../node_modules/@nx/react/typings/image.d.ts"],
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "src/**/*.spec.tsx", "src/**/*.test.tsx", "src/**/*.spec.js", "src/**/*.test.js", "src/**/*.spec.jsx", "src/**/*.test.jsx"],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "exclude": [
+    "out-tsc",
+    "dist",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.tsx",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.js",
+    "src/**/*.test.js",
+    "src/**/*.spec.jsx",
+    "src/**/*.test.jsx",
+    "eslint.config.js",
+    "eslint.config.cjs",
+    "eslint.config.mjs"
+  ],
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
+  "references": [
+    {
+      "path": "../../packages/shared/discord-oauth/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-firestore/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-oauth/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/service/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/service/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/google-oauth/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/google-drive/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/status-bar/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/common/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/common/tsconfig.lib.json"
+    }
+  ]
 }

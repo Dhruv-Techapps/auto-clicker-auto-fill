@@ -5,8 +5,8 @@ import { FormEvent, useState } from 'react';
 import { Badge, Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ErrorAlert } from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { configReorderSelector, configReorderUpdateAPI, switchConfigReorderModal, updateConfigReorder } from '../store/config';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { ArrowDown, ArrowUp } from '../util';
 
 const ReorderConfigsModal = () => {
@@ -78,7 +78,9 @@ const ReorderConfigsModal = () => {
           <div className='list-group'>
             <DndContext onDragEnd={handleDragEnd} sensors={sensors} collisionDetection={closestCenter}>
               <SortableContext items={configs} strategy={verticalListSortingStrategy}>
-                {configs?.map((config) => <SortableItem key={config.id} {...config} />)}
+                {configs?.map((config) => (
+                  <SortableItem key={config.id} {...config} />
+                ))}
               </SortableContext>
             </DndContext>
             {/*<Reorder reorderId='configurations' draggedClassName='active' placeholderClassName='list-group' onReorder={onReorder}></Reorder>*/}

@@ -4,9 +4,9 @@ import { LOAD_TYPES, START_TYPES, URL_MATCH, defaultHotkey } from '@dhruv-techap
 import { Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { HotkeyPopover } from '../popover';
 import { configSettingsSelector, selectedConfigSelector, setConfigSettingsMessage, switchConfigSettingsModal, updateConfigSettings } from '../store/config';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { REGEX } from '../util';
 import { getFieldNameValue } from '../util/element';
 

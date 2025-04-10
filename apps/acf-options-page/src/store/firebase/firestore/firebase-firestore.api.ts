@@ -1,4 +1,4 @@
-import { FirebaseFirestoreService } from '@dhruv-techapps/firebase-firestore';
+import { FirebaseFirestoreService } from '@dhruv-techapps/shared-firebase-firestore';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const profileGetAPI = createAsyncThunk('profile/get', async () => {

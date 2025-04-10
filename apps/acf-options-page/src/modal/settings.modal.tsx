@@ -1,9 +1,9 @@
-import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/status-bar';
+import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/shared-status-bar';
 import { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ErrorAlert, Loading } from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { settingsGetAPI } from '../store/settings/settings.api';
 import { settingsSelector, switchSettingsModal, updateSettings } from '../store/settings/settings.slice';
 import { themeSelector } from '../store/theme.slice';
