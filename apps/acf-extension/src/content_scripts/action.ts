@@ -1,5 +1,5 @@
 import { ACTION_STATUS, Action } from '@dhruv-techapps/acf-common';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/status-bar';
+import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Common from './common';
 import { statusBar } from './status-bar';
 import { ACFEvents } from './util/acf-events';

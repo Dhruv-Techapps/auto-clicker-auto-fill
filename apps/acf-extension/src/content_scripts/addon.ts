@@ -1,8 +1,8 @@
 import { ACTION_STATUS, ADDON_CONDITIONS, ActionSettings, Addon, RECHECK_OPTIONS } from '@dhruv-techapps/acf-common';
 import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/google-analytics';
-import { Sandbox } from '@dhruv-techapps/sandbox';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/status-bar';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
+import { Sandbox } from '@dhruv-techapps/shared-sandbox';
+import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { RADIO_CHECKBOX_NODE_NAME } from '../common/constant';
 import Common from './common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';

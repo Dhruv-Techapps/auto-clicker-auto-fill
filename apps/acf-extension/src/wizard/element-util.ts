@@ -1,5 +1,5 @@
-import { GoogleAnalyticsService } from '@dhruv-techapps/google-analytics';
 import { generateUUID } from '@dhruv-techapps/core-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
 import { BUTTON_FILE_SUBMIT_NODE_NAME, RADIO_CHECKBOX_NODE_NAME } from '../common/constant';
 import { xPath } from './dom-path';
 import { WizardAction } from './type';

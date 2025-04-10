@@ -1,10 +1,83 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
-    "types": ["node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"]
+    "outDir": "dist",
+    "types": ["node"],
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "lib": ["dom"]
   },
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts"]
+  "exclude": ["out-tsc", "dist", "jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"],
+  "include": ["src/**/*.ts"],
+  "references": [
+    {
+      "path": "../../packages/acf/events/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/util/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/sandbox/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/service/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/status-bar/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-storage/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/vision/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/google-sheets/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-oauth/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-functions/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-firestore/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/discord-oauth/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/discord-messaging/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/extension/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/main-world/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/google-analytics/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/openai/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/store/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/common/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/notifications/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/google-oauth/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/google-drive/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/common/tsconfig.lib.json"
+    }
+  ]
 }

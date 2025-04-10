@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE_KEY, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage } from '@dhruv-techapps/acf-store';
-import { GoogleAnalyticsBackground } from '@dhruv-techapps/google-analytics';
+import { GoogleAnalyticsBackground } from '@dhruv-techapps/shared-google-analytics';
 import { ACTION_POPUP } from '../common/constant';
 
 const CONTEXT_MENU_ELEMENT_ID = 'element-mode';

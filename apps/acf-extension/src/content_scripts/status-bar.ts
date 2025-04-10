@@ -1,3 +1,3 @@
-import { StatusBar } from '@dhruv-techapps/status-bar';
+import { StatusBar } from '@dhruv-techapps/shared-status-bar';
 
 export const statusBar = new StatusBar();
