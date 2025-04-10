@@ -1,4 +1,4 @@
-import { ThemeContext } from '@dhruv-techapps/context';
+import { ThemeContext } from '@dhruv-techapps/ui-context';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
