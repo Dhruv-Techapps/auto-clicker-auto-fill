@@ -1,0 +1,106 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/acf/common"
+    },
+    {
+      "path": "./packages/acf/events"
+    },
+    {
+      "path": "./packages/acf/main-world"
+    },
+    {
+      "path": "./packages/acf/service"
+    },
+    {
+      "path": "./packages/acf/store"
+    },
+    {
+      "path": "./packages/acf/util"
+    },
+    {
+      "path": "./packages/ui/context"
+    },
+    {
+      "path": "./packages/core/common"
+    },
+    {
+      "path": "./packages/core/extension"
+    },
+    {
+      "path": "./packages/core/service"
+    },
+    {
+      "path": "./packages/shared/discord-messaging"
+    },
+    {
+      "path": "./packages/shared/discord-oauth"
+    },
+    {
+      "path": "./packages/shared/firebase-database"
+    },
+    {
+      "path": "./packages/shared/firebase-firestore"
+    },
+    {
+      "path": "./packages/shared/firebase-functions"
+    },
+    {
+      "path": "./packages/shared/firebase-oauth"
+    },
+    {
+      "path": "./packages/shared/firebase-storage"
+    },
+    {
+      "path": "./packages/shared/google-analytics"
+    },
+    {
+      "path": "./packages/shared/google-drive"
+    },
+    {
+      "path": "./packages/shared/google-oauth"
+    },
+    {
+      "path": "./packages/shared/google-sheets"
+    },
+    {
+      "path": "./packages/shared/notifications"
+    },
+    {
+      "path": "./packages/shared/openai"
+    },
+    {
+      "path": "./packages/shared/sandbox"
+    },
+    {
+      "path": "./packages/shared/status-bar"
+    },
+    {
+      "path": "./packages/shared/vision"
+    },
+    {
+      "path": "./packages/ui/components"
+    },
+    {
+      "path": "./packages/shared/util"
+    },
+    {
+      "path": "./apps/acf-options-page"
+    },
+    {
+      "path": "./apps/acf-extension"
+    },
+    {
+      "path": "./apps/acf-i18n"
+    },
+    {
+      "path": "./packages/acf/store"
+    },
+    {
+      "path": "./apps/acf-configs"
+    }
+  ]
+}
