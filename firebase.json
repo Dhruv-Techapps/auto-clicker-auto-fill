@@ -2,7 +2,7 @@
   "hosting": [
     {
       "site": "auto-clicker-autofill-configs",
-      "public": "dist/apps/acf-configs",
+      "public": "apps/acf-configs/dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -13,7 +13,7 @@
     },
     {
       "site": "auto-clicker-auto-fill-dev",
-      "public": "dist/apps/acf-options-page",
+      "public": "apps/acf-options-page/dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -24,7 +24,7 @@
     },
     {
       "site": "auto-clicker-auto-fill-beta",
-      "public": "dist/apps/acf-options-page",
+      "public": "apps/acf-options-page/dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -35,7 +35,7 @@
     },
     {
       "site": "auto-clicker-auto-fill-prod",
-      "public": "dist/apps/acf-options-page",
+      "public": "apps/acf-options-page/dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {

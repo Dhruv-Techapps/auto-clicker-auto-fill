@@ -1,0 +1,54 @@
+name: Deploy
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }} on ${{ inputs.version || github.ref_name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (v4.0.0.0)'
+        type: string
+jobs:
+  main:
+    name: Build & Bundle & Publish
+    environment:
+      name: ${{inputs.environment}}
+      url: ${{ steps.release.outputs.url}}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+      discussions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: ${{github.repository_owner}}
+          cache: 'npm'
+      - uses: nrwl/nx-set-shas@v3
+      - run: npm ci
+      - name: Build Configurations Page
+        run: |
+          npx nx run acf-configs:build --prod --base ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache
+        env:
+          VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
+          VITE_PUBLIC_I18N: ${{vars.VITE_PUBLIC_I18N}}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          VITE_PUBLIC_ALGOLIA_APP_ID: ${{vars.VITE_PUBLIC_ALGOLIA_APP_ID}}
+          VITE_PUBLIC_ALGOLIA_SEARCH_API_KEY: ${{vars.VITE_PUBLIC_ALGOLIA_SEARCH_API_KEY}}
+      - name: Print Environment Info
+        run: npx nx report
+      - name: Configs to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-autofill-configs
+          channelId: live

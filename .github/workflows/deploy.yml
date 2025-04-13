@@ -14,11 +14,6 @@ on:
         type: boolean
         default: false
         required: true
-      deploy_configs:
-        description: 'Configs to firebase hosting'
-        type: boolean
-        default: false
-        required: true
       upload_extension:
         description: 'Extension to chrome webstore'
         type: boolean
@@ -56,53 +51,42 @@ jobs:
           cache: 'npm'
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
-      - name: Build Projects and Library
+      - name: Build Options Page
+        if: ${{ inputs.deploy_options_page }}
         run: |
-          CMD="npx nx run-many -t build -p"
-
-          # Conditionally add projects based on inputs
-          PROJECTS=()
-          if [[ "${{ inputs.deploy_options_page }}" == "true" ]]; then
-            PROJECTS+=("acf-options-page")
-          fi
-          if [[ "${{ inputs.deploy_configs }}" == "true" ]]; then
-            PROJECTS+=("acf-configs")
-          fi
-          if [[ "${{ inputs.upload_extension }}" == "true" ]]; then
-            PROJECTS+=("acf-extension")
-          fi
-
-          # Append selected projects to CMD
-          if [[ ${#PROJECTS[@]} -gt 0 ]]; then
-            CMD="$CMD ${PROJECTS[*]}"
-          fi
-
-          CMD="$CMD --prod --base-href ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache"
-
-          echo "Final Command: $CMD"
-          eval $CMD
+          npx nx run acf-options-page:build --prod --base ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache
         env:
-          VITE_PUBLIC_NAME: ${{vars.VITE_PUBLIC_NAME}}
           VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{vars.VITE_PUBLIC_CHROME_EXTENSION_ID}}
           VITE_PUBLIC_I18N: ${{vars.VITE_PUBLIC_I18N}}
-          VITE_PUBLIC_GOOGLE_ANALYTICS_ID: ${{vars.VITE_PUBLIC_GOOGLE_ANALYTICS_ID}}
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_SLOT}}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT}}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
           VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
-          TRACKING_ID: ${{vars.TRACKING_ID}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN: ${{vars.VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN}}
+      - name: Build Extension
+        if: ${{ inputs.upload_extension }}
+        run: |
+          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
+        env:
+          VITE_PUBLIC_NAME: ${{vars.VITE_PUBLIC_NAME}}
+          VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
+          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          VITE_PUBLIC_EXTENSION_SENTRY_DSN: ${{vars.VITE_PUBLIC_EXTENSION_SENTRY_DSN}}
           DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
           OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
           EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
           PUBLIC_URL: ${{vars.PUBLIC_URL}}
-          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
           API_SECRET: ${{vars.API_SECRET}}
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
-          VITE_PUBLIC_EXTENSION_SENTRY_DSN: ${{vars.VITE_PUBLIC_EXTENSION_SENTRY_DSN}}
-          VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN: ${{vars.VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN}}
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
       - name: Print Environment Info
         run: npx nx report
@@ -119,18 +103,10 @@ jobs:
           projectId: auto-clicker-autofill
           target: ${{ env.TARGET }}
           channelId: live
-      - name: Configs to Firebase Hosting
-        if: ${{ inputs.deploy_configs }}
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: auto-clicker-autofill
-          target: auto-clicker-autofill-configs
-          channelId: live
       - name: Bundle Projects
         if: ${{ inputs.upload_extension }}
         run: |
-          cd dist/apps/acf-extension
+          cd apps/acf-extension/dist
           zip -r ../../../acf-extension-${{vars.VITE_PUBLIC_VARIANT}}.zip .
           cd ../../../
       - name: Extension to Chrome Webstore

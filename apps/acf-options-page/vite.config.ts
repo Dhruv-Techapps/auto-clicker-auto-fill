@@ -1,6 +1,7 @@
 /// <reference types='vitest' />
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -38,6 +39,7 @@ export default defineConfig(() => ({
       },
       include: '**/*.svg',
     }),
+    visualizer({ open: true }),
   ],
   // Uncomment this if you are using workers.
   // worker: {
@@ -49,6 +51,24 @@ export default defineConfig(() => ({
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'react';
+            if (id.includes('redux')) return 'redux';
+            if (id.includes('micromark')) return 'micromark';
+            if (id.includes('i18next')) return 'i18next';
+            if (id.includes('@firebase')) return '@firebase';
+            if (id.includes('@tanstack')) return '@tanstack';
+            if (id.includes('@dnd-kit')) return '@dnd-kit';
+            if (id.includes('bootstrap') || id.includes('@restart')) return '@bootstrap';
+            if (id.includes('popperjs')) return 'popperjs';
+            return 'vendor';
+          }
+        },
+      },
     },
   },
   define: {
