@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useState } from 'react';
+import React, { createContext, PropsWithChildren, useMemo, useState } from 'react';
 
 export const ThemeContext = createContext({
   theme: localStorage.getItem('theme') || 'light',
@@ -18,5 +18,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     localStorage.setItem('theme', newTheme);
   };
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

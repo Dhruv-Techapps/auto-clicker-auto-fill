@@ -73,7 +73,7 @@ export class StatusBar {
 
   public actionUpdate(number: number, text: string | undefined): void {
     this.action.textContent = `🅰️${number}`;
-    this.action.title = text || 'Action';
+    this.action.title = text ?? 'Action';
     this.addon.textContent = '';
   }
 
@@ -128,7 +128,7 @@ export class ManualStatusBar {
     this.manualContainer.appendChild(li);
   };
 
-  private manualSetup = (): void => {
+  private readonly manualSetup = (): void => {
     this.manualContainer.className = 'manual';
     this.statusBar.appendChild(this.manualContainer);
   };

@@ -1,3 +1,5 @@
+import { ConfigError } from '@dhruv-techapps/core-common';
+
 type CoreServiceRequest = {
   messenger: string;
   methodName: string;
@@ -21,8 +23,12 @@ export class CoreService {
         // This line is kept for debugging purpose console.debug(`${message.messenger}.${message.methodName}`, message.message);
         chrome.runtime.sendMessage(id, message, (response) => {
           if (chrome.runtime.lastError || response?.error) {
-            console.error(chrome.runtime.lastError?.message || response?.error);
-            reject(new Error(chrome.runtime.lastError?.message || response?.error));
+            const error: string = chrome.runtime.lastError?.message ?? response?.error;
+            console.error(error);
+            if (error.includes('User not logged in')) {
+              reject(new ConfigError('Authentication', error));
+            }
+            reject(new Error(error));
           } else {
             // This line is kept for debugging purpose console.debug(response);
             resolve(response);

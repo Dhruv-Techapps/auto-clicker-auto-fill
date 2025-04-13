@@ -20,7 +20,7 @@ export enum LoggerColor {
 export type LoggerType = 'log' | 'warn' | 'error' | 'info' | 'debug';
 
 export class Logger {
-  static color(module: string, type: LoggerType = 'debug', color: Logger, ...args: unknown[]) {
+  static color(module: string, color: Logger, type: LoggerType = 'debug', ...args: unknown[]) {
     console[type].apply(null, [`%c${module}`, color, ...args]);
   }
 
