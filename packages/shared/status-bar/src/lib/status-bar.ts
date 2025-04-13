@@ -11,13 +11,13 @@ export enum STATUS_BAR_TYPE {
 }
 
 export class StatusBar {
-  private statusBar: HTMLDivElement = document.createElement('div');
-  private icon: HTMLSpanElement = document.createElement('span');
-  private batch: HTMLSpanElement = document.createElement('span');
-  private action: HTMLSpanElement = document.createElement('span');
-  private addon: HTMLSpanElement = document.createElement('span');
-  private timer: HTMLSpanElement = document.createElement('span');
-  private text: HTMLSpanElement = document.createElement('span');
+  private readonly statusBar: HTMLDivElement = document.createElement('div');
+  private readonly icon: HTMLSpanElement = document.createElement('span');
+  private readonly batch: HTMLSpanElement = document.createElement('span');
+  private readonly action: HTMLSpanElement = document.createElement('span');
+  private readonly addon: HTMLSpanElement = document.createElement('span');
+  private readonly timer: HTMLSpanElement = document.createElement('span');
+  private readonly text: HTMLSpanElement = document.createElement('span');
 
   constructor() {
     this.statusBar = document.createElement('div');
@@ -106,8 +106,8 @@ export class StatusBar {
 
 export class ManualStatusBar {
   private static instance: ManualStatusBar;
-  private statusBar: HTMLDivElement;
-  private manualContainer: HTMLUListElement = document.createElement('ul');
+  private readonly statusBar: HTMLDivElement;
+  private readonly manualContainer: HTMLUListElement = document.createElement('ul');
 
   private constructor() {
     this.statusBar = document.createElement('div');

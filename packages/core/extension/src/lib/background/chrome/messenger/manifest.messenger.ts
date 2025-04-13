@@ -2,12 +2,10 @@ export type ManifestResult = Partial<chrome.runtime.Manifest>;
 
 type ManifestValuesProps = string[];
 
-type ManifestValueProps = string;
-
 export type ManifestRequest = {
   messenger: 'manifest';
   methodName: 'values' | 'value';
-  message: ManifestValueProps | ManifestValuesProps;
+  message: string | ManifestValuesProps;
 };
 
 export class ManifestMessenger {
@@ -22,14 +20,14 @@ export class ManifestMessenger {
     return { ...result };
   }
 
-  async value(key: ManifestValueProps): Promise<ManifestResult> {
+  async value(key: string): Promise<ManifestResult> {
     if (!key || typeof key !== 'string') {
       throw new Error('Key is not provided or key is not of type string');
     }
     return { [key]: this.#process(key) };
   }
 
-  #process = (key: string): string | ManifestResult => {
+  readonly #process = (key: string): string | ManifestResult => {
     let manifest: ManifestResult = chrome.runtime.getManifest();
     const keys = key.split('.');
     keys.forEach((prop) => {

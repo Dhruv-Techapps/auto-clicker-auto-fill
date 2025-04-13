@@ -6,7 +6,7 @@ import { NOTIFICATIONS_ID, NOTIFICATIONS_TITLE } from './discord-oauth.constant'
 import { Discord } from './discord-oauth.types';
 
 export class DiscordOauth2Background extends FirebaseFunctionsBackground {
-  constructor(auth: Auth, cloudFunctionUrl: string, edgeClientId?: string, private clientId?: string) {
+  constructor(auth: Auth, cloudFunctionUrl: string, edgeClientId?: string, private readonly clientId?: string) {
     super(auth, cloudFunctionUrl, edgeClientId);
     this.clientId = clientId;
   }

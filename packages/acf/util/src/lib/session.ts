@@ -1,8 +1,8 @@
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 
 export class Session {
-  private SESSION_COUNT_KEY;
-  private SESSION_CLEAR_PARAM = 'clear-acf-session';
+  private readonly SESSION_COUNT_KEY;
+  private readonly SESSION_CLEAR_PARAM = 'clear-acf-session';
 
   constructor(id: RANDOM_UUID) {
     this.SESSION_COUNT_KEY = `acf-session-count-${id}`;
