@@ -1,3 +1,5 @@
+import { getRandomValues } from '@dhruv-techapps/core-common';
+
 export const Timer = (function () {
   const getWaitTime = (time?: number | string) => {
     let waitTime;
@@ -8,7 +10,7 @@ export const Timer = (function () {
             .toString()
             .split('e')
             .map((n) => Number(n));
-          waitTime = (Math.floor(Math.random() * (end - start)) + start) * 1000;
+          waitTime = (Math.floor(getRandomValues() * (end - start)) + start) * 1000;
         }
       } else {
         waitTime = Number(time) * 1000;

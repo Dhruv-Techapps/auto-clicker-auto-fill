@@ -26,7 +26,7 @@ export class DiscordOauth2Background extends FirebaseFunctionsBackground {
       url.searchParams.append('response_type', 'token');
       url.searchParams.append('redirect_uri', redirectURL);
       url.searchParams.append('scope', scopes.join(' '));
-      url.searchParams.append('nonce', getRandomValues());
+      url.searchParams.append('nonce', getRandomValues().toString());
 
       const responseUrl = await chrome.identity.launchWebAuthFlow({
         url: url.href,
