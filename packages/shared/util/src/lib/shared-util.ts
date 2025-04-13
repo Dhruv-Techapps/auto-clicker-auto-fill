@@ -35,6 +35,6 @@ export const Timer = (function () {
   return {
     getWaitTime,
     getTimeAndSleep,
-    sleep,
+    sleep
   };
 })();

@@ -8,5 +8,5 @@ export type DiscordMessagingType = {
 
 export enum DiscordMessagingColor {
   SUCCESS = '#198754',
-  ERROR = '#dc3545',
+  ERROR = '#dc3545'
 }

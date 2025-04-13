@@ -13,7 +13,7 @@ import {
   switchActionSettingsModal,
   syncActionSettings,
   updateActionSettings,
-  updateActionSettingsGoto,
+  updateActionSettingsGoto
 } from '../store/config';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { REGEX } from '../util';

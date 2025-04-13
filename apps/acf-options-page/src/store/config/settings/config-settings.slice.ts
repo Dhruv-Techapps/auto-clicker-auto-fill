@@ -26,8 +26,8 @@ const slice = createSlice({
       state.message = undefined;
       state.error = action.payload;
       Sentry.captureException(state.error);
-    },
-  },
+    }
+  }
 });
 
 export const { switchConfigSettingsModal, setConfigSettingsMessage, setConfigSettingsError } = slice.actions;

@@ -4,5 +4,5 @@ export enum LOCAL_STORAGE_KEY {
   SHEETS = 'sheets',
   INSTALL_DATE = 'install_date',
   XPATH = 'xpath',
-  URL = 'url',
+  URL = 'url'
 }

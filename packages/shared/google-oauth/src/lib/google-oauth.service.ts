@@ -8,14 +8,14 @@ export class GoogleOauthService extends CoreService {
     return await this.message<RuntimeMessageRequest<Array<GOOGLE_SCOPES>>, GoogleOauth2LoginResponse>({
       messenger: RUNTIME_MESSAGE_GOOGLE_OAUTH,
       methodName: 'login',
-      message: scopes,
+      message: scopes
     });
   }
   static async logout(scopes: Array<GOOGLE_SCOPES>) {
     return await this.message<RuntimeMessageRequest<Array<GOOGLE_SCOPES>>, GoogleOauth2RemoveResponse>({
       messenger: RUNTIME_MESSAGE_GOOGLE_OAUTH,
       methodName: 'logout',
-      message: scopes,
+      message: scopes
     });
   }
 

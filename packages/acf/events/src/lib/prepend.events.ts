@@ -14,7 +14,7 @@ export const PrependEvents = (() => {
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'PrependEvents',
+        event: 'PrependEvents'
       });
       element.textContent = value + element.textContent;
     } else {

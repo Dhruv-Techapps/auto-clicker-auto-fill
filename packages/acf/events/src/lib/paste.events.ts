@@ -16,7 +16,7 @@ export const PasteEvents = (() => {
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'PasteEvents',
+        event: 'PasteEvents'
       });
       element.textContent = value;
     } else {

@@ -14,7 +14,7 @@ if (import.meta.env.VITE_PUBLIC_VARIANT === 'PROD') {
         hint.attachments = [{ filename: 'screenshot.png', data }];
       }
       return event;
-    },
+    }
   });
 }
 

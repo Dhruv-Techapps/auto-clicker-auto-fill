@@ -26,7 +26,7 @@ const ReorderConfigsModal = () => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+      coordinateGetter: sortableKeyboardCoordinates
     })
   );
 
@@ -104,7 +104,7 @@ export function SortableItem(props) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: props.id });
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition
   };
   return (
     <ListGroup.Item key={props.id} ref={setNodeRef} {...attributes} {...listeners} style={style}>

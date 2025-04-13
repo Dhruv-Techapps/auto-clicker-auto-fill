@@ -26,8 +26,8 @@ const slice = createSlice({
       state.error = action.payload;
       Sentry.captureException(state.error);
       state.message = undefined;
-    },
-  },
+    }
+  }
 });
 
 export const { switchBatchModal, setBatchMessage, setBatchError } = slice.actions;

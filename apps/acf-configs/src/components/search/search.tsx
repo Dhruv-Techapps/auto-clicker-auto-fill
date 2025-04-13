@@ -21,7 +21,7 @@ export const Search = () => {
                   items={[
                     { label: '10 configurations per page', value: 10, default: true },
                     { label: '20 configurations per page', value: 20 },
-                    { label: '40 configurations per page', value: 40 },
+                    { label: '40 configurations per page', value: 40 }
                   ]}
                 />
                 <SortBy items={[{ label: 'Relevance', value: 'instant_search' }]} />

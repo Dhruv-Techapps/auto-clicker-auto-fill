@@ -19,8 +19,8 @@ const slice = createSlice({
       localStorage.setItem('theme', theme);
       Sentry.setTag('theme', theme);
       return theme;
-    },
-  },
+    }
+  }
 });
 export const { switchTheme } = slice.actions;
 export const themeSelector = (state: RootState) => state.theme;

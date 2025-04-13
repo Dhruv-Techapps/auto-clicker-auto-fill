@@ -9,7 +9,7 @@ import {
   selectedConfigSelector,
   setConfigMessage,
   switchConfigSettingsModal,
-  updateConfig,
+  updateConfig
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';

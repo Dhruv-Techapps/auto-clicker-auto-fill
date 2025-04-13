@@ -2,7 +2,7 @@ export enum RETRY_OPTIONS {
   STOP = 'stop',
   SKIP = 'skip',
   RELOAD = 'reload',
-  GOTO = 'goto',
+  GOTO = 'goto'
 }
 
 export type SettingsNotifications = {
@@ -20,7 +20,7 @@ export const defaultSettingsNotifications = {
   onConfig: false,
   onError: false,
   sound: false,
-  discord: false,
+  discord: false
 };
 
 export type SettingsBackup = {
@@ -29,7 +29,7 @@ export type SettingsBackup = {
 };
 
 export const defaultSettingsBackup = {
-  autoBackup: 'off',
+  autoBackup: 'off'
 };
 
 export type Settings = {
@@ -49,7 +49,7 @@ export const defaultSettings: Settings = {
   retryInterval: 1,
   statusBar: 'bottom-right',
   retryOption: RETRY_OPTIONS.STOP,
-  checkiFrames: false,
+  checkiFrames: false
 };
 
 export type Discord = {

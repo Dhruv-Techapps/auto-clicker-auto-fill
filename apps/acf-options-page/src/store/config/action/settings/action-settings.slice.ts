@@ -38,7 +38,7 @@ const slice = createSlice({
     },
     updateActionSettingsGoto: (state, action: PayloadAction<GOTO>) => {
       state.settings.retryGoto = action.payload;
-    },
+    }
   },
   extraReducers(builder) {
     builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
@@ -49,7 +49,7 @@ const slice = createSlice({
       }
       state.visible = !state.visible;
     });
-  },
+  }
 });
 
 export const { updateActionSettings, switchActionSettingsModal, updateActionSettingsGoto, setActionSettingsMessage, setActionSettingsError } = slice.actions;

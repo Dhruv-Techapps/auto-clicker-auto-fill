@@ -12,7 +12,7 @@ import { statusBar } from './status-bar';
 
 const ACTION_I18N = {
   TITLE: chrome.i18n.getMessage('@ACTION__TITLE'),
-  NO_NAME: chrome.i18n.getMessage('@ACTION__NO_NAME'),
+  NO_NAME: chrome.i18n.getMessage('@ACTION__NO_NAME')
 };
 
 const Actions = (() => {
@@ -28,7 +28,7 @@ const Actions = (() => {
         title: `${ACTION_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
         message: action.elementFinder,
         silent: !settings.notifications.sound,
-        iconUrl: Common.getNotificationIcon(),
+        iconUrl: Common.getNotificationIcon()
       });
     }
   };

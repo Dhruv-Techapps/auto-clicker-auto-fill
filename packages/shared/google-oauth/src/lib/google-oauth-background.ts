@@ -80,7 +80,7 @@ export class GoogleOauth2Background {
 
     const result = await chrome.identity.launchWebAuthFlow({
       url: url.href,
-      interactive,
+      interactive
     });
     if (result) {
       const url = new URL(result);

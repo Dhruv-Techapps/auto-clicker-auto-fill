@@ -24,7 +24,7 @@ export class FirebaseFirestoreBackground extends FirebaseOauth2Background {
         const product = {
           id: doc.id,
           ...doc.data(),
-          prices: [] as { id: string }[],
+          prices: [] as { id: string }[]
         };
         const priceQuery = query(collection(doc.ref, 'prices'), where('active', '==', true));
         const priceSnap = await getDocs(priceQuery);
@@ -80,7 +80,7 @@ export class FirebaseFirestoreBackground extends FirebaseOauth2Background {
       price: priceId,
       allow_promotion_codes: true,
       success_url: this.publicUrl,
-      cancel_url: this.publicUrl,
+      cancel_url: this.publicUrl
     });
 
     const docSnap = await getDoc(checkoutSessionRef);

@@ -18,7 +18,7 @@ settingsListenerMiddleware.startListening({
       () => listenerApi.dispatch(setSettingsMessage(language.modal.settings.saveMessage)),
       (error) => listenerApi.dispatch(setSettingsError(error))
     );
-  },
+  }
 });
 
 export { settingsListenerMiddleware };

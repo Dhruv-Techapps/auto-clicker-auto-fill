@@ -33,7 +33,7 @@ const initialState: ConfigStore = {
   configs: CONFIGURATIONS,
   selectedConfigId: CONFIGURATIONS[0].id,
   selectedActionId: CONFIGURATIONS[0].actions[0].id,
-  detailVisibility: LocalStorage.getItem(HIDDEN_DETAIL_KEY, defaultDetailVisibility),
+  detailVisibility: LocalStorage.getItem(HIDDEN_DETAIL_KEY, defaultDetailVisibility)
 };
 
 const slice = createSlice({
@@ -60,7 +60,7 @@ const slice = createSlice({
       prepare: () => {
         const config = getDefaultConfig(CONFIG_SOURCE.WEB);
         return { payload: config };
-      },
+      }
     },
     updateConfig: (state, action: PayloadAction<ConfigAction>) => {
       const { name, value } = action.payload;
@@ -145,7 +145,7 @@ const slice = createSlice({
     },
     ...actionActions,
     ...batchActions,
-    ...scheduleActions,
+    ...scheduleActions
   },
   extraReducers: (builder) => {
     builder.addCase(configGetAllAPI.fulfilled, (state, action) => {
@@ -184,7 +184,7 @@ const slice = createSlice({
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });
-  },
+  }
 });
 
 export const {
@@ -209,7 +209,7 @@ export const {
   syncActionStatement,
   syncSchedule,
   setSearch,
-  setDetailVisibility,
+  setDetailVisibility
 } = slice.actions;
 
 //Config Selectors

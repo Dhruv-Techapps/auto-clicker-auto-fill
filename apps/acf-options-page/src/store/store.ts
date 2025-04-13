@@ -21,9 +21,9 @@ export const store = configureStore({
     firebase: firebaseReducer,
     firebaseFirestore: firebaseFirestoreReducer,
     subscribe: subscribeReducer,
-    ...configReducers,
+    ...configReducers
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(settingsListenerMiddleware.middleware, configsListenerMiddleware.middleware, configsToastListenerMiddleware.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(settingsListenerMiddleware.middleware, configsListenerMiddleware.middleware, configsToastListenerMiddleware.middleware)
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -8,7 +8,7 @@ export class GoogleSheetsService extends CoreService {
     return await this.message<RuntimeMessageRequest<GoogleSheetsRequest>, GoogleSheetsResponse>({
       messenger: RUNTIME_MESSAGE_GOOGLE_SHEETS,
       methodName: 'getSheets',
-      message: { spreadsheetId, ranges },
+      message: { spreadsheetId, ranges }
     });
   }
 }

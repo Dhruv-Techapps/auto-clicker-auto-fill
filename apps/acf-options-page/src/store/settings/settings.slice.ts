@@ -57,7 +57,7 @@ const slice = createSlice({
       Sentry.captureException(state.error);
       state.message = undefined;
       state.loading = false;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(settingsGetAPI.fulfilled, (state, action) => {
@@ -98,7 +98,7 @@ const slice = createSlice({
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });
-  },
+  }
 });
 
 export const { switchSettingsModal, setSettingsError, updateSettings, setSettingsMessage, updateSettingsNotification, updateSettingsBackup } = slice.actions;

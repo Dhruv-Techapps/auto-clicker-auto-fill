@@ -18,7 +18,7 @@ enum SETTINGS_PAGE {
   NOTIFICATION = 'Show Notification',
   RETRY = 'Retry',
   BACKUP = 'Backup',
-  SHEETS = 'Google Sheets',
+  SHEETS = 'Google Sheets'
 }
 
 export const SettingsModal = () => {

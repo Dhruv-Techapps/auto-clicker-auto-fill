@@ -17,5 +17,5 @@ export enum AUTO_BACKUP {
   DAILY = 'daily',
   WEEKLY = 'weekly',
   MONTHLY = 'monthly',
-  OFF = 'off',
+  OFF = 'off'
 }

@@ -47,7 +47,7 @@ export class GoogleAnalyticsBackground {
       // Create and store a new session
       sessionData = {
         session_id: currentTimeInMs.toString(),
-        timestamp: currentTimeInMs.toString(),
+        timestamp: currentTimeInMs.toString()
       };
       await chrome.storage.session.set({ sessionData });
     }
@@ -74,10 +74,10 @@ export class GoogleAnalyticsBackground {
           events: [
             {
               name,
-              params,
-            },
-          ],
-        }),
+              params
+            }
+          ]
+        })
       });
       if (!this.debug) {
         return;
@@ -94,8 +94,8 @@ export class GoogleAnalyticsBackground {
       params: {
         page_title: pageTitle,
         page_location: pageLocation,
-        ...additionalParams,
-      },
+        ...additionalParams
+      }
     });
   }
 
@@ -105,8 +105,8 @@ export class GoogleAnalyticsBackground {
       name,
       params: {
         error,
-        ...additionalParams,
-      },
+        ...additionalParams
+      }
     });
   }
 }

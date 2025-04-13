@@ -11,14 +11,14 @@ export enum ADDON_CONDITIONS {
   '>= Greater Than Equals' = 'GreaterThanEquals',
   '<= Less Than Equals' = 'LessThanEquals',
   '✓ Is Checked ' = 'IsChecked',
-  '✕ Is Not Checked ' = 'IsNotChecked',
+  '✕ Is Not Checked ' = 'IsNotChecked'
 }
 
 export enum RECHECK_OPTIONS {
   STOP = 'stop',
   SKIP = 'skip',
   RELOAD = 'reload',
-  GOTO = 'goto',
+  GOTO = 'goto'
 }
 
 export type Addon = {
@@ -37,5 +37,5 @@ export const defaultAddon: Addon = {
   elementFinder: '',
   value: '',
   condition: ADDON_CONDITIONS['~~ Select Condition ~~'],
-  recheckOption: RECHECK_OPTIONS.STOP,
+  recheckOption: RECHECK_OPTIONS.STOP
 };

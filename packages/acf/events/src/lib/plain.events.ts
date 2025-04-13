@@ -30,7 +30,7 @@ export const PlainEvents = (() => {
       element.selected = true;
     } else if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'PlainEvents',
+        event: 'PlainEvents'
       });
       element.textContent = value;
     } else {

@@ -5,7 +5,7 @@ export const APP_LINK = {
   CONFIGS: 'https://gist.github.com/dharmesh-hemaram',
   TEST: 'https://test.getautoclicker.com/',
   ISSUES: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/issues',
-  DISCUSSIONS: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions',
+  DISCUSSIONS: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions'
 };
 // Application Languages
 export const APP_LANGUAGES = ['en', 'ar', 'de', 'es', 'fi', 'fr', 'id', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'sv', 'vi', 'zh_CN'];
@@ -15,8 +15,8 @@ export const SPONSORS = [
     id: 'saroj-kitchen',
     link: 'https://www.youtube.com/@sarojskitchen',
     title: "Saroj's Kitchen",
-    image: 'https://yt3.googleusercontent.com/ytc/AL5GRJXXSNx_TgWygPPxifjLMWl6De3YVmGwHAjOfhztgVA=s176-c-k-c0x00ffffff-no-rj',
-  },
+    image: 'https://yt3.googleusercontent.com/ytc/AL5GRJXXSNx_TgWygPPxifjLMWl6De3YVmGwHAjOfhztgVA=s176-c-k-c0x00ffffff-no-rj'
+  }
 ];
 
 export const NO_EXTENSION_ERROR = ['Could not establish connection. Receiving end does not exist.', "Cannot read properties of undefined (reading 'sendMessage')"];
@@ -38,5 +38,5 @@ export const SOCIAL_LINKS = {
   GITHUB: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill',
   FACEBOOK: `https://www.facebook.com/sharer.php?u=${url}&quote=${message}`,
   WHATSAPP: `https://wa.me/?text=${message}%5Cn%20${url}`,
-  RATE_US: `https://chromewebstore.google.com/detail/${extensionId}/reviews`,
+  RATE_US: `https://chromewebstore.google.com/detail/${extensionId}/reviews`
 };

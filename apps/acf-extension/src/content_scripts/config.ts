@@ -17,7 +17,7 @@ import { statusBar } from './status-bar';
 import GoogleSheets from './util/google-sheets';
 
 const CONFIG_I18N = {
-  TITLE: chrome.i18n.getMessage('@CONFIG__TITLE'),
+  TITLE: chrome.i18n.getMessage('@CONFIG__TITLE')
 };
 const ConfigProcessor = (() => {
   const getFields = (config: Configuration) => {
@@ -63,7 +63,7 @@ const ConfigProcessor = (() => {
             title: `${CONFIG_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
             message: config.name || config.url,
             silent: !sound,
-            iconUrl: Common.getNotificationIcon(),
+            iconUrl: Common.getNotificationIcon()
           });
           if (discord) {
             DiscordMessagingService.push(`${CONFIG_I18N.TITLE} ${I18N_COMMON.COMPLETED}`, getFields(config));
@@ -88,7 +88,7 @@ const ConfigProcessor = (() => {
                 ...e.message.split('\n').map((info) => {
                   const [name, value] = info.split(':');
                   return { name, value: value.replace(/'/g, '`') };
-                }),
+                })
               ],
               DiscordMessagingColor.ERROR
             );

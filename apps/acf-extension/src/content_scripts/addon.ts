@@ -10,7 +10,7 @@ import { statusBar } from './status-bar';
 import { ACFValue } from './util/acf-value';
 
 const ADDON_I18N = {
-  TITLE: chrome.i18n.getMessage('@ADDON__TITLE'),
+  TITLE: chrome.i18n.getMessage('@ADDON__TITLE')
 };
 
 type AddonType = { nodeValue: string | boolean } & Addon;

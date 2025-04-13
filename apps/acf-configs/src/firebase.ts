@@ -8,7 +8,7 @@ export const firebase = initializeApp({
   projectId: import.meta.env.VITE_PUBLIC_FIREBASE_PROJECT_ID,
   authDomain: import.meta.env.VITE_PUBLIC_FIREBASE_AUTH_DOMAIN,
   databaseURL: import.meta.env.VITE_PUBLIC_FIREBASE_DATABASE_URL,
-  storageBucket: import.meta.env.VITE_PUBLIC_FIREBASE_BUCKET,
+  storageBucket: import.meta.env.VITE_PUBLIC_FIREBASE_BUCKET
 });
 
 export const auth = getAuth(firebase);

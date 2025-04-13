@@ -19,7 +19,7 @@ const slice = createSlice({
     builder.addCase(profileSetAPI.fulfilled, (state) => {
       state.profile = !state.profile;
     });
-  },
+  }
 });
 
 export const firebaseFirestoreSelector = (state: RootState) => state.firebaseFirestore;

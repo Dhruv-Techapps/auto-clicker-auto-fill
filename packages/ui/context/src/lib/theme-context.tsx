@@ -4,7 +4,7 @@ export const ThemeContext = createContext({
   theme: localStorage.getItem('theme') || 'light',
   toggleTheme: () => {
     // Default implementation for toggleTheme
-  },
+  }
 });
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {

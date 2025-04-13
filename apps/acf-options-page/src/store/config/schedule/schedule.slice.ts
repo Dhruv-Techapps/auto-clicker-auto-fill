@@ -33,7 +33,7 @@ const slice = createSlice({
       state.error = action.payload;
       Sentry.captureException(state.error);
       state.message = undefined;
-    },
+    }
   },
   extraReducers(builder) {
     builder.addCase(openScheduleModalAPI.fulfilled, (state, action) => {
@@ -44,7 +44,7 @@ const slice = createSlice({
       }
       state.visible = !state.visible;
     });
-  },
+  }
 });
 
 export const { setScheduleError, setScheduleMessage, switchScheduleModal, updateSchedule } = slice.actions;

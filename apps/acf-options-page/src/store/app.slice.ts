@@ -14,7 +14,7 @@ type AppStore = {
 
 const initialState: AppStore = {
   loading: true,
-  extensionNotFound: false,
+  extensionNotFound: false
 };
 
 const slice = createSlice({
@@ -37,7 +37,7 @@ const slice = createSlice({
       if (action.payload) {
         state.error = action.payload;
       }
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getManifest.fulfilled, (state, action) => {
@@ -58,7 +58,7 @@ const slice = createSlice({
         }
       }
     });
-  },
+  }
 });
 
 export const { switchExtensionNotFound, setAppError, setManifest } = slice.actions;

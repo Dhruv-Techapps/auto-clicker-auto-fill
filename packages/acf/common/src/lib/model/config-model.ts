@@ -5,12 +5,12 @@ import { Batch } from './batch-model';
 
 export enum LOAD_TYPES {
   WINDOW = 'window',
-  DOCUMENT = 'document',
+  DOCUMENT = 'document'
 }
 
 export enum START_TYPES {
   AUTO = 'auto',
-  MANUAL = 'manual',
+  MANUAL = 'manual'
 }
 
 export const defaultHotkey = 'Ctrl + Shift + A';
@@ -18,12 +18,12 @@ export const defaultHotkey = 'Ctrl + Shift + A';
 export enum CONFIG_SOURCE {
   WIZARD = 'wizard',
   RECORDER = 'recorder',
-  WEB = 'web',
+  WEB = 'web'
 }
 
 export enum URL_MATCH {
   REGEX = 'regex',
-  EXACT = 'exact',
+  EXACT = 'exact'
 }
 
 export type Bypass = {
@@ -40,7 +40,7 @@ export interface ISchedule {
 export const defaultSchedule: ISchedule = {
   date: '',
   time: '',
-  repeat: 0,
+  repeat: 0
 };
 
 export type Configuration = {
@@ -74,5 +74,5 @@ export const getDefaultConfig = (source?: CONFIG_SOURCE, actions?: Array<Action>
   startType: START_TYPES.AUTO,
   loadType: LOAD_TYPES.WINDOW,
   actions: actions || [getDefaultAction()],
-  updated: true,
+  updated: true
 });

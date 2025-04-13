@@ -11,7 +11,7 @@ const FLAGS = [
         <b className='text-danger'>g</b>lobal
       </>
     ),
-    sub: "Don't return after first match",
+    sub: "Don't return after first match"
   },
   {
     value: 'm',
@@ -20,7 +20,7 @@ const FLAGS = [
         <b className='text-danger'>m</b>ulti line
       </>
     ),
-    sub: '^ and $ match start/end of line',
+    sub: '^ and $ match start/end of line'
   },
   {
     value: 'i',
@@ -29,7 +29,7 @@ const FLAGS = [
         <b className='text-danger'>i</b>nsensitive
       </>
     ),
-    sub: 'Case insensitive match',
+    sub: 'Case insensitive match'
   },
   {
     value: 'x',
@@ -38,7 +38,7 @@ const FLAGS = [
         e<b className='text-danger'>x</b>tended
       </>
     ),
-    sub: 'Ignore whitespace',
+    sub: 'Ignore whitespace'
   },
   {
     value: 's',
@@ -47,8 +47,8 @@ const FLAGS = [
         <b className='text-danger'>s</b>ingle line
       </>
     ),
-    sub: 'Dot matches newline',
-  },
+    sub: 'Dot matches newline'
+  }
 ];
 
 type Flags = {
@@ -72,7 +72,7 @@ function AddonValueExtractorFlags() {
     const flagElement = e.currentTarget;
     const {
       dataset: { flag },
-      classList,
+      classList
     } = flagElement;
 
     if (flag) {

@@ -30,7 +30,7 @@ const slice = createSlice({
     setConfigReorderMessage: (state, action: PayloadAction<string | undefined>) => {
       state.error = undefined;
       state.message = action.payload;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(configReorderUpdateAPI.rejected, (state, action) => {
@@ -41,7 +41,7 @@ const slice = createSlice({
     builder.addCase(configReorderUpdateAPI.fulfilled, (state) => {
       state.visible = false;
     });
-  },
+  }
 });
 
 export const { switchConfigReorderModal, updateConfigReorder, setConfigReorderMessage } = slice.actions;

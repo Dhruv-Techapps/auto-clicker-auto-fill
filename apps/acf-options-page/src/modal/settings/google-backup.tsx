@@ -17,7 +17,7 @@ export function SettingsGoogleBackup() {
   const { t } = useTranslation();
   const modalContext = useConfirmationModalContext();
   const {
-    settings: { backup },
+    settings: { backup }
   } = useAppSelector(settingsSelector);
   const { user } = useAppSelector(firebaseSelector);
   const { grantedScopes, googleLoading } = useAppSelector(googleSelector);
@@ -52,7 +52,7 @@ export function SettingsGoogleBackup() {
     const result = await modalContext.showConfirmation({
       title: t('confirm.backup.restore.title'),
       message: t('confirm.backup.restore.message'),
-      headerClass: 'text-danger',
+      headerClass: 'text-danger'
     });
     result && dispatch(googleDriveRestoreAPI({ id, name }));
   };

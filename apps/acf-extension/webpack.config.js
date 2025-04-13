@@ -40,12 +40,12 @@ module.exports = composePlugins(
       wizard: './src/wizard/index.ts',
       'wizard-popup': ['./src/wizard/popup/wizard-popup.ts', './src/wizard/popup/wizard-popup.scss'],
       devtools: './src/devtools/index.ts',
-      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss',
+      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss'
     };
     if (config.module.rules) {
       config.module.rules.push({
         test: /\.scss$/,
-        use: [{ loader: 'file-loader', options: { publicPath: path.resolve(__dirname, 'dist'), outputPath: '/css', name: '[name].min.css' } }, 'sass-loader'],
+        use: [{ loader: 'file-loader', options: { publicPath: path.resolve(__dirname, 'dist'), outputPath: '/css', name: '[name].min.css' } }, 'sass-loader']
       });
       config.module.rules[2].options.cacheDirectory = path.resolve(options.root, 'node_modules/.cache/babel-loader');
     }
@@ -63,13 +63,13 @@ module.exports = composePlugins(
             to: './manifest.json',
             transform(content) {
               return modify(content, process.env);
-            },
-          },
-        ],
+            }
+          }
+        ]
       }),
       new Dotenv({
         path: `${options.root}/.env`,
-        systemvars: true,
+        systemvars: true
       }),
       new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
     );
@@ -80,7 +80,7 @@ module.exports = composePlugins(
           project: 'acf-extension',
           authToken: process.env.SENTRY_AUTH_TOKEN,
           release: {
-            name: process.env.VITE_PUBLIC_RELEASE_VERSION?.replace('v', ''),
+            name: process.env.VITE_PUBLIC_RELEASE_VERSION?.replace('v', '')
           },
           bundleSizeOptimizations: {
             excludeDebugStatements: true,
@@ -89,8 +89,8 @@ module.exports = composePlugins(
             // Only relevant if you added `replayIntegration`
             excludeReplayIframe: true,
             excludeReplayShadowDom: true,
-            excludeReplayWorker: true,
-          },
+            excludeReplayWorker: true
+          }
         })
       );
     }

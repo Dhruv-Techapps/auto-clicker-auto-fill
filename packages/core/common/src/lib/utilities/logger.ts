@@ -14,7 +14,7 @@ export enum LoggerColor {
   CYAN = 'background-color:#0dcaf0;',
   BLACK = 'background-color:#000;color:white;',
   WHITE = 'background-color:#fff;',
-  GRAY = 'background-color:#f8f9fa;font-style:italic;padding:0 5px;',
+  GRAY = 'background-color:#f8f9fa;font-style:italic;padding:0 5px;'
 }
 
 export type LoggerType = 'log' | 'warn' | 'error' | 'info' | 'debug';

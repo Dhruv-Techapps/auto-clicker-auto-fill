@@ -9,8 +9,8 @@ export default defineConfig(() => ({
   root: __dirname,
   resolve: {
     alias: {
-      '@acf-options-page': path.resolve(__dirname, 'src'),
-    },
+      '@acf-options-page': path.resolve(__dirname, 'src')
+    }
   },
   cacheDir: '../../node_modules/.vite/apps/acf-options-page',
   server: {
@@ -20,13 +20,13 @@ export default defineConfig(() => ({
       '/locales': {
         target: 'http://localhost:3333',
         secure: false,
-        changeOrigin: true,
-      },
-    },
+        changeOrigin: true
+      }
+    }
   },
   preview: {
     port: 4300,
-    host: 'localhost',
+    host: 'localhost'
   },
   plugins: [
     react(),
@@ -35,11 +35,11 @@ export default defineConfig(() => ({
         exportType: 'named',
         ref: true,
         svgo: false,
-        titleProp: true,
+        titleProp: true
       },
-      include: '**/*.svg',
+      include: '**/*.svg'
     }),
-    visualizer({ open: true }),
+    visualizer({ open: true })
   ],
   // Uncomment this if you are using workers.
   // worker: {
@@ -50,7 +50,7 @@ export default defineConfig(() => ({
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
-      transformMixedEsModules: true,
+      transformMixedEsModules: true
     },
     rollupOptions: {
       output: {
@@ -67,12 +67,12 @@ export default defineConfig(() => ({
             if (id.includes('popperjs')) return 'popperjs';
             return 'vendor';
           }
-        },
-      },
-    },
+        }
+      }
+    }
   },
   define: {
-    'import.meta.vitest': undefined,
+    'import.meta.vitest': undefined
   },
   test: {
     watch: false,
@@ -83,7 +83,7 @@ export default defineConfig(() => ({
     reporters: ['default'],
     coverage: {
       reportsDirectory: './test-output/vitest/coverage',
-      provider: 'v8' as const,
-    },
-  },
+      provider: 'v8' as const
+    }
+  }
 }));

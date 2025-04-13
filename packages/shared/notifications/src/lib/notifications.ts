@@ -23,7 +23,7 @@ export class NotificationHandler {
       title,
       message,
       requireInteraction,
-      silent: false,
+      silent: false
     };
     chrome.notifications.create(id, { ...defaultOptions });
   }

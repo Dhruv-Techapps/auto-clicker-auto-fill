@@ -126,7 +126,7 @@ try {
     [RUNTIME_MESSAGE_FIREBASE_FIRESTORE]: new FirebaseFirestoreBackground(auth, EDGE_OAUTH_CLIENT_ID, OPTIONS_PAGE_URL),
     [RUNTIME_MESSAGE_FIREBASE_FUNCTIONS]: new FirebaseFunctionsBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID),
     [RUNTIME_MESSAGE_VISION]: new VisionBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID),
-    [RUNTIME_MESSAGE_OPENAI]: new OpenAIBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID),
+    [RUNTIME_MESSAGE_OPENAI]: new OpenAIBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID)
   };
   Runtime.onMessageExternal(onMessageListener);
   Runtime.onMessage(onMessageListener);

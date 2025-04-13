@@ -8,7 +8,7 @@ type SubscribeStore = { visible: boolean; isPortalLinkLoading: boolean; subscrip
 const initialState: SubscribeStore = {
   visible: false,
   isSubscribing: false,
-  isPortalLinkLoading: false,
+  isPortalLinkLoading: false
 };
 
 export const getProducts = createAsyncThunk('firebase/getProducts', async () => {
@@ -43,7 +43,7 @@ const slice = createSlice({
     switchIsPortalLinkLoading: (state) => {
       window.dataLayer.push({ event: 'modal', name: 'manage-subscribe', visibility: !state.visible });
       state.isPortalLinkLoading = !state.isPortalLinkLoading;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getSubscription.fulfilled, (state, action) => {
@@ -68,7 +68,7 @@ const slice = createSlice({
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });
-  },
+  }
 });
 
 export const { switchSubscribeModal, switchIsPortalLinkLoading } = slice.actions;

@@ -45,7 +45,7 @@ const slice = createSlice({
     },
     updateRemoveConfiguration: (state, action) => {
       state.configs = action.payload;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(configRemoveUpdateAPI.rejected, (state, action) => {
@@ -56,7 +56,7 @@ const slice = createSlice({
     builder.addCase(configRemoveUpdateAPI.fulfilled, (state) => {
       state.visible = false;
     });
-  },
+  }
 });
 
 export const { switchConfigRemoveSelection, switchConfigRemoveModal, updateRemoveConfiguration, setConfigRemoveMessage } = slice.actions;

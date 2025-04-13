@@ -17,7 +17,7 @@ export const CONFIGURATIONS: Configuration[] = [
         elementValue: 'female',
         id: '5eafe6c4-c786-49cb-a039-16f62fea4d02',
         initWait: 0,
-        name: 'gender',
+        name: 'gender'
       },
       { elementFinder: '//select[@id="product-size"]', elementValue: '35', id: 'c31dfbaf-2f74-43ef-81f6-cba3166df330', initWait: 0, name: 'product-size', value: '35' },
       { elementFinder: '//select[@name="cars"]', elementValue: 'Audi', id: '3cec0fe7-a19d-4d66-ade3-7a2b6ab17117', initWait: 0, name: 'cars', value: 'Audi' },
@@ -26,7 +26,7 @@ export const CONFIGURATIONS: Configuration[] = [
         id: '61a0d773-c189-4239-8c12-b36bdc6648ba',
         initWait: 0,
         name: 'message',
-        value: 'The cat was playing in the garden. and mice also',
+        value: 'The cat was playing in the garden. and mice also'
       },
       {
         checked: true,
@@ -35,7 +35,7 @@ export const CONFIGURATIONS: Configuration[] = [
         elementValue: 'Car',
         id: 'f1383c7d-4f1d-4f02-9ed9-c30b14a35cac',
         initWait: 0,
-        name: 'vehicle2',
+        name: 'vehicle2'
       },
       {
         checked: true,
@@ -44,7 +44,7 @@ export const CONFIGURATIONS: Configuration[] = [
         elementValue: 'Bike',
         id: 'af68b21d-c1f2-460a-ad4f-0f27d896b0f0',
         initWait: 0,
-        name: 'vehicle1',
+        name: 'vehicle1'
       },
       { elementFinder: '/html/body/div[1]/form[1]/table/tbody/tr[17]/td[1]/button', elementValue: 'Click Me! (Alert)', id: '3b0e9b8b-2a43-46d7-a4a1-85aec973294f', initWait: 0, name: '', value: '' },
       {
@@ -53,7 +53,7 @@ export const CONFIGURATIONS: Configuration[] = [
         id: 'bb101eb7-738e-4a5e-ad79-d9ede35a8c7c',
         initWait: 0,
         name: '',
-        value: '',
+        value: ''
       },
       {
         elementFinder: '/html/body/div[1]/form[1]/table/tbody/tr[19]/td[1]/button',
@@ -61,7 +61,7 @@ export const CONFIGURATIONS: Configuration[] = [
         id: 'be602b59-8024-4c1d-a17e-92eab668d581',
         initWait: 0,
         name: '',
-        value: '',
+        value: ''
       },
       { elementFinder: '//button[@name="btnLogin"]', elementValue: 'Login', id: 'a8aa5f74-ff1c-4668-8cae-85614c17132f', initWait: 0, name: 'btnLogin', value: '' },
       {
@@ -70,7 +70,7 @@ export const CONFIGURATIONS: Configuration[] = [
         id: '1e1691af-6579-415e-94c6-7a3c47473dc7',
         initWait: 0,
         name: 'address',
-        value: 'Here is my new address',
+        value: 'Here is my new address'
       },
       { elementFinder: '/html/body/div[1]/form[2]/table/tbody/tr[4]/td[1]/button[1]', elementValue: 'Primary', id: 'fa5d504b-80d9-4476-b101-24043b457256', initWait: 0, name: '', value: '' },
       { elementFinder: '/html/body/div[1]/form[2]/table/tbody/tr[4]/td[1]/button[2]', elementValue: 'Secondary', id: 'a4cb5c9f-88c3-4b6c-8c5d-bb8d5d241aaa', initWait: 0, name: '', value: '' },
@@ -86,7 +86,7 @@ export const CONFIGURATIONS: Configuration[] = [
         id: '1c5a1353-5166-45be-9048-0297914c0c29',
         initWait: 0,
         name: 'inputEmail',
-        value: 'dharmesh@gail.com',
+        value: 'dharmesh@gail.com'
       },
       {
         elementFinder: '//input[@id="inputPassword"][@placeholder="Password"]',
@@ -94,7 +94,7 @@ export const CONFIGURATIONS: Configuration[] = [
         id: '0c983c2a-95bb-49c6-b107-3e232ad2f2f1',
         initWait: 0,
         name: 'inputPassword',
-        value: '123456',
+        value: '123456'
       },
       { elementFinder: '/html/body/div[1]/table[2]/tbody/tr/td[1]/button[1]', elementValue: 'Primary', id: 'b976f02e-294a-4aba-88a5-c9c9f351d3c6', initWait: 0, name: '', value: '' },
       { elementFinder: '/html/body/div[1]/table[2]/tbody/tr/td[1]/button[2]', elementValue: 'Secondary', id: '788fc906-157e-42cf-b13b-2ef0fbd07f30', initWait: 0, name: '', value: '' },
@@ -111,9 +111,9 @@ export const CONFIGURATIONS: Configuration[] = [
         id: 'e399e157-2117-4295-b0f5-b811f23e43ed',
         initWait: 0,
         name: 'form-events-test',
-        value: 'Form events to test check console',
+        value: 'Form events to test check console'
       },
-      { elementFinder: '//button[@id="speed-test"]', elementValue: 'CLICK ME 1', id: 'b1ac8cd2-9c6b-4a0b-a4d3-f3c29ea187ca', initWait: 0, name: 'speed-test', repeat: 10, value: '' },
+      { elementFinder: '//button[@id="speed-test"]', elementValue: 'CLICK ME 1', id: 'b1ac8cd2-9c6b-4a0b-a4d3-f3c29ea187ca', initWait: 0, name: 'speed-test', repeat: 10, value: '' }
     ],
     enable: false,
     id: '4ac9b2ad-1112-43c4-b532-b9b5bece69a7',
@@ -123,7 +123,7 @@ export const CONFIGURATIONS: Configuration[] = [
     startType: 'auto',
     timer: 1736353844887,
     updated: true,
-    url: 'https://test.getautoclicker.com/',
+    url: 'https://test.getautoclicker.com/'
   } as Configuration,
   {
     actions: [{ elementFinder: '//input', error: [], id: '85f50b8e-eba2-47a7-a0e2-10f5ad7d9ee2', value: 'GoogleSheets::Users!A1' }],
@@ -137,7 +137,7 @@ export const CONFIGURATIONS: Configuration[] = [
     spreadsheetId: '1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA',
     startType: 'auto',
     updated: true,
-    url: 'https://test.getautoclicker.com/',
+    url: 'https://test.getautoclicker.com/'
   } as Configuration,
   {
     actions: [{ elementFinder: '//input[@name="username"]', error: [], id: '2a0a59d2-698d-453a-a14a-278b2aebc9e2', value: 'Dharmesh <random(hello|world)>' }],
@@ -149,7 +149,7 @@ export const CONFIGURATIONS: Configuration[] = [
     source: 'web',
     startType: 'auto',
     updated: true,
-    url: 'https://test.getautoclicker.com/',
+    url: 'https://test.getautoclicker.com/'
   } as Configuration,
   {
     actions: [{ elementFinder: '//input[@name="username"]', error: [], id: 'b28a5b20-7627-4be6-89d4-357f1006b47a', value: 'Query::ab' }],
@@ -161,13 +161,13 @@ export const CONFIGURATIONS: Configuration[] = [
     source: 'web',
     startType: 'auto',
     updated: true,
-    url: 'https://test.getautoclicker.com/?ab=12',
+    url: 'https://test.getautoclicker.com/?ab=12'
   } as Configuration,
   {
     actions: [
       { elementFinder: '//form//input[@id="name"]', error: [], id: 'd12e549c-e799-47d5-af25-48e76924199c', repeat: 0, repeatInterval: 0, settings: { iframeFirst: true }, value: 'Name' },
       { elementFinder: '//form//input[@id="mail"]', error: [], id: '39671f28-0a02-4578-9fa4-5805a1ebde73', settings: { iframeFirst: true }, value: 'test@gmail.com' },
-      { elementFinder: '//form//textarea[@id="msg"]', error: [], id: '52bffeab-268c-4ea3-a5d3-6fa6ede3ee6e', settings: { iframeFirst: true }, value: "I'm Here" },
+      { elementFinder: '//form//textarea[@id="msg"]', error: [], id: '52bffeab-268c-4ea3-a5d3-6fa6ede3ee6e', settings: { iframeFirst: true }, value: "I'm Here" }
     ],
     batch: { repeat: 0, repeatInterval: 0 },
     enable: false,
@@ -177,6 +177,6 @@ export const CONFIGURATIONS: Configuration[] = [
     source: 'web',
     startType: 'auto',
     updated: true,
-    url: 'https://test.getautoclicker.com/',
-  } as Configuration,
+    url: 'https://test.getautoclicker.com/'
+  } as Configuration
 ];

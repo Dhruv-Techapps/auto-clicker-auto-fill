@@ -10,7 +10,7 @@ const CONTEXT_MENU_CONFIG_PAGE_ID = 'config-page-mode';
 const CONTEXT_MENU_I18N = {
   FIELD: chrome.i18n.getMessage('@CONTEXT_MENU__FIELD'),
   RECORD: chrome.i18n.getMessage('@CONTEXT_MENU__RECORD'),
-  CONFIG_PAGE: chrome.i18n.getMessage('@CONTEXT_MENU__CONFIG_PAGE'),
+  CONFIG_PAGE: chrome.i18n.getMessage('@CONTEXT_MENU__CONFIG_PAGE')
 };
 
 const registerConfigsContextMenus = () => {
@@ -31,14 +31,14 @@ const registerConfigsContextMenus = () => {
           chrome.contextMenus.create({
             id: 'configs-list',
             title: `${configs.length} Configs Found`,
-            contexts: ['all'],
+            contexts: ['all']
           });
           configs.forEach((config) => {
             chrome.contextMenus.create({
               id: `config|${config.id}|${currentTab.id}`,
               title: config.name,
               contexts: ['all'],
-              parentId: 'configs-list',
+              parentId: 'configs-list'
             });
           });
         }

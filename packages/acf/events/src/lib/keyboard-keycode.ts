@@ -103,7 +103,7 @@ const keyCodes: keyCodesType = {
   'open bracket': 219,
   'back slash': 220,
   'close braket': 221,
-  'single quote': 222,
+  'single quote': 222
 };
 
 export default keyCodes;

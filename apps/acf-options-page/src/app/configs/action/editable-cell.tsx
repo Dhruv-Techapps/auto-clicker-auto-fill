@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export const defaultColumn: Partial<ColumnDef<Action>> = {
-  cell: Cell,
+  cell: Cell
 };
 
 function Cell({ getValue, row: { original }, column: { id, columnDef }, table }) {

@@ -7,7 +7,7 @@ export enum STATUS_BAR_TYPE {
   BATCH_REPEAT = 'Batch repeat',
   ACTION_WAIT = 'Action wait',
   ACTION_REPEAT = 'Action repeat',
-  ADDON_RECHECK = 'Addon recheck',
+  ADDON_RECHECK = 'Addon recheck'
 }
 
 export class StatusBar {

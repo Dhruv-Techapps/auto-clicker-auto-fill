@@ -19,8 +19,8 @@ const slice = createSlice({
     },
     hideToast: (state, action: PayloadAction<number>) => {
       state[action.payload].show = false;
-    },
-  },
+    }
+  }
 });
 export const { addToast, hideToast } = slice.actions;
 export const toastSelector = (state: RootState) => state.toast;

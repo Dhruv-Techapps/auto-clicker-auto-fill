@@ -36,7 +36,7 @@ const slice = createSlice({
       state.error = action.payload;
       Sentry.captureException(state.error);
       state.message = undefined;
-    },
+    }
   },
   extraReducers(builder) {
     builder.addCase(openActionAddonModalAPI.fulfilled, (state, action) => {
@@ -47,7 +47,7 @@ const slice = createSlice({
       }
       state.visible = !state.visible;
     });
-  },
+  }
 });
 
 export const { setActionAddonError, setActionAddonMessage, switchActionAddonModal, updateActionAddon, updateActionAddonGoto } = slice.actions;

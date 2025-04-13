@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 enum Dimension {
   ROWS,
-  COLUMNS,
+  COLUMNS
 }
 
 export type ValueRange = {

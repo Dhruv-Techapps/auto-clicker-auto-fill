@@ -21,7 +21,7 @@ export class MainWorldBackground {
             });
           });
         },
-        args: [message],
+        args: [message]
       });
     }
   }
@@ -51,7 +51,7 @@ export class MainWorldBackground {
             };
           }
         },
-        args: [message],
+        args: [message]
       });
     }
   }

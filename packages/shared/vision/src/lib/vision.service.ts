@@ -9,7 +9,7 @@ export class VisionService extends CoreService {
     return await this.message<RuntimeMessageRequest<VisionImageRequest>, string>({
       messenger: RUNTIME_MESSAGE_VISION,
       methodName: 'imagesAnnotate',
-      message: message,
+      message: message
     });
   }
 }

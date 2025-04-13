@@ -33,7 +33,7 @@ const slice = createSlice({
     builder.addCase(googleDriveDeleteAPI.fulfilled, (state, action) => {
       state.files = state.files.filter((file) => file.id !== action.payload.id);
     });
-  },
+  }
 });
 
 export const googleDriveSelector = (state: RootState) => state.googleDrive;

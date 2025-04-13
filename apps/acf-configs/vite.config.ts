@@ -8,17 +8,17 @@ export default defineConfig(() => ({
   root: __dirname,
   resolve: {
     alias: {
-      '@acf-configs': path.resolve(__dirname, 'src'),
-    },
+      '@acf-configs': path.resolve(__dirname, 'src')
+    }
   },
   cacheDir: '../../node_modules/.vite/apps/acf-configs',
   server: {
     port: 4200,
-    host: 'localhost',
+    host: 'localhost'
   },
   preview: {
     port: 4300,
-    host: 'localhost',
+    host: 'localhost'
   },
   plugins: [
     react(),
@@ -27,10 +27,10 @@ export default defineConfig(() => ({
         exportType: 'named',
         ref: true,
         svgo: false,
-        titleProp: true,
+        titleProp: true
       },
-      include: '**/*.svg',
-    }),
+      include: '**/*.svg'
+    })
   ],
   // Uncomment this if you are using workers.
   // worker: {
@@ -41,11 +41,11 @@ export default defineConfig(() => ({
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
-      transformMixedEsModules: true,
-    },
+      transformMixedEsModules: true
+    }
   },
   define: {
-    'import.meta.vitest': undefined,
+    'import.meta.vitest': undefined
   },
   test: {
     watch: false,
@@ -56,7 +56,7 @@ export default defineConfig(() => ({
     reporters: ['default'],
     coverage: {
       reportsDirectory: './test-output/vitest/coverage',
-      provider: 'v8' as const,
-    },
-  },
+      provider: 'v8' as const
+    }
+  }
 }));

@@ -11,7 +11,7 @@ export const VALUE_MATCHER = {
   GOOGLE_SHEETS: /^GoogleSheets::/i,
   FUNC: /^Func::/i,
   IMAGE: /^Image::/i,
-  OPENAI: /^OpenAI::/i,
+  OPENAI: /^OpenAI::/i
 };
 
 export class ACFValue {

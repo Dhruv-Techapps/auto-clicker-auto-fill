@@ -25,7 +25,7 @@ function App() {
       innerWidth: window.innerWidth,
       innerHeight: window.innerHeight,
       outerWidth: window.outerWidth,
-      outerHeight: window.outerHeight,
+      outerHeight: window.outerHeight
     });
   }, [dispatch]);
 

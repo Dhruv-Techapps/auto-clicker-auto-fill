@@ -15,7 +15,7 @@ import {
   setActionSettingsError,
   setActionSettingsMessage,
   setActionStatementError,
-  setActionStatementMessage,
+  setActionStatementMessage
 } from './action';
 import { setBatchError, setBatchMessage } from './batch';
 import {
@@ -35,7 +35,7 @@ import {
   updateAction,
   updateBatch,
   updateConfig,
-  updateConfigSettings,
+  updateConfigSettings
 } from './config.slice';
 import { setScheduleError, setScheduleMessage } from './schedule';
 import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
@@ -51,7 +51,7 @@ configsToastListenerMiddleware.startListening({
     if (header) {
       listenerApi.dispatch(addToast({ header, body }));
     }
-  },
+  }
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -127,7 +127,7 @@ configsListenerMiddleware.startListening({
           }
         }
       });
-  },
+  }
 });
 
 export { configsListenerMiddleware, configsToastListenerMiddleware };

@@ -9,7 +9,7 @@ export const steps = [
           Add Configuration
         </a>
       </div>
-    ),
+    )
   },
   {
     selector: 'input[name=url]',
@@ -21,7 +21,7 @@ export const steps = [
         </a>{' '}
         .
       </div>
-    ),
+    )
   },
   {
     selector: '#add-action',
@@ -33,7 +33,7 @@ export const steps = [
           Action
         </a>
       </div>
-    ),
+    )
   },
   {
     selector: '[name=elementFinder]',
@@ -46,7 +46,7 @@ export const steps = [
           Element Finder
         </a>
       </div>
-    ),
+    )
   },
   {
     selector: '[name=value]',
@@ -58,10 +58,10 @@ export const steps = [
           Value
         </a>
       </div>
-    ),
+    )
   },
   {
     selector: '#tour',
-    content: 'To restart the tour, simply click the link provided here.',
-  },
+    content: 'To restart the tour, simply click the link provided here.'
+  }
 ];

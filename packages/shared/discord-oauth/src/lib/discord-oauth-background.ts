@@ -30,7 +30,7 @@ export class DiscordOauth2Background extends FirebaseFunctionsBackground {
 
       const responseUrl = await chrome.identity.launchWebAuthFlow({
         url: url.href,
-        interactive: true,
+        interactive: true
       });
       if (responseUrl) {
         if (chrome.runtime.lastError || responseUrl.includes('access_denied')) {

@@ -7,18 +7,18 @@ import { RETRY_OPTIONS } from './setting-model';
 // Action Condition
 export enum ACTION_STATUS {
   DONE = 'done',
-  SKIPPED = 'skipped',
+  SKIPPED = 'skipped'
 }
 
 export enum ACTION_RUNNING {
   SKIP = 'skip',
   GOTO = 'goto',
-  PROCEED = 'proceed',
+  PROCEED = 'proceed'
 }
 
 export enum ACTION_CONDITION_OPR {
   AND = 'and',
-  OR = 'or',
+  OR = 'or'
 }
 
 export type ActionCondition = {
@@ -33,7 +33,7 @@ export const getDefaultActionCondition = (actionId: RANDOM_UUID, operator?: ACTI
   id: generateUUID(),
   actionId,
   status: ACTION_STATUS.DONE,
-  operator,
+  operator
 });
 
 // Action Statement
@@ -46,7 +46,7 @@ export type ActionStatement = {
 
 export const getDefaultActionStatement = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionStatement => ({
   conditions: [getDefaultActionCondition(actionId, operator)],
-  then: RETRY_OPTIONS.STOP,
+  then: RETRY_OPTIONS.STOP
 });
 
 // Action Setting
@@ -83,5 +83,5 @@ export type Action = {
 export const getDefaultAction = (): Action => ({
   id: generateUUID(),
   elementFinder: '',
-  error: ['elementFinder'],
+  error: ['elementFinder']
 });

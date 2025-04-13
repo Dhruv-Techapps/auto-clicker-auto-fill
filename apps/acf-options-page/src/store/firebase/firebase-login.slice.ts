@@ -31,7 +31,7 @@ const slice = createSlice({
       state.error = action.payload;
       Sentry.captureException(state.error);
       state.message = undefined;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(firebaseIsLoginAPI.fulfilled, (state, action) => {
@@ -70,7 +70,7 @@ const slice = createSlice({
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });
-  },
+  }
 });
 
 export const { switchFirebaseLoginModal, setFirebaseLoginMessage, setFirebaseLoginError } = slice.actions;

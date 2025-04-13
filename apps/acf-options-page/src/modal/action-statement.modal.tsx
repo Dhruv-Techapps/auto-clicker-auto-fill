@@ -13,7 +13,7 @@ import {
   setActionStatementMessage,
   switchActionStatementModal,
   syncActionStatement,
-  updateActionStatementCondition,
+  updateActionStatementCondition
 } from '../store/config';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Plus } from '../util/svg';

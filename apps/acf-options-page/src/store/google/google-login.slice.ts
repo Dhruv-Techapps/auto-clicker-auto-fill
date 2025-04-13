@@ -39,7 +39,7 @@ const slice = createSlice({
       Sentry.captureException(state.error);
       state.googleLoading = false;
     });
-  },
+  }
 });
 
 export const googleSelector = (state: RootState) => state.google;

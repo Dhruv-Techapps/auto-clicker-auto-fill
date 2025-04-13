@@ -3,7 +3,7 @@ const { join } = require('path');
 
 module.exports = {
   output: {
-    path: join(__dirname, 'dist'),
+    path: join(__dirname, 'dist')
   },
   plugins: [
     new NxAppWebpackPlugin({
@@ -14,7 +14,7 @@ module.exports = {
       assets: ['./src/locales'],
       optimization: false,
       outputHashing: 'none',
-      generatePackageJson: true,
-    }),
-  ],
+      generatePackageJson: true
+    })
+  ]
 };

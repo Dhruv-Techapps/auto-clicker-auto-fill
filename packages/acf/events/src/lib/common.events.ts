@@ -64,7 +64,7 @@ const CommonEvents = (() => {
       radiusX: 10.5,
       radiusY: 10.5,
       rotationAngle: 10,
-      force: 0.5,
+      force: 0.5
     });
   };
 
@@ -76,7 +76,7 @@ const CommonEvents = (() => {
       changedTouches: [touch],
       shiftKey: true,
       cancelable: true,
-      bubbles: true,
+      bubbles: true
     };
   };
 
@@ -97,7 +97,7 @@ const CommonEvents = (() => {
     isComposing = false,
     charCode = 0,
     keyCode = 0,
-    which = 0,
+    which = 0
   }): KeyboardEventInit => ({ key, code, location, ctrlKey, shiftKey, altKey, metaKey, bubbles, repeat, isComposing, charCode, keyCode, which });
 
   const getElementWindow = (element: HTMLElement): Window & typeof globalThis => {
@@ -127,7 +127,7 @@ export const EVENTS = {
   APPEND: 'append',
   PREPEND: 'prepend',
   CLIPBOARD: 'clipboard',
-  ELEMENT: 'element',
+  ELEMENT: 'element'
 };
 
 export default CommonEvents;

@@ -30,7 +30,7 @@ export const HeaderProfile = () => {
           )}
         </div>
       ),
-      headerClass: 'text-danger',
+      headerClass: 'text-danger'
     });
     result && dispatch(profileSetAPI(!profile));
   };

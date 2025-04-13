@@ -20,7 +20,7 @@ export const VALUE_MATCHER = {
   ACTION_REPEAT: /<actionRepeat>/,
   SESSION_COUNT: /<sessionCount>/,
   CLIPBOARD_PASTE: /<clipboardPaste>/,
-  PASTE: /<paste>/,
+  PASTE: /<paste>/
 };
 
 export const Value = (() => {

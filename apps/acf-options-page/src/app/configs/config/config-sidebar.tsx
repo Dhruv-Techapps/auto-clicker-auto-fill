@@ -9,7 +9,7 @@ import {
   setDetailVisibility,
   setSearch,
   switchConfigRemoveModal,
-  switchConfigReorderModal,
+  switchConfigReorderModal
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { Ban, EyeSlashFill, Plus, ThreeDots, Trash } from '@acf-options-page/util';
@@ -32,7 +32,7 @@ export const ConfigSidebar = (props) => {
     const result = await modalContext.showConfirmation({
       title: t('confirm.configuration.remove.title'),
       message: t('confirm.configuration.remove.message', { name }),
-      headerClass: 'text-danger',
+      headerClass: 'text-danger'
     });
     result && dispatch(removeConfig(config.id));
   };

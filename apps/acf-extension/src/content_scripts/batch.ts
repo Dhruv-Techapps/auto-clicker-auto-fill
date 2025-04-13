@@ -8,7 +8,7 @@ import { I18N_COMMON } from './i18n';
 import { statusBar } from './status-bar';
 
 const BATCH_I18N = {
-  TITLE: chrome.i18n.getMessage('@BATCH__TITLE'),
+  TITLE: chrome.i18n.getMessage('@BATCH__TITLE')
 };
 
 const BatchProcessor = (() => {
@@ -39,7 +39,7 @@ const BatchProcessor = (() => {
               title: `${BATCH_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
               message: `#${i + 1} ${BATCH_I18N.TITLE}`,
               silent: !notifications.sound,
-              iconUrl: Common.getNotificationIcon(),
+              iconUrl: Common.getNotificationIcon()
             });
           }
           console.groupEnd();
