@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Extension Not Found",
-      "subTitle": "This is configuration page for <b>Auto Clicker - AutoFill {{NX_PUBLIC_VARIANT}}</b> extension",
+      "subTitle": "This is configuration page for <b>Auto Clicker - AutoFill {{VITE_PUBLIC_VARIANT}}</b> extension",
       "hint": "You need to download extension first in order to make use of this"
     },
     "actionSettings": {

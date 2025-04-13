@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "لم يتم العثور على الامتداد",
-      "subTitle": "هذه هي صفحة التكوين للامتداد <b>{{NX_PUBLIC_NAME}}.</b>",
+      "subTitle": "هذه هي صفحة التكوين للامتداد <b>{{VITE_PUBLIC_NAME}}.</b>",
       "hint": "تحتاج إلى تنزيل الامتداد أولاً للاستفادة من هذا"
     },
     "actionSettings": {

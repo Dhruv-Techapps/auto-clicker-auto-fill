@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Erweiterung nicht gefunden",
-      "subTitle": "Dies ist die Konfigurationsseite für <b>die {{NX_PUBLIC_NAME}}-</b> Erweiterung",
+      "subTitle": "Dies ist die Konfigurationsseite für <b>die {{VITE_PUBLIC_NAME}}-</b> Erweiterung",
       "hint": "Sie müssen zuerst die Erweiterung herunterladen, um diese nutzen zu können"
     },
     "actionSettings": {

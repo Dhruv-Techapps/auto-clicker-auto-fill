@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "확장명을 찾을 수 없습니다",
-      "subTitle": "이것은 구성 페이지입니다 <b>[{{NX_PUBLIC_NAME}}]</b> 확대",
+      "subTitle": "이것은 구성 페이지입니다 <b>[{{VITE_PUBLIC_NAME}}]</b> 확대",
       "hint": "이를 사용하려면 먼저 확장을 다운로드해야합니다."
     },
     "actionSettings": {

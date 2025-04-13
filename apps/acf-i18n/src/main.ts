@@ -7,7 +7,7 @@ import express from 'express';
 import * as path from 'path';
 
 const app = express();
-
+console.log(express.static(path.join(__dirname, 'locales')));
 app.use('/locales', express.static(path.join(__dirname, 'locales')));
 
 const port = process.env.PORT || 3333;

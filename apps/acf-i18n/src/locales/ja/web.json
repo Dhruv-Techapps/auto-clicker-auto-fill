@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "拡張子が見つかりません",
-      "subTitle": "これは<b>{{NX_PUBLIC_NAME}}</b>拡張機能の設定ページです",
+      "subTitle": "これは<b>{{VITE_PUBLIC_NAME}}</b>拡張機能の設定ページです",
       "hint": "これを利用するにはまず拡張機能をダウンロードする必要があります"
     },
     "actionSettings": {

@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Extensie niet gevonden",
-      "subTitle": "Dit is de configuratiepagina voor de extensie <b>{{NX_PUBLIC_NAME}}</b>",
+      "subTitle": "Dit is de configuratiepagina voor de extensie <b>{{VITE_PUBLIC_NAME}}</b>",
       "hint": "Om hiervan gebruik te kunnen maken, moet u eerst de extensie downloaden"
     },
     "actionSettings": {

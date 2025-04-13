@@ -12,7 +12,11 @@
     "jsx": "react-jsx"
   },
   "include": ["src/**/*.[ts|tsx]"],
-  "references": [],
+  "references": [
+    {
+      "path": "../context/tsconfig.lib.json"
+    }
+  ],
   "exclude": [
     "vite.config.ts",
     "vite.config.mts",

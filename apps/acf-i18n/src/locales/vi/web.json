@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Không tìm thấy tiện ích mở rộng",
-      "subTitle": "Đây là trang cấu hình cho tiện ích mở rộng <b>{{NX_PUBLIC_NAME}}</b>",
+      "subTitle": "Đây là trang cấu hình cho tiện ích mở rộng <b>{{VITE_PUBLIC_NAME}}</b>",
       "hint": "Trước tiên, bạn cần tải xuống tiện ích mở rộng để sử dụng tiện ích này"
     },
     "actionSettings": {

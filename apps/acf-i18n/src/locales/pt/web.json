@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Extensão não encontrada",
-      "subTitle": "Esta é a página de configuração da extensão <b>{{NX_PUBLIC_NAME}}</b>",
+      "subTitle": "Esta é a página de configuração da extensão <b>{{VITE_PUBLIC_NAME}}</b>",
       "hint": "Você precisa baixar a extensão primeiro para poder usar esta"
     },
     "actionSettings": {

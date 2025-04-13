@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Tillägg hittades inte",
-      "subTitle": "Det här är konfigurationssidan för tillägget <b>{{NX_PUBLIC_NAME}}</b>",
+      "subTitle": "Det här är konfigurationssidan för tillägget <b>{{VITE_PUBLIC_NAME}}</b>",
       "hint": "Du måste ladda ner tillägget först för att kunna använda detta"
     },
     "actionSettings": {

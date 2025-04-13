@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Ekstensi Tidak Ditemukan",
-      "subTitle": "Ini adalah halaman konfigurasi untuk ekstensi <b>{{NX_PUBLIC_NAME}}</b>",
+      "subTitle": "Ini adalah halaman konfigurasi untuk ekstensi <b>{{VITE_PUBLIC_NAME}}</b>",
       "hint": "Anda perlu mengunduh ekstensi terlebih dahulu untuk memanfaatkan ini"
     },
     "actionSettings": {

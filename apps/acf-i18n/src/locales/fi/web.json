@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "Laajennusta ei löydy",
-      "subTitle": "Tämä on laajennuksen <b>{{NX_PUBLIC_NAME}}</b> määrityssivu",
+      "subTitle": "Tämä on laajennuksen <b>{{VITE_PUBLIC_NAME}}</b> määrityssivu",
       "hint": "Sinun on ensin ladattava laajennus, jotta voit käyttää tätä"
     },
     "actionSettings": {

@@ -170,7 +170,7 @@
     },
     "extensionNotFound": {
       "title": "未找到扩展",
-      "subTitle": "这是 <b>[{{NX_PUBLIC_NAME}}]</b> 扩展的配置页面",
+      "subTitle": "这是 <b>[{{VITE_PUBLIC_NAME}}]</b> 扩展的配置页面",
       "hint": "您需要先下载扩展才能使用此功能"
     },
     "actionSettings": {

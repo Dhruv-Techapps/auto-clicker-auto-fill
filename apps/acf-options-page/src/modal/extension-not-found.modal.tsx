@@ -14,7 +14,7 @@ const ExtensionNotFoundModal = () => {
 
   const downloadClick = () => {
     const webStore = CHROME_WEB_STORE;
-    const extensionId = import.meta.env[`NX_PUBLIC_CHROME_EXTENSION_ID`];
+    const extensionId = import.meta.env[`VITE_PUBLIC_CHROME_EXTENSION_ID`];
     window.open(`${webStore}${extensionId}`);
   };
 
