@@ -32,7 +32,7 @@ jobs:
       - run: npm ci
       - name: Build Configurations Page
         run: |
-          npx nx run acf-configs:build --prod --base ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache
+          npx nx run acf-configs:build --prod --base https://configs.getautoclicker.com/ --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
           VITE_PUBLIC_I18N: ${{vars.VITE_PUBLIC_I18N}}
