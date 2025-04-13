@@ -4,7 +4,7 @@ const GOOGLE_SHEETS_REGEX = /^googlesheets::/i;
 export default class GoogleSheets {
   static getSheets(config: Configuration) {
     const sheets = new Map<string, Set<string>>();
-    const batchHighestRepeat: number = config.batch?.repeat || 0;
+    const batchHighestRepeat: number = config.batch?.repeat ?? 0;
     config.actions
       .map(({ elementFinder, value, addon }) => {
         const result = [];

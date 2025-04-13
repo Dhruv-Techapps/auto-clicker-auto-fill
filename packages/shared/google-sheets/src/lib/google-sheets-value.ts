@@ -7,6 +7,8 @@ declare global {
   }
 }
 
+const rangeRegex = /(\D+?)(\d+)/;
+
 export class GoogleSheetsValue {
   static getSheetValue(value: string) {
     const sheets = window.__sheets;
@@ -22,13 +24,13 @@ export class GoogleSheetsValue {
       throw new ConfigError(`Sheet "${sheetName}" do not have value in ${startRange}`, 'Sheet values not found');
     }
 
-    if (!/(\D+)(\d+)/.test(range)) {
+    if (!rangeRegex.test(range)) {
       throw new ConfigError(`Sheet range is not valid${range}`, 'Sheet range invalid');
     }
-    const currentRangeRegExp = /(\D+)(\d+)/.exec(range);
+    const currentRangeRegExp = rangeRegex.exec(range);
     if (currentRangeRegExp) {
       const [, column, row] = currentRangeRegExp;
-      const startRangeRegExp = /(\D+)(\d+)/.exec(startRange);
+      const startRangeRegExp = rangeRegex.exec(startRange);
       if (startRangeRegExp) {
         const [, columnStart, rowStart] = startRangeRegExp;
         const colIndex = column.split('').reduce((a, c, i) => a + c.charCodeAt(0) - columnStart.charCodeAt(0) + i * 26, 0);

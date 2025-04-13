@@ -34,7 +34,7 @@ export class DiscordOauth2Background extends FirebaseFunctionsBackground {
       });
       if (responseUrl) {
         if (chrome.runtime.lastError || responseUrl.includes('access_denied')) {
-          const error = chrome.runtime.lastError?.message || getParameterByName('error_description', responseUrl);
+          const error = chrome.runtime.lastError?.message ?? getParameterByName('error_description', responseUrl);
           NotificationHandler.notify(NOTIFICATIONS_ID, NOTIFICATIONS_TITLE, error);
           throw new Error(error);
         }
