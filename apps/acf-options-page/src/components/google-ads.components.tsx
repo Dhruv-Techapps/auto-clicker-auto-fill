@@ -9,7 +9,7 @@ type GoogleAdsProps = {
 
 export function GoogleAds({ client = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_CLIENT, slot = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_SLOT, className = 'mb-3' }: GoogleAdsProps) {
   useEffect(() => {
-    // eslint-disable-next-line no-extra-semi
+     
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
 

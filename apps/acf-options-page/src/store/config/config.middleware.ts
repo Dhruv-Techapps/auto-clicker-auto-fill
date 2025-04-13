@@ -45,7 +45,7 @@ configsToastListenerMiddleware.startListening({
   matcher: isAnyOf(addConfig, removeConfig, duplicateConfig),
   effect: async (action, listenerApi) => {
     const [type, method] = action.type.split('/');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
 
     const header = i18next.t(`toast.${type}.${method}.header`, { name: type });
     const body = i18next.t(`toast.${type}.${method}.body`, { name: type });
@@ -101,7 +101,7 @@ configsListenerMiddleware.startListening({
     // Run whatever additional side-effect-y logic you want here
     const state = listenerApi.getState() as RootState;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
 
     StorageService.set({ [LOCAL_STORAGE_KEY.CONFIGS]: state.configuration.configs })
       .then(() => {

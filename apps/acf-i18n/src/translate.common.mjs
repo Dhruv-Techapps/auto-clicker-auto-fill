@@ -23,7 +23,7 @@ class TranslateCommon {
       return targetValue;
     } else {
       value = value.replaceAll(/(\$\d+)/g, '{{$1}}');
-      let [translatedValue] = await this.translate.translate(value, { from: 'en', to: targetLanguage });
+      const [translatedValue] = await this.translate.translate(value, { from: 'en', to: targetLanguage });
       console.log(`Translating "${value}" to "${translatedValue}"`);
       return translatedValue.replaceAll(/{{(\$\d+)}}/g, '$1');
     }

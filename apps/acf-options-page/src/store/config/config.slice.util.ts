@@ -25,7 +25,7 @@ export const getConfigName = (url?: string) => {
  * @returns The index of the selected configuration.
  */
 export const checkQueryParams = (configs: Array<Configuration>, thunkAPI): RANDOM_UUID | undefined => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
 
   if (window.location.search) {
     const { searchParams } = new URL(window.location.href);
