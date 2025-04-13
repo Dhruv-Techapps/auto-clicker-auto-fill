@@ -11,7 +11,7 @@ export const ClassEvents = (() => {
     } else if (action === 'clear') {
       element.className = '';
     } else if (action === 'replace') {
-      element.className.replace(new RegExp(`^${name}$`, 'gi'), prop);
+      element.className = element.className.replace(new RegExp(`${name}`, 'gi'), prop);
     }
   };
 

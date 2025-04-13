@@ -32,6 +32,7 @@ module.exports = composePlugins(
     // `context` is the context passed to the `@nx/webpack:webpack` executor
     // customize configuration here
     config.output.clean = true;
+    config.devtool = 'source-map';
     config.entry = {
       background: './src/background/index.ts',
       content_scripts: './src/content_scripts/index.ts',
