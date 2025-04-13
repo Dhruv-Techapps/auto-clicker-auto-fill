@@ -25,8 +25,6 @@ export const getConfigName = (url?: string) => {
  * @returns The index of the selected configuration.
  */
 export const checkQueryParams = (configs: Array<Configuration>, thunkAPI): RANDOM_UUID | undefined => {
-   
-
   if (window.location.search) {
     const { searchParams } = new URL(window.location.href);
     const configId = searchParams.get('configId');

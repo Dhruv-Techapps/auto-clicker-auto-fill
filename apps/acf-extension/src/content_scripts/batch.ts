@@ -46,7 +46,7 @@ const BatchProcessor = (() => {
         }
       } else if (batch.repeat < -1) {
         let i = 1;
-         
+
         while (true) {
           if (batch?.repeatInterval) {
             statusBar.batchUpdate('∞');

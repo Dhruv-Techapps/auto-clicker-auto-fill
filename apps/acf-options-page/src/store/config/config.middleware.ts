@@ -45,7 +45,6 @@ configsToastListenerMiddleware.startListening({
   matcher: isAnyOf(addConfig, removeConfig, duplicateConfig),
   effect: async (action, listenerApi) => {
     const [type, method] = action.type.split('/');
-     
 
     const header = i18next.t(`toast.${type}.${method}.header`, { name: type });
     const body = i18next.t(`toast.${type}.${method}.body`, { name: type });
@@ -100,8 +99,6 @@ configsListenerMiddleware.startListening({
   effect: async (action, listenerApi) => {
     // Run whatever additional side-effect-y logic you want here
     const state = listenerApi.getState() as RootState;
-
-     
 
     StorageService.set({ [LOCAL_STORAGE_KEY.CONFIGS]: state.configuration.configs })
       .then(() => {

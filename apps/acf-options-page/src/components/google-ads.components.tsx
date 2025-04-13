@@ -9,7 +9,6 @@ type GoogleAdsProps = {
 
 export function GoogleAds({ client = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_CLIENT, slot = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_SLOT, className = 'mb-3' }: GoogleAdsProps) {
   useEffect(() => {
-     
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
 

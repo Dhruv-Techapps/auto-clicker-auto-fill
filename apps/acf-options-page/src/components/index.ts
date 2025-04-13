@@ -1,4 +1,3 @@
- 
 export * from './toast-handler.component';
 export * from './dropdown-toggle.components';
 export * from './error-alert.components';
