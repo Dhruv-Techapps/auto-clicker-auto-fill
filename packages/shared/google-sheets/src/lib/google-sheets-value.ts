@@ -1,4 +1,5 @@
 import { ConfigError } from '@dhruv-techapps/core-common';
+import { RANGE_REGEX } from './google-sheets.constant';
 import { Sheets } from './google-sheets.types';
 
 declare global {
@@ -6,8 +7,6 @@ declare global {
     __sheets?: Sheets;
   }
 }
-
-const rangeRegex = /(\D+?)(\d+)/;
 
 export class GoogleSheetsValue {
   static getSheetValue(value: string) {
@@ -24,15 +23,15 @@ export class GoogleSheetsValue {
       throw new ConfigError(`Sheet "${sheetName}" do not have value in ${startRange}`, 'Sheet values not found');
     }
 
-    if (!rangeRegex.test(range)) {
+    if (!RANGE_REGEX.test(range)) {
       throw new ConfigError(`Sheet range is not valid${range}`, 'Sheet range invalid');
     }
-    const currentRangeRegExp = rangeRegex.exec(range);
-    if (currentRangeRegExp) {
-      const [, column, row] = currentRangeRegExp;
-      const startRangeRegExp = rangeRegex.exec(startRange);
-      if (startRangeRegExp) {
-        const [, columnStart, rowStart] = startRangeRegExp;
+    const currentRANGE_REGEXp = RANGE_REGEX.exec(range);
+    if (currentRANGE_REGEXp) {
+      const [, column, row] = currentRANGE_REGEXp;
+      const startRANGE_REGEXp = RANGE_REGEX.exec(startRange);
+      if (startRANGE_REGEXp) {
+        const [, columnStart, rowStart] = startRANGE_REGEXp;
         const colIndex = column.split('').reduce((a, c, i) => a + c.charCodeAt(0) - columnStart.charCodeAt(0) + i * 26, 0);
         const rowIndex = Number(row) - Number(rowStart);
         if (!values[rowIndex]?.[colIndex]) {

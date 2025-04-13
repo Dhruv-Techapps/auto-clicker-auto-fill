@@ -1,4 +1,5 @@
 import { ConfigError } from '@dhruv-techapps/core-common';
+import { RANGE_REGEX } from './google-sheets.constant';
 import { GoogleSheetsService } from './google-sheets.service';
 import { Sheets, ValueRange } from './google-sheets.types';
 
@@ -11,7 +12,7 @@ export class GoogleSheetsCS {
       let hightestRow = 1;
       if (ranges instanceof Set) {
         ranges.forEach((range) => {
-          const regexResult = /(\D+)(\d+)/.exec(range);
+          const regexResult = RANGE_REGEX.exec(range);
           if (regexResult) {
             const [, column, row] = regexResult;
             const rowIndex = Number(row);
