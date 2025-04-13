@@ -15,6 +15,13 @@ export default defineConfig(() => ({
   server: {
     port: 4200,
     host: 'localhost',
+    proxy: {
+      '/locales': {
+        target: 'http://localhost:3333',
+        secure: false,
+        changeOrigin: true,
+      },
+    },
   },
   preview: {
     port: 4300,

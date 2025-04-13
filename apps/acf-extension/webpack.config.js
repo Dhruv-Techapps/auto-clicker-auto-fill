@@ -32,24 +32,14 @@ module.exports = composePlugins(
     // `context` is the context passed to the `@nx/webpack:webpack` executor
     // customize configuration here
     config.output.clean = true;
-    config.devServer = {
-      devMiddleware: {
-        writeToDisk: true, // 👈 write the in-memory files to disk
-      },
-      static: {
-        directory: path.join(__dirname, 'dist'),
-      },
-      compress: true,
-      hot: true,
-    };
     config.entry = {
       background: './src/background/index.ts',
       content_scripts: './src/content_scripts/index.ts',
       content_scripts_main: './src/content_scripts_main/index.ts',
       wizard: './src/wizard/index.ts',
-      wizard_popup: ['./src/wizard/popup/wizard-popup.ts', './src/wizard/popup/wizard-popup.scss'],
+      'wizard-popup': ['./src/wizard/popup/wizard-popup.ts', './src/wizard/popup/wizard-popup.scss'],
       devtools: './src/devtools/index.ts',
-      status_bar: '../../packages/shared/status-bar/src/lib/status-bar.scss',
+      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss',
     };
     if (config.module.rules) {
       config.module.rules.push({

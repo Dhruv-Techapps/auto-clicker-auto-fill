@@ -6,6 +6,8 @@ import { store } from './store/store';
 import './util/i18n';
 import './util/instrument';
 
+window.EXTENSION_ID = import.meta.env[`VITE_PUBLIC_CHROME_EXTENSION_ID`];
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
