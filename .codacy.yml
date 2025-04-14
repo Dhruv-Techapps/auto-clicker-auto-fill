@@ -6,3 +6,4 @@ exclude_paths:
   - '**/vite.config.ts'
   - '**/project.json'
   - '**/tsconfig.*.json'
+  - '**/webpack.config.js'
