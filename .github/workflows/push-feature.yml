@@ -16,10 +16,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com
-          scope: ${{github.repository_owner}}
-          cache: 'npm'
+          node-version: 22
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       - run: npx nx reset
