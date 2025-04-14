@@ -21,9 +21,9 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       - run: npx nx report
-      - run: npx nx format:check
-      - run: npx nx affected --target=lint --parallel=3
-      - run: npx nx affected --target=test --parallel=3 --exclude='tag:puppeteer'
+      - run: npx nx format:check --verbose
+      - run: npx nx affected --target=lint --parallel=3 --verbose
+      - run: npx nx affected --target=test --parallel=3 --exclude='tag:puppeteer' --verbose
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
         with:
