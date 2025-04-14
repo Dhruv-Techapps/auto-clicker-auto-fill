@@ -23,7 +23,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       - run: npx nx reset
-      - run: npx nx format:check --verbose
+      - run: NX_DAEMON=false npx nx format:check --verbose
       - run: npx nx affected --target=lint --parallel=3 --verbose
       - run: npx nx affected --target=test --parallel=3 --exclude='tag:puppeteer' --ci --code-coverage --verbose
       - name: Upload results to Codecov
