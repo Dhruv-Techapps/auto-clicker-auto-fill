@@ -1,17 +1,8 @@
-import { SystemError } from '@dhruv-techapps/core-common';
+import { sanitizeUrl, SystemError } from '@dhruv-techapps/core-common';
 import { ACTION_I18N_TITLE } from '.';
 import CommonEvents from './common.events';
 
 const LOCATION_COMMANDS = ['reload', 'href', 'replace', 'open', 'close', 'focus', 'blur', 'print', 'stop', 'moveBy', 'moveTo'];
-
-const sanitizeUrl = (url: string): string | null => {
-  try {
-    const parsedUrl = new URL(url, window.location.origin);
-    return parsedUrl.href;
-  } catch {
-    return null;
-  }
-};
 
 export const LocationCommandEvents = (() => {
   const execCommand = (commands: Array<string | Event>, value: string) => {
@@ -21,16 +12,11 @@ export const LocationCommandEvents = (() => {
           window.location.reload();
           break;
         case 'href': {
-          const sanitizedValue = sanitizeUrl(value.split('::')[2]);
-          if (sanitizedValue) {
-            window.location.href = sanitizedValue;
-          } else {
-            console.error('Invalid URL provided for href command');
-          }
+          window.location.href = sanitizeUrl(value.split('::')[2]);
           break;
         }
         case 'replace':
-          window.location.replace(value.split('::')[2]);
+          window.location.replace(sanitizeUrl(value.split('::')[2]));
           break;
         case 'focus':
           window.focus();
