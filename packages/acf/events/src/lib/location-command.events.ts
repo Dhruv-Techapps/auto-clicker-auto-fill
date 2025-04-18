@@ -4,6 +4,15 @@ import CommonEvents from './common.events';
 
 const LOCATION_COMMANDS = ['reload', 'href', 'replace', 'open', 'close', 'focus', 'blur', 'print', 'stop', 'moveBy', 'moveTo'];
 
+const sanitizeUrl = (url: string): string | null => {
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+    return parsedUrl.href;
+  } catch {
+    return null;
+  }
+};
+
 export const LocationCommandEvents = (() => {
   const execCommand = (commands: Array<string | Event>, value: string) => {
     commands.forEach((command) => {
@@ -11,9 +20,15 @@ export const LocationCommandEvents = (() => {
         case 'reload':
           window.location.reload();
           break;
-        case 'href':
-          window.location.href = value.split('::')[2];
+        case 'href': {
+          const sanitizedValue = sanitizeUrl(value.split('::')[2]);
+          if (sanitizedValue) {
+            window.location.href = sanitizedValue;
+          } else {
+            console.error('Invalid URL provided for href command');
+          }
           break;
+        }
         case 'replace':
           window.location.replace(value.split('::')[2]);
           break;
