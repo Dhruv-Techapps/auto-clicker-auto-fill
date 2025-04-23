@@ -12,7 +12,7 @@ export const Timer = (function () {
             .map((n) => Number(n));
           waitTime = (Math.floor(getRandomValues() * (end - start)) + start) * 1000;
         }
-      } else {
+      } else if (time > 0) {
         waitTime = Number(time) * 1000;
       }
     }
