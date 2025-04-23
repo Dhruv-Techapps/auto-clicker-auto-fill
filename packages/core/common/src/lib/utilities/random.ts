@@ -1,6 +1,6 @@
 export const getRandomValues = () => {
   const array = new Uint32Array(1);
-  return crypto.getRandomValues(array)[0] / (0xffffffff + 1);
+  return crypto.getRandomValues(array)[0] / Math.pow(2, 32);
 };
 
 export type RANDOM_UUID = `${string}-${string}-${string}-${string}-${string}`;
