@@ -7,7 +7,7 @@ describe('random utilities', () => {
       const value = getRandomValues();
       expect(typeof value).toBe('number');
       expect(value).toBeGreaterThanOrEqual(0);
-      expect(value).toBeLessThanOrEqual(2 ** 32 - 1);
+      expect(value).toBeLessThanOrEqual(1);
     });
   });
 

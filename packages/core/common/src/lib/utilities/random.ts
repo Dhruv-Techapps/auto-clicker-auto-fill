@@ -1,6 +1,7 @@
 export const getRandomValues = () => {
-  const array = new Uint32Array(1);
-  return crypto.getRandomValues(array)[0] / Math.pow(2, 32);
+  const arr = crypto.getRandomValues(new Uint32Array(1));
+  const mantissa = arr[0] * Math.pow(2, 20) + (arr[1] >>> 12);
+  return mantissa * Math.pow(2, -52);
 };
 
 export type RANDOM_UUID = `${string}-${string}-${string}-${string}-${string}`;
