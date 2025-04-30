@@ -9,11 +9,6 @@ on:
         type: environment
         default: Development
         required: true
-      deploy_options_page:
-        description: 'Options Page to firebase hosting'
-        type: boolean
-        default: false
-        required: true
       upload_extension:
         description: 'Extension to chrome webstore'
         type: boolean
@@ -53,7 +48,6 @@ jobs:
       - run: npm ci
       - run: npx nx report
       - name: Build Options Page
-        if: ${{ inputs.deploy_options_page }}
         run: |
           npx nx run acf-options-page:build --prod --base ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache
         env:
@@ -69,7 +63,6 @@ jobs:
           VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
           VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN: ${{vars.VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN}}
       - name: Build Extension
-        if: ${{ inputs.upload_extension }}
         run: |
           npx nx run acf-extension:build --prod --verbose --skip-nx-cache
         env:
@@ -95,7 +88,6 @@ jobs:
           TARGET="auto-clicker-auto-fill-$VARIANT"
           echo "TARGET=$TARGET" >> $GITHUB_ENV
       - name: Options Page to Firebase Hosting
-        if: ${{ inputs.deploy_options_page }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
@@ -103,7 +95,6 @@ jobs:
           target: ${{ env.TARGET }}
           channelId: live
       - name: Bundle Projects
-        if: ${{ inputs.upload_extension }}
         run: |
           cd apps/acf-extension/dist
           zip -r ../../../acf-extension-${{vars.VITE_PUBLIC_VARIANT}}.zip .
@@ -128,30 +119,3 @@ jobs:
           prerelease: ${{ vars.VITE_PUBLIC_VARIANT == 'BETA' || vars.VITE_PUBLIC_VARIANT == 'DEV'}}
           generate_release_notes: true
           discussion_category_name: 'Release'
-      - uses: actions/github-script@v6
-        if: startsWith(github.ref, 'refs/tags/') && vars.VITE_PUBLIC_VARIANT == 'PROD'
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            // Function to format links and remove comments
-            const formatContent = (text) => 
-            text
-              .replace(/(https?:\/\/[^\s)]+)/g, '<$1>') // Wrap URLs in <>
-              .replace(/<!--.*?-->/gs, '') // Remove all HTML comments
-              const releaseBody = formatContent(`${{ github.event.release.body }}`)
-              const options = {
-                method: 'POST',
-                headers: {
-                 'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  username: 'Release Bot',
-                  avatar_url: 'https://getautoclicker.com/docs/4.x/assets/brand/bootstrap-social-logo.png',
-                  content: '@everyone\n${{ github.actor }} published a new release: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})'+releaseBody,
-                }),
-              };
-
-              const response = await fetch(process.env.DISCORD_WEBHOOK_URL, options);
-              console.log(response.status);

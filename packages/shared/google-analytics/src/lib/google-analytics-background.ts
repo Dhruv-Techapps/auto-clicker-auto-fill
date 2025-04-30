@@ -64,13 +64,13 @@ export class GoogleAnalyticsBackground {
     if (!params.engagement_time_msec) {
       params.engagement_time_msec = DEFAULT_ENGAGEMENT_TIME_MSEC;
     }
-    params.user_id = await this.getOrCreateClientId();
     params.version = chrome.runtime.getManifest().version;
     try {
       await fetch(`${this.debug ? GA_DEBUG_ENDPOINT : GA_ENDPOINT}?measurement_id=${this.MEASUREMENT_ID}&api_secret=${this.API_SECRET}`, {
         method: 'POST',
         body: JSON.stringify({
           client_id: await this.getOrCreateClientId(),
+          user_id: await this.getOrCreateClientId(),
           events: [
             {
               name,
