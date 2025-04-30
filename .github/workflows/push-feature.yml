@@ -6,7 +6,6 @@ on:
 jobs:
   main:
     name: Check
-    environment: Development
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
