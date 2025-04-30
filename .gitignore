@@ -49,3 +49,7 @@ apps/acf-extension/assets/LOCAL/icons/*
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
 test-output
+
+
+#Ignore vscode AI rules
+.github/copilot-instructions.md
