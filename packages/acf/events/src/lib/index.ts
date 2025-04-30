@@ -7,6 +7,7 @@ import { CopyEvents } from './copy.events';
 import { ElementEvents } from './element.events';
 import { FormEvents } from './form.events';
 import { FuncEvents } from './func.events';
+import { HistoryCommandEvents } from './history-command.events';
 import { KeyEvents } from './key.events';
 import { KeyboardEvents } from './keyboard.events';
 import { LocationCommandEvents } from './location-command.events';
@@ -90,6 +91,9 @@ export const Events = (() => {
           break;
         case EVENTS.ELEMENT:
           ElementEvents.start(elements, value);
+          break;
+        case EVENTS.HISTORY_COMMAND:
+          HistoryCommandEvents.start(value);
           break;
         default:
           PlainEvents.start(elements, value);

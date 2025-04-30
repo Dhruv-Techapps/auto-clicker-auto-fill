@@ -122,6 +122,7 @@ export const EVENTS = {
   PASTE: 'paste',
   WINDOW_COMMAND: 'windowcommand',
   LOCATION_COMMAND: 'locationcommand',
+  HISTORY_COMMAND: 'historycommand',
   FUNC: 'func',
   REPLACE: 'replace',
   APPEND: 'append',

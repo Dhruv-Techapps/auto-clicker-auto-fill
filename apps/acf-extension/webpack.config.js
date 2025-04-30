@@ -49,11 +49,13 @@ module.exports = composePlugins(
       });
       config.module.rules[2].options.cacheDirectory = path.resolve(options.root, 'node_modules/.cache/babel-loader');
     }
+
+    const watch = process.argv.includes('--watch') || process.argv.includes('-w');
     config.plugins.push(
       new CopyPlugin({
         patterns: [
           { from: `**/messages.json`, to: './_locales', context: `${options.root}/apps/acf-i18n/src/locales` },
-          { from: path.join(__dirname, 'assets', config.watch || !process.env.VITE_PUBLIC_VARIANT ? 'DEV' : process.env.VITE_PUBLIC_VARIANT), to: './assets' },
+          { from: path.join(__dirname, 'assets', watch ? 'DEV' : process.env.VITE_PUBLIC_VARIANT), to: './assets' },
           { from: `./*.html`, to: './html', context: 'src/wizard/popup' },
           { from: `./*.html`, to: './', context: 'src/devtools' },
           { from: `./*.html`, to: './html', context: '../../packages/shared/sandbox/src/lib' },

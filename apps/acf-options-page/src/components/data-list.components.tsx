@@ -159,6 +159,16 @@ export function DataList() {
         <option value='LocationCommand::replace::url'>LocationCommand::replace::url</option>
         <option value='LocationCommand::assign::url'>LocationCommand::assign::url</option>
         <option value='LocationCommand::open::https://getautoclicker.com'>LocationCommand::open::https://getautoclicker.com</option>
+        <option value='HistoryCommand::back'>HistoryCommand::back</option>
+        <option value='HistoryCommand::forward'>HistoryCommand::forward</option>
+        <option value='HistoryCommand::go::-1'>HistoryCommand::go::-1</option>
+        <option value='HistoryCommand::go::1'>HistoryCommand::go::1</option>
+        <option value='HistoryCommand::pushState::{"state":{},"title":"","url":"https://test.getautoclicker.com/"}'>
+          HistoryCommand::pushState::&#123;&quot;state&quot;:&#123;&#125;,&quot;title&quot;:&quot;&quot;,&quot;url&quot;:&quot;https://test.getautoclicker.com/&quot;&#125;
+        </option>
+        <option value='HistoryCommand::replaceState::{"state":{},"title":"","url":"https://test.getautoclicker.com/"}'>
+          HistoryCommand::replaceState::&#123;&quot;state&quot;:&#123;&#125;,&quot;title&quot;:&quot;&quot;,&quot;url&quot;:&quot;https://test.getautoclicker.com/&quot;&#125;
+        </option>
         <option value='Tabs::reload'>Tabs::reload</option>
         <option value='Tabs::update::{"url":"https://test.getautoclicker.com/"}'>Tabs::update::&#123;"url":"https://test.getautoclicker.com/"&#123;</option>
         <option value='WindowCommand::close'>WindowCommand::close</option>
