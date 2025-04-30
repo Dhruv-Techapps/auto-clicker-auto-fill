@@ -18,17 +18,7 @@
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
-        "build": {
-          "targetName": "build",
-          "configName": "tsconfig.lib.json",
-          "buildDepsName": "build-deps",
-          "watchDepsName": "watch-deps"
-        }
-      }
+      "options": { "typecheck": { "targetName": "typecheck" }, "build": { "targetName": "build", "configName": "tsconfig.lib.json", "buildDepsName": "build-deps", "watchDepsName": "watch-deps" } }
     },
     {
       "plugin": "@nx/react/router-plugin",
@@ -41,12 +31,7 @@
         "typecheckTargetName": "typecheck"
       }
     },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
     {
       "plugin": "@nx/vite/plugin",
       "options": {
@@ -61,67 +46,23 @@
         "watchDepsTargetName": "watch-deps"
       }
     },
-    {
-      "plugin": "@nx/cypress/plugin",
-      "options": {
-        "targetName": "e2e",
-        "openTargetName": "open-cypress",
-        "componentTestingTargetName": "component-test",
-        "ciTargetName": "e2e-ci"
-      }
-    },
+    { "plugin": "@nx/cypress/plugin", "options": { "targetName": "e2e", "openTargetName": "open-cypress", "componentTestingTargetName": "component-test", "ciTargetName": "e2e-ci" } },
     {
       "plugin": "@nx/webpack/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "serveTargetName": "serve",
-        "previewTargetName": "preview",
-        "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps"
-      }
+      "options": { "buildTargetName": "build", "serveTargetName": "serve", "previewTargetName": "preview", "buildDepsTargetName": "build-deps", "watchDepsTargetName": "watch-deps" }
     }
   ],
   "targetDefaults": {
-    "test": {
-      "dependsOn": ["^build"]
-    },
-    "e2e-ci--**/*": {
-      "dependsOn": ["^build"]
-    },
-    "@nx/js:swc": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
-    }
+    "test": { "dependsOn": ["^build"] },
+    "e2e-ci--**/*": { "dependsOn": ["^build"] },
+    "@nx/js:swc": { "cache": true, "dependsOn": ["^build"], "inputs": ["production", "^production"] }
   },
   "generators": {
-    "@nx/react": {
-      "application": {
-        "babel": true,
-        "style": "scss",
-        "linter": "eslint",
-        "bundler": "vite"
-      },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
-    },
-    "@nx/web:application": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "none",
-      "e2eTestRunner": "none"
-    }
+    "@nx/react": { "application": { "babel": true, "style": "scss", "linter": "eslint", "bundler": "vite" }, "component": { "style": "scss" }, "library": { "style": "scss", "linter": "eslint" } },
+    "@nx/web:application": { "style": "css", "linter": "eslint", "unitTestRunner": "none", "e2eTestRunner": "none" }
   },
   "release": {
-    "git": {
-      "commitMessage": "chore(release): release ${version}",
-      "push": true
-    },
+    "git": { "commitMessage": "chore(release): release ${version}", "push": true },
     "projects": [
       "core-common",
       "core-extension",
@@ -150,15 +91,8 @@
       "vision",
       "openai"
     ],
-    "changelog": {
-      "workspaceChangelog": {
-        "file": false,
-        "createRelease": "github"
-      }
-    },
-    "version": {
-      "preVersionCommand": "npx nx run-many --targets=lint,test,build"
-    }
+    "changelog": { "workspaceChangelog": { "file": false, "createRelease": "github" } },
+    "version": { "preVersionCommand": "npx nx run-many --targets=lint,test,build" }
   },
-  "nxCloudId": "672a30de5dd6176980bcbdbf"
+  "nxCloudId": "681267b172b61fd02e1e2666"
 }
