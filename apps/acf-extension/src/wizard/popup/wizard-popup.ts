@@ -17,21 +17,21 @@ export class AutoClickerAutoFillPopup extends HTMLElement {
   }
 
   setI18n() {
-    const docsTestElement = this.shadowRoot?.querySelector('#docs-text');
-    const chatTestElement = this.shadowRoot?.querySelector('#chat-text');
-    const advanceTestElement = this.shadowRoot?.querySelector('#advance-text');
-    const sponsorElement = this.shadowRoot?.querySelector('#sponsor-text');
+    const docsTestElement = this.shadowRoot?.querySelector('#docs-text') as HTMLElement;
+    const chatTestElement = this.shadowRoot?.querySelector('#chat-text') as HTMLElement;
+    const advanceTestElement = this.shadowRoot?.querySelector('#advance-text') as HTMLElement;
+    const sponsorElement = this.shadowRoot?.querySelector('#sponsor-text') as HTMLElement;
     if (docsTestElement) {
-      docsTestElement.innerHTML = chrome.i18n.getMessage('@DOCS');
+      docsTestElement.innerText = chrome.i18n.getMessage('@DOCS');
     }
     if (chatTestElement) {
-      chatTestElement.innerHTML = chrome.i18n.getMessage('@CHAT');
+      chatTestElement.innerText = chrome.i18n.getMessage('@CHAT');
     }
     if (advanceTestElement) {
-      advanceTestElement.innerHTML = chrome.i18n.getMessage('@ADVANCE');
+      advanceTestElement.innerText = chrome.i18n.getMessage('@ADVANCE');
     }
     if (sponsorElement) {
-      sponsorElement.innerHTML = chrome.i18n.getMessage('@SPONSOR');
+      sponsorElement.innerText = chrome.i18n.getMessage('@SPONSOR');
     }
   }
 
@@ -120,17 +120,17 @@ export class AutoClickerAutoFillPopup extends HTMLElement {
       (this.shadowRoot?.querySelector('slot[name="no-actions"]') as HTMLSlotElement).hidden = true;
       const tbody = this.shadowRoot?.querySelector('tbody');
       if (tbody) {
-        tbody.innerHTML = '';
+        tbody.innerText = '';
         actions.forEach(({ name, value, elementFinder, elementValue }, index) => {
           const tr = (document.getElementById('auto-clicker-autofill-popup-tr') as HTMLTemplateElement).content.cloneNode(true) as HTMLTableRowElement;
           const tds = tr.querySelectorAll('td div') as NodeListOf<HTMLTableCellElement>;
           if (elementValue) {
             tds[0].innerText = `${name}::${elementValue}`;
           } else {
-            tds[0].innerText = name || elementFinder;
+            tds[0].innerText = name ?? elementFinder;
           }
           tr.children[0].setAttribute('title', elementFinder);
-          tds[1].innerHTML = value || '<span class="badge text-bg-secondary">Click</span>';
+          tds[1].innerText = value ?? 'Click';
           tr.querySelector('button')?.setAttribute('index', String(index));
           tbody.appendChild(tr);
         });
