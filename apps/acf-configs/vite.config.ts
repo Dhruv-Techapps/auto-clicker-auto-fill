@@ -56,8 +56,9 @@ export default defineConfig(() => ({
     includeSource: ['src/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
     coverage: {
+      reporter: ['lcov'],
       reportsDirectory: './test-output/vitest/coverage',
-      provider: 'v8' as const
+      provider: 'istanbul' as const
     }
   }
 }));
