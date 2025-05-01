@@ -44,7 +44,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: ${{github.repository_owner}}
           cache: 'npm'
-      - uses: nrwl/nx-set-shas@v3
+      - uses: nrwl/nx-set-shas@v4
       - run: npm ci
       - run: npx nx report
       - name: Build Options Page

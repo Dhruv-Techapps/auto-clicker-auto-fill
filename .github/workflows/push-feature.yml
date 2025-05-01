@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: nrwl/nx-set-shas@v3
+      - uses: nrwl/nx-set-shas@v4
       - run: npm ci
       - run: npx nx report
       - run: npx nx format:check --verbose
