@@ -7,6 +7,5 @@ exclude_paths:
   - '**/**/project.json'
   - '**/**/tsconfig.*.json'
   - '**/**/webpack.config.js'
-  - 'update.sh'
-  - 'remove.sh'
+  - 'scripts/*'
   - 'userscripts/*'

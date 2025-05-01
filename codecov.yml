@@ -10,7 +10,7 @@ coverage:
   # Define paths to include or exclude for coverage
   paths:
     - apps/*                  # Adjust paths based on your monorepo structure
-    - libs/*             # Example for libraries directory
+    - packages/*             # Example for libraries directory
   status:
     project:
       # Configure status check for each app and library in the monorepo
