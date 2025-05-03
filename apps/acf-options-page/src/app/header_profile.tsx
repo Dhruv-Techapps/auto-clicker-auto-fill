@@ -22,7 +22,7 @@ export const HeaderProfile = () => {
           ) : (
             <>
               <ul className='text-start'>
-                <li>By switching your profile to public, you will gain unlimited access to cloud services (google sheets). </li>
+                <li>By switching your profile to public, you will gain 300 access to cloud services (google sheets). </li>
                 <li>We will also sync your configurations to our server to help train our AI services and make your configurations searchable and usable for other users. </li>
               </ul>
               <i>Rest assured, all data will be encrypted before syncing to ensure your privacy and security.</i>

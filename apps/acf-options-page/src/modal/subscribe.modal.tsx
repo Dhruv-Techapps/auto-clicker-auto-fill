@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Button, ButtonGroup, Card, CardBody, Col, Form, Modal, Row, ToggleButton } from 'react-bootstrap';
+import { Button, Card, CardBody, Col, Form, Modal, Row } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 import { subscribeSelector, switchSubscribeModal } from '../store/subscribe';
 
 import * as React from 'react';
-import { AwardFill, Discord, Fire, Star } from '../util';
+import { AwardFill, Discord, Star } from '../util';
 
 declare global {
   namespace JSX {
@@ -16,7 +16,6 @@ declare global {
 }
 const SubscribeModal = () => {
   const { visible, isSubscribing } = useAppSelector(subscribeSelector);
-  const [yearly, setYearly] = React.useState('year');
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
@@ -31,39 +30,20 @@ const SubscribeModal = () => {
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col xs={12} className='d-flex justify-content-center mb-3'>
-              <ButtonGroup>
-                <ToggleButton variant='outline-secondary' id='month' type='radio' value='month' checked={yearly === 'month'} className='px-5 py-2' onChange={() => setYearly('month')}>
-                  Monthly
-                </ToggleButton>
-                <ToggleButton variant='outline-primary' id='yearly' type='radio' value='yearly' checked={yearly === 'year'} className='px-5 py-2' onChange={() => setYearly('year')}>
-                  Yearly
-                </ToggleButton>
-              </ButtonGroup>
-            </Col>
-            <Col className='d-flex justify-content-center mb-3 text-danger'>
-              {yearly === 'month' && (
-                <div>
-                  <Fire /> Save 2 months on yearly subscription
-                </div>
-              )}
-            </Col>
-          </Row>
-          <Row>
             <Col>
               <Card style={{ height: '100%' }}>
                 <CardBody className='d-flex row-gap-3 flex-column '>
                   <h5>Pro subscription</h5>
                   <div>
                     <div className='d-flex align-items-center'>
-                      <h1 className='m-0 me-2'>{yearly === 'year' ? '100' : '10'}$</h1>
+                      <h1 className='m-0 me-2'>10$</h1>
                       <small className='text-grey'>
                         per
                         <br />
-                        {yearly}
+                        month
                       </small>
                     </div>
-                    <Button variant='primary' target='_blank' href='https://getautoclicker.com/docs/4.x/about/subscription/' disabled={isSubscribing} className='px-5 py-2 mt-3 w-100'>
+                    <Button variant='primary' target='_blank' href='https://github.com/sponsors/Dhruv-Techapps' disabled={isSubscribing} className='px-5 py-2 mt-3 w-100'>
                       {isSubscribing && <span className='spinner-border spinner-border-sm me-3' aria-hidden='true'></span>}
                       Upgrade to Pro
                     </Button>

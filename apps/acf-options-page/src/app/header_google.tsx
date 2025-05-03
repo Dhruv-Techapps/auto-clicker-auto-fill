@@ -3,7 +3,7 @@ import { firebaseFirestoreSelector, firebaseLogoutAPI, firebaseSelector, switchF
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { switchSubscribeModal } from '../store/subscribe';
 import { LockFill } from '../util';
-import { HeaderProfile } from './header_porfile';
+import { HeaderProfile } from './header_profile';
 
 export const HeaderGoogle = () => {
   const dispatch = useAppDispatch();

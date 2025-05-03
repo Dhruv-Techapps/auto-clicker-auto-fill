@@ -41,7 +41,7 @@ function Header() {
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
 
-  const changeLanguage = async (lng) => {
+  const changeLanguage = async (lng: string) => {
     await i18n.changeLanguage(lng);
     document.documentElement.lang = lng;
     localStorage.setItem('language', lng);
