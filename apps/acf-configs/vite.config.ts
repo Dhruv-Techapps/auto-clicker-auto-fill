@@ -14,7 +14,14 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/apps/acf-configs',
   server: {
     port: 4200,
-    host: 'localhost'
+    host: 'localhost',
+    proxy: {
+      '/locales': {
+        target: 'http://localhost:3333',
+        secure: false,
+        changeOrigin: true
+      }
+    }
   },
   preview: {
     port: 4300,

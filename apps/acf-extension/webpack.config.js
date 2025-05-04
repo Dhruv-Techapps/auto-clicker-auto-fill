@@ -40,7 +40,8 @@ module.exports = composePlugins(
       wizard: './src/wizard/index.ts',
       'wizard-popup': ['./src/wizard/popup/wizard-popup.ts', './src/wizard/popup/wizard-popup.scss'],
       devtools: './src/devtools/index.ts',
-      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss'
+      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss',
+      configs: './src/configs/index.ts'
     };
     if (config.module.rules) {
       config.module.rules.push({

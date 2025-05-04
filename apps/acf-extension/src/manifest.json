@@ -42,6 +42,11 @@
       "css": ["css/wizard-popup.min.css"],
       "js": ["webcomponents/webcomponents-bundle.js", "wizard-popup.js", "wizard.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["https://configs.getautoclicker.com/config/*"],
+      "js": ["configs.js"],
+      "run_at": "document_idle"
     }
   ],
   "externally_connectable": {

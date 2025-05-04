@@ -26,7 +26,7 @@ function Footer() {
                 <span className={`${import.meta.env.VITE_PUBLIC_VARIANT} ms-2`}>[{import.meta.env.VITE_PUBLIC_VARIANT}]</span>
               </h6>
               <div className='text-muted'>
-                <small>© 2017 - 2024</small>
+                <small>© 2017 - 2025</small>
                 <br />
                 <small id='extension-version'>☘ v{manifest?.version}</small>
                 <br />

@@ -1,5 +1,4 @@
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
-import 'instantsearch.css/themes/satellite.css';
 import { Breadcrumb, Configure, Hits, HitsPerPage, InstantSearch, Pagination, PoweredBy, SearchBox, SortBy } from 'react-instantsearch';
 import { Hit } from './hits';
 

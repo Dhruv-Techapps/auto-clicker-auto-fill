@@ -7,16 +7,17 @@ type HitProps = {
     name: string;
     url: string;
     price: number;
+    userName: string;
   }>;
 };
 
 export const Hit = ({ hit }: HitProps) => {
   return (
     <Link
-      className='d-flex p-4 w-100 flex-column'
+      className='d-flex p-2 w-100 flex-column'
       to={{
         pathname: `/config/${hit.objectID}`,
-        search: `?queryID=${hit.__queryID}`,
+        search: `?queryID=${hit.__queryID}`
       }}
     >
       <article className='d-flex'>
@@ -28,6 +29,7 @@ export const Hit = ({ hit }: HitProps) => {
           <p className='Hit-price'>
             <Highlight attribute='url' hit={hit} />
           </p>
+          {hit.userName && <i>-- {hit.userName}</i>}
         </div>
       </article>
     </Link>

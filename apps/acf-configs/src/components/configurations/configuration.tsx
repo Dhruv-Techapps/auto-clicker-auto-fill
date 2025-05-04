@@ -57,6 +57,8 @@ export const Configuration: React.FC<{ configId?: string }> = ({ configId }) => 
           {!loading && config && (
             <div>
               <h1>{config.name ?? 'Configuration'}</h1>
+              <input type='hidden' value={config.userId} name='locationId' />
+              <input type='hidden' value={id} name='fileId' />
               {file && (
                 <table className='table table-bordered'>
                   <tbody>
@@ -128,7 +130,7 @@ export const Configuration: React.FC<{ configId?: string }> = ({ configId }) => 
                 <div className='mb-4'>
                   Tags:
                   {config.tags.map((tag) => (
-                    <Badge bg='secondary' className='ms-2'>
+                    <Badge bg='secondary' key={tag} className='ms-2'>
                       {tag}
                     </Badge>
                   ))}

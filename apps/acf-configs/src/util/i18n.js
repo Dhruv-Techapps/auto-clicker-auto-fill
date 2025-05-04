@@ -22,12 +22,12 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     fallbackLng: 'en',
-    ns: 'web-new',
+    ns: 'web',
     debug: false,
-    defaultNS: 'web-new',
+    defaultNS: 'web',
     lng,
     backend: {
-      loadPath: `https://static.getautoclicker.com/acf-i18n/{{lng}}/{{ns}}.json`,
+      loadPath: `${import.meta.env.VITE_PUBLIC_I18N}/{{lng}}/{{ns}}.json`,
       addPath: '/locales/add/{{lng}}/{{ns}}',
       allowMultiLoading: true,
       reloadInterval: false,

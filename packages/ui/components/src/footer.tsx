@@ -17,12 +17,12 @@ export function Footer() {
             <div className='d-inline-flex flex-column'>
               <h6 className='text-secondary mb-0'>
                 {t('common.appName')}
-                <span className={`${process.env.VITE_PUBLIC_VARIANT} ms-2`}>[{process.env.VITE_PUBLIC_VARIANT}]</span>
+                <span className={`${import.meta.env.VITE_PUBLIC_VARIANT} ms-2`}>[{import.meta.env.VITE_PUBLIC_VARIANT}]</span>
               </h6>
               <div className='text-muted'>
-                <small>© 2017 - 2024</small>
+                <small>© 2017 - 2025</small>
                 <br />
-                <small id='web-version'>☯ {process.env.VITE_PUBLIC_RELEASE_VERSION}</small>
+                <small id='web-version'>☯ {import.meta.env.VITE_PUBLIC_RELEASE_VERSION}</small>
               </div>
             </div>
           </Col>
