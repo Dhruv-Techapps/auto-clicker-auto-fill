@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy [Extension & Options Page]
 run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }} on ${{ inputs.version || github.ref_name }}
 
 on:

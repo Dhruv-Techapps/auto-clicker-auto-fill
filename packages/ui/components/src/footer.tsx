@@ -1,3 +1,4 @@
+import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ChatFill, Facebook, ShieldCheck, Star, Twitter, Whatsapp } from './assets/svg';
@@ -9,7 +10,7 @@ export function Footer() {
   const imageURL = 'https://getautoclicker.com/favicons/favicon48.png';
 
   return (
-    <footer className='pt-3 mt-3 mt-md-3 pt-md-3 border-top'>
+    <footer className='pt-3 mt-3 mt-md-3 pt-md-3 border-top' data-version={React.version}>
       <Container>
         <Row>
           <Col md xs={12} className='mb-3'>
