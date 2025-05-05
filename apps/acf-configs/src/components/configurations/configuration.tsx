@@ -1,12 +1,13 @@
 import { Configuration as ConfigurationType } from '@dhruv-techapps/acf-common';
 import React, { useEffect } from 'react';
-import { Badge, Button } from 'react-bootstrap';
+import { Alert, Badge, Button } from 'react-bootstrap';
 import { useParams, useSearchParams } from 'react-router-dom';
 import JsonView from 'react18-json-view';
 import 'react18-json-view/src/style.css';
 import { ConfigType, getConfig } from '../../database';
 import { downloadFile } from '../../storage';
 import { download } from '../../util/common';
+import { EXTENSIONS } from '../../util/constant';
 
 export const Configuration: React.FC<{ configId?: string }> = ({ configId }) => {
   let { id } = useParams();
@@ -15,6 +16,8 @@ export const Configuration: React.FC<{ configId?: string }> = ({ configId }) => 
   const [file, setFile] = React.useState<ConfigurationType>();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
+  const [extensionError, setExtensionError] = React.useState<string | null>(null);
+  const [extensionMessage, setExtensionMessage] = React.useState<string | null>(null);
 
   if (configId) {
     id = configId;
@@ -37,6 +40,30 @@ export const Configuration: React.FC<{ configId?: string }> = ({ configId }) => 
         });
     }
   }, [id]);
+
+  const onExtensionClick = (extensionId: string) => {
+    chrome.runtime
+      .sendMessage(extensionId, { messenger: 'configs', methodName: 'exists', message: id })
+      .then(({ result, error }) => {
+        if (error) {
+          setExtensionError('Error while checking configuration');
+          return;
+        }
+        if (!result) {
+          chrome.runtime
+            .sendMessage(extensionId, { messenger: 'configs', methodName: 'install', message: file })
+            .then(({ result }) => {
+              if (result === 'done') {
+                setExtensionMessage('Configuration installed successfully');
+              }
+            })
+            .catch(console.error);
+        } else {
+          setExtensionError('Configuration already exists in this extension');
+        }
+      })
+      .catch(console.error);
+  };
 
   const onDownloadClick = () => {
     if (file && id) {
@@ -142,6 +169,25 @@ export const Configuration: React.FC<{ configId?: string }> = ({ configId }) => 
                     <Button variant='success' onClick={onDownloadClick}>
                       Download JSON
                     </Button>
+                    {EXTENSIONS.filter((extension) => extension.version).map(({ id, name }) => (
+                      <Button key={id} variant='primary' className='mx-2' onClick={() => onExtensionClick(id)}>
+                        {name}
+                      </Button>
+                    ))}
+                  </div>
+                  <div>
+                    {extensionError && (
+                      <Alert variant='danger' dismissible>
+                        {extensionError}
+                      </Alert>
+                    )}
+                  </div>
+                  <div>
+                    {extensionMessage && (
+                      <Alert variant='success' dismissible>
+                        {extensionMessage}
+                      </Alert>
+                    )}
                   </div>
                   <JsonView src={file} enableClipboard={false} style={{ minWidth: '1300px' }} />
                 </>

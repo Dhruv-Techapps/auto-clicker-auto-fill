@@ -1,3 +1,5 @@
+/// <reference types="chrome"/>
+
 import { ThemeProvider } from '@dhruv-techapps/ui-context';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';

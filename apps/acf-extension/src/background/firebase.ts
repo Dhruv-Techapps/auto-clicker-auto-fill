@@ -8,7 +8,7 @@ const firebase = initializeApp({
   apiKey: FIREBASE_API_KEY,
   projectId: FIREBASE_PROJECT_ID,
   databaseURL: FIREBASE_DATABASE_URL,
-  storageBucket: FIREBASE_BUCKET,
+  storageBucket: FIREBASE_BUCKET
 });
 firebase.automaticDataCollectionEnabled = false;
 const auth = getAuth(firebase);
