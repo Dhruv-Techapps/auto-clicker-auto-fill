@@ -23,7 +23,6 @@ import { AcfSchedule } from './acf-schedule';
 import registerContextMenus from './context-menu';
 import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
-import { SyncConfig } from './sync-config';
 import { TabsMessenger } from './tab';
 
 self['XMLHttpRequest'] = XMLHttpRequest;
@@ -72,31 +71,6 @@ try {
         }
       );
     }*/
-  });
-
-  /**
-   * On startup check if user is logged in and sync config
-   * If user is not logged in then do nothing
-   * If user is logged in then sync config
-   * If user is logged in and last backup is more than 7 days then sync config
-   * Set last backup time in local storage
-   */
-  chrome.runtime.onStartup.addListener(() => {
-    auth.authStateReady().then(() => {
-      new FirebaseFirestoreBackground(auth).getProfile().then((profile) => {
-        if (profile) {
-          chrome.storage.local.get('last-backup', (result) => {
-            if (result['last-backup'] === undefined) {
-              new SyncConfig(auth).syncConfig(false);
-              chrome.storage.local.set({ 'last-backup': Date.now() });
-            } else if (Date.now() - result['last-backup'] > 604800000) {
-              new SyncConfig(auth).syncConfig(true);
-              chrome.storage.local.set({ 'last-backup': Date.now() });
-            }
-          });
-        }
-      });
-    });
   });
 
   /**

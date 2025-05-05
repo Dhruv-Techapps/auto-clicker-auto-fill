@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import appReducer from './app.slice';
 import { blogReducer } from './blog';
 import { configReducers, configsListenerMiddleware, configsToastListenerMiddleware } from './config';
-import { firebaseFirestoreReducer, firebaseReducer } from './firebase';
+import { firebaseReducer } from './firebase';
 import { googleDriveReducer, googleReducer } from './google';
 import { settingsListenerMiddleware, settingsReducer } from './settings';
 import { subscribeReducer } from './subscribe';
@@ -19,7 +19,6 @@ export const store = configureStore({
     google: googleReducer,
     googleDrive: googleDriveReducer,
     firebase: firebaseReducer,
-    firebaseFirestore: firebaseFirestoreReducer,
     subscribe: subscribeReducer,
     ...configReducers
   },

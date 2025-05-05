@@ -8,7 +8,7 @@ import { LoginModal } from '../modal/login.modal';
 import { SubscribeModal } from '../modal/subscribe.modal';
 import { getManifest } from '../store/app.api';
 import { appSelector } from '../store/app.slice';
-import { firebaseIsLoginAPI, firebaseSelector, profileGetAPI } from '../store/firebase';
+import { firebaseIsLoginAPI, firebaseSelector } from '../store/firebase';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import Configs from './configs/configs';
 import Header from './header';
@@ -28,12 +28,6 @@ function App() {
       outerHeight: window.outerHeight
     });
   }, [dispatch]);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(profileGetAPI());
-    }
-  }, [user, dispatch]);
 
   const onCloseAlert = () => {
     setShow(false);

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { SettingsModal } from '../modal';
-import { firebaseFirestoreSelector, firebaseSelector } from '../store/firebase';
+import { firebaseSelector } from '../store/firebase';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { switchSettingsModal } from '../store/settings/settings.slice';
 import { switchTheme, themeSelector } from '../store/theme.slice';
@@ -16,7 +16,6 @@ function Header() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const theme = useAppSelector(themeSelector);
-  const { profile } = useAppSelector(firebaseFirestoreSelector);
   const { role } = useAppSelector(firebaseSelector);
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
@@ -69,11 +68,6 @@ function Header() {
               {role.toUpperCase()}
             </Badge>
           )}
-          {profile && (
-            <Badge bg='success' className='ms-2'>
-              PUBLIC
-            </Badge>
-          )}
         </Navbar.Brand>
         <div className='d-flex'>
           <Navbar.Toggle aria-controls='basic-navbar-nav' onClick={handleShow}>
@@ -101,11 +95,6 @@ function Header() {
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <Nav.Link target='_blank' rel='noopener noreferrer' title='discussion' href={APP_LINK.DISCUSSIONS}>
                   {t('footer.discussion')}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item as='li' className='col-6 col-lg-auto'>
-                <Nav.Link target='_blank' rel='noopener noreferrer' title='configuration' href={APP_LINK.CONFIGS} className='rainbow-text'>
-                  {t('footer.configuration')} (new)
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as='li' className='col-6 col-lg-auto'>
