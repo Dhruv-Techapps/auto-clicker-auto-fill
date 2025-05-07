@@ -13,7 +13,7 @@ type FirebaseStore = {
   role?: FirebaseRole;
 };
 
-const initialState: FirebaseStore = { visible: false, isLoading: false };
+const initialState: FirebaseStore = { visible: false, isLoading: true };
 
 const slice = createSlice({
   name: 'firebase',
@@ -40,9 +40,11 @@ const slice = createSlice({
         state.role = action.payload.role;
         Sentry.setUser({ id: action.payload.user.uid });
       }
+      state.isLoading = false;
     });
     builder.addCase(firebaseIsLoginAPI.rejected, (state, action) => {
       state.error = action.error.message;
+      state.isLoading = false;
       Sentry.captureException(state.error);
     });
     builder.addCase(firebaseLoginAPI.pending, (state) => {
