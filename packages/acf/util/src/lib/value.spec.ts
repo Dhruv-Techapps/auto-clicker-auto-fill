@@ -61,3 +61,44 @@ describe('getValue', () => {
     window.history.replaceState({}, '', `${window.location.pathname}${originalSearch}`);
   });
 });
+describe('validateQueryParam', () => {
+  const { validateQueryParam } = Value;
+
+  it('should return true for valid key and value', () => {
+    expect(validateQueryParam('param1', 'value1')).toBe(true);
+    expect(validateQueryParam('key_2', 'value-2')).toBe(true);
+    expect(validateQueryParam('key%20', 'value_3')).toBe(true);
+    expect(validateQueryParam('key-4', 'value 4')).toBe(true);
+    expect(validateQueryParam('A', 'B')).toBe(true);
+    expect(validateQueryParam('abcDEF123', '456XYZ')).toBe(true);
+  });
+
+  it('should return false for invalid key', () => {
+    expect(validateQueryParam('param!', 'value1')).toBe(false);
+    expect(validateQueryParam('key$', 'value2')).toBe(false);
+    expect(validateQueryParam('key@', 'value3')).toBe(false);
+    expect(validateQueryParam('key<', 'value4')).toBe(false);
+    expect(validateQueryParam('key>', 'value5')).toBe(false);
+  });
+
+  it('should return false for invalid value', () => {
+    expect(validateQueryParam('param1', 'value!')).toBe(false);
+    expect(validateQueryParam('param2', 'value@')).toBe(false);
+    expect(validateQueryParam('param3', 'value<')).toBe(false);
+    expect(validateQueryParam('param4', 'value>')).toBe(false);
+    expect(validateQueryParam('param5', 'value/')).toBe(false);
+  });
+
+  it('should return false if either key or value contains script tags', () => {
+    expect(validateQueryParam('<script>', 'value')).toBe(false);
+    expect(validateQueryParam('key', '<script>')).toBe(false);
+    expect(validateQueryParam('key', 'value<script>alert(1)</script>')).toBe(false);
+    expect(validateQueryParam('key<script>', 'value')).toBe(false);
+  });
+
+  it('should return false for empty key or value', () => {
+    expect(validateQueryParam('', 'value')).toBe(false);
+    expect(validateQueryParam('key', '')).toBe(false);
+    expect(validateQueryParam('', '')).toBe(false);
+  });
+});

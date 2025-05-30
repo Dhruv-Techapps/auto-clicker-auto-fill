@@ -46,7 +46,7 @@ export const Value = (() => {
   };
 
   const validateQueryParam = (key: string, value: string): boolean => {
-    const pattern = /^[a-zA-Z0-9_-]+$/;
+    const pattern = /^[a-zA-Z0-9_%\- ]+$/;
     return pattern.test(key) && pattern.test(value);
   };
 
@@ -130,5 +130,5 @@ export const Value = (() => {
     return value;
   };
 
-  return { getValue, getBatchRepeat, getActionRepeat, getSessionCount };
+  return { getValue, getBatchRepeat, getActionRepeat, getSessionCount, validateQueryParam };
 })();
