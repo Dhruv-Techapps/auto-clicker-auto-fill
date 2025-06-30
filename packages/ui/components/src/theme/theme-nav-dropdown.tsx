@@ -1,11 +1,11 @@
-import { getStoredTheme, ThemeContext, TTheme } from '@dhruv-techapps/ui-context';
+import { getStoredTheme, ThemeContext, tTheme } from '@dhruv-techapps/ui-context';
 import { useContext, useState } from 'react';
 
 export const ThemeNavDropdown = () => {
   const [theme, setTheme] = useState(getStoredTheme());
   const { updateTheme } = useContext(ThemeContext);
 
-  const onClickTheme = (theme: TTheme | null) => {
+  const onClickTheme = (theme: tTheme | null) => {
     setTheme(theme);
     updateTheme(theme);
   };

@@ -1,4 +1,4 @@
-import { getStoredTheme, ThemeContext } from '@dhruv-techapps/ui-context';
+import { getStoredTheme, ThemeContext, tTheme } from '@dhruv-techapps/ui-context';
 import { useContext, useState } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
@@ -12,7 +12,7 @@ export const ThemeButtonDropdown = (props: TThemeDropdownProps) => {
   const [theme, setTheme] = useState(getStoredTheme());
   const { updateTheme } = useContext(ThemeContext);
 
-  const onClickTheme = (theme: Theme | null) => {
+  const onClickTheme = (theme: tTheme | null) => {
     setTheme(theme);
     updateTheme(theme);
   };
