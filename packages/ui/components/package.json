@@ -18,12 +18,11 @@
     "dist",
     "!**/*.tsbuildinfo"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@swc/helpers": "~0.5.11",
-    "bootstrap-icons": "^1.13.1",
-    "react-bootstrap": "^2.10.9",
-    "react-i18next": "^15.4.1",
+    "@dhruv-techapps/ui-context": "0.0.1",
     "react": "19.0.0",
-    "@dhruv-techapps/ui-context": "0.0.1"
+    "react-bootstrap": "^2.10.9",
+    "react-i18next": "^15.4.1"
   }
 }

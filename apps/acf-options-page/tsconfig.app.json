@@ -50,6 +50,9 @@
       "path": "../../packages/shared/status-bar/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/ui/components/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/core/common/tsconfig.lib.json"
     },
     {

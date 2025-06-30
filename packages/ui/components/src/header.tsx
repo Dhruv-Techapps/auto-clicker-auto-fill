@@ -2,7 +2,6 @@ import { ThemeContext } from '@dhruv-techapps/ui-context';
 import React, { FC, PropsWithChildren, useContext, useState } from 'react';
 import { Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Github } from './assets/svg';
 import { APP_LANGUAGES, APP_LINK, SOCIAL_LINKS } from './constants';
 
 type HeaderProps = {
@@ -73,7 +72,7 @@ export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
               </Nav.Item>
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <Nav.Link target='_blank' rel='noopener noreferrer' title='github' href={SOCIAL_LINKS.GITHUB}>
-                  <Github />
+                  <i className='bi bi-github' />
                   <small className='d-lg-none ms-2'>{t('footer.github')}</small>
                 </Nav.Link>
               </Nav.Item>

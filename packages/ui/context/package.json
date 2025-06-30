@@ -18,8 +18,7 @@
     "dist",
     "!**/*.tsbuildinfo"
   ],
-  "dependencies": {
-    "@swc/helpers": "~0.5.11",
-    "react": "19.0.0"
+  "peerDependencies": {
+    "@swc/helpers": "~0.5.11"
   }
 }

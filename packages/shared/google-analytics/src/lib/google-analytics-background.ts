@@ -4,7 +4,11 @@ import { FireErrorEventParams, FireEventParams, FirePageViewEventParams } from '
 
 export class GoogleAnalyticsBackground {
   debug: boolean;
-  constructor(private readonly MEASUREMENT_ID?: string, private readonly API_SECRET?: string, debug = false) {
+  constructor(
+    private readonly MEASUREMENT_ID?: string,
+    private readonly API_SECRET?: string,
+    debug = false
+  ) {
     this.MEASUREMENT_ID = MEASUREMENT_ID;
     this.API_SECRET = API_SECRET;
     this.debug = debug;

@@ -17,7 +17,7 @@ const getConfigs = async () => {
 
 export class AcfSchedule {
   async check() {
-    const schedules: Array<IAlarmSchedule> = (await getConfigs()).filter((config) => config.schedule).map((config) => ({ id: config.id, schedule: config.schedule } as IAlarmSchedule));
+    const schedules: Array<IAlarmSchedule> = (await getConfigs()).filter((config) => config.schedule).map((config) => ({ id: config.id, schedule: config.schedule }) as IAlarmSchedule);
     for (const schedule of schedules) {
       const alarm = await chrome.alarms.get(schedule.id);
       if (!alarm) {
