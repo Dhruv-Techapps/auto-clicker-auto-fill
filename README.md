@@ -4,9 +4,9 @@ Auto click, fill, submit with AutoClicker
 
 Fill input field or click button or link anything anywhere. easy configure in few steps and work like PRO.
 
---- 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/53bda8a642194c29bb27326df9ed5823)](https://app.codacy.com/gh/Dhruv-Techapps/auto-clicker-auto-fill/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 ---
+
+## [![Codacy Badge](https://app.codacy.com/project/badge/Grade/53bda8a642194c29bb27326df9ed5823)](https://app.codacy.com/gh/Dhruv-Techapps/auto-clicker-auto-fill/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## Table of Contents
 

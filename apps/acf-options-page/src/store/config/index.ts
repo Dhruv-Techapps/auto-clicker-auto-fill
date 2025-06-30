@@ -22,5 +22,5 @@ export const configReducers = {
   configSettings: configSettingsReducer,
   schedule: scheduleReducer,
   batch: batchReducer,
-  ...actionReducers,
+  ...actionReducers
 };

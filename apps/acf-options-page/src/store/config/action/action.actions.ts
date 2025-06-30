@@ -106,5 +106,5 @@ export const actionActions = {
   },
   ...actionAddonActions,
   ...actionSettingsActions,
-  ...actionStatementActions,
+  ...actionStatementActions
 };

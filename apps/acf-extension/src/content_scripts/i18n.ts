@@ -11,7 +11,7 @@ export const I18N_COMMON = {
   ERROR: chrome.i18n.getMessage('@ERROR'),
   SCHEDULE: chrome.i18n.getMessage('@SCHEDULE'),
   CONDITION_SATISFIED: chrome.i18n.getMessage('@CONDITION_SATISFIED'),
-  CONDITION_NOT_SATISFIED: chrome.i18n.getMessage('@CONDITION_NOT_SATISFIED'),
+  CONDITION_NOT_SATISFIED: chrome.i18n.getMessage('@CONDITION_NOT_SATISFIED')
 };
 
 export const I18N_ERROR = {
@@ -26,5 +26,5 @@ export const I18N_ERROR = {
   NOT_FOUND_RELOAD: chrome.i18n.getMessage('@ERROR__NOT_FOUND_RELOAD'),
   ACTION_NOT_FOUND_FOR_GOTO: chrome.i18n.getMessage('@ERROR__ACTION_NOT_FOUND_FOR_GOTO'),
   NO_ELEMENT_FOUND: chrome.i18n.getMessage('@ERROR__NO_ELEMENT_FOUND'),
-  ACTION_CONDITION_CONFIG_ERROR: chrome.i18n.getMessage('@ERROR__ACTION_CONDITION_CONFIG_ERROR'),
+  ACTION_CONDITION_CONFIG_ERROR: chrome.i18n.getMessage('@ERROR__ACTION_CONDITION_CONFIG_ERROR')
 };

@@ -56,8 +56,8 @@ const slice = createSlice({
       } else {
         state.actions.push(action.payload);
       }
-    },
-  },
+    }
+  }
 });
 
 export const { removeWizardAction, updateAllWizardAction, updateWizardAction, updatedConfig } = slice.actions;

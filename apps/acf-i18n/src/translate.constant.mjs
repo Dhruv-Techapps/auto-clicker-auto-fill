@@ -13,7 +13,7 @@ const LANGUAGES = [
   { lang: 'ar', folder: 'ar' },
   { lang: 'it', folder: 'it' },
   { lang: 'ru', folder: 'ru' },
-  { lang: 'id', folder: 'id' },
+  { lang: 'id', folder: 'id' }
 ];
 
 export { LANGUAGES };

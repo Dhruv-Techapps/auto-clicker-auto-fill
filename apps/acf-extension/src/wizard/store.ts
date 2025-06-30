@@ -3,9 +3,9 @@ import { wizardReducer } from './store/slice';
 
 export const store = configureStore({
   reducer: {
-    wizard: wizardReducer,
+    wizard: wizardReducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

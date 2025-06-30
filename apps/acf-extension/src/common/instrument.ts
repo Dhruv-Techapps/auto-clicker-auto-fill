@@ -16,15 +16,15 @@ if (VARIANT === 'PROD' || VARIANT === 'LOCAL') {
       ...integrations,
       browserTracingIntegration(),
       captureConsoleIntegration({
-        levels: ['error', 'warn'],
-      }),
+        levels: ['error', 'warn']
+      })
     ],
     ignoreErrors: [
       'The browser is shutting down.',
       'Extension context invalidated.',
       'Could not establish connection. Receiving end does not exist.',
       'Non-Error promise rejection captured',
-      'unlabeled event',
+      'unlabeled event'
     ],
     release: `acf-extension@${RELEASE_VERSION?.replace('v', '')}`,
     sampleRate: 1,
@@ -35,7 +35,7 @@ if (VARIANT === 'PROD' || VARIANT === 'LOCAL') {
         return null;
       }
       return event;
-    },
+    }
   });
   scope.setClient(client);
   client.init(); // initializing has to be done after setting the client on the scope

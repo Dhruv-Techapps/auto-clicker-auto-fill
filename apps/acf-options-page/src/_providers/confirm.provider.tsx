@@ -22,7 +22,7 @@ const ConfirmationModalContextProvider: React.FC<ConfirmationModalContextProvide
     setContent({
       title,
       message,
-      headerClass,
+      headerClass
     });
     setShow(true);
     return new Promise(function (resolve) {
@@ -31,7 +31,7 @@ const ConfirmationModalContextProvider: React.FC<ConfirmationModalContextProvide
   };
 
   const modalContext: ModalContextType = {
-    showConfirmation: handleShow,
+    showConfirmation: handleShow
   };
 
   const handleOk = () => {

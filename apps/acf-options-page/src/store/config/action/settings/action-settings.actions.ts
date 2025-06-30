@@ -26,5 +26,5 @@ export const actionSettingsActions = {
       delete selectedAction.settings;
     }
     selectedConfig.updated = true;
-  },
+  }
 };

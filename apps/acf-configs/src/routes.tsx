@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
   {
     path: 'login',
     loader: loginLoader,
-    Component: Login,
+    Component: Login
   },
   {
     id: 'root',
@@ -21,13 +21,13 @@ export const router = createBrowserRouter([
       {
         index: true,
         //loader: protectedLoader,
-        Component: Search,
+        Component: Search
       },
       {
         path: '/config/:id/',
         loader: protectedLoader,
-        Component: Configuration,
-      },
-    ],
-  },
+        Component: Configuration
+      }
+    ]
+  }
 ]);

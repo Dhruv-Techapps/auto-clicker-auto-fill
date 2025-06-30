@@ -3,7 +3,7 @@ import { ConfigError } from '@dhruv-techapps/core-common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
 
 const ACTION_CONDITION_I18N = {
-  TITLE: chrome.i18n.getMessage('@ACTION_CONDITION__TITLE'),
+  TITLE: chrome.i18n.getMessage('@ACTION_CONDITION__TITLE')
 };
 
 const Statement = (() => {
@@ -14,7 +14,7 @@ const Statement = (() => {
     return conditions
       .map(({ actionId, status, operator }) => ({
         status: actions.find((action) => action.id === actionId)?.status === status,
-        operator,
+        operator
       }))
       .reduce((accumulator, currentValue) => {
         if (currentValue.operator === undefined) {

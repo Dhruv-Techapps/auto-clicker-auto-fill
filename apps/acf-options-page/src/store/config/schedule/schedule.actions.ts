@@ -20,5 +20,5 @@ export const scheduleActions = {
       delete selectedConfig.schedule;
     }
     selectedConfig.updated = true;
-  },
+  }
 };

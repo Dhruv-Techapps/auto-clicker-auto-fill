@@ -13,5 +13,5 @@ export const actionReducers = {
   action: actionReducer,
   actionAddon: actionAddonReducer,
   actionStatement: actionStatementReducer,
-  actionSettings: actionSettingsReducer,
+  actionSettings: actionSettingsReducer
 };

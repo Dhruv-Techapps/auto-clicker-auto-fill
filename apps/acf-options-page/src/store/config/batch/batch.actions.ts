@@ -33,5 +33,5 @@ export const batchActions = {
       batch.refresh = !batch.refresh;
     }
     config.updated = true;
-  },
+  }
 };

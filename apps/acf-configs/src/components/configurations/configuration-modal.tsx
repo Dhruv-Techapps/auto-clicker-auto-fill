@@ -21,7 +21,7 @@ export const ConfigurationModal = forwardRef<{ show: (configId: string) => void 
         setConfigId(_configId);
       }
       setShow(true);
-    },
+    }
   }));
 
   useEffect(() => {

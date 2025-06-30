@@ -26,5 +26,5 @@ export const actionAddonActions = {
       delete selectedAction.addon;
     }
     selectedConfig.updated = true;
-  },
+  }
 };
