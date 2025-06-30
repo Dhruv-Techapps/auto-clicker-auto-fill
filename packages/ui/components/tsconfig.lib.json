@@ -8,8 +8,7 @@
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"],
-    "jsx": "react-jsx"
+    "types": ["node"]
   },
   "include": ["src/**/*.[ts|tsx]"],
   "references": [

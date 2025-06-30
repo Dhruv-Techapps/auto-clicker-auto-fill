@@ -1,3 +1,4 @@
+import { ThemeNavDropdown } from '@dhruv-techapps/ui-components';
 import * as Sentry from '@sentry/react';
 import { useEffect, useState } from 'react';
 import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
@@ -6,7 +7,6 @@ import { SettingsModal } from '../modal';
 import { firebaseSelector } from '../store/firebase';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { switchSettingsModal } from '../store/settings/settings.slice';
-import { switchTheme, themeSelector } from '../store/theme.slice';
 import { APP_LANGUAGES, APP_LINK } from '../util/constants';
 import { HeaderGoogle } from './header_google';
 
@@ -14,7 +14,6 @@ function Header() {
   const [show, setShow] = useState<boolean>(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const theme = useAppSelector(themeSelector);
   const { role } = useAppSelector(firebaseSelector);
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
@@ -44,10 +43,6 @@ function Header() {
     document.documentElement.lang = lng;
     localStorage.setItem('language', lng);
     Sentry.setTag('page_locale', lng);
-  };
-
-  const toggleTheme = () => {
-    dispatch(switchTheme());
   };
 
   let appName = t('common.appName');
@@ -119,12 +114,7 @@ function Header() {
                 </Nav.Link>
               </Nav.Item>
 
-              <Nav.Item as='li' className='col-6 col-lg-auto'>
-                <Nav.Link onClick={toggleTheme} data-testid='switch-theme'>
-                  {theme !== 'light' ? <i className='bi bi-sun' title={t('header.theme.dark')} /> : <i className='bi bi-moon' title={t('header.theme.light')} />}
-                  <small className='d-lg-none ms-2'>Toggle Theme</small>
-                </Nav.Link>
-              </Nav.Item>
+              <ThemeNavDropdown />
 
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <NavDropdown title={i18n.language} id='language-nav-dropdown' align='end' className='text-uppercase fw-bolder' data-testid='switch-language'>

@@ -27,6 +27,9 @@
       "path": "../../packages/shared/status-bar"
     },
     {
+      "path": "../../packages/ui/components"
+    },
+    {
       "path": "../../packages/core/common"
     },
     {

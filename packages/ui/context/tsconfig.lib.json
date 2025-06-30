@@ -9,7 +9,8 @@
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["node"],
-    "jsx": "react-jsx"
+    "declaration": true,
+    "declarationMap": true
   },
   "include": ["src/**/*.[ts|tsx]"],
   "references": [],
