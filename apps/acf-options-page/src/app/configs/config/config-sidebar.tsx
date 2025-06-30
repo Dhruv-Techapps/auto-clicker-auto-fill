@@ -12,7 +12,6 @@ import {
   switchConfigReorderModal
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { Ban, EyeSlashFill, Plus, ThreeDots, Trash } from '@acf-options-page/util';
 import { Configuration } from '@dhruv-techapps/acf-common';
 import { useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
@@ -63,14 +62,14 @@ export const ConfigSidebar = (props) => {
     <div className='rounded sidebar bg-body'>
       <div className='d-flex justify-content-between align-items-center border-bottom p-2 rounded-top'>
         <Button variant='primary' onClick={() => dispatch(addConfig())} data-testid='add-configuration'>
-          <Plus /> {t('configuration.add')}
+          <i className='bi bi-plus' /> {t('configuration.add')}
         </Button>
         <Form className='flex-grow-1 mx-2'>
           <Form.Control className='d-flex' ref={searchRef} type='search' onChange={onSearchChange} placeholder='Search' id='search-configuration'></Form.Control>
         </Form>
         <Dropdown className='ml-2' id='config-detail-filter-wrapper'>
           <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' className='fs-4' aria-label='Toggle Action Column'>
-            <EyeSlashFill />
+            <i className='bi bi-eye-slash-fill' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={onDetailChange} data-column='name' disabled={!detailVisibility.url} active={detailVisibility.name}>
@@ -83,7 +82,7 @@ export const ConfigSidebar = (props) => {
         </Dropdown>
         <Dropdown id='configs-dropdown-wrapper'>
           <Dropdown.Toggle as={DropdownToggle} id='configs-dropdown' aria-label='Configurations more option' data-testid='configurations-more-option' className='fs-4'>
-            <ThreeDots />
+            <i className='bi bi-three-dots' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={() => props.onExportAll(configs)} data-testid='configurations-export-all'>
@@ -125,10 +124,10 @@ export const ConfigSidebar = (props) => {
                 {detailVisibility.name && <div className='text-truncate'>{`${config.name || 'configuration - ' + (index + 1)}`}</div>}
                 {detailVisibility.url && <div className='text-truncate text-secondary'>{config.url}</div>}
               </div>
-              {!config.enable && <Ban className='link-secondary' title='Disabled' />}
+              {!config.enable && <i className='bi bi-ban link-secondary' title='Disabled' />}
             </div>
             <Button variant='link' data-testid='remove-configuration' onClick={(e) => onRemoveConfig(e, config)} disabled={configs.length === 1}>
-              <Trash className={configs.length === 1 ? '' : 'link-danger'} title='Delete' />
+              <i className={`bi bi-trash ${configs.length === 1 ? '' : 'link-danger'}`} title='Delete' />
             </Button>
           </ListGroup.Item>
         ))}

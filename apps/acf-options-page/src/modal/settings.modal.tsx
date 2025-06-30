@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { settingsGetAPI } from '../store/settings/settings.api';
 import { settingsSelector, switchSettingsModal, updateSettings } from '../store/settings/settings.slice';
 import { themeSelector } from '../store/theme.slice';
-import { ArrowRepeat, BellFill, ChevronLeft, ChevronRight, CloudArrowUpFill, FileSpreadsheetFill } from '../util';
 import { getFieldNameValue } from '../util/element';
 import { SettingsGoogleBackup } from './settings/google-backup';
 import { SettingGoogleSheets } from './settings/google-sheets';
@@ -57,7 +56,7 @@ export const SettingsModal = () => {
           <Modal.Title as='h6'>
             {page ? (
               <Button onClick={() => setPage(undefined)} data-testid='settings-back-button' variant='link' className='me-2 p-0 d-inline-flex align-items-center'>
-                <ChevronLeft />
+                <i className='bi bi-chevron-left' />
               </Button>
             ) : (
               <>{t('modal.settings.title')}</>
@@ -72,37 +71,37 @@ export const SettingsModal = () => {
               <li className='list-group-item'>
                 <Button onClick={() => setPage(SETTINGS_PAGE.NOTIFICATION)} variant={theme} className='d-flex align-items-center justify-content-between w-100' data-testid='settings-notification'>
                   <div className='fw-bold'>
-                    <BellFill className='me-2' />
+                    <i className='bi bi-bell-fill me-2' />
                     {t('modal.settings.notification.title')}
                   </div>
-                  <ChevronRight />
+                  <i className='bi bi-chevron-right' />
                 </Button>
               </li>
               <li className='list-group-item'>
                 <Button onClick={() => setPage(SETTINGS_PAGE.RETRY)} variant={theme} className='d-flex align-items-center justify-content-between w-100' data-testid='settings-retry'>
                   <div className='fw-bold'>
-                    <ArrowRepeat className='me-2' />
+                    <i className='bi bi-arrow-repeat me-2' />
                     {t('modal.settings.retry.title')}
                   </div>
-                  <ChevronRight />
+                  <i className='bi bi-chevron-right' />
                 </Button>
               </li>
               <li className='list-group-item'>
                 <Button onClick={() => setPage(SETTINGS_PAGE.BACKUP)} variant={theme} className='d-flex align-items-center justify-content-between w-100' data-testid='settings-backup'>
                   <div className='fw-bold'>
-                    <CloudArrowUpFill className='me-2' />
+                    <i className='bi bi-cloud-arrow-up-fill me-2' />
                     Backup
                   </div>
-                  <ChevronRight />
+                  <i className='bi bi-chevron-right' />
                 </Button>
               </li>
               <li className='list-group-item'>
                 <Button onClick={() => setPage(SETTINGS_PAGE.SHEETS)} variant={theme} className='d-flex align-items-center justify-content-between w-100' data-testid='settings-backup'>
                   <div className='fw-bold'>
-                    <FileSpreadsheetFill className='me-2' />
+                    <i className='bi bi-file-spreadsheet-fill me-2' />
                     Google Sheets
                   </div>
-                  <ChevronRight />
+                  <i className='bi bi-chevron-right' />
                 </Button>
               </li>
               <li className='list-group-item d-flex justify-content-between align-items-center'>

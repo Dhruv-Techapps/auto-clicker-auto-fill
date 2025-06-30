@@ -11,7 +11,6 @@ import { firebaseSelector, switchFirebaseLoginModal } from '../../store/firebase
 import { googleDriveSelector, googleHasAccessAPI, googleLoginAPI, googleSelector } from '../../store/google';
 import { googleDriveAutoBackupAPI, googleDriveBackupAPI, googleDriveDeleteAPI, googleDriveListWithContentAPI, googleDriveRestoreAPI } from '../../store/google/google-drive/google-drive.api';
 import { settingsSelector } from '../../store/settings/settings.slice';
-import { CloudArrowDownFill, CloudArrowUpFill, Trash } from '../../util';
 
 export function SettingsGoogleBackup() {
   const { t } = useTranslation();
@@ -102,7 +101,7 @@ export function SettingsGoogleBackup() {
       <ol className='list-group'>
         <ListGroup.Item as='li'>
           <NavDropdown.Item href='#backup-now' title={t('modal.settings.backup.now')} onClick={() => onBackup()}>
-            <CloudArrowUpFill className='me-2' />
+            <i className='bi bi-cloud-arrow-up-fill me-2' />
             {t('modal.settings.backup.now')}
           </NavDropdown.Item>
         </ListGroup.Item>
@@ -148,11 +147,11 @@ export function SettingsGoogleBackup() {
                   </Accordion.Header>
                   <Accordion.Body>
                     <Button onClick={() => restore(file.id, file.name)} variant='link' type='button' size='sm' className='text-danger'>
-                      <CloudArrowDownFill className='me-2' />
+                      <i className='bi bi-cloud-arrow-down-fill me-2' />
                       Restore
                     </Button>
                     <Button onClick={() => deleteFile(file.id, file.name)} variant='link' type='button' size='sm' className='text-danger'>
-                      <Trash className='me-2' />
+                      <i className='bi bi-trash me-2' />
                       Delete
                     </Button>
                     <Card>

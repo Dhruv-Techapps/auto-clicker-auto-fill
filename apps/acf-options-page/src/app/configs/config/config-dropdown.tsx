@@ -1,6 +1,5 @@
 import { addConfig, configSelector, selectConfig, switchConfigRemoveModal, switchConfigReorderModal } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { ThreeDots } from '@acf-options-page/util';
 import { useEffect, useState } from 'react';
 import { Button, Col, Dropdown, DropdownToggle, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -57,7 +56,7 @@ export const ConfigDropdown = (props) => {
           </Button>
           <Dropdown id='configurations-dropdown-wrapper'>
             <Dropdown.Toggle as={DropdownToggle} id='configs-dropdown' aria-label='Configurations more option' data-testid='configurations-more-option' className='rounded-end-circle'>
-              <ThreeDots />
+              <i className='bi bi-three-dots' />
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => props.onExportAll(configs)} data-testid='configurations-export-all'>

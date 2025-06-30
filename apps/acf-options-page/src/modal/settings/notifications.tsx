@@ -2,7 +2,6 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { settingsSelector, updateSettingsNotification } from '../../store/settings/settings.slice';
-import { VolumeMute, VolumeUp } from '../../util';
 import { getFieldNameValue } from '../../util/element';
 import { SettingDiscord } from './discord';
 
@@ -53,7 +52,7 @@ function SettingNotifications() {
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='notifications.sound'>
             <div className='fw-bold'>
-              {t('modal.settings.notification.sound')} <span>{notifications?.sound ? <VolumeUp /> : <VolumeMute />}</span>
+              {t('modal.settings.notification.sound')} <span>{notifications?.sound ? <i className='bi bi-volume-up' /> : <i className='bi bi-volume-mute' />}</span>
             </div>
           </Form.Label>
           <Form.Check type='switch' onChange={onUpdate} name='sound' checked={notifications?.sound || false} id='notifications.sound' />

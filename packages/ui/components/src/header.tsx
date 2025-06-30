@@ -2,7 +2,7 @@ import { ThemeContext } from '@dhruv-techapps/ui-context';
 import React, { FC, PropsWithChildren, useContext, useState } from 'react';
 import { Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Github, Moon, Sun, ThreeDots, Youtube } from './assets/svg';
+import { Github } from './assets/svg';
 import { APP_LANGUAGES, APP_LINK, SOCIAL_LINKS } from './constants';
 
 type HeaderProps = {
@@ -31,7 +31,7 @@ export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
         </Navbar.Brand>
         <div className='d-flex'>
           <Navbar.Toggle aria-controls='basic-navbar-nav' onClick={handleShow}>
-            <ThreeDots />
+            <i className='bi bi-three-dots' />
           </Navbar.Toggle>
         </div>
         <Offcanvas show={show} onHide={handleClose} responsive='lg' placement='end' className='flex-grow-1 bd-header'>
@@ -67,7 +67,7 @@ export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
             <Nav className='flex-row flex-wrap ms-md-auto' as='ul'>
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <Nav.Link target='_blank' rel='noopener noreferrer' title='youtube' href={SOCIAL_LINKS.YOUTUBE}>
-                  <Youtube />
+                  <i className='bi bi-youtube' />
                   <small className='d-lg-none ms-2'>{t('footer.youtube')}</small>
                 </Nav.Link>
               </Nav.Item>
@@ -84,7 +84,7 @@ export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
 
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <Nav.Link onClick={toggleTheme} data-testid='switch-theme'>
-                  {theme !== 'light' ? <Sun title={t('header.theme.dark')} /> : <Moon title={t('header.theme.light')} />}
+                  {theme !== 'light' ? <i className='bi bi-sun' title={t('header.theme.dark')} /> : <i className='bi bi-moon' title={t('header.theme.light')} />}
                   <small className='d-lg-none ms-2'>Toggle Theme</small>
                 </Nav.Link>
               </Nav.Item>

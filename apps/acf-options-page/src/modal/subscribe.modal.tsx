@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { subscribeSelector, switchSubscribeModal } from '../store/subscribe';
 
 import * as React from 'react';
-import { AwardFill, Discord, Star } from '../util';
 
 declare global {
   namespace JSX {
@@ -56,13 +55,13 @@ const SubscribeModal = () => {
                       <li>Captcha resolver (Coming Soon)</li>
                       <li>No Ads</li>
                       <li>
-                        <Discord /> VIP Assistance over Discord
+                        <i className='bi bi-discord' /> VIP Assistance over Discord
                       </li>
                       <li>
-                        <Star /> Early access to new Features
+                        <i className='bi bi-star' /> Early access to new Features
                       </li>
                       <li>
-                        <AwardFill /> Pride and Joy
+                        <i className='bi bi-award-fill' /> Pride and Joy
                       </li>
                     </ul>
                   </div>

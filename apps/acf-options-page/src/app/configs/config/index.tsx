@@ -13,7 +13,6 @@ import {
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
-import { Copy, Download, Gear, StockWatch, Upload } from '@acf-options-page/util';
 import { getFieldNameValue } from '@acf-options-page/util/element';
 import { Configuration } from '@dhruv-techapps/acf-common';
 import { createRef } from 'react';
@@ -101,7 +100,7 @@ function Config() {
             <div className='d-flex align-items-center'>
               {config.enable ? (
                 <Button className='fs-5' variant='link' onClick={showSchedule}>
-                  <StockWatch />
+                  <i className='bi bi-stock-watch' />
                 </Button>
               ) : (
                 <Badge pill bg='secondary' className='ms-2 d-none d-md-block'>
@@ -118,16 +117,16 @@ function Config() {
             </Form>
             <ButtonGroup>
               <Button variant='link' title={t('configuration.export')} onClick={onExportConfig} data-testid='export-configuration' className='fs-5'>
-                <Upload />
+                <i className='bi bi-upload' />
               </Button>
               <Button variant='link' title={t('configuration.import')} onClick={() => importFiled.current?.click()} data-testid='import-configuration' className='fs-5'>
-                <Download />
+                <i className='bi bi-download' />
               </Button>
               <Button variant='link' title={t('configuration.duplicate')} onClick={onDuplicateConfig} data-testid='duplicate-configuration' className='fs-5'>
-                <Copy />
+                <i className='bi bi-copy' />
               </Button>
               <Button variant='link' title={t('configuration.settings')} onClick={showSettings} data-testid='configuration-settings' className='fs-5'>
-                <Gear />
+                <i className='bi bi-gear' />
               </Button>
             </ButtonGroup>
             <div className='custom-file d-none'>

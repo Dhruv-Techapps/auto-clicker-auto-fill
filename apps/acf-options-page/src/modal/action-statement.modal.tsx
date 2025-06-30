@@ -16,7 +16,6 @@ import {
   updateActionStatementCondition
 } from '../store/config';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { Plus } from '../util/svg';
 import { ActionStatementCondition } from './action-statement/action-statement-condition';
 import { ActionStatementRetry } from './action-statement/action-statement-retry';
 
@@ -94,7 +93,7 @@ const ActionStatementModal = () => {
                 <th>Status</th>
                 <th>
                   <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id, ACTION_CONDITION_OPR.AND)}>
-                    <Plus />
+                    <i className='bi bi-plus' />
                   </Button>
                 </th>
               </tr>
@@ -110,7 +109,7 @@ const ActionStatementModal = () => {
           ) : (
             <div className='p-5 d-flex justify-content-center'>
               <Button type='button' aria-label='Add' onClick={() => addCondition(config.actions[0].id)}>
-                <Plus /> {t('modal.actionSettings.title')}
+                <i className='bi bi-plus' /> {t('modal.actionSettings.title')}
               </Button>
             </div>
           )}

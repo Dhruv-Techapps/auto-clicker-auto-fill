@@ -7,7 +7,6 @@ import { firebaseSelector } from '../store/firebase';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { switchSettingsModal } from '../store/settings/settings.slice';
 import { switchTheme, themeSelector } from '../store/theme.slice';
-import { GearFill, Moon, Sun, ThreeDots } from '../util';
 import { APP_LANGUAGES, APP_LINK } from '../util/constants';
 import { HeaderGoogle } from './header_google';
 
@@ -71,7 +70,7 @@ function Header() {
         </Navbar.Brand>
         <div className='d-flex'>
           <Navbar.Toggle aria-controls='basic-navbar-nav' onClick={handleShow}>
-            <ThreeDots />
+            <i className='bi bi-three-dots' />
           </Navbar.Toggle>
         </div>
         <Offcanvas show={show} onHide={handleClose} responsive='lg' placement='end' className='flex-grow-1 bd-header'>
@@ -115,14 +114,14 @@ function Header() {
 
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <Nav.Link onClick={() => dispatch(switchSettingsModal())} data-testid='open-global-settings'>
-                  <GearFill title={t('header.settings')} />
+                  <i className='bi bi-gear-fill' title={t('header.settings')} />
                   <small className='d-lg-none ms-2'>{t('header.settings')}</small>
                 </Nav.Link>
               </Nav.Item>
 
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <Nav.Link onClick={toggleTheme} data-testid='switch-theme'>
-                  {theme !== 'light' ? <Sun title={t('header.theme.dark')} /> : <Moon title={t('header.theme.light')} />}
+                  {theme !== 'light' ? <i className='bi bi-sun' title={t('header.theme.dark')} /> : <i className='bi bi-moon' title={t('header.theme.light')} />}
                   <small className='d-lg-none ms-2'>Toggle Theme</small>
                 </Nav.Link>
               </Nav.Item>

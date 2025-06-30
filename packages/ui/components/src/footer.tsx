@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { ChatFill, Facebook, ShieldCheck, Star, Twitter, Whatsapp } from './assets/svg';
 import { SOCIAL_LINKS } from './constants';
 
 export function Footer() {
@@ -32,7 +31,7 @@ export function Footer() {
             <ul className='list-unstyled text-small'>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='discord' href={SOCIAL_LINKS.DISCORD}>
-                  <ChatFill className='me-2' />
+                  <i className='bi bi-chat-fill me-2' />
                   {t('footer.discord')}
                 </a>
               </li>
@@ -43,13 +42,13 @@ export function Footer() {
             <ul className='list-unstyled text-small'>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='privacy' href='https://getautoclicker.com/policy/'>
-                  <ShieldCheck className='me-2' />
+                  <i className='bi bi-shield-check me-2' />
                   {t('footer.privacy')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='rate-us' href={SOCIAL_LINKS.RATE_US}>
-                  <Star className='me-2' />
+                  <i className='bi bi-star me-2' />
                   {t('footer.rate-us')}
                 </a>
               </li>
@@ -60,19 +59,19 @@ export function Footer() {
             <ul className='list-unstyled text-small'>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='facebook' href={SOCIAL_LINKS.FACEBOOK}>
-                  <Facebook className='me-2' />
+                  <i className='bi bi-facebook me-2' />
                   {t('footer.facebook')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='twitter' href={SOCIAL_LINKS.TWITTER}>
-                  <Twitter className='me-2' />
+                  <i className='bi bi-twitter me-2' />
                   {t('footer.twitter')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='whatsapp' href={SOCIAL_LINKS.WHATSAPP}>
-                  <Whatsapp className='me-2' />
+                  <i className='bi bi-whatsapp me-2' />
                   {t('footer.whatsapp')}
                 </a>
               </li>

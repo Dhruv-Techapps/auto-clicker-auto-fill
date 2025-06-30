@@ -2,7 +2,6 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { appSelector } from '../store/app.slice';
 import { useAppSelector } from '../store/hooks';
-import { ChatFill, Facebook, Github, ShieldCheck, Star, Twitter, Whatsapp, Youtube } from '../util';
 import { SOCIAL_LINKS } from '../util/constants';
 
 function Footer() {
@@ -39,19 +38,19 @@ function Footer() {
             <ul className='list-unstyled text-small'>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='discord' href={SOCIAL_LINKS.DISCORD}>
-                  <ChatFill className='me-2' />
+                  <i className='bi bi-chat-fill me-2' />
                   {t('footer.discord')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='youtube' href={SOCIAL_LINKS.YOUTUBE}>
-                  <Youtube className='me-2' />
+                  <i className='bi bi-youtube me-2' />
                   {t('footer.youtube')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='github' href={SOCIAL_LINKS.GITHUB}>
-                  <Github className='me-2' />
+                  <i className='bi bi-github me-2' />
                   {t('footer.github')}
                 </a>
               </li>
@@ -62,13 +61,13 @@ function Footer() {
             <ul className='list-unstyled text-small'>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='privacy' href='https://getautoclicker.com/policy/'>
-                  <ShieldCheck className='me-2' />
+                  <i className='bi bi-shield-check me-2' />
                   {t('footer.privacy')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='rate-us' href={SOCIAL_LINKS.RATE_US}>
-                  <Star className='me-2' />
+                  <i className='bi bi-star me-2' />
                   {t('footer.rate-us')}
                 </a>
               </li>
@@ -79,19 +78,19 @@ function Footer() {
             <ul className='list-unstyled text-small'>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='facebook' href={SOCIAL_LINKS.FACEBOOK}>
-                  <Facebook className='me-2' />
+                  <i className='bi bi-facebook me-2' />
                   {t('footer.facebook')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='twitter' href={SOCIAL_LINKS.TWITTER}>
-                  <Twitter className='me-2' />
+                  <i className='bi bi-twitter me-2' />
                   {t('footer.twitter')}
                 </a>
               </li>
               <li>
                 <a className='text-decoration-none' target='_blank' rel='noopener noreferrer' title='whatsapp' href={SOCIAL_LINKS.WHATSAPP}>
-                  <Whatsapp className='me-2' />
+                  <i className='bi bi-whatsapp me-2' />
                   {t('footer.whatsapp')}
                 </a>
               </li>

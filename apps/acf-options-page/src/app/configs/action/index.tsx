@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ActionSettingsModal, ActionStatementModal, AddonModal } from '../../../modal';
-import { Plus, Repeat } from '../../../util';
 import ActionTable from './action-table';
 
 function Action() {
@@ -40,10 +39,10 @@ function Action() {
             </Col>
             <Col xs='auto' className='d-flex align-items-center'>
               <Button size='sm' variant='outline-primary px-3' onClick={() => dispatch(switchBatchModal())} id='batch-model'>
-                <Repeat className='me-2' /> {t('batch.title')}
+                <i className='bi bi-repeatme-2' /> {t('batch.title')}
               </Button>
               <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddAction} id='add-action'>
-                <Plus className='me-2' /> {t('action.add')}
+                <i className='bi bi-plus me-2' /> {t('action.add')}
               </Button>
             </Col>
           </Row>

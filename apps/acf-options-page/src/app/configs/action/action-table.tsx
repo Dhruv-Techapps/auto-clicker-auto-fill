@@ -18,7 +18,7 @@ import { Button, Dropdown, Form, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { DropdownToggle } from '../../../components';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
-import { Ban, EyeSlashFill, Plus, REGEX, ThreeDots, Trash } from '../../../util';
+import { REGEX } from '../../../util';
 import { defaultColumn } from './editable-cell';
 
 type ActionMeta = { dataType: string; list: string; pattern: string; required: boolean; width?: string };
@@ -187,7 +187,7 @@ const ActionTable = ({ actions }: ActionProps) => {
               <th style={{ width: '92px', textAlign: 'center' }}>
                 <Dropdown className='ml-2' id='acton-column-filter-wrapper'>
                   <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 fs-5' aria-label='Toggle Action Column'>
-                    <EyeSlashFill />
+                    <i className='bi bi-eye-slash-fill' />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={onColumnChange} data-column='name' active={columnVisibility.name}>
@@ -216,7 +216,7 @@ const ActionTable = ({ actions }: ActionProps) => {
                 <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
               ))}
               <td align='center'>
-                {actions[row.id].disabled && <Ban className='me-2' title='Disabled' />}
+                {actions[row.id].disabled && <i className='bi bi-ban me-2' title='Disabled' />}
                 <Button
                   variant='link'
                   data-testid='action-remove'
@@ -225,12 +225,12 @@ const ActionTable = ({ actions }: ActionProps) => {
                   }}
                   disabled={actions.length === 1}
                 >
-                  <Trash className={actions.length === 1 ? '' : 'text-danger'} title='Delete' />
+                  <i className={`bi bi-trash ${actions.length === 1 ? '' : 'text-danger'}`} title='Delete' />
                 </Button>
                 {actions[row.id].elementFinder && (
                   <Dropdown id='acton-dropdown-wrapper' className='d-inline-block'>
                     <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option'>
-                      <ThreeDots width='24' height='24' />
+                      <i className='bi bi-three-dots' width='24' height='24' />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item data-testid='action-addon' onClick={() => showAddon(row)}>
@@ -246,10 +246,10 @@ const ActionTable = ({ actions }: ActionProps) => {
                       )}
                       <Dropdown.Divider />
                       <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(row, 0)}>
-                        <Plus className='me-2' /> {t('action.addBefore')}
+                        <i className='bi bi-plus me-2' /> {t('action.addBefore')}
                       </Dropdown.Item>
                       <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(row, 1)}>
-                        <Plus className='me-2' /> {t('action.addAfter')}
+                        <i className='bi bi-plus me-2' /> {t('action.addAfter')}
                       </Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(row, actions[row.id].disabled)}>

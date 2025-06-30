@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, Table } from 'react-bootstrap';
-import { InfoCircle } from '../util';
 import { APP_LINK } from '../util/constants';
 
 export function ElementFinderPopover() {
@@ -118,7 +117,7 @@ export function ElementFinderPopover() {
         </Popover>
       }
     >
-      <InfoCircle className='ms-2 text-muted' />
+      <i className='bi bi-info-circle ms-2 text-muted' />
     </OverlayTrigger>
   );
 }

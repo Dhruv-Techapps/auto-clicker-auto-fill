@@ -3,7 +3,6 @@ import { ChangeEvent } from 'react';
 import { Button, ButtonGroup, Form } from 'react-bootstrap';
 import { removeActionStatementCondition, selectedConfigSelector, updateActionStatementCondition } from '../../store/config';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { X } from '../../util';
 import { getFieldNameValue } from '../../util/element';
 
 type ActionStatementConditionProps = {
@@ -72,7 +71,7 @@ function ActionStatementCondition({ condition, index }: ActionStatementCondition
       </td>
       <td>
         <Button type='button' variant='link' className='ms-1 mt-2 p-0 text-danger' aria-label='Close' hidden={index === 0} onClick={removeCondition}>
-          <X />
+          <i className='bi bi-x' />
         </Button>
       </td>
     </tr>

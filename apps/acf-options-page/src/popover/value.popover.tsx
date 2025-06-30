@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, Table } from 'react-bootstrap';
-import { InfoCircle } from '../util';
 import { APP_LINK } from '../util/constants';
 
 export function ValuePopover() {
@@ -113,10 +112,6 @@ export function ValuePopover() {
                     <code>email&lt;batchRepeat&gt; -&gt; email1, email2</code>
                   </td>
                 </tr>
-                {/* <tr>
-          <td><a href={APP_LINK.DOCS + 'action/exec-command'} target="_blank" rel="noopener noreferrer">Exec Command</a></td>
-          <td><code>ExecCommand::[&quot;cut&quot;,&quot;paste&quot;]</code></td>
-        </tr> */}
                 <tr>
                   <td>
                     <a href={`${APP_LINK.DOCS}action-value/location-command`} target='_blank' rel='noopener noreferrer'>
@@ -174,7 +169,7 @@ export function ValuePopover() {
         </Popover>
       }
     >
-      <InfoCircle className='ms-2 text-muted' />
+      <i className='bi bi-info-circle ms-2 text-muted' />
     </OverlayTrigger>
   );
 }

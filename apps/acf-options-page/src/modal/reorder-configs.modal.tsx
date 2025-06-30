@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { ErrorAlert } from '../components';
 import { configReorderSelector, configReorderUpdateAPI, switchConfigReorderModal, updateConfigReorder } from '../store/config';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { ArrowDown, ArrowUp } from '../util';
 
 const ReorderConfigsModal = () => {
   const { visible, configs, error } = useAppSelector(configReorderSelector);
@@ -73,7 +72,7 @@ const ReorderConfigsModal = () => {
           <ErrorAlert error={error} />
           <p className='text-muted'>{t('modal.reorder.hint')}</p>
           <Button onClick={sortActions} className='mb-3'>
-            Reorder {sort !== undefined && <span>{sort ? <ArrowUp /> : <ArrowDown />}</span>}
+            Reorder {sort !== undefined && <span>{sort ? <i className='bi bi-arrow-up' /> : <i className='bi bi-arrow-down' />}</span>}
           </Button>
           <div className='list-group'>
             <DndContext onDragEnd={handleDragEnd} sensors={sensors} collisionDetection={closestCenter}>
