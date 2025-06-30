@@ -62,14 +62,14 @@ export const ConfigSidebar = (props) => {
     <div className='rounded sidebar bg-body'>
       <div className='d-flex justify-content-between align-items-center border-bottom p-2 rounded-top'>
         <Button variant='primary' onClick={() => dispatch(addConfig())} data-testid='add-configuration'>
-          <i className='bi bi-plus' /> {t('configuration.add')}
+          <i className='bi bi-plus-lg' /> {t('configuration.add')}
         </Button>
         <Form className='flex-grow-1 mx-2'>
           <Form.Control className='d-flex' ref={searchRef} type='search' onChange={onSearchChange} placeholder='Search' id='search-configuration'></Form.Control>
         </Form>
         <Dropdown className='ml-2' id='config-detail-filter-wrapper'>
-          <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' className='fs-4' aria-label='Toggle Action Column'>
-            <i className='bi bi-eye-slash-fill' />
+          <Dropdown.Toggle as={DropdownToggle} id='configs-detail-filter' aria-label='Toggle Action Column'>
+            <i className='bi bi-eye-slash-fill fs-4' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={onDetailChange} data-column='name' disabled={!detailVisibility.url} active={detailVisibility.name}>
@@ -81,8 +81,8 @@ export const ConfigSidebar = (props) => {
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown id='configs-dropdown-wrapper'>
-          <Dropdown.Toggle as={DropdownToggle} id='configs-dropdown' aria-label='Configurations more option' data-testid='configurations-more-option' className='fs-4'>
-            <i className='bi bi-three-dots' />
+          <Dropdown.Toggle as={DropdownToggle} id='configs-dropdown' aria-label='Configurations more option' data-testid='configurations-more-option'>
+            <i className='bi bi-three-dots fs-4' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={() => props.onExportAll(configs)} data-testid='configurations-export-all'>

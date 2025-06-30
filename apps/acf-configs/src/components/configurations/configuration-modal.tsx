@@ -41,7 +41,7 @@ export const ConfigurationModal = forwardRef<{ show: (configId: string) => void 
       <Modal.Header closeButton>
         <Modal.Title>
           {config?.name || 'Configuration'}
-          <small className='d-block fs-5 text-muted'>{config?.url}</small>
+          <small className='d-block text-muted'>{config?.url}</small>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='text-center'>

@@ -39,10 +39,10 @@ function Action() {
             </Col>
             <Col xs='auto' className='d-flex align-items-center'>
               <Button size='sm' variant='outline-primary px-3' onClick={() => dispatch(switchBatchModal())} id='batch-model'>
-                <i className='bi bi-repeatme-2' /> {t('batch.title')}
+                <i className='bi bi-repeat me-2' /> {t('batch.title')}
               </Button>
               <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddAction} id='add-action'>
-                <i className='bi bi-plus me-2' /> {t('action.add')}
+                <i className='bi bi-plus-lg me-2' /> {t('action.add')}
               </Button>
             </Col>
           </Row>

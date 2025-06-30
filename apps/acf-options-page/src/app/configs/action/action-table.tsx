@@ -186,8 +186,8 @@ const ActionTable = ({ actions }: ActionProps) => {
               ))}
               <th style={{ width: '92px', textAlign: 'center' }}>
                 <Dropdown className='ml-2' id='acton-column-filter-wrapper'>
-                  <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 fs-5' aria-label='Toggle Action Column'>
-                    <i className='bi bi-eye-slash-fill' />
+                  <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0' aria-label='Toggle Action Column'>
+                    <i className='bi bi-eye-slash-fill fs-4' />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={onColumnChange} data-column='name' active={columnVisibility.name}>
@@ -230,7 +230,7 @@ const ActionTable = ({ actions }: ActionProps) => {
                 {actions[row.id].elementFinder && (
                   <Dropdown id='acton-dropdown-wrapper' className='d-inline-block'>
                     <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option'>
-                      <i className='bi bi-three-dots' width='24' height='24' />
+                      <i className='bi bi-three-dots' />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item data-testid='action-addon' onClick={() => showAddon(row)}>
@@ -246,10 +246,10 @@ const ActionTable = ({ actions }: ActionProps) => {
                       )}
                       <Dropdown.Divider />
                       <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(row, 0)}>
-                        <i className='bi bi-plus me-2' /> {t('action.addBefore')}
+                        <i className='bi bi-plus-lg me-2' /> {t('action.addBefore')}
                       </Dropdown.Item>
                       <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(row, 1)}>
-                        <i className='bi bi-plus me-2' /> {t('action.addAfter')}
+                        <i className='bi bi-plus-lg me-2' /> {t('action.addAfter')}
                       </Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(row, actions[row.id].disabled)}>

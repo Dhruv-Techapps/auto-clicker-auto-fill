@@ -16,10 +16,10 @@ const ConfirmModal = ({ visible, message, title, headerClass, noClick, yesClick 
         {message}
       </Modal.Body>
       <Modal.Footer className='flex-nowrap p-0'>
-        <Button variant='link' className='fs-6 text-decoration-none col-6 m-0 rounded-0 border-end' size='lg' onClick={noClick} data-testid='confirm-modal-no'>
+        <Button variant='link' className='text-decoration-none col-6 m-0 rounded-0 border-end' size='lg' onClick={noClick} data-testid='confirm-modal-no'>
           {t('common.no')}
         </Button>
-        <Button variant='link' className={`fs-6 text-decoration-none col-6 m-0 rounded-0 ${headerClass}`} size='lg' onClick={yesClick} data-testid='confirm-modal-yes'>
+        <Button variant='link' className={`text-decoration-none col-6 m-0 rounded-0 ${headerClass}`} size='lg' onClick={yesClick} data-testid='confirm-modal-yes'>
           {t('common.yes')}
         </Button>
       </Modal.Footer>

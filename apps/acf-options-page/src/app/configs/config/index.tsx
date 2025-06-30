@@ -99,7 +99,7 @@ function Config() {
             {t('configuration.title')}
             <div className='d-flex align-items-center'>
               {config.enable ? (
-                <Button className='fs-5' variant='link' onClick={showSchedule}>
+                <Button variant='link' onClick={showSchedule}>
                   <i className='bi bi-stock-watch' />
                 </Button>
               ) : (
@@ -116,17 +116,17 @@ function Config() {
               <Form.Check type='switch' name='enable' id='config-enable' label={t('configuration.enable')} checked={config.enable} onChange={onUpdate} />
             </Form>
             <ButtonGroup>
-              <Button variant='link' title={t('configuration.export')} onClick={onExportConfig} data-testid='export-configuration' className='fs-5'>
-                <i className='bi bi-upload' />
+              <Button variant='link' title={t('configuration.export')} onClick={onExportConfig} data-testid='export-configuration'>
+                <i className='bi bi-upload fs-5' />
               </Button>
-              <Button variant='link' title={t('configuration.import')} onClick={() => importFiled.current?.click()} data-testid='import-configuration' className='fs-5'>
-                <i className='bi bi-download' />
+              <Button variant='link' title={t('configuration.import')} onClick={() => importFiled.current?.click()} data-testid='import-configuration'>
+                <i className='bi bi-download fs-5' />
               </Button>
-              <Button variant='link' title={t('configuration.duplicate')} onClick={onDuplicateConfig} data-testid='duplicate-configuration' className='fs-5'>
-                <i className='bi bi-copy' />
+              <Button variant='link' title={t('configuration.duplicate')} onClick={onDuplicateConfig} data-testid='duplicate-configuration'>
+                <i className='bi bi-copy fs-5' />
               </Button>
-              <Button variant='link' title={t('configuration.settings')} onClick={showSettings} data-testid='configuration-settings' className='fs-5'>
-                <i className='bi bi-gear' />
+              <Button variant='link' title={t('configuration.settings')} onClick={showSettings} data-testid='configuration-settings'>
+                <i className='bi bi-gear fs-5' />
               </Button>
             </ButtonGroup>
             <div className='custom-file d-none'>

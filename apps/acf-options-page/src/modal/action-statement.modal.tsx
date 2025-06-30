@@ -93,7 +93,7 @@ const ActionStatementModal = () => {
                 <th>Status</th>
                 <th>
                   <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id, ACTION_CONDITION_OPR.AND)}>
-                    <i className='bi bi-plus' />
+                    <i className='bi bi-plus-lg' />
                   </Button>
                 </th>
               </tr>
@@ -109,7 +109,7 @@ const ActionStatementModal = () => {
           ) : (
             <div className='p-5 d-flex justify-content-center'>
               <Button type='button' aria-label='Add' onClick={() => addCondition(config.actions[0].id)}>
-                <i className='bi bi-plus' /> {t('modal.actionSettings.title')}
+                <i className='bi bi-plus-lg' /> {t('modal.actionSettings.title')}
               </Button>
             </div>
           )}
