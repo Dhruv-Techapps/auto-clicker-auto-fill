@@ -51,11 +51,12 @@ module.exports = composePlugins(
     }
 
     const { VITE_PUBLIC_VARIANT } = process.env;
+    const assets = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'DEV' : VITE_PUBLIC_VARIANT;
     config.plugins.push(
       new CopyPlugin({
         patterns: [
           { from: `**/messages.json`, to: './_locales', context: `${options.root}/apps/acf-i18n/src/locales` },
-          { from: path.join(__dirname, 'assets', VITE_PUBLIC_VARIANT === 'LOCAL' ? 'DEV' : VITE_PUBLIC_VARIANT), to: './assets' },
+          { from: path.join(__dirname, 'assets', assets ?? 'DEV'), to: './assets' },
           { from: `./*.html`, to: './html', context: 'src/wizard/popup' },
           { from: `./*.html`, to: './', context: 'src/devtools' },
           { from: `./*.html`, to: './html', context: '../../packages/shared/sandbox/src/lib' },
@@ -75,7 +76,7 @@ module.exports = composePlugins(
       }),
       new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
     );
-    if (process.env.VITE_PUBLIC_VARIANT === 'PROD') {
+    if (VITE_PUBLIC_VARIANT === 'PROD') {
       config.plugins.push(
         sentryWebpackPlugin({
           org: 'dhruv-techapps',
