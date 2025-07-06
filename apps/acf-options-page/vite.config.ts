@@ -39,7 +39,7 @@ export default defineConfig(() => ({
       },
       include: '**/*.svg'
     }),
-    visualizer({ open: true })
+    visualizer({ open: true, filename: 'dist/stats.html' })
   ],
   // Uncomment this if you are using workers.
   // worker: {
