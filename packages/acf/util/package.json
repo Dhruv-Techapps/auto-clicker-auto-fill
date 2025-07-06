@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "@swc/helpers": "~0.5.11",
-    "@dhruv-techapps/core-common": "0.0.1"
+    "@dhruv-techapps/core-common": "0.0.1",
+    "randexp": "^0.5.3"
   }
 }
