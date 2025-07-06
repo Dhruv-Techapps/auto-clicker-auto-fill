@@ -1,5 +1,6 @@
 import { getStoredTheme, ThemeContext, tTheme } from '@dhruv-techapps/ui-context';
 import { useContext, useState } from 'react';
+import { NavDropdown } from 'react-bootstrap';
 
 export const ThemeNavDropdown = () => {
   const [theme, setTheme] = useState(getStoredTheme());
@@ -21,30 +22,16 @@ export const ThemeNavDropdown = () => {
   };
 
   return (
-    <li className='nav-item dropdown'>
-      <button className='btn btn-link nav-link dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
-        {getIcon()}
-      </button>
-      <ul className='dropdown-menu dropdown-menu-end'>
-        <li>
-          <button type='button' className={`dropdown-item d-flex align-items-center ${theme === 'light' ? 'active' : ''}`} onClick={() => onClickTheme('light')}>
-            <i className='bi bi-sun-fill me-2 opacity-50 theme-icon'></i> Light
-          </button>
-        </li>
-        <li>
-          <button type='button' className={`dropdown-item d-flex align-items-center ${theme === 'dark' ? 'active' : ''}`} onClick={() => onClickTheme('dark')}>
-            <i className='bi bi-moon-stars-fill me-2 opacity-50 theme-icon'></i> Dark
-          </button>
-        </li>
-        <li>
-          <hr className='dropdown-divider' />
-        </li>
-        <li>
-          <button type='button' className={`dropdown-item d-flex align-items-center ${theme === null ? 'active' : ''}`} onClick={() => onClickTheme(null)}>
-            <i className='bi bi-circle-half me-2 opacity-50 theme-icon'></i> Auto
-          </button>
-        </li>
-      </ul>
-    </li>
+    <NavDropdown id='nav-dropdown-dark-example' title={getIcon()} menuVariant='dark' as={'ul'}>
+      <NavDropdown.Item onClick={() => onClickTheme('light')} active={theme === 'light'} className='d-flex align-items-center'>
+        <i className='bi bi-sun-fill me-2 opacity-50'></i> Light
+      </NavDropdown.Item>
+      <NavDropdown.Item onClick={() => onClickTheme('dark')} active={theme === 'dark'} className='d-flex align-items-center'>
+        <i className='bi bi-moon-stars-fill me-2 opacity-50 '></i> Dark
+      </NavDropdown.Item>
+      <NavDropdown.Item onClick={() => onClickTheme(null)} active={theme === null} className='d-flex align-items-center'>
+        <i className='bi bi-circle-half me-2 opacity-50 '></i> Auto
+      </NavDropdown.Item>
+    </NavDropdown>
   );
 };

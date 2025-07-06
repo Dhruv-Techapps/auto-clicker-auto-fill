@@ -7,8 +7,8 @@
     {
       "type": "chrome",
       "request": "attach",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:3000/",
+      "name": "Launch Chrome against options page",
+      "url": "http://localhost:4200/",
       "webRoot": "${workspaceFolder}/apps/acf-options-page/",
       "port": 9222
     },
@@ -16,7 +16,7 @@
       "type": "chrome",
       "request": "attach",
       "name": "Launch Chrome against extension",
-      "url": "http://localhost:3000/",
+      "url": "http://localhost:4200/",
       "webRoot": "${workspaceFolder}/apps/acf-extension/",
       "port": 9222
     }
