@@ -23,5 +23,6 @@ export const useTimeout = (effect: EffectCallback, deps?: string) => {
         }
       };
     }
+    return;
   }, [deps, effect]);
 };

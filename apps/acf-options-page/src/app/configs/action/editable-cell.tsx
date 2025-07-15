@@ -1,14 +1,14 @@
 import { getFieldNameValue } from '@acf-options-page/util/element';
 import { Action } from '@dhruv-techapps/acf-common';
 import { ColumnDef } from '@tanstack/react-table';
-import { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export const defaultColumn: Partial<ColumnDef<Action>> = {
   cell: Cell
 };
 
-function Cell({ getValue, row: { original }, column: { id, columnDef }, table }) {
+function Cell({ getValue, row: { original }, column: { id, columnDef }, table }: any) {
   const { meta } = columnDef;
   const initialValue = getValue();
   const [value, setValue] = useState(initialValue);
@@ -16,14 +16,17 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table })
   const inputRef = useRef<HTMLInputElement>(null);
   const [valueFieldType, setValueFieldType] = useState<'input' | 'textarea'>(original.valueFieldType || 'input');
 
-  const onBlur = (e) => {
+  const onBlur = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, { [id]: initialValue });
     if (update) {
       table.options.meta?.updateData(original.id, update.name, update.value);
     }
   };
 
-  const onChange = ({ currentTarget: { value: changeValue } }) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {
+      currentTarget: { value: changeValue }
+    } = e;
     setIsInvalid(false);
     setValue(changeValue);
   };

@@ -1,7 +1,16 @@
 import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const ConfirmModal = ({ visible, message, title, headerClass, noClick, yesClick }) => {
+interface ConfirmModalProps {
+  visible?: boolean;
+  message: React.ReactNode;
+  title?: string;
+  headerClass?: string;
+  noClick: () => void;
+  yesClick: () => void;
+}
+
+const ConfirmModal = ({ visible, message, title, headerClass, noClick, yesClick }: ConfirmModalProps) => {
   const { t } = useTranslation();
   const onShow = () => {
     //:TODO

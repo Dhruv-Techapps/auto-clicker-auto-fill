@@ -1,7 +1,7 @@
 import { Alert, Button, Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { FormEvent, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useTimeout } from '../_hooks/message.hooks';
 import { syncSchedule } from '../store/config';
 import { scheduleSelector, setScheduleMessage, switchScheduleModal, updateSchedule } from '../store/config/schedule';
@@ -21,7 +21,7 @@ export const ScheduleModal = () => {
     dispatch(setScheduleMessage());
   }, message);
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, schedule);
     if (update) {
       dispatch(updateSchedule(update));

@@ -1,4 +1,5 @@
 import { RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
+import { ChangeEvent } from 'react';
 import { Card, Form, FormControl, InputGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -10,7 +11,7 @@ function SettingRetry() {
   const { t } = useTranslation();
   const { settings } = useAppSelector(settingsSelector);
   const dispatch = useAppDispatch();
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, settings);
     if (update) {
       dispatch(updateSettings(update));

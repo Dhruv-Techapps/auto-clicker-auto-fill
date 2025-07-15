@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     updateSchedule: (state, action) => {
       const { name, value } = action.payload;
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       state.schedule[name] = value;
     },
     switchScheduleModal: (state) => {
