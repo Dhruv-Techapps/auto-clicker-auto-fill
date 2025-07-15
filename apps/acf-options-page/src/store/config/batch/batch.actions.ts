@@ -14,6 +14,7 @@ export const batchActions = {
     }
     const { batch } = config;
     if (batch) {
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       batch[name] = value;
     } else {
       config.batch = { [name]: value };

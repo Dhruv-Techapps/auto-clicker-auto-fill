@@ -1,5 +1,6 @@
 import { Action, CONFIG_SOURCE, Configuration, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { GetThunkAPI } from '@reduxjs/toolkit';
 import { blogCheckAPI } from '../blog';
 
 /**
@@ -24,7 +25,7 @@ export const getConfigName = (url?: string) => {
  * @param thunkAPI - The thunk API object.
  * @returns The index of the selected configuration.
  */
-export const checkQueryParams = (configs: Array<Configuration>, thunkAPI): RANDOM_UUID | undefined => {
+export const checkQueryParams = (configs: Array<Configuration>, thunkAPI: GetThunkAPI<any>): RANDOM_UUID | undefined => {
   if (window.location.search) {
     const { searchParams } = new URL(window.location.href);
     const configId = searchParams.get('configId');
@@ -70,6 +71,7 @@ export const checkQueryParams = (configs: Array<Configuration>, thunkAPI): RANDO
       thunkAPI.dispatch(blogCheckAPI(version));
     }
   }
+  return;
 };
 
 /**

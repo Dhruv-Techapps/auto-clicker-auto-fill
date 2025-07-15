@@ -1,5 +1,5 @@
 import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/shared-status-bar';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ErrorAlert, Loading } from '../components';
@@ -38,7 +38,7 @@ export const SettingsModal = () => {
     }
   }, [dispatch]);
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, settings);
     if (update) {
       dispatch(updateSettings(update));

@@ -1,8 +1,8 @@
-import { ThemeContext } from '@dhruv-techapps/ui-context';
-import React, { FC, PropsWithChildren, useContext, useState } from 'react';
+import React, { FC, PropsWithChildren, useState } from 'react';
 import { Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { APP_LANGUAGES, APP_LINK, SOCIAL_LINKS } from './constants';
+import { ThemeNavDropdown } from './theme';
 
 type HeaderProps = {
   onHomeClick?: (e: React.MouseEvent<HTMLLinkElement>) => void;
@@ -13,8 +13,6 @@ export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { t, i18n } = useTranslation();
-
-  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const changeLanguage = async (lng: string) => {
     await i18n.changeLanguage(lng);
@@ -81,12 +79,7 @@ export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
                 <hr className='d-lg-none my-2 text-white-50'></hr>
               </Nav.Item>
 
-              <Nav.Item as='li' className='col-6 col-lg-auto'>
-                <Nav.Link onClick={toggleTheme} data-testid='switch-theme'>
-                  {theme !== 'light' ? <i className='bi bi-sun' title={t('header.theme.dark')} /> : <i className='bi bi-moon' title={t('header.theme.light')} />}
-                  <small className='d-lg-none ms-2'>Toggle Theme</small>
-                </Nav.Link>
-              </Nav.Item>
+              <ThemeNavDropdown />
 
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <NavDropdown title={i18n.language} id='language-nav-dropdown' align='end' className='text-uppercase fw-bolder' data-testid='switch-language'>

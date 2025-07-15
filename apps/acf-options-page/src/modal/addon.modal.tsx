@@ -2,7 +2,7 @@ import { ADDON_CONDITIONS } from '@dhruv-techapps/acf-common';
 import { Alert, Button, Card, Col, Form, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { FormEvent, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useTimeout } from '../_hooks/message.hooks';
 import { ValueExtractorPopover } from '../popover';
 import { actionAddonSelector, setActionAddonMessage, switchActionAddonModal, syncActionAddon, updateActionAddon } from '../store/config';
@@ -23,7 +23,7 @@ const AddonModal = () => {
     dispatch(setActionAddonMessage());
   }, message);
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const update = getFieldNameValue(e, addon);
     if (update) {
       dispatch(updateActionAddon(update));

@@ -72,7 +72,7 @@ const slice = createSlice({
         Sentry.captureException(state.error);
         return;
       }
-
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       selectedConfig[name] = value;
       selectedConfig['updated'] = true;
       if (name === 'url' && !selectedConfig.name) {
@@ -89,7 +89,7 @@ const slice = createSlice({
         Sentry.captureException(state.error);
         return;
       }
-
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       selectedConfig[name] = value;
       selectedConfig['updated'] = true;
       if (name === 'startType' && value === START_TYPES.AUTO) {
@@ -140,6 +140,7 @@ const slice = createSlice({
       state.selectedConfigId = action.payload;
     },
     setDetailVisibility: (state, action: PayloadAction<string>) => {
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       state.detailVisibility[action.payload] = !state.detailVisibility[action.payload];
       LocalStorage.setItem(HIDDEN_DETAIL_KEY, state.detailVisibility);
     },

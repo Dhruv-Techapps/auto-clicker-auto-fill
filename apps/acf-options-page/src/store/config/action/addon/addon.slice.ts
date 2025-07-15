@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     updateActionAddon: (state, action) => {
       const { name, value } = action.payload;
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       state.addon[name] = value;
     },
     updateActionAddonGoto: (state, action: PayloadAction<GOTO>) => {

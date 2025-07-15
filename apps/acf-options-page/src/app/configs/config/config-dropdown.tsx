@@ -1,10 +1,17 @@
 import { addConfig, configSelector, selectConfig, switchConfigRemoveModal, switchConfigReorderModal } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { useEffect, useState } from 'react';
+import { Configuration } from '@dhruv-techapps/acf-common';
+import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Col, Dropdown, DropdownToggle, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-export const ConfigDropdown = (props) => {
+interface ConfigDropdownProps {
+  importFiled: React.RefObject<HTMLInputElement | null>;
+  onExportAll: (configs: Array<Configuration>) => void;
+}
+
+export const ConfigDropdown = (props: ConfigDropdownProps) => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
@@ -21,9 +28,9 @@ export const ConfigDropdown = (props) => {
     };
   }, []);
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.currentTarget;
-    dispatch(selectConfig(value));
+    dispatch(selectConfig(value as RANDOM_UUID));
   };
 
   const onAddConfig = () => {
@@ -62,7 +69,7 @@ export const ConfigDropdown = (props) => {
               <Dropdown.Item onClick={() => props.onExportAll(configs)} data-testid='configurations-export-all'>
                 {t('configuration.exportAll')}
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => props.importFiled.current?.click()} data-testid='configurations-import-all'>
+              <Dropdown.Item onClick={() => props.importFiled?.current?.click()} data-testid='configurations-import-all'>
                 {t('configuration.importAll')}
               </Dropdown.Item>
               <Dropdown.Divider />

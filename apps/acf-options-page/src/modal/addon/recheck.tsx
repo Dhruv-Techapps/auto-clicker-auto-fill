@@ -14,7 +14,7 @@ function AddonRecheck() {
   const config = useAppSelector(selectedConfigSelector);
   const dispatch = useAppDispatch();
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, addon);
     if (update) {
       dispatch(updateActionAddon(update));

@@ -35,7 +35,7 @@ const ActionSettingsModal = () => {
     updateForm(FORM_ID, settings);
   }, [settings]);
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, settings);
     if (update) {
       dispatch(updateActionSettings(update));

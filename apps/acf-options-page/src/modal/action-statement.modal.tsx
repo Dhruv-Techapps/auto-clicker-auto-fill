@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 
-import { ACTION_CONDITION_OPR, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
+import { ACTION_CONDITION_OPR, ActionCondition, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { Alert, Button, Form, Modal, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -48,7 +48,7 @@ const ActionStatementModal = () => {
     //:TODO
   };
 
-  const verifyConditions = (conditions) => {
+  const verifyConditions = (conditions: ActionCondition[]) => {
     conditions = conditions.map((condition) => {
       if (config !== undefined && condition.actionId === undefined && condition.actionIndex !== undefined) {
         const actionId = config.actions[condition.actionIndex].id;

@@ -35,11 +35,13 @@ const slice = createSlice({
     },
     updateSettings: (state, action: PayloadAction<SettingsAction>) => {
       const { name, value } = action.payload;
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       state.settings[name] = value;
     },
     updateSettingsNotification: (state, action: PayloadAction<SettingsAction>) => {
       const { name, value } = action.payload;
       if (state.settings.notifications) {
+        // @ts-expect-error "making is generic function difficult for TypeScript"
         state.settings.notifications[name] = value;
       } else {
         state.settings.notifications = { ...defaultSettingsNotifications, [name]: value };

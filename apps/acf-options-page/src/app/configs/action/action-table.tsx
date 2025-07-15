@@ -34,15 +34,18 @@ const ActionTable = ({ actions }: ActionProps) => {
   const dispatch = useAppDispatch();
   const modalContext = useConfirmationModalContext();
 
-  const onColumnChange = (e) => {
+  const onColumnChange = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement | HTMLAnchorElement>) => {
     const column = e.currentTarget.getAttribute('data-column');
+    if (!column) {
+      return;
+    }
     dispatch(setColumnVisibility(column));
   };
 
   const removeActionConfirm = async (actionId: RANDOM_UUID, index: number) => {
     const action = actions.find((action) => action.id === actionId);
     if (!action) {
-      return false;
+      return;
     }
 
     if (Object.keys(action).length === 3 && action.elementFinder === '') {
@@ -163,7 +166,7 @@ const ActionTable = ({ actions }: ActionProps) => {
     dispatch(openActionSettingsModalAPI(row.original.id));
   };
 
-  const onDisableClick = (row: Row<Action>, disabled: boolean) => {
+  const onDisableClick = (row: Row<Action>, disabled?: boolean) => {
     dispatch(updateAction({ selectedActionId: row.original.id, name: 'disabled', value: !disabled }));
   };
 
@@ -210,13 +213,13 @@ const ActionTable = ({ actions }: ActionProps) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row, index) => (
-            <tr key={row.id} className={actions[row.id].disabled ? 'table-secondary' : ''}>
+            <tr key={row.id} className={row.original.disabled ? 'table-secondary' : ''}>
               <td className='align-middle'>{index + 1}</td>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
               ))}
               <td align='center'>
-                {actions[row.id].disabled && <i className='bi bi-ban me-2' title='Disabled' />}
+                {row.original.disabled && <i className='bi bi-ban me-2' title='Disabled' />}
                 <Button
                   variant='link'
                   data-testid='action-remove'
@@ -227,7 +230,7 @@ const ActionTable = ({ actions }: ActionProps) => {
                 >
                   <i className={`bi bi-trash ${actions.length === 1 ? '' : 'text-danger'}`} title='Delete' />
                 </Button>
-                {actions[row.id].elementFinder && (
+                {row.original.elementFinder && (
                   <Dropdown id='acton-dropdown-wrapper' className='d-inline-block'>
                     <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option'>
                       <i className='bi bi-three-dots' />
@@ -252,8 +255,8 @@ const ActionTable = ({ actions }: ActionProps) => {
                         <i className='bi bi-plus-lg me-2' /> {t('action.addAfter')}
                       </Dropdown.Item>
                       <Dropdown.Divider />
-                      <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(row, actions[row.id].disabled)}>
-                        {t(`action.${actions[row.id].disabled ? 'enable' : 'disable'}`)}
+                      <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(row, row.original.disabled)}>
+                        {t(`action.${row.original.disabled ? 'enable' : 'disable'}`)}
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

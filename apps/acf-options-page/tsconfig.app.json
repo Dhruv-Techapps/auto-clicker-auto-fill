@@ -5,8 +5,12 @@
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "jsx": "react-jsx",
     "lib": ["dom"],
-    "types": ["node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts", "vite/client", "vitest/importMeta"],
-    "rootDir": "src"
+    "types": ["chrome", "node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts", "vite/client", "vitest/importMeta"],
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@acf-options-page/*": ["src/*"]
+    }
   },
   "exclude": [
     "out-tsc",

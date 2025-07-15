@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -11,7 +12,7 @@ function SettingNotifications() {
   const { notifications } = useAppSelector(settingsSelector).settings;
 
   const dispatch = useAppDispatch();
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue<boolean>(e, notifications);
     if (update) {
       dispatch(updateSettingsNotification(update));

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-import { LOAD_TYPES, START_TYPES, URL_MATCH, defaultHotkey } from '@dhruv-techapps/acf-common';
+import { Bypass, LOAD_TYPES, START_TYPES, URL_MATCH, defaultHotkey } from '@dhruv-techapps/acf-common';
 import { Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
@@ -49,7 +49,7 @@ const ConfigSettingsModal = () => {
     return false;
   };
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const update = getFieldNameValue(e, config);
     if (update) {
       dispatch(updateConfigSettings(update));
@@ -57,9 +57,10 @@ const ConfigSettingsModal = () => {
   };
 
   const onBypassUpdate = () => {
-    const bypass = {};
+    const bypass: Bypass = {};
     document.querySelectorAll("[id^='bypass.']").forEach((element) => {
       const { name, checked } = element as HTMLInputElement;
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       bypass[name] = checked;
     });
     dispatch(updateConfigSettings({ name: 'bypass', value: bypass }));

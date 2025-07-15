@@ -1,4 +1,4 @@
-import { getDefaultAction } from '@dhruv-techapps/acf-common';
+import { Action, getDefaultAction } from '@dhruv-techapps/acf-common';
 import { RANDOM_UUID } from '@dhruv-techapps/core-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
@@ -7,7 +7,7 @@ import { actionAddonActions } from './addon';
 import { actionSettingsActions } from './settings';
 import { actionStatementActions } from './statement';
 
-const arrayMove = (arr, oldIndex, newIndex) => {
+const arrayMove = (arr: Array<Action | undefined>, oldIndex: number, newIndex: number) => {
   if (newIndex >= arr.length) {
     let k = newIndex - arr.length + 1;
     k -= 1;
@@ -32,6 +32,7 @@ export const actionActions = {
       Sentry.captureException(state.error);
       return;
     }
+    // @ts-expect-error "making is generic function difficult for TypeScript"
     selectedConfig.actions = [...arrayMove(selectedConfig.actions, oldIndex, newIndex)];
   },
   addAction: (state: ConfigStore, action: PayloadAction<AddActionPayload>) => {
@@ -72,7 +73,7 @@ export const actionActions = {
       Sentry.captureException(state.error);
       return;
     }
-
+    // @ts-expect-error "making is generic function difficult for TypeScript"
     selectedAction[name] = value;
     const { error } = selectedAction;
     if (error) {

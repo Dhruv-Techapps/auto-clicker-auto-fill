@@ -79,7 +79,7 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
           url.searchParams.append('elementFinder', xpath);
           chrome.tabs.create({ url: url.href });
           googleAnalytics?.fireEvent({ name: 'Wizard', params: { location: 'contextMenus.onClicked', data: true } });
-          chrome.storage.local.remove([LOCAL_STORAGE_KEY.URL, LOCAL_STORAGE_KEY.XPATH]);
+          chrome.storage.local.remove(['url', 'xpath']);
         }
         break;
       default:

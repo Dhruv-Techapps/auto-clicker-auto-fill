@@ -21,6 +21,7 @@ const slice = createSlice({
   reducers: {
     updateActionSettings: (state, action: PayloadAction<ActionSettingsRequest>) => {
       const { name, value } = action.payload;
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       state.settings[name] = value;
     },
     switchActionSettingsModal: (state) => {

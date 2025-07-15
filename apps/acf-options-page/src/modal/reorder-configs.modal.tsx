@@ -1,4 +1,4 @@
-import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { closestCenter, DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { FormEvent, useState } from 'react';
@@ -48,11 +48,11 @@ const ReorderConfigsModal = () => {
     //:TODO
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    if (active.id !== over.id && configs) {
+    if (active.id !== over?.id && configs) {
       const oldIndex = configs.findIndex((config) => config.id === active.id);
-      const newIndex = configs.findIndex((config) => config.id === over.id);
+      const newIndex = configs.findIndex((config) => config.id === over?.id);
 
       dispatch(updateConfigReorder(arrayMove(configs, oldIndex, newIndex)));
     }
@@ -98,7 +98,14 @@ const ReorderConfigsModal = () => {
   );
 };
 
-export function SortableItem(props) {
+interface SortableItemProps {
+  id: string;
+  name?: string;
+  url?: string;
+  enable?: boolean;
+}
+
+export function SortableItem(props: SortableItemProps) {
   const { t } = useTranslation();
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: props.id });
   const style = {
