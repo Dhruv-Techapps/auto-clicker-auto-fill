@@ -4,17 +4,5 @@
   "sourceRoot": "packages/ui/components/src",
   "projectType": "library",
   "tags": ["scope:ui"],
-  "targets": {
-    "build": {
-      "executor": "@nx/js:swc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "packages/ui/components/dist",
-        "main": "packages/ui/components/src/index.ts",
-        "tsConfig": "packages/ui/components/tsconfig.lib.json",
-
-        "stripLeadingPaths": true
-      }
-    }
-  }
+  "targets": {}
 }
