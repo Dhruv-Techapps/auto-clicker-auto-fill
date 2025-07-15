@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["dom"],
     "outDir": "dist",
-    "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"],
+    "types": ["vite/client", "node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"],
     "rootDir": "src",
     "jsx": "react-jsx",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
