@@ -17,13 +17,22 @@ export class VisionValue {
     if (!element) {
       throw new Error('No element found');
     }
-    if (element.tagName !== 'IMG') {
-      throw new Error('Element is not an image');
+    let src;
+    if (element.tagName === 'IMG' || element.tagName === 'IMAGE') {
+      src = element.getAttribute('src');
+    } else {
+      // get background image from the element
+      const style = window.getComputedStyle(element);
+      const backgroundImage = style.backgroundImage;
+      if (!backgroundImage || backgroundImage === 'none') {
+        throw new Error('No background image found');
+      }
+      src = backgroundImage.slice(5, -2);
     }
-    const src = element.getAttribute('src');
     if (!src) {
       throw new Error('No image found');
     }
+
     let content = '';
     let imageUri = '';
     if (this.isBase64Image(src)) {
