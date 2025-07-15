@@ -94,7 +94,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "21.2.1",
     "prettier": "^3.6.2",
-    "react-refresh": "^0.10.0",
+    "react-refresh": "^0.17.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.55.0",
     "swc-loader": "0.1.15",
