@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NUMBER_FIELDS, IN_VALID_CLASS } from './validation';
+import { ChangeEvent } from 'react';
+import { IN_VALID_CLASS, NUMBER_FIELDS } from './validation';
 
-const getFieldNameValue = <T = any>(e, data?): { name: string; value: T } | null => {
+const getFieldNameValue = <T = any>(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, data?: any): { name: string; value: T } | null => {
   if (e.target.classList.contains(IN_VALID_CLASS)) {
     return null;
   }
 
-  let { value } = e.target;
-  const { name, type } = e.target;
-  if (type === 'checkbox') {
-    value = e.target.checked;
+  const { name, type, value } = e.target;
+  let currentValue: any = value;
+  if (type === 'checkbox' && e.target instanceof HTMLInputElement) {
+    currentValue = e.target.checked;
   } else if (NUMBER_FIELDS.includes(name) && value.indexOf('e') === -1) {
-    value = Number(value);
+    currentValue = Number(value);
   }
   if (data && data[name] === value) {
     return null;
   }
 
-  return { name, value };
+  return { name, value: currentValue };
 };
 
 const updateForm = (formId: string, data: any) => {
@@ -35,4 +36,4 @@ const updateForm = (formId: string, data: any) => {
   }
 };
 
-export { updateForm, getFieldNameValue };
+export { getFieldNameValue, updateForm };

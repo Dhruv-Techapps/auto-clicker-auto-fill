@@ -6,7 +6,7 @@ import { useAppDispatch } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
 import { Configuration } from '@dhruv-techapps/acf-common';
-import { createRef, useEffect } from 'react';
+import { ChangeEvent, createRef, useEffect } from 'react';
 import { Alert, Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { BatchModal, ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal, ScheduleModal } from '../../modal';
@@ -16,7 +16,12 @@ import Config from './config';
 import { ConfigDropdown } from './config/config-dropdown';
 import { ConfigSidebar } from './config/config-sidebar';
 
-function Configs(props) {
+interface ConfigsProps {
+  error?: string;
+  errorButton?: boolean;
+}
+
+function Configs(props: Readonly<ConfigsProps>) {
   const { t } = useTranslation();
   const importFiled = createRef<HTMLInputElement>();
   const dispatch = useAppDispatch();
@@ -27,13 +32,13 @@ function Configs(props) {
     }
   }, [dispatch]);
 
-  const onExportAll = (configs) => {
+  const onExportAll = (configs: Array<Configuration>) => {
     download('All Configurations', configs);
   };
 
-  const onImportAll = (e) => {
+  const onImportAll = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.currentTarget;
-    if (files.length <= 0) {
+    if (!files || files.length <= 0) {
       return false;
     }
     const fr = new FileReader();
@@ -59,7 +64,10 @@ function Configs(props) {
         }
       }
     };
-    fr.readAsText(files.item(0));
+    const file = files.item(0);
+    if (file) {
+      fr.readAsText(file);
+    }
     return false;
   };
 

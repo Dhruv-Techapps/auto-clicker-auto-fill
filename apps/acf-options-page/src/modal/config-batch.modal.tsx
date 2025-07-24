@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { Card, Col, Form, FormControl, Modal, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
@@ -23,7 +24,7 @@ const BatchModal = () => {
     dispatch(switchBatchModal());
   };
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, batch);
     if (update) {
       dispatch(updateBatch(update));

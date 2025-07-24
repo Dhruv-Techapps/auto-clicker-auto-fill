@@ -21,6 +21,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setColumnVisibility: (state, action: PayloadAction<string>) => {
+      // @ts-expect-error "making is generic function difficult for TypeScript"
       state.columnVisibility[action.payload] = !state.columnVisibility[action.payload];
       LocalStorage.setItem(HIDDEN_COLUMN_KEY, state.columnVisibility);
     },

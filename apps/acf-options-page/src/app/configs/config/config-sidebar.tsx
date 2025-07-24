@@ -13,11 +13,16 @@ import {
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { Configuration } from '@dhruv-techapps/acf-common';
-import { useLayoutEffect, useRef } from 'react';
+import { ChangeEvent, MouseEvent, useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-export const ConfigSidebar = (props) => {
+interface ConfigSidebarProps {
+  importFiled: React.RefObject<HTMLInputElement | null>;
+  onExportAll: (configs: Array<Configuration>) => void;
+}
+
+export const ConfigSidebar = (props: ConfigSidebarProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { selectedConfigId, detailVisibility } = useAppSelector(configSelector);
@@ -36,19 +41,20 @@ export const ConfigSidebar = (props) => {
     result && dispatch(removeConfig(config.id));
   };
 
-  const onSearchChange = (e) => {
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     dispatch(setSearch(value));
   };
 
-  const onDetailChange = (e) => {
+  const onDetailChange = (e: MouseEvent<HTMLInputElement>) => {
     const column = e.currentTarget.getAttribute('data-column');
+    if (!column) return;
     dispatch(setDetailVisibility(column));
   };
 
   //create use effect function to focus on search input field on clicking ctrl + f
   useLayoutEffect(() => {
-    const searchInputFocus = (e) => {
+    const searchInputFocus = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === 'f') {
         e.preventDefault();
         searchRef.current?.focus();
@@ -88,7 +94,7 @@ export const ConfigSidebar = (props) => {
             <Dropdown.Item onClick={() => props.onExportAll(configs)} data-testid='configurations-export-all'>
               {t('configuration.exportAll')}
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => props.importFiled.current?.click()} data-testid='configurations-import-all'>
+            <Dropdown.Item onClick={() => props.importFiled?.current?.click()} data-testid='configurations-import-all'>
               {t('configuration.importAll')}
             </Dropdown.Item>
             <Dropdown.Divider />

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { REGEX } from '@acf-options-page/util';
 import { APP_LINK } from '@acf-options-page/util/constants';
 import { getFieldNameValue, updateForm } from '@acf-options-page/util/element';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Card, Col, Form, FormControl, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -15,19 +15,19 @@ function ConfigBody() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, config);
     if (update) {
       dispatch(updateConfig(update));
     }
   };
 
-  const onKeyDown = (e) => {
-    setIsInvalid(e.target.value !== '');
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setIsInvalid(e.currentTarget.value !== '');
   };
 
   useEffect(() => {
-    if (config && config.url) {
+    if (config?.url) {
       setIsInvalid(false);
     }
     updateForm(FORM_ID, config);

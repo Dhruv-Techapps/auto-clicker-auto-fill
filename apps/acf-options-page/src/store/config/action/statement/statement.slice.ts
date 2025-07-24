@@ -28,6 +28,7 @@ const slice = createSlice({
         state.error = 'Invalid Condition';
         Sentry.captureException(state.error);
       } else {
+        // @ts-expect-error "making is generic function difficult for TypeScript"
         condition[name] = value;
       }
     },

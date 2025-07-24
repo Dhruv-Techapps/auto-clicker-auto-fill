@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { getFieldNameValue } from '@acf-options-page/util/element';
 import { Configuration } from '@dhruv-techapps/acf-common';
-import { createRef } from 'react';
+import { ChangeEvent, createRef } from 'react';
 import { Alert, Badge, Button, ButtonGroup, Card, Col, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ConfigBody from './config-body';
@@ -35,7 +35,7 @@ function Config() {
     return <Alert variant='secondary'>Please select configuration from left</Alert>;
   }
 
-  const onUpdate = (e) => {
+  const onUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     const update = getFieldNameValue(e, config);
     if (update) {
       dispatch(updateConfig(update));
@@ -48,8 +48,12 @@ function Config() {
     download(name, config);
   };
 
-  const onImportConfig = ({ currentTarget: { files } }) => {
-    if (files.length <= 0) {
+  const onImportConfig = (e: ChangeEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { files }
+    } = e;
+
+    if (!files || files.length <= 0) {
       return false;
     }
     const fr = new FileReader();
@@ -75,7 +79,10 @@ function Config() {
         }
       }
     };
-    fr.readAsText(files.item(0));
+    const file = files.item(0);
+    if (file !== null) {
+      fr.readAsText(file);
+    }
     return false;
   };
 
