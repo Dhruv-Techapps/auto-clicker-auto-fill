@@ -4,7 +4,7 @@ import { BUTTON_FILE_SUBMIT_NODE_NAME, RADIO_CHECKBOX_NODE_NAME } from '../commo
 import { xPath } from './dom-path';
 import { WizardAction } from './type';
 
-interface selectType {
+interface ISelectType {
   elementValue?: string;
   optionValue?: string;
 }
@@ -12,7 +12,7 @@ interface selectType {
 export const WizardElementUtil = (() => {
   const radioCheckbox = (element: HTMLInputElement): boolean => element.checked;
 
-  const select = (element: HTMLSelectElement): selectType | null => {
+  const select = (element: HTMLSelectElement): ISelectType | null => {
     const option = element.querySelector('option:checked') as HTMLOptionElement;
     if (option.index === 0) {
       return null;
@@ -37,7 +37,7 @@ export const WizardElementUtil = (() => {
     });
 
   const optionListener = async (element: HTMLSelectElement | HTMLOptionElement) =>
-    new Promise<selectType | null>((resolve) => {
+    new Promise<ISelectType | null>((resolve) => {
       element.addEventListener('blur', (e) => resolve(select(e.target as HTMLSelectElement)), { once: true, passive: true });
     });
 
