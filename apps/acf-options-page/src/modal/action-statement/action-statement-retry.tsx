@@ -1,12 +1,12 @@
-import { ActionStatement, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { ERetryOptions, IActionStatement } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { selectedConfigSelector, updateActionStatementGoto, updateActionStatementThen } from '../../store/config';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
-type ActionStatementRetryProps = Partial<Pick<ActionStatement, 'then' | 'goto'>>;
+type ActionStatementRetryProps = Partial<Pick<IActionStatement, 'then' | 'goto'>>;
 
 export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
   const { then, goto } = props;
@@ -14,9 +14,9 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const onUpdateThen = (then: RETRY_OPTIONS) => {
+  const onUpdateThen = (then: ERetryOptions) => {
     dispatch(updateActionStatementThen(then));
-    if (then === RETRY_OPTIONS.GOTO) {
+    if (then === ERetryOptions.GOTO) {
       const actionId = config?.actions[0].id;
       if (actionId) {
         dispatch(updateActionStatementGoto(actionId));
@@ -25,7 +25,7 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
   };
 
   const onUpdateGoto = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(updateActionStatementGoto(e.currentTarget.value as RANDOM_UUID));
+    dispatch(updateActionStatementGoto(e.currentTarget.value as TRandomUUID));
   };
 
   if (!config) {
@@ -45,9 +45,9 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
             <Form.Check
               type='radio'
               required
-              checked={then === RETRY_OPTIONS.STOP}
-              value={RETRY_OPTIONS.STOP}
-              onChange={() => onUpdateThen(RETRY_OPTIONS.STOP)}
+              checked={then === ERetryOptions.STOP}
+              value={ERetryOptions.STOP}
+              onChange={() => onUpdateThen(ERetryOptions.STOP)}
               name='then'
               label={t('modal.actionSettings.retry.stop')}
             />
@@ -56,9 +56,9 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
             <Form.Check
               type='radio'
               required
-              checked={then === RETRY_OPTIONS.SKIP}
-              value={RETRY_OPTIONS.SKIP}
-              onChange={() => onUpdateThen(RETRY_OPTIONS.SKIP)}
+              checked={then === ERetryOptions.SKIP}
+              value={ERetryOptions.SKIP}
+              onChange={() => onUpdateThen(ERetryOptions.SKIP)}
               name='then'
               label={t('modal.actionSettings.retry.skip')}
             />
@@ -67,9 +67,9 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
             <Form.Check
               type='radio'
               required
-              checked={then === RETRY_OPTIONS.RELOAD}
-              value={RETRY_OPTIONS.RELOAD}
-              onChange={() => onUpdateThen(RETRY_OPTIONS.RELOAD)}
+              checked={then === ERetryOptions.RELOAD}
+              value={ERetryOptions.RELOAD}
+              onChange={() => onUpdateThen(ERetryOptions.RELOAD)}
               name='then'
               label={t('modal.actionSettings.retry.refresh')}
             />
@@ -78,15 +78,15 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
             <Form.Check
               type='radio'
               required
-              checked={then === RETRY_OPTIONS.GOTO}
-              value={RETRY_OPTIONS.GOTO}
-              onChange={() => onUpdateThen(RETRY_OPTIONS.GOTO)}
+              checked={then === ERetryOptions.GOTO}
+              value={ERetryOptions.GOTO}
+              onChange={() => onUpdateThen(ERetryOptions.GOTO)}
               name='then'
               label={t('modal.actionSettings.retry.goto')}
             />
           </Col>
         </Row>
-        {then === RETRY_OPTIONS.GOTO && (
+        {then === ERetryOptions.GOTO && (
           <Row>
             <Col xs={{ span: 4, offset: 8 }}>
               <Form.Select value={goto} onChange={onUpdateGoto} name='goto' required>

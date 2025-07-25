@@ -1,4 +1,4 @@
-export type Discord = {
+export interface Discord {
   accent_color: number;
   avatar: string;
   banner_color: string;
@@ -13,4 +13,4 @@ export type Discord = {
   public_flags: number;
   username: string;
   verified: boolean;
-};
+}

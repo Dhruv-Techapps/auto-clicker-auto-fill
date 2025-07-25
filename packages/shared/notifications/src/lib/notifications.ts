@@ -16,8 +16,8 @@ export function registerNotifications(optionsPageUrl?: string) {
 
 export class NotificationHandler {
   static async notify(id: string, title: string, message: string, requireInteraction = true) {
-    const { action } = await chrome.runtime.getManifest();
-    const defaultOptions: chrome.notifications.NotificationOptions<true> = {
+    const { action } = chrome.runtime.getManifest();
+    const defaultOptions: chrome.notifications.NotificationCreateOptions = {
       type: 'basic',
       iconUrl: action.default_icon,
       title,

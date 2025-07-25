@@ -12,14 +12,14 @@ import {
   switchConfigReorderModal
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { ChangeEvent, MouseEvent, useLayoutEffect, useRef } from 'react';
 import { Button, Dropdown, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 interface ConfigSidebarProps {
   importFiled: React.RefObject<HTMLInputElement | null>;
-  onExportAll: (configs: Array<Configuration>) => void;
+  onExportAll: (configs: Array<IConfiguration>) => void;
 }
 
 export const ConfigSidebar = (props: ConfigSidebarProps) => {
@@ -30,7 +30,7 @@ export const ConfigSidebar = (props: ConfigSidebarProps) => {
   const modalContext = useConfirmationModalContext();
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const onRemoveConfig = async (e: React.MouseEvent<HTMLButtonElement>, config: Configuration) => {
+  const onRemoveConfig = async (e: React.MouseEvent<HTMLButtonElement>, config: IConfiguration) => {
     e.stopPropagation();
     const name = config.name ?? config.url;
     const result = await modalContext.showConfirmation({

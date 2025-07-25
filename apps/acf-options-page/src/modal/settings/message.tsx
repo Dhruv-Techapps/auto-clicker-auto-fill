@@ -3,9 +3,9 @@ import { useTimeout } from '../../_hooks/message.hooks';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setSettingsMessage, settingsSelector } from '../../store/settings/settings.slice';
 
-export type SettingMessageRef = {
+export interface SettingMessageRef {
   showMessage: (message: string) => void;
-};
+}
 
 const SettingMessage = () => {
   const { message } = useAppSelector(settingsSelector);

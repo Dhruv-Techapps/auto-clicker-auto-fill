@@ -1,25 +1,25 @@
-import { Discord, Settings, defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
-import { AUTO_BACKUP } from '@dhruv-techapps/shared-google-drive';
+import { IDiscord, ISettings, defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
+import { EAutoBackup } from '@dhruv-techapps/shared-google-drive';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../store';
 import { discordDeleteAPI, discordGetAPI, discordLoginAPI, settingsGetAPI } from './settings.api';
 
-type SettingsStore = {
+export interface ISettingsStore {
   visible: boolean;
   loading: boolean;
   error?: string;
-  settings: Settings;
-  discord?: Discord;
+  settings: ISettings;
+  discord?: IDiscord;
   message?: string;
-};
+}
 
-type SettingsAction = {
+export interface ISettingsAction {
   name: string;
   value: boolean;
-};
+}
 
-const initialState: SettingsStore = { visible: false, loading: true, settings: defaultSettings };
+const initialState: ISettingsStore = { visible: false, loading: true, settings: defaultSettings };
 
 const slice = createSlice({
   name: 'settings',
@@ -33,12 +33,12 @@ const slice = createSlice({
       state.message = action.payload;
       state.error = undefined;
     },
-    updateSettings: (state, action: PayloadAction<SettingsAction>) => {
+    updateSettings: (state, action: PayloadAction<ISettingsAction>) => {
       const { name, value } = action.payload;
       // @ts-expect-error "making is generic function difficult for TypeScript"
       state.settings[name] = value;
     },
-    updateSettingsNotification: (state, action: PayloadAction<SettingsAction>) => {
+    updateSettingsNotification: (state, action: PayloadAction<ISettingsAction>) => {
       const { name, value } = action.payload;
       if (state.settings.notifications) {
         // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -47,7 +47,7 @@ const slice = createSlice({
         state.settings.notifications = { ...defaultSettingsNotifications, [name]: value };
       }
     },
-    updateSettingsBackup: (state, action: PayloadAction<AUTO_BACKUP>) => {
+    updateSettingsBackup: (state, action: PayloadAction<EAutoBackup>) => {
       if (state.settings.backup) {
         state.settings.backup.autoBackup = action.payload;
       } else {

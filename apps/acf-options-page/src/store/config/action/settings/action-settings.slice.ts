@@ -1,25 +1,28 @@
-import { ActionSettings, defaultActionSettings, GOTO } from '@dhruv-techapps/acf-common';
+import { defaultActionSettings, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../../store';
 import { openActionSettingsModalAPI } from './action-settings.api';
 
-type ActionSettingsStore = {
+export interface IActionSettingsStore {
   visible: boolean;
   error?: string;
   message?: string;
-  settings: ActionSettings;
-};
+  settings: IActionSettings;
+}
 
-type ActionSettingsRequest = { name: string; value: boolean };
+export interface IActionSettingsRequest {
+  name: string;
+  value: boolean;
+}
 
-const initialState: ActionSettingsStore = { visible: false, settings: { ...defaultActionSettings } };
+const initialState: IActionSettingsStore = { visible: false, settings: { ...defaultActionSettings } };
 
 const slice = createSlice({
   name: 'actionSettings',
   initialState,
   reducers: {
-    updateActionSettings: (state, action: PayloadAction<ActionSettingsRequest>) => {
+    updateActionSettings: (state, action: PayloadAction<IActionSettingsRequest>) => {
       const { name, value } = action.payload;
       // @ts-expect-error "making is generic function difficult for TypeScript"
       state.settings[name] = value;
@@ -37,7 +40,7 @@ const slice = createSlice({
       Sentry.captureException(state.error);
       state.message = undefined;
     },
-    updateActionSettingsGoto: (state, action: PayloadAction<GOTO>) => {
+    updateActionSettingsGoto: (state, action: PayloadAction<TGoto>) => {
       state.settings.retryGoto = action.payload;
     }
   },

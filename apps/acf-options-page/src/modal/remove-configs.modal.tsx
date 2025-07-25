@@ -1,4 +1,4 @@
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent, FormEvent } from 'react';
 import { Badge, Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +23,7 @@ const RemoveConfigsModal = () => {
   const remove = (e: ChangeEvent<HTMLInputElement>) => {
     const { dataset } = e.currentTarget;
     if (dataset.id) {
-      dispatch(switchConfigRemoveSelection(dataset.id as RANDOM_UUID));
+      dispatch(switchConfigRemoveSelection(dataset.id as TRandomUUID));
     }
   };
 

@@ -1,10 +1,10 @@
 import { ConfigError } from '@dhruv-techapps/core-common';
 
-type CoreServiceRequest = {
+interface CoreServiceRequest {
   messenger: string;
   methodName: string;
   message?: unknown;
-};
+}
 
 export class CoreService {
   static messageChrome<K extends CoreServiceRequest, T = void>(message: K): Promise<T> {

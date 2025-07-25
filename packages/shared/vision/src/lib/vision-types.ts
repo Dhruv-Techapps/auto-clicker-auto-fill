@@ -1,8 +1,8 @@
-export type VisionImageRequest = {
+export interface VisionImageRequest {
   content: string;
   imageUri: string;
-};
+}
 
-export type VisionImageResponse = {
+export interface VisionImageResponse {
   responses: Array<{ fullTextAnnotation: { text: string } }>;
-};
+}

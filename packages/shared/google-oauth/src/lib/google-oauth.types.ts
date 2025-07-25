@@ -7,10 +7,10 @@ export enum GOOGLE_SCOPES {
   EMAIL = 'https://www.googleapis.com/auth/userinfo.email'
 }
 
-export type GoogleOauth2LoginResponse = {
+export interface GoogleOauth2LoginResponse {
   token?: string;
   grantedScopes?: string[];
-};
+}
 
 export type GoogleOauth2RemoveResponse = RESPONSE_CODE.REMOVED;
 

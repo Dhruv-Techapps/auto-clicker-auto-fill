@@ -2,13 +2,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 
-type ConfigSettingsStore = {
+export interface IConfigSettingsStore {
   visible: boolean;
   error?: string;
   message?: string;
-};
+}
 
-const initialState: ConfigSettingsStore = { visible: false };
+const initialState: IConfigSettingsStore = { visible: false };
 
 const slice = createSlice({
   name: 'configSettings',

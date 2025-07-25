@@ -1,9 +1,9 @@
-type NavigationStep = {
+interface NavigationStep {
   type: 'navigate';
   url: string;
-};
+}
 
-type SetViewportStep = {
+interface SetViewportStep {
   type: 'setViewport';
   width: number;
   height: number;
@@ -11,36 +11,36 @@ type SetViewportStep = {
   isMobile: boolean;
   hasTouch: boolean;
   isLandscape: boolean;
-};
-type ChangeStep = {
+}
+interface ChangeStep {
   target: string;
   type: 'change';
   selectors: Array<Array<string>>;
   value: string;
-};
+}
 
-type ClickStep = {
+interface ClickStep {
   target: string;
   type: 'click' | 'doubleClick';
   selectors: Array<Array<string>>;
   offsetY: number;
   offsetX: number;
-};
+}
 
-type KeyStep = {
+interface KeyStep {
   target: string;
   type: 'keyDown' | 'keyUp';
   key: string;
-};
+}
 
-type AssertedEvents = {
+interface AssertedEvents {
   type: string;
   url: string;
   title: string;
-};
+}
 
 export type Step = (NavigationStep | SetViewportStep | ChangeStep | ClickStep | KeyStep) & { assertedEvents?: Array<AssertedEvents>; timeout: number };
-export type Recording = {
+export interface Recording {
   title: string;
   steps: Array<Step>;
-};
+}

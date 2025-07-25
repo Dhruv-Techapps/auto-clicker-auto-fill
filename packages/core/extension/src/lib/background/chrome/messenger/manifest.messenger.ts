@@ -2,11 +2,11 @@ export type ManifestResult = Partial<chrome.runtime.Manifest>;
 
 type ManifestValuesProps = string[];
 
-export type ManifestRequest = {
+export interface ManifestRequest {
   messenger: 'manifest';
   methodName: 'values' | 'value';
   message: string | ManifestValuesProps;
-};
+}
 
 export class ManifestMessenger {
   async values(keys: ManifestValuesProps): Promise<ManifestResult> {

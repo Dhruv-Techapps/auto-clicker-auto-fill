@@ -1,4 +1,4 @@
-import { Configuration as ConfigurationType } from '@dhruv-techapps/acf-common';
+import { IConfiguration as ConfigurationType } from '@dhruv-techapps/acf-common';
 import React, { useEffect } from 'react';
 import { Alert, Badge, Button } from 'react-bootstrap';
 import { useParams, useSearchParams } from 'react-router-dom';

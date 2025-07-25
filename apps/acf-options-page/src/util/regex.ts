@@ -1,6 +1,6 @@
-type RegexType = {
+interface RegexType {
   [index: string]: string;
-};
+}
 
 const REGEX: RegexType = {
   NUMBER: '^-?\\d+$',

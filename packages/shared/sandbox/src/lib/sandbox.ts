@@ -2,11 +2,11 @@ import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
 
 export const SANDBOX_INITIALIZED = 'sandbox-initialized';
 
-type SandboxReqType = {
+interface SandboxReqType {
   command: string;
   name: string;
   context: string;
-};
+}
 
 export const Sandbox = (() => {
   let sandbox: HTMLIFrameElement;

@@ -1,5 +1,5 @@
-import { Action, CONFIG_SOURCE, Configuration, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { EConfigSource, IAction, IConfiguration, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { GetThunkAPI } from '@reduxjs/toolkit';
 import { blogCheckAPI } from '../blog';
 
@@ -25,7 +25,7 @@ export const getConfigName = (url?: string) => {
  * @param thunkAPI - The thunk API object.
  * @returns The index of the selected configuration.
  */
-export const checkQueryParams = (configs: Array<Configuration>, thunkAPI: GetThunkAPI<any>): RANDOM_UUID | undefined => {
+export const checkQueryParams = (configs: Array<IConfiguration>, thunkAPI: GetThunkAPI<any>): TRandomUUID | undefined => {
   if (window.location.search) {
     const { searchParams } = new URL(window.location.href);
     const configId = searchParams.get('configId');
@@ -54,12 +54,12 @@ export const checkQueryParams = (configs: Array<Configuration>, thunkAPI: GetThu
       if (selectedConfig) {
         const selectedAction = selectedConfig.actions.find((action) => action.elementFinder === elementFinder);
         if (!selectedAction) {
-          const action: Action = { ...getDefaultAction(), elementFinder: elementFinder, error: [] };
+          const action: IAction = { ...getDefaultAction(), elementFinder: elementFinder, error: [] };
           selectedConfig.actions.push(action);
         }
         return selectedConfig.id;
       } else {
-        const newConfig = getDefaultConfig(CONFIG_SOURCE.WEB);
+        const newConfig = getDefaultConfig(EConfigSource.WEB);
         newConfig.url = url;
         newConfig.name = getConfigName(url);
         newConfig.actions[0].elementFinder = elementFinder;
@@ -79,7 +79,7 @@ export const checkQueryParams = (configs: Array<Configuration>, thunkAPI: GetThu
  * @param configs - An array of configurations.
  * @returns The updated array of configurations with updated IDs.
  */
-export const updateConfigIds = (configs: Array<Configuration>) => {
+export const updateConfigIds = (configs: Array<IConfiguration>) => {
   return configs.map(updateConfigId);
 };
 
@@ -88,11 +88,11 @@ export const updateConfigIds = (configs: Array<Configuration>) => {
  * @param config - A configuration.
  * @returns The updated configuration with updated IDs.
  */
-export const updateConfigId = (config: Configuration) => {
+export const updateConfigId = (config: IConfiguration) => {
   if (!config.id) {
     return { ...config, id: crypto.randomUUID() };
   }
-  config.actions.map((action) => {
+  config.actions.forEach((action) => {
     if (!action.id) {
       action.id = crypto.randomUUID();
     }

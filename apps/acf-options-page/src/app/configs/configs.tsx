@@ -5,7 +5,7 @@ import { configGetAllAPI } from '@acf-options-page/store/config/config.api';
 import { useAppDispatch } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { ChangeEvent, createRef, useEffect } from 'react';
 import { Alert, Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ function Configs(props: Readonly<ConfigsProps>) {
     }
   }, [dispatch]);
 
-  const onExportAll = (configs: Array<Configuration>) => {
+  const onExportAll = (configs: Array<IConfiguration>) => {
     download('All Configurations', configs);
   };
 
@@ -47,7 +47,7 @@ function Configs(props: Readonly<ConfigsProps>) {
         if (target?.result === null) {
           dispatch(addToast({ header: 'File', body: t('error.json'), variant: 'danger' }));
         } else {
-          const importedConfigs: Array<Configuration> | Configuration = JSON.parse(target?.result as string);
+          const importedConfigs: Array<IConfiguration> | IConfiguration = JSON.parse(target?.result as string);
           if (!Array.isArray(importedConfigs)) {
             dispatch(importConfig(importedConfigs));
           } else {

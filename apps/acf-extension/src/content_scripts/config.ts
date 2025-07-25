@@ -1,4 +1,4 @@
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { MainWorldService } from '@dhruv-techapps/acf-main-world';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { Session } from '@dhruv-techapps/acf-util';
@@ -20,7 +20,7 @@ const CONFIG_I18N = {
   TITLE: chrome.i18n.getMessage('@CONFIG__TITLE')
 };
 const ConfigProcessor = (() => {
-  const getFields = (config: Configuration) => {
+  const getFields = (config: IConfiguration) => {
     const fields = [{ name: 'URL', value: config.url }];
     if (config.name) {
       fields.unshift({ name: 'name', value: config.name });
@@ -28,7 +28,7 @@ const ConfigProcessor = (() => {
     return fields;
   };
 
-  const getEvents = (config: Configuration) => {
+  const getEvents = (config: IConfiguration) => {
     const events: { [key: string]: string | number | boolean | undefined } = { url: config.url, loadType: config.loadType, actions: config.actions.length };
     if (config.batch) {
       events['batch'] = config.batch.refresh || config.batch.repeat;
@@ -45,7 +45,7 @@ const ConfigProcessor = (() => {
     return events;
   };
 
-  const start = async (config: Configuration) => {
+  const start = async (config: IConfiguration) => {
     try {
       window.__sessionCount = new Session(config.id).getCount();
       if (config.bypass) {
@@ -116,7 +116,7 @@ const ConfigProcessor = (() => {
     });
   };
 
-  const checkStartTime = async (config: Configuration) => {
+  const checkStartTime = async (config: IConfiguration) => {
     if (config.startTime?.match(/^\d{2}:\d{2}:\d{2}:\d{3}$/)) {
       await schedule(config.startTime);
     } else {
@@ -129,7 +129,7 @@ const ConfigProcessor = (() => {
     statusBar.setLocation(statusBarLocation);
   };
 
-  const checkStartType = async (configs: Array<Configuration>, config?: Configuration) => {
+  const checkStartType = async (configs: Array<IConfiguration>, config?: IConfiguration) => {
     setupStatusBar();
     configs.forEach((c) => {
       Hotkey.setup(start.bind(this, c), c.hotkey);

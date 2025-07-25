@@ -4,16 +4,16 @@ import * as Sentry from '@sentry/react';
 import { RootState } from '../store';
 import { firebaseIsLoginAPI, firebaseLoginAPI, firebaseLogoutAPI } from './firebase-login.api';
 
-type FirebaseStore = {
+export interface IFirebaseStore {
   visible: boolean;
   error?: string;
   message?: string;
   isLoading: boolean;
   user?: User | null;
   role?: FirebaseRole;
-};
+}
 
-const initialState: FirebaseStore = { visible: false, isLoading: true };
+const initialState: IFirebaseStore = { visible: false, isLoading: true };
 
 const slice = createSlice({
   name: 'firebase',

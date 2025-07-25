@@ -1,6 +1,6 @@
-import { GOTO } from './common-model';
+import { TGoto } from './common-model';
 
-export enum ADDON_CONDITIONS {
+export enum EAddonConditions {
   '~~ Select Condition ~~' = '',
   '= Equals' = 'Equals',
   '!= Not Equals' = 'NotEquals',
@@ -14,28 +14,28 @@ export enum ADDON_CONDITIONS {
   '✕ Is Not Checked ' = 'IsNotChecked'
 }
 
-export enum RECHECK_OPTIONS {
+export enum ERecheckOptions {
   STOP = 'stop',
   SKIP = 'skip',
   RELOAD = 'reload',
   GOTO = 'goto'
 }
 
-export type Addon = {
+export interface IAddon {
   elementFinder: string;
   value: string;
-  condition: ADDON_CONDITIONS;
+  condition: EAddonConditions;
   valueExtractor?: string;
   valueExtractorFlags?: string;
   recheck?: number;
   recheckInterval?: number | string;
-  recheckOption: RECHECK_OPTIONS;
-  recheckGoto?: GOTO;
-};
+  recheckOption: ERecheckOptions;
+  recheckGoto?: TGoto;
+}
 
-export const defaultAddon: Addon = {
+export const defaultAddon: IAddon = {
   elementFinder: '',
   value: '',
-  condition: ADDON_CONDITIONS['~~ Select Condition ~~'],
-  recheckOption: RECHECK_OPTIONS.STOP
+  condition: EAddonConditions['~~ Select Condition ~~'],
+  recheckOption: ERecheckOptions.STOP
 };

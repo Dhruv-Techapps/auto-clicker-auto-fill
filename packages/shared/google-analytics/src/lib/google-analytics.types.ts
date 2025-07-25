@@ -1,17 +1,17 @@
-export type FirePageViewEventParams = {
+export interface FirePageViewEventParams {
   name?: string;
   pageTitle: string;
   pageLocation: string;
   additionalParams?: Record<string, unknown>;
-};
+}
 
-export type FireErrorEventParams = {
+export interface FireErrorEventParams {
   error: string;
   name?: string;
   additionalParams?: Record<string, unknown>;
-};
+}
 
-export type FireEventParams = {
+export interface FireEventParams {
   name: string;
   params?: {
     session_id?: string;
@@ -29,4 +29,4 @@ export type FireEventParams = {
       params: Record<string, unknown>;
     }>;
   };
-};
+}

@@ -1,7 +1,7 @@
-import { LOCAL_STORAGE_KEY, Settings, defaultSettings } from '@dhruv-techapps/acf-common';
+import { ISettings, LOCAL_STORAGE_KEY, defaultSettings } from '@dhruv-techapps/acf-common';
 
 export class SettingsStorage {
-  async getSettings(): Promise<Settings> {
+  async getSettings(): Promise<ISettings> {
     try {
       const { settings = defaultSettings } = await chrome.storage.local.get(LOCAL_STORAGE_KEY.SETTINGS);
       return settings;

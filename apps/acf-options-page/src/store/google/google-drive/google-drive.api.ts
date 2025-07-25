@@ -1,5 +1,5 @@
 import { GoogleBackupService } from '@dhruv-techapps/acf-service';
-import { AUTO_BACKUP, GoogleDriveService } from '@dhruv-techapps/shared-google-drive';
+import { EAutoBackup, GoogleDriveService } from '@dhruv-techapps/shared-google-drive';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateSettingsBackup } from '../../settings';
 
@@ -12,7 +12,7 @@ export const googleDriveRestoreAPI = createAsyncThunk('googleDrive/restore', asy
   await GoogleBackupService.restore(req.id, req.name);
 });
 
-export const googleDriveAutoBackupAPI = createAsyncThunk('googleDrive/autoBackup', async (autoBackup: AUTO_BACKUP, thunkAPI) => {
+export const googleDriveAutoBackupAPI = createAsyncThunk('googleDrive/autoBackup', async (autoBackup: EAutoBackup, thunkAPI) => {
   await GoogleDriveService.autoBackup(autoBackup);
   thunkAPI.dispatch(updateSettingsBackup(autoBackup));
 });

@@ -1,4 +1,4 @@
-import { Bypass } from '@dhruv-techapps/acf-common';
+import { IBypass } from '@dhruv-techapps/acf-common';
 
 declare global {
   interface Window {
@@ -26,13 +26,13 @@ export class MainWorldBackground {
     }
   }
 
-  async bypass(message: Bypass, sender: chrome.runtime.MessageSender) {
+  async bypass(message: IBypass, sender: chrome.runtime.MessageSender) {
     if (sender.tab?.id) {
       // Perform the action that requires the permission
-      chrome.scripting.executeScript<[Bypass], void>({
+      chrome.scripting.executeScript<[IBypass], void>({
         world: 'MAIN',
         target: { tabId: sender.tab.id, allFrames: true },
-        func: (message: Bypass) => {
+        func: (message: IBypass) => {
           if (message.alert) {
             window.alert = () => {
               // By Passing alert function

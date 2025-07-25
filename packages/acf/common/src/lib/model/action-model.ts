@@ -1,67 +1,67 @@
-import { generateUUID, RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { TRandomUUID, generateUUID } from '@dhruv-techapps/core-common';
 
-import { Addon } from './addon-model';
-import { GOTO } from './common-model';
-import { RETRY_OPTIONS } from './setting-model';
+import { IAddon } from './addon-model';
+import { TGoto } from './common-model';
+import { ERetryOptions } from './setting-model';
 
 // Action Condition
-export enum ACTION_STATUS {
+export enum EActionStatus {
   DONE = 'done',
   SKIPPED = 'skipped'
 }
 
-export enum ACTION_RUNNING {
+export enum EActionRunning {
   SKIP = 'skip',
   GOTO = 'goto',
   PROCEED = 'proceed'
 }
 
-export enum ACTION_CONDITION_OPR {
+export enum EActionConditionOperator {
   AND = 'and',
   OR = 'or'
 }
 
-export type ActionCondition = {
-  id: RANDOM_UUID;
+export interface IActionCondition {
+  id: TRandomUUID;
   actionIndex?: number;
-  actionId: RANDOM_UUID;
-  status: ACTION_STATUS;
-  operator?: ACTION_CONDITION_OPR;
-};
+  actionId: TRandomUUID;
+  status: EActionStatus;
+  operator?: EActionConditionOperator;
+}
 
-export const getDefaultActionCondition = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionCondition => ({
+export const getDefaultActionCondition = (actionId: TRandomUUID, operator?: EActionConditionOperator): IActionCondition => ({
   id: generateUUID(),
   actionId,
-  status: ACTION_STATUS.DONE,
+  status: EActionStatus.DONE,
   operator
 });
 
 // Action Statement
 
-export type ActionStatement = {
-  conditions: Array<ActionCondition>;
-  then: RETRY_OPTIONS;
-  goto?: GOTO;
-};
+export interface IActionStatement {
+  conditions: Array<IActionCondition>;
+  then: ERetryOptions;
+  goto?: TGoto;
+}
 
-export const getDefaultActionStatement = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR): ActionStatement => ({
+export const getDefaultActionStatement = (actionId: TRandomUUID, operator?: EActionConditionOperator): IActionStatement => ({
   conditions: [getDefaultActionCondition(actionId, operator)],
-  then: RETRY_OPTIONS.STOP
+  then: ERetryOptions.STOP
 });
 
 // Action Setting
-export type ActionSettings = {
+export interface IActionSettings {
   iframeFirst?: boolean;
   retry?: number;
   retryInterval?: number | string;
-  retryOption?: RETRY_OPTIONS;
-  retryGoto?: GOTO;
-};
+  retryOption?: ERetryOptions;
+  retryGoto?: TGoto;
+}
 
 export const defaultActionSettings = {};
 
-export type Action = {
-  id: RANDOM_UUID;
+export interface IAction {
+  id: TRandomUUID;
   disabled?: boolean;
   elementFinder: string;
   actionId?: number;
@@ -70,17 +70,17 @@ export type Action = {
   value?: string;
   repeat?: number;
   repeatInterval?: number | string;
-  addon?: Addon;
-  statement?: ActionStatement;
-  settings?: ActionSettings;
-  status?: ACTION_STATUS;
+  addon?: IAddon;
+  statement?: IActionStatement;
+  settings?: IActionSettings;
+  status?: EActionStatus;
   error?: string[];
   valueFieldType?: 'text' | 'textarea';
   elementType?: string;
   selectors?: Array<Array<string>>;
-};
+}
 
-export const getDefaultAction = (): Action => ({
+export const getDefaultAction = (): IAction => ({
   id: generateUUID(),
   elementFinder: '',
   error: ['elementFinder']

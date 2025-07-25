@@ -1,4 +1,4 @@
-import { Bypass } from '@dhruv-techapps/acf-common';
+import { IBypass } from '@dhruv-techapps/acf-common';
 import { CoreService } from '@dhruv-techapps/core-service';
 import { RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING } from './main-world.constant';
 
@@ -7,7 +7,7 @@ export class MainWorldService extends CoreService {
     return await this.message({ messenger: RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING, methodName: 'click', message: elementFinder });
   }
 
-  static async bypass(message: Bypass) {
+  static async bypass(message: IBypass) {
     return await this.message({ messenger: RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING, methodName: 'bypass', message });
   }
 }

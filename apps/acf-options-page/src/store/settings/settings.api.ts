@@ -1,16 +1,16 @@
-import { Discord, LOCAL_STORAGE_KEY, Settings } from '@dhruv-techapps/acf-common';
+import { IDiscord, ISettings, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { DiscordOauthService } from '@dhruv-techapps/shared-discord-oauth';
 import { FirebaseFirestoreService } from '@dhruv-techapps/shared-firebase-firestore';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const settingsGetAPI = createAsyncThunk('settings/get', async () => {
-  const result = await StorageService.get<LOCAL_STORAGE_KEY.SETTINGS, Settings>(LOCAL_STORAGE_KEY.SETTINGS);
+  const result = await StorageService.get<LOCAL_STORAGE_KEY.SETTINGS, ISettings>(LOCAL_STORAGE_KEY.SETTINGS);
   return result.settings;
 });
 
 export const discordGetAPI = createAsyncThunk('discord/get', async () => {
-  const result = await FirebaseFirestoreService.getDiscord<Discord>();
+  const result = await FirebaseFirestoreService.getDiscord<IDiscord>();
   return result;
 });
 

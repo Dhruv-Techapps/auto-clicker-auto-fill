@@ -1,7 +1,7 @@
 /*global chrome*/
 
 import { LOCAL_STORAGE_KEY, defaultSettings, getDefaultConfig } from '@dhruv-techapps/acf-common';
-import { BACKUP_ALARM, DriveFile, GoogleDriveBackground, GoogleDriveFile } from '@dhruv-techapps/shared-google-drive';
+import { BACKUP_ALARM, GoogleDriveBackground, IDriveFile, IGoogleDriveFile } from '@dhruv-techapps/shared-google-drive';
 import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
 import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
 import { EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL } from '../common/environments';
@@ -31,7 +31,7 @@ export default class AcfBackup extends GoogleDriveBackground {
   async backup(now?: boolean): Promise<string> {
     const { configs = [getDefaultConfig()] } = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
     const { settings = { ...defaultSettings } } = await chrome.storage.local.get(LOCAL_STORAGE_KEY.SETTINGS);
-    const { files } = await this.driveList<GoogleDriveFile>();
+    const { files } = await this.driveList<IGoogleDriveFile>();
     await this._createOrUpdate(BACKUP_FILE_NAMES.CONFIGS, configs, files.find((file) => file.name === BACKUP_FILE_NAMES.CONFIGS)?.id);
     await this._createOrUpdate(BACKUP_FILE_NAMES.SETTINGS, settings, files.find((file) => file.name === BACKUP_FILE_NAMES.SETTINGS)?.id);
     if (!settings.backup) {
@@ -46,7 +46,7 @@ export default class AcfBackup extends GoogleDriveBackground {
     return lastBackup;
   }
 
-  async restore(file: DriveFile): Promise<void> {
+  async restore(file: IDriveFile): Promise<void> {
     const fileContent = await this.driveGet(file);
     if (fileContent) {
       if (file.name === BACKUP_FILE_NAMES.SETTINGS) {

@@ -1,26 +1,26 @@
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 import { configReorderUpdateAPI } from './config-reorder.api';
 
-type ConfigReorderStore = {
+export interface IConfigReorderStore {
   visible: boolean;
   error?: string;
   message?: string;
-  configs?: Array<Configuration>;
-};
+  configs?: Array<IConfiguration>;
+}
 
-const initialState: ConfigReorderStore = { visible: false };
+const initialState: IConfigReorderStore = { visible: false };
 
 const slice = createSlice({
   name: 'configReorder',
   initialState,
   reducers: {
-    updateConfigReorder: (state, action: PayloadAction<Array<Configuration>>) => {
+    updateConfigReorder: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = action.payload;
     },
-    switchConfigReorderModal: (state, action: PayloadAction<Array<Configuration> | undefined>) => {
+    switchConfigReorderModal: (state, action: PayloadAction<Array<IConfiguration> | undefined>) => {
       if (action.payload) {
         state.configs = action.payload;
       }

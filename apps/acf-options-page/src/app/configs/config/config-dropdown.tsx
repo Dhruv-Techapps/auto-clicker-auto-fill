@@ -1,14 +1,14 @@
 import { addConfig, configSelector, selectConfig, switchConfigRemoveModal, switchConfigReorderModal } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { Configuration } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Col, Dropdown, DropdownToggle, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 interface ConfigDropdownProps {
   importFiled: React.RefObject<HTMLInputElement | null>;
-  onExportAll: (configs: Array<Configuration>) => void;
+  onExportAll: (configs: Array<IConfiguration>) => void;
 }
 
 export const ConfigDropdown = (props: ConfigDropdownProps) => {
@@ -30,7 +30,7 @@ export const ConfigDropdown = (props: ConfigDropdownProps) => {
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.currentTarget;
-    dispatch(selectConfig(value as RANDOM_UUID));
+    dispatch(selectConfig(value as TRandomUUID));
   };
 
   const onAddConfig = () => {

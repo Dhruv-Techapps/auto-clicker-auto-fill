@@ -1,5 +1,5 @@
-import { Action, getDefaultAction } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { IAction, getDefaultAction } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { ConfigStore } from '../config.slice';
@@ -7,7 +7,7 @@ import { actionAddonActions } from './addon';
 import { actionSettingsActions } from './settings';
 import { actionStatementActions } from './statement';
 
-const arrayMove = (arr: Array<Action | undefined>, oldIndex: number, newIndex: number) => {
+const arrayMove = (arr: Array<IAction | undefined>, oldIndex: number, newIndex: number) => {
   if (newIndex >= arr.length) {
     let k = newIndex - arr.length + 1;
     k -= 1;
@@ -19,7 +19,7 @@ const arrayMove = (arr: Array<Action | undefined>, oldIndex: number, newIndex: n
   return arr; // for testing
 };
 
-type AddActionPayload = undefined | { actionId: RANDOM_UUID; position: 1 | 0 };
+type AddActionPayload = undefined | { actionId: TRandomUUID; position: 1 | 0 };
 
 export const actionActions = {
   reorderActions: (state: ConfigStore, action: PayloadAction<{ oldIndex: number; newIndex: number }>) => {
@@ -56,7 +56,7 @@ export const actionActions = {
     selectedConfig.updated = true;
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  updateAction: (state: ConfigStore, action: PayloadAction<{ selectedActionId: RANDOM_UUID; name: string; value: any }>) => {
+  updateAction: (state: ConfigStore, action: PayloadAction<{ selectedActionId: TRandomUUID; name: string; value: any }>) => {
     const { configs, selectedConfigId } = state;
     const { name, value, selectedActionId } = action.payload;
 
@@ -84,7 +84,7 @@ export const actionActions = {
     }
     selectedConfig.updated = true;
   },
-  removeAction: (state: ConfigStore, action: PayloadAction<RANDOM_UUID>) => {
+  removeAction: (state: ConfigStore, action: PayloadAction<TRandomUUID>) => {
     const { configs, selectedConfigId } = state;
     const selectedActionId = action.payload;
 

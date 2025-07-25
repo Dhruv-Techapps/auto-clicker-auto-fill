@@ -1,4 +1,4 @@
-import { RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
+import { ERetryOptions } from '@dhruv-techapps/acf-common';
 import { ChangeEvent } from 'react';
 import { Card, Form, FormControl, InputGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -40,12 +40,12 @@ function SettingRetry() {
         <Card.Body>
           <p>{t('modal.settings.retry.hint')}</p>
           <div className='d-flex justify-content-between mt-3'>
-            <Form.Check type='radio' value={RETRY_OPTIONS.STOP} checked={settings.retryOption === RETRY_OPTIONS.STOP} onChange={onUpdate} name='retryOption' label={t('modal.settings.retry.stop')} />
-            <Form.Check type='radio' value={RETRY_OPTIONS.SKIP} checked={settings.retryOption === RETRY_OPTIONS.SKIP} onChange={onUpdate} name='retryOption' label={t('modal.settings.retry.skip')} />
+            <Form.Check type='radio' value={ERetryOptions.STOP} checked={settings.retryOption === ERetryOptions.STOP} onChange={onUpdate} name='retryOption' label={t('modal.settings.retry.stop')} />
+            <Form.Check type='radio' value={ERetryOptions.SKIP} checked={settings.retryOption === ERetryOptions.SKIP} onChange={onUpdate} name='retryOption' label={t('modal.settings.retry.skip')} />
             <Form.Check
               type='radio'
-              value={RETRY_OPTIONS.RELOAD}
-              checked={settings.retryOption === RETRY_OPTIONS.RELOAD}
+              value={ERetryOptions.RELOAD}
+              checked={settings.retryOption === ERetryOptions.RELOAD}
               onChange={onUpdate}
               name='retryOption'
               label={t('modal.settings.retry.refresh')}

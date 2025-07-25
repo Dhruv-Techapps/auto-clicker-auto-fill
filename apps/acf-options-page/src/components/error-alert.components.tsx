@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Alert, Col, Container, Row } from 'react-bootstrap';
 
-type ErrorAlertProps = {
+interface ErrorAlertProps {
   heading?: string;
   error?: string;
-};
+}
 
 export const ErrorAlert: FC<ErrorAlertProps> = ({ heading = 'Error', error }) => {
   if (!error) {

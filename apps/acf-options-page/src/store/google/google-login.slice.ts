@@ -3,13 +3,13 @@ import * as Sentry from '@sentry/react';
 import { RootState } from '../store';
 import { googleHasAccessAPI, googleLoginAPI } from './google-login.api';
 
-type GoogleStore = {
+export interface IGoogleStore {
   error?: string;
   googleLoading: boolean;
   grantedScopes: string[];
-};
+}
 
-const initialState: GoogleStore = { grantedScopes: [], googleLoading: false };
+const initialState: IGoogleStore = { grantedScopes: [], googleLoading: false };
 
 const slice = createSlice({
   name: 'google',

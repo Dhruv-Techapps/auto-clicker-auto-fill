@@ -1,16 +1,16 @@
-import { DriveFile } from '@dhruv-techapps/shared-google-drive';
+import { IDriveFile } from '@dhruv-techapps/shared-google-drive';
 import { createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 import { googleDriveDeleteAPI, googleDriveListWithContentAPI } from './google-drive.api';
 
-type GoogleDriveStore = {
-  files: Array<DriveFile>;
+export interface IGoogleDriveStore {
+  files: Array<IDriveFile>;
   filesLoading: boolean;
   error?: string;
-};
+}
 
-const initialState: GoogleDriveStore = { filesLoading: false, files: [] };
+const initialState: IGoogleDriveStore = { filesLoading: false, files: [] };
 
 const slice = createSlice({
   name: 'googleDrive',

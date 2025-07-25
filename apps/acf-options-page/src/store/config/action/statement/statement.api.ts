@@ -1,14 +1,17 @@
-import { ActionStatement, GOTO, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { ERetryOptions, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
 
-export const openActionStatementModalAPI = createAsyncThunk<
-  { statement: ActionStatement | undefined; selectedActionId: RANDOM_UUID; firstActionId: RANDOM_UUID; goto: GOTO | undefined },
-  RANDOM_UUID,
-  { state: RootState }
->('action-statement/open', async (selectedActionId, thunkAPI) => {
-  const { configuration } = thunkAPI.getState() as RootState;
+interface OpenActionStatementModalAPIResult {
+  statement: IActionStatement | undefined;
+  selectedActionId: TRandomUUID;
+  firstActionId: TRandomUUID;
+  goto: TGoto | undefined;
+}
+
+export const openActionStatementModalAPI = createAsyncThunk<OpenActionStatementModalAPIResult, TRandomUUID, { state: RootState }>('action-statement/open', async (selectedActionId, thunkAPI) => {
+  const { configuration } = thunkAPI.getState();
   const { selectedConfigId, configs } = configuration;
   const config = configs.find((config) => config.id === selectedConfigId);
   if (!config) {
@@ -20,7 +23,7 @@ export const openActionStatementModalAPI = createAsyncThunk<
   }
   const { statement } = action;
   let goto = statement?.goto;
-  if (statement?.then === RETRY_OPTIONS.GOTO && typeof statement.goto === 'number') {
+  if (statement?.then === ERetryOptions.GOTO && typeof statement.goto === 'number') {
     goto = config.actions[statement.goto].id;
   }
   return { statement: statement, selectedActionId, goto, firstActionId: config.actions[0].id };

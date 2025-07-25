@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { Bypass, LOAD_TYPES, START_TYPES, URL_MATCH, defaultHotkey } from '@dhruv-techapps/acf-common';
+import { ELoadTypes, EStartTypes, EUrlMatch, IBypass, defaultHotkey } from '@dhruv-techapps/acf-common';
 import { Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
@@ -57,7 +57,7 @@ const ConfigSettingsModal = () => {
   };
 
   const onBypassUpdate = () => {
-    const bypass: Bypass = {};
+    const bypass: IBypass = {};
     document.querySelectorAll("[id^='bypass.']").forEach((element) => {
       const { name, checked } = element as HTMLInputElement;
       // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -91,9 +91,9 @@ const ConfigSettingsModal = () => {
                     type='radio'
                     id='startAuto'
                     name='startType'
-                    value={START_TYPES.AUTO}
+                    value={EStartTypes.AUTO}
                     onChange={onUpdate}
-                    checked={config.startType === START_TYPES.AUTO}
+                    checked={config.startType === EStartTypes.AUTO}
                     label={t('modal.configSettings.auto')}
                   />
                   <Form.Check
@@ -102,8 +102,8 @@ const ConfigSettingsModal = () => {
                     id='startManual'
                     name='startType'
                     onChange={onUpdate}
-                    value={START_TYPES.MANUAL}
-                    checked={config.startType === START_TYPES.MANUAL}
+                    value={EStartTypes.MANUAL}
+                    checked={config.startType === EStartTypes.MANUAL}
                     label={t('modal.configSettings.manual')}
                   />
                   <small>
@@ -120,7 +120,7 @@ const ConfigSettingsModal = () => {
               </Row>
               <hr />
               <Row>
-                <Col md={12} sm={12} hidden={config.startType === START_TYPES.AUTO}>
+                <Col md={12} sm={12} hidden={config.startType === EStartTypes.AUTO}>
                   <InputGroup>
                     <InputGroup.Text>{t('modal.configSettings.hotkey')}</InputGroup.Text>
                     <FormControl placeholder={defaultHotkey} onKeyDown={onKeyDown} defaultValue={config.hotkey || defaultHotkey} name='hotkey' onBlur={onUpdate} pattern={REGEX.HOTKEY} />
@@ -129,15 +129,15 @@ const ConfigSettingsModal = () => {
                     </InputGroup.Text>
                   </InputGroup>
                 </Col>
-                <Col md={12} sm={12} hidden={config.startType === START_TYPES.MANUAL}>
+                <Col md={12} sm={12} hidden={config.startType === EStartTypes.MANUAL}>
                   {t('modal.configSettings.extensionLoad')}&nbsp;
                   <Form.Check
                     inline
                     type='radio'
                     id='loadTypeWindow'
-                    value={LOAD_TYPES.WINDOW}
+                    value={ELoadTypes.WINDOW}
                     onChange={onUpdate}
-                    checked={config.loadType === LOAD_TYPES.WINDOW}
+                    checked={config.loadType === ELoadTypes.WINDOW}
                     name='loadType'
                     label={t('modal.configSettings.window')}
                   />
@@ -145,9 +145,9 @@ const ConfigSettingsModal = () => {
                     inline
                     type='radio'
                     id='loadTypeDocument'
-                    value={LOAD_TYPES.DOCUMENT}
+                    value={ELoadTypes.DOCUMENT}
                     onChange={onUpdate}
-                    checked={config.loadType === LOAD_TYPES.DOCUMENT}
+                    checked={config.loadType === ELoadTypes.DOCUMENT}
                     name='loadType'
                     label={t('modal.configSettings.document')}
                   />
@@ -200,7 +200,7 @@ const ConfigSettingsModal = () => {
                   <InputGroup>
                     <InputGroup.Text>{t('modal.configSettings.urlMatch')}</InputGroup.Text>
                     <Form.Select value={config.url_match} onChange={onUpdate} name='url_match' required>
-                      {Object.entries(URL_MATCH).map((condition) => (
+                      {Object.entries(EUrlMatch).map((condition) => (
                         <option key={condition[1]} value={condition[1]}>
                           {t(`modal.configSettings.${condition[0].toLowerCase()}`)}
                         </option>

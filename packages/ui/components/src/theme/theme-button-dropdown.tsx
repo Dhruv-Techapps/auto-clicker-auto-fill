@@ -3,9 +3,9 @@ import { useContext, useState } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 
-type TThemeDropdownProps = {
+interface TThemeDropdownProps {
   drop?: DropDirection;
-};
+}
 
 export const ThemeButtonDropdown = (props: TThemeDropdownProps) => {
   const { drop } = props;

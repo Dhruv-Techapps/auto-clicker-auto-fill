@@ -1,10 +1,10 @@
-import { ActionStatement } from '@dhruv-techapps/acf-common';
+import { IActionStatement } from '@dhruv-techapps/acf-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { ConfigStore } from '../../config.slice';
 
 export const actionStatementActions = {
-  syncActionStatement: (state: ConfigStore, action: PayloadAction<ActionStatement | undefined>) => {
+  syncActionStatement: (state: ConfigStore, action: PayloadAction<IActionStatement | undefined>) => {
     const { configs, selectedActionId, selectedConfigId } = state;
 
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);

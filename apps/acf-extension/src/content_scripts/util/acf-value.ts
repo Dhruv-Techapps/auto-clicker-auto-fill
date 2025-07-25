@@ -1,8 +1,8 @@
-import { ActionSettings } from '@dhruv-techapps/acf-common';
+import { IActionSettings } from '@dhruv-techapps/acf-common';
 import { Value } from '@dhruv-techapps/acf-util';
+import { UserScriptsService } from '@dhruv-techapps/core-service';
 import { GoogleSheetsValue } from '@dhruv-techapps/shared-google-sheets';
 import { OpenAIService } from '@dhruv-techapps/shared-openai';
-import { SandboxValue } from '@dhruv-techapps/shared-sandbox';
 import { VisionService, VisionValue } from '@dhruv-techapps/shared-vision';
 import Common from '../common';
 import { I18N_ERROR } from '../i18n';
@@ -15,13 +15,13 @@ export const VALUE_MATCHER = {
 };
 
 export class ACFValue {
-  static async getValue(value: string, settings?: ActionSettings): Promise<string> {
+  static async getValue(value: string, settings?: IActionSettings): Promise<string> {
     value = await Value.getValue(value);
     if (VALUE_MATCHER.GOOGLE_SHEETS.test(value)) {
       return this.getGoogleSheetsValue(value);
     }
     if (VALUE_MATCHER.FUNC.test(value)) {
-      return this.getFuncValue(value);
+      return this.getFuncValue(value).then((results) => results[0].result);
     }
     if (VALUE_MATCHER.OPENAI.test(value)) {
       return this.getOpenAIValue(value);
@@ -36,8 +36,10 @@ export class ACFValue {
     return GoogleSheetsValue.getSheetValue(value);
   }
 
-  private static async getFuncValue(value: string): Promise<string> {
-    return await SandboxValue.getFuncValue(value);
+  private static async getFuncValue(value: string): Promise<chrome.userScripts.InjectionResult[]> {
+    const codeStr = value.replace(/^Func::/gi, '');
+    const results = await UserScriptsService.execute(codeStr);
+    return results;
   }
 
   private static async getOpenAIValue(value: string): Promise<string> {
@@ -53,7 +55,7 @@ export class ACFValue {
     return value;
   }
 
-  private static async getImageValue(value: string, settings?: ActionSettings): Promise<string> {
+  private static async getImageValue(value: string, settings?: IActionSettings): Promise<string> {
     try {
       const elementFinder = value.replace(/image::/i, '');
       const elements = await Common.start(elementFinder, settings);

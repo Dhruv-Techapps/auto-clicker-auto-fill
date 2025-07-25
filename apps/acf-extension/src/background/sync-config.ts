@@ -1,4 +1,4 @@
-import { Configuration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { IConfiguration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { ConfigRequest, FirebaseFirestoreBackground } from '@dhruv-techapps/shared-firebase-firestore';
 import { Auth } from '@dhruv-techapps/shared-firebase-oauth';
 import { FirebaseStorageBackground } from '@dhruv-techapps/shared-firebase-storage';
@@ -16,11 +16,11 @@ const TAGS_REGEX =
 export class SyncConfig {
   constructor(private readonly auth: Auth) {}
 
-  filterConfig(configs: Array<Configuration>, updated: boolean): Array<Configuration> {
+  filterConfig(configs: Array<IConfiguration>, updated: boolean): Array<IConfiguration> {
     if (updated) {
-      return configs.filter((config: Configuration) => config.url && config.updated && !config.download);
+      return configs.filter((config: IConfiguration) => config.url && config.updated && !config.download);
     } else {
-      return configs.filter((config: Configuration) => config.url && !config.download);
+      return configs.filter((config: IConfiguration) => config.url && !config.download);
     }
   }
 
@@ -56,15 +56,15 @@ export class SyncConfig {
 
   async reset() {
     const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-    const configs: Array<Configuration> = storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [];
-    const updatedConfigs = configs.map((config: Configuration) => {
+    const configs: Array<IConfiguration> = storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [];
+    const updatedConfigs = configs.map((config: IConfiguration) => {
       delete config.updated;
       return config;
     });
     await chrome.storage.local.set({ [LOCAL_STORAGE_KEY.CONFIGS]: updatedConfigs });
   }
 
-  getBlob(config: Configuration) {
+  getBlob(config: IConfiguration) {
     config.download = true;
     delete config.spreadsheetId;
     config.actions.forEach((action, index, actions) => {
@@ -96,7 +96,7 @@ export class SyncConfig {
     return new Blob([JSON.stringify(config)], { type: 'application/json;charset=utf-8;' });
   }
 
-  getTags(data: ConfigRequest, config: Configuration) {
+  getTags(data: ConfigRequest, config: IConfiguration) {
     data.tags = Array.from(new Set(config.actions.map((action) => action.value?.match(TAGS_REGEX)?.[0].toLowerCase()).filter((value): value is string => !!value)));
     if (config.actions.find((action) => action.addon)) {
       data.tags.push('addon');
@@ -110,7 +110,7 @@ export class SyncConfig {
     try {
       const { uid } = this.auth.currentUser;
       const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-      const configs: Array<Configuration> = this.filterConfig(storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [], updated);
+      const configs: Array<IConfiguration> = this.filterConfig(storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [], updated);
       if (configs.length === 0) {
         console.log('No configs to sync');
         return;

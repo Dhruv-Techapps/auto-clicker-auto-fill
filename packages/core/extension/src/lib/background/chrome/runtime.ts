@@ -1,9 +1,9 @@
-import { ActionMessenger, AlarmsMessenger, ManifestMessenger, NotificationsMessenger, StorageMessenger } from './messenger';
+import { ActionMessenger, AlarmsMessenger, ManifestMessenger, NotificationsMessenger, StorageMessenger, UserScriptsMessenger } from './messenger';
 
-export type MessengerConfigObject = {
+export interface MessengerConfigObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-};
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const messageListener = async (request: any, sender: chrome.runtime.MessageSender, configs: MessengerConfigObject): Promise<any> => {
@@ -21,6 +21,8 @@ export const messageListener = async (request: any, sender: chrome.runtime.Messa
         return new ActionMessenger()[(methodName as keyof ActionMessenger) || 'setIcon'](message);
       case 'alarms':
         return new AlarmsMessenger()[(methodName as keyof AlarmsMessenger) || 'create'](message);
+      case 'userScripts':
+        return new UserScriptsMessenger()[(methodName as keyof UserScriptsMessenger) || 'execute'](message, sender);
       default:
         if (configs[messenger]) {
           if (typeof configs[messenger][methodName] === 'function') {

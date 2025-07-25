@@ -4,14 +4,14 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { openScheduleModalAPI } from './schedule.api';
 
-type ScheduleStore = {
+export interface IScheduleStore {
   visible: boolean;
   error?: string;
   message?: string;
   schedule: ISchedule;
-};
+}
 
-const initialState: ScheduleStore = { visible: false, schedule: { ...defaultSchedule } };
+const initialState: IScheduleStore = { visible: false, schedule: { ...defaultSchedule } };
 
 const slice = createSlice({
   name: 'schedule',

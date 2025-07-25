@@ -51,9 +51,9 @@ const FLAGS = [
   }
 ];
 
-type Flags = {
+interface Flags {
   [index: string]: boolean;
-};
+}
 
 function AddonValueExtractorFlags() {
   const { addon } = useAppSelector(actionAddonSelector);

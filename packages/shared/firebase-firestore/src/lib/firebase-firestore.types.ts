@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as FirebaseFirestore from 'firebase/firestore';
 
-export type ConfigRequest = {
+export interface ConfigRequest {
   url: string;
   userId: string;
   userName: string;
@@ -9,7 +9,7 @@ export type ConfigRequest = {
   tags?: string[];
   created?: FirebaseFirestore.Timestamp;
   updated?: FirebaseFirestore.Timestamp;
-};
+}
 
 export interface CustomerData {
   metadata: {

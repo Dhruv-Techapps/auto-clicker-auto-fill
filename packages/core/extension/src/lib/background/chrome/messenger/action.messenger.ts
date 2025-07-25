@@ -1,8 +1,8 @@
-export type ActionRequest = {
+export interface ActionRequest {
   messenger: 'action';
   methodName: 'setIcon' | 'setBadgeBackgroundColor' | 'setBadgeText' | 'setTitle';
   message: chrome.action.TabIconDetails | chrome.action.BadgeColorDetails | chrome.action.BadgeTextDetails | chrome.action.TitleDetails;
-};
+}
 
 export class ActionMessenger {
   setIcon(details: chrome.action.TabIconDetails) {

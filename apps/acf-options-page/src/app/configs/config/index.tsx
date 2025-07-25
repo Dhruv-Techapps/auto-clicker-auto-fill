@@ -14,7 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { getFieldNameValue } from '@acf-options-page/util/element';
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { ChangeEvent, createRef } from 'react';
 import { Alert, Badge, Button, ButtonGroup, Card, Col, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -62,7 +62,7 @@ function Config() {
         if (target?.result === null) {
           dispatch(addToast({ header: 'File', body: t('error.json'), variant: 'danger' }));
         } else {
-          const importedConfig: Configuration = JSON.parse(target?.result as string);
+          const importedConfig: IConfiguration = JSON.parse(target?.result as string);
           if (Array.isArray(importedConfig)) {
             dispatch(importAll(importedConfig));
           } else {

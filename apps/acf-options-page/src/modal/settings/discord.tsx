@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { settingsSelector } from '../../store/settings';
 import { discordDeleteAPI, discordGetAPI, discordLoginAPI } from '../../store/settings/settings.api';
 
-type SettingDiscordProps = {
+interface SettingDiscordProps {
   checked: boolean;
   label: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
+}
 
 function SettingDiscord({ onChange, label, checked }: SettingDiscordProps) {
   const { discord } = useAppSelector(settingsSelector);

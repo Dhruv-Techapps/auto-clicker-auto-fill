@@ -17,8 +17,8 @@ export const EXTENSIONS = [
   }
 ] as Array<TExtension>;
 
-export type TExtension = {
+export interface TExtension {
   id: string;
   name: string;
   version?: string;
-};
+}

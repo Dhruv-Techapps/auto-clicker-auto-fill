@@ -1,8 +1,8 @@
-import { BATCH_REPEAT, Configuration, SESSION_COUNT } from '@dhruv-techapps/acf-common';
+import { BATCH_REPEAT, IConfiguration, SESSION_COUNT } from '@dhruv-techapps/acf-common';
 const GOOGLE_SHEETS_REGEX = /^googlesheets::/i;
 
 export default class GoogleSheets {
-  static getSheets(config: Configuration) {
+  static getSheets(config: IConfiguration) {
     const sheets = new Map<string, Set<string>>();
     const batchHighestRepeat: number = config.batch?.repeat ?? 0;
     config.actions

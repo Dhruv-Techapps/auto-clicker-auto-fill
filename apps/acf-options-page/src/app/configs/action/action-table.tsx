@@ -10,8 +10,8 @@ import {
   updateAction
 } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { Action } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { IAction } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ColumnDef, Row, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from '@tanstack/react-table';
 import { useMemo } from 'react';
 import { Button, Dropdown, Form, Table } from 'react-bootstrap';
@@ -21,11 +21,17 @@ import { ElementFinderPopover, ValuePopover } from '../../../popover';
 import { REGEX } from '../../../util';
 import { defaultColumn } from './editable-cell';
 
-type ActionMeta = { dataType: string; list: string; pattern: string; required: boolean; width?: string };
+interface ActionMeta {
+  dataType: string;
+  list: string;
+  pattern: string;
+  required: boolean;
+  width?: string;
+}
 
-type ActionProps = {
-  actions: Action[];
-};
+interface ActionProps {
+  actions: IAction[];
+}
 
 const ActionTable = ({ actions }: ActionProps) => {
   const { t } = useTranslation();
@@ -42,7 +48,7 @@ const ActionTable = ({ actions }: ActionProps) => {
     dispatch(setColumnVisibility(column));
   };
 
-  const removeActionConfirm = async (actionId: RANDOM_UUID, index: number) => {
+  const removeActionConfirm = async (actionId: TRandomUUID, index: number) => {
     const action = actions.find((action) => action.id === actionId);
     if (!action) {
       return;
@@ -62,7 +68,7 @@ const ActionTable = ({ actions }: ActionProps) => {
     result && dispatch(removeAction(actionId));
   };
 
-  const columns = useMemo<ColumnDef<Action, ActionMeta>[]>(
+  const columns = useMemo<ColumnDef<IAction, ActionMeta>[]>(
     () => [
       {
         header: t('action.initWait'),
@@ -135,7 +141,7 @@ const ActionTable = ({ actions }: ActionProps) => {
     [t]
   );
 
-  const table = useReactTable<Action>({
+  const table = useReactTable<IAction>({
     columns: columns,
     data: actions,
     defaultColumn,
@@ -145,32 +151,32 @@ const ActionTable = ({ actions }: ActionProps) => {
     // Provide our updateData function to our table meta
     meta: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      updateData: (selectedActionId: RANDOM_UUID, columnId: string, value: any) => {
+      updateData: (selectedActionId: TRandomUUID, columnId: string, value: any) => {
         dispatch(updateAction({ selectedActionId, name: columnId, value }));
       },
-      updateValueFieldTypes: (selectedActionId: RANDOM_UUID, valueFieldType: 'input' | 'textarea') => {
+      updateValueFieldTypes: (selectedActionId: TRandomUUID, valueFieldType: 'input' | 'textarea') => {
         dispatch(updateAction({ selectedActionId, name: 'valueFieldType', value: valueFieldType }));
       }
     }
   });
 
-  const showAddon = (row: Row<Action>) => {
+  const showAddon = (row: Row<IAction>) => {
     dispatch(openActionAddonModalAPI(row.original.id));
   };
 
-  const showCondition = (row: Row<Action>) => {
+  const showCondition = (row: Row<IAction>) => {
     dispatch(openActionStatementModalAPI(row.original.id));
   };
 
-  const showSettings = (row: Row<Action>) => {
+  const showSettings = (row: Row<IAction>) => {
     dispatch(openActionSettingsModalAPI(row.original.id));
   };
 
-  const onDisableClick = (row: Row<Action>, disabled?: boolean) => {
+  const onDisableClick = (row: Row<IAction>, disabled?: boolean) => {
     dispatch(updateAction({ selectedActionId: row.original.id, name: 'disabled', value: !disabled }));
   };
 
-  const onAddClick = (row: Row<Action>, position: 1 | 0) => {
+  const onAddClick = (row: Row<IAction>, position: 1 | 0) => {
     dispatch(addAction({ actionId: row.original.id, position }));
   };
 

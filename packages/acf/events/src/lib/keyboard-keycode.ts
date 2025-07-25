@@ -1,6 +1,6 @@
-type keyCodesType = {
+interface keyCodesType {
   [index: string]: number;
-};
+}
 
 const keyCodes: keyCodesType = {
   '0': 48,

@@ -2,13 +2,13 @@ import { RootState } from '@acf-options-page/store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 
-type BatchStore = {
+export interface IBatchStore {
   visible: boolean;
   error?: string;
   message?: string;
-};
+}
 
-const initialState: BatchStore = { visible: false };
+const initialState: IBatchStore = { visible: false };
 
 const slice = createSlice({
   name: 'batch',

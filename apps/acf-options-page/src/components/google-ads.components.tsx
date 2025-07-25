@@ -1,11 +1,11 @@
 import { memo, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-type GoogleAdsProps = {
+interface GoogleAdsProps {
   readonly client?: string;
   readonly slot?: string;
   readonly className?: string;
-};
+}
 
 const GoogleAds = memo(function GoogleAds({ client = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_CLIENT, slot = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_SLOT, className = 'mb-3' }: GoogleAdsProps) {
   useEffect(() => {

@@ -1,33 +1,33 @@
-import { Configuration } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 import { configRemoveUpdateAPI } from './config-remove.api';
 
-export type ConfigurationRemoveType = Configuration & { checked?: boolean };
+export type ConfigurationRemoveType = IConfiguration & { checked?: boolean };
 
-type ConfigRemoveStore = {
+export interface IConfigRemoveStore {
   visible: boolean;
   error?: string;
   message?: string;
   configs?: Array<ConfigurationRemoveType>;
-};
+}
 
-const initialState: ConfigRemoveStore = { visible: false };
+const initialState: IConfigRemoveStore = { visible: false };
 
 const slice = createSlice({
   name: 'configRemove',
   initialState,
   reducers: {
-    switchConfigRemoveModal: (state, action: PayloadAction<Array<Configuration> | undefined>) => {
+    switchConfigRemoveModal: (state, action: PayloadAction<Array<IConfiguration> | undefined>) => {
       if (action.payload) {
         state.configs = action.payload;
       }
       window.dataLayer.push({ event: 'modal', name: 'config_remove', visibility: !state.visible });
       state.visible = !state.visible;
     },
-    switchConfigRemoveSelection: (state, action: PayloadAction<RANDOM_UUID>) => {
+    switchConfigRemoveSelection: (state, action: PayloadAction<TRandomUUID>) => {
       if (state.configs) {
         const config = state.configs.find((config) => config.id === action.payload);
         if (!config) {

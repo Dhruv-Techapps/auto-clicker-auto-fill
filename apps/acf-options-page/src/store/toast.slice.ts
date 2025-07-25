@@ -3,11 +3,11 @@ import { ReactNode } from 'react';
 import { ToastProps } from 'react-bootstrap';
 import { RootState } from './store';
 
-export type ToastHandlerProps = Omit<ToastProps, 'defaultValue'> & {
+export interface ToastHandlerProps extends Omit<ToastProps, 'defaultValue'> {
   header: string | ReactNode;
   body?: string | ReactNode;
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
-};
+}
 
 const initialState: Array<ToastHandlerProps> = [];
 const slice = createSlice({

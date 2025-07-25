@@ -1,3 +1,3 @@
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 
-export type GOTO = number | RANDOM_UUID;
+export type TGoto = number | TRandomUUID;

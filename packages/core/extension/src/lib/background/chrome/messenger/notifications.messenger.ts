@@ -1,19 +1,19 @@
-type NotificationsMessengerProps = {
+interface NotificationsMessengerProps {
   notificationId: string;
-};
+}
 
 type NotificationsMessengerCreateProps = NotificationsMessengerProps & {
-  options: chrome.notifications.NotificationOptions<true>;
+  options: chrome.notifications.NotificationCreateOptions;
 };
 type NotificationsMessengerUpdateProps = NotificationsMessengerProps & {
-  options: chrome.notifications.NotificationOptions<false>;
+  options: chrome.notifications.NotificationOptions;
 };
 
-export type NotificationsRequest = {
+export interface NotificationsRequest {
   messenger: 'notifications';
   methodName: 'create' | 'update' | 'clear';
   message: NotificationsMessengerProps | NotificationsMessengerCreateProps | NotificationsMessengerUpdateProps;
-};
+}
 
 export class NotificationsMessenger {
   create({ notificationId, options }: NotificationsMessengerCreateProps) {

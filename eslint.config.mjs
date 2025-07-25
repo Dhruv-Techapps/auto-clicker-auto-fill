@@ -39,7 +39,8 @@ export default [
           ],
           allowCircularSelfDependency: true
         }
-      ]
+      ],
+      '@typescript-eslint/consistent-type-definitions': ['error', 'interface']
     }
   },
   {

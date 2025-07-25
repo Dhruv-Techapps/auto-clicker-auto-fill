@@ -1,6 +1,6 @@
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 
-export const CONFIGURATIONS: Configuration[] = [
+export const CONFIGURATIONS: IConfiguration[] = [
   {
     actions: [
       { elementFinder: '//input[@name="username"][@placeholder="username"]', elementType: 'text', id: '4cce810a-f4e3-4699-8aeb-6ec2f8b4da0d', initWait: 0, name: 'username', value: 'Dharmesh' },
@@ -124,11 +124,11 @@ export const CONFIGURATIONS: Configuration[] = [
     timer: 1736353844887,
     updated: true,
     url: 'https://test.getautoclicker.com/'
-  } as Configuration,
+  } as IConfiguration,
   {
     actions: [{ elementFinder: '//input', error: [], id: '85f50b8e-eba2-47a7-a0e2-10f5ad7d9ee2', value: 'GoogleSheets::Users!A1' }],
     batch: { refresh: false },
-    bypass: { alert: true, confirm: false, prompt: false },
+    IBypass: { alert: true, confirm: false, prompt: false },
     enable: false,
     id: '9585a3ea-807a-488e-9e62-6e3720a1bcc8',
     loadType: 'window',
@@ -138,7 +138,7 @@ export const CONFIGURATIONS: Configuration[] = [
     startType: 'auto',
     updated: true,
     url: 'https://test.getautoclicker.com/'
-  } as Configuration,
+  } as IConfiguration,
   {
     actions: [{ elementFinder: '//input[@name="username"]', error: [], id: '2a0a59d2-698d-453a-a14a-278b2aebc9e2', value: 'Dharmesh <random(hello|world)>' }],
     enable: false,
@@ -150,7 +150,7 @@ export const CONFIGURATIONS: Configuration[] = [
     startType: 'auto',
     updated: true,
     url: 'https://test.getautoclicker.com/'
-  } as Configuration,
+  } as IConfiguration,
   {
     actions: [{ elementFinder: '//input[@name="username"]', error: [], id: 'b28a5b20-7627-4be6-89d4-357f1006b47a', value: 'Query::ab' }],
     enable: false,
@@ -162,7 +162,7 @@ export const CONFIGURATIONS: Configuration[] = [
     startType: 'auto',
     updated: true,
     url: 'https://test.getautoclicker.com/?ab=12'
-  } as Configuration,
+  } as IConfiguration,
   {
     actions: [
       { elementFinder: '//form//input[@id="name"]', error: [], id: 'd12e549c-e799-47d5-af25-48e76924199c', repeat: 0, repeatInterval: 0, settings: { iframeFirst: true }, value: 'Name' },
@@ -178,5 +178,5 @@ export const CONFIGURATIONS: Configuration[] = [
     startType: 'auto',
     updated: true,
     url: 'https://test.getautoclicker.com/'
-  } as Configuration
+  } as IConfiguration
 ];

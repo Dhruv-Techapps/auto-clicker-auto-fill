@@ -1,4 +1,4 @@
-import { Action, ACTION_RUNNING, ACTION_STATUS } from '@dhruv-techapps/acf-common';
+import { EActionRunning, EActionStatus, IAction } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, isValidUUID } from '@dhruv-techapps/core-common';
 import { NotificationsService } from '@dhruv-techapps/core-service';
@@ -16,11 +16,11 @@ const ACTION_I18N = {
 };
 
 const Actions = (() => {
-  const checkStatement = async (actions: Array<Action>, action: Action) => {
+  const checkStatement = async (actions: Array<IAction>, action: IAction) => {
     Statement.check(actions, action.statement);
   };
 
-  const notify = async (action: Action) => {
+  const notify = async (action: IAction) => {
     const settings = await new SettingsStorage().getSettings();
     if (settings.notifications?.onAction) {
       NotificationsService.create({
@@ -32,7 +32,7 @@ const Actions = (() => {
       });
     }
   };
-  const start = async (actions: Array<Action>, batchRepeat: number) => {
+  const start = async (actions: Array<IAction>, batchRepeat: number) => {
     window.__batchRepeat = batchRepeat;
     let i = 0;
     while (i < actions.length) {
@@ -55,9 +55,9 @@ const Actions = (() => {
         action.status = await ActionProcessor.start(action);
         notify(action);
       } catch (error) {
-        if (error === ACTION_STATUS.SKIPPED || error === ACTION_RUNNING.SKIP) {
-          console.debug(`${ACTION_I18N.TITLE} #${window.__currentAction}`, `[${window.__currentActionName}]`, window.__actionError, `⏭️ ${ACTION_STATUS.SKIPPED}`);
-          action.status = ACTION_STATUS.SKIPPED;
+        if (error === EActionStatus.SKIPPED || error === EActionRunning.SKIP) {
+          console.debug(`${ACTION_I18N.TITLE} #${window.__currentAction}`, `[${window.__currentActionName}]`, window.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+          action.status = EActionStatus.SKIPPED;
         } else if (typeof error === 'number' || (typeof error === 'string' && isValidUUID(error))) {
           const index = typeof error === 'number' ? error : actions.findIndex((a) => a.id === error);
           if (index === -1) {

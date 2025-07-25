@@ -6,13 +6,13 @@ import * as Sentry from '@sentry/react';
 const HIDDEN_COLUMN_KEY = 'columnVisibility';
 const defaultColumnVisibility = { name: true, initWait: false, repeat: false, repeatInterval: false };
 
-type ActionStore = {
+export interface IActionStore {
   error?: string;
   message?: string;
   columnVisibility: { name: boolean; initWait: boolean; repeat: boolean; repeatInterval: boolean };
-};
+}
 
-const initialState: ActionStore = {
+const initialState: IActionStore = {
   columnVisibility: LocalStorage.getItem(HIDDEN_COLUMN_KEY, defaultColumnVisibility)
 };
 

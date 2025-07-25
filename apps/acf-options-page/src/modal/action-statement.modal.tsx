@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 
-import { ACTION_CONDITION_OPR, ActionCondition, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { EActionConditionOperator, getDefaultActionCondition, IActionCondition } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Alert, Button, Form, Modal, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
@@ -36,7 +36,7 @@ const ActionStatementModal = () => {
     onHide();
   };
 
-  const addCondition = (actionId: RANDOM_UUID, operator?: ACTION_CONDITION_OPR) => {
+  const addCondition = (actionId: TRandomUUID, operator?: EActionConditionOperator) => {
     dispatch(addActionStatementCondition(getDefaultActionCondition(actionId, operator)));
   };
 
@@ -48,7 +48,7 @@ const ActionStatementModal = () => {
     //:TODO
   };
 
-  const verifyConditions = (conditions: ActionCondition[]) => {
+  const verifyConditions = (conditions: IActionCondition[]) => {
     conditions = conditions.map((condition) => {
       if (config !== undefined && condition.actionId === undefined && condition.actionIndex !== undefined) {
         const actionId = config.actions[condition.actionIndex].id;
@@ -92,7 +92,7 @@ const ActionStatementModal = () => {
                 <th>Action</th>
                 <th>Status</th>
                 <th>
-                  <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id, ACTION_CONDITION_OPR.AND)}>
+                  <Button type='button' variant='link' className='mt-2 p-0' aria-label='Add' onClick={() => addCondition(config.actions[0].id, EActionConditionOperator.AND)}>
                     <i className='bi bi-plus-lg' />
                   </Button>
                 </th>

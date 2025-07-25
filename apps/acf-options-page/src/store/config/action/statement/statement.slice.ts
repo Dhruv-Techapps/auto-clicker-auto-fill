@@ -1,21 +1,25 @@
-import { ActionCondition, ActionStatement, GOTO, RETRY_OPTIONS } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { ERetryOptions, IActionCondition, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../../store';
 import { openActionStatementModalAPI } from './statement.api';
 
-type ActionStatementStore = {
+export interface IActionStatementStore {
   visible: boolean;
   error?: string;
   message?: string;
-  statement: Partial<ActionStatement>;
-};
+  statement: Partial<IActionStatement>;
+}
 
-const initialState: ActionStatementStore = { visible: false, statement: {} };
+const initialState: IActionStatementStore = { visible: false, statement: {} };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type StatementCondition = { name: string; value: any; id: RANDOM_UUID };
+interface StatementCondition {
+  name: string;
+  value: any;
+  id: TRandomUUID;
+}
 
 const slice = createSlice({
   name: 'actionStatement',
@@ -32,7 +36,7 @@ const slice = createSlice({
         condition[name] = value;
       }
     },
-    addActionStatementCondition: (state, action: PayloadAction<ActionCondition>) => {
+    addActionStatementCondition: (state, action: PayloadAction<IActionCondition>) => {
       if (state.statement.conditions) {
         state.statement.conditions.push(action.payload);
       } else {
@@ -40,7 +44,7 @@ const slice = createSlice({
       }
       state.error = undefined;
     },
-    removeActionStatementCondition: (state, action: PayloadAction<RANDOM_UUID>) => {
+    removeActionStatementCondition: (state, action: PayloadAction<TRandomUUID>) => {
       const conditionIndex = state.statement.conditions?.findIndex((condition) => condition.id === action.payload);
       if (conditionIndex === -1 || conditionIndex === undefined) {
         state.error = 'Invalid Condition';
@@ -49,10 +53,10 @@ const slice = createSlice({
         state.statement.conditions?.splice(conditionIndex, 1);
       }
     },
-    updateActionStatementThen: (state, action: PayloadAction<RETRY_OPTIONS>) => {
+    updateActionStatementThen: (state, action: PayloadAction<ERetryOptions>) => {
       state.statement.then = action.payload;
     },
-    updateActionStatementGoto: (state, action: PayloadAction<GOTO>) => {
+    updateActionStatementGoto: (state, action: PayloadAction<TGoto>) => {
       state.statement.goto = action.payload;
     },
     switchActionStatementModal: (state) => {

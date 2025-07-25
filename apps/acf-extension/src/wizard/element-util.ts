@@ -4,10 +4,10 @@ import { BUTTON_FILE_SUBMIT_NODE_NAME, RADIO_CHECKBOX_NODE_NAME } from '../commo
 import { xPath } from './dom-path';
 import { WizardAction } from './type';
 
-type selectType = {
+interface selectType {
   elementValue?: string;
   optionValue?: string;
-};
+}
 
 export const WizardElementUtil = (() => {
   const radioCheckbox = (element: HTMLInputElement): boolean => element.checked;

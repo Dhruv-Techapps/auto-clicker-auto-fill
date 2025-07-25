@@ -1,4 +1,4 @@
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import JsonView from 'react18-json-view';
@@ -9,7 +9,7 @@ export const ConfigurationModal = forwardRef<{ show: (configId: string) => void 
   const [show, setShow] = useState(false);
   const [configId, setConfigId] = useState<string>();
   const [config, setConfig] = useState<ConfigType>();
-  const [file, setFile] = useState<Configuration>();
+  const [file, setFile] = useState<IConfiguration>();
   const [loading, setLoading] = useState(true);
 
   useImperativeHandle(ref, () => ({

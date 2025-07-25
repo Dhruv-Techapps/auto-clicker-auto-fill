@@ -1,4 +1,4 @@
-import { ADDON_CONDITIONS } from '@dhruv-techapps/acf-common';
+import { EAddonConditions } from '@dhruv-techapps/acf-common';
 import { Alert, Button, Card, Col, Form, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -80,7 +80,7 @@ const AddonModal = () => {
                       {t('modal.addon.condition')} <small className='text-danger'>*</small>
                     </Form.Label>
                     <Form.Select value={addon.condition} onChange={onUpdate} name='condition' required>
-                      {Object.entries(ADDON_CONDITIONS).map((condition) => (
+                      {Object.entries(EAddonConditions).map((condition) => (
                         <option key={condition[1]} value={condition[1]}>
                           {condition[0]}
                         </option>

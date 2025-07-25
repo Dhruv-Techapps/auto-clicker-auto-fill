@@ -3,9 +3,16 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../store';
 
-type SubscribeStore = { visible: boolean; isPortalLinkLoading: boolean; subscriptions?: Subscription[]; error?: string; products?: Product[]; isSubscribing: boolean };
+export interface ISubscribeStore {
+  visible: boolean;
+  isPortalLinkLoading: boolean;
+  subscriptions?: Subscription[];
+  error?: string;
+  products?: Product[];
+  isSubscribing: boolean;
+}
 
-const initialState: SubscribeStore = {
+const initialState: ISubscribeStore = {
   visible: false,
   isSubscribing: false,
   isPortalLinkLoading: false

@@ -4,9 +4,9 @@ export const getRandomValues = () => {
   return mantissa * Math.pow(2, -52);
 };
 
-export type RANDOM_UUID = `${string}-${string}-${string}-${string}-${string}`;
+export type TRandomUUID = `${string}-${string}-${string}-${string}-${string}`;
 
-export const generateUUID = (): RANDOM_UUID => {
+export const generateUUID = (): TRandomUUID => {
   // Generate a random UUID (version 4)
   return crypto.randomUUID
     ? crypto.randomUUID()
@@ -14,7 +14,7 @@ export const generateUUID = (): RANDOM_UUID => {
         const r = (getRandomValues() * 16) | 0;
         const v = c === 'x' ? r : (r & 0x3) | 0x8;
         return v.toString(16);
-      }) as RANDOM_UUID);
+      }) as TRandomUUID);
 };
 
 export const isValidUUID = (uuid: unknown) => {

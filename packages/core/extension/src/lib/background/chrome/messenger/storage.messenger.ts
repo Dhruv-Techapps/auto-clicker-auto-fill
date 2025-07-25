@@ -7,11 +7,11 @@ export type StorageMessengerGetProps = string | string[] | StorageMessengerSetPr
 
 export type StorageMessengerRemoveProps = string | string[];
 
-export type StorageRequest = {
+export interface StorageRequest {
   messenger: 'storage';
   methodName: 'get' | 'set' | 'remove';
   message: StorageMessengerGetProps | StorageMessengerSetProps | StorageMessengerRemoveProps;
-};
+}
 
 export class StorageMessenger {
   async get(keys: StorageMessengerGetProps): Promise<StorageMessengerSetProps> {

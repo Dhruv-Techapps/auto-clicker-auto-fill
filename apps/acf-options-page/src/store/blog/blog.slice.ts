@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { blogCheckAPI } from './blog.api';
 
-type GitHubRelease = {
+interface GitHubRelease {
   url: string;
   assets_url: string;
   upload_url: string;
@@ -75,9 +75,12 @@ type GitHubRelease = {
   body: string;
   discussion_url: string;
   mentions_count: number;
-};
+}
 
-type AddonStore = { visible: boolean; release?: GitHubRelease };
+interface AddonStore {
+  visible: boolean;
+  release?: GitHubRelease;
+}
 
 const initialState: AddonStore = {
   visible: false

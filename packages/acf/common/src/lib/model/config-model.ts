@@ -1,36 +1,36 @@
-import { generateUUID, RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { generateUUID, TRandomUUID } from '@dhruv-techapps/core-common';
 
-import { Action, getDefaultAction } from './action-model';
-import { Batch } from './batch-model';
+import { getDefaultAction, IAction } from './action-model';
+import { IBatch } from './batch-model';
 
-export enum LOAD_TYPES {
+export enum ELoadTypes {
   WINDOW = 'window',
   DOCUMENT = 'document'
 }
 
-export enum START_TYPES {
+export enum EStartTypes {
   AUTO = 'auto',
   MANUAL = 'manual'
 }
 
 export const defaultHotkey = 'Ctrl + Shift + A';
 
-export enum CONFIG_SOURCE {
+export enum EConfigSource {
   WIZARD = 'wizard',
   RECORDER = 'recorder',
   WEB = 'web'
 }
 
-export enum URL_MATCH {
+export enum EUrlMatch {
   REGEX = 'regex',
   EXACT = 'exact'
 }
 
-export type Bypass = {
+export interface IBypass {
   alert?: boolean;
   confirm?: boolean;
   prompt?: boolean;
-};
+}
 
 export interface ISchedule {
   date: string;
@@ -43,14 +43,14 @@ export const defaultSchedule: ISchedule = {
   repeat: 0
 };
 
-export type Configuration = {
+export interface IConfiguration {
   url: string;
   updated?: boolean;
   enable: boolean;
-  startType: START_TYPES;
-  loadType: LOAD_TYPES;
-  actions: Array<Action>;
-  id: RANDOM_UUID;
+  startType: EStartTypes;
+  loadType: ELoadTypes;
+  actions: Array<IAction>;
+  id: TRandomUUID;
   configId?: number;
   name?: string;
   initWait?: number;
@@ -58,21 +58,21 @@ export type Configuration = {
   schedule?: ISchedule;
   spreadsheetId?: string;
   hotkey?: string;
-  batch?: Batch;
-  source?: CONFIG_SOURCE;
+  batch?: IBatch;
+  source?: EConfigSource;
   new?: boolean;
-  url_match?: URL_MATCH;
+  url_match?: EUrlMatch;
   download?: boolean;
-  bypass?: Bypass;
-};
+  bypass?: IBypass;
+}
 
-export const getDefaultConfig = (source?: CONFIG_SOURCE, actions?: Array<Action>): Configuration => ({
+export const getDefaultConfig = (source?: EConfigSource, actions?: Array<IAction>): IConfiguration => ({
   url: '',
   source,
   id: generateUUID(),
   enable: true,
-  startType: START_TYPES.AUTO,
-  loadType: LOAD_TYPES.WINDOW,
+  startType: EStartTypes.AUTO,
+  loadType: ELoadTypes.WINDOW,
   actions: actions || [getDefaultAction()],
   updated: true
 });

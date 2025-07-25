@@ -1,22 +1,22 @@
-import { ACTION_CONDITION_OPR, ACTION_STATUS, ActionCondition } from '@dhruv-techapps/acf-common';
+import { EActionConditionOperator, EActionStatus, IActionCondition } from '@dhruv-techapps/acf-common';
 import { ChangeEvent } from 'react';
 import { Button, ButtonGroup, Form } from 'react-bootstrap';
 import { removeActionStatementCondition, selectedConfigSelector, updateActionStatementCondition } from '../../store/config';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getFieldNameValue } from '../../util/element';
 
-type ActionStatementConditionProps = {
-  condition: ActionCondition;
-  index: number;
-};
+interface IActionStatementConditionProps {
+  readonly condition: IActionCondition;
+  readonly index: number;
+}
 
-function ActionStatementCondition({ condition, index }: ActionStatementConditionProps) {
-  const { actionId, actionIndex, status, operator = ACTION_CONDITION_OPR.AND } = condition;
+function ActionStatementCondition({ condition, index }: IActionStatementConditionProps) {
+  const { actionId, actionIndex, status, operator = EActionConditionOperator.AND } = condition;
   const config = useAppSelector(selectedConfigSelector);
 
   const dispatch = useAppDispatch();
 
-  const changeOpr = (_operator: ACTION_CONDITION_OPR) => {
+  const changeOpr = (_operator: EActionConditionOperator) => {
     dispatch(updateActionStatementCondition({ name: 'operator', value: _operator, id: condition.id }));
   };
 
@@ -42,10 +42,10 @@ function ActionStatementCondition({ condition, index }: ActionStatementCondition
       <td className='fw-bold'>
         {index !== 0 && (
           <ButtonGroup>
-            <Button type='button' variant='outline-primary' className={operator === ACTION_CONDITION_OPR.OR ? 'active' : ''} onClick={() => changeOpr(ACTION_CONDITION_OPR.OR)}>
+            <Button type='button' variant='outline-primary' className={operator === EActionConditionOperator.OR ? 'active' : ''} onClick={() => changeOpr(EActionConditionOperator.OR)}>
               OR
             </Button>
-            <Button type='button' variant='outline-primary' className={operator === ACTION_CONDITION_OPR.AND ? 'active' : ''} onClick={() => changeOpr(ACTION_CONDITION_OPR.AND)}>
+            <Button type='button' variant='outline-primary' className={operator === EActionConditionOperator.AND ? 'active' : ''} onClick={() => changeOpr(EActionConditionOperator.AND)}>
               AND
             </Button>
           </ButtonGroup>
@@ -62,7 +62,7 @@ function ActionStatementCondition({ condition, index }: ActionStatementCondition
       </td>
       <td>
         <Form.Select value={status} onChange={onUpdate} name='status' required style={{ flexShrink: 2 }}>
-          {Object.entries(ACTION_STATUS).map((_status) => (
+          {Object.entries(EActionStatus).map((_status) => (
             <option key={_status[1]} value={_status[1]}>
               {_status[0]}
             </option>

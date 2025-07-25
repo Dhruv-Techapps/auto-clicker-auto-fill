@@ -1,4 +1,4 @@
-import { AUTO_BACKUP } from '@dhruv-techapps/shared-google-drive';
+import { EAutoBackup } from '@dhruv-techapps/shared-google-drive';
 import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
 import { useEffect } from 'react';
 import { Accordion, Button, Card, ListGroup, NavDropdown } from 'react-bootstrap';
@@ -39,7 +39,7 @@ export function SettingsGoogleBackup() {
     }
   }, [user, grantedScopes, scope, dispatch]);
 
-  const onBackup = async (autoBackup?: AUTO_BACKUP) => {
+  const onBackup = async (autoBackup?: EAutoBackup) => {
     if (autoBackup) {
       dispatch(googleDriveAutoBackupAPI(autoBackup));
     } else {
@@ -108,23 +108,23 @@ export function SettingsGoogleBackup() {
       </ol>
       <h6 className='mt-4'>{t('modal.settings.backup.auto-backup')}</h6>
       <ol className='list-group'>
-        <ListGroup.Item as='li' active={backup?.autoBackup === AUTO_BACKUP.DAILY}>
-          <NavDropdown.Item href='#backup-daily' title={t('modal.settings.backup.daily')} onClick={() => onBackup(AUTO_BACKUP.DAILY)}>
+        <ListGroup.Item as='li' active={backup?.autoBackup === EAutoBackup.DAILY}>
+          <NavDropdown.Item href='#backup-daily' title={t('modal.settings.backup.daily')} onClick={() => onBackup(EAutoBackup.DAILY)}>
             {t('modal.settings.backup.daily')}
           </NavDropdown.Item>
         </ListGroup.Item>
-        <ListGroup.Item as='li' active={backup?.autoBackup === AUTO_BACKUP.WEEKLY}>
-          <NavDropdown.Item href='#backup-weekly' title={t('modal.settings.backup.weekly')} onClick={() => onBackup(AUTO_BACKUP.WEEKLY)}>
+        <ListGroup.Item as='li' active={backup?.autoBackup === EAutoBackup.WEEKLY}>
+          <NavDropdown.Item href='#backup-weekly' title={t('modal.settings.backup.weekly')} onClick={() => onBackup(EAutoBackup.WEEKLY)}>
             {t('modal.settings.backup.weekly')}
           </NavDropdown.Item>
         </ListGroup.Item>
-        <ListGroup.Item as='li' active={backup?.autoBackup === AUTO_BACKUP.MONTHLY}>
-          <NavDropdown.Item href='#backup-monthly' title={t('modal.settings.backup.monthly')} onClick={() => onBackup(AUTO_BACKUP.MONTHLY)}>
+        <ListGroup.Item as='li' active={backup?.autoBackup === EAutoBackup.MONTHLY}>
+          <NavDropdown.Item href='#backup-monthly' title={t('modal.settings.backup.monthly')} onClick={() => onBackup(EAutoBackup.MONTHLY)}>
             {t('modal.settings.backup.monthly')}
           </NavDropdown.Item>
         </ListGroup.Item>
-        <ListGroup.Item as='li' active={!backup?.autoBackup || backup?.autoBackup === AUTO_BACKUP.OFF}>
-          <NavDropdown.Item href='#backup-off' title={t('modal.settings.backup.off')} onClick={() => onBackup(AUTO_BACKUP.OFF)}>
+        <ListGroup.Item as='li' active={!backup?.autoBackup || backup?.autoBackup === EAutoBackup.OFF}>
+          <NavDropdown.Item href='#backup-off' title={t('modal.settings.backup.off')} onClick={() => onBackup(EAutoBackup.OFF)}>
             {t('modal.settings.backup.off')}
           </NavDropdown.Item>
         </ListGroup.Item>

@@ -1,10 +1,10 @@
 import { getFieldNameValue } from '@acf-options-page/util/element';
-import { Action } from '@dhruv-techapps/acf-common';
+import { IAction } from '@dhruv-techapps/acf-common';
 import { ColumnDef } from '@tanstack/react-table';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-export const defaultColumn: Partial<ColumnDef<Action>> = {
+export const defaultColumn: Partial<ColumnDef<IAction>> = {
   cell: Cell
 };
 

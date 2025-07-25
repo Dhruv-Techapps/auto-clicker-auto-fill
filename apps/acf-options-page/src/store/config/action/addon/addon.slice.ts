@@ -1,17 +1,17 @@
 import { RootState } from '@acf-options-page/store';
-import { Addon, GOTO, defaultAddon } from '@dhruv-techapps/acf-common';
+import { IAddon, TGoto, defaultAddon } from '@dhruv-techapps/acf-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { openActionAddonModalAPI } from './addon.api';
 
-type ActionAddonStore = {
+export interface IActionAddonStore {
   visible: boolean;
   error?: string;
   message?: string;
-  addon: Addon;
-};
+  addon: IAddon;
+}
 
-const initialState: ActionAddonStore = { visible: false, addon: { ...defaultAddon } };
+const initialState: IActionAddonStore = { visible: false, addon: { ...defaultAddon } };
 
 const slice = createSlice({
   name: 'actionAddon',
@@ -22,7 +22,7 @@ const slice = createSlice({
       // @ts-expect-error "making is generic function difficult for TypeScript"
       state.addon[name] = value;
     },
-    updateActionAddonGoto: (state, action: PayloadAction<GOTO>) => {
+    updateActionAddonGoto: (state, action: PayloadAction<TGoto>) => {
       state.addon.recheckGoto = action.payload;
     },
     switchActionAddonModal: (state) => {

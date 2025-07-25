@@ -1,4 +1,4 @@
-import { Action, CONFIG_SOURCE, Configuration, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { EConfigSource, getDefaultAction, getDefaultConfig, IAction, IConfiguration } from '@dhruv-techapps/acf-common';
 
 import { Recording, Step } from './index.types';
 
@@ -24,7 +24,7 @@ const getProps = (selectors: Array<Array<string>>) => {
 };
 
 export const ConvertStep = (step: Step) => {
-  const action: Action = getDefaultAction();
+  const action: IAction = getDefaultAction();
   switch (step.type) {
     case 'change':
       {
@@ -50,11 +50,9 @@ export const ConvertStep = (step: Step) => {
       break;
     case 'keyDown':
     case 'keyUp':
-      {
-        action.elementFinder = ELEMENT_FINDER;
-        action.name = step.key;
-        action.value = `KeyboardEvents::${step.key}`;
-      }
+      action.elementFinder = ELEMENT_FINDER;
+      action.name = step.key;
+      action.value = `KeyboardEvents::${step.key}`;
       break;
     case 'navigate':
     case 'setViewport':
@@ -70,7 +68,7 @@ export const ConvertStep = (step: Step) => {
 };
 
 const getConfig = (url: string) => {
-  const config: Configuration = getDefaultConfig(CONFIG_SOURCE.RECORDER);
+  const config: IConfiguration = getDefaultConfig(EConfigSource.RECORDER);
   config.actions = [];
   config.url = url;
   delete config.updated;
@@ -78,9 +76,9 @@ const getConfig = (url: string) => {
 };
 
 export const ConvertRecording = (recording: Recording) => {
-  const configs: Array<Configuration> = [];
+  const configs: Array<IConfiguration> = [];
   const [, navigate, ...steps] = recording.steps;
-  let config: Configuration;
+  let config: IConfiguration;
   if (navigate.type === 'navigate') {
     console.assert(navigate.url, 'URL is required for navigate step');
     config = getConfig(navigate.url);
@@ -92,7 +90,7 @@ export const ConvertRecording = (recording: Recording) => {
   console.assert(steps.length === 0, 'No steps found in recording');
   steps.forEach((step) => {
     const action = ConvertStep(step);
-    if (action && action.elementFinder) {
+    if (action?.elementFinder) {
       config.actions.push(action);
     }
     if (step.assertedEvents) {

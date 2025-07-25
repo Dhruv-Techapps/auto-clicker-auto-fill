@@ -1,5 +1,5 @@
-export type RuntimeMessageRequest<T = undefined> = {
+export interface RuntimeMessageRequest<T = undefined> {
   messenger: string;
   methodName: string;
   message?: T;
-};
+}

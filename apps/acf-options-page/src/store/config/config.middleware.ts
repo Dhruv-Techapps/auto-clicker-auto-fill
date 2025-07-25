@@ -1,6 +1,6 @@
 import { ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
-import { AnyAction, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
+import { createListenerMiddleware, isAnyOf, UnknownAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import i18next from 'i18next';
 import { RootState } from '../store';
@@ -54,8 +54,7 @@ configsToastListenerMiddleware.startListening({
   }
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getMessageFunc = (action: AnyAction): { success: any; failure: any; message: string } => {
+const getMessageFunc = (action: UnknownAction): { success: any; failure: any; message: string } => {
   switch (action.type) {
     case updateConfigSettings.type:
       return { success: setConfigSettingsMessage, failure: setConfigSettingsError, message: i18next.t(`message.configSettings`) };

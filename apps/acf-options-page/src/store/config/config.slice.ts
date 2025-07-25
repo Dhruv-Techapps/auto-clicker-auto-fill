@@ -1,6 +1,6 @@
 import { CONFIGURATIONS } from '@acf-options-page/data/configurations';
-import { CONFIG_SOURCE, Configuration, START_TYPES, getDefaultConfig } from '@dhruv-techapps/acf-common';
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { EConfigSource, EStartTypes, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { LocalStorage } from '../../_helpers';
@@ -14,19 +14,22 @@ import { scheduleActions } from './schedule';
 const HIDDEN_DETAIL_KEY = 'config-detail-visibility';
 const defaultDetailVisibility = { name: true, url: true };
 
-export type ConfigStore = {
+export interface ConfigStore {
   loading: boolean;
-  selectedConfigId: RANDOM_UUID;
-  selectedActionId: RANDOM_UUID;
+  selectedConfigId: TRandomUUID;
+  selectedActionId: TRandomUUID;
   error?: string;
-  configs: Array<Configuration>;
+  configs: Array<IConfiguration>;
   message?: string;
   search?: string;
   detailVisibility: { name: boolean; url: boolean };
-};
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ConfigAction = { name: string; value: any };
+interface ConfigAction {
+  name: string;
+  value: any;
+}
 
 const initialState: ConfigStore = {
   loading: true,
@@ -53,12 +56,12 @@ const slice = createSlice({
       state.search = action.payload;
     },
     addConfig: {
-      reducer: (state, action: PayloadAction<Configuration>) => {
+      reducer: (state, action: PayloadAction<IConfiguration>) => {
         state.configs.unshift(action.payload);
         state.selectedConfigId = action.payload.id;
       },
       prepare: () => {
-        const config = getDefaultConfig(CONFIG_SOURCE.WEB);
+        const config = getDefaultConfig(EConfigSource.WEB);
         return { payload: config };
       }
     },
@@ -92,11 +95,11 @@ const slice = createSlice({
       // @ts-expect-error "making is generic function difficult for TypeScript"
       selectedConfig[name] = value;
       selectedConfig['updated'] = true;
-      if (name === 'startType' && value === START_TYPES.AUTO) {
+      if (name === 'startType' && value === EStartTypes.AUTO) {
         delete selectedConfig.hotkey;
       }
     },
-    removeConfig: (state, action: PayloadAction<RANDOM_UUID>) => {
+    removeConfig: (state, action: PayloadAction<TRandomUUID>) => {
       const { configs } = state;
       const selectConfigIndex = configs.findIndex((config) => config.id === action.payload);
       if (selectConfigIndex === -1) {
@@ -109,15 +112,15 @@ const slice = createSlice({
         state.selectedConfigId = configs[0].id;
       }
     },
-    setConfigs: (state, action: PayloadAction<Array<Configuration>>) => {
+    setConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = updateConfigIds(action.payload);
       state.selectedConfigId = state.configs[0].id;
     },
-    importAll: (state, action: PayloadAction<Array<Configuration>>) => {
+    importAll: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs.push(...updateConfigIds(action.payload));
       state.selectedConfigId = state.configs[0].id;
     },
-    importConfig: (state, action: PayloadAction<Configuration>) => {
+    importConfig: (state, action: PayloadAction<IConfiguration>) => {
       const config = updateConfigId(action.payload);
       state.configs.push(config);
       state.selectedConfigId = config.id;
@@ -136,7 +139,7 @@ const slice = createSlice({
       state.configs.push({ ...selectedConfig, name, id, actions });
       state.selectedConfigId = id;
     },
-    selectConfig: (state, action: PayloadAction<RANDOM_UUID>) => {
+    selectConfig: (state, action: PayloadAction<TRandomUUID>) => {
       state.selectedConfigId = action.payload;
     },
     setDetailVisibility: (state, action: PayloadAction<string>) => {

@@ -1,4 +1,4 @@
-import { LOAD_TYPES, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
+import { ELoadTypes, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
 import { Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { Sheets } from '@dhruv-techapps/shared-google-sheets';
@@ -27,7 +27,7 @@ new SettingsStorage().getSettings().then((settings) => {
   }
 });
 
-async function loadConfig(loadType: LOAD_TYPES) {
+async function loadConfig(loadType: ELoadTypes) {
   try {
     new ConfigStorage().getConfig().then(async ({ autoConfig, manualConfigs }: GetConfigResult) => {
       if (autoConfig) {
@@ -37,7 +37,7 @@ async function loadConfig(loadType: LOAD_TYPES) {
           await ConfigProcessor.checkStartType(manualConfigs, autoConfig);
           Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', host, 'END');
         }
-      } else if (manualConfigs.length > 0 && loadType === LOAD_TYPES.DOCUMENT) {
+      } else if (manualConfigs.length > 0 && loadType === ELoadTypes.DOCUMENT) {
         await ConfigProcessor.checkStartType(manualConfigs);
       }
     });
@@ -50,11 +50,11 @@ async function loadConfig(loadType: LOAD_TYPES) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadConfig(LOAD_TYPES.DOCUMENT);
+  loadConfig(ELoadTypes.DOCUMENT);
 });
 
 window.addEventListener('load', () => {
-  loadConfig(LOAD_TYPES.WINDOW);
+  loadConfig(ELoadTypes.WINDOW);
 });
 
 addEventListener('unhandledrejection', (event) => {

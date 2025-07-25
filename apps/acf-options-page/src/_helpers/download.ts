@@ -1,6 +1,6 @@
-import { Configuration } from '@dhruv-techapps/acf-common';
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 
-export const download = (name: string, data: Configuration | Array<Configuration>) => {
+export const download = (name: string, data: IConfiguration | Array<IConfiguration>) => {
   const blob = new Blob([JSON.stringify(data)], { type: 'application/json;charset=utf-8;' });
   const href = URL.createObjectURL(blob);
 

@@ -1,3 +1,7 @@
-export type Batch = { refresh?: boolean; repeat?: number; repeatInterval?: number | string };
+export interface IBatch {
+  refresh?: boolean;
+  repeat?: number;
+  repeatInterval?: number | string;
+}
 
-export const defaultBatch: Batch = {};
+export const defaultBatch: IBatch = {};

@@ -2,14 +2,14 @@ import { Hit as AlgoliaHit } from 'instantsearch.js';
 import { Highlight } from 'react-instantsearch';
 import { Link } from 'react-router-dom';
 
-type HitProps = {
+interface HitProps {
   hit: AlgoliaHit<{
     name: string;
     url: string;
     price: number;
     userName: string;
   }>;
-};
+}
 
 export const Hit = ({ hit }: HitProps) => {
   return (

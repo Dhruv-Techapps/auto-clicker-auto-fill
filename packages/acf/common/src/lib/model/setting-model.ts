@@ -1,18 +1,18 @@
-export enum RETRY_OPTIONS {
+export enum ERetryOptions {
   STOP = 'stop',
   SKIP = 'skip',
   RELOAD = 'reload',
   GOTO = 'goto'
 }
 
-export type SettingsNotifications = {
+export interface ISettingsNotifications {
   onAction: boolean;
   onBatch: boolean;
   onConfig: boolean;
   onError: boolean;
   sound: boolean;
   discord: boolean;
-};
+}
 
 export const defaultSettingsNotifications = {
   onAction: false,
@@ -23,36 +23,36 @@ export const defaultSettingsNotifications = {
   discord: false
 };
 
-export type SettingsBackup = {
+export interface ISettingsBackup {
   autoBackup: 'daily' | 'weekly' | 'monthly' | 'off';
   lastBackup?: string;
-};
+}
 
 export const defaultSettingsBackup = {
   autoBackup: 'off'
 };
 
-export type Settings = {
+export interface ISettings {
   retry: number;
   retryInterval: number | string;
-  retryOption: RETRY_OPTIONS;
+  retryOption: ERetryOptions;
   checkiFrames: boolean;
   statusBar: 'hide' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  backup?: SettingsBackup;
+  backup?: ISettingsBackup;
   reloadOnError?: boolean;
-  notifications?: SettingsNotifications;
+  notifications?: ISettingsNotifications;
   suppressWhatsNew?: boolean;
-};
+}
 
-export const defaultSettings: Settings = {
+export const defaultSettings: ISettings = {
   retry: 5,
   retryInterval: 1,
   statusBar: 'bottom-right',
-  retryOption: RETRY_OPTIONS.STOP,
+  retryOption: ERetryOptions.STOP,
   checkiFrames: false
 };
 
-export type Discord = {
+export interface IDiscord {
   accent_color: number;
   avatar: string;
   banner_color: string;
@@ -67,13 +67,13 @@ export type Discord = {
   public_flags: number;
   username: string;
   verified: boolean;
-};
+}
 
-export type Google = {
+export interface IGoogleUser {
   family_name: string;
   given_name: string;
   locale: string;
   name: string;
   picture: string;
   sub: string;
-};
+}

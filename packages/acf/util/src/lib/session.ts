@@ -1,10 +1,10 @@
-import { RANDOM_UUID } from '@dhruv-techapps/core-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 
 export class Session {
   private readonly SESSION_COUNT_KEY;
   private readonly SESSION_CLEAR_PARAM = 'clear-acf-session';
 
-  constructor(id: RANDOM_UUID) {
+  constructor(id: TRandomUUID) {
     this.SESSION_COUNT_KEY = `acf-session-count-${id}`;
   }
 
