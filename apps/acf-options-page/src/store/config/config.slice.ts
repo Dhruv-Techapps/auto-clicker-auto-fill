@@ -25,7 +25,6 @@ export interface ConfigStore {
   detailVisibility: { name: boolean; url: boolean };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface ConfigAction {
   name: string;
   value: any;

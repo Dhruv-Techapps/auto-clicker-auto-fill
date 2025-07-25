@@ -14,7 +14,6 @@ export interface IActionStatementStore {
 
 const initialState: IActionStatementStore = { visible: false, statement: {} };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface StatementCondition {
   name: string;
   value: any;
