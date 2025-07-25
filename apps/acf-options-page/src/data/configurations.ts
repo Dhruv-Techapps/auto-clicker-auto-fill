@@ -128,7 +128,7 @@ export const CONFIGURATIONS: IConfiguration[] = [
   {
     actions: [{ elementFinder: '//input', error: [], id: '85f50b8e-eba2-47a7-a0e2-10f5ad7d9ee2', value: 'GoogleSheets::Users!A1' }],
     batch: { refresh: false },
-    IBypass: { alert: true, confirm: false, prompt: false },
+    bypass: { alert: true, confirm: false, prompt: false },
     enable: false,
     id: '9585a3ea-807a-488e-9e62-6e3720a1bcc8',
     loadType: 'window',
