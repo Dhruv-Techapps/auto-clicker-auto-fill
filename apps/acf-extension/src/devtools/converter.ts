@@ -90,7 +90,7 @@ export const ConvertRecording = (recording: Recording) => {
   console.assert(steps.length === 0, 'No steps found in recording');
   steps.forEach((step) => {
     const action = ConvertStep(step);
-    if (action?.elementFinder) {
+    if (action.elementFinder) {
       config.actions.push(action);
     }
     if (step.assertedEvents) {
