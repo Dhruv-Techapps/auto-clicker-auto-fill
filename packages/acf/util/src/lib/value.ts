@@ -55,9 +55,7 @@ export const Value = (() => {
     const [, key] = value.split('::');
     if (searchParams.has(key)) {
       const paramValue = searchParams.get(key) ?? key;
-      if (validateQueryParam(key, paramValue)) {
-        value = sanitizeInput(paramValue);
-      }
+      value = sanitizeInput(paramValue);
     }
     return value;
   };
@@ -66,10 +64,7 @@ export const Value = (() => {
     const searchParams = new URLSearchParams(window.location.search);
     value = value.replace(VALUE_MATCHER.QUERY, (_, key) => {
       const paramValue = searchParams.get(key) ?? key;
-      if (validateQueryParam(key, paramValue)) {
-        return sanitizeInput(paramValue);
-      }
-      return key;
+      return sanitizeInput(paramValue);
     });
     return value;
   };
