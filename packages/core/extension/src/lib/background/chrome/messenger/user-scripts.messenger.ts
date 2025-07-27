@@ -29,6 +29,10 @@ export class UserScriptsMessenger {
       js: [{ code: `window.ext = ${JSON.stringify(ext)};` }, { code }]
     });
 
+    if (results.length === 0) {
+      throw new Error('No results returned from userScripts.execute');
+    }
+
     return {
       result: results[0].result,
       error: results[0].error

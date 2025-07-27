@@ -16,10 +16,10 @@ const UserScriptProcessor = (() => {
     return await UserScriptsService.execute(executeRequest)
       .then((response: IUserScriptsExecuteResponse) => {
         if (response.error) {
-          console.error(`${USER_SCRIPTS_I18N.TITLE} #${window.ext.__currentAction}`, `❌ ${I18N_COMMON.ERROR}: ${response.error}`);
+          console.error(`${USER_SCRIPTS_I18N.TITLE} #${window.ext.__currentAction}`, `❌ ${I18N_COMMON.ERROR}`);
           return EActionStatus.SKIPPED;
         }
-        console.debug(`${USER_SCRIPTS_I18N.TITLE} #${window.ext.__currentAction}`, `✅ ${I18N_COMMON.COMPLETED} : ${response.result}`);
+        console.debug(`${USER_SCRIPTS_I18N.TITLE} #${window.ext.__currentAction}`, `✅ ${I18N_COMMON.COMPLETED}`);
         return EActionStatus.DONE;
       })
       .catch((error) => {

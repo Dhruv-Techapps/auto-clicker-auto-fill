@@ -1,8 +1,9 @@
 import { getFieldNameValue } from '@acf-options-page/util/element';
 import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
+import { ThemeContext } from '@dhruv-techapps/ui-context';
 import Editor from '@monaco-editor/react';
 import { ColumnDef } from '@tanstack/react-table';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 export const defaultColumn: Partial<ColumnDef<IAction | IUserScript>> = {
   cell: Cell
@@ -14,6 +15,7 @@ interface InputProps {
 }
 
 function Cell({ getValue, row: { original }, column: { id, columnDef }, table }: any) {
+  const { theme } = useContext(ThemeContext);
   const { meta } = columnDef;
   const initialValue = getValue();
   const [value, setValue] = useState(initialValue);
@@ -87,7 +89,17 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
 
   if (id === 'value') {
     if (valueFieldType === 'script') {
-      return <Editor defaultLanguage='javascript' theme='vs-dark' height='100px' aria-label={meta?.ariaLabel} value={value || ''} onChange={onEditorChange} options={options} />;
+      return (
+        <Editor
+          defaultLanguage='javascript'
+          theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+          height='100px'
+          aria-label={meta?.ariaLabel}
+          value={value || ''}
+          onChange={onEditorChange}
+          options={options}
+        />
+      );
     }
     return (
       <InputGroup>
