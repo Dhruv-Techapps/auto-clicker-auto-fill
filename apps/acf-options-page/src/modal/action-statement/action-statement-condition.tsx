@@ -55,7 +55,7 @@ function ActionStatementCondition({ condition, index }: IActionStatementConditio
         <Form.Select value={actionId} onChange={onUpdate} name='actionId' required className='flex-grow-1 me-1'>
           {actions.map((_action, index) => (
             <option key={_action.id} value={_action.id}>
-              {index + 1} . {_action.name || _action.elementFinder}
+              {index + 1} . {_action.name || 'Action or Userscript'}
             </option>
           ))}
         </Form.Select>

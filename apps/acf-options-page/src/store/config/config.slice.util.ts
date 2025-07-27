@@ -1,4 +1,4 @@
-import { EConfigSource, IAction, IConfiguration, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { EConfigSource, IAction, IConfiguration, getDefaultAction, getDefaultConfig, isAction } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { GetThunkAPI } from '@reduxjs/toolkit';
 import { blogCheckAPI } from '../blog';
@@ -52,18 +52,16 @@ export const checkQueryParams = (configs: Array<IConfiguration>, thunkAPI: GetTh
     } else if (url && elementFinder) {
       const selectedConfig = configs.find((config) => config.url === url);
       if (selectedConfig) {
-        const selectedAction = selectedConfig.actions.find((action) => action.elementFinder === elementFinder);
+        const selectedAction = selectedConfig.actions.filter(isAction).find((action) => action.elementFinder === elementFinder);
         if (!selectedAction) {
-          const action: IAction = { ...getDefaultAction(), elementFinder: elementFinder, error: [] };
+          const action: IAction = { ...getDefaultAction(elementFinder) };
           selectedConfig.actions.push(action);
         }
         return selectedConfig.id;
       } else {
-        const newConfig = getDefaultConfig(EConfigSource.WEB);
+        const newConfig = getDefaultConfig(EConfigSource.WEB, [getDefaultAction(elementFinder)]);
         newConfig.url = url;
         newConfig.name = getConfigName(url);
-        newConfig.actions[0].elementFinder = elementFinder;
-        newConfig.actions[0].error = [];
         configs.unshift(newConfig);
         return newConfig.id;
       }

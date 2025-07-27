@@ -1,4 +1,3 @@
-import { useConfirmationModalContext } from '@acf-options-page/_providers/confirm.provider';
 import { actionSelector, addAction, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI, setColumnVisibility, updateAction } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
@@ -28,10 +27,8 @@ interface ActionProps {
 
 const ActionTable = ({ actions }: ActionProps) => {
   const { t } = useTranslation();
-
   const { columnVisibility } = useAppSelector(actionSelector);
   const dispatch = useAppDispatch();
-  const modalContext = useConfirmationModalContext();
 
   const onColumnChange = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement | HTMLAnchorElement>) => {
     const column = e.currentTarget.getAttribute('data-column');

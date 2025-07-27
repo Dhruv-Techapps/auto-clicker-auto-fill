@@ -9,7 +9,7 @@ type WizardConfiguration = Omit<IConfiguration, 'actions'> & {
   timer?: number;
 };
 
-const initialState: WizardConfiguration = getDefaultConfig(EConfigSource.WIZARD, []);
+const initialState: WizardConfiguration = getDefaultConfig(EConfigSource.WIZARD, []) as WizardConfiguration;
 
 const slice = createSlice({
   name: 'wizard',

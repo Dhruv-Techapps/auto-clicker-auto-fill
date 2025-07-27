@@ -81,8 +81,8 @@ export interface IAction {
   selectors?: Array<Array<string>>;
 }
 
-export const getDefaultAction = (): IAction => ({
+export const getDefaultAction = (elementFinder = ''): IAction => ({
   id: generateUUID(),
-  elementFinder: '',
-  error: ['elementFinder']
+  elementFinder,
+  error: [elementFinder === '' ? 'elementFinder' : '']
 });

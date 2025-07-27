@@ -112,7 +112,7 @@ function AddonRecheck() {
                 <Form.Select value={addon.recheckGoto} onChange={onUpdateGoto} name='goto' required>
                   {actions.map((_action, index) => (
                     <option key={_action.id} value={_action.id}>
-                      {index + 1} . {_action.name ?? _action.elementFinder}
+                      {index + 1} . {_action.name ?? 'Action or Userscript'}
                     </option>
                   ))}
                 </Form.Select>

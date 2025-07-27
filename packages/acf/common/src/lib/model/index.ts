@@ -18,3 +18,8 @@ export const isUserScript = (action: IAction | IUserScript): action is IUserScri
   // Based on common patterns, IUserScript likely has different properties than IAction
   return 'type' in action && action.type === 'userscript';
 };
+
+export const isAction = (action: IAction | IUserScript): action is IAction => {
+  // Check for properties that are unique to IAction
+  return 'elementFinder' in action && typeof action.elementFinder === 'string';
+};
