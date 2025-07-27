@@ -1,16 +1,15 @@
-import { ConfigError } from '@dhruv-techapps/core-common';
+import { ConfigError, IExtension } from '@dhruv-techapps/core-common';
 import { RANGE_REGEX } from './google-sheets.constant';
-import { Sheets } from './google-sheets.types';
 
 declare global {
   interface Window {
-    __sheets?: Sheets;
+    ext: IExtension;
   }
 }
 
 export class GoogleSheetsValue {
   static getSheetValue(value: string) {
-    const sheets = window.__sheets;
+    const sheets = window.ext.__sheets;
     if (!sheets) {
       return value;
     }

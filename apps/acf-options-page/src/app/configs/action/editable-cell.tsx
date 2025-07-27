@@ -1,12 +1,17 @@
 import { getFieldNameValue } from '@acf-options-page/util/element';
-import { IAction } from '@dhruv-techapps/acf-common';
+import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
+import Editor from '@monaco-editor/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
-
-export const defaultColumn: Partial<ColumnDef<IAction>> = {
+export const defaultColumn: Partial<ColumnDef<IAction | IUserScript>> = {
   cell: Cell
 };
+
+interface InputProps {
+  rows?: number;
+  placeholder?: string;
+}
 
 function Cell({ getValue, row: { original }, column: { id, columnDef }, table }: any) {
   const { meta } = columnDef;
@@ -14,10 +19,17 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
   const [value, setValue] = useState(initialValue);
   const [isInvalid, setIsInvalid] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [valueFieldType, setValueFieldType] = useState<'input' | 'textarea'>(original.valueFieldType || 'input');
+  const [valueFieldType, setValueFieldType] = useState<'input' | 'textarea' | 'script'>(original.valueFieldType || 'input');
 
   const onBlur = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, { [id]: initialValue });
+    if (update) {
+      table.options.meta?.updateData(original.id, update.name, update.value);
+    }
+  };
+
+  const onEditorChange = (value: string | undefined) => {
+    const update = { name: id, value };
     if (update) {
       table.options.meta?.updateData(original.id, update.name, update.value);
     }
@@ -37,7 +49,7 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
     setValue(initialValue);
   }, [initialValue, id, original.error]);
 
-  const getInput = (as: 'input' | 'textarea') => (
+  const getInput = (as: 'input' | 'textarea', rest: InputProps = {}) => (
     <Form.Control
       ref={inputRef}
       aria-label={meta?.ariaLabel}
@@ -46,6 +58,7 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
       name={id}
       as={as}
       {...(as === 'textarea' && { rows: 1 })}
+      {...rest}
       onChange={onChange}
       onBlur={onBlur}
       pattern={meta?.pattern}
@@ -62,7 +75,20 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
     table.options.meta?.updateValueFieldTypes(original.id, newFieldType);
   };
 
+  const options = {
+    minimap: {
+      enabled: false
+    },
+    scrollbar: {
+      alwaysConsumeMouseWheel: false
+    },
+    automaticLayout: true
+  };
+
   if (id === 'value') {
+    if (valueFieldType === 'script') {
+      return <Editor defaultLanguage='javascript' theme='vs-dark' height='100px' aria-label={meta?.ariaLabel} value={value || ''} onChange={onEditorChange} options={options} />;
+    }
     return (
       <InputGroup>
         <OverlayTrigger overlay={<Tooltip id={id}>{valueFieldType === 'input' ? `Switch to Textarea` : 'Switch to Input'}</Tooltip>}>

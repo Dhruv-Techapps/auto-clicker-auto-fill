@@ -18,19 +18,19 @@ describe('getValue', () => {
   });
 
   it('should replace <batchRepeat> with the correct value', async () => {
-    window.__batchRepeat = 5;
+    window.ext.__batchRepeat = 5;
     const result = await Value.getValue('<batchRepeat>');
     expect(result).toBe('5');
   });
 
   it('should replace <actionRepeat> with the correct value', async () => {
-    window.__actionRepeat = 3;
+    window.ext.__actionRepeat = 3;
     const result = await Value.getValue('<actionRepeat>');
     expect(result).toBe('3');
   });
 
   it('should replace <sessionCount> with the correct value', async () => {
-    window.__sessionCount = 10;
+    window.ext.__sessionCount = 10;
     const result = await Value.getValue('<sessionCount>');
     expect(result).toBe('10');
   });

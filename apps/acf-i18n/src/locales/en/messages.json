@@ -56,6 +56,9 @@
   "@ACTION__TITLE": {
     "message": "Action"
   },
+  "@USER_SCRIPT__TITLE": {
+    "message": "User Script"
+  },
   "@ACTION__NO_NAME": {
     "message": "no-name"
   },

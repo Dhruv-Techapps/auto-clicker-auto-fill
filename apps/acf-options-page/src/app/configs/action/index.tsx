@@ -1,5 +1,5 @@
 import { useTimeout } from '@acf-options-page/_hooks/message.hooks';
-import { addAction, selectedConfigSelector, switchBatchModal } from '@acf-options-page/store/config';
+import { addAction, addUserscript, selectedConfigSelector, switchBatchModal } from '@acf-options-page/store/config';
 import { actionSelector, setActionMessage } from '@acf-options-page/store/config/action/action.slice';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { Button, Card, Col, Row } from 'react-bootstrap';
@@ -19,6 +19,10 @@ function Action() {
 
   const onAddAction = () => {
     dispatch(addAction());
+  };
+
+  const onAddUserscript = () => {
+    dispatch(addUserscript());
   };
 
   if (!config) {
@@ -43,6 +47,9 @@ function Action() {
               </Button>
               <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddAction} id='add-action'>
                 <i className='bi bi-plus-lg me-2' /> {t('action.add')}
+              </Button>
+              <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddUserscript} id='add-userscript'>
+                <i className='bi bi-plus-lg me-2' /> {t('userscript.add')}
               </Button>
             </Col>
           </Row>

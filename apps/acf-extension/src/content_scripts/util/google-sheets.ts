@@ -33,7 +33,7 @@ export default class GoogleSheets {
             ranges.add(range.replace(BATCH_REPEAT, '1'));
             ranges.add(range.replace(BATCH_REPEAT, String(batchHighestRepeat + 1)));
           } else if (value.includes(SESSION_COUNT)) {
-            ranges.add(range.replace(SESSION_COUNT, String(window.__sessionCount)));
+            ranges.add(range.replace(SESSION_COUNT, String(window.ext.__sessionCount)));
           } else {
             ranges.add(range);
           }

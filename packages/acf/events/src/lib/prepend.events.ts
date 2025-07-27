@@ -28,7 +28,7 @@ export const PrependEvents = (() => {
 
   const start = (elements: Array<HTMLElement>, value: string) => {
     value = value.replace(/^prepend::/i, '');
-    console.debug(`${ACTION_I18N_TITLE} #${window.__currentAction} [${window.__currentActionName}]`, elements, value);
+    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, value);
     CommonEvents.loopElements(elements, value, checkNode);
   };
 

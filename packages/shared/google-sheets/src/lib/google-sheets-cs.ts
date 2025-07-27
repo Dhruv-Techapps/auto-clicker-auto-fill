@@ -1,7 +1,7 @@
-import { ConfigError } from '@dhruv-techapps/core-common';
+import { ConfigError, ISheets } from '@dhruv-techapps/core-common';
 import { RANGE_REGEX } from './google-sheets.constant';
 import { GoogleSheetsService } from './google-sheets.service';
-import { Sheets, ValueRange } from './google-sheets.types';
+import { ValueRange } from './google-sheets.types';
 
 export class GoogleSheetsCS {
   transformSheets(sheets: Map<string, Set<string> | string>) {
@@ -37,8 +37,8 @@ export class GoogleSheetsCS {
     });
   }
 
-  transformResult(result: Array<ValueRange>): Sheets {
-    return result.reduce((a: Sheets, c: ValueRange) => {
+  transformResult(result: Array<ValueRange>): ISheets {
+    return result.reduce((a: ISheets, c: ValueRange) => {
       const { range, values } = c;
       const [sheetName, ranges] = range.split('!');
       const [startRange, endRange] = ranges.split(':');
@@ -47,7 +47,7 @@ export class GoogleSheetsCS {
     }, {});
   }
 
-  async getValues(sheets: Map<string, Set<string> | string>, spreadsheetId?: string): Promise<Sheets | undefined> {
+  async getValues(sheets: Map<string, Set<string> | string>, spreadsheetId?: string): Promise<ISheets | undefined> {
     try {
       if (sheets.size === 0) {
         return undefined;

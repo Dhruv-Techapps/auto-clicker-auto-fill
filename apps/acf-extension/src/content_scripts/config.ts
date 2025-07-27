@@ -47,12 +47,12 @@ const ConfigProcessor = (() => {
 
   const start = async (config: IConfiguration) => {
     try {
-      window.__sessionCount = new Session(config.id).getCount();
+      window.ext.__sessionCount = new Session(config.id).getCount();
       if (config.bypass) {
         await MainWorldService.bypass(config.bypass);
       }
       const sheets = GoogleSheets.getSheets(config);
-      window.__sheets = await new GoogleSheetsCS().getValues(sheets, config.spreadsheetId);
+      window.ext.__sheets = await new GoogleSheetsCS().getValues(sheets, config.spreadsheetId);
       await BatchProcessor.start(config.actions, config.batch);
       const { notifications } = await new SettingsStorage().getSettings();
       if (notifications) {

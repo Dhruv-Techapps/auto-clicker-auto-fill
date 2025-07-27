@@ -1,7 +1,8 @@
 import { generateUUID, TRandomUUID } from '@dhruv-techapps/core-common';
 
-import { getDefaultAction, IAction } from './action-model';
-import { IBatch } from './batch-model';
+import { getDefaultAction, IAction } from './IAction';
+import { IBatch } from './IBatch';
+import { IUserScript } from './IUserscript';
 
 export enum ELoadTypes {
   WINDOW = 'window',
@@ -49,7 +50,7 @@ export interface IConfiguration {
   enable: boolean;
   startType: EStartTypes;
   loadType: ELoadTypes;
-  actions: Array<IAction>;
+  actions: Array<IAction | IUserScript>;
   id: TRandomUUID;
   configId?: number;
   name?: string;

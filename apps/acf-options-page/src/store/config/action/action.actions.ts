@@ -1,4 +1,4 @@
-import { IAction, getDefaultAction } from '@dhruv-techapps/acf-common';
+import { IAction, getDefaultAction, getDefaultUserscript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
@@ -53,6 +53,17 @@ export const actionActions = {
     } else {
       selectedConfig.actions.push(getDefaultAction());
     }
+    selectedConfig.updated = true;
+  },
+  addUserscript: (state: ConfigStore, action: PayloadAction<AddActionPayload>) => {
+    const { configs, selectedConfigId } = state;
+    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+    if (!selectedConfig) {
+      state.error = 'Invalid Configuration';
+      Sentry.captureException(state.error);
+      return;
+    }
+    selectedConfig.actions.push(getDefaultUserscript());
     selectedConfig.updated = true;
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

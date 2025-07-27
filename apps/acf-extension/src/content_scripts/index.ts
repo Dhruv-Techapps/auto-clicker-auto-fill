@@ -1,7 +1,6 @@
 import { ELoadTypes, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
-import { Logger, LoggerColor } from '@dhruv-techapps/core-common';
-import { Sheets } from '@dhruv-techapps/shared-google-sheets';
+import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { scope } from '../common/instrument';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';
@@ -10,15 +9,11 @@ scope.setTag('page', 'content-script');
 
 declare global {
   interface Window {
-    __currentAction: number;
-    __currentActionName: string;
-    __actionError: string;
-    __actionRepeat: number;
-    __batchRepeat: number;
-    __sessionCount: number;
-    __sheets?: Sheets;
+    ext: IExtension;
   }
 }
+
+window.ext = window.ext || {};
 
 let reloadOnError = false;
 new SettingsStorage().getSettings().then((settings) => {

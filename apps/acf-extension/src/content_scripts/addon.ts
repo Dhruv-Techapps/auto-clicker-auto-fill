@@ -27,7 +27,7 @@ const AddonProcessor = (() => {
         return await start({ elementFinder, value, condition, recheck, recheckOption, ...props }, settings);
       }
     }
-    window.__actionError = `${ADDON_I18N.TITLE} ${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${I18N_COMMON.CONDITION_NOT_SATISFIED}`;
+    window.ext.__actionError = `${ADDON_I18N.TITLE} ${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${I18N_COMMON.CONDITION_NOT_SATISFIED}`;
     if (recheckOption === ERecheckOptions.RELOAD) {
       if (document.readyState === 'complete') {
         window.location.reload();
@@ -133,7 +133,7 @@ const AddonProcessor = (() => {
         await recheckFunc({ nodeValue, elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }, settings);
       }
       console.debug(
-        `${ADDON_I18N.TITLE} #${window.__currentAction} [${window.__currentActionName}]`,
+        `${ADDON_I18N.TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`,
         `${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${I18N_COMMON.CONDITION_SATISFIED}`
       );
     }

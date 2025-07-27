@@ -11,14 +11,6 @@ export interface ValueRange {
   error?: { message: string };
 }
 
-export interface Sheets {
-  [index: string]: {
-    startRange: string;
-    endRange: string;
-    values: Array<any>;
-  };
-}
-
 export interface GoogleSheetsRequest {
   spreadsheetId: string;
   ranges: Array<string>;

@@ -40,7 +40,7 @@ export const HistoryCommandEvents = (() => {
 
   const start = (value: string) => {
     const commands = CommonEvents.getVerifiedEvents(HISTORY_COMMANDS, value);
-    console.debug(`${ACTION_I18N_TITLE} #${window.__currentAction} [${window.__currentActionName}]`, commands);
+    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, commands);
     execCommand(commands, value);
   };
 

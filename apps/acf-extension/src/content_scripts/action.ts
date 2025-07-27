@@ -11,7 +11,7 @@ const ActionProcessor = (() => {
       if (repeat > 0 || repeat < -1) {
         await statusBar.wait(repeatInterval, STATUS_BAR_TYPE.ACTION_REPEAT, repeat);
         repeat -= 1;
-        window.__actionRepeat = window.__actionRepeat + 1;
+        window.ext.__actionRepeat = window.ext.__actionRepeat + 1;
         await process(action);
         return await repeatFunc(action, repeat, repeatInterval);
       }
@@ -30,7 +30,7 @@ const ActionProcessor = (() => {
   };
 
   const start = async (action: IAction) => {
-    window.__actionRepeat = 1;
+    window.ext.__actionRepeat = 1;
     await process(action);
     return await repeatFunc(action, action.repeat, action.repeatInterval);
   };

@@ -1,4 +1,4 @@
-import { TGoto } from './common-model';
+import { TGoto } from './TGoto';
 
 export enum EAddonConditions {
   '~~ Select Condition ~~' = '',

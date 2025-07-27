@@ -1,4 +1,4 @@
-import { IAction, IBatch } from '@dhruv-techapps/acf-common';
+import { IAction, IBatch, IUserScript } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { NotificationsService } from '@dhruv-techapps/core-service';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
@@ -22,7 +22,7 @@ const BatchProcessor = (() => {
     }
   };
 
-  const checkRepeat = async (actions: Array<IAction>, batch: IBatch) => {
+  const checkRepeat = async (actions: Array<IAction | IUserScript>, batch: IBatch) => {
     if (batch.repeat) {
       if (batch.repeat > 0) {
         for (let i = 0; i < batch.repeat; i += 1) {
@@ -59,7 +59,7 @@ const BatchProcessor = (() => {
     }
   };
 
-  const start = async (actions: Array<IAction>, batch?: IBatch) => {
+  const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
     try {
       statusBar.batchUpdate(1);
       console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);

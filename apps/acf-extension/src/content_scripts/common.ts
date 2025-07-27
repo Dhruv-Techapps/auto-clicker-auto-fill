@@ -114,7 +114,7 @@ const Common = (() => {
     if (!elementFinder) {
       throw new ConfigError(I18N_ERROR.ELEMENT_FINDER_BLANK, 'Element Finder');
     }
-    window.__actionError = I18N_ERROR.NO_ELEMENT_FOUND;
+    window.ext.__actionError = I18N_ERROR.NO_ELEMENT_FOUND;
     const { retryOption, retryInterval, retry, checkiFrames, iframeFirst, retryGoto } = { ...(await new SettingsStorage().getSettings()), ...settings };
     let elements: HTMLElement[] | undefined;
     if (iframeFirst) {

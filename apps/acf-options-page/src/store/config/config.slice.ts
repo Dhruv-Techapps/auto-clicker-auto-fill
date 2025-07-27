@@ -204,6 +204,7 @@ export const {
   importConfig,
   updateBatch,
   addAction,
+  addUserscript,
   reorderActions,
   removeAction,
   updateAction,

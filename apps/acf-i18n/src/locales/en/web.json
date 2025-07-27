@@ -92,6 +92,12 @@
         "title": "Remove Action",
         "message": "Are you sure to remove [{{name}}] Action?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Remove User Script",
+        "message": "Are you sure to remove [{{name}}] User Script?"
+      }
     }
   },
   "modal": {
@@ -298,6 +304,18 @@
     "value": "Value",
     "repeat": "Repeat",
     "repeatInterval": "R-Interval"
+  },
+  "userscript": {
+    "title": "User Script",
+    "add": "Add User Script",
+    "addBefore": "Add User Script Above",
+    "addAfter": "Add User Script Below",
+    "remove": "Remove User Script",
+    "disable": "Disable User Script",
+    "enable": "Enable User Script",
+    "name": "Name",
+    "value": "Value",
+    "script": "Script"
   },
   "popover": {
     "valueExtractor": {

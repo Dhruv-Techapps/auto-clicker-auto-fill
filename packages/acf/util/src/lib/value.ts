@@ -1,13 +1,15 @@
+import { IExtension } from '@dhruv-techapps/core-common';
 import RandExp from 'randexp';
 
 const LOCAL_STORAGE_COPY = 'auto-clicker-copy';
 
+interface IValue extends IExtension {
+  __api?: Record<string, string>;
+}
+
 declare global {
   interface Window {
-    __batchRepeat: number;
-    __actionRepeat: number;
-    __sessionCount: number;
-    __api?: { [key: string]: string };
+    ext: IValue;
   }
 }
 
@@ -33,11 +35,11 @@ export const Value = (() => {
       return result;
     });
 
-  const getBatchRepeat = (value: string) => value.replaceAll('<batchRepeat>', String(window.__batchRepeat));
+  const getBatchRepeat = (value: string) => value.replaceAll('<batchRepeat>', String(window.ext.__batchRepeat));
 
-  const getActionRepeat = (value: string) => value.replaceAll('<actionRepeat>', String(window.__actionRepeat));
+  const getActionRepeat = (value: string) => value.replaceAll('<actionRepeat>', String(window.ext.__actionRepeat));
 
-  const getSessionCount = (value: string) => value.replaceAll('<sessionCount>', String(window.__sessionCount));
+  const getSessionCount = (value: string) => value.replaceAll('<sessionCount>', String(window.ext.__sessionCount));
 
   const sanitizeInput = (input: string): string => {
     const element = document.createElement('div');
@@ -71,7 +73,7 @@ export const Value = (() => {
 
   const getApiValue = (value: string): string => {
     const [, key] = value.split('::');
-    const apiValue = window.__api?.[key];
+    const apiValue = window.ext.__api?.[key];
     if (apiValue) {
       return apiValue;
     }

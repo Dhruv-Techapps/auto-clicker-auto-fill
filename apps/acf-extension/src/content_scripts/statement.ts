@@ -1,4 +1,4 @@
-import { EActionConditionOperator, EActionRunning, ERetryOptions, IAction, IActionCondition, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
+import { EActionConditionOperator, EActionRunning, ERetryOptions, IAction, IActionCondition, IActionStatement, IUserScript, TGoto } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
 
@@ -7,7 +7,7 @@ const ACTION_CONDITION_I18N = {
 };
 
 const Statement = (() => {
-  const conditionResult = (conditions: Array<IActionCondition>, actions: Array<IAction>) => {
+  const conditionResult = (conditions: Array<IActionCondition>, actions: Array<IAction | IUserScript>) => {
     if (conditions.filter((condition) => condition.actionIndex !== undefined && condition.actionId === undefined).length > 0) {
       throw new ConfigError(I18N_ERROR.ACTION_CONDITION_CONFIG_ERROR, ACTION_CONDITION_I18N.TITLE);
     }
@@ -25,7 +25,7 @@ const Statement = (() => {
   };
 
   const checkThen = (condition: boolean, then: ERetryOptions, goto?: TGoto) => {
-    window.__actionError = `↔️ ${ACTION_CONDITION_I18N.TITLE} ${condition ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`;
+    window.ext.__actionError = `↔️ ${ACTION_CONDITION_I18N.TITLE} ${condition ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`;
     if (!condition) {
       if (then === ERetryOptions.GOTO && goto) {
         throw goto;
@@ -44,7 +44,7 @@ const Statement = (() => {
     }
   };
 
-  const check = (actions: Array<IAction>, statement?: IActionStatement) => {
+  const check = (actions: Array<IAction | IUserScript>, statement?: IActionStatement) => {
     if (statement) {
       const { conditions, then, goto } = statement;
       if (conditions && then) {

@@ -1,25 +1,18 @@
 import { useConfirmationModalContext } from '@acf-options-page/_providers/confirm.provider';
-import {
-  actionSelector,
-  addAction,
-  openActionAddonModalAPI,
-  openActionSettingsModalAPI,
-  openActionStatementModalAPI,
-  removeAction,
-  setColumnVisibility,
-  updateAction
-} from '@acf-options-page/store/config';
+import { actionSelector, addAction, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI, setColumnVisibility, updateAction } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { IAction } from '@dhruv-techapps/acf-common';
+import { IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
-import { ColumnDef, Row, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from '@tanstack/react-table';
+import { ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, Row, useReactTable } from '@tanstack/react-table';
 import { useMemo } from 'react';
-import { Button, Dropdown, Form, Table } from 'react-bootstrap';
+import { Dropdown, Form, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { DropdownToggle } from '../../../components';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
 import { REGEX } from '../../../util';
+import { ActionRow } from './action-row';
 import { defaultColumn } from './editable-cell';
+import { UserScriptRow } from './userscript-row';
 
 interface ActionMeta {
   dataType: string;
@@ -30,7 +23,7 @@ interface ActionMeta {
 }
 
 interface ActionProps {
-  actions: IAction[];
+  actions: Array<IAction | IUserScript>;
 }
 
 const ActionTable = ({ actions }: ActionProps) => {
@@ -48,27 +41,7 @@ const ActionTable = ({ actions }: ActionProps) => {
     dispatch(setColumnVisibility(column));
   };
 
-  const removeActionConfirm = async (actionId: TRandomUUID, index: number) => {
-    const action = actions.find((action) => action.id === actionId);
-    if (!action) {
-      return;
-    }
-
-    if (Object.keys(action).length === 3 && action.elementFinder === '') {
-      dispatch(removeAction(actionId));
-      return;
-    }
-
-    const name = action.name || `#${index + 1}`;
-    const result = await modalContext.showConfirmation({
-      title: t('confirm.action.remove.title'),
-      message: t('confirm.action.remove.message', { name }),
-      headerClass: 'text-danger'
-    });
-    result && dispatch(removeAction(actionId));
-  };
-
-  const columns = useMemo<ColumnDef<IAction, ActionMeta>[]>(
+  const columns = useMemo<ColumnDef<IAction | IUserScript, ActionMeta>[]>(
     () => [
       {
         header: t('action.initWait'),
@@ -141,7 +114,7 @@ const ActionTable = ({ actions }: ActionProps) => {
     [t]
   );
 
-  const table = useReactTable<IAction>({
+  const table = useReactTable<IAction | IUserScript>({
     columns: columns,
     data: actions,
     defaultColumn,
@@ -154,30 +127,30 @@ const ActionTable = ({ actions }: ActionProps) => {
       updateData: (selectedActionId: TRandomUUID, columnId: string, value: any) => {
         dispatch(updateAction({ selectedActionId, name: columnId, value }));
       },
-      updateValueFieldTypes: (selectedActionId: TRandomUUID, valueFieldType: 'input' | 'textarea') => {
+      updateValueFieldTypes: (selectedActionId: TRandomUUID, valueFieldType: 'input' | 'textarea' | 'script') => {
         dispatch(updateAction({ selectedActionId, name: 'valueFieldType', value: valueFieldType }));
       }
     }
   });
 
-  const showAddon = (row: Row<IAction>) => {
-    dispatch(openActionAddonModalAPI(row.original.id));
+  const showAddon = (actionId: TRandomUUID) => {
+    dispatch(openActionAddonModalAPI(actionId));
   };
 
-  const showCondition = (row: Row<IAction>) => {
-    dispatch(openActionStatementModalAPI(row.original.id));
+  const showCondition = (actionId: TRandomUUID) => {
+    dispatch(openActionStatementModalAPI(actionId));
   };
 
-  const showSettings = (row: Row<IAction>) => {
-    dispatch(openActionSettingsModalAPI(row.original.id));
+  const showSettings = (actionId: TRandomUUID) => {
+    dispatch(openActionSettingsModalAPI(actionId));
   };
 
-  const onDisableClick = (row: Row<IAction>, disabled?: boolean) => {
-    dispatch(updateAction({ selectedActionId: row.original.id, name: 'disabled', value: !disabled }));
+  const onDisableClick = (actionId: TRandomUUID, disabled?: boolean) => {
+    dispatch(updateAction({ selectedActionId: actionId, name: 'disabled', value: !disabled }));
   };
 
-  const onAddClick = (row: Row<IAction>, position: 1 | 0) => {
-    dispatch(addAction({ actionId: row.original.id, position }));
+  const onAddClick = (actionId: TRandomUUID, position: 1 | 0) => {
+    dispatch(addAction({ actionId: actionId, position }));
   };
 
   return (
@@ -218,58 +191,38 @@ const ActionTable = ({ actions }: ActionProps) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row, index) => (
-            <tr key={row.id} className={row.original.disabled ? 'table-secondary' : ''}>
-              <td className='align-middle'>{index + 1}</td>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-              ))}
-              <td align='center'>
-                {row.original.disabled && <i className='bi bi-ban me-2' title='Disabled' />}
-                <Button
-                  variant='link'
-                  data-testid='action-remove'
-                  onClick={() => {
-                    removeActionConfirm(row.original.id, index);
-                  }}
-                  disabled={actions.length === 1}
-                >
-                  <i className={`bi bi-trash ${actions.length === 1 ? '' : 'text-danger'}`} title='Delete' />
-                </Button>
-                {row.original.elementFinder && (
-                  <Dropdown id='acton-dropdown-wrapper' className='d-inline-block'>
-                    <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option'>
-                      <i className='bi bi-three-dots' />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item data-testid='action-addon' onClick={() => showAddon(row)}>
-                        {t('action.addon')}
-                      </Dropdown.Item>
-                      <Dropdown.Item data-testid='action-settings' onClick={() => showSettings(row)}>
-                        {t('action.settings')}
-                      </Dropdown.Item>
-                      {index !== 0 && (
-                        <Dropdown.Item data-testid='action-statement' onClick={() => showCondition(row)}>
-                          {t('modal.actionCondition.title')}
-                        </Dropdown.Item>
-                      )}
-                      <Dropdown.Divider />
-                      <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(row, 0)}>
-                        <i className='bi bi-plus-lg me-2' /> {t('action.addBefore')}
-                      </Dropdown.Item>
-                      <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(row, 1)}>
-                        <i className='bi bi-plus-lg me-2' /> {t('action.addAfter')}
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(row, row.original.disabled)}>
-                        {t(`action.${row.original.disabled ? 'enable' : 'disable'}`)}
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                )}
-              </td>
-            </tr>
-          ))}
+          {table.getRowModel().rows.map((row, index) => {
+            if (isUserScript(row.original)) {
+              return (
+                <UserScriptRow
+                  key={row.id}
+                  row={row as Row<IUserScript>}
+                  index={index}
+                  actions={actions}
+                  showAddon={showAddon}
+                  showSettings={showSettings}
+                  showCondition={showCondition}
+                  onAddClick={onAddClick}
+                  onDisableClick={onDisableClick}
+                  flexRender={flexRender}
+                />
+              );
+            }
+            return (
+              <ActionRow
+                key={row.id}
+                row={row as Row<IAction>}
+                index={index}
+                actions={actions}
+                showAddon={showAddon}
+                showSettings={showSettings}
+                showCondition={showCondition}
+                onAddClick={onAddClick}
+                onDisableClick={onDisableClick}
+                flexRender={flexRender}
+              />
+            );
+          })}
         </tbody>
       </Table>
     </Form>

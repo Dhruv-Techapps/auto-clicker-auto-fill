@@ -1,4 +1,4 @@
-import { EActionRunning, EActionStatus, IAction } from '@dhruv-techapps/acf-common';
+import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, isValidUUID } from '@dhruv-techapps/core-common';
 import { NotificationsService } from '@dhruv-techapps/core-service';
@@ -9,6 +9,7 @@ import Common from './common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
 import Statement from './statement';
 import { statusBar } from './status-bar';
+import UserScriptProcessor from './userscript';
 
 const ACTION_I18N = {
   TITLE: chrome.i18n.getMessage('@ACTION__TITLE'),
@@ -16,54 +17,56 @@ const ACTION_I18N = {
 };
 
 const Actions = (() => {
-  const checkStatement = async (actions: Array<IAction>, action: IAction) => {
+  const checkStatement = async (actions: Array<IAction | IUserScript>, action: IAction | IUserScript) => {
     Statement.check(actions, action.statement);
   };
 
-  const notify = async (action: IAction) => {
+  const notify = async (action: IAction | IUserScript) => {
     const settings = await new SettingsStorage().getSettings();
     if (settings.notifications?.onAction) {
       NotificationsService.create({
         type: 'basic',
         title: `${ACTION_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
-        message: action.elementFinder,
+        message: isUserScript(action) ? 'Userscript' : action.elementFinder,
         silent: !settings.notifications.sound,
         iconUrl: Common.getNotificationIcon()
       });
     }
   };
-  const start = async (actions: Array<IAction>, batchRepeat: number) => {
-    window.__batchRepeat = batchRepeat;
+
+  const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number) => {
+    window.ext.__batchRepeat = batchRepeat;
     let i = 0;
     while (i < actions.length) {
       const action = actions[i];
-      window.__currentActionName = action.name ?? ACTION_I18N.NO_NAME;
+      window.ext.__currentActionName = action.name ?? ACTION_I18N.NO_NAME;
       if (action.disabled) {
-        console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.__currentActionName}]`, `🚫 ${I18N_COMMON.DISABLED} `);
+        console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, `🚫 ${I18N_COMMON.DISABLED} `);
         i += 1;
         continue;
       }
       statusBar.actionUpdate(i + 1, action.name);
-      window.__currentAction = i + 1;
-      if (!action.elementFinder) {
-        throw new ConfigError(I18N_ERROR.ELEMENT_FINDER_BLANK, ACTION_I18N.TITLE);
-      }
+      window.ext.__currentAction = i + 1;
       try {
         await checkStatement(actions, action);
         await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
         await AddonProcessor.check(action.addon, action.settings);
-        action.status = await ActionProcessor.start(action);
+        if (action.type === 'userscript') {
+          action.status = await UserScriptProcessor.start(action as IUserScript);
+        } else {
+          action.status = await ActionProcessor.start(action as IAction);
+        }
         notify(action);
       } catch (error) {
         if (error === EActionStatus.SKIPPED || error === EActionRunning.SKIP) {
-          console.debug(`${ACTION_I18N.TITLE} #${window.__currentAction}`, `[${window.__currentActionName}]`, window.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+          console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
           action.status = EActionStatus.SKIPPED;
         } else if (typeof error === 'number' || (typeof error === 'string' && isValidUUID(error))) {
           const index = typeof error === 'number' ? error : actions.findIndex((a) => a.id === error);
           if (index === -1) {
             throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
           }
-          console.debug(`${ACTION_I18N.TITLE} #${window.__currentAction}`, `[${window.__currentActionName}]`, window.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
+          console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
           i = index - 1;
         } else {
           throw error;
