@@ -16,7 +16,7 @@ if (VARIANT === 'PROD' || VARIANT === 'LOCAL') {
       ...integrations,
       browserTracingIntegration(),
       captureConsoleIntegration({
-        levels: ['error', 'warn']
+        levels: ['error']
       })
     ],
     ignoreErrors: [
