@@ -43,7 +43,7 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
 
   const resize = () => {
     const el = inputRef.current;
-    if (el) {
+    if (el && el instanceof HTMLTextAreaElement) {
       el.style.height = 'auto';
       el.style.height = el.scrollHeight + 'px';
     }
