@@ -84,7 +84,7 @@
     "@vitest/ui": "^3.1.2",
     "cypress": "14.5.3",
     "dotenv-webpack": "^8.1.0",
-    "eslint": "^9.8.0",
+    "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-import": "2.31.0",
