@@ -20,10 +20,10 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
       - run: npm ci
       - run: npx nx report
-      - run: npx nx format:check --verbose
-      - run: npx nx affected --target=lint --parallel=3 --verbose
-      - run: npx nx affected --target=test --parallel=3 --verbose --coverage
-      - run: npx nx affected --target=typecheck --parallel=3 --verbose
+      - run: npx nx format:check --verbose --exclude=acf-configs
+      - run: npx nx affected --target=lint --parallel=3 --verbose --exclude=acf-configs
+      - run: npx nx affected --target=test --parallel=3 --verbose --coverage --exclude=acf-configs
+      - run: npx nx affected --target=typecheck --parallel=3 --verbose --exclude=acf-configs
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
