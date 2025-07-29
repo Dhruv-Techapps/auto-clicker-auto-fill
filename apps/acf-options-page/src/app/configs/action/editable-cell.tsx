@@ -50,8 +50,14 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
   };
 
   useEffect(() => {
-    resize();
-  }, [value]);
+    if (valueFieldType === 'textarea') {
+      const debounceResize = () => {
+        const timeout = setTimeout(() => resize(), 100);
+        return () => clearTimeout(timeout);
+      };
+      debounceResize();
+    }
+  }, [value, valueFieldType]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {
