@@ -20,12 +20,10 @@
     "paths": {
       "@acf-options-page/*": ["./apps/acf-options-page/src/*"]
     },
-    "rootDir": ".",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": "."
+    "skipDefaultLibCheck": true
   },
   "exclude": ["node_modules", "tmp"]
 }
