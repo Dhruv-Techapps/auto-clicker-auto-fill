@@ -25,6 +25,7 @@ import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
 import { TabsMessenger } from './tab';
 
+// eslint-disable-next-line no-restricted-globals
 self['XMLHttpRequest'] = XMLHttpRequest;
 
 try {
@@ -118,11 +119,11 @@ try {
   scope.captureException(error);
   console.error('background', error);
 }
-
+// eslint-disable-next-line no-restricted-globals
 self.onunhandledrejection = async (event) => {
   scope.captureException(event.reason, { captureContext: { tags: { errorType: 'onunhandledrejection' } } });
 };
-
+// eslint-disable-next-line no-restricted-globals
 self.onerror = async (...rest) => {
   scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
 };

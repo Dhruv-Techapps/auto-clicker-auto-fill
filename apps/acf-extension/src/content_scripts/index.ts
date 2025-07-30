@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
   loadConfig(ELoadTypes.WINDOW);
 });
-
+// eslint-disable-next-line no-restricted-globals
 addEventListener('unhandledrejection', (event) => {
   if (reloadOnError && event.reason.message === 'Extension context invalidated.') {
     window.location.reload();
@@ -59,7 +59,7 @@ addEventListener('unhandledrejection', (event) => {
   }
   scope.captureException(event.reason, { captureContext: { tags: { errorType: 'unhandledrejection' } } });
 });
-
+// eslint-disable-next-line no-restricted-globals
 self.onerror = (...rest) => {
   scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
 };
