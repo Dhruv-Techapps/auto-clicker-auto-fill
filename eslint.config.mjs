@@ -1,35 +1,91 @@
+// eslint.config.ts
 import nx from '@nx/eslint-plugin';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
+import ts from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import functional from 'eslint-plugin-functional';
+import importPlugin from 'eslint-plugin-import';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactPlugin from 'eslint-plugin-react';
+import hooksPlugin from 'eslint-plugin-react-hooks';
+import unicornPlugin from 'eslint-plugin-unicorn';
 
 export default [
-  ...nx.configs['flat/base'],
-  ...nx.configs['flat/typescript'],
-  ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist', '**/build', '**/.react-router', '**/vite.config.*.timestamp*', '**/vitest.config.*.timestamp*']
-  },
-  {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: typescriptParser,
+      parser: tsParser,
       parserOptions: {
-        ecmaVersion: 'latest',
         sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true
-        }
+        ecmaVersion: 'latest',
+        project: './tsconfig.json'
       }
     },
     plugins: {
-      '@typescript-eslint': typescriptEslint,
-      react: react,
-      'react-hooks': reactHooks
+      '@typescript-eslint': ts,
+      functional,
+      react: reactPlugin,
+      'react-hooks': hooksPlugin,
+      'jsx-a11y': jsxA11y,
+      import: importPlugin,
+      unicorn: unicornPlugin
     },
     rules: {
-      // Nx rules
+      // React
+      ...reactPlugin.configs['jsx-runtime'].rules,
+
+      // React Hooks
+      ...hooksPlugin.configs.recommended.rules,
+
+      // TypeScript Recommended
+      ...ts.configs['eslint-recommended'].rules,
+      ...ts.configs['recommended'].rules,
+
+      // Functional Plugin
+      ...functional.configs['recommended'].rules,
+
+      // JSX Accessibility
+      ...jsxA11y.configs.recommended.rules,
+
+      // Overrides and Custom Rules
+      'prefer-const': 'warn',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+
+      // React Specific
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-vars': 'error',
+      'react/prop-types': 'off',
+
+      // React Hooks
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // React Performance
+      'react/jsx-no-bind': 'warn',
+      'react/jsx-no-leaked-render': 'warn',
+
+      'import/order': ['warn', { groups: ['builtin', 'external', 'internal'] }],
+      'import/no-unresolved': 'error',
+      'import/no-duplicates': 'warn',
+
+      'unicorn/prefer-query-selector': 'warn',
+      'unicorn/no-array-for-each': 'warn',
+      'unicorn/filename-case': ['warn', { case: 'kebabCase' }]
+    }
+  },
+
+  // Nx Base Configs (already in flat config style)
+  ...nx.configs['flat/base'],
+  ...nx.configs['flat/typescript'],
+  ...nx.configs['flat/javascript'],
+
+  // Additional rule overrides for broader file scope
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    rules: {
       '@nx/enforce-module-boundaries': [
         'error',
         {
@@ -59,39 +115,12 @@ export default [
           ],
           allowCircularSelfDependency: true
         }
-      ],
-
-      // Core ESLint rules
-      'prefer-const': 'warn',
-      'no-unused-vars': 'off', // Turn off core rule in favor of TypeScript version
-
-      // TypeScript recommended rules
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-
-      // React recommended rules
-      'react/jsx-uses-react': 'off', // Not needed in React 17+
-      'react/react-in-jsx-scope': 'off', // Not needed in React 17+
-      'react/jsx-uses-vars': 'error',
-      'react/prop-types': 'off', // Using TypeScript instead
-
-      // React Hooks rules
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-
-      // React performance suggestions
-      'react/jsx-no-bind': 'warn',
-      'react/jsx-no-leaked-render': 'warn'
-    },
-    settings: {
-      react: {
-        version: 'detect'
-      }
+      ]
     }
   },
+
+  // Ignore patterns
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
-    rules: {}
+    ignores: ['**/dist', '**/build', '**/.react-router', '**/vite.config.*.timestamp*', '**/vitest.config.*.timestamp*']
   }
 ];
