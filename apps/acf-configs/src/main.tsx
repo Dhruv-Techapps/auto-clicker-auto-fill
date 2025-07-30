@@ -1,6 +1,6 @@
 /// <reference types="chrome"/>
 
-import { ThemeProvider } from '@dhruv-techapps/ui-context';
+import { ThemeProvider } from '../../acf-options-page/context';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';

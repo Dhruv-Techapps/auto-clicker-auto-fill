@@ -1,4 +1,4 @@
-import { APP_LANGUAGES } from '@dhruv-techapps/ui-components';
+import { APP_LANGUAGES } from '../../acf-options-page/components';
 import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';

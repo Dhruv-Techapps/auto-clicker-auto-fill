@@ -1,4 +1,4 @@
-import { ThemeNavDropdown } from '@dhruv-techapps/ui-components';
+import { ThemeNavDropdown } from '../components';
 import * as Sentry from '@sentry/react';
 import { useEffect, useState } from 'react';
 import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';

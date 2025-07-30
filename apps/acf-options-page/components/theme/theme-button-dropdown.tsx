@@ -1,4 +1,4 @@
-import { getStoredTheme, ThemeContext, tTheme } from '@dhruv-techapps/ui-context';
+import { getStoredTheme, ThemeContext, tTheme } from '../../context';
 import { useContext, useState } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';

@@ -1,8 +1,0 @@
-{
-  "name": "ui-context",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/ui/context/src",
-  "projectType": "library",
-  "tags": ["scope:ui"],
-  "targets": {}
-}

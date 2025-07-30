@@ -1,4 +1,4 @@
-import { Footer, Header } from '@dhruv-techapps/ui-components';
+import { Footer, Header } from '../../acf-options-page/components';
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import aa from 'search-insights';
