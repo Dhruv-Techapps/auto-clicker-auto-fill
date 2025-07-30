@@ -45,7 +45,10 @@ try {
    */
   chrome.runtime.onInstalled.addListener(async (details) => {
     if (details.reason === 'install') {
-      TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
+      const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
+      if (!storageResult[LOCAL_STORAGE_KEY.CONFIGS]) {
+        TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
+      }
     } else {
       new AcfSchedule().check();
     } /* else if (details.reason === 'update') {
