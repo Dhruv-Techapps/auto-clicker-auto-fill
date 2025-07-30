@@ -21,6 +21,7 @@ jobs:
       - run: npm ci
       - run: npx nx report
       - run: npx nx format:check --verbose --exclude=acf-configs
+      - run: npx nx affected --target=build --parallel=3 --verbose --exclude=acf-configs
       - run: npx nx affected --target=lint --parallel=3 --verbose --exclude=acf-configs
       - run: npx nx affected --target=test --parallel=3 --verbose --coverage --exclude=acf-configs
       - run: npx nx affected --target=typecheck --parallel=3 --verbose --exclude=acf-configs

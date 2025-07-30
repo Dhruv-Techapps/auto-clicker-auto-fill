@@ -3,6 +3,7 @@
   "version": "3.4.37",
   "license": "MIT",
   "scripts": {
+    "clean": "find . -type d \\( -name dist -o -name out-tsc \\) -not -path \"./dist\" -not -path \"./out-tsc\" -exec rm -rf {} +",
     "start": "nx run-many -t serve -p acf-extension acf-options-page acf-i18n",
     "test": "nx run-many -t test --coverage",
     "release:publish": "nx release publish",
@@ -73,7 +74,6 @@
     "@types/node": "^20.0.0",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.1.6",
-    "@typescript-eslint/parser": "^8.38.0",
     "@vitejs/plugin-react": "^4.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "@vitest/ui": "^3.1.2",
