@@ -4,6 +4,11 @@
   "license": "MIT",
   "scripts": {
     "clean": "find . -type d \\( -name dist -o -name out-tsc \\) -not -path \"./dist\" -not -path \"./out-tsc\" -exec rm -rf {} +",
+    "clean:node_modules": "rm -rf node_modules",
+    "clean:verdaccio": "rm -rf .verdaccio",
+    "clean:tmp": "rm -rf tmp",
+    "clean:nx": "rm -rf .nx",
+    "clean:all": "npm run clean && npm run clean:node_modules && npm run clean:verdaccio && npm run clean:tmp && npm run clean:nx",
     "start": "nx run-many -t serve -p acf-extension acf-options-page acf-i18n",
     "test": "nx run-many -t test --coverage",
     "release:publish": "nx release publish",
