@@ -1,67 +1,30 @@
-import { ThemeNavDropdown } from '../../components';
-import * as Sentry from '@sentry/react';
-import { useEffect, useState } from 'react';
-import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
+import React, { FC, PropsWithChildren, useState } from 'react';
+import { Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { SettingsModal } from '../modal';
-import { firebaseSelector } from '../store/firebase';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { switchSettingsModal } from '../store/settings/settings.slice';
-import { APP_LANGUAGES, APP_LINK } from '../util/constants';
-import { HeaderGoogle } from './header_google';
+import { APP_LANGUAGES, APP_LINK, SOCIAL_LINKS } from './constants';
+import { ThemeNavDropdown } from './theme';
 
-function Header() {
+type HeaderProps = {
+  onHomeClick?: (e: React.MouseEvent<HTMLLinkElement>) => void;
+} & PropsWithChildren;
+
+export const Header: FC<HeaderProps> = ({ children, onHomeClick }) => {
   const [show, setShow] = useState<boolean>(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { role } = useAppSelector(firebaseSelector);
-  const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    if (/(DEV|BETA|LOCAL)/.test(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
-      window.document.title = `${t('common.appName')} [${import.meta.env.VITE_PUBLIC_VARIANT}]`;
-    } else {
-      window.document.title = t('common.appName');
-    }
-  }, [t]);
-
-  useEffect(() => {
-    if (/(DEV|BETA|LOCAL)/.test(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
-      window.document.title = `${t('common.appName')} [${import.meta.env.VITE_PUBLIC_VARIANT}]`;
-    } else {
-      window.document.title = t('common.appName');
-    }
-  }, [t]);
-
-  useEffect(() => {
-    document.documentElement.lang = i18n.language;
-  }, [i18n.language]);
 
   const changeLanguage = async (lng: string) => {
     await i18n.changeLanguage(lng);
     document.documentElement.lang = lng;
-    localStorage.setItem('language', lng);
-    Sentry.setTag('page_locale', lng);
   };
-
-  let appName = t('common.appName');
-
-  if (/(DEV|BETA)/.test(import.meta.env.VITE_PUBLIC_VARIANT || '')) {
-    appName += ` [${import.meta.env.VITE_PUBLIC_VARIANT}]`;
-  }
 
   return (
     <Navbar expand='lg' as='header' className='bd-navbar' sticky='top'>
       <Container fluid className='bd-gutter flex-wrap flex-lg-nowrap' as='nav'>
         <div className='d-lg-none' style={{ width: '4.25rem' }}></div>
-        <Navbar.Brand href='/' className='p-0 me-0 me-lg-2'>
-          {appName}
-          {role && (
-            <Badge bg='danger' text='light' className='ms-2'>
-              {role.toUpperCase()}
-            </Badge>
-          )}
+        <Navbar.Brand onClick={onHomeClick} href='/' className='p-0 me-0 me-lg-2'>
+          {t('common.appName')}
         </Navbar.Brand>
         <div className='d-flex'>
           <Navbar.Toggle aria-controls='basic-navbar-nav' onClick={handleShow}>
@@ -70,7 +33,7 @@ function Header() {
         </div>
         <Offcanvas show={show} onHide={handleClose} responsive='lg' placement='end' className='flex-grow-1 bd-header'>
           <Offcanvas.Header closeButton className='px-4 pb-0' closeVariant='white'>
-            <Offcanvas.Title className='text-white'>{appName}</Offcanvas.Title>
+            <Offcanvas.Title className='text-white'>{t('common.appName')}</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body className='p-4 pt-0 p-lg-0'>
             <hr className='d-lg-none text-white-50'></hr>
@@ -99,19 +62,21 @@ function Header() {
             </Nav>
             <hr className='d-lg-none text-white-50'></hr>
             <Nav className='flex-row flex-wrap ms-md-auto' as='ul'>
-              <Nav.Item as='li' className='col-6 col-lg-auto d-flex align-items-center'>
-                <iframe src='https://github.com/sponsors/Dhruv-Techapps/button' title='Sponsor Dhruv-Techapps' height='32' width='114' style={{ border: 0, borderRadius: '6px' }}></iframe>
+              <Nav.Item as='li' className='col-6 col-lg-auto'>
+                <Nav.Link target='_blank' rel='noopener noreferrer' title='youtube' href={SOCIAL_LINKS.YOUTUBE}>
+                  <i className='bi bi-youtube' />
+                  <small className='d-lg-none ms-2'>{t('footer.youtube')}</small>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item as='li' className='col-6 col-lg-auto'>
+                <Nav.Link target='_blank' rel='noopener noreferrer' title='github' href={SOCIAL_LINKS.GITHUB}>
+                  <i className='bi bi-github' />
+                  <small className='d-lg-none ms-2'>{t('footer.github')}</small>
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item as='li' className='py-2 py-lg-1 col-12 col-lg-auto'>
                 <div className='vr d-none d-lg-flex h-100 mx-lg-2 text-white'></div>
                 <hr className='d-lg-none my-2 text-white-50'></hr>
-              </Nav.Item>
-
-              <Nav.Item as='li' className='col-6 col-lg-auto'>
-                <Nav.Link onClick={() => dispatch(switchSettingsModal())} data-testid='open-global-settings'>
-                  <i className='bi bi-gear-fill' title={t('header.settings')} />
-                  <small className='d-lg-none ms-2'>{t('header.settings')}</small>
-                </Nav.Link>
               </Nav.Item>
 
               <ThemeNavDropdown />
@@ -129,19 +94,11 @@ function Header() {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav.Item>
-
-              <Nav.Item as='li' className='py-2 py-lg-1 col-12 col-lg-auto'>
-                <div className='vr d-none d-lg-flex h-100 mx-lg-2 text-white'></div>
-                <hr className='d-lg-none my-2 text-white-50'></hr>
-              </Nav.Item>
-              <HeaderGoogle />
+              {children}
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
       </Container>
-      <SettingsModal />
     </Navbar>
   );
-}
-
-export default Header;
+};
