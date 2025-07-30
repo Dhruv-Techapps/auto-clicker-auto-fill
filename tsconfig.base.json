@@ -19,11 +19,7 @@
     "customConditions": ["development"],
     "paths": {
       "@acf-options-page/*": ["./apps/acf-options-page/src/*"]
-    },
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "skipDefaultLibCheck": true
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
