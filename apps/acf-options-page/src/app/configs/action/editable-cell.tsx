@@ -23,6 +23,10 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
   const inputRef = useRef<HTMLInputElement>(null);
   const [valueFieldType, setValueFieldType] = useState<'input' | 'textarea' | 'script'>(original.valueFieldType || 'input');
 
+  useEffect(() => {
+    setValueFieldType(original.valueFieldType || 'input');
+  }, [original.valueFieldType]);
+
   const onBlur = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, { [id]: initialValue });
     if (update) {
@@ -36,6 +40,24 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
       table.options.meta?.updateData(original.id, update.name, update.value);
     }
   };
+
+  const resize = () => {
+    const el = inputRef.current;
+    if (el && el instanceof HTMLTextAreaElement) {
+      el.style.height = 'auto';
+      el.style.height = el.scrollHeight + 'px';
+    }
+  };
+
+  useEffect(() => {
+    if (valueFieldType === 'textarea') {
+      const debounceResize = () => {
+        const timeout = setTimeout(() => resize(), 100);
+        return () => clearTimeout(timeout);
+      };
+      debounceResize();
+    }
+  }, [value, valueFieldType]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {
