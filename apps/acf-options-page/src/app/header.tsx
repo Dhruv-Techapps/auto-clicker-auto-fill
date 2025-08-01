@@ -1,4 +1,4 @@
-import { ThemeNavDropdown } from '@dhruv-techapps/ui-components';
+import { ThemeNavDropdown } from '@acf-options-page/components/theme';
 import * as Sentry from '@sentry/react';
 import { useEffect, useState } from 'react';
 import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
@@ -113,9 +113,9 @@ function Header() {
                   <small className='d-lg-none ms-2'>{t('header.settings')}</small>
                 </Nav.Link>
               </Nav.Item>
-
-              <ThemeNavDropdown />
-
+              <Nav.Item as='li' className='col-6 col-lg-auto'>
+                <ThemeNavDropdown />
+              </Nav.Item>
               <Nav.Item as='li' className='col-6 col-lg-auto'>
                 <NavDropdown title={i18n.language} id='language-nav-dropdown' align='end' className='text-uppercase fw-bolder' data-testid='switch-language'>
                   {APP_LANGUAGES.map((language) => (

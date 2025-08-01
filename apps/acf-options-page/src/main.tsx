@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@dhruv-techapps/ui-context';
+import { ThemeProvider } from '@acf-options-page/context';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';

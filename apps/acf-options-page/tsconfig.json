@@ -3,10 +3,10 @@
   "include": [],
   "references": [
     {
-      "path": "../../packages/shared/discord-oauth"
+      "path": "../../packages/shared/firebase-firestore"
     },
     {
-      "path": "../../packages/shared/firebase-firestore"
+      "path": "../../packages/shared/discord-oauth"
     },
     {
       "path": "../../packages/shared/firebase-oauth"
@@ -25,12 +25,6 @@
     },
     {
       "path": "../../packages/shared/status-bar"
-    },
-    {
-      "path": "../../packages/ui/context"
-    },
-    {
-      "path": "../../packages/ui/components"
     },
     {
       "path": "../../packages/core/common"
