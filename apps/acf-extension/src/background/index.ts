@@ -1,4 +1,4 @@
-import { RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
+import { LOCAL_STORAGE_KEY, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { MainWorldBackground, RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING } from '@dhruv-techapps/acf-main-world';
 import { Runtime } from '@dhruv-techapps/core-extension';
 import { DiscordMessagingBackground, RUNTIME_MESSAGE_DISCORD_MESSAGING } from '@dhruv-techapps/shared-discord-messaging';
@@ -44,7 +44,10 @@ try {
    */
   chrome.runtime.onInstalled.addListener(async (details) => {
     if (details.reason === 'install') {
-      TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
+      const storageResult = await chrome.storage.local.get([LOCAL_STORAGE_KEY.CONFIGS]);
+      if (!storageResult[LOCAL_STORAGE_KEY.CONFIGS]) {
+        TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
+      }
     } else {
       new AcfSchedule().check();
     } /* else if (details.reason === 'update') {
