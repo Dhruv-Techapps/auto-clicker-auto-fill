@@ -1,9 +1,0 @@
-{
-  "name": "acf-configs",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/acf-configs/src",
-  "projectType": "application",
-  "tags": ["scope:apps"],
-  "// targets": "to see all targets run: nx show project acf-configs --web",
-  "targets": {}
-}
