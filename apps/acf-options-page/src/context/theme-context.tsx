@@ -3,7 +3,7 @@ import React, { createContext, PropsWithChildren, useMemo, useState } from 'reac
 export type tTheme = 'light' | 'dark';
 
 export const ThemeContext = createContext({
-  theme: localStorage.getItem('theme') || 'light',
+  theme: getPreferredTheme(),
   updateTheme: (theme: tTheme | null) => {
     return theme;
   }
