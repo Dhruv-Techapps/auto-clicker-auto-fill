@@ -2,13 +2,6 @@ import React, { createContext, PropsWithChildren, useMemo, useState } from 'reac
 
 export type tTheme = 'light' | 'dark';
 
-export const ThemeContext = createContext({
-  theme: getPreferredTheme(),
-  updateTheme: (theme: tTheme | null) => {
-    return theme;
-  }
-});
-
 export const getStoredTheme = () => localStorage.getItem('theme');
 
 const removeStoredTheme = () => localStorage.removeItem('theme');
@@ -26,6 +19,13 @@ const getPreferredTheme = (): tTheme => {
   }
   return getSystemPreferredTheme();
 };
+
+export const ThemeContext = createContext({
+  theme: getPreferredTheme(),
+  updateTheme: (theme: tTheme | null) => {
+    return theme;
+  }
+});
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<tTheme>(getPreferredTheme());
