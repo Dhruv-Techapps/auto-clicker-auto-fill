@@ -92,7 +92,7 @@
     "nx": "21.2.3",
     "prettier": "^3.6.2",
     "react-refresh": "^0.17.0",
-    "rollup-plugin-visualizer": "^5.14.0",
+    "rollup-plugin-visualizer": "^6.0.3",
     "sass": "^1.55.0",
     "swc-loader": "0.1.15",
     "tslib": "^2.3.0",
