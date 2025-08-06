@@ -1,0 +1,341 @@
+{
+  "header": {
+    "theme": {
+      "light": "切換到淺色主題",
+      "dark": "切換到深色主題"
+    },
+    "google-group": "Google Group",
+    "login": "登入",
+    "logout": "登出",
+    "settings": "全域設定"
+  },
+  "footer": {
+    "resources": "資源",
+    "docs": "文件",
+    "blog": "Blog",
+    "configuration": "設定",
+    "issues": "問題",
+    "rate-us": "評價我們",
+    "discussion": "討論",
+    "test": "練習表格",
+    "about": "關於",
+    "contact": "聯絡我們",
+    "chat": "聊天",
+    "connect": "連接",
+    "google-group": "Google Group",
+    "privacy": "隱私和政策",
+    "social": "社交",
+    "discord": "Discord",
+    "youtube": "Youtube",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "twitter": "Twitter",
+    "github": "Github"
+  },
+  "toast": {
+    "configuration": {
+      "addConfig": {
+        "header": "設定",
+        "body": "[{{name}}] 新增成功"
+      },
+      "duplicateConfig": {
+        "header": "設定",
+        "body": "[{{name}}] 複製成功"
+      },
+      "removeConfig": {
+        "header": "設定",
+        "body": "[{{name}}] 移除成功"
+      },
+      "exportAll": {
+        "header": "批次匯出",
+        "body": "設定匯出成功"
+      },
+      "importAll": {
+        "header": "批次匯入",
+        "body": "設定匯入成功"
+      },
+      "importError": {
+        "header": "匯入錯誤"
+      },
+      "importSuccess": {
+        "header": "設定",
+        "body": "[{{name}}] 匯入成功"
+      },
+      "updateBatch": {
+        "header": "批次",
+        "body": "批次儲存成功！"
+      }
+    },
+    "action": {
+      "save": {
+        "header": "動作",
+        "body": "動作儲存成功！"
+      }
+    }
+  },
+  "confirm": {
+    "configuration": {
+      "remove": {
+        "title": "移除設定",
+        "message": "確定移除 [{{name}}] 設定嗎？"
+      }
+    },
+    "backup": {
+      "restore": {
+        "title": "從雲端還原設定",
+        "message": "確定要從雲端還原設定嗎？這將替換所有設定，且此操作不可逆轉。"
+      }
+    },
+    "action": {
+      "remove": {
+        "title": "移除動作",
+        "message": "確定移除 [{{name}}] 動作嗎？"
+      }
+    }
+  },
+  "modal": {
+    "settings": {
+      "title": "全域設定",
+      "checkIFrames": "檢查 IFrames",
+      "checkIFramesHint": "這將檢查 IFrames 中的元素",
+      "reloadOnError": "重新載入錯誤",
+      "reloadOnErrorHint": "此重新載入頁面如果發生任何錯誤",
+      "advance": "進階",
+      "advanceHint": "啟用進階模式以獲得更多功能",
+      "notification": {
+        "title": "顯示通知",
+        "error": "發生錯誤時",
+        "action": "完成動作時",
+        "batch": "完成批次處理時",
+        "config": "完成設定時",
+        "sound": "通知提示音",
+        "discord": {
+          "title": "在 Discord 上通知",
+          "hint": "您需要登入並加入我們的<1>Discord 伺服器</1>才能在 Discord 上接收通知",
+          "info": "這目前還在開發中，未來版本中此功能可能會移動到<b>動作</b>特定的通知中"
+        }
+      },
+      "statusBar": {
+        "title": "狀態列",
+        "hint": "在頁面底部顯示狀態列",
+        "hide": "隱藏",
+        "top-left": "左上角",
+        "top-right": "右上角",
+        "bottom-left": "左下角",
+        "bottom-right": "右下角"
+      },
+      "retry": {
+        "title": "重試",
+        "interval": "重試間隔",
+        "stop": "停止",
+        "skip": "跳過未找到",
+        "refresh": "重新整理",
+        "hint": "如果擴充功能在重試後仍未找到 xpath，可執行以下操作"
+      },
+      "backup": {
+        "title": "備份",
+        "last-backup": "上次備份：",
+        "backup": "備份至雲端",
+        "restore": "從雲端還原",
+        "now": "立即備份",
+        "auto-backup": "自動備份",
+        "daily": "日常的",
+        "weekly": "每週",
+        "monthly": "每月",
+        "off": "離開"
+      },
+      "saveMessage": "設定儲存成功！"
+    },
+    "configSettings": {
+      "title": "設定設定",
+      "start": "開始",
+      "auto": "自動",
+      "autoHint": "<b>自動</b>(預設)瀏覽器重新整理或載入新頁面時，擴充功能會自動載入",
+      "manual": "手動",
+      "manualHint": "<b>手動</b>瀏覽器載入後，使用者可以使用快速鍵手動喚醒擴充功能",
+      "extensionLoad": "擴充功能載入",
+      "window": "視窗",
+      "windowHint": "<b>視窗</b>(預設)瀏覽器載入全部內容後才載入擴充功能",
+      "document": "文件",
+      "hotkey": "快速鍵",
+      "documentHint": "<b>文件</b>瀏覽器在載入指令碼和圖片之前載入擴充功能(更快)(不安全)",
+      "urlMatch": "URL 匹配",
+      "regex": "正則表達式",
+      "exact": "精確的"
+    },
+    "reorder": {
+      "title": "重新排序設定",
+      "hint": "請先儲存所有設定後再重新排序"
+    },
+    "extensionNotFound": {
+      "title": "擴充功能未找到",
+      "subTitle": "這是 <b>[{{VITE_PUBLIC_NAME}}]</b> 擴充功能的設定頁面",
+      "hint": "您需要先下載擴充功能才能使用此功能"
+    },
+    "actionSettings": {
+      "title": "動作設定",
+      "info": "動作設定將覆蓋全域設定，適用於動作及其附加條件",
+      "iframeFirst": "先檢查 Iframe",
+      "iframeFirstHint": "首先檢查 Iframe 中的元素，然後檢查主頁面",
+      "retry": {
+        "title": "重試",
+        "hint": "* 如果 xpath 在重試後仍未被擴充功能找到，可以執行以下操作",
+        "interval": "重試間隔",
+        "stop": "停止",
+        "skip": "跳過動作",
+        "goto": "轉到操作",
+        "refresh": "重新整理"
+      }
+    },
+    "actionCondition": {
+      "action": "動作",
+      "status": "狀態",
+      "title": "動作條件",
+      "info": "動作條件用於根據之前動作的狀態來新增條件",
+      "skip": "跳過",
+      "goto": "跳轉到",
+      "proceed": "繼續",
+      "hint": "以下是當擴充功能不匹配條件時可以執行的操作"
+    },
+    "ads": {
+      "title": "請允許我們網站上的廣告",
+      "subTitle": "您安裝了下列哪些擴充功能？"
+    },
+    "addon": {
+      "title": "附加元件",
+      "info": "執行動作前會檢查新增的條件",
+      "elementFinder": "元素查找器",
+      "condition": "條件",
+      "value": "值",
+      "valueExtractor": "值提取器",
+      "recheck": {
+        "title": "重新檢查",
+        "hint": "* 如果重新檢查與條件不匹配，可以執行以下操作",
+        "interval": "重新檢查間隔",
+        "stop": "停止",
+        "skip": "跳過動作",
+        "refresh": "重新整理",
+        "goto": "轉到操作"
+      }
+    }
+  },
+  "message": {
+    "config": "設定儲存成功！",
+    "configSettings": "設定設定儲存成功！",
+    "batch": "批次處理儲存成功！",
+    "action": "動作儲存成功！",
+    "reorderActions": "操作重新排序成功！",
+    "removeAction": "操作刪除成功！",
+    "actionAddon": "附加元件儲存成功！",
+    "actionStatement": "動作條件儲存成功！",
+    "actionSettings": "動作設定儲存成功！"
+  },
+  "configuration": {
+    "title": "設定",
+    "add": "新設定",
+    "exportAll": "批次匯出設定",
+    "importAll": "批次匯入設定",
+    "remove": "移除設定",
+    "duplicate": "複製設定",
+    "reorder": "重新排序設定",
+    "removeConfigs": "批次移除設定",
+    "settings": "設定設定",
+    "enable": "啟用",
+    "export": "匯出設定",
+    "import": "匯入設定",
+    "url": "URL",
+    "name": "名稱",
+    "initWait": "初始化等待",
+    "startTime": "開始時間",
+    "noConfig": "未找到設定，請優化您的搜尋條件。"
+  },
+  "batch": {
+    "title": "批次處理",
+    "repeat": "重複",
+    "repeatHint": "<b>重複</b>將重新執行所有操作，而無需按照給定的時間間隔重新載入頁面。",
+    "repeatInterval": "重複間隔",
+    "refresh": "重新整理",
+    "refreshHint": "所有操作完成後，<b>重新整理</b>將重新載入頁面。"
+  },
+  "error": {
+    "number": "只允許有效數字",
+    "interval": "只允許有效數字",
+    "url": "需要 URL",
+    "initWait": "只允許有效數字",
+    "startTime": "開始時間應符合 HH:mm:ss:fff (12:12:12:000) 格式",
+    "json": "所選 Json 無效",
+    "hotKey": "單個字母未搭配 Ctrl/Command 是無效的",
+    "valueExtractor": "無效的正則表達式",
+    "value": "需要值",
+    "condition": "需要條件",
+    "elementFinder": "需要元素查找器"
+  },
+  "action": {
+    "title": "動作",
+    "add": "新增動作",
+    "addBefore": "在上面新增動作",
+    "addAfter": "在下面新增動作",
+    "addon": "附加元件",
+    "remove": "移除動作",
+    "settings": "動作設定",
+    "disable": "停用動作",
+    "enable": "啟用行動",
+    "initWait": "初始化等待",
+    "name": "名稱",
+    "elementFinder": "元素查找器",
+    "value": "值",
+    "repeat": "重複",
+    "repeatInterval": "重複間隔"
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "例子"
+    },
+    "startTime": {
+      "content": "試試我們的新瀏覽器擴充功能 <1>Schedule URL</1>。<br /> 可用於在特定時間排程網頁/URL"
+    },
+    "hotkey": {
+      "title": "快速鍵",
+      "content": "按下鍵盤快速鍵自動輸入欄位",
+      "hint": "單個字母未搭配 <kbd>Ctrl</kbd>, <kbd>Alt</kbd> 或 <kbd>Shift</kbd> 是無效的"
+    }
+  },
+  "common": {
+    "appName": "自動點擊器 - 自動填寫",
+    "settings": "設定",
+    "error": "錯誤",
+    "save": "儲存",
+    "clear": "清除",
+    "close": "關閉",
+    "download": "下載",
+    "disabled": "已停用",
+    "sec": "秒",
+    "no": "否",
+    "yes": "是",
+    "local": "本地",
+    "dev": "開發",
+    "stable": "穩定",
+    "examples": "範例"
+  },
+  "language": {
+    "en": "英語",
+    "fr": "法語",
+    "ko": "韓語",
+    "ca": "加拿大語",
+    "hi": "印地語",
+    "zh_CN": "中文",
+    "sv": "瑞典",
+    "pt": "葡萄牙語",
+    "ja": "日語",
+    "nl": "荷蘭語",
+    "de": "德語",
+    "es": "西班牙語",
+    "vi": "越南語",
+    "fi": "芬蘭",
+    "ar": "阿拉伯",
+    "it": "義大利語",
+    "ru": "俄語",
+    "id": "印尼"
+  }
+}
