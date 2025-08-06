@@ -1,0 +1,164 @@
+{
+  "EXT_NAME": {
+    "message": "Auto Clicker - AutoFill"
+  },
+  "EXT_NAME_DEV": {
+    "message": "Auto Clicker - AutoFill [DEV]"
+  },
+  "EXT_NAME_BETA": {
+    "message": "Auto Clicker - AutoFill [BETA]"
+  },
+  "EXT_NAME_LOCAL": {
+    "message": "Auto Clicker - AutoFill [LOCAL]"
+  },
+  "EXT_SHORT_NAME": {
+    "message": "Auto Fill"
+  },
+  "EXT_DESCRIPTION": {
+    "message": "自動填寫輸入欄位或自動點擊按鈕或連結任何地方。您可以設定並檢查點擊速度測試"
+  },
+  "@ACF_BACKUP__NOTIFICATION_TITLE": {
+    "message": "ACF 備份"
+  },
+  "@ACF_BACKUP__NOTIFICATION_BACKUP": {
+    "message": "設定已備份至 Google Drive ($1)"
+  },
+  "@ACF_BACKUP__NOTIFICATION_RESTORE": {
+    "message": "設定已從 Google Drive 還原。請重新整理設定頁面以載入內容。"
+  },
+  "@ACF_BACKUP__ERROR_NO_CONFIG": {
+    "message": "沒有找到可備份的設定"
+  },
+  "@ACF_BACKUP__ERROR_NO_CONTENT": {
+    "message": "檔案中沒有任何內容"
+  },
+  "@PORT__ACTION_NOT_FOUND": {
+    "message": "未設定"
+  },
+  "@PORT__METHOD_NOT_FOUND": {
+    "message": "未找到指定的方法"
+  },
+  "@CONTEXT_MENU__FIELD": {
+    "message": "★ 為此欄位設定"
+  },
+  "@CONTEXT_MENU__RECORD": {
+    "message": "☉ 自動點擊器（記錄）"
+  },
+  "@CONTEXT_MENU__CONFIG_PAGE": {
+    "message": "↗ 開啟設定頁面"
+  },
+  "@TABS__TITLE": {
+    "message": "分頁"
+  },
+  "@TABS__ERROR": {
+    "message": "無法找到指定的分頁或分頁 ID。"
+  },
+  "@ACTION__TITLE": {
+    "message": "Action"
+  },
+  "@ACTION__NO_NAME": {
+    "message": "動作名稱不存在"
+  },
+  "@ADDON__TITLE": {
+    "message": "附加元件"
+  },
+  "@ACTION_CONDITION__TITLE": {
+    "message": "動作條件"
+  },
+  "@BATCH__TITLE": {
+    "message": "批次"
+  },
+  "@CONFIG__TITLE": {
+    "message": "Config"
+  },
+  "@ERROR__ELEMENT_FINDER_BLANK": {
+    "message": "元素查找器是空白的"
+  },
+  "@ERROR__NO_MATCH": {
+    "message": "條件不匹配。"
+  },
+  "@ERROR__WRONG_TITLE": {
+    "message": "不正確的比較"
+  },
+  "@ERROR__WRONG_DESCRIPTION": {
+    "message": "大於或少於運算子只能比較數字"
+  },
+  "@ERROR__ELEMENT_FINDER_TITLE": {
+    "message": "錯誤的元素查找器或外掛條件"
+  },
+  "@ERROR__ELEMENT_FINDER_DESCRIPTION": {
+    "message": "元素查找器應針對核取方塊"
+  },
+  "@ERROR__INVALID_ELEMENT_FINDER": {
+    "message": "無效元素查找器"
+  },
+  "@ERROR__NOT_FOUND_STOP": {
+    "message": "找不到 - 停止"
+  },
+  "@ERROR__NOT_FOUND_RELOAD": {
+    "message": "找不到 - 重新載入"
+  },
+  "@ERROR__ACTION_NOT_FOUND_FOR_GOTO": {
+    "message": "未找到 Goto 的動作"
+  },
+  "@ERROR__NO_ELEMENT_FOUND": {
+    "message": "使用給定的選擇器未找到元素"
+  },
+  "@ERROR__ACTION_CONDITION_CONFIG_ERROR": {
+    "message": "請造訪設定頁面來審查和更新動作條件，以確保設定正確更新。"
+  },
+  "@CONDITION_SATISFIED": {
+    "message": "條件滿足"
+  },
+  "@CONDITION_NOT_SATISFIED": {
+    "message": "條件不滿足"
+  },
+  "@ERROR": {
+    "message": "錯誤"
+  },
+  "@SCHEDULE": {
+    "message": "排程"
+  },
+  "@REPEAT": {
+    "message": "重複"
+  },
+  "@COMPLETED": {
+    "message": "完成"
+  },
+  "@DEFAULT": {
+    "message": "預設"
+  },
+  "@WAIT": {
+    "message": "等待"
+  },
+  "@DISABLED": {
+    "message": "停用"
+  },
+  "@RESULT": {
+    "message": "結果"
+  },
+  "@GOTO": {
+    "message": "前往"
+  },
+  "@RECHECK": {
+    "message": "重新檢查"
+  },
+  "@COMPARE": {
+    "message": "比較"
+  },
+  "@RECHECK_OPTION": {
+    "message": "重新檢查選項"
+  },
+  "@DOCS": {
+    "message": "文件"
+  },
+  "@CHAT": {
+    "message": "聊天"
+  },
+  "@ADVANCE": {
+    "message": "進階"
+  },
+  "@SPONSOR": {
+    "message": "贊助"
+  }
+}

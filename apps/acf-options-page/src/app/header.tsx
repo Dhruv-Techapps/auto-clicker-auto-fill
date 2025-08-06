@@ -124,7 +124,7 @@ function Header() {
                     </NavDropdown.Item>
                   ))}
                   <NavDropdown.Divider />
-                  <NavDropdown.Item title='Add your Language' href='https://github.com/Dhruv-Techapps/acf-i18n/discussions/4' target='_blank' rel='noopener noreferrer'>
+                  <NavDropdown.Item title='Add your Language' href='https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions/484' target='_blank' rel='noopener noreferrer'>
                     Add your Language
                   </NavDropdown.Item>
                 </NavDropdown>
