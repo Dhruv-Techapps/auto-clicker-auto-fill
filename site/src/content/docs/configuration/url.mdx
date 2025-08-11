@@ -1,0 +1,23 @@
+---
+title: URL
+description: Provide the target URL where actions will run. Use a single URL or a regular expression to match multiple pages.
+toc: true
+---
+
+<img class="d-block mb-4 img-fluid rounded-3" src="/docs/[[config:docs_version]]/assets/img/configuration.png" alt="" />
+
+<Callout type="info">
+  This is the target URL where the extension executes actions. You may use a plain URL or a [regular
+  expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) to match multiple
+  pages.
+</Callout>
+
+### Examples
+
+##### https://www.instagram.com/dhruv.techapps/
+
+- `https://www.instagram.com/dhruv.techapps/`
+- `https://www.instagram.com/dhruv`
+- `https://www.instagram.com/`
+- `https://.*.instagram.com/`
+- `.*://.*.instagram.com/`

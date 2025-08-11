@@ -1,0 +1,39 @@
+---
+title: Settings · Retry
+description: Retry settings control how the extension handles cases where an element is not found on the page.
+toc: true
+---
+
+<img
+  class="d-block mb-4 img-fluid rounded-3"
+  src="/docs/[[config:docs_version]]/assets/img/settings-retry.png"
+  alt=""
+/>
+
+## Retry
+
+Retry finding an element on a webpage for a specified number of times. The default is 5.
+
+<Callout type="info">Specify a positive numeric value between `1` and `999`.</Callout>
+
+## Retry Interval
+
+The time interval between retries. The default is 1 second.
+
+<Callout name="example-float" />
+
+<Callout type="info">This field is optional. If left blank, retries occur without additional delay.</Callout>
+
+<Callout type="warning">Set Retry (> 1) if you want Retry Interval to take effect.</Callout>
+
+## Retry Options
+
+Choose what should happen if the element is not found after the specified number of retries. default is `STOP`.
+
+<BsTable>
+  | Option | Description | |---------|--------------------------------------------------| | STOP | Stops execution if
+  the element is not found. | | SKIP | Skips the action and proceeds to the next one. | | REFRESH | Refreshes the
+  webpage and retries the action. |
+</BsTable>
+
+These settings apply globally unless overridden at the action level.

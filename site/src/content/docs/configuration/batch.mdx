@@ -1,0 +1,45 @@
+---
+title: Batch
+description: Configure how many times a batch runs, the delay between runs, and whether to refresh the page after completion.
+toc: true
+---
+
+<img class="d-block mb-4 img-fluid rounded-3" src="/docs/[[config:docs_version]]/assets/img/batch.png" alt="" />
+
+## Repeat
+
+Set how many times this batch should execute.
+
+- Provide a positive integer. The batch runs that many times.
+- Valid range: `1` to `999`.
+
+You can also use the repeat index inside Element Finder XPath or Value using the `<batchRepeat>` placeholder. The placeholder is replaced with the current 1‑based repeat index during execution.
+
+Example:
+
+- Without repeat index: `//table/tr[1]/td[1]/button` selects only the first row button.
+- With repeat index: `//table/tr[<batchRepeat>]/td[1]/button` and Repeat = `3` will iterate rows 1, 2, and 3.
+
+## Repeat Interval
+
+Control the delay between repeats.
+
+- Unit: seconds (supports decimals). Examples: `0.5`, `1`, `2.5`.
+- Requires Repeat to be set (>= 1).
+
+<Callout name="example-float" />
+
+<Callout type="info">Repeat Interval is optional. If left blank, each repeat starts immediately.</Callout>
+
+<Callout type="warning">Repeat is required when using Repeat Interval.</Callout>
+
+## Refresh
+
+Refresh the page after all actions in the batch complete successfully.
+
+<Callout type="info">The page refresh triggers only after all actions finish successfully.</Callout>
+
+<Callout type="danger">
+  #### Refresh and Repeat cannot be used together Refresh overrides Batch Repeat. Use either Batch Repeat or Refresh,
+  not both.
+</Callout>
