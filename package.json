@@ -37,7 +37,7 @@
     "react": "19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "19.1.0",
-    "react-i18next": "^15.4.1",
+    "react-i18next": "^15.6.1",
     "react-instantsearch": "^7.15.5",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
