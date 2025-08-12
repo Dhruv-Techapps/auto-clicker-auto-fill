@@ -6,16 +6,21 @@ toc: true
 ---
 
 <Callout type="info">
-  Quickly copy an XPath with DevTools: 1. Right‑click the target element (button, link, input) and choose Inspect. 2. In
-  the Elements panel, ensure the element is highlighted. 3. Right‑click the highlighted node and choose Copy → Copy
-  XPath. 4. Paste the XPath into the Element Finder.
+
+Quickly copy an XPath with DevTools:
+
+1. Right‑click the target element (button, link, input) and choose Inspect.
+2. In the Elements panel, ensure the element is highlighted.
+3. Right‑click the highlighted node and choose Copy → Copy XPath.
+4. Paste the XPath into the Element Finder.
+
 </Callout>
 
 ### XPath
 
 XPath locates an element by its position and attributes in the DOM tree. See examples below.
 
-<Callout name="example-xpath" />
+<IncludeMdx src="/content/callouts/example-xpath.mdx" />
 
 ### Get element by ID
 
@@ -26,20 +31,20 @@ Notes:
 - IDs are intended to be unique. If duplicates exist, the first match is selected.
 
 <Callout type="info">
-Referring to the HTML below:
-- `#inputEmail` targets `id="inputEmail"`.
-- `#inputPassword` targets `id="inputPassword"`.
+  Referring to the HTML below: - `#inputEmail` targets `id="inputEmail"`. - `#inputPassword` targets
+  `id="inputPassword"`.
 </Callout>
+
 ```html
 <main class="form-signin">
   <form>
     <label for="inputEmail">Email address</label>
-    <input type="email" id="inputEmail" class="form-control"> 👈 selected
+    <input type="email" id="inputEmail" class="form-control" /> 👈 selected
     <label for="inputPassword">Password</label>
-    <input type="password" id="inputPassword" class="form-control"> 👈 selected
+    <input type="password" id="inputPassword" class="form-control" /> 👈 selected
     <button class="btn btn-primary" type="submit">Sign in</button>
   </form>
-  </main>
+</main>
 ```
 
 ### Get elements by class name

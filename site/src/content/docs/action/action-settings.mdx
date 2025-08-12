@@ -18,8 +18,11 @@ If an element is inside an inline iframe, enable this to search within the ifram
 
 Default: off. Applicable to same‑origin iframes without a URL in the src attribute, for example:
 
-- &lt;iframe src="about:blank">&lt;/iframe>
-- &lt;iframe src="">&lt;/iframe>
+<Code
+  code={`<iframe src="about:blank"></iframe>
+<iframe src=""></iframe>`}
+  lang="html"
+/>
 
 If the iframe has a URL (especially a different origin), create a separate configuration targeted to that URL.
 

@@ -109,12 +109,7 @@ const { addedIn, layout, title } = Astro.props
             <XIcon class="navbar-nav-svg" height={16} width={16} />
             <small class="d-lg-none ms-2">X</small>
           </LinkItem>
-             <LinkItem
-            class="nav-link py-2 px-0 px-lg-2"
-            href={`https://x.com/${getConfig().discord}`}
-            target="_blank"
-            rel="noopener"
-          >
+          <LinkItem class="nav-link py-2 px-0 px-lg-2" href={getConfig().discord} target="_blank" rel="noopener">
             <DiscordIcon class="navbar-nav-svg" height={16} width={16} />
             <small class="d-lg-none ms-2">Discord</small>
           </LinkItem>

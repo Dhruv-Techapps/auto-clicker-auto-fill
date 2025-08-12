@@ -34,7 +34,6 @@ const configSchema = z.object({
     popper_hash: z.string()
   }),
   current_version: zVersionSemver,
-  current_ruby_version: zVersionSemver,
   description: z.string(),
   docs_version: z.string(),
   docsDir: z.string(),
@@ -46,7 +45,6 @@ const configSchema = z.object({
   github_org: z.string().url(),
   opencollective: z.string().url(),
   repo: z.string().url(),
-  rfs_version: zPrefixedVersionSemver,
   subtitle: z.string(),
   discord: z.string().url(),
   title: z.string(),

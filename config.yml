@@ -3,10 +3,7 @@ baseURL: 'https://getbootstrap.com'
 
 docsDir: 'site'
 
-subtitle: 'The most popular HTML, CSS, and JS library in the world.'
-
-current_ruby_version: '5.3.7'
-rfs_version: 'v10.0.0'
+subtitle: 'Extension to automate click / fill.'
 
 description: 'Extension to automate click / fill.'
 authors: 'Dhruv Patel, Dharmesh Patel, and AutoClicker contributors'
@@ -16,7 +13,7 @@ header: 'Auto Clicker - AutoFill'
 facebook: 'dhruv.techapps'
 instagram: 'dharmeshhemaram'
 github: 'Dhruv-Techapps'
-current_version: '4.0.42'
+current_version: '4.0.47'
 docs_version: '4.x'
 github_org: 'https://github.com/Dhruv-Techapps'
 discussion: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions'
@@ -72,4 +69,4 @@ anchors:
 
 toc:
   min: 2
-  max: 6
+  max: 3

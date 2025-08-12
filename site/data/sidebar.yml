@@ -9,6 +9,8 @@
     - title: Download
 
 - title: Extension
+  icon: tools
+  icon_color: blue
   pages:
     - title: Status Bar
     - title: Log
@@ -16,10 +18,14 @@
     - title: Language
 
 - title: Record
+  icon: record-circle
+  icon_color: red
   pages:
     - title: Overview
 
 - title: Settings
+  icon: gear
+  icon_color: gray
   pages:
     - title: Overview
     - title: Retry
@@ -29,10 +35,14 @@
     - title: Status Bar Location
 
 - title: Session
+  icon: hourglass-bottom
+  icon_color: indigo
   pages:
     - title: Overview
 
 - title: Config List
+  icon: ui-radios
+  icon_color: blue
   pages:
     - title: Overview
     - title: Bulk Export
@@ -41,6 +51,8 @@
     - title: Reorder
 
 - title: Configuration
+  icon: menu-button-wide-fill
+  icon_color: cyan
   pages:
     - title: Overview
     - title: URL
@@ -48,6 +60,8 @@
     - title: Batch
 
 - title: Action
+  icon: braces-asterisk
+  icon_color: red
   pages:
     - title: Overview
     - title: Element Finder
@@ -56,10 +70,14 @@
     - title: Action Condition
 
 - title: Userscript
+  icon: magic
+  icon_color: orange
   pages:
     - title: Overview
 
 - title: Action Value
+  icon: palette2
+  icon_color: pink
   pages:
     - title: Overview
     - title: AI
@@ -87,6 +105,8 @@
     - title: Function
 
 - title: Addon
+  icon: check-circle
+  icon_color: blue
   pages:
     - title: Overview
     - title: Element Finder
@@ -95,6 +115,8 @@
     - title: Recheck
 
 - title: About
+  icon: globe2
+  icon_color: indigo
   pages:
     - title: Permissions
     - title: Subscription
