@@ -10,7 +10,6 @@
  */
 
 import docsearch from '@docsearch/js'
-
 ;(() => {
   // These values will be replaced by Astro's Vite plugin
   const CONFIG = {
