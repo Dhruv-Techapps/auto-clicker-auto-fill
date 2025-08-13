@@ -8,4 +8,6 @@ exclude_paths:
   - '**/**/tsconfig.*.json'
   - '**/**/webpack.config.js'
   - 'scripts/*'
+  - 'site/*'
+  - 'build/*'
   - 'userscripts/*'
