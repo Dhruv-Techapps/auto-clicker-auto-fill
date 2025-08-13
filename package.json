@@ -78,7 +78,7 @@
     "@nx/web": "21.2.3",
     "@nx/webpack": "21.2.3",
     "@nx/workspace": "21.2.3",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.1",
     "@sentry/webpack-plugin": "^3.3.1",
     "@stackblitz/sdk": "^1.11.0",
     "@svgr/webpack": "^8.0.1",
