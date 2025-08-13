@@ -67,7 +67,7 @@
     "@docsearch/js": "^3.9.0",
     "@eslint/js": "^9.31.0",
     "@google-cloud/translate": "^9.2.0",
-    "@nx/cypress": "21.2.3",
+    "@nx/cypress": "21.3.11",
     "@nx/eslint": "21.2.3",
     "@nx/eslint-plugin": "21.2.3",
     "@nx/express": "21.2.3",
