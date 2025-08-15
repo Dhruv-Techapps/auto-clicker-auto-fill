@@ -3,7 +3,8 @@ import type { SvgIconProps } from '@libs/icon'
 
 type Props = SvgIconProps
 
-const { class: className, height, width, id = crypto.randomUUID() } = Astro.props
+const { class: className, height, width, id } = Astro.props
+const resolvedId = id ?? crypto.randomUUID();
 ---
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" class={className} height={height} width={width}>
