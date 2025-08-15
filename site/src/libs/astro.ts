@@ -1,16 +1,13 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import type { AstroIntegration } from 'astro'
 import autoImport from 'astro-auto-import'
 import type { Element, Text } from 'hast'
+import fs from 'node:fs'
+import path from 'node:path'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { getConfig } from './config'
-import { rehypeBsTable } from './rehype'
-import { remarkBsConfig, remarkBsDocsref } from './remark'
-import { configurePrism } from './prism'
 import {
   docsDirectory,
   getDocsFsPath,
@@ -18,6 +15,9 @@ import {
   getDocsStaticFsPath,
   validateVersionedDocsPaths
 } from './path'
+import { configurePrism } from './prism'
+import { rehypeBsTable } from './rehype'
+import { remarkBsConfig, remarkBsDocsref } from './remark'
 
 // A list of directories in `src/components` that contains components that will be auto imported in all pages for
 // convenience.
@@ -143,9 +143,9 @@ function cleanPublicDirectory() {
 // Copy the `dist` folder from the root of the repo containing the latest version of Bootstrap to make it available from
 // the `/docs/${docs_version}/dist` URL.
 function copyBootstrap() {
-  const source = path.join(process.cwd(), 'dist')
+  const source = path.join(process.cwd(), 'node_modules', 'bootstrap', 'dist')
   const destination = path.join(getDocsPublicFsPath(), 'docs', getConfig().docs_version, 'dist')
-
+  console.log(`Copying Bootstrap from ${source} to ${destination}`)
   fs.mkdirSync(destination, { recursive: true })
   fs.cpSync(source, destination, { recursive: true })
 }

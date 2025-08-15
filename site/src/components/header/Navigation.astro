@@ -1,6 +1,6 @@
 ---
 import LinkItem from '@components/header/LinkItem.astro'
-import BootstrapWhiteFillIcon from '@components/icons/BootstrapWhiteFillIcon.astro'
+import AutoClickerAutoFillWhiteFillIcon from '@components/icons/AutoClickerAutoFillWhiteFillIcon.astro'
 import DiscordIcon from '@components/icons/DiscordIcon.astro'
 import GitHubIcon from '@components/icons/GitHubIcon.astro'
 import HamburgerIcon from '@components/icons/HamburgerIcon.astro'
@@ -43,8 +43,8 @@ const { addedIn, layout, title } = Astro.props
     }
     {layout !== 'docs' && <div class="d-lg-none" style="width: 4.25rem;" />}
 
-    <a class="navbar-brand p-0 me-0 me-lg-2" href="/" aria-label="Bootstrap">
-      <BootstrapWhiteFillIcon class="d-block my-1" height={32} width={40} />
+    <a class="navbar-brand p-0 me-0 me-lg-2" href="/" aria-label="Auto Clicker Auto Fill">
+      <AutoClickerAutoFillWhiteFillIcon class="d-block my-1" height={32} width={40} id="HeaderWhiteIcon" />
     </a>
 
     <div class="d-flex">
@@ -69,7 +69,7 @@ const { addedIn, layout, title } = Astro.props
       aria-labelledby="bdNavbarOffcanvasLabel"
     >
       <div class="offcanvas-header px-4 pb-0">
-        <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Bootstrap</h5>
+        <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Auto Clicker Auto Fill</h5>
         <button
           type="button"
           class="btn-close btn-close-white"
