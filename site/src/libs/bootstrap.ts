@@ -1,8 +1,9 @@
 import { getConfig } from '@libs/config'
+import { getVersionedDocsPath } from '@libs/path'
 import type { HTMLAttributes } from 'astro/types'
 
 export function getVersionedBsCssProps(direction: 'rtl' | undefined) {
-  let bsCssLinkHref = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap'
+  let bsCssLinkHref = '/dist/css/bootstrap'
 
   if (direction === 'rtl') {
     bsCssLinkHref = `${bsCssLinkHref}.rtl`
@@ -15,7 +16,7 @@ export function getVersionedBsCssProps(direction: 'rtl' | undefined) {
   bsCssLinkHref = `${bsCssLinkHref}.css`
 
   const bsCssLinkProps: HTMLAttributes<'link'> = {
-    href: bsCssLinkHref,
+    href: getVersionedDocsPath(bsCssLinkHref),
     rel: 'stylesheet'
   }
 
@@ -27,7 +28,7 @@ export function getVersionedBsCssProps(direction: 'rtl' | undefined) {
 }
 
 export function getVersionedBsJsProps() {
-  let bsJsScriptSrc = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle'
+  let bsJsScriptSrc = '/dist/js/bootstrap.bundle'
 
   if (import.meta.env.PROD) {
     bsJsScriptSrc = `${bsJsScriptSrc}.min`
@@ -36,7 +37,7 @@ export function getVersionedBsJsProps() {
   bsJsScriptSrc = `${bsJsScriptSrc}.js`
 
   const bsJsLinkProps: HTMLAttributes<'script'> = {
-    src: bsJsScriptSrc
+    src: getVersionedDocsPath(bsJsScriptSrc)
   }
 
   if (import.meta.env.PROD) {

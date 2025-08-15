@@ -8,7 +8,7 @@ env:
   NODE: 22
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   docs:
