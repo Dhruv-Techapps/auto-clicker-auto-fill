@@ -1,0 +1,159 @@
+---
+title: Watch Mode for Extension Development  
+description: Enhanced development experience with automatic rebuilds and extension reloading
+group: development
+toc: true
+---
+
+# Watch Mode for Chrome Extension Development
+
+This document describes the enhanced watch mode functionality for developing the Auto Clicker AutoFill Chrome extension.
+
+## Overview
+
+The watch mode provides an improved development experience with:
+
+- **Fast development builds** with optimized source maps
+- **Automatic file watching** with instant rebuilds on file changes
+- **Extension auto-reload** that automatically reloads the extension in Chrome when files change
+- **Development-specific optimizations** for faster build times
+
+## Usage
+
+### Basic Watch Mode
+
+Start development watch mode:
+
+```bash
+npm run start
+# or
+npx nx serve acf-extension
+```
+
+This will:
+- Build the extension in development mode
+- Watch for file changes and rebuild automatically
+- Start a reload server for automatic extension reloading
+
+### Production Watch Mode
+
+For testing production builds while watching:
+
+```bash
+npx nx serve:prod acf-extension
+```
+
+### Advanced Watch Mode
+
+For more control over watch options:
+
+```bash
+npx nx watch acf-extension
+```
+
+## Features
+
+### Development Optimizations
+
+When running in development mode, the build includes:
+
+- **Faster source maps** (`eval-cheap-module-source-map`) for quicker builds
+- **No minification** for easier debugging
+- **Disabled code splitting** for simpler debugging
+- **Optimized file watching** with polling and debouncing
+
+### Automatic Extension Reload
+
+The extension includes a development-only reload client that:
+
+- Connects to a WebSocket server running on port 8080
+- Automatically reloads the extension when files change
+- Reconnects automatically if the connection is lost
+- Only activates in development builds
+
+### Watch Options
+
+The watch mode includes optimized settings:
+
+- **Polling interval**: 1000ms for reliable file change detection
+- **Aggregate timeout**: 300ms to debounce rapid file changes
+- **Ignored paths**: `node_modules` for better performance
+
+## Setup for Extension Development
+
+1. **Load the extension in Chrome**:
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked" and select the `dist` directory from the build output
+
+2. **Start watch mode**:
+   ```bash
+   npm run start
+   ```
+
+3. **Make changes**: The extension will automatically reload when you modify source files
+
+## Technical Details
+
+### Build Configuration
+
+The watch mode modifies webpack configuration based on environment:
+
+- **Development**: Fast source maps, no minification, watch optimizations
+- **Production**: Full source maps, minification enabled
+
+### Reload Mechanism
+
+The reload functionality uses:
+
+- A WebSocket server (port 8080) running during watch mode
+- Client code injected into the background script in development
+- Automatic reconnection with exponential backoff
+
+### File Structure
+
+```
+apps/acf-extension/
+├── scripts/
+│   ├── extension-reload-plugin.js    # Webpack plugin for reload server
+│   ├── reload-extension.js           # WebSocket server for reloading
+│   └── reload-client.js             # Client-side reload code
+├── src/
+│   └── background/
+│       └── index.ts                 # Includes reload client in development
+└── webpack.config.js                # Enhanced with development optimizations
+```
+
+## Troubleshooting
+
+### Extension Not Reloading
+
+1. Check that the extension is loaded in developer mode
+2. Verify the WebSocket server is running (you'll see connection messages in console)
+3. Ensure port 8080 is not blocked by firewall
+
+### Build Issues
+
+1. Clear the webpack cache: `rm -rf node_modules/.cache`
+2. Restart the watch mode
+3. Check for TypeScript errors in the console
+
+### Performance Issues
+
+1. Increase the polling interval in `watchOptions`
+2. Add more paths to the `ignored` array in watch options
+3. Consider using a faster file system if possible
+
+## Environment Variables
+
+- `NODE_ENV=development`: Enables development optimizations and reload client
+- Watch mode is automatically detected when using `--watch` flag
+
+## Browser DevTools
+
+When developing with watch mode:
+
+1. Open Chrome DevTools on the extension pages
+2. Check the Console tab for reload messages
+3. Use the Sources tab with source maps for debugging
+4. Network tab shows WebSocket connection to reload server

@@ -129,3 +129,46 @@ self.onunhandledrejection = async (event) => {
 self.onerror = async (...rest) => {
   scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
 };
+
+// Development-only: Auto-reload extension when files change
+// @ts-ignore - process.env.NODE_ENV is replaced by webpack
+if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development') {
+  console.log('🔧 Extension development reload client active');
+
+  let reconnectTimer: NodeJS.Timeout;
+  
+  function connectToReloadServer() {
+    try {
+      const ws = new WebSocket('ws://localhost:8080');
+      
+      ws.onopen = () => {
+        console.log('🔗 Connected to extension reload server');
+        clearTimeout(reconnectTimer);
+      };
+      
+      ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        if (message.type === 'reload') {
+          console.log('🔄 Reloading extension...');
+          chrome.runtime.reload();
+        }
+      };
+      
+      ws.onclose = () => {
+        console.log('📡 Disconnected from reload server, attempting to reconnect...');
+        // Reconnect after 2 seconds
+        reconnectTimer = setTimeout(connectToReloadServer, 2000);
+      };
+      
+      ws.onerror = (error) => {
+        console.log('❌ Reload server connection error:', error);
+      };
+    } catch (error) {
+      // WebSocket might not be available in some environments
+      console.log('⚠️ Could not connect to reload server (this is normal in production)');
+    }
+  }
+  
+  // Connect to the reload server
+  connectToReloadServer();
+}

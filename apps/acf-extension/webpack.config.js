@@ -5,6 +5,7 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const { BannerPlugin } = require('webpack');
 const fs = require('fs');
+const ExtensionReloadPlugin = require('./scripts/extension-reload-plugin');
 
 function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RELEASE_VERSION }) {
   // copy-webpack-plugin passes a buffer
@@ -31,8 +32,33 @@ module.exports = composePlugins(
     // `options` is the options passed to the `@nx/webpack:webpack` executor
     // `context` is the context passed to the `@nx/webpack:webpack` executor
     // customize configuration here
+    
+    // Get environment information
+    const isDevelopment = process.env.NODE_ENV === 'development' || options.env?.development;
+    const isWatchMode = process.env.npm_lifecycle_event === 'serve' || process.argv.includes('--watch');
+    
     config.output.clean = true;
-    config.devtool = 'source-map';
+    
+    // Optimize for development vs production
+    if (isDevelopment) {
+      config.devtool = 'eval-cheap-module-source-map'; // Faster source maps for dev
+      config.optimization = {
+        ...config.optimization,
+        minimize: false, // Disable minification in development
+        splitChunks: false // Disable code splitting for simpler debugging
+      };
+      
+      // Watch options for better development experience
+      if (isWatchMode) {
+        config.watchOptions = {
+          poll: 1000, // Use polling for better file watching
+          aggregateTimeout: 300, // Delay rebuild after file change
+          ignored: /node_modules/ // Ignore node_modules for performance
+        };
+      }
+    } else {
+      config.devtool = 'source-map'; // Full source maps for production
+    }
     config.entry = {
       background: './src/background/index.ts',
       content_scripts: './src/content_scripts/index.ts',
@@ -52,7 +78,9 @@ module.exports = composePlugins(
 
     const { VITE_PUBLIC_VARIANT } = process.env;
     const assets = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'DEV' : VITE_PUBLIC_VARIANT;
-    config.plugins.push(
+    
+    // Configure plugins
+    const plugins = [
       new CopyPlugin({
         patterns: [
           { from: `**/messages.json`, to: './_locales', context: `${options.root}/apps/acf-i18n/src/locales` },
@@ -75,7 +103,15 @@ module.exports = composePlugins(
         systemvars: true
       }),
       new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
-    );
+    ];
+    
+    // Add extension reload plugin for development
+    if (isDevelopment) {
+      plugins.push(new ExtensionReloadPlugin());
+      console.log('🔧 Added Extension Reload Plugin for development watch mode');
+    }
+    
+    config.plugins.push(...plugins);
     if (VITE_PUBLIC_VARIANT === 'PROD') {
       config.plugins.push(
         sentryWebpackPlugin({

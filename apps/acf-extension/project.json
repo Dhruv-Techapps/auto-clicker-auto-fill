@@ -10,7 +10,25 @@
       "command": "webpack-cli build",
       "options": {
         "cwd": "apps/acf-extension",
+        "args": ["--node-env=development", "--watch", "--env", "development"]
+      },
+      "continuous": true,
+      "dependsOn": ["watch-deps"]
+    },
+    "serve:prod": {
+      "command": "webpack-cli build",
+      "options": {
+        "cwd": "apps/acf-extension",
         "args": ["--node-env=production", "--watch"]
+      },
+      "continuous": true,
+      "dependsOn": ["watch-deps"]
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "webpack-cli build --mode=development --watch --env development",
+        "cwd": "apps/acf-extension"
       },
       "continuous": true,
       "dependsOn": ["watch-deps"]
