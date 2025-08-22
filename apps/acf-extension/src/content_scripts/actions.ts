@@ -10,6 +10,7 @@ import { I18N_COMMON, I18N_ERROR } from './i18n';
 import Statement from './statement';
 import { statusBar } from './status-bar';
 import UserScriptProcessor from './userscript';
+import DomWatchManager from './util/dom-watch-manager';
 
 const ACTION_I18N = {
   TITLE: chrome.i18n.getMessage('@ACTION__TITLE'),
@@ -36,6 +37,10 @@ const Actions = (() => {
 
   const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number) => {
     window.ext.__batchRepeat = batchRepeat;
+    
+    // Clear any existing DOM watchers before starting new actions
+    DomWatchManager.clear();
+    
     let i = 0;
     while (i < actions.length) {
       const action = actions[i];
@@ -55,6 +60,13 @@ const Actions = (() => {
           action.status = await UserScriptProcessor.start(action as IUserScript);
         } else {
           action.status = await ActionProcessor.start(action as IAction);
+          
+          // Register action for DOM watching if enabled (only for regular actions, not userscripts)
+          const typedAction = action as IAction;
+          if (typedAction.settings?.watch?.watchEnabled) {
+            console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, '👁️ Registering for DOM watching');
+            DomWatchManager.registerAction(typedAction);
+          }
         }
         notify(action);
       } catch (error) {
@@ -76,7 +88,7 @@ const Actions = (() => {
       i += 1;
     }
   };
-  return { start };
+  return { start, getDomWatchManager: () => DomWatchManager };
 })();
 
 export default Actions;

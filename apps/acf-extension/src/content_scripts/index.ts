@@ -2,6 +2,7 @@ import { ELoadTypes, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
 import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { scope } from '../common/instrument';
+import Actions from './actions';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';
 
@@ -64,8 +65,9 @@ self.onerror = (...rest) => {
   scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
 };
 
-chrome.runtime.onMessage.addListener(async (message) => {
-  const { action, configId } = message;
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  const { action, configId, command } = message;
+  
   if (action === RUNTIME_MESSAGE_ACF.RUN_CONFIG) {
     try {
       new ConfigStorage().getConfigById(configId).then(async (config) => {
@@ -88,5 +90,47 @@ chrome.runtime.onMessage.addListener(async (message) => {
       }
       scope.captureException(e);
     }
+  } else if (action === RUNTIME_MESSAGE_ACF.DOM_WATCHER_GET_STATUS) {
+    // Handle DOM watcher status request
+    try {
+      const domWatchManager = Actions.getDomWatchManager();
+      const status = domWatchManager.getStatus();
+      sendResponse(status);
+    } catch (e) {
+      console.error('Error getting DOM watcher status:', e);
+      sendResponse({ isActive: false, watchedActionsCount: 0, watchedActions: [] });
+    }
+    return true; // Keep message channel open for async response
+  } else if (action === RUNTIME_MESSAGE_ACF.DOM_WATCHER_COMMAND) {
+    // Handle DOM watcher commands
+    try {
+      const domWatchManager = Actions.getDomWatchManager();
+      
+      switch (command) {
+        case 'START':
+          domWatchManager.start();
+          break;
+        case 'STOP':
+          domWatchManager.stop();
+          break;
+        case 'PAUSE':
+          domWatchManager.pause();
+          break;
+        case 'RESUME':
+          domWatchManager.resume();
+          break;
+        case 'CLEAR':
+          domWatchManager.clear();
+          break;
+        default:
+          console.warn('Unknown DOM watcher command:', command);
+      }
+      
+      sendResponse({ success: true });
+    } catch (e) {
+      console.error('Error handling DOM watcher command:', e);
+      sendResponse({ success: false, error: e.message });
+    }
+    return true; // Keep message channel open for async response
   }
 });

@@ -1,4 +1,4 @@
-import { defaultActionSettings, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
+import { defaultActionSettings, defaultActionWatchSettings, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../../store';
@@ -13,10 +13,16 @@ export interface IActionSettingsStore {
 
 export interface IActionSettingsRequest {
   name: string;
-  value: boolean;
+  value: boolean | string | number;
 }
 
-const initialState: IActionSettingsStore = { visible: false, settings: { ...defaultActionSettings } };
+const initialState: IActionSettingsStore = { 
+  visible: false, 
+  settings: { 
+    ...defaultActionSettings, 
+    watch: { ...defaultActionWatchSettings } 
+  } 
+};
 
 const slice = createSlice({
   name: 'actionSettings',
@@ -24,8 +30,39 @@ const slice = createSlice({
   reducers: {
     updateActionSettings: (state, action: PayloadAction<IActionSettingsRequest>) => {
       const { name, value } = action.payload;
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      state.settings[name] = value;
+      
+      // Handle nested watch settings
+      if (name.startsWith('watch.')) {
+        if (!state.settings.watch) {
+          state.settings.watch = {};
+        }
+        
+        const watchProperty = name.replace('watch.', '');
+        if (watchProperty.includes('.')) {
+          // Handle nested properties like watch.lifecycleStopConditions.timeout
+          const [parentProp, childProp] = watchProperty.split('.');
+          if (parentProp === 'lifecycleStopConditions') {
+            if (!state.settings.watch.lifecycleStopConditions) {
+              state.settings.watch.lifecycleStopConditions = {};
+            }
+            if (childProp === 'timeout') {
+              // Convert minutes to milliseconds
+              state.settings.watch.lifecycleStopConditions.timeout = typeof value === 'number' ? value * 60000 : parseInt(value as string) * 60000;
+            } else {
+              // @ts-expect-error "handling dynamic nested properties"
+              state.settings.watch.lifecycleStopConditions[childProp] = value;
+            }
+          }
+        } else {
+          // Handle direct watch properties
+          // @ts-expect-error "handling dynamic properties"
+          state.settings.watch[watchProperty] = value;
+        }
+      } else {
+        // Handle regular settings
+        // @ts-expect-error "making is generic function difficult for TypeScript"
+        state.settings[name] = value;
+      }
     },
     switchActionSettingsModal: (state) => {
       window.dataLayer.push({ event: 'modal', name: 'action_settings', visibility: !state.visible });
@@ -47,9 +84,19 @@ const slice = createSlice({
   extraReducers(builder) {
     builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
       if (action.payload.settings) {
-        state.settings = { ...action.payload.settings, retryGoto: action.payload.retryGoto };
+        state.settings = { 
+          ...action.payload.settings, 
+          retryGoto: action.payload.retryGoto,
+          watch: {
+            ...defaultActionWatchSettings,
+            ...action.payload.settings.watch
+          }
+        };
       } else {
-        state.settings = { ...defaultActionSettings };
+        state.settings = { 
+          ...defaultActionSettings,
+          watch: { ...defaultActionWatchSettings }
+        };
       }
       state.visible = !state.visible;
     });
