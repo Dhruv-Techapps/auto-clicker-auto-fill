@@ -22,6 +22,6 @@
     "@swc/helpers": "~0.5.11",
     "@dhruv-techapps/shared-firebase-oauth": "0.0.1",
     "@dhruv-techapps/core-service": "0.0.1",
-    "firebase": "^11.9.1"
+    "firebase": "^12.1.0"
   }
 }
