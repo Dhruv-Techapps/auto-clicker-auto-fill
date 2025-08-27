@@ -71,7 +71,7 @@
     "@nx/eslint": "21.3.11",
     "@nx/eslint-plugin": "21.2.3",
     "@nx/express": "21.2.3",
-    "@nx/js": "21.2.3",
+    "@nx/js": "21.4.1",
     "@nx/node": "21.2.3",
     "@nx/react": "21.4.0",
     "@nx/vite": "21.2.3",
