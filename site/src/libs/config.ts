@@ -1,7 +1,7 @@
 import yaml from 'js-yaml'
 import fs from 'node:fs'
 import { z } from 'zod'
-import { zPrefixedVersionSemver, zVersionSemver } from './validation'
+import { zVersionSemver } from './validation'
 
 // The config schema used to validate the config file content and ensure all values required by the site are valid.
 const configSchema = z.object({
