@@ -162,4 +162,4 @@ Please see [SECURITY](SECURITY.md) for security policies and reporting guideline
 
 ## Code of Conduct
 
-See [CODE_OF_CONDUCT](docs/CODE_OF_CONDUCT.md) for our community standards.
+See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for our community standards.
