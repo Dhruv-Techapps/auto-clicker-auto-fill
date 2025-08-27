@@ -10,6 +10,3 @@ changelog:
     - title: 🐛 Bug
       labels:
         - 'Bug'
-    - title: 👒 Dependencies
-      labels:
-        - 'Dependencies'
