@@ -71,7 +71,7 @@ This project uses an Nx monorepo structure:
   - `acf`: Auto Clicker AutoFill-specific logic, events, services, and storage.
   - `shared`: Integrations (Firebase, Google, Discord, OpenAI, etc.).
 
-See the [docs](https://stable.getautoclicker.com/docs/4.x/getting-started/introduction/) for a full breakdown.
+See the [docs](https://getautoclicker.com/docs/4.x/getting-started/introduction/) for a full breakdown.
 
 ---
 
@@ -138,14 +138,12 @@ We welcome contributions! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file
 
 ## Important Links
 
-- [Docs](https://stable.getautoclicker.com/docs/4.x/getting-started/introduction/)
-- [Examples](https://gist.github.com/dharmesh-hemaram)
+- [Docs](https://getautoclicker.com/docs/4.x/getting-started/introduction/)
 - [Blog](https://blog.getautoclicker.com/)
 - **Variants:**
   - [Stable](https://stable.getautoclicker.com)
   - [Beta](https://beta.getautoclicker.com)
   - [Dev](https://dev.getautoclicker.com)
-- [Google Group](https://groups.google.com/g/auto-clicker-autofill)
 - [GitHub](https://github.com/Dhruv-Techapps)
 - [Twitter](https://twitter.com/dharmeshhemaram)
 - [Open Collective](https://opencollective.com/auto-clicker-autofill)
