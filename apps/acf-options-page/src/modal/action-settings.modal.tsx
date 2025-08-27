@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 
-import { ERetryOptions } from '@dhruv-techapps/acf-common';
+import { ERetryOptions, EActionWatchRestartMode } from '@dhruv-techapps/acf-common';
 import { Alert, Button, Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -153,6 +153,27 @@ const ActionSettingsModal = () => {
                   <Row className='mb-2'>
                     <Col md={6} sm={12}>
                       <InputGroup>
+                        <InputGroup.Text>{t('modal.actionSettings.watch.restartMode', 'Restart Mode')}</InputGroup.Text>
+                        <Form.Select 
+                          name='watch.restartMode' 
+                          onChange={onUpdate} 
+                          defaultValue={settings.watch?.restartMode || EActionWatchRestartMode.SINGLE}
+                        >
+                          <option value={EActionWatchRestartMode.SINGLE}>
+                            {t('modal.actionSettings.watch.restartMode.single', 'Single Action')}
+                          </option>
+                          <option value={EActionWatchRestartMode.SEQUENCE}>
+                            {t('modal.actionSettings.watch.restartMode.sequence', 'From This Action')}
+                          </option>
+                          <option value={EActionWatchRestartMode.FULL}>
+                            {t('modal.actionSettings.watch.restartMode.full', 'Full Sequence')}
+                          </option>
+                        </Form.Select>
+                      </InputGroup>
+                      <small className='text-muted'>{t('modal.actionSettings.watch.restartModeHint', 'How to restart when DOM changes trigger this action')}</small>
+                    </Col>
+                    <Col md={6} sm={12}>
+                      <InputGroup>
                         <InputGroup.Text>{t('modal.actionSettings.watch.rootSelector', 'Watch Root')}</InputGroup.Text>
                         <FormControl 
                           placeholder={t('modal.actionSettings.watch.rootSelectorPlaceholder', 'body')} 
@@ -163,6 +184,8 @@ const ActionSettingsModal = () => {
                       </InputGroup>
                       <small className='text-muted'>{t('modal.actionSettings.watch.rootSelectorHint', 'CSS selector for container to observe')}</small>
                     </Col>
+                  </Row>
+                  <Row className='mb-2'>
                     <Col md={6} sm={12}>
                       <InputGroup>
                         <InputGroup.Text>{t('modal.actionSettings.watch.timeout', 'Timeout')}&nbsp;<small className='text-muted'>({t('common.min', 'min')})</small></InputGroup.Text>

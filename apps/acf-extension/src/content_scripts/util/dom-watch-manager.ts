@@ -1,4 +1,4 @@
-import { IAction, IActionWatchSettings, defaultActionWatchSettings } from '@dhruv-techapps/acf-common';
+import { IAction, IActionWatchSettings, defaultActionWatchSettings, EActionWatchRestartMode } from '@dhruv-techapps/acf-common';
 import ActionProcessor from '../action';
 import Common from '../common';
 
@@ -8,6 +8,8 @@ interface WatchedAction {
   processedElements: WeakSet<HTMLElement>;
   processedCount: number;
   startTime: number;
+  actionIndex: number;        // Index of this action in the sequence
+  actionSequence: IAction[];  // The full action sequence
 }
 
 interface DomWatchState {
@@ -16,6 +18,7 @@ interface DomWatchState {
   watchedActions: Map<string, WatchedAction>;
   debounceTimeouts: Map<string, number>;
   currentUrl: string;
+  sequenceRestartCallback?: (startIndex: number, actions: IAction[]) => Promise<void>;
 }
 
 const DomWatchManager = (() => {
@@ -24,7 +27,8 @@ const DomWatchManager = (() => {
     observer: null,
     watchedActions: new Map(),
     debounceTimeouts: new Map(),
-    currentUrl: window.location.href
+    currentUrl: window.location.href,
+    sequenceRestartCallback: undefined
   };
 
   const PROCESSED_ATTRIBUTE_PREFIX = 'data-acf-processed-';
@@ -82,7 +86,7 @@ const DomWatchManager = (() => {
 
   // Process a single element for a specific action
   const processElementForAction = async (element: HTMLElement, watchedAction: WatchedAction): Promise<void> => {
-    const { action, watchSettings, processedElements } = watchedAction;
+    const { action, watchSettings, processedElements, actionIndex, actionSequence } = watchedAction;
 
     // Check if already processed
     if (isElementProcessed(element, action.id)) {
@@ -105,16 +109,29 @@ const DomWatchManager = (() => {
     }
 
     try {
-      console.debug(`DomWatchManager: Processing element for action "${action.name || action.id}"`);
+      console.debug(`DomWatchManager: Processing element for action "${action.name || action.id}" with restart mode: ${watchSettings.restartMode}`);
       
       // Mark as processed before executing to prevent re-processing during execution
       markElementProcessed(element, action.id);
       processedElements.add(element);
       watchedAction.processedCount++;
 
-      // Execute the action on this specific element
-      // We need to temporarily modify the action execution to work with a single element
-      await executeActionOnElement(element, action);
+      // Handle different restart modes
+      if (watchSettings.restartMode === EActionWatchRestartMode.SINGLE) {
+        // Default behavior: execute only this action on the specific element
+        await executeActionOnElement(element, action);
+      } else if (watchSettings.restartMode === EActionWatchRestartMode.SEQUENCE && state.sequenceRestartCallback) {
+        // Restart from this action and continue through the sequence
+        console.debug(`DomWatchManager: Restarting action sequence from index ${actionIndex}`);
+        await state.sequenceRestartCallback(actionIndex, actionSequence);
+      } else if (watchSettings.restartMode === EActionWatchRestartMode.FULL && state.sequenceRestartCallback) {
+        // Restart the entire action sequence from the beginning
+        console.debug(`DomWatchManager: Restarting full action sequence from beginning`);
+        await state.sequenceRestartCallback(0, actionSequence);
+      } else {
+        // Fallback to single action execution
+        await executeActionOnElement(element, action);
+      }
 
     } catch (error) {
       console.error('DomWatchManager: Error processing element:', error);
@@ -268,7 +285,7 @@ const DomWatchManager = (() => {
   };
 
   // Register an action for DOM watching
-  const registerAction = (action: IAction): void => {
+  const registerAction = (action: IAction, actionIndex: number = 0, actionSequence: IAction[] = [action]): void => {
     if (!action.settings?.watch?.watchEnabled) {
       return;
     }
@@ -283,7 +300,9 @@ const DomWatchManager = (() => {
       watchSettings,
       processedElements: new WeakSet(),
       processedCount: 0,
-      startTime: Date.now()
+      startTime: Date.now(),
+      actionIndex,
+      actionSequence
     };
 
     state.watchedActions.set(action.id, watchedAction);
@@ -292,7 +311,7 @@ const DomWatchManager = (() => {
       start();
     }
 
-    console.debug(`DomWatchManager: Registered action "${action.name || action.id}" for DOM watching`);
+    console.debug(`DomWatchManager: Registered action "${action.name || action.id}" for DOM watching (index: ${actionIndex}, restart mode: ${watchSettings.restartMode})`);
   };
 
   // Unregister an action from DOM watching
@@ -381,6 +400,11 @@ const DomWatchManager = (() => {
     }))
   });
 
+  // Set the callback function for sequence restart
+  const setSequenceRestartCallback = (callback: (startIndex: number, actions: IAction[]) => Promise<void>): void => {
+    state.sequenceRestartCallback = callback;
+  };
+
   // Clear all actions and stop watching
   const clear = (): void => {
     state.watchedActions.clear();
@@ -392,6 +416,7 @@ const DomWatchManager = (() => {
   return {
     registerAction,
     unregisterAction,
+    setSequenceRestartCallback,
     start,
     stop,
     pause,

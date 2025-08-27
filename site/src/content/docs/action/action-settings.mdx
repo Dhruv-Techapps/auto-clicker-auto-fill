@@ -122,6 +122,32 @@ When enabled, only processes elements that are currently visible in the viewport
   Enabling visibility check may miss elements that are initially hidden but become visible through user interaction or page scrolling.
 </Callout>
 
+### Restart Mode
+
+**Default:** Single Action
+
+Controls how actions restart when DOM changes trigger the watcher. This setting is crucial for complex workflows involving multiple sequential actions.
+
+**Options:**
+
+- **Single Action** - Re-executes only the triggered action (default behavior)
+- **From This Action** - Restarts execution from the triggered action and continues through the remaining sequence
+- **Full Sequence** - Restarts the entire action sequence from the beginning
+
+<Callout type="info">
+  Sequential restart modes are essential for complex workflows like custom dropdowns where Action 1 opens the dropdown, Action 2 filters options, and Action 3 selects the result. When new options appear, "From This Action" mode ensures the complete workflow runs correctly.
+</Callout>
+
+**Use Cases:**
+
+- **Single Action:** Simple scenarios like liking posts or filling independent form fields
+- **From This Action:** Multi-step workflows where the triggered action depends on previous steps
+- **Full Sequence:** Complex workflows where all actions must run in order to maintain state
+
+<Callout type="warning">
+  Sequential restart modes will re-execute multiple actions, which may impact performance on pages with frequent DOM changes. Use appropriate debounce timing to limit restart frequency.
+</Callout>
+
 ### Stop on URL Change
 
 **Default:** On
@@ -166,6 +192,28 @@ Process new posts in a social media feed:
    - Watch Root: `[data-testid="primaryColumn"]`
    - Debounce: `800ms`
    - Max Repeats: `1`
+   - Restart Mode: `Single Action`
+
+### Custom Dropdown Selection (Sequential Actions)
+
+For complex workflows where multiple actions work together, use sequential restart modes:
+
+**Actions Setup:**
+1. **Action 1 (Click to Open):** `#custom-dropdown .dropdown-trigger`
+2. **Action 2 (Filter Results):** `#custom-dropdown .search-input` (Value: "Premium")
+3. **Action 3 (Select Option):** `#custom-dropdown .option[data-value="premium"]:not(.selected)`
+
+**Action 3 DOM Watcher Settings:**
+   - Enable DOM Watching: ✅
+   - Watch Root: `#custom-dropdown .options-list`
+   - Debounce: `1000ms`
+   - Restart Mode: `From This Action` ✨
+   - Max Repeats: `1`
+
+When new dropdown options load dynamically, Action 3 will trigger and restart the sequence from Action 3, ensuring the filter and selection happen correctly for new content.
+
+**Alternative: Full Sequence Mode**
+For dropdowns that reset state when new options load, use `Full Sequence` restart mode to ensure the dropdown opens and filters are applied before selection.
 
 <Callout type="warning">
   Always test DOM Watcher configurations thoroughly. Some sites may have rate limiting or anti-automation measures that could conflict with automated interactions.

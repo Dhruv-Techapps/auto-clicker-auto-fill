@@ -49,6 +49,12 @@ export const getDefaultActionStatement = (actionId: TRandomUUID, operator?: EAct
   then: ERetryOptions.STOP
 });
 
+export enum EActionWatchRestartMode {
+  SINGLE = 'single',               // Re-execute only this action (default)
+  SEQUENCE = 'sequence',           // Restart from this action and continue sequence
+  FULL = 'full'                    // Restart entire action sequence from beginning
+}
+
 // Action Watch Settings
 export interface IActionWatchSettings {
   watchEnabled?: boolean;           // Enable DOM watching for this action
@@ -56,6 +62,7 @@ export interface IActionWatchSettings {
   debounceMs?: number;             // Debounce delay in milliseconds (default: 500)
   maxRepeats?: number;             // Max times to process same element (default: 1)
   visibilityCheck?: boolean;       // Only process visible elements (default: false)
+  restartMode?: EActionWatchRestartMode; // How to restart when triggered (default: SINGLE)
   lifecycleStopConditions?: {      // Auto-stop conditions
     timeout?: number;              // Stop after N milliseconds
     maxProcessed?: number;         // Stop after N elements processed
@@ -79,6 +86,7 @@ export const defaultActionWatchSettings: IActionWatchSettings = {
   debounceMs: 500,
   maxRepeats: 1,
   visibilityCheck: false,
+  restartMode: EActionWatchRestartMode.SINGLE,
   lifecycleStopConditions: {
     timeout: 30 * 60 * 1000, // 30 minutes
     urlChange: true

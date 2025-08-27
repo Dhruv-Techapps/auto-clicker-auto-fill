@@ -41,7 +41,19 @@ const Actions = (() => {
     // Clear any existing DOM watchers before starting new actions
     DomWatchManager.clear();
     
-    let i = 0;
+    // Set up the sequence restart callback for DOM watcher
+    const regularActions = actions.filter(action => action.type !== 'userscript') as IAction[];
+    DomWatchManager.setSequenceRestartCallback(async (startIndex: number, actionSequence: IAction[]) => {
+      console.debug(`Actions: Restarting sequence from index ${startIndex}`);
+      await executeActionsFromIndex(actionSequence, startIndex);
+    });
+    
+    await executeActionsFromIndex(actions, 0);
+  };
+
+  // Helper function to execute actions starting from a specific index
+  const executeActionsFromIndex = async (actions: Array<IAction | IUserScript>, startIndex: number) => {
+    let i = startIndex;
     while (i < actions.length) {
       const action = actions[i];
       window.ext.__currentActionName = action.name ?? ACTION_I18N.NO_NAME;
@@ -63,9 +75,11 @@ const Actions = (() => {
           
           // Register action for DOM watching if enabled (only for regular actions, not userscripts)
           const typedAction = action as IAction;
-          if (typedAction.settings?.watch?.watchEnabled) {
+          if (typedAction.settings?.watch?.watchEnabled && startIndex === 0) {
+            // Only register during initial run, not during restart
             console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, '👁️ Registering for DOM watching');
-            DomWatchManager.registerAction(typedAction);
+            const regularActions = actions.filter(act => act.type !== 'userscript') as IAction[];
+            DomWatchManager.registerAction(typedAction, i, regularActions);
           }
         }
         notify(action);
