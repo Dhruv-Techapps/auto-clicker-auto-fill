@@ -9,3 +9,8 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'weekly'
+    # Disable version updates for npm dependencies
+    open-pull-requests-limit: 0
+    labels:
+      - 'npm dependencies'
+      - 'triage-board'
