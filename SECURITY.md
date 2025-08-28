@@ -17,7 +17,7 @@ We take security vulnerabilities seriously. If you discover a security issue in 
 
 ### How to Report
 
-1. **Email**: Send details to [support.getautoclicker@gmail.com](mailto:support.getautoclicker@gmail.com?subject=[Vulnerability%20Found]) with the subject line "Vulnerability Found"
+1. **Email**: Send details to [support@getautoclicker.com](mailto:support@getautoclicker.com?subject=[Vulnerability%20Found]) with the subject line "Vulnerability Found"
 2. **Include**:
    - Extension version affected
    - Detailed description of the vulnerability

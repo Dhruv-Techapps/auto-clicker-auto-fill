@@ -36,7 +36,7 @@ This Code of Conduct applies within all project spaces and also applies when an 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by emailing our team at [support.getautoclicker@gmail.com](mailto:support.getautoclicker@gmail.com?subject=[Code%20of%20Conduct]%20Report). All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by emailing our team at [support@getautoclicker.com](mailto:support@getautoclicker.com?subject=[Code%20of%20Conduct]%20Report). All complaints will be reviewed and investigated promptly and fairly.
 
 All project maintainers are obligated to respect the privacy and security of the reporter of any incident.
 
