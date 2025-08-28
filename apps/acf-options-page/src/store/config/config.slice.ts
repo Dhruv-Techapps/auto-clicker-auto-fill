@@ -5,11 +5,12 @@ import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { LocalStorage } from '../../_helpers';
 import { RootState } from '../store';
-import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI, openActionWatchModalAPI } from './action';
+import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
 import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
 import { scheduleActions } from './schedule';
+import { openWatchModalAPI, watchActions } from './watch';
 
 const HIDDEN_DETAIL_KEY = 'config-detail-visibility';
 const defaultDetailVisibility = { name: true, url: true };
@@ -148,6 +149,7 @@ const slice = createSlice({
     },
     ...actionActions,
     ...batchActions,
+    ...watchActions,
     ...scheduleActions
   },
   extraReducers: (builder) => {
@@ -180,10 +182,7 @@ const slice = createSlice({
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });
-    builder.addCase(openActionWatchModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionWatchModalAPI.rejected, (state, action) => {
+    builder.addCase(openWatchModalAPI.rejected, (state, action) => {
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });
@@ -219,6 +218,7 @@ export const {
   syncActionSettings,
   syncActionStatement,
   syncSchedule,
+  syncWatch,
   setSearch,
   setDetailVisibility
 } = slice.actions;

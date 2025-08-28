@@ -1,5 +1,5 @@
 import { useTimeout } from '@acf-options-page/_hooks/message.hooks';
-import { addAction, addUserscript, selectedConfigSelector, switchBatchModal } from '@acf-options-page/store/config';
+import { addAction, addUserscript, openWatchModalAPI, selectedConfigSelector, switchBatchModal } from '@acf-options-page/store/config';
 import { actionSelector, setActionMessage } from '@acf-options-page/store/config/action/action.slice';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { Button, Card, Col, Row } from 'react-bootstrap';
@@ -44,6 +44,9 @@ function Action() {
             <Col xs='auto' className='d-flex align-items-center'>
               <Button size='sm' variant='outline-primary px-3' onClick={() => dispatch(switchBatchModal())} id='batch-model'>
                 <i className='bi bi-repeat me-2' /> {t('batch.title')}
+              </Button>
+              <Button size='sm' variant='outline-primary px-3 mx-3' onClick={() => dispatch(openWatchModalAPI())} id='watch-model'>
+                <i className='bi bi-eyeglasses me-2' /> {t('watch.title')}
               </Button>
               <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddAction} id='add-action'>
                 <i className='bi bi-plus-lg me-2' /> {t('action.add')}
