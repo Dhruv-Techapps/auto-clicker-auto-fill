@@ -9,11 +9,13 @@ import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics'
 import { GoogleSheetsCS } from '@dhruv-techapps/shared-google-sheets';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { scope } from '../common/instrument';
+import Actions from './actions';
 import BatchProcessor from './batch';
 import Common from './common';
 import { Hotkey } from './hotkey';
 import { I18N_COMMON } from './i18n';
 import { statusBar } from './status-bar';
+import DomWatchManager from './util/dom-watch-manager';
 import GoogleSheets from './util/google-sheets';
 
 const CONFIG_I18N = {
@@ -45,6 +47,21 @@ const ConfigProcessor = (() => {
     return events;
   };
 
+  const InitializeDomWatcher = (config: IConfiguration) => {
+    DomWatchManager.clear();
+    // If watch settings are provided and enabled, set up DOM watcher for the entire configuration
+    if (config.watch?.watchEnabled) {
+      // Set up the sequence restart callback for DOM watcher
+      DomWatchManager.setSequenceRestartCallback(async () => {
+        console.debug(`Actions: Restarting entire action sequence due to DOM changes`);
+        await Actions.start(config.actions, window.ext.__batchRepeat + 1);
+      });
+
+      // Register the configuration-level DOM watcher after actions complete initially
+      DomWatchManager.registerConfiguration(config.watch);
+    }
+  };
+
   const start = async (config: IConfiguration) => {
     try {
       window.ext.__sessionCount = new Session(config.id).getCount();
@@ -53,7 +70,9 @@ const ConfigProcessor = (() => {
       }
       const sheets = GoogleSheets.getSheets(config);
       window.ext.__sheets = await new GoogleSheetsCS().getValues(sheets, config.spreadsheetId);
-      await BatchProcessor.start(config.actions, config.batch, config.watch);
+      // Clear any existing DOM watchers before starting new actions
+      await BatchProcessor.start(config.actions, config.batch);
+      InitializeDomWatcher(config);
       const { notifications } = await new SettingsStorage().getSettings();
       if (notifications) {
         const { onConfig, sound, discord } = notifications;

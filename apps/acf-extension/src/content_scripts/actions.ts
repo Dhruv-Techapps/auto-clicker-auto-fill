@@ -1,4 +1,4 @@
-import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript, IWatchSettings } from '@dhruv-techapps/acf-common';
+import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, isValidUUID } from '@dhruv-techapps/core-common';
 import { NotificationsService } from '@dhruv-techapps/core-service';
@@ -10,7 +10,6 @@ import { I18N_COMMON, I18N_ERROR } from './i18n';
 import Statement from './statement';
 import { statusBar } from './status-bar';
 import UserScriptProcessor from './userscript';
-import DomWatchManager from './util/dom-watch-manager';
 
 const ACTION_I18N = {
   TITLE: chrome.i18n.getMessage('@ACTION__TITLE'),
@@ -35,30 +34,9 @@ const Actions = (() => {
     }
   };
 
-  const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number, watchSettings?: IWatchSettings) => {
+  const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number) => {
     window.ext.__batchRepeat = batchRepeat;
-
-    // Clear any existing DOM watchers before starting new actions
-    DomWatchManager.clear();
-
-    // If watch settings are provided and enabled, set up DOM watcher for the entire configuration
-    if (watchSettings?.watchEnabled) {
-      // Set up the sequence restart callback for DOM watcher
-      DomWatchManager.setSequenceRestartCallback(async () => {
-        console.debug(`Actions: Restarting entire action sequence due to DOM changes`);
-        await executeActionsFromIndex(actions, 0);
-      });
-
-      // Register the configuration-level DOM watcher after actions complete initially
-      DomWatchManager.registerConfiguration(actions, watchSettings);
-    }
-
-    await executeActionsFromIndex(actions, 0);
-  };
-
-  // Helper function to execute actions starting from a specific index
-  const executeActionsFromIndex = async (actions: Array<IAction | IUserScript>, startIndex: number) => {
-    let i = startIndex;
+    let i = 0;
     while (i < actions.length) {
       const action = actions[i];
       window.ext.__currentActionName = action.name ?? ACTION_I18N.NO_NAME;
@@ -98,7 +76,7 @@ const Actions = (() => {
       i += 1;
     }
   };
-  return { start, getDomWatchManager: () => DomWatchManager };
+  return { start };
 })();
 
 export default Actions;

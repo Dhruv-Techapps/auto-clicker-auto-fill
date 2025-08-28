@@ -33,14 +33,25 @@ function WatchSettings() {
           <Fragment>
             <hr className='my-3' />
             <Row className='mb-3'>
-              <Col md={6} sm={12}>
+              <Col md={12} sm={12} className='mb-3'>
                 <InputGroup>
                   <InputGroup.Text>{t('modal.watch.rootSelector', 'Watch Root')}</InputGroup.Text>
                   <FormControl placeholder={t('modal.watch.rootSelectorPlaceholder', 'body')} name='watchRootSelector' onBlur={onUpdate} defaultValue={watch?.watchRootSelector || 'body'} />
                 </InputGroup>
                 <small className='text-muted'>{t('modal.watch.rootSelectorHint', 'CSS selector for container to observe')}</small>
               </Col>
-
+              <Col md={6} sm={12}>
+                <InputGroup>
+                  <InputGroup.Text>{t('modal.watch.watchAttributes', 'Watch Attributes')}</InputGroup.Text>
+                  <FormControl
+                    placeholder={t('modal.watch.attributesPlaceholder', 'style, class, hidden')}
+                    name='watchAttributes'
+                    onBlur={onUpdate}
+                    defaultValue={watch?.watchAttributes?.join(', ')}
+                  />
+                </InputGroup>
+                <small className='text-muted'>{t('modal.watch.rootSelectorHint', 'attributes to observe')}</small>
+              </Col>
               <Col md={6} sm={12}>
                 <InputGroup>
                   <InputGroup.Text>

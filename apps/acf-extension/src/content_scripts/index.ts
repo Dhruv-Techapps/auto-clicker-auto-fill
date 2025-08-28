@@ -2,9 +2,9 @@ import { ELoadTypes, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
 import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { scope } from '../common/instrument';
-import Actions from './actions';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';
+import DomWatchManager from './util/dom-watch-manager';
 
 scope.setTag('page', 'content-script');
 
@@ -67,7 +67,7 @@ self.onerror = (...rest) => {
 
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   const { action, configId, command } = message;
-  
+
   if (action === RUNTIME_MESSAGE_ACF.RUN_CONFIG) {
     try {
       new ConfigStorage().getConfigById(configId).then(async (config) => {
@@ -93,8 +93,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   } else if (action === RUNTIME_MESSAGE_ACF.DOM_WATCHER_GET_STATUS) {
     // Handle DOM watcher status request
     try {
-      const domWatchManager = Actions.getDomWatchManager();
-      const status = domWatchManager.getStatus();
+      const status = DomWatchManager.getStatus();
       sendResponse(status);
     } catch (e) {
       console.error('Error getting DOM watcher status:', e);
@@ -104,8 +103,8 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   } else if (action === RUNTIME_MESSAGE_ACF.DOM_WATCHER_COMMAND) {
     // Handle DOM watcher commands
     try {
-      const domWatchManager = Actions.getDomWatchManager();
-      
+      const domWatchManager = DomWatchManager;
+
       switch (command) {
         case 'START':
           domWatchManager.start();
@@ -125,11 +124,11 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         default:
           console.warn('Unknown DOM watcher command:', command);
       }
-      
+
       sendResponse({ success: true });
     } catch (e) {
       console.error('Error handling DOM watcher command:', e);
-      sendResponse({ success: false, error: e.message });
+      if (e instanceof Error) sendResponse({ success: false, error: e.message });
     }
     return true; // Keep message channel open for async response
   }
