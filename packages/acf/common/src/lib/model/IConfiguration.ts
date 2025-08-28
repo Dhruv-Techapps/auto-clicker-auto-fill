@@ -3,6 +3,7 @@ import { generateUUID, TRandomUUID } from '@dhruv-techapps/core-common';
 import { getDefaultAction, IAction } from './IAction';
 import { IBatch } from './IBatch';
 import { IUserScript } from './IUserscript';
+import { IWatchSettings } from './IWatch';
 
 export enum ELoadTypes {
   WINDOW = 'window',
@@ -61,6 +62,7 @@ export interface IConfiguration {
   spreadsheetId?: string;
   hotkey?: string;
   batch?: IBatch;
+  watch?: IWatchSettings; // DOM watch configuration
   source?: EConfigSource;
   new?: boolean;
   url_match?: EUrlMatch;

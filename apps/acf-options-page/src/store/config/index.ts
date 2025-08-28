@@ -1,4 +1,5 @@
 import { actionReducers } from './action';
+import { actionWatchReducer } from './watch';
 import { batchReducer } from './batch';
 import { configReducer } from './config.slice';
 import { configRemoveReducer } from './remove';
@@ -22,5 +23,6 @@ export const configReducers = {
   configSettings: configSettingsReducer,
   schedule: scheduleReducer,
   batch: batchReducer,
+  watch: actionWatchReducer,
   ...actionReducers
 };

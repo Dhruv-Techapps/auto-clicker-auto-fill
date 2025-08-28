@@ -1,4 +1,4 @@
-import { defaultActionSettings, defaultActionWatchSettings, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
+import { defaultActionSettings, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { RootState } from '../../../store';
@@ -16,12 +16,9 @@ export interface IActionSettingsRequest {
   value: boolean | string | number;
 }
 
-const initialState: IActionSettingsStore = { 
-  visible: false, 
-  settings: { 
-    ...defaultActionSettings, 
-    watch: { ...defaultActionWatchSettings } 
-  } 
+const initialState: IActionSettingsStore = {
+  visible: false,
+  settings: { ...defaultActionSettings }
 };
 
 const slice = createSlice({
@@ -30,43 +27,8 @@ const slice = createSlice({
   reducers: {
     updateActionSettings: (state, action: PayloadAction<IActionSettingsRequest>) => {
       const { name, value } = action.payload;
-      
-      // Handle nested watch settings
-      if (name.startsWith('watch.')) {
-        if (!state.settings.watch) {
-          state.settings.watch = {};
-        }
-        
-        const watchProperty = name.replace('watch.', '');
-        if (watchProperty.includes('.')) {
-          // Handle nested properties like watch.lifecycleStopConditions.timeout
-          const [parentProp, childProp] = watchProperty.split('.');
-          if (parentProp === 'lifecycleStopConditions') {
-            if (!state.settings.watch.lifecycleStopConditions) {
-              state.settings.watch.lifecycleStopConditions = {};
-            }
-            if (childProp === 'timeout') {
-              // Convert minutes to milliseconds
-              state.settings.watch.lifecycleStopConditions.timeout = typeof value === 'number' ? value * 60000 : parseInt(value as string) * 60000;
-            } else {
-              // Only assign if childProp is a valid key of lifecycleStopConditions
-              if (childProp in state.settings.watch.lifecycleStopConditions) {
-                // Type assertion ensures type safety
-                (state.settings.watch.lifecycleStopConditions as Record<string, unknown>)[childProp] = value;
-              }
-            }
-          }
-        } else {
-          // Handle direct watch properties
-          if (watchProperty in state.settings.watch) {
-            (state.settings.watch as Record<string, typeof value>)[watchProperty] = value;
-          }
-        }
-      } else {
-        // Handle regular settings
-        if (name in state.settings) {
-          (state.settings as Record<string, typeof value>)[name] = value;
-        }
+      if (name in state.settings) {
+        (state.settings as Record<string, typeof value>)[name] = value;
       }
     },
     switchActionSettingsModal: (state) => {
@@ -88,21 +50,7 @@ const slice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
-      if (action.payload.settings) {
-        state.settings = { 
-          ...action.payload.settings, 
-          retryGoto: action.payload.retryGoto,
-          watch: {
-            ...defaultActionWatchSettings,
-            ...action.payload.settings.watch
-          }
-        };
-      } else {
-        state.settings = { 
-          ...defaultActionSettings,
-          watch: { ...defaultActionWatchSettings }
-        };
-      }
+      state.settings = action.payload.settings ? { ...action.payload.settings, retryGoto: action.payload.retryGoto } : { ...defaultActionSettings };
       state.visible = !state.visible;
     });
   }

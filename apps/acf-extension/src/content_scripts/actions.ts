@@ -37,17 +37,16 @@ const Actions = (() => {
 
   const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number) => {
     window.ext.__batchRepeat = batchRepeat;
-    
+
     // Clear any existing DOM watchers before starting new actions
     DomWatchManager.clear();
-    
+
     // Set up the sequence restart callback for DOM watcher
-    const regularActions = actions.filter(action => action.type !== 'userscript') as IAction[];
     DomWatchManager.setSequenceRestartCallback(async (startIndex: number, actionSequence: IAction[]) => {
       console.debug(`Actions: Restarting sequence from index ${startIndex}`);
       await executeActionsFromIndex(actionSequence, startIndex);
     });
-    
+
     await executeActionsFromIndex(actions, 0);
   };
 
@@ -69,16 +68,16 @@ const Actions = (() => {
         await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
         await AddonProcessor.check(action.addon, action.settings);
         if (action.type === 'userscript') {
-          action.status = await UserScriptProcessor.start(action as IUserScript);
+          action.status = await UserScriptProcessor.start(action);
         } else {
-          action.status = await ActionProcessor.start(action as IAction);
-          
+          action.status = await ActionProcessor.start(action);
+
           // Register action for DOM watching if enabled (only for regular actions, not userscripts)
-          const typedAction = action as IAction;
+          const typedAction = action;
           if (typedAction.settings?.watch?.watchEnabled && startIndex === 0) {
             // Only register during initial run, not during restart
             console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, '👁️ Registering for DOM watching');
-            const regularActions = actions.filter(act => act.type !== 'userscript') as IAction[];
+            const regularActions = actions.filter((act) => act.type !== 'userscript');
             DomWatchManager.registerAction(typedAction, i, regularActions);
           }
         }

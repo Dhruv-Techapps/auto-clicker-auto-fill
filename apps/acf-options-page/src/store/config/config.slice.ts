@@ -5,7 +5,7 @@ import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import * as Sentry from '@sentry/react';
 import { LocalStorage } from '../../_helpers';
 import { RootState } from '../store';
-import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
+import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI, openActionWatchModalAPI } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
 import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
@@ -177,6 +177,13 @@ const slice = createSlice({
       state.selectedActionId = action.payload.selectedActionId;
     });
     builder.addCase(openActionSettingsModalAPI.rejected, (state, action) => {
+      state.error = action.error.message;
+      Sentry.captureException(state.error);
+    });
+    builder.addCase(openActionWatchModalAPI.fulfilled, (state, action) => {
+      state.selectedActionId = action.payload.selectedActionId;
+    });
+    builder.addCase(openActionWatchModalAPI.rejected, (state, action) => {
       state.error = action.error.message;
       Sentry.captureException(state.error);
     });

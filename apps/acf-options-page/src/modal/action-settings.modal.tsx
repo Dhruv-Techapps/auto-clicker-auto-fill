@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 
-import { ERetryOptions, EActionWatchRestartMode } from '@dhruv-techapps/acf-common';
+import { ERetryOptions } from '@dhruv-techapps/acf-common';
 import { Alert, Button, Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -54,9 +54,7 @@ const ActionSettingsModal = () => {
     dispatch(switchActionSettingsModal());
   };
 
-  const onShow = () => {
-    //:TODO
-  };
+  const onShow = () => {};
 
   const onUpdateGoto = (e: ChangeEvent<HTMLSelectElement>) => {
     dispatch(updateActionSettingsGoto(e.currentTarget.value as TRandomUUID));
@@ -95,141 +93,7 @@ const ActionSettingsModal = () => {
               </Row>
             </Card.Body>
           </Card>
-          <Card bg='info-subtle' text='info-emphasis' className='mt-3'>
-            <Card.Header>
-              <h6 className='mb-0'>{t('modal.actionSettings.watch.title', 'DOM Watcher Settings')}</h6>
-            </Card.Header>
-            <Card.Body>
-              <Row className='mb-3'>
-                <Col md={12} sm={12}>
-                  <Form.Check 
-                    type='switch' 
-                    name='watch.watchEnabled' 
-                    checked={settings.watch?.watchEnabled || false} 
-                    onChange={onUpdate} 
-                    label={t('modal.actionSettings.watch.enabled', 'Enable DOM Watching')} 
-                  />
-                  <small className='text-muted'>{t('modal.actionSettings.watch.enabledHint', 'Automatically re-run this action when new matching elements are added to the page (e.g., for infinite scrolling, async content)')}</small>
-                </Col>
-              </Row>
-              {settings.watch?.watchEnabled && (
-                <>
-                  <Row className='mb-2'>
-                    <Col md={6} sm={12}>
-                      <InputGroup>
-                        <InputGroup.Text>{t('modal.actionSettings.watch.debounce', 'Debounce')}&nbsp;<small className='text-muted'>({t('common.ms', 'ms')})</small></InputGroup.Text>
-                        <FormControl 
-                          placeholder={t('modal.actionSettings.watch.debounce', 'Debounce')} 
-                          name='watch.debounceMs' 
-                          type='number' 
-                          onBlur={onUpdate} 
-                          defaultValue={settings.watch?.debounceMs || 500} 
-                          pattern={REGEX.NUMBER}
-                          min="100"
-                          max="5000"
-                        />
-                        <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-                      </InputGroup>
-                      <small className='text-muted'>{t('modal.actionSettings.watch.debounceHint', 'Delay before processing new elements (100-5000ms)')}</small>
-                    </Col>
-                    <Col md={6} sm={12}>
-                      <InputGroup>
-                        <InputGroup.Text>{t('modal.actionSettings.watch.maxRepeats', 'Max Repeats')}</InputGroup.Text>
-                        <FormControl 
-                          placeholder={t('modal.actionSettings.watch.maxRepeats', 'Max Repeats')} 
-                          name='watch.maxRepeats' 
-                          type='number' 
-                          onBlur={onUpdate} 
-                          defaultValue={settings.watch?.maxRepeats || 1} 
-                          pattern={REGEX.NUMBER}
-                          min="1"
-                          max="10"
-                        />
-                        <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-                      </InputGroup>
-                      <small className='text-muted'>{t('modal.actionSettings.watch.maxRepeatsHint', 'Maximum times to process the same element')}</small>
-                    </Col>
-                  </Row>
-                  <Row className='mb-2'>
-                    <Col md={6} sm={12}>
-                      <InputGroup>
-                        <InputGroup.Text>{t('modal.actionSettings.watch.restartMode', 'Restart Mode')}</InputGroup.Text>
-                        <Form.Select 
-                          name='watch.restartMode' 
-                          onChange={onUpdate} 
-                          defaultValue={settings.watch?.restartMode || EActionWatchRestartMode.SINGLE}
-                        >
-                          <option value={EActionWatchRestartMode.SINGLE}>
-                            {t('modal.actionSettings.watch.restartMode.single', 'Single Action')}
-                          </option>
-                          <option value={EActionWatchRestartMode.SEQUENCE}>
-                            {t('modal.actionSettings.watch.restartMode.sequence', 'From This Action')}
-                          </option>
-                          <option value={EActionWatchRestartMode.FULL}>
-                            {t('modal.actionSettings.watch.restartMode.full', 'Full Sequence')}
-                          </option>
-                        </Form.Select>
-                      </InputGroup>
-                      <small className='text-muted'>{t('modal.actionSettings.watch.restartModeHint', 'How to restart when DOM changes trigger this action')}</small>
-                    </Col>
-                    <Col md={6} sm={12}>
-                      <InputGroup>
-                        <InputGroup.Text>{t('modal.actionSettings.watch.rootSelector', 'Watch Root')}</InputGroup.Text>
-                        <FormControl 
-                          placeholder={t('modal.actionSettings.watch.rootSelectorPlaceholder', 'body')} 
-                          name='watch.watchRootSelector' 
-                          onBlur={onUpdate} 
-                          defaultValue={settings.watch?.watchRootSelector || 'body'} 
-                        />
-                      </InputGroup>
-                      <small className='text-muted'>{t('modal.actionSettings.watch.rootSelectorHint', 'CSS selector for container to observe')}</small>
-                    </Col>
-                  </Row>
-                  <Row className='mb-2'>
-                    <Col md={6} sm={12}>
-                      <InputGroup>
-                        <InputGroup.Text>{t('modal.actionSettings.watch.timeout', 'Timeout')}&nbsp;<small className='text-muted'>({t('common.min', 'min')})</small></InputGroup.Text>
-                        <FormControl 
-                          placeholder={t('modal.actionSettings.watch.timeout', 'Timeout')} 
-                          name='watch.lifecycleStopConditions.timeout' 
-                          type='number' 
-                          onBlur={onUpdate} 
-                          defaultValue={settings.watch?.lifecycleStopConditions?.timeout ? Math.round(settings.watch.lifecycleStopConditions.timeout / 60000) : 30} 
-                          pattern={REGEX.NUMBER}
-                          min="1"
-                          max="180"
-                        />
-                        <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-                      </InputGroup>
-                      <small className='text-muted'>{t('modal.actionSettings.watch.timeoutHint', 'Auto-stop after N minutes (1-180)')}</small>
-                    </Col>
-                  </Row>
-                  <Row className='mb-2'>
-                    <Col md={6} sm={12}>
-                      <Form.Check 
-                        type='switch' 
-                        name='watch.visibilityCheck' 
-                        checked={settings.watch?.visibilityCheck || false} 
-                        onChange={onUpdate} 
-                        label={t('modal.actionSettings.watch.visibilityCheck', 'Visibility Check')} 
-                      />
-                      <small className='text-muted'>{t('modal.actionSettings.watch.visibilityCheckHint', 'Only process elements that are visible in viewport')}</small>
-                    </Col>
-                    <Col md={6} sm={12}>
-                      <Form.Check 
-                        type='switch' 
-                        name='watch.lifecycleStopConditions.urlChange' 
-                        checked={settings.watch?.lifecycleStopConditions?.urlChange !== false} 
-                        onChange={onUpdate} 
-                        label={t('modal.actionSettings.watch.urlChange', 'Stop on URL Change')} 
-                      />
-                      <small className='text-muted'>{t('modal.actionSettings.watch.urlChangeHint', 'Automatically stop watching when page URL changes')}</small>
-                    </Col>
-                  </Row>
-                </>
-              )}
-            </Card.Body>
-          </Card>
+          {/* <WatchSettings /> */}
           <Card bg='warning-subtle' text='warning-emphasis' className='mt-3'>
             <Card.Body>
               <Row className='mb-2 mb-md-0'>
