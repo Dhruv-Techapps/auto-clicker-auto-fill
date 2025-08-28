@@ -49,8 +49,11 @@ const slice = createSlice({
               // Convert minutes to milliseconds
               state.settings.watch.lifecycleStopConditions.timeout = typeof value === 'number' ? value * 60000 : parseInt(value as string) * 60000;
             } else {
-              // @ts-expect-error "handling dynamic nested properties"
-              state.settings.watch.lifecycleStopConditions[childProp] = value;
+              // Only assign if childProp is a valid key of lifecycleStopConditions
+              if (childProp in state.settings.watch.lifecycleStopConditions) {
+                // Type assertion ensures type safety
+                (state.settings.watch.lifecycleStopConditions as Record<string, unknown>)[childProp] = value;
+              }
             }
           }
         } else {
