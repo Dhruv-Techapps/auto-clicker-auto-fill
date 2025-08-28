@@ -1,4 +1,4 @@
-import { IAction, IBatch, IUserScript } from '@dhruv-techapps/acf-common';
+import { IAction, IBatch, IUserScript, IWatchSettings } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { NotificationsService } from '@dhruv-techapps/core-service';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
@@ -22,7 +22,7 @@ const BatchProcessor = (() => {
     }
   };
 
-  const checkRepeat = async (actions: Array<IAction | IUserScript>, batch: IBatch) => {
+  const checkRepeat = async (actions: Array<IAction | IUserScript>, batch: IBatch, watchSettings?: IWatchSettings) => {
     if (batch.repeat) {
       if (batch.repeat > 0) {
         for (let i = 0; i < batch.repeat; i += 1) {
@@ -31,7 +31,7 @@ const BatchProcessor = (() => {
           if (batch?.repeatInterval) {
             await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT, i + 2);
           }
-          await Actions.start(actions, i + 2);
+          await Actions.start(actions, i + 2, watchSettings);
           const { notifications } = await new SettingsStorage().getSettings();
           if (notifications?.onBatch) {
             NotificationsService.create({
@@ -52,24 +52,24 @@ const BatchProcessor = (() => {
             statusBar.batchUpdate('∞');
             await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT, '∞');
           }
-          await Actions.start(actions, i);
+          await Actions.start(actions, i, watchSettings);
           i += 1;
         }
       }
     }
   };
 
-  const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
+  const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch, watchSettings?: IWatchSettings) => {
     try {
       statusBar.batchUpdate(1);
       console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);
-      await Actions.start(actions, 1);
+      await Actions.start(actions, 1, watchSettings);
       console.groupEnd();
       if (batch) {
         if (batch.refresh) {
           refresh();
         } else {
-          await checkRepeat(actions, batch);
+          await checkRepeat(actions, batch, watchSettings);
         }
       }
     } catch (error) {

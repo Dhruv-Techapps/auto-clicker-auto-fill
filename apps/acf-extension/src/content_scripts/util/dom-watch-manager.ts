@@ -1,226 +1,97 @@
-import { IAction, IActionWatchSettings, defaultActionWatchSettings, EActionWatchRestartMode } from '@dhruv-techapps/acf-common';
+import { IAction, IUserScript, IWatchSettings, defaultWatchSettings } from '@dhruv-techapps/acf-common';
 import ActionProcessor from '../action';
 import Common from '../common';
-
-interface WatchedAction {
-  action: IAction;
-  watchSettings: Required<IActionWatchSettings>;
-  processedElements: WeakSet<HTMLElement>;
-  processedCount: number;
-  startTime: number;
-  actionIndex: number;        // Index of this action in the sequence
-  actionSequence: IAction[];  // The full action sequence
-}
 
 interface DomWatchState {
   isActive: boolean;
   observer: MutationObserver | null;
-  watchedActions: Map<string, WatchedAction>;
-  debounceTimeouts: Map<string, number>;
+  watchSettings: Required<IWatchSettings> | null;
+  actions: Array<IAction | IUserScript>;
+  debounceTimeout: number | null;
   currentUrl: string;
-  sequenceRestartCallback?: (startIndex: number, actions: IAction[]) => Promise<void>;
+  processedElements: WeakSet<HTMLElement>;
+  processedCount: number;
+  startTime: number;
+  sequenceRestartCallback?: () => Promise<void>;
 }
 
 const DomWatchManager = (() => {
   const state: DomWatchState = {
     isActive: false,
     observer: null,
-    watchedActions: new Map(),
-    debounceTimeouts: new Map(),
+    watchSettings: null,
+    actions: [],
+    debounceTimeout: null,
     currentUrl: window.location.href,
+    processedElements: new WeakSet(),
+    processedCount: 0,
+    startTime: 0,
     sequenceRestartCallback: undefined
   };
 
-  const PROCESSED_ATTRIBUTE_PREFIX = 'data-acf-processed-';
+  const PROCESSED_ATTRIBUTE = 'data-acf-processed';
 
-  // Check if element is visible in viewport
-  const isElementVisible = (element: HTMLElement): boolean => {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+  // Check if element has already been processed
+  const isElementProcessed = (element: HTMLElement): boolean => {
+    return element.hasAttribute(PROCESSED_ATTRIBUTE);
   };
 
-  // Check if element has already been processed for a specific action
-  const isElementProcessed = (element: HTMLElement, actionId: string): boolean => {
-    return element.hasAttribute(`${PROCESSED_ATTRIBUTE_PREFIX}${actionId}`);
+  // Mark element as processed
+  const markElementProcessed = (element: HTMLElement): void => {
+    element.setAttribute(PROCESSED_ATTRIBUTE, 'true');
   };
 
-  // Mark element as processed for a specific action
-  const markElementProcessed = (element: HTMLElement, actionId: string): void => {
-    element.setAttribute(`${PROCESSED_ATTRIBUTE_PREFIX}${actionId}`, 'true');
-  };
-
-  // Check if element matches the action's element finder
-  const doesElementMatch = async (element: HTMLElement, action: IAction): Promise<boolean> => {
-    try {
-      // Use the existing Common.getElements logic to check if element would be found
-      const elementFinder = action.elementFinder;
-      
-      // Quick checks for simple selectors
-      if (/^(id::|#)/gi.test(elementFinder)) {
-        const id = elementFinder.replace(/^(id::|#)/gi, '');
-        return element.id === id;
-      } else if (/^ClassName::/gi.test(elementFinder)) {
-        const className = elementFinder.replace(/^ClassName::/gi, '');
-        return element.classList.contains(className);
-      } else if (/^TagName::/gi.test(elementFinder)) {
-        const tagName = elementFinder.replace(/^TagName::/gi, '');
-        return element.tagName.toLowerCase() === tagName.toLowerCase();
-      } else if (/^(Selector::|SelectorAll::)/gi.test(elementFinder)) {
-        const selector = elementFinder.replace(/^(Selector::|SelectorAll::)/gi, '');
-        return element.matches(selector);
-      }
-      
-      // For XPath and complex selectors, fall back to querying
-      const elements = await Common.getElements(element.ownerDocument, elementFinder, 0, 0);
-      return elements?.includes(element) || false;
-    } catch (error) {
-      console.debug('DomWatchManager: Error checking element match:', error);
-      return false;
-    }
-  };
-
-  // Process a single element for a specific action
-  const processElementForAction = async (element: HTMLElement, watchedAction: WatchedAction): Promise<void> => {
-    const { action, watchSettings, processedElements, actionIndex, actionSequence } = watchedAction;
-
-    // Check if already processed
-    if (isElementProcessed(element, action.id)) {
-      return;
-    }
-
-    // Check visibility if required
-    if (watchSettings.visibilityCheck && !isElementVisible(element)) {
-      return;
-    }
-
-    // Check if element matches the action's selector
-    if (!(await doesElementMatch(element, action))) {
-      return;
-    }
-
-    // Check max repeats per element
-    if (processedElements.has(element) && watchSettings.maxRepeats <= 1) {
-      return;
-    }
-
-    try {
-      console.debug(`DomWatchManager: Processing element for action "${action.name || action.id}" with restart mode: ${watchSettings.restartMode}`);
-      
-      // Mark as processed before executing to prevent re-processing during execution
-      markElementProcessed(element, action.id);
-      processedElements.add(element);
-      watchedAction.processedCount++;
-
-      // Handle different restart modes
-      if (watchSettings.restartMode === EActionWatchRestartMode.SINGLE) {
-        // Default behavior: execute only this action on the specific element
-        await executeActionOnElement(element, action);
-      } else if (watchSettings.restartMode === EActionWatchRestartMode.SEQUENCE && state.sequenceRestartCallback) {
-        // Restart from this action and continue through the sequence
-        console.debug(`DomWatchManager: Restarting action sequence from index ${actionIndex}`);
-        await state.sequenceRestartCallback(actionIndex, actionSequence);
-      } else if (watchSettings.restartMode === EActionWatchRestartMode.FULL && state.sequenceRestartCallback) {
-        // Restart the entire action sequence from the beginning
-        console.debug(`DomWatchManager: Restarting full action sequence from beginning`);
-        await state.sequenceRestartCallback(0, actionSequence);
-      } else {
-        // Fallback to single action execution
-        await executeActionOnElement(element, action);
+  // Check if element matches any action in the configuration
+  const findMatchingActions = async (element: HTMLElement): Promise<IAction[]> => {
+    const matchingActions: IAction[] = [];
+    
+    for (const action of state.actions) {
+      // Skip userscripts as they don't operate on DOM elements
+      if (!action.elementFinder || action.type === 'userscript') {
+        continue;
       }
 
-    } catch (error) {
-      console.error('DomWatchManager: Error processing element:', error);
-      // Remove the processed marker if execution failed
-      element.removeAttribute(`${PROCESSED_ATTRIBUTE_PREFIX}${action.id}`);
-      processedElements.delete(element);
-      watchedAction.processedCount--;
-    }
-  };
+      try {
+        // Check if this element matches the action's element finder
+        const elementFinder = action.elementFinder;
+        
+        // Quick checks for simple selectors
+        let matches = false;
+        if (/^(id::|#)/gi.test(elementFinder)) {
+          const id = elementFinder.replace(/^(id::|#)/gi, '');
+          matches = element.id === id;
+        } else if (/^ClassName::/gi.test(elementFinder)) {
+          const className = elementFinder.replace(/^ClassName::/gi, '');
+          matches = element.classList.contains(className);
+        } else if (/^TagName::/gi.test(elementFinder)) {
+          const tagName = elementFinder.replace(/^TagName::/gi, '');
+          matches = element.tagName.toLowerCase() === tagName.toLowerCase();
+        } else if (/^(Selector::|SelectorAll::)/gi.test(elementFinder)) {
+          const selector = elementFinder.replace(/^(Selector::|SelectorAll::)/gi, '');
+          matches = element.matches(selector);
+        } else {
+          // For XPath and complex selectors, fall back to querying
+          const elements = await Common.getElements(element.ownerDocument, elementFinder, 0, 0);
+          matches = elements?.includes(element) || false;
+        }
 
-  // Execute action on a specific element (bypasses normal element finding)
-  const executeActionOnElement = async (element: HTMLElement, action: IAction): Promise<void> => {
-    // Set up the action context
-    const previousCurrentAction = window.ext.__currentAction;
-    const previousCurrentActionName = window.ext.__currentActionName;
-    const previousActionRepeat = window.ext.__actionRepeat;
-
-    try {
-      window.ext.__currentActionName = action.name || `Watch-${action.id}`;
-      window.ext.__actionRepeat = 1;
-
-      // Import ACFEvents and ACFValue dynamically to avoid circular dependencies
-      const { ACFEvents } = await import('./acf-events');
-      const { ACFValue } = await import('./acf-value');
-
-      // Get the action value
-      const value = action.value ? await ACFValue.getValue(action.value, action.settings) : action.value;
-      
-      // Execute the event on the specific element
-      await ACFEvents.check(action.elementFinder, [element], value);
-
-    } finally {
-      // Restore previous context
-      window.ext.__currentAction = previousCurrentAction;
-      window.ext.__currentActionName = previousCurrentActionName;
-      window.ext.__actionRepeat = previousActionRepeat;
-    }
-  };
-
-  // Debounced processing for an action
-  const debounceProcessing = (actionId: string, processingFn: () => void, delay: number): void => {
-    // Clear existing timeout
-    const existingTimeout = state.debounceTimeouts.get(actionId);
-    if (existingTimeout) {
-      clearTimeout(existingTimeout);
-    }
-
-    // Set new timeout
-    const timeoutId = window.setTimeout(() => {
-      processingFn();
-      state.debounceTimeouts.delete(actionId);
-    }, delay);
-
-    state.debounceTimeouts.set(actionId, timeoutId);
-  };
-
-  // Check lifecycle stop conditions for an action
-  const shouldStopWatching = (watchedAction: WatchedAction): boolean => {
-    const { watchSettings, processedCount, startTime } = watchedAction;
-    const { lifecycleStopConditions } = watchSettings;
-
-    if (!lifecycleStopConditions) return false;
-
-    // Check timeout
-    if (lifecycleStopConditions.timeout) {
-      const elapsed = Date.now() - startTime;
-      if (elapsed >= lifecycleStopConditions.timeout) {
-        console.debug('DomWatchManager: Stopping due to timeout');
-        return true;
+        if (matches) {
+          matchingActions.push(action as IAction);
+        }
+      } catch (error) {
+        console.debug('DomWatchManager: Error checking element match:', error);
       }
     }
-
-    // Check max processed count
-    if (lifecycleStopConditions.maxProcessed && processedCount >= lifecycleStopConditions.maxProcessed) {
-      console.debug('DomWatchManager: Stopping due to max processed count');
-      return true;
-    }
-
-    // Check URL change
-    if (lifecycleStopConditions.urlChange && state.currentUrl !== window.location.href) {
-      console.debug('DomWatchManager: Stopping due to URL change');
-      return true;
-    }
-
-    return false;
+    
+    return matchingActions;
   };
 
-  // Process added nodes for all watched actions
-  const processAddedNodes = (addedNodes: NodeList): void => {
+  // Process added nodes and check if any match actions
+  const processAddedNodes = async (addedNodes: NodeList): Promise<void> => {
+    if (!state.watchSettings || !state.sequenceRestartCallback) {
+      return;
+    }
+
     const elements: HTMLElement[] = [];
     
     // Collect all HTML elements from added nodes
@@ -239,106 +110,143 @@ const DomWatchManager = (() => {
       }
     });
 
-    // Process elements for each watched action
-    state.watchedActions.forEach((watchedAction, actionId) => {
-      // Check if we should stop watching this action
-      if (shouldStopWatching(watchedAction)) {
-        unregisterAction(actionId);
-        return;
+    // Check if any new elements match our actions and are not already processed
+    let shouldRestart = false;
+    for (const element of elements) {
+      if (!isElementProcessed(element)) {
+        const matchingActions = await findMatchingActions(element);
+        if (matchingActions.length > 0) {
+          console.debug('DomWatchManager: Found new matching element, triggering action sequence restart');
+          markElementProcessed(element);
+          state.processedCount++;
+          shouldRestart = true;
+          break; // Only need to find one matching element to trigger restart
+        }
       }
+    }
 
-      // Debounce processing for this action
-      debounceProcessing(actionId, () => {
-        elements.forEach(element => {
-          processElementForAction(element, watchedAction).catch(error => {
-            console.error('DomWatchManager: Error in debounced processing:', error);
-          });
-        });
-      }, watchedAction.watchSettings.debounceMs);
-    });
+    if (shouldRestart) {
+      console.debug('DomWatchManager: Restarting action sequence due to DOM changes');
+      await state.sequenceRestartCallback();
+    }
+  };
+
+  // Debounced processing
+  const debounceProcessing = (processingFn: () => Promise<void>, delay: number): void => {
+    // Clear existing timeout
+    if (state.debounceTimeout) {
+      clearTimeout(state.debounceTimeout);
+    }
+
+    // Set new timeout
+    state.debounceTimeout = window.setTimeout(async () => {
+      try {
+        await processingFn();
+      } catch (error) {
+        console.error('DomWatchManager: Error in debounced processing:', error);
+      }
+      state.debounceTimeout = null;
+    }, delay);
+  };
+
+  // Check lifecycle stop conditions
+  const shouldStopWatching = (): boolean => {
+    if (!state.watchSettings?.lifecycleStopConditions) return false;
+
+    const { lifecycleStopConditions } = state.watchSettings;
+
+    // Check timeout
+    if (lifecycleStopConditions.timeout) {
+      const elapsed = Date.now() - state.startTime;
+      if (elapsed >= lifecycleStopConditions.timeout * 1000) { // Convert seconds to milliseconds
+        console.debug('DomWatchManager: Stopping due to timeout');
+        return true;
+      }
+    }
+
+    // Check max processed count
+    if (lifecycleStopConditions.maxProcessed && state.processedCount >= lifecycleStopConditions.maxProcessed) {
+      console.debug('DomWatchManager: Stopping due to max processed count');
+      return true;
+    }
+
+    // Check URL change
+    if (lifecycleStopConditions.urlChange && state.currentUrl !== window.location.href) {
+      console.debug('DomWatchManager: Stopping due to URL change');
+      return true;
+    }
+
+    return false;
   };
 
   // Mutation observer callback
   const handleMutations = (mutations: MutationRecord[]): void => {
-    if (!state.isActive || state.watchedActions.size === 0) {
+    if (!state.isActive || !state.watchSettings) {
+      return;
+    }
+
+    // Check if we should stop watching
+    if (shouldStopWatching()) {
+      stop();
       return;
     }
 
     for (const mutation of mutations) {
       if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-        processAddedNodes(mutation.addedNodes);
+        // Debounce the processing to avoid excessive restarts
+        debounceProcessing(
+          () => processAddedNodes(mutation.addedNodes),
+          (state.watchSettings.debounce || 1) * 1000 // Convert seconds to milliseconds
+        );
       }
     }
   };
 
   // Initialize the mutation observer
   const initializeObserver = (): void => {
-    if (state.observer) {
+    if (state.observer || !state.watchSettings) {
       return;
     }
 
+    const watchRoot = state.watchSettings.watchRootSelector || 'body';
+    const rootElement = document.querySelector(watchRoot) || document.body;
+
     state.observer = new MutationObserver(handleMutations);
-    state.observer.observe(document.body, {
+    state.observer.observe(rootElement, {
       childList: true,
       subtree: true
     });
+
+    console.debug(`DomWatchManager: Initialized observer on ${watchRoot}`);
   };
 
-  // Register an action for DOM watching
-  const registerAction = (action: IAction, actionIndex: number = 0, actionSequence: IAction[] = [action]): void => {
-    if (!action.settings?.watch?.watchEnabled) {
+  // Register configuration-level DOM watching
+  const registerConfiguration = (actions: Array<IAction | IUserScript>, watchSettings: IWatchSettings): void => {
+    if (!watchSettings.watchEnabled) {
       return;
     }
 
-    const watchSettings: Required<IActionWatchSettings> = {
-      ...defaultActionWatchSettings,
-      ...action.settings.watch
+    const mergedSettings: Required<IWatchSettings> = {
+      ...defaultWatchSettings,
+      ...watchSettings
     };
 
-    const watchedAction: WatchedAction = {
-      action,
-      watchSettings,
-      processedElements: new WeakSet(),
-      processedCount: 0,
-      startTime: Date.now(),
-      actionIndex,
-      actionSequence
-    };
-
-    state.watchedActions.set(action.id, watchedAction);
+    state.watchSettings = mergedSettings;
+    state.actions = actions;
+    state.processedElements = new WeakSet();
+    state.processedCount = 0;
+    state.startTime = Date.now();
     
     if (!state.isActive) {
       start();
     }
 
-    console.debug(`DomWatchManager: Registered action "${action.name || action.id}" for DOM watching (index: ${actionIndex}, restart mode: ${watchSettings.restartMode})`);
-  };
-
-  // Unregister an action from DOM watching
-  const unregisterAction = (actionId: string): void => {
-    const watchedAction = state.watchedActions.get(actionId);
-    if (watchedAction) {
-      state.watchedActions.delete(actionId);
-      
-      // Clear any pending debounce timeouts
-      const timeoutId = state.debounceTimeouts.get(actionId);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        state.debounceTimeouts.delete(actionId);
-      }
-
-      console.debug(`DomWatchManager: Unregistered action "${watchedAction.action.name || actionId}" from DOM watching`);
-    }
-
-    // Stop watching if no actions remain
-    if (state.watchedActions.size === 0) {
-      stop();
-    }
+    console.debug(`DomWatchManager: Registered configuration-level DOM watching with ${actions.length} actions`);
   };
 
   // Start DOM watching
   const start = (): void => {
-    if (state.isActive) {
+    if (state.isActive || !state.watchSettings) {
       return;
     }
 
@@ -346,7 +254,7 @@ const DomWatchManager = (() => {
     state.currentUrl = window.location.href;
     initializeObserver();
     
-    console.debug('DomWatchManager: Started DOM watching');
+    console.debug('DomWatchManager: Started configuration-level DOM watching');
   };
 
   // Stop DOM watching
@@ -362,14 +270,16 @@ const DomWatchManager = (() => {
       state.observer = null;
     }
 
-    // Clear all timeouts
-    state.debounceTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
-    state.debounceTimeouts.clear();
+    // Clear timeout
+    if (state.debounceTimeout) {
+      clearTimeout(state.debounceTimeout);
+      state.debounceTimeout = null;
+    }
     
     console.debug('DomWatchManager: Stopped DOM watching');
   };
 
-  // Pause DOM watching (keep actions registered but stop observing)
+  // Pause DOM watching (keep settings but stop observing)
   const pause = (): void => {
     if (state.observer) {
       state.observer.disconnect();
@@ -381,7 +291,7 @@ const DomWatchManager = (() => {
 
   // Resume DOM watching
   const resume = (): void => {
-    if (state.watchedActions.size > 0) {
+    if (state.watchSettings) {
       start();
       console.debug('DomWatchManager: Resumed DOM watching');
     }
@@ -390,32 +300,36 @@ const DomWatchManager = (() => {
   // Get current watch status
   const getStatus = () => ({
     isActive: state.isActive,
-    watchedActionsCount: state.watchedActions.size,
-    watchedActions: Array.from(state.watchedActions.entries()).map(([id, watched]) => ({
-      id,
-      name: watched.action.name || id,
-      processedCount: watched.processedCount,
-      startTime: watched.startTime,
-      settings: watched.watchSettings
-    }))
+    watchEnabled: state.watchSettings?.watchEnabled || false,
+    processedCount: state.processedCount,
+    startTime: state.startTime,
+    actionsCount: state.actions.length,
+    settings: state.watchSettings
   });
 
   // Set the callback function for sequence restart
-  const setSequenceRestartCallback = (callback: (startIndex: number, actions: IAction[]) => Promise<void>): void => {
+  const setSequenceRestartCallback = (callback: () => Promise<void>): void => {
     state.sequenceRestartCallback = callback;
   };
 
-  // Clear all actions and stop watching
+  // Clear all state and stop watching
   const clear = (): void => {
-    state.watchedActions.clear();
-    state.debounceTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
-    state.debounceTimeouts.clear();
+    state.watchSettings = null;
+    state.actions = [];
+    state.processedElements = new WeakSet();
+    state.processedCount = 0;
+    state.startTime = 0;
+    
+    if (state.debounceTimeout) {
+      clearTimeout(state.debounceTimeout);
+      state.debounceTimeout = null;
+    }
+    
     stop();
   };
 
   return {
-    registerAction,
-    unregisterAction,
+    registerConfiguration,
     setSequenceRestartCallback,
     start,
     stop,

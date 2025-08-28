@@ -53,7 +53,7 @@ const ConfigProcessor = (() => {
       }
       const sheets = GoogleSheets.getSheets(config);
       window.ext.__sheets = await new GoogleSheetsCS().getValues(sheets, config.spreadsheetId);
-      await BatchProcessor.start(config.actions, config.batch);
+      await BatchProcessor.start(config.actions, config.batch, config.watch);
       const { notifications } = await new SettingsStorage().getSettings();
       if (notifications) {
         const { onConfig, sound, discord } = notifications;

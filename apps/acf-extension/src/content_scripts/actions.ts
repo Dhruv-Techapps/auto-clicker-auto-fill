@@ -1,4 +1,4 @@
-import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
+import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript, IWatchSettings } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, isValidUUID } from '@dhruv-techapps/core-common';
 import { NotificationsService } from '@dhruv-techapps/core-service';
@@ -35,17 +35,23 @@ const Actions = (() => {
     }
   };
 
-  const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number) => {
+  const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number, watchSettings?: IWatchSettings) => {
     window.ext.__batchRepeat = batchRepeat;
 
     // Clear any existing DOM watchers before starting new actions
     DomWatchManager.clear();
 
-    // Set up the sequence restart callback for DOM watcher
-    DomWatchManager.setSequenceRestartCallback(async (startIndex: number, actionSequence: IAction[]) => {
-      console.debug(`Actions: Restarting sequence from index ${startIndex}`);
-      await executeActionsFromIndex(actionSequence, startIndex);
-    });
+    // If watch settings are provided and enabled, set up DOM watcher for the entire configuration
+    if (watchSettings?.watchEnabled) {
+      // Set up the sequence restart callback for DOM watcher
+      DomWatchManager.setSequenceRestartCallback(async () => {
+        console.debug(`Actions: Restarting entire action sequence due to DOM changes`);
+        await executeActionsFromIndex(actions, 0);
+      });
+
+      // Register the configuration-level DOM watcher after actions complete initially
+      DomWatchManager.registerConfiguration(actions, watchSettings);
+    }
 
     await executeActionsFromIndex(actions, 0);
   };
@@ -71,15 +77,6 @@ const Actions = (() => {
           action.status = await UserScriptProcessor.start(action);
         } else {
           action.status = await ActionProcessor.start(action);
-
-          // Register action for DOM watching if enabled (only for regular actions, not userscripts)
-          const typedAction = action;
-          if (typedAction.settings?.watch?.watchEnabled && startIndex === 0) {
-            // Only register during initial run, not during restart
-            console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, '👁️ Registering for DOM watching');
-            const regularActions = actions.filter((act) => act.type !== 'userscript');
-            DomWatchManager.registerAction(typedAction, i, regularActions);
-          }
         }
         notify(action);
       } catch (error) {
