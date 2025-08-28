@@ -74,7 +74,8 @@ DOM Watcher enables automatic re-execution of actions when new matching elements
 When enabled, the action will continue watching for newly added DOM elements that match the action's element finder after the initial execution completes. Each new matching element will trigger the action automatically.
 
 <Callout type="info">
-  DOM Watcher is only available for regular actions, not userscripts. Each watched action maintains its own element tracking to prevent duplicate processing.
+  DOM Watcher is only available for regular actions, not userscripts. Each watched action maintains its own element
+  tracking to prevent duplicate processing.
 </Callout>
 
 ### Debounce Timing
@@ -84,8 +85,9 @@ When enabled, the action will continue watching for newly added DOM elements tha
 Delay before processing new elements when DOM changes occur. This prevents excessive processing during rapid DOM mutations (like during initial page load or bulk content updates).
 
 **Examples:**
+
 - `100ms` - Very responsive, suitable for real-time applications
-- `500ms` - Balanced performance, good for most use cases  
+- `500ms` - Balanced performance, good for most use cases
 - `2000ms` - Conservative, for pages with frequent DOM changes
 
 ### Max Repeats
@@ -101,6 +103,7 @@ Maximum number of times the same element can be processed. Most use cases need o
 CSS selector specifying the container element to observe for changes. Limiting the observation scope can improve performance on complex pages.
 
 **Examples:**
+
 - `body` - Watch entire page (default)
 - `#main-content` - Watch specific container
 - `.feed-container` - Watch social media feed
@@ -119,7 +122,8 @@ Maximum time the DOM watcher will remain active. The watcher automatically stops
 When enabled, only processes elements that are currently visible in the viewport. This can improve performance and user experience by focusing on content the user can actually see.
 
 <Callout type="warning">
-  Enabling visibility check may miss elements that are initially hidden but become visible through user interaction or page scrolling.
+  Enabling visibility check may miss elements that are initially hidden but become visible through user interaction or
+  page scrolling.
 </Callout>
 
 ### Restart Mode
@@ -135,7 +139,9 @@ Controls how actions restart when DOM changes trigger the watcher. This setting 
 - **Full Sequence** - Restarts the entire action sequence from the beginning
 
 <Callout type="info">
-  Sequential restart modes are essential for complex workflows like custom dropdowns where Action 1 opens the dropdown, Action 2 filters options, and Action 3 selects the result. When new options appear, "From This Action" mode ensures the complete workflow runs correctly.
+  Sequential restart modes are essential for complex workflows like custom dropdowns where Action 1 opens the dropdown,
+  Action 2 filters options, and Action 3 selects the result. When new options appear, "From This Action" mode ensures
+  the complete workflow runs correctly.
 </Callout>
 
 **Use Cases:**
@@ -145,7 +151,8 @@ Controls how actions restart when DOM changes trigger the watcher. This setting 
 - **Full Sequence:** Complex workflows where all actions must run in order to maintain state
 
 <Callout type="warning">
-  Sequential restart modes will re-execute multiple actions, which may impact performance on pages with frequent DOM changes. Use appropriate debounce timing to limit restart frequency.
+  Sequential restart modes will re-execute multiple actions, which may impact performance on pages with frequent DOM
+  changes. Use appropriate debounce timing to limit restart frequency.
 </Callout>
 
 ### Stop on URL Change
@@ -199,16 +206,18 @@ Process new posts in a social media feed:
 For complex workflows where multiple actions work together, use sequential restart modes:
 
 **Actions Setup:**
+
 1. **Action 1 (Click to Open):** `#custom-dropdown .dropdown-trigger`
 2. **Action 2 (Filter Results):** `#custom-dropdown .search-input` (Value: "Premium")
 3. **Action 3 (Select Option):** `#custom-dropdown .option[data-value="premium"]:not(.selected)`
 
 **Action 3 DOM Watcher Settings:**
-   - Enable DOM Watching: ✅
-   - Watch Root: `#custom-dropdown .options-list`
-   - Debounce: `1000ms`
-   - Restart Mode: `From This Action` ✨
-   - Max Repeats: `1`
+
+- Enable DOM Watching: ✅
+- Watch Root: `#custom-dropdown .options-list`
+- Debounce: `1000ms`
+- Restart Mode: `From This Action` ✨
+- Max Repeats: `1`
 
 When new dropdown options load dynamically, Action 3 will trigger and restart the sequence from Action 3, ensuring the filter and selection happen correctly for new content.
 
@@ -216,7 +225,8 @@ When new dropdown options load dynamically, Action 3 will trigger and restart th
 For dropdowns that reset state when new options load, use `Full Sequence` restart mode to ensure the dropdown opens and filters are applied before selection.
 
 <Callout type="warning">
-  Always test DOM Watcher configurations thoroughly. Some sites may have rate limiting or anti-automation measures that could conflict with automated interactions.
+  Always test DOM Watcher configurations thoroughly. Some sites may have rate limiting or anti-automation measures that
+  could conflict with automated interactions.
 </Callout>
 
 ## Monitoring & Debugging
@@ -230,7 +240,8 @@ Use the **DOM Watcher DevTools panel** to monitor and control watcher behavior:
 5. Monitor debug logs for troubleshooting
 
 <Callout type="tip">
-  The DevTools panel shows detailed information about each watched action, including processing counts and timing details. Use this to optimize your debounce timing and validate watcher behavior.
+  The DevTools panel shows detailed information about each watched action, including processing counts and timing
+  details. Use this to optimize your debounce timing and validate watcher behavior.
 </Callout>
 
 ## Performance Considerations
@@ -242,7 +253,8 @@ Use the **DOM Watcher DevTools panel** to monitor and control watcher behavior:
 - **Set appropriate timeouts:** Prevent runaway watchers with reasonable time limits
 
 <Callout type="warning">
-  DOM Watcher uses `MutationObserver` which is generally performant, but watching large page sections with frequent changes can impact browser performance.
+  DOM Watcher uses `MutationObserver` which is generally performant, but watching large page sections with frequent
+  changes can impact browser performance.
 </Callout>
 
 ## Error handling

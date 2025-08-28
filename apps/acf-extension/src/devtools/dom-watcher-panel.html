@@ -1,158 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>ACF DOM Watcher</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 10px;
-            margin: 0;
-            background: #f5f5f5;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .header {
-            background: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4285f4;
-        }
-        .status-card {
-            background: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .status-active { background: #4caf50; }
-        .status-inactive { background: #f44336; }
-        .status-paused { background: #ff9800; }
-        .controls {
-            margin: 15px 0;
-        }
-        .btn {
-            background: #4285f4;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 10px;
-            font-size: 12px;
-        }
-        .btn:hover {
-            background: #3367d6;
-        }
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        .btn-danger {
-            background: #f44336;
-        }
-        .btn-danger:hover {
-            background: #d32f2f;
-        }
-        .btn-warning {
-            background: #ff9800;
-        }
-        .btn-warning:hover {
-            background: #f57c00;
-        }
-        .watched-action {
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 8px 0;
-        }
-        .watched-action-header {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .watched-action-details {
-            font-size: 12px;
-            color: #666;
-        }
-        .no-actions {
-            text-align: center;
-            color: #666;
-            font-style: italic;
-            padding: 20px;
-        }
-        .refresh-btn {
-            float: right;
-            font-size: 11px;
-            padding: 4px 8px;
-        }
-        .log-section {
-            background: #fff;
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-        .log-entry {
-            font-family: monospace;
-            font-size: 11px;
-            padding: 2px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .log-debug { color: #666; }
-        .log-info { color: #2196f3; }
-        .log-warning { color: #ff9800; }
-        .log-error { color: #f44336; }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        margin: 0;
+        background: #f5f5f5;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .header {
+        background: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        border-left: 4px solid #4285f4;
+      }
+      .status-card {
+        background: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .status-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+      .status-active {
+        background: #4caf50;
+      }
+      .status-inactive {
+        background: #f44336;
+      }
+      .status-paused {
+        background: #ff9800;
+      }
+      .controls {
+        margin: 15px 0;
+      }
+      .btn {
+        background: #4285f4;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+        font-size: 12px;
+      }
+      .btn:hover {
+        background: #3367d6;
+      }
+      .btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      .btn-danger {
+        background: #f44336;
+      }
+      .btn-danger:hover {
+        background: #d32f2f;
+      }
+      .btn-warning {
+        background: #ff9800;
+      }
+      .btn-warning:hover {
+        background: #f57c00;
+      }
+      .watched-action {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 8px 0;
+      }
+      .watched-action-header {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .watched-action-details {
+        font-size: 12px;
+        color: #666;
+      }
+      .no-actions {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+        padding: 20px;
+      }
+      .refresh-btn {
+        float: right;
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+      .log-section {
+        background: #fff;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 15px;
+      }
+      .log-entry {
+        font-family: monospace;
+        font-size: 11px;
+        padding: 2px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .log-debug {
+        color: #666;
+      }
+      .log-info {
+        color: #2196f3;
+      }
+      .log-warning {
+        color: #ff9800;
+      }
+      .log-error {
+        color: #f44336;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h2>Auto Clicker AutoFill - DOM Watcher</h2>
-            <button class="btn refresh-btn" onclick="refreshStatus()">🔄 Refresh</button>
-            <p>Monitor and control DOM watching for dynamically added content</p>
-        </div>
+      <div class="header">
+        <h2>Auto Clicker AutoFill - DOM Watcher</h2>
+        <button class="btn refresh-btn" onclick="refreshStatus()">🔄 Refresh</button>
+        <p>Monitor and control DOM watching for dynamically added content</p>
+      </div>
 
-        <div class="status-card">
-            <h3>Watcher Status</h3>
-            <div id="watcherStatus">
-                <span class="status-indicator status-inactive"></span>
-                <span>Checking...</span>
-            </div>
-            <div class="controls">
-                <button class="btn" id="startBtn" onclick="startWatcher()">▶️ Start</button>
-                <button class="btn btn-warning" id="pauseBtn" onclick="pauseWatcher()">⏸️ Pause</button>
-                <button class="btn" id="resumeBtn" onclick="resumeWatcher()">▶️ Resume</button>
-                <button class="btn btn-danger" id="stopBtn" onclick="stopWatcher()">⏹️ Stop</button>
-                <button class="btn btn-danger" id="clearBtn" onclick="clearWatcher()">🗑️ Clear All</button>
-            </div>
+      <div class="status-card">
+        <h3>Watcher Status</h3>
+        <div id="watcherStatus">
+          <span class="status-indicator status-inactive"></span>
+          <span>Checking...</span>
         </div>
+        <div class="controls">
+          <button class="btn" id="startBtn" onclick="startWatcher()">▶️ Start</button>
+          <button class="btn btn-warning" id="pauseBtn" onclick="pauseWatcher()">⏸️ Pause</button>
+          <button class="btn" id="resumeBtn" onclick="resumeWatcher()">▶️ Resume</button>
+          <button class="btn btn-danger" id="stopBtn" onclick="stopWatcher()">⏹️ Stop</button>
+          <button class="btn btn-danger" id="clearBtn" onclick="clearWatcher()">🗑️ Clear All</button>
+        </div>
+      </div>
 
-        <div class="status-card">
-            <h3>Watched Actions (<span id="actionCount">0</span>)</h3>
-            <div id="watchedActions">
-                <div class="no-actions">No actions are currently being watched</div>
-            </div>
+      <div class="status-card">
+        <h3>Watched Actions (<span id="actionCount">0</span>)</h3>
+        <div id="watchedActions">
+          <div class="no-actions">No actions are currently being watched</div>
         </div>
+      </div>
 
-        <div class="log-section">
-            <h3>Debug Log</h3>
-            <div id="debugLog" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background: #fafafa;">
-                <div class="log-entry log-info">DOM Watcher DevTools panel loaded</div>
-            </div>
-            <button class="btn" onclick="clearLog()" style="margin-top: 10px;">Clear Log</button>
+      <div class="log-section">
+        <h3>Debug Log</h3>
+        <div id="debugLog" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background: #fafafa">
+          <div class="log-entry log-info">DOM Watcher DevTools panel loaded</div>
         </div>
+        <button class="btn" onclick="clearLog()" style="margin-top: 10px">Clear Log</button>
+      </div>
     </div>
 
     <script src="./dom-watcher-panel.js"></script>
-</body>
+  </body>
 </html>

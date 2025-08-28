@@ -69,7 +69,7 @@ export class DomWatcherDevToolsBackground {
       }
     } catch (error) {
       console.error('DomWatcherDevTools: Error getting watcher status:', error);
-      
+
       // Send default status on error
       const port = this.devToolsPorts.get(tabId);
       if (port) {
