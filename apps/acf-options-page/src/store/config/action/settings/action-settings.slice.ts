@@ -58,13 +58,15 @@ const slice = createSlice({
           }
         } else {
           // Handle direct watch properties
-          // @ts-expect-error "handling dynamic properties"
-          state.settings.watch[watchProperty] = value;
+          if (watchProperty in state.settings.watch) {
+            (state.settings.watch as Record<string, typeof value>)[watchProperty] = value;
+          }
         }
       } else {
         // Handle regular settings
-        // @ts-expect-error "making is generic function difficult for TypeScript"
-        state.settings[name] = value;
+        if (name in state.settings) {
+          (state.settings as Record<string, typeof value>)[name] = value;
+        }
       }
     },
     switchActionSettingsModal: (state) => {
