@@ -149,8 +149,9 @@ const Common = (() => {
 
     if (DomWatchManager.getStatus().isActive && elements) {
       elements = filterProcessedElements(elements);
-      setElementProcessed(elements);
     }
+
+    setElementProcessed(elements);
     return elements;
   };
 
