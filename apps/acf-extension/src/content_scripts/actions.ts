@@ -7,6 +7,7 @@ import ActionProcessor from './action';
 import AddonProcessor from './addon';
 import Common from './common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
+import { logger } from './logger';
 import Statement from './statement';
 import { statusBar } from './status-bar';
 import UserScriptProcessor from './userscript';
@@ -41,7 +42,7 @@ const Actions = (() => {
       const action = actions[i];
       window.ext.__currentActionName = action.name ?? ACTION_I18N.NO_NAME;
       if (action.disabled) {
-        console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, `🚫 ${I18N_COMMON.DISABLED} `);
+        logger.debug(['ACTION', `#${i + 1}`, window.ext.__currentActionName], `🚫 ${I18N_COMMON.DISABLED}`);
         i += 1;
         continue;
       }
@@ -59,14 +60,14 @@ const Actions = (() => {
         notify(action);
       } catch (error) {
         if (error === EActionStatus.SKIPPED || error === EActionRunning.SKIP) {
-          console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+          logger.debug(['ACTION', `#${window.ext.__currentAction}`, window.ext.__currentActionName], `⏭️ ${EActionStatus.SKIPPED}`, { error: window.ext.__actionError });
           action.status = EActionStatus.SKIPPED;
         } else if (typeof error === 'number' || (typeof error === 'string' && isValidUUID(error))) {
           const index = typeof error === 'number' ? error : actions.findIndex((a) => a.id === error);
           if (index === -1) {
             throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
           }
-          console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
+          logger.debug(['ACTION', `#${window.ext.__currentAction}`, window.ext.__currentActionName], `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`, { error: window.ext.__actionError });
           i = index - 1;
         } else {
           throw error;

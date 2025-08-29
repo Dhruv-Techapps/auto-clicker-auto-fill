@@ -14,6 +14,7 @@ import BatchProcessor from './batch';
 import Common from './common';
 import { Hotkey } from './hotkey';
 import { I18N_COMMON } from './i18n';
+import { logger } from './logger';
 import { statusBar } from './status-bar';
 import DomWatchManager from './util/dom-watch-manager';
 import GoogleSheets from './util/google-sheets';
@@ -52,7 +53,7 @@ const ConfigProcessor = (() => {
     if (config.watch?.watchEnabled) {
       // Set up the sequence restart callback for DOM watcher
       DomWatchManager.setSequenceRestartCallback(async () => {
-        console.debug(`Actions: Restarting entire action sequence due to DOM changes`);
+        logger.debug(['ACTIONS', 'DOM-RESTART'], 'Restarting entire action sequence due to DOM changes');
         await Actions.start(config.actions, window.ext.__batchRepeat + 1);
       });
 

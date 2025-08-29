@@ -1,4 +1,5 @@
 import { IWatchSettings, defaultWatchSettings } from '@dhruv-techapps/acf-common';
+import { logger } from '../logger';
 
 interface DomWatchState {
   isActive: boolean;
@@ -27,7 +28,7 @@ const DomWatchManager = (() => {
       return;
     }
 
-    console.debug('DomWatchManager: Restarting action sequence due to DOM changes');
+    logger.debug(['DOM-WATCHER'], 'Restarting action sequence due to DOM changes');
     await state.sequenceRestartCallback();
   };
 
@@ -43,7 +44,7 @@ const DomWatchManager = (() => {
       try {
         await processingFn();
       } catch (error) {
-        console.error('DomWatchManager: Error in debounced processing:', error);
+        logger.error(['DOM-WATCHER'], 'Error in debounced processing', error);
       }
       state.debounceTimeout = null;
     }, delay);
@@ -60,14 +61,14 @@ const DomWatchManager = (() => {
       const elapsed = Date.now() - state.startTime;
       if (elapsed >= lifecycleStopConditions.timeout * 60 * 1000) {
         // Convert mins to milliseconds
-        console.debug('DomWatchManager: Stopping due to timeout');
+        logger.debug(['DOM-WATCHER'], 'Stopping due to timeout');
         return true;
       }
     }
 
     // Check URL change
     if (lifecycleStopConditions.urlChange && state.currentUrl !== window.location.href) {
-      console.debug('DomWatchManager: Stopping due to URL change');
+      logger.debug(['DOM-WATCHER'], 'Stopping due to URL change');
       return true;
     }
 
@@ -116,7 +117,7 @@ const DomWatchManager = (() => {
       });
     });
 
-    console.debug(`DomWatchManager: Initialized observer on ${watchRoot}`);
+    logger.debug(['DOM-WATCHER'], `Initialized observer on ${watchRoot}`);
   };
 
   // Register configuration-level DOM watching
@@ -136,7 +137,7 @@ const DomWatchManager = (() => {
       start();
     }
 
-    console.debug(`DomWatchManager: Registered configuration-level DOM watching`);
+    logger.debug(['DOM-WATCHER'], 'Registered configuration-level DOM watching');
   };
 
   // Start DOM watching
@@ -149,7 +150,7 @@ const DomWatchManager = (() => {
     state.currentUrl = window.location.href;
     initializeObserver();
 
-    console.debug('DomWatchManager: Started configuration-level DOM watching');
+    logger.debug(['DOM-WATCHER'], 'Started configuration-level DOM watching');
   };
 
   // Get current watch status

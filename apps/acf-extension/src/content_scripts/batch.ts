@@ -5,6 +5,7 @@ import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
 import Common from './common';
 import { I18N_COMMON } from './i18n';
+import { logger } from './logger';
 import { statusBar } from './status-bar';
 
 const BATCH_I18N = {
@@ -27,7 +28,7 @@ const BatchProcessor = (() => {
       if (batch.repeat > 0) {
         for (let i = 0; i < batch.repeat; i += 1) {
           statusBar.batchUpdate(i + 2);
-          console.groupCollapsed(`${BATCH_I18N.TITLE} #${i + 2} [${I18N_COMMON.REPEAT}]`);
+          logger.debug(['BATCH', `#${i + 2}`, I18N_COMMON.REPEAT], 'Starting repeat batch');
           if (batch?.repeatInterval) {
             await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT, i + 2);
           }
@@ -42,7 +43,7 @@ const BatchProcessor = (() => {
               iconUrl: Common.getNotificationIcon()
             });
           }
-          console.groupEnd();
+          logger.debug(['BATCH', `#${i + 2}`, I18N_COMMON.REPEAT], 'Completed repeat batch');
         }
       } else if (batch.repeat < -1) {
         let i = 1;
@@ -62,9 +63,9 @@ const BatchProcessor = (() => {
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
     try {
       statusBar.batchUpdate(1);
-      console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);
+      logger.debug(['BATCH', '#1', I18N_COMMON.DEFAULT], 'Starting default batch');
       await Actions.start(actions, 1);
-      console.groupEnd();
+      logger.debug(['BATCH', '#1', I18N_COMMON.DEFAULT], 'Completed default batch');
       if (batch) {
         if (batch.refresh) {
           refresh();
@@ -73,7 +74,7 @@ const BatchProcessor = (() => {
         }
       }
     } catch (error) {
-      console.groupEnd();
+      logger.error(['BATCH'], 'Batch execution failed', error);
       throw error;
     }
   };
