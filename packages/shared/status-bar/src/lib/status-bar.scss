@@ -33,6 +33,29 @@ $gray-colors: #212529, #343a40, #495057, #6c757d, #adb5bd, #ced4da, #dee2e6, #e9
     right: 0;
   }
 
+  // Minimal mode overrides
+  &.minimal {
+    width: 40px !important;
+    height: 20px !important;
+    font-size: 10px !important;
+    background: rgba(0,0,0,0.7) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    pointer-events: none !important;
+    margin: 8px !important;
+    
+    span {
+      padding: 0 !important;
+      background: none !important;
+      &:before,
+      &:after {
+        display: none !important;
+      }
+    }
+  }
+
   span:not(:empty) {
     padding: 5px;
 

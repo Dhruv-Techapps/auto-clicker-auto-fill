@@ -3,6 +3,7 @@ import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps
 import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { scope } from '../common/instrument';
 import ConfigProcessor from './config';
+import { logger } from './logger';
 import { statusBar } from './status-bar';
 
 scope.setTag('page', 'content-script');
@@ -16,11 +17,19 @@ declare global {
 window.ext = window.ext || {};
 
 let reloadOnError = false;
-new SettingsStorage().getSettings().then((settings) => {
-  if (settings.reloadOnError !== undefined) {
-    reloadOnError = settings.reloadOnError;
+
+// Initialize logger and settings
+(async () => {
+  try {
+    await logger.initialize();
+    const settings = await new SettingsStorage().getSettings();
+    if (settings.reloadOnError !== undefined) {
+      reloadOnError = settings.reloadOnError;
+    }
+  } catch (error) {
+    console.warn('Failed to initialize logger/settings:', error);
   }
-});
+})();
 
 async function loadConfig(loadType: ELoadTypes) {
   try {
@@ -70,9 +79,9 @@ chrome.runtime.onMessage.addListener(async (message) => {
   if (action === RUNTIME_MESSAGE_ACF.RUN_CONFIG) {
     try {
       new ConfigStorage().getConfigById(configId).then(async (config) => {
-        Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', config?.url, 'START');
+        logger.info(['CONFIG', 'RUNTIME'], `Starting config: ${config?.url}`);
         await ConfigProcessor.checkStartType([], config);
-        Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', config?.url, 'END');
+        logger.info(['CONFIG', 'RUNTIME'], `Completed config: ${config?.url}`);
       });
     } catch (e) {
       if (e instanceof Error) {
