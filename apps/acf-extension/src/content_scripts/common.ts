@@ -25,7 +25,7 @@ const Common = (() => {
   const filterProcessedElements = (elements: Array<HTMLElement>): Array<HTMLElement> => {
     return elements.filter((element) => {
       // Add your filtering logic here
-      return element.hasAttribute('data-acf-processed');
+      return !element.hasAttribute('data-acf-processed');
     });
   };
 
