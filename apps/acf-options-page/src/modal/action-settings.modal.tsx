@@ -54,10 +54,6 @@ const ActionSettingsModal = () => {
     dispatch(switchActionSettingsModal());
   };
 
-  const onShow = () => {
-    //:TODO
-  };
-
   const onUpdateGoto = (e: ChangeEvent<HTMLSelectElement>) => {
     dispatch(updateActionSettingsGoto(e.currentTarget.value as TRandomUUID));
   };
@@ -78,7 +74,7 @@ const ActionSettingsModal = () => {
   const { actions } = config;
 
   return (
-    <Modal show={visible} size='lg' onHide={onHide} onShow={onShow} data-testid='action-settings-modal'>
+    <Modal show={visible} size='lg' onHide={onHide} data-testid='action-settings-modal'>
       <Form id={FORM_ID} onSubmit={onSubmit} onReset={onReset}>
         <Modal.Header closeButton>
           <Modal.Title as='h6'>{t('modal.actionSettings.title')}</Modal.Title>

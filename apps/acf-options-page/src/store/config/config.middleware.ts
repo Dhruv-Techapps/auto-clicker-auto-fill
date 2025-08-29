@@ -32,6 +32,7 @@ import {
   syncActionSettings,
   syncActionStatement,
   syncSchedule,
+  syncWatch,
   updateAction,
   updateBatch,
   updateConfig,
@@ -39,6 +40,7 @@ import {
 } from './config.slice';
 import { setScheduleError, setScheduleMessage } from './schedule';
 import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
+import { setWatchError, setWatchMessage } from './watch';
 
 const configsToastListenerMiddleware = createListenerMiddleware();
 configsToastListenerMiddleware.startListening({
@@ -66,6 +68,8 @@ const getMessageFunc = (action: UnknownAction): { success: any; failure: any; me
       return { success: setActionMessage, failure: setActionError, message: i18next.t(`message.action`) };
     case syncActionAddon.type:
       return { success: setActionAddonMessage, failure: setActionAddonError, message: i18next.t(`message.actionAddon`) };
+    case syncWatch.type:
+      return { success: setWatchMessage, failure: setWatchError, message: i18next.t(`message.watch`) };
     case syncActionStatement.type:
       return { success: setActionStatementMessage, failure: setActionStatementError, message: i18next.t(`message.actionStatement`) };
     case syncActionSettings.type:
@@ -91,6 +95,7 @@ configsListenerMiddleware.startListening({
     reorderActions,
     removeAction,
     syncActionAddon,
+    syncWatch,
     syncSchedule,
     syncActionSettings,
     syncActionStatement

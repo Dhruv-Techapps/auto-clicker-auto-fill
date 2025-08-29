@@ -11,8 +11,7 @@
         {
           "projects": ["acf-extension"],
           "target": "serve"
-        },
-        "watch-deps"
+        }
       ]
     }
   }

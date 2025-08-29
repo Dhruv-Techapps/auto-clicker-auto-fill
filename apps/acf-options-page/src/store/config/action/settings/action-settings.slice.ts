@@ -13,10 +13,13 @@ export interface IActionSettingsStore {
 
 export interface IActionSettingsRequest {
   name: string;
-  value: boolean;
+  value: boolean | string | number;
 }
 
-const initialState: IActionSettingsStore = { visible: false, settings: { ...defaultActionSettings } };
+const initialState: IActionSettingsStore = {
+  visible: false,
+  settings: { ...defaultActionSettings }
+};
 
 const slice = createSlice({
   name: 'actionSettings',
@@ -24,8 +27,9 @@ const slice = createSlice({
   reducers: {
     updateActionSettings: (state, action: PayloadAction<IActionSettingsRequest>) => {
       const { name, value } = action.payload;
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      state.settings[name] = value;
+      if (name in state.settings) {
+        (state.settings as Record<string, typeof value>)[name] = value;
+      }
     },
     switchActionSettingsModal: (state) => {
       window.dataLayer.push({ event: 'modal', name: 'action_settings', visibility: !state.visible });
@@ -46,11 +50,7 @@ const slice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
-      if (action.payload.settings) {
-        state.settings = { ...action.payload.settings, retryGoto: action.payload.retryGoto };
-      } else {
-        state.settings = { ...defaultActionSettings };
-      }
+      state.settings = action.payload.settings ? { ...action.payload.settings, retryGoto: action.payload.retryGoto } : { ...defaultActionSettings };
       state.visible = !state.visible;
     });
   }

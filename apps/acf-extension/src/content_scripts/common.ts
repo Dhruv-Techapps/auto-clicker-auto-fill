@@ -3,6 +3,7 @@ import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { I18N_ERROR } from './i18n';
 import { statusBar } from './status-bar';
+import DomWatchManager from './util/dom-watch-manager';
 
 const Common = (() => {
   const retryFunc = async (retry?: number, retryInterval?: number | string) => {
@@ -13,6 +14,19 @@ const Common = (() => {
       }
     }
     return false;
+  };
+
+  const setElementProcessed = (elements: Array<HTMLElement>) => {
+    elements.forEach((element) => {
+      element.setAttribute('data-acf-processed', 'true');
+    });
+  };
+
+  const filterProcessedElements = (elements: Array<HTMLElement>): Array<HTMLElement> => {
+    return elements.filter((element) => {
+      // Add your filtering logic here
+      return !element.hasAttribute('data-acf-processed');
+    });
   };
 
   const getElements = async (document: Document, elementFinder: string, retry: number, retryInterval: number | string): Promise<Array<HTMLElement> | undefined> => {
@@ -132,6 +146,12 @@ const Common = (() => {
     if (!elements || elements.length === 0) {
       return checkRetryOption(retryOption, elementFinder, retryGoto);
     }
+
+    if (DomWatchManager.getStatus().isActive && elements) {
+      elements = filterProcessedElements(elements);
+    }
+
+    setElementProcessed(elements);
     return elements;
   };
 

@@ -12,8 +12,7 @@
         "cwd": "apps/acf-extension",
         "args": ["--node-env=production", "--watch"]
       },
-      "continuous": true,
-      "dependsOn": ["watch-deps"]
+      "continuous": true
     }
   }
 }

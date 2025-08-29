@@ -7,6 +7,7 @@ export * from './IBatch';
 export * from './IConfiguration';
 export * from './ISetting';
 export * from './IUserscript';
+export * from './IWatch';
 export * from './TGoto';
 export const BATCH_REPEAT = '<batchRepeat>';
 export const ACTION_REPEAT = '<actionRepeat>';

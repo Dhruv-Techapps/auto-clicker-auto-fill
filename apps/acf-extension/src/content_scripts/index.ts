@@ -66,6 +66,7 @@ self.onerror = (...rest) => {
 
 chrome.runtime.onMessage.addListener(async (message) => {
   const { action, configId } = message;
+
   if (action === RUNTIME_MESSAGE_ACF.RUN_CONFIG) {
     try {
       new ConfigStorage().getConfigById(configId).then(async (config) => {

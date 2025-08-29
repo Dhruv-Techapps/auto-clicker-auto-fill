@@ -22,7 +22,7 @@ const ActionProcessor = (() => {
   const process = async (action: IAction) => {
     const elementFinder = await ACFValue.getValue(action.elementFinder);
     const elements = await Common.start(elementFinder, action.settings);
-    if (elements === undefined) {
+    if (elements === undefined || elements.length === 0) {
       throw EActionStatus.SKIPPED;
     }
     const value = action.value ? await ACFValue.getValue(action.value, action.settings) : action.value;

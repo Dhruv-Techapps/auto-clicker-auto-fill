@@ -52,9 +52,9 @@ const Actions = (() => {
         await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
         await AddonProcessor.check(action.addon, action.settings);
         if (action.type === 'userscript') {
-          action.status = await UserScriptProcessor.start(action as IUserScript);
+          action.status = await UserScriptProcessor.start(action);
         } else {
-          action.status = await ActionProcessor.start(action as IAction);
+          action.status = await ActionProcessor.start(action);
         }
         notify(action);
       } catch (error) {
