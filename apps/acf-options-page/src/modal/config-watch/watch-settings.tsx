@@ -50,7 +50,7 @@ function WatchSettings() {
                     defaultValue={watch?.watchAttributes?.join(', ')}
                   />
                 </InputGroup>
-                <small className='text-muted'>{t('modal.watch.rootSelectorHint', 'attributes to observe')}</small>
+                <small className='text-muted'>{t('modal.watch.attributesHint', 'Comma-separated list of attributes to observe for changes')}</small>
               </Col>
               <Col md={6} sm={12}>
                 <InputGroup>
