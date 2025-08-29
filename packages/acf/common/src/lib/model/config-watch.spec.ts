@@ -1,4 +1,5 @@
 import { defaultWatchSettings, IConfiguration, IWatchSettings } from '@dhruv-techapps/acf-common';
+import { generateUUID } from '@dhruv-techapps/core-common';
 
 describe('DOM Watcher Configuration Settings', () => {
   it('should have correct default watch settings', () => {
@@ -22,7 +23,7 @@ describe('DOM Watcher Configuration Settings', () => {
     };
 
     const config: IConfiguration = {
-      id: 'test-config',
+      id: generateUUID(),
       url: 'https://example.com',
       enable: true,
       startType: 'auto' as any,
