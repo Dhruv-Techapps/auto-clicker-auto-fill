@@ -58,8 +58,8 @@ const DomWatchManager = (() => {
     // Check timeout
     if (lifecycleStopConditions.timeout) {
       const elapsed = Date.now() - state.startTime;
-      if (elapsed >= lifecycleStopConditions.timeout * 1000) {
-        // Convert seconds to milliseconds
+      if (elapsed >= lifecycleStopConditions.timeout * 60 * 1000) {
+        // Convert mins to milliseconds
         console.debug('DomWatchManager: Stopping due to timeout');
         return true;
       }
@@ -82,7 +82,6 @@ const DomWatchManager = (() => {
 
     // Check if we should stop watching
     if (shouldStopWatching()) {
-      stop();
       return;
     }
 
@@ -152,46 +151,6 @@ const DomWatchManager = (() => {
     console.debug('DomWatchManager: Started configuration-level DOM watching');
   };
 
-  // Stop DOM watching
-  const stop = (): void => {
-    if (!state.isActive) {
-      return;
-    }
-
-    state.isActive = false;
-
-    if (state.observer) {
-      state.observer.disconnect();
-      state.observer = null;
-    }
-
-    // Clear timeout
-    if (state.debounceTimeout) {
-      clearTimeout(state.debounceTimeout);
-      state.debounceTimeout = null;
-    }
-
-    console.debug('DomWatchManager: Stopped DOM watching');
-  };
-
-  // Pause DOM watching (keep settings but stop observing)
-  const pause = (): void => {
-    if (state.observer) {
-      state.observer.disconnect();
-      state.observer = null;
-    }
-    state.isActive = false;
-    console.debug('DomWatchManager: Paused DOM watching');
-  };
-
-  // Resume DOM watching
-  const resume = (): void => {
-    if (state.watchSettings) {
-      start();
-      console.debug('DomWatchManager: Resumed DOM watching');
-    }
-  };
-
   // Get current watch status
   const getStatus = () => ({
     isActive: state.isActive,
@@ -205,27 +164,10 @@ const DomWatchManager = (() => {
     state.sequenceRestartCallback = callback;
   };
 
-  // Clear all state and stop watching
-  const clear = (): void => {
-    state.watchSettings = null;
-    state.startTime = 0;
-
-    if (state.debounceTimeout) {
-      clearTimeout(state.debounceTimeout);
-      state.debounceTimeout = null;
-    }
-
-    stop();
-  };
-
   return {
     registerConfiguration,
     setSequenceRestartCallback,
     start,
-    stop,
-    pause,
-    resume,
-    clear,
     getStatus
   };
 })();

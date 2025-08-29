@@ -1,9 +1,6 @@
 import { ConvertRecording, ConvertStep } from './converter';
 import { Recording, Step } from './index.types';
 
-// Import DOM Watcher DevTools
-import './dom-watcher-devtools';
-
 export class RecorderPlugin {
   stringify(recording: Recording) {
     return Promise.resolve(JSON.stringify(ConvertRecording(recording)));

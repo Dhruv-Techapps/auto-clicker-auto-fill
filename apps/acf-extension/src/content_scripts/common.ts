@@ -147,7 +147,7 @@ const Common = (() => {
       return checkRetryOption(retryOption, elementFinder, retryGoto);
     }
 
-    if (DomWatchManager.getStatus().isActive) {
+    if (DomWatchManager.getStatus().isActive && elements) {
       elements = filterProcessedElements(elements);
       setElementProcessed(elements);
     }

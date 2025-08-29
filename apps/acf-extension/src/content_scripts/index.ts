@@ -4,7 +4,6 @@ import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
 import { scope } from '../common/instrument';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';
-import DomWatchManager from './util/dom-watch-manager';
 
 scope.setTag('page', 'content-script');
 
@@ -90,46 +89,5 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
       }
       scope.captureException(e);
     }
-  } else if (action === RUNTIME_MESSAGE_ACF.DOM_WATCHER_GET_STATUS) {
-    // Handle DOM watcher status request
-    try {
-      const status = DomWatchManager.getStatus();
-      sendResponse(status);
-    } catch (e) {
-      console.error('Error getting DOM watcher status:', e);
-      sendResponse({ isActive: false, watchedActionsCount: 0, watchedActions: [] });
-    }
-    return true; // Keep message channel open for async response
-  } else if (action === RUNTIME_MESSAGE_ACF.DOM_WATCHER_COMMAND) {
-    // Handle DOM watcher commands
-    try {
-      const domWatchManager = DomWatchManager;
-
-      switch (command) {
-        case 'START':
-          domWatchManager.start();
-          break;
-        case 'STOP':
-          domWatchManager.stop();
-          break;
-        case 'PAUSE':
-          domWatchManager.pause();
-          break;
-        case 'RESUME':
-          domWatchManager.resume();
-          break;
-        case 'CLEAR':
-          domWatchManager.clear();
-          break;
-        default:
-          console.warn('Unknown DOM watcher command:', command);
-      }
-
-      sendResponse({ success: true });
-    } catch (e) {
-      console.error('Error handling DOM watcher command:', e);
-      if (e instanceof Error) sendResponse({ success: false, error: e.message });
-    }
-    return true; // Keep message channel open for async response
   }
 });

@@ -59,7 +59,6 @@ module.exports = composePlugins(
           { from: path.join(__dirname, 'assets', assets ?? 'DEV'), to: './assets' },
           { from: `./*.html`, to: './html', context: 'src/wizard/popup' },
           { from: `./*.html`, to: './', context: 'src/devtools' },
-          { from: `./*.js`, to: './', context: 'src/devtools' },
           { from: `./*.html`, to: './html', context: '../../packages/shared/sandbox/src/lib' },
           { from: path.join(options.root, './node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js'), to: './webcomponents' },
           {

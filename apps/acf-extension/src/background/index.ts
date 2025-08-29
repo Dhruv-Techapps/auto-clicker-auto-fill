@@ -21,7 +21,6 @@ import { scope } from '../common/instrument';
 import AcfBackup from './acf-backup';
 import { AcfSchedule } from './acf-schedule';
 import registerContextMenus from './context-menu';
-import { DomWatcherDevToolsBackground } from './dom-watcher-devtools';
 import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
 import { TabsMessenger } from './tab';
@@ -104,11 +103,6 @@ try {
    * Set Notifications
    */
   registerNotifications(OPTIONS_PAGE_URL);
-
-  /**
-   * Initialize DOM Watcher DevTools communication
-   */
-  new DomWatcherDevToolsBackground();
 
   /**
    * Setup on Message Listener

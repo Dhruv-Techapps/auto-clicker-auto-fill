@@ -48,7 +48,6 @@ const ConfigProcessor = (() => {
   };
 
   const InitializeDomWatcher = (config: IConfiguration) => {
-    DomWatchManager.clear();
     // If watch settings are provided and enabled, set up DOM watcher for the entire configuration
     if (config.watch?.watchEnabled) {
       // Set up the sequence restart callback for DOM watcher
