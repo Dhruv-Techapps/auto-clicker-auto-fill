@@ -8,7 +8,7 @@ export const defaultWatchSettings: IWatchSettings = {
   }
 };
 
-// Action Watch Settings
+// Configuration-level Watch Settings
 export interface IWatchSettings {
   watchEnabled?: boolean; // Enable DOM watching for this action
   watchRootSelector?: string; // Container to observe (default: 'body')
