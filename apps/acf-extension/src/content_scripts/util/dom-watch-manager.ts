@@ -103,7 +103,8 @@ const DomWatchManager = (() => {
     }
 
     const watchRoot = state.watchSettings.watchRootSelector || 'body';
-    const rootElements = document.querySelectorAll<HTMLElement>(watchRoot) || document.body;
+    const nodeList = document.querySelectorAll<HTMLElement>(watchRoot);
+    const rootElements = nodeList.length > 0 ? nodeList : [document.body];
 
     state.observer = new MutationObserver(handleMutations);
     rootElements.forEach((rootElement) => {
