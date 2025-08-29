@@ -91,7 +91,6 @@ const ActionSettingsModal = () => {
               </Row>
             </Card.Body>
           </Card>
-          {/* <WatchSettings /> */}
           <Card bg='warning-subtle' text='warning-emphasis' className='mt-3'>
             <Card.Body>
               <Row className='mb-2 mb-md-0'>

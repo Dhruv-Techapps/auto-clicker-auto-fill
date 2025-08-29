@@ -1,0 +1,119 @@
+---
+title: Watch (beta)
+description: Enable automatic re-execution of actions when new matching elements are added to the page. Perfect for infinite scrolling feeds, live comments, and dynamic content
+tags: [watch, debounce, watch-root-selector, timeout, stop-on-url-change]
+toc: true
+added:
+  version: '4.1.0'
+---
+
+## Watch Settings
+
+- **Infinite scrolling feeds** (social media, news sites, product listings)
+- **Live comment streams** (YouTube, social platforms)
+- **Dynamic form builders** (lazy-loaded form sections)
+- **Real-time chat applications** (new message handling)
+- **Progressive content loading** (search results, dashboards)
+
+<img
+  class="d-block mb-4 img-fluid rounded-3"
+  src="/docs/[[config:docs_version]]/assets/img/watch-settings.png"
+  alt="Watch Settings"
+/>
+
+### Enable Watch
+
+**Default:** Off
+
+When enabled, the action will continue watching for newly added elements that match the action's element finder after the initial execution completes. Each new matching element will trigger the action automatically.
+
+### Debounce Timing
+
+**Default:** 500ms | **Range:** 100-5000ms
+
+Delay before processing new elements when changes occur. This prevents excessive processing during rapid mutations (like during initial page load or bulk content updates).
+
+**Examples:**
+
+- `100ms` - Very responsive, suitable for real-time applications
+- `500ms` - Balanced performance, good for most use cases
+- `2000ms` - Conservative, for pages with frequent changes
+
+### Watch Root Selector
+
+**Default:** `body`
+
+CSS selector specifying the container element to observe for changes. Limiting the observation scope can improve performance on complex pages.
+
+**Examples:**
+
+- `body` - Watch entire page (default)
+- `#main-content` - Watch specific container
+- `.feed-container` - Watch social media feed
+- `[data-testid="comments"]` - Watch comments section
+
+### Timeout
+
+**Default:** 30 minutes | **Range:** 1-180 minutes
+
+Maximum time the watcher will remain active. The watcher automatically stops after this duration to prevent indefinite background processing.
+
+### Stop on URL Change
+
+**Default:** On
+
+Automatically stops watching when the page URL changes (including hash changes and history API navigation). This prevents watchers from running on unintended pages in single-page applications.
+
+<Callout type="info">
+  URL change detection works with both traditional page navigation and modern SPA routing (History API, hash changes).
+</Callout>
+
+## Watcher Examples
+
+### YouTube Comments Auto-Like
+
+Configure an action to automatically like comments from specific users:
+
+1. **Element Finder:** `//div[@id="contents"]//a[contains(@href, "/channel/UC123456")]/../../..//button[@aria-label="Like this comment"]`
+2. **Watcher Settings:**
+   - Enable Watching: ✅
+   - Watch Root: `#contents`
+   - Debounce: `1000ms`
+
+### Infinite Scroll Product Collection
+
+Automatically add products to favorites as they load:
+
+1. **Element Finder:** `.product-card .favorite-button:not(.favorited)`
+2. **Watcher Settings:**
+   - Enable Watching: ✅
+   - Watch Root: `.product-grid`
+   - Debounce: `500ms`
+
+### Social Media Feed Automation
+
+Process new posts in a social media feed:
+
+1. **Element Finder:** `[data-testid="tweet"]:not([data-processed]) .like-button`
+2. **Watcher Settings:**
+   - Enable Watching: ✅
+   - Watch Root: `[data-testid="primaryColumn"]`
+   - Debounce: `800ms`
+
+<Callout type="warning">
+  Always test Watcher configurations thoroughly. Some sites may have rate limiting or anti-automation measures that
+  could conflict with automated interactions.
+</Callout>
+
+## Performance Considerations
+
+- **Use specific selectors:** Narrow down the Watch Root to the smallest relevant container
+- **Optimize debounce timing:** Higher values reduce CPU usage but increase response time
+- **Monitor processing counts:** Excessive processing may indicate selector issues
+- **Consider visibility checks:** Enable for content-heavy pages to reduce unnecessary processing
+- **Set appropriate timeouts:** Prevent runaway watchers with reasonable time limits
+
+<Callout type="warning">
+  Watcher uses `MutationObserver` which is generally performant, but watching large page sections with frequent changes
+  can impact browser performance.
+</Callout>

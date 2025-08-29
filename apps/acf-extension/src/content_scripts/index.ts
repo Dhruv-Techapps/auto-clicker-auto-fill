@@ -64,8 +64,8 @@ self.onerror = (...rest) => {
   scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
 };
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  const { action, configId, command } = message;
+chrome.runtime.onMessage.addListener(async (message) => {
+  const { action, configId } = message;
 
   if (action === RUNTIME_MESSAGE_ACF.RUN_CONFIG) {
     try {

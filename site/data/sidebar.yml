@@ -58,6 +58,7 @@
     - title: URL
     - title: Config Settings
     - title: Batch
+    - title: Watch
 
 - title: Action
   icon: braces-asterisk

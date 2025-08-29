@@ -45,13 +45,13 @@ function Action() {
               <Button size='sm' variant='outline-primary px-3' onClick={() => dispatch(switchBatchModal())} id='batch-model'>
                 <i className='bi bi-repeat me-2' /> {t('batch.title')}
               </Button>
-              <Button size='sm' variant='outline-primary px-3 mx-3' onClick={() => dispatch(openWatchModalAPI())} id='watch-model'>
-                <i className='bi bi-eyeglasses me-2' /> {t('watch.title', 'Watch')}
+              <Button size='sm' variant='outline-primary px-3 ms-3' onClick={() => dispatch(openWatchModalAPI())} id='watch-model'>
+                <i className='bi bi-eye-fill me-2' /> {t('watch.title', 'Watch')}
               </Button>
-              <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddAction} id='add-action'>
+              <Button size='sm' variant='outline-primary px-3 ms-3' onClick={onAddAction} id='add-action'>
                 <i className='bi bi-plus-lg me-2' /> {t('action.add')}
               </Button>
-              <Button size='sm' variant='outline-primary px-3 mx-3' onClick={onAddUserscript} id='add-userscript'>
+              <Button size='sm' variant='outline-primary px-3 ms-3' onClick={onAddUserscript} id='add-userscript'>
                 <i className='bi bi-plus-lg me-2' /> {t('userscript.add')}
               </Button>
             </Col>

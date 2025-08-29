@@ -1,6 +1,6 @@
 import { updateForm } from '@acf-options-page/util';
 import { FormEvent, useEffect } from 'react';
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Badge, Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
 import { setWatchMessage, switchWatchModal, syncWatch, watchSelector } from '../store/config';
@@ -42,7 +42,9 @@ const WatchModal = () => {
     <Modal show={visible} size='lg' onHide={onHide} data-testid='watch-modal'>
       <Form id={FORM_ID} onSubmit={onSubmit} onReset={onReset}>
         <Modal.Header closeButton>
-          <Modal.Title as='h6'>{t('modal.watch.title', 'Watch Settings')}</Modal.Title>
+          <Modal.Title as='h6'>
+            {t('modal.watch.title', 'Watch Settings')} <Badge>Beta</Badge>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <WatchSettings />
