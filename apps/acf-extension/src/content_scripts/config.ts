@@ -7,6 +7,7 @@ import { NotificationsService } from '@dhruv-techapps/core-service';
 import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging';
 import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
 import { GoogleSheetsCS } from '@dhruv-techapps/shared-google-sheets';
+import { MicrosoftExcelCS } from '@dhruv-techapps/shared-microsoft-excel';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { scope } from '../common/instrument';
 import Actions from './actions';
@@ -17,6 +18,7 @@ import { I18N_COMMON } from './i18n';
 import { statusBar } from './status-bar';
 import DomWatchManager from './util/dom-watch-manager';
 import GoogleSheets from './util/google-sheets';
+import MicrosoftExcel from './util/microsoft-excel';
 
 const CONFIG_I18N = {
   TITLE: chrome.i18n.getMessage('@CONFIG__TITLE')
@@ -69,6 +71,8 @@ const ConfigProcessor = (() => {
       }
       const sheets = GoogleSheets.getSheets(config);
       window.ext.__sheets = await new GoogleSheetsCS().getValues(sheets, config.spreadsheetId);
+      const workbook = MicrosoftExcel.getWorkbook(config);
+      window.ext.__workbook = await new MicrosoftExcelCS().getValues(workbook, config.workbookId);
       // Clear any existing DOM watchers before starting new actions
       await BatchProcessor.start(config.actions, config.batch);
       InitializeDomWatcher(config);

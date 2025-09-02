@@ -60,6 +60,7 @@ export interface IConfiguration {
   startTime?: string;
   schedule?: ISchedule;
   spreadsheetId?: string;
+  workbookId?: string;
   hotkey?: string;
   batch?: IBatch;
   watch?: IWatchSettings; // DOM watch configuration

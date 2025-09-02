@@ -1,6 +1,7 @@
 import { IActionSettings } from '@dhruv-techapps/acf-common';
 import { Value } from '@dhruv-techapps/acf-util';
 import { GoogleSheetsValue } from '@dhruv-techapps/shared-google-sheets';
+import { MicrosoftExcelValue } from '@dhruv-techapps/shared-microsoft-excel';
 import { OpenAIService } from '@dhruv-techapps/shared-openai';
 import { SandboxValue } from '@dhruv-techapps/shared-sandbox';
 import { VisionService, VisionValue } from '@dhruv-techapps/shared-vision';
@@ -9,6 +10,7 @@ import { I18N_ERROR } from '../i18n';
 
 export const VALUE_MATCHER = {
   GOOGLE_SHEETS: /^GoogleSheets::/i,
+  MICROSOFT_EXCEL: /^MicrosoftExcel::/i,
   FUNC: /^Func::/i,
   IMAGE: /^Image::/i,
   OPENAI: /^OpenAI::/i
@@ -19,6 +21,9 @@ export class ACFValue {
     value = await Value.getValue(value);
     if (VALUE_MATCHER.GOOGLE_SHEETS.test(value)) {
       return this.getGoogleSheetsValue(value);
+    }
+    if (VALUE_MATCHER.MICROSOFT_EXCEL.test(value)) {
+      return this.getMicrosoftExcelValue(value);
     }
     if (VALUE_MATCHER.FUNC.test(value)) {
       return this.getFuncValue(value);
@@ -34,6 +39,10 @@ export class ACFValue {
 
   private static getGoogleSheetsValue(value: string): string {
     return GoogleSheetsValue.getSheetValue(value);
+  }
+
+  private static getMicrosoftExcelValue(value: string): string {
+    return MicrosoftExcelValue.getWorkbookValue(value);
   }
 
   private static async getFuncValue(value: string): Promise<string> {
