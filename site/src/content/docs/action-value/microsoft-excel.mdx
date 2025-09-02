@@ -1,0 +1,48 @@
+---
+title: Microsoft Excel
+description: Connect with your Microsoft account and fill form using Microsoft Excel workbook data directly in iterative manner.
+tags: [action, value, microsoft-excel, action-value]
+toc: true
+---
+
+import { getDocsRelativePath } from '@libs/path'
+
+Before using Microsoft Excel Value please do connect extension with [Microsoft Excel]([[docsref:/settings/microsoft-excel]]) and add [Microsoft Excel Workbook ID]([[docsref:/configuration/config-settings#microsoft-excel-workbook-id]])
+
+You can use [Microsoft Excel A1 Notation](https://support.microsoft.com/en-us/office/overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173) to fetch the cell value
+
+<Example
+  filePath={getDocsRelativePath('/src/content/html/input2.html')}
+  variables={{
+    element_finder: '//input',
+    value: 'MicrosoftExcel::Sheet1!A1',
+    element_finder2: '//input',
+    value2: 'MicrosoftExcel::Sheet1!B1'
+  }}
+/>
+
+## MicrosoftExcel::Sheet1!A1
+
+Fetch the A1 cell value from Sheet1.
+
+<Code code={`MicrosoftExcel::Sheet1!A1`} lang="javascript" />
+
+## MicrosoftExcel::Sheet1!C
+
+Fetch the C cell value from Sheet1.
+
+<Code code={`MicrosoftExcel::Sheet1!C`} lang="javascript" />
+
+## MicrosoftExcel::Sheet1!C&lt;batchRepeat&gt;
+
+With batch repeat 0..N, fetch values from C1, C2, ... C(N+1).
+
+<Code code={`MicrosoftExcel::Sheet1!C<batchRepeat> `} lang="javascript" />
+
+## MicrosoftExcel::Sheet1!C&lt;sessionCount&gt;
+
+Maintains count in session; on refresh/reopen continues where it left off (same tab).
+
+<Code code={`MicrosoftExcel::Sheet1!C<sessionCount>`} lang="javascript" />
+
+<Callout name="subscribe-callout" />
