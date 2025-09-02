@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "../../core/service"
+    },
+    {
+      "path": "../notifications"
+    },
+    {
+      "path": "../../core/common"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

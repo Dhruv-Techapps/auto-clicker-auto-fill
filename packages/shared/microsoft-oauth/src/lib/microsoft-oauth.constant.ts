@@ -1,0 +1,1 @@
+export const RUNTIME_MESSAGE_MICROSOFT_OAUTH = 'microsoft-oauth';

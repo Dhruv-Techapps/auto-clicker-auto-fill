@@ -1,0 +1,19 @@
+{
+  "name": "shared-microsoft-oauth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/microsoft-oauth/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/shared/microsoft-oauth/dist",
+        "main": "packages/shared/microsoft-oauth/src/index.ts",
+        "tsConfig": "packages/shared/microsoft-oauth/tsconfig.lib.json",
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

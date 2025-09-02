@@ -18,7 +18,9 @@
     "target": "es2022",
     "customConditions": ["development"],
     "paths": {
-      "@acf-options-page/*": ["./apps/acf-options-page/src/*"]
+      "@acf-options-page/*": ["./apps/acf-options-page/src/*"],
+      "@dhruv-techapps/shared-microsoft-oauth": ["./packages/shared/microsoft-oauth/src/index.ts"],
+      "@dhruv-techapps/shared-microsoft-excel": ["./packages/shared/microsoft-excel/src/index.ts"]
     }
   }
 }
