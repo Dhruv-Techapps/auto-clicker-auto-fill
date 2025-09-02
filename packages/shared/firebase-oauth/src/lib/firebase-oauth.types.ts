@@ -2,6 +2,11 @@ import { FirebaseApp } from '@firebase/app';
 import { CompleteFn, ErrorFn, NextFn, Observer, Unsubscribe } from '@firebase/util';
 export type FirebaseRole = 'pro' | 'discord' | 'sheets' | 'vision' | 'chatgpt';
 
+export enum FirebaseAuthProvider {
+  GOOGLE = 'google',
+  MICROSOFT = 'microsoft'
+}
+
 export type FirebaseLoginResponse = {
   user: User | null;
   role: FirebaseRole;

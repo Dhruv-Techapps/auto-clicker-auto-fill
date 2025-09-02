@@ -7,13 +7,10 @@
       "path": "../../core/service"
     },
     {
+      "path": "../notifications"
+    },
+    {
       "path": "../../core/common"
-    },
-    {
-      "path": "../google-oauth"
-    },
-    {
-      "path": "../microsoft-oauth"
     },
     {
       "path": "./tsconfig.lib.json"

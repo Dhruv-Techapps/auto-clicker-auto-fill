@@ -16,13 +16,10 @@
       "path": "../../core/service/tsconfig.lib.json"
     },
     {
+      "path": "../notifications/tsconfig.lib.json"
+    },
+    {
       "path": "../../core/common/tsconfig.lib.json"
-    },
-    {
-      "path": "../google-oauth/tsconfig.lib.json"
-    },
-    {
-      "path": "../microsoft-oauth/tsconfig.lib.json"
     }
   ],
   "exclude": [
