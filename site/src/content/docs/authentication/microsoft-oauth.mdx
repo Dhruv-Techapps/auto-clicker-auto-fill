@@ -1,0 +1,145 @@
+---
+title: Authentication · Microsoft OAuth
+description: Sign in with Microsoft using Firebase Authentication in the Auto Clicker AutoFill web extension.
+tags: [authentication, microsoft-oauth, firebase, microsoft, oauth, login]
+toc: true
+---
+
+## Microsoft OAuth Integration
+
+Auto Clicker AutoFill now supports Microsoft sign-in through Firebase Authentication, providing seamless integration with Microsoft accounts for enhanced functionality.
+
+### Overview
+
+The Microsoft OAuth implementation allows users to authenticate using their Microsoft accounts, similar to the existing Google sign-in functionality. This integration uses Firebase Authentication with Microsoft as an OAuth provider.
+
+### Features
+
+- **Microsoft Account Sign-In**: Users can sign in using their Microsoft accounts
+- **Firebase Integration**: Leverages Firebase Authentication for secure token management
+- **Extension Compatibility**: Works within the web extension's background and content script architecture
+- **Unified Authentication**: Can be used alongside Google OAuth for flexible authentication options
+
+### Technical Implementation
+
+The Microsoft OAuth implementation consists of:
+
+- `MicrosoftOauth2Background`: Handles Microsoft OAuth flow in the extension background
+- `FirebaseMicrosoftOauth2Background`: Integrates Microsoft OAuth with Firebase Authentication
+- `FirebaseMultiOauth2Background`: Supports both Google and Microsoft authentication providers
+
+### Usage
+
+#### Basic Microsoft Authentication
+
+```typescript
+import { FirebaseMicrosoftOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+
+// Initialize with Firebase Auth and Microsoft client ID
+const auth = getAuth(app);
+const microsoftAuth = new FirebaseMicrosoftOauth2Background(auth, 'your-microsoft-client-id');
+
+// Sign in with Microsoft
+const result = await microsoftAuth.firebaseLogin(true);
+console.log('User:', result?.user);
+console.log('Role:', result?.role);
+```
+
+#### Multi-Provider Authentication
+
+```typescript
+import { FirebaseMultiOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+
+// Initialize with both Google and Microsoft client IDs
+const auth = getAuth(app);
+const multiAuth = new FirebaseMultiOauth2Background(
+  auth, 
+  'your-google-client-id', 
+  'your-microsoft-client-id'
+);
+
+// Sign in with Microsoft
+await multiAuth.firebaseLogin(FirebaseAuthProvider.MICROSOFT);
+
+// Sign in with Google
+await multiAuth.firebaseLogin(FirebaseAuthProvider.GOOGLE);
+
+// Check login status
+const loginStatus = await multiAuth.firebaseIsLogin();
+
+// Logout from specific provider
+await multiAuth.firebaseLogout(FirebaseAuthProvider.MICROSOFT);
+```
+
+### Configuration
+
+#### Microsoft Azure App Registration
+
+1. Register your application in the [Azure portal](https://portal.azure.com)
+2. Configure redirect URI to match your extension's redirect URL
+3. Note the Application (client) ID for use in the extension
+
+#### Firebase Configuration
+
+1. Enable Microsoft authentication in Firebase Console
+2. Configure Microsoft OAuth provider with your Azure app credentials
+3. Update your extension's manifest with the Microsoft client ID
+
+### Scopes
+
+The Microsoft OAuth implementation supports the following scopes:
+
+- `https://graph.microsoft.com/User.Read` - Read user profile information
+- `openid` - OpenID Connect authentication
+- `offline_access` - Refresh token access
+
+### Error Handling
+
+The implementation includes comprehensive error handling:
+
+```typescript
+try {
+  const result = await microsoftAuth.firebaseLogin(true);
+} catch (error) {
+  if (error.message === 'Microsoft client id not found') {
+    // Handle missing client ID
+  } else if (error.message === 'User not logged in') {
+    // Handle authentication failure
+  }
+}
+```
+
+### Service Integration
+
+Use the service layer for messaging between extension contexts:
+
+```typescript
+import { FirebaseOauthService, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+
+// Service calls for cross-context communication
+await FirebaseOauthService.login(FirebaseAuthProvider.MICROSOFT);
+await FirebaseOauthService.logout(FirebaseAuthProvider.MICROSOFT);
+const status = await FirebaseOauthService.isLogin();
+```
+
+### Best Practices
+
+1. **Client ID Security**: Store Microsoft client IDs securely and never expose them in client-side code
+2. **Error Handling**: Always wrap authentication calls in try-catch blocks
+3. **Provider Selection**: Allow users to choose their preferred authentication provider
+4. **Token Management**: Use Firebase's built-in token refresh mechanisms
+5. **Logout Cleanup**: Properly clean up tokens when users sign out
+
+### Browser Compatibility
+
+Microsoft OAuth is supported in:
+- Chrome extensions
+- Edge extensions (with appropriate client ID configuration)
+- Other Chromium-based browsers
+
+### Security Considerations
+
+- Microsoft tokens are handled securely through Firebase Authentication
+- OAuth flow uses secure redirect URIs
+- Tokens are automatically refreshed by Firebase
+- Authentication state is managed consistently across extension contexts

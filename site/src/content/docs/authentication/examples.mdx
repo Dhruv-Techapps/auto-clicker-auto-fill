@@ -1,0 +1,477 @@
+---
+title: Authentication · Usage Examples
+description: Practical examples of implementing Microsoft and Google OAuth in Auto Clicker AutoFill extensions.
+tags: [authentication, examples, microsoft-oauth, google-oauth, firebase, tutorial]
+toc: true
+---
+
+## Authentication Usage Examples
+
+This page provides practical examples of implementing authentication in Auto Clicker AutoFill extensions using both Google and Microsoft OAuth providers.
+
+### Basic Setup
+
+#### Extension Background Script
+
+```typescript
+// background.ts
+import { getAuth } from 'firebase/auth/web-extension';
+import { initializeApp } from 'firebase/app';
+import { FirebaseMultiOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "your-api-key",
+  authDomain: "your-project.firebaseapp.com",
+  // ... other config
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Initialize multi-provider authentication
+const authHandler = new FirebaseMultiOauth2Background(
+  auth,
+  'your-google-client-id',     // Google OAuth client ID
+  'your-microsoft-client-id'   // Microsoft OAuth client ID
+);
+
+// Handle authentication messages from content scripts
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  switch (request.action) {
+    case 'microsoft-login':
+      authHandler.firebaseLogin(FirebaseAuthProvider.MICROSOFT)
+        .then(result => sendResponse({ success: true, user: result?.user }))
+        .catch(error => sendResponse({ success: false, error: error.message }));
+      return true;
+      
+    case 'google-login':
+      authHandler.firebaseLogin(FirebaseAuthProvider.GOOGLE)
+        .then(result => sendResponse({ success: true, user: result?.user }))
+        .catch(error => sendResponse({ success: false, error: error.message }));
+      return true;
+      
+    case 'logout':
+      authHandler.firebaseLogout()
+        .then(() => sendResponse({ success: true }))
+        .catch(error => sendResponse({ success: false, error: error.message }));
+      return true;
+      
+    case 'check-auth':
+      authHandler.firebaseIsLogin()
+        .then(result => sendResponse({ 
+          success: true, 
+          isLoggedIn: !!result?.user,
+          user: result?.user,
+          role: result?.role
+        }))
+        .catch(error => sendResponse({ success: false, error: error.message }));
+      return true;
+  }
+});
+```
+
+#### Content Script Integration
+
+```typescript
+// content-script.ts
+class AuthenticationManager {
+  async loginWithMicrosoft(): Promise<boolean> {
+    try {
+      const response = await chrome.runtime.sendMessage({ action: 'microsoft-login' });
+      if (response.success) {
+        console.log('Microsoft login successful:', response.user);
+        return true;
+      } else {
+        console.error('Microsoft login failed:', response.error);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error during Microsoft login:', error);
+      return false;
+    }
+  }
+
+  async loginWithGoogle(): Promise<boolean> {
+    try {
+      const response = await chrome.runtime.sendMessage({ action: 'google-login' });
+      if (response.success) {
+        console.log('Google login successful:', response.user);
+        return true;
+      } else {
+        console.error('Google login failed:', response.error);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error during Google login:', error);
+      return false;
+    }
+  }
+
+  async logout(): Promise<boolean> {
+    try {
+      const response = await chrome.runtime.sendMessage({ action: 'logout' });
+      return response.success;
+    } catch (error) {
+      console.error('Error during logout:', error);
+      return false;
+    }
+  }
+
+  async checkAuthStatus(): Promise<{ isLoggedIn: boolean; user?: any; role?: string }> {
+    try {
+      const response = await chrome.runtime.sendMessage({ action: 'check-auth' });
+      if (response.success) {
+        return {
+          isLoggedIn: response.isLoggedIn,
+          user: response.user,
+          role: response.role
+        };
+      }
+    } catch (error) {
+      console.error('Error checking auth status:', error);
+    }
+    return { isLoggedIn: false };
+  }
+}
+
+// Usage in content script
+const authManager = new AuthenticationManager();
+
+// Check authentication status on page load
+authManager.checkAuthStatus().then(status => {
+  if (status.isLoggedIn) {
+    console.log('User is logged in:', status.user);
+    // Initialize authenticated features
+  } else {
+    console.log('User is not logged in');
+    // Show login options
+  }
+});
+```
+
+### Advanced Examples
+
+#### Provider-Specific Authentication
+
+```typescript
+// separate-providers.ts
+import { 
+  FirebaseOauth2Background,
+  FirebaseMicrosoftOauth2Background,
+  FirebaseAuthProvider 
+} from '@dhruv-techapps/shared-firebase-oauth';
+
+class ProviderSpecificAuth {
+  private googleAuth: FirebaseOauth2Background;
+  private microsoftAuth: FirebaseMicrosoftOauth2Background;
+
+  constructor(auth: any) {
+    this.googleAuth = new FirebaseOauth2Background(auth, 'google-client-id');
+    this.microsoftAuth = new FirebaseMicrosoftOauth2Background(auth, 'microsoft-client-id');
+  }
+
+  async loginWithPreferredProvider(provider: 'google' | 'microsoft') {
+    try {
+      let result;
+      
+      if (provider === 'google') {
+        result = await this.googleAuth.firebaseLogin();
+        console.log('Google authentication result:', result);
+      } else {
+        result = await this.microsoftAuth.firebaseLogin();
+        console.log('Microsoft authentication result:', result);
+      }
+
+      return result;
+    } catch (error) {
+      console.error(`${provider} authentication failed:`, error);
+      throw error;
+    }
+  }
+
+  async getAuthHeaders(provider: 'google' | 'microsoft', scopes?: string[]) {
+    try {
+      if (provider === 'google') {
+        return await this.googleAuth._getFirebaseHeaders(scopes);
+      } else {
+        return await this.microsoftAuth._getFirebaseHeaders(scopes);
+      }
+    } catch (error) {
+      console.error(`Failed to get ${provider} auth headers:`, error);
+      throw error;
+    }
+  }
+}
+```
+
+#### Service Layer Usage
+
+```typescript
+// service-layer-example.ts
+import { 
+  FirebaseOauthService, 
+  GoogleOauthService, 
+  MicrosoftOauthService,
+  FirebaseAuthProvider,
+  GOOGLE_SCOPES,
+  MICROSOFT_SCOPES
+} from '@dhruv-techapps/shared-firebase-oauth';
+
+class AuthService {
+  // Firebase authentication with provider choice
+  static async authenticateWithFirebase(provider: FirebaseAuthProvider) {
+    try {
+      const result = await FirebaseOauthService.login(provider);
+      console.log('Firebase authentication successful:', result);
+      return result;
+    } catch (error) {
+      console.error('Firebase authentication failed:', error);
+      throw error;
+    }
+  }
+
+  // Direct Google OAuth (without Firebase)
+  static async authenticateWithGoogle() {
+    try {
+      const result = await GoogleOauthService.login([
+        GOOGLE_SCOPES.PROFILE,
+        GOOGLE_SCOPES.EMAIL
+      ]);
+      console.log('Google OAuth successful:', result);
+      return result;
+    } catch (error) {
+      console.error('Google OAuth failed:', error);
+      throw error;
+    }
+  }
+
+  // Direct Microsoft OAuth (without Firebase)
+  static async authenticateWithMicrosoft() {
+    try {
+      const result = await MicrosoftOauthService.login([
+        MICROSOFT_SCOPES.PROFILE,
+        MICROSOFT_SCOPES.EMAIL
+      ]);
+      console.log('Microsoft OAuth successful:', result);
+      return result;
+    } catch (error) {
+      console.error('Microsoft OAuth failed:', error);
+      throw error;
+    }
+  }
+
+  // Check authentication status
+  static async checkStatus() {
+    try {
+      return await FirebaseOauthService.isLogin();
+    } catch (error) {
+      console.error('Status check failed:', error);
+      return null;
+    }
+  }
+
+  // Logout from all providers
+  static async logout() {
+    try {
+      await FirebaseOauthService.logout();
+      console.log('Logout successful');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      throw error;
+    }
+  }
+}
+```
+
+#### UI Integration Example
+
+```typescript
+// ui-integration.ts
+class AuthenticationUI {
+  private authStatus: { isLoggedIn: boolean; provider?: string; user?: any } = { isLoggedIn: false };
+
+  async initializeUI() {
+    // Check current authentication status
+    await this.updateAuthStatus();
+    
+    // Render appropriate UI
+    this.renderAuthUI();
+    
+    // Set up event listeners
+    this.setupEventListeners();
+  }
+
+  private async updateAuthStatus() {
+    try {
+      const response = await chrome.runtime.sendMessage({ action: 'check-auth' });
+      if (response.success && response.isLoggedIn) {
+        this.authStatus = {
+          isLoggedIn: true,
+          user: response.user,
+          provider: this.detectProvider(response.user)
+        };
+      } else {
+        this.authStatus = { isLoggedIn: false };
+      }
+    } catch (error) {
+      console.error('Failed to check auth status:', error);
+      this.authStatus = { isLoggedIn: false };
+    }
+  }
+
+  private detectProvider(user: any): string {
+    // Detect provider based on user data
+    if (user?.providerData) {
+      for (const provider of user.providerData) {
+        if (provider.providerId === 'google.com') return 'Google';
+        if (provider.providerId === 'microsoft.com') return 'Microsoft';
+      }
+    }
+    return 'Unknown';
+  }
+
+  private renderAuthUI() {
+    const container = document.getElementById('auth-container');
+    if (!container) return;
+
+    if (this.authStatus.isLoggedIn) {
+      container.innerHTML = `
+        <div class="auth-status logged-in">
+          <p>Logged in with ${this.authStatus.provider}</p>
+          <p>Welcome, ${this.authStatus.user?.displayName || 'User'}</p>
+          <button id="logout-btn">Logout</button>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <div class="auth-status logged-out">
+          <p>Please sign in to continue</p>
+          <button id="google-login-btn">Sign in with Google</button>
+          <button id="microsoft-login-btn">Sign in with Microsoft</button>
+        </div>
+      `;
+    }
+  }
+
+  private setupEventListeners() {
+    document.addEventListener('click', async (event) => {
+      const target = event.target as HTMLElement;
+      
+      if (target.id === 'google-login-btn') {
+        await this.handleLogin('google');
+      } else if (target.id === 'microsoft-login-btn') {
+        await this.handleLogin('microsoft');
+      } else if (target.id === 'logout-btn') {
+        await this.handleLogout();
+      }
+    });
+  }
+
+  private async handleLogin(provider: 'google' | 'microsoft') {
+    try {
+      const action = provider === 'google' ? 'google-login' : 'microsoft-login';
+      const response = await chrome.runtime.sendMessage({ action });
+      
+      if (response.success) {
+        await this.updateAuthStatus();
+        this.renderAuthUI();
+        console.log(`${provider} login successful`);
+      } else {
+        console.error(`${provider} login failed:`, response.error);
+        alert(`Login failed: ${response.error}`);
+      }
+    } catch (error) {
+      console.error(`Error during ${provider} login:`, error);
+      alert(`Login error: ${error.message}`);
+    }
+  }
+
+  private async handleLogout() {
+    try {
+      const response = await chrome.runtime.sendMessage({ action: 'logout' });
+      
+      if (response.success) {
+        this.authStatus = { isLoggedIn: false };
+        this.renderAuthUI();
+        console.log('Logout successful');
+      } else {
+        console.error('Logout failed:', response.error);
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  }
+}
+
+// Initialize UI when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  const authUI = new AuthenticationUI();
+  authUI.initializeUI();
+});
+```
+
+### Error Handling Examples
+
+```typescript
+// error-handling.ts
+class AuthErrorHandler {
+  static handleAuthError(error: any, provider: string): string {
+    if (error?.message) {
+      switch (error.message) {
+        case 'Microsoft client id not found':
+        case 'Google client id not found':
+          return `${provider} authentication is not configured. Please contact support.`;
+          
+        case 'User not logged in':
+          return 'Please sign in to continue.';
+          
+        case 'Invalid Credentials':
+        case 'invalid authentication credentials':
+          return 'Your credentials have expired. Please sign in again.';
+          
+        case 'Token not found':
+          return 'Authentication failed. Please try again.';
+          
+        case 'Error while retrieving token':
+          return 'Network error during authentication. Please check your connection.';
+          
+        default:
+          return `Authentication error: ${error.message}`;
+      }
+    }
+    
+    return 'An unknown authentication error occurred.';
+  }
+
+  static async withErrorHandling<T>(
+    operation: () => Promise<T>, 
+    provider: string
+  ): Promise<{ success: boolean; data?: T; error?: string }> {
+    try {
+      const data = await operation();
+      return { success: true, data };
+    } catch (error) {
+      const errorMessage = this.handleAuthError(error, provider);
+      console.error(`${provider} operation failed:`, error);
+      return { success: false, error: errorMessage };
+    }
+  }
+}
+
+// Usage example
+const result = await AuthErrorHandler.withErrorHandling(
+  () => FirebaseOauthService.login(FirebaseAuthProvider.MICROSOFT),
+  'Microsoft'
+);
+
+if (result.success) {
+  console.log('Authentication successful:', result.data);
+} else {
+  console.error('Authentication failed:', result.error);
+  // Show user-friendly error message
+  showNotification(result.error);
+}
+```
+
+These examples demonstrate comprehensive integration of Microsoft and Google OAuth authentication in Auto Clicker AutoFill extensions, including error handling, UI integration, and service layer usage.
