@@ -1,5 +1,5 @@
 {
-  "name": "@dhruv-techapps/shared-firebase-oauth",
+  "name": "@dhruv-techapps/shared-microsoft-oauth",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -20,12 +20,8 @@
   ],
   "dependencies": {
     "@swc/helpers": "~0.5.11",
-    "@dhruv-techapps/shared-google-oauth": "0.0.1",
-    "@dhruv-techapps/shared-microsoft-oauth": "0.0.1",
     "@dhruv-techapps/core-common": "0.0.1",
     "@dhruv-techapps/core-service": "0.0.1",
-    "firebase": "^12.1.0",
-    "@firebase/app": "0.14.1",
-    "@firebase/util": "1.13.0"
+    "@dhruv-techapps/shared-notifications": "0.0.1"
   }
 }
