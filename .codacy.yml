@@ -1,12 +1,5 @@
 exclude_paths:
   - 'README.md'
-  - '**/**/eslint.config.mjs'
-  - '**/**/package.json'
-  - '**/**/tsconfig.json'
-  - '**/**/vite.config.ts'
-  - '**/**/project.json'
-  - '**/**/tsconfig.*.json'
-  - '**/**/webpack.config.js'
   - 'scripts/*'
   - 'site/*'
   - 'build/*'
