@@ -1,4 +1,3 @@
-import { BROWSER } from '@dhruv-techapps/core-common';
 import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
 import { MICROSOFT_SCOPES, MicrosoftOauth2LoginResponse } from './microsoft-oauth.types';
 
@@ -46,7 +45,7 @@ export class MicrosoftOauth2Background {
   }
 
   async _getAuthToken({ scopes, interactive }: { scopes?: Array<string>; interactive?: boolean }): Promise<MicrosoftOauth2LoginResponse> {
-    scopes = scopes || [MICROSOFT_SCOPES.PROFILE, MICROSOFT_SCOPES.EMAIL];
+    scopes = scopes || [MICROSOFT_SCOPES.EMAIL];
     if (!scopes || scopes.length === 0) {
       throw new Error('No scopes found');
     }

@@ -1,7 +1,6 @@
 import { RESPONSE_CODE } from '@dhruv-techapps/core-common';
 
 export enum MICROSOFT_SCOPES {
-  PROFILE = 'https://graph.microsoft.com/User.Read',
   EMAIL = 'https://graph.microsoft.com/User.Read',
   OPENID = 'openid',
   OFFLINE_ACCESS = 'offline_access'
