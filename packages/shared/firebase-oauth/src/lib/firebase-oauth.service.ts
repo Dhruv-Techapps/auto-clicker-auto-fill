@@ -9,16 +9,16 @@ export class FirebaseOauthService extends CoreService {
   }
 
   static async login(provider: FirebaseAuthProvider = FirebaseAuthProvider.GOOGLE) {
-    return await this.message<RuntimeMessageRequest<FirebaseAuthProvider>, FirebaseLoginResponse>({ 
-      messenger: RUNTIME_MESSAGE_FIREBASE_OAUTH, 
+    return await this.message<RuntimeMessageRequest<FirebaseAuthProvider>, FirebaseLoginResponse>({
+      messenger: RUNTIME_MESSAGE_FIREBASE_OAUTH,
       methodName: 'firebaseLogin',
       message: provider
     });
   }
 
   static async logout(provider?: FirebaseAuthProvider) {
-    return await this.message<RuntimeMessageRequest<FirebaseAuthProvider | undefined>, void>({ 
-      messenger: RUNTIME_MESSAGE_FIREBASE_OAUTH, 
+    return await this.message<RuntimeMessageRequest<FirebaseAuthProvider | undefined>, void>({
+      messenger: RUNTIME_MESSAGE_FIREBASE_OAUTH,
       methodName: 'firebaseLogout',
       message: provider
     });

@@ -33,42 +33,38 @@ The Microsoft OAuth implementation consists of:
 #### Basic Microsoft Authentication
 
 ```typescript
-import { FirebaseMicrosoftOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+import { FirebaseMicrosoftOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth'
 
 // Initialize with Firebase Auth and Microsoft client ID
-const auth = getAuth(app);
-const microsoftAuth = new FirebaseMicrosoftOauth2Background(auth, 'your-microsoft-client-id');
+const auth = getAuth(app)
+const microsoftAuth = new FirebaseMicrosoftOauth2Background(auth, 'your-microsoft-client-id')
 
 // Sign in with Microsoft
-const result = await microsoftAuth.firebaseLogin(true);
-console.log('User:', result?.user);
-console.log('Role:', result?.role);
+const result = await microsoftAuth.firebaseLogin(true)
+console.log('User:', result?.user)
+console.log('Role:', result?.role)
 ```
 
 #### Multi-Provider Authentication
 
 ```typescript
-import { FirebaseMultiOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+import { FirebaseMultiOauth2Background, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth'
 
 // Initialize with both Google and Microsoft client IDs
-const auth = getAuth(app);
-const multiAuth = new FirebaseMultiOauth2Background(
-  auth, 
-  'your-google-client-id', 
-  'your-microsoft-client-id'
-);
+const auth = getAuth(app)
+const multiAuth = new FirebaseMultiOauth2Background(auth, 'your-google-client-id', 'your-microsoft-client-id')
 
 // Sign in with Microsoft
-await multiAuth.firebaseLogin(FirebaseAuthProvider.MICROSOFT);
+await multiAuth.firebaseLogin(FirebaseAuthProvider.MICROSOFT)
 
 // Sign in with Google
-await multiAuth.firebaseLogin(FirebaseAuthProvider.GOOGLE);
+await multiAuth.firebaseLogin(FirebaseAuthProvider.GOOGLE)
 
 // Check login status
-const loginStatus = await multiAuth.firebaseIsLogin();
+const loginStatus = await multiAuth.firebaseIsLogin()
 
 // Logout from specific provider
-await multiAuth.firebaseLogout(FirebaseAuthProvider.MICROSOFT);
+await multiAuth.firebaseLogout(FirebaseAuthProvider.MICROSOFT)
 ```
 
 ### Configuration
@@ -99,7 +95,7 @@ The implementation includes comprehensive error handling:
 
 ```typescript
 try {
-  const result = await microsoftAuth.firebaseLogin(true);
+  const result = await microsoftAuth.firebaseLogin(true)
 } catch (error) {
   if (error.message === 'Microsoft client id not found') {
     // Handle missing client ID
@@ -114,12 +110,12 @@ try {
 Use the service layer for messaging between extension contexts:
 
 ```typescript
-import { FirebaseOauthService, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth';
+import { FirebaseOauthService, FirebaseAuthProvider } from '@dhruv-techapps/shared-firebase-oauth'
 
 // Service calls for cross-context communication
-await FirebaseOauthService.login(FirebaseAuthProvider.MICROSOFT);
-await FirebaseOauthService.logout(FirebaseAuthProvider.MICROSOFT);
-const status = await FirebaseOauthService.isLogin();
+await FirebaseOauthService.login(FirebaseAuthProvider.MICROSOFT)
+await FirebaseOauthService.logout(FirebaseAuthProvider.MICROSOFT)
+const status = await FirebaseOauthService.isLogin()
 ```
 
 ### Best Practices
@@ -133,6 +129,7 @@ const status = await FirebaseOauthService.isLogin();
 ### Browser Compatibility
 
 Microsoft OAuth is supported in:
+
 - Chrome extensions
 - Edge extensions (with appropriate client ID configuration)
 - Other Chromium-based browsers

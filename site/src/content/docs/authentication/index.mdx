@@ -12,11 +12,13 @@ Auto Clicker AutoFill supports multiple authentication providers through Firebas
 ### Supported Providers
 
 #### Google OAuth
+
 - **Primary provider** for Google services integration
 - Supports Google Sheets, Google Drive, and other Google APIs
 - Established and fully integrated authentication flow
 
 #### Microsoft OAuth
+
 - **New support** for Microsoft account authentication
 - Enables integration with Microsoft Graph APIs
 - Uses same Firebase Authentication infrastructure
@@ -33,6 +35,7 @@ The authentication system is built on Firebase Authentication with OAuth provide
 ### Implementation Layers
 
 #### Background Services
+
 - `GoogleOauth2Background`: Google OAuth implementation
 - `MicrosoftOauth2Background`: Microsoft OAuth implementation
 - `FirebaseOauth2Background`: Firebase integration for Google
@@ -40,11 +43,13 @@ The authentication system is built on Firebase Authentication with OAuth provide
 - `FirebaseMultiOauth2Background`: Unified multi-provider support
 
 #### Service Layer
+
 - `GoogleOauthService`: Google OAuth messaging service
 - `MicrosoftOauthService`: Microsoft OAuth messaging service
 - `FirebaseOauthService`: Firebase authentication messaging service
 
 #### Types and Constants
+
 - Standardized interfaces for authentication responses
 - Provider enums and constants for consistent usage
 - Error handling types and messaging
@@ -52,41 +57,41 @@ The authentication system is built on Firebase Authentication with OAuth provide
 ### Usage Patterns
 
 #### Single Provider Authentication
+
 Use specific provider implementations for dedicated authentication:
 
 ```typescript
 // Google authentication
-const googleAuth = new FirebaseOauth2Background(auth, googleClientId);
-await googleAuth.firebaseLogin();
+const googleAuth = new FirebaseOauth2Background(auth, googleClientId)
+await googleAuth.firebaseLogin()
 
-// Microsoft authentication  
-const microsoftAuth = new FirebaseMicrosoftOauth2Background(auth, microsoftClientId);
-await microsoftAuth.firebaseLogin();
+// Microsoft authentication
+const microsoftAuth = new FirebaseMicrosoftOauth2Background(auth, microsoftClientId)
+await microsoftAuth.firebaseLogin()
 ```
 
 #### Multi-Provider Authentication
+
 Use the unified implementation for flexible provider support:
 
 ```typescript
-const multiAuth = new FirebaseMultiOauth2Background(
-  auth, 
-  googleClientId, 
-  microsoftClientId
-);
+const multiAuth = new FirebaseMultiOauth2Background(auth, googleClientId, microsoftClientId)
 
 // Choose provider at runtime
-await multiAuth.firebaseLogin(FirebaseAuthProvider.GOOGLE);
-await multiAuth.firebaseLogin(FirebaseAuthProvider.MICROSOFT);
+await multiAuth.firebaseLogin(FirebaseAuthProvider.GOOGLE)
+await multiAuth.firebaseLogin(FirebaseAuthProvider.MICROSOFT)
 ```
 
 ### Configuration Requirements
 
 #### Firebase Setup
+
 1. Enable desired OAuth providers in Firebase Console
 2. Configure provider-specific settings (client IDs, secrets)
 3. Set up appropriate redirect URIs for extension context
 
 #### Extension Manifest
+
 Update your extension's manifest to include OAuth configuration:
 
 ```json
@@ -100,6 +105,7 @@ Update your extension's manifest to include OAuth configuration:
 ```
 
 #### Provider Registration
+
 - **Google**: Configure in Google Cloud Console
 - **Microsoft**: Register application in Azure Portal
 
@@ -128,6 +134,7 @@ See the following guides for specific implementation details:
 ### Browser Support
 
 Authentication is supported in:
+
 - Chrome extensions (primary target)
 - Edge extensions (with appropriate configuration)
 - Other Chromium-based browsers with extension support

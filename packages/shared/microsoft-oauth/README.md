@@ -68,10 +68,7 @@ await MicrosoftOauthService.logout([MICROSOFT_SCOPES.PROFILE]);
   "permissions": ["identity"],
   "oauth2": {
     "client_id": "your-microsoft-client-id",
-    "scopes": [
-      "https://graph.microsoft.com/User.Read",
-      "openid"
-    ]
+    "scopes": ["https://graph.microsoft.com/User.Read", "openid"]
   }
 }
 ```

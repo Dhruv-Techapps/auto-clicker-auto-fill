@@ -20,7 +20,7 @@ export class FirebaseMicrosoftOauth2Background extends MicrosoftOauth2Background
     if (token) {
       const provider = new OAuthProvider('microsoft.com');
       const credential = OAuthProvider.credential(provider.providerId, {
-        accessToken: token,
+        accessToken: token
       });
       if (credential) {
         const { user } = await signInWithCredential(this.auth, credential);
@@ -63,7 +63,7 @@ export class FirebaseMicrosoftOauth2Background extends MicrosoftOauth2Background
         if (token) {
           const provider = new OAuthProvider('microsoft.com');
           const credential = OAuthProvider.credential(provider.providerId, {
-            accessToken: token,
+            accessToken: token
           });
           if (credential) {
             const { user } = await signInWithCredential(this.auth, credential);
