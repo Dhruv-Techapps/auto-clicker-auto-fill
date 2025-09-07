@@ -7,6 +7,10 @@ on:
       version:
         description: 'Version (v4.0.0.0)'
         type: string
+env:
+  FORCE_COLOR: 2
+  NODE: 24
+
 jobs:
   main:
     name: Build & Bundle & Publish
@@ -19,16 +23,18 @@ jobs:
       actions: read
       discussions: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Clone repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 24
+          node-version: '${{ env.NODE }}'
           registry-url: https://npm.pkg.github.com
           scope: ${{github.repository_owner}}
           cache: 'npm'
-      - uses: nrwl/nx-set-shas@v4
+      - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
       - run: npm ci
       - name: Build Configurations Page
         run: |
@@ -47,7 +53,7 @@ jobs:
       - name: Print Environment Info
         run: npx nx report
       - name: Configs to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c #v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill

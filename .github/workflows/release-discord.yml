@@ -14,14 +14,14 @@ jobs:
   notify-discord:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v6
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             // Function to format links and remove comments
-            const formatContent = (text) => 
+            const formatContent = (text) =>
                 text
                   .replace(/(https?:\/\/[^\s)]+)/g, '<$1>') // Wrap URLs in <>
                   .replace(/<!--.*?-->/gs, '') // Remove all HTML comments
