@@ -13,7 +13,7 @@ export interface IActionSettingsStore {
 
 export interface IActionSettingsRequest {
   name: string;
-  value: boolean;
+  value: boolean | string | number;
 }
 
 const initialState: IActionSettingsStore = {
