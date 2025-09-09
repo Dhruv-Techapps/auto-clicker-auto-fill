@@ -13,7 +13,7 @@ export interface IActionSettingsStore {
 
 export interface IActionSettingsRequest {
   name: string;
-  value: boolean | string | number;
+  value: boolean;
 }
 
 const initialState: IActionSettingsStore = {
@@ -27,9 +27,8 @@ const slice = createSlice({
   reducers: {
     updateActionSettings: (state, action: PayloadAction<IActionSettingsRequest>) => {
       const { name, value } = action.payload;
-      if (name in state.settings) {
-        (state.settings as Record<string, typeof value>)[name] = value;
-      }
+      // @ts-expect-error "making is generic function difficult for TypeScript"
+      state.settings[name] = value;
     },
     switchActionSettingsModal: (state) => {
       window.dataLayer.push({ event: 'modal', name: 'action_settings', visibility: !state.visible });
