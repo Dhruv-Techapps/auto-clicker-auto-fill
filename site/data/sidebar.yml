@@ -121,3 +121,9 @@
   pages:
     - title: Permissions
     - title: Subscription
+
+- title: FAQ
+  icon: question-circle
+  icon_color: green
+  pages:
+    - title: Quick Q&A
