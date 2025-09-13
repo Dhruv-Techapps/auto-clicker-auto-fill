@@ -1,3 +1,13 @@
+## Unreleased
+
+### 🚀 Features
+
+- **i18n:** improve Chinese language labels and add zh_TW translations - Update Chinese language label from 'Chinese' to 'Chinese (Simplified)' and add Traditional Chinese language labels across all supported languages
+
+### 🐛 Bug Fixes
+
+- **i18n:** enable Traditional Chinese language support - Add zh-tw configuration to activate existing Traditional Chinese translations
+
 ## 4.0.9 (2024-05-20)
 
 This was a version bump only, there were no code changes.

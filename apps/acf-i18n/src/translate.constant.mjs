@@ -1,5 +1,6 @@
 const LANGUAGES = [
   { lang: 'zh-cn', folder: 'zh_CN' },
+  { lang: 'zh-tw', folder: 'zh_TW' },
   { lang: 'fr', folder: 'fr' },
   { lang: 'ko', folder: 'ko' },
   { lang: 'sv', folder: 'sv' },
