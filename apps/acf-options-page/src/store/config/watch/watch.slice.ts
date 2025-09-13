@@ -27,9 +27,8 @@ const slice = createSlice({
   reducers: {
     updateWatch: (state, action: PayloadAction<IWatchUpdateRequest>) => {
       const { name, value } = action.payload;
-      if (name in state.watch) {
-        (state.watch as Record<string, typeof value>)[name] = value;
-      }
+      // @ts-expect-error "making is generic function difficult for TypeScript"
+      state.watch[name] = value;
     },
     updateWatchLifecycleStopConditions: (state, action: PayloadAction<IWatchUpdateRequest>) => {
       const { name, value } = action.payload;
