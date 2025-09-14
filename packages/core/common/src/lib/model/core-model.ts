@@ -14,4 +14,5 @@ export interface IExtension {
   __batchRepeat: number;
   __sessionCount: number;
   __sheets?: ISheets;
+  __workbook?: ISheets;
 }

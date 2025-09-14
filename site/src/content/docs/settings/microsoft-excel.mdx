@@ -1,0 +1,39 @@
+---
+title: Settings · Microsoft Excel
+description: Extension can fetch the values from your Microsoft Excel workbooks and fill the forms on behalf of you.
+tags: [settings, microsoft-excel, automation, microsoft-excel-login, pro]
+toc: true
+---
+
+<img
+  class="d-block mb-4 img-fluid rounded-3"
+  src="/docs/[[config:docs_version]]/assets/img/global-settings.png"
+  alt=""
+/>
+
+### Microsoft Excel Login
+
+Auto Clicker Auto Fill needs read-only access to your Microsoft Excel workbooks to fetch cell values. Click `Connect with Microsoft Excel` and grant the following scopes.
+
+### Microsoft Excel Scope
+
+- `https://graph.microsoft.com/Files.Read`
+- `https://graph.microsoft.com/User.Read`
+
+> After you connect with Microsoft Excel go to configuration settings and add [Microsoft Excel Workbook ID]([[docsref:/configuration/config-settings#microsoft-excel-workbook-id]])
+
+<img
+  class="d-block mb-4 img-fluid rounded-3"
+  src="/docs/[[config:docs_version]]/assets/img/settings-microsoft-excel.png"
+  alt=""
+/>
+
+<Callout type="danger">
+  Microsoft may show a warning for apps not yet fully verified for production. To proceed during development/testing, click
+  Advanced → `Go to Auto Clicker Auto Fill (unsafe)`.
+  <img
+    class="d-block mb-4 img-fluid rounded-3"
+    src="/docs/[[config:docs_version]]/assets/img/settings-microsoft-excel-error.png"
+    alt=""
+  />
+</Callout>
