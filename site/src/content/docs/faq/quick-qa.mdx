@@ -25,11 +25,11 @@ It’s how you point to something on the page (a button, input, link). You can u
 - Text-based paths (XPath)
 - CSS selector (querySelector)
 - Shortcuts like Id::, Name::, ClassName::, Selector::
-  More: [Element Finder]([[docsref:/element-finder/overview]])
+  More: [Element Finder]([[docsref:/action/element-finder]])
 
 #### Q: How do I add a new action?
 
-Open your Configuration → Actions → Add. Set the Finder, choose the Value (what to do), and adjust timing or conditions if needed. Details: [Action Settings]([[docsref:/action-settings/overview]])
+Open your Configuration → Actions → Add. Set the Finder, choose the Value (what to do), and adjust timing or conditions if needed. Details: [Action Settings]([[docsref:/action/action-settings]])
 
 ## Selectors (how to point to elements)
 
@@ -164,7 +164,7 @@ Click the dropdown trigger first, then select the item in the open list by its e
 
 #### Q: What is Init Wait (sec)?
 
-A delay before an action or configuration starts. Set 0 for no delay. [Timing]([[docsref:/action-settings/timing]])
+A delay before an action or configuration starts. Set 0 for no delay. [Timing]([[docsref:/action/overview#init-wait]])
 
 #### Q: Why is there a 5s delay before actions?
 
@@ -172,7 +172,7 @@ Lower the Retry Interval in Global Settings and set each action’s Init Wait to
 
 #### Q: Can I repeat actions N times or forever?
 
-Yes. Use Batch Repeat. A value of -2 means repeat forever. [Batch Repeat]([[docsref:/action-settings/batch-repeat]])
+Yes. Use Batch Repeat. A value of -2 means repeat forever. [Batch Repeat]([[docsref:/configuration/batch#repeat]])
 
 #### Q: How do I add a short delay between actions?
 
@@ -211,7 +211,7 @@ Yes, use a regular expression in the Configuration URL. Examples:
 - `^https://(108\.181|208\.87)\..*`
 - `^https://example\.com/(a|b|c)/.*`
 
-Learn more: [Configuration URL]([[docsref:/configuration/config-url]])
+Learn more: [Configuration URL]([[docsref:/configuration/url]])
 
 #### Q: Open another URL when done?
 
@@ -224,7 +224,7 @@ Final action:
 
 #### Q: How do I click inside an iframe (even nested ones)?
 
-Turn on “Iframe First” for the action that targets the iframe’s content. For nested iframes, do it step by step: switch outer iframe (action 1), then inner (action 2), then your click. [iFrame]([[docsref:/element-finder/iframe]])
+Turn on “Iframe First” for the action from action settings that targets the iframe’s content.
 
 #### Q: Payment fields (like Stripe) won’t fill.
 
@@ -238,7 +238,7 @@ Use stable attributes (like data-\*), clear text, or CSS selectors. Avoid absolu
 
 #### Q: How do I pull a value from Google Sheets?
 
-Use `GoogleSheets::Sheet1!A1` as the Value. First, connect in Global Settings → Google Sheets. [Google Sheets]([[docsref:/integration/google-sheets]])
+Use `GoogleSheets::Sheet1!A1` as the Value. First, connect in Global Settings → Google Sheets. [Google Sheets]([[docsref:/action-value/google-sheets]])
 
 #### Q: How do I go row by row each time it runs?
 
