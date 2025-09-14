@@ -53,6 +53,7 @@ export interface IConfiguration {
   startType: EStartTypes;
   loadType: ELoadTypes;
   actions: Array<IAction | IUserScript>;
+  triggerUrlChange?: boolean; // Whether to trigger on URL change (for SPAs)
   id: TRandomUUID;
   configId?: number;
   name?: string;
@@ -78,5 +79,6 @@ export const getDefaultConfig = (source?: EConfigSource, actions?: Array<IAction
   startType: EStartTypes.AUTO,
   loadType: ELoadTypes.WINDOW,
   actions: actions || [getDefaultAction()],
-  updated: true
+  updated: true,
+  triggerUrlChange: false
 });
