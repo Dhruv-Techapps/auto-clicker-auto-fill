@@ -26,7 +26,7 @@ async function loadConfig(loadType: ELoadTypes) {
   try {
     new ConfigStorage().getConfig().then(async ({ autoConfig, manualConfigs }: GetConfigResult) => {
       if (autoConfig) {
-        if (autoConfig.loadType === loadType || (autoConfig.triggerUrlChange === true && loadType === ELoadTypes.URL_CHANGE)) {
+        if (autoConfig.loadType === loadType || (autoConfig.triggerUrlChange && loadType === ELoadTypes.URL_CHANGE)) {
           const { host } = document.location;
           Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', host, loadType);
           await ConfigProcessor.checkStartType(manualConfigs, autoConfig);
