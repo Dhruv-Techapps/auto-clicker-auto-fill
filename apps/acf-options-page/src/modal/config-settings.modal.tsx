@@ -151,6 +151,16 @@ const ConfigSettingsModal = () => {
                     name='loadType'
                     label={t('modal.configSettings.document')}
                   />
+                  <span className='mx-2 border-start'></span>
+                  <Form.Check
+                    inline
+                    type='switch'
+                    id='triggerUrlChange'
+                    onChange={onUpdate}
+                    checked={config.triggerUrlChange}
+                    name='triggerUrlChange'
+                    label={t('modal.configSettings.triggerUrlChange')}
+                  />
                   <small>
                     <ul className='mb-0 mt-2'>
                       <li>
@@ -158,6 +168,9 @@ const ConfigSettingsModal = () => {
                       </li>
                       <li>
                         <Trans i18nKey='modal.configSettings.documentHint' components={{ b: <b /> }} />
+                      </li>
+                      <li>
+                        <Trans i18nKey='modal.configSettings.triggerUrlChangeHint' components={{ b: <b /> }} />
                       </li>
                     </ul>
                   </small>

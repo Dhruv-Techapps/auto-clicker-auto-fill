@@ -92,6 +92,12 @@
         "title": "Remover ação",
         "message": "Tem certeza de que deseja remover a ação [{{name}}]?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Remover script do usuário",
+        "message": "Tem certeza de que deseja remover o script de usuário [{{name}}]?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Documento",
       "hotkey": "Tecla de atalho",
       "documentHint": "O navegador <b>de documentos</b> carrega a extensão antes que os scripts e imagens sejam carregados (mais rápido) (inseguro)",
+      "triggerUrlChange": "Acionar na alteração de URL",
+      "triggerUrlChangeHint": "<b>A alteração do URL do gatilho</b> acionará a configuração se o URL for alterado sem recarregar a página (como no SPA)",
       "urlMatch": "Correspondência de URL",
       "regex": "Regex",
       "exact": "Exato"
@@ -218,6 +226,13 @@
         "refresh": "Atualizar",
         "goto": "Ir para ação"
       }
+    },
+    "schedule": {
+      "title": "Agendar",
+      "info": "Configuração de agendamento para data e hora específicas",
+      "date": "Data",
+      "time": "Tempo",
+      "repeat": "Repita"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Ação removida com sucesso!",
     "actionAddon": "Addon salvo com sucesso!",
     "actionStatement": "Ação Condição salva com sucesso!",
-    "actionSettings": "Configurações de ação salvas com sucesso!"
+    "actionSettings": "Configurações de ação salvas com sucesso!",
+    "schedule": "Agenda salva com sucesso!"
   },
   "configuration": {
     "title": "Configuração",
@@ -263,6 +279,9 @@
     "interval": "Somente números válidos são permitidos",
     "url": "O URL é obrigatório",
     "initWait": "Somente números válidos são permitidos",
+    "scheduleDate": "A data do agendamento deve corresponder ao formato AAAA-MM-DD (2025-12-01)",
+    "scheduleTime": "O horário agendado deve corresponder ao formato HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "A repetição do agendamento deve ser apenas numérica",
     "startTime": "A hora de início deve corresponder ao formato HH:mm:ss:fff (12:12:12:000)",
     "json": "Json selecionado não é válido",
     "hotKey": "Uma única letra sem Ctrl/Command não é válida",
@@ -288,6 +307,9 @@
     "repeat": "Repita",
     "repeatInterval": "Intervalo R"
   },
+  "userscript": {
+    "add": "Adicionar script de usuário"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Exemplos"
@@ -311,6 +333,7 @@
     "download": "Download",
     "disabled": "Desabilitado",
     "sec": "segundo",
+    "min": "min",
     "no": "Não",
     "yes": "Sim",
     "local": "LOCAL",

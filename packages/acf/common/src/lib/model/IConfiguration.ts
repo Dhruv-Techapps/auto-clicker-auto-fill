@@ -52,6 +52,7 @@ export interface IConfiguration {
   enable: boolean;
   startType: EStartTypes;
   loadType: ELoadTypes;
+  triggerUrlChange?: boolean;
   actions: Array<IAction | IUserScript>;
   id: TRandomUUID;
   configId?: number;
@@ -78,5 +79,6 @@ export const getDefaultConfig = (source?: EConfigSource, actions?: Array<IAction
   startType: EStartTypes.AUTO,
   loadType: ELoadTypes.WINDOW,
   actions: actions || [getDefaultAction()],
+  triggerUrlChange: false,
   updated: true
 });

@@ -92,6 +92,12 @@
         "title": "Eliminar acción",
         "message": "¿Estás seguro de eliminar la acción [{{name}}]?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Eliminar script de usuario",
+        "message": "¿Estás seguro de eliminar el script de usuario [{{name}}]?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Documento",
       "hotkey": "tecla de acceso rápido",
       "documentHint": "El navegador <b>de documentos</b> carga la extensión antes de que se carguen los scripts y las imágenes (más rápido) (inseguro)",
+      "triggerUrlChange": "Disparador al cambiar la URL",
+      "triggerUrlChangeHint": "<b>El cambio de URL</b> activará la configuración si se cambia la URL sin recargar la página (como en SPA)",
       "urlMatch": "Coincidencia de URL",
       "regex": "expresión regular",
       "exact": "Exacto"
@@ -218,6 +226,13 @@
         "refresh": "Actualizar",
         "goto": "Ir a acción"
       }
+    },
+    "schedule": {
+      "title": "Cronograma",
+      "info": "Configuración de programación para fecha y hora específicas",
+      "date": "Fecha",
+      "time": "Tiempo",
+      "repeat": "Repetir"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "¡La acción se eliminó correctamente!",
     "actionAddon": "¡Complemento guardado exitosamente!",
     "actionStatement": "¡Condición de acción guardada exitosamente!",
-    "actionSettings": "¡La configuración de acción se guardó correctamente!"
+    "actionSettings": "¡La configuración de acción se guardó correctamente!",
+    "schedule": "¡Horario guardado exitosamente!"
   },
   "configuration": {
     "title": "Configuración",
@@ -263,6 +279,9 @@
     "interval": "Sólo se permiten números válidos",
     "url": "La URL es obligatoria",
     "initWait": "Sólo se permiten números válidos",
+    "scheduleDate": "La fecha programada debe coincidir con el formato AAAA-MM-DD (01/12/2025)",
+    "scheduleTime": "La hora programada debe coincidir con el formato HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "La repetición del programa debe ser solo numérica",
     "startTime": "La hora de inicio debe coincidir con el formato HH:mm:ss:fff (12:12:12:000)",
     "json": "El Json seleccionado no es válido",
     "hotKey": "Una sola letra sin Ctrl/Comando no es válida",
@@ -288,6 +307,9 @@
     "repeat": "Repetir",
     "repeatInterval": "Intervalo R"
   },
+  "userscript": {
+    "add": "Agregar script de usuario"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Ejemplos"
@@ -311,6 +333,7 @@
     "download": "Descargar",
     "disabled": "Desactivado",
     "sec": "segundo",
+    "min": "mín.",
     "no": "No",
     "yes": "Sí",
     "local": "LOCAL",

@@ -92,6 +92,12 @@
         "title": "Rimuovi azione",
         "message": "Sei sicuro di rimuovere l'azione [{{name}}]?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Rimuovi script utente",
+        "message": "Vuoi rimuovere lo script utente [{{name}}]?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Documento",
       "hotkey": "Tasto di scelta rapida",
       "documentHint": "Il browser <b>dei documenti</b> carica l&#39;estensione prima che gli script e le immagini vengano caricati (più veloce) (non sicuro)",
+      "triggerUrlChange": "Attivazione al cambio URL",
+      "triggerUrlChangeHint": "<b>Trigger URL Change</b> attiverà la configurazione se l&#39;URL viene modificato senza ricaricare la pagina (come in SPA)",
       "urlMatch": "Corrispondenza URL",
       "regex": "Regex",
       "exact": "Esatto"
@@ -218,6 +226,13 @@
         "refresh": "ricaricare",
         "goto": "Vai a Azione"
       }
+    },
+    "schedule": {
+      "title": "Programma",
+      "info": "Configurazione della pianificazione per data e ora specifiche",
+      "date": "Data",
+      "time": "Tempo",
+      "repeat": "Ripetere"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Azione rimossa con successo!",
     "actionAddon": "Componente aggiuntivo salvato con successo!",
     "actionStatement": "Condizione dell'azione salvata con successo!",
-    "actionSettings": "Impostazioni azione salvate con successo!"
+    "actionSettings": "Impostazioni azione salvate con successo!",
+    "schedule": "Programma salvato con successo!"
   },
   "configuration": {
     "title": "Configurazione",
@@ -263,6 +279,9 @@
     "interval": "Sono ammessi solo numeri validi",
     "url": "L'URL è obbligatorio",
     "initWait": "Sono ammessi solo numeri validi",
+    "scheduleDate": "La data della pianificazione deve corrispondere al formato AAAA-MM-GG (2025-12-01)",
+    "scheduleTime": "L'orario di pianificazione deve corrispondere al formato HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "La ripetizione della pianificazione dovrebbe essere solo numerica",
     "startTime": "L'ora di inizio deve corrispondere al formato HH:mm:ss:fff (12:12:12:000)",
     "json": "Json selezionato non è valido",
     "hotKey": "La singola lettera senza Ctrl/Comando non è valida",
@@ -288,6 +307,9 @@
     "repeat": "Ripetere",
     "repeatInterval": "Intervallo R"
   },
+  "userscript": {
+    "add": "Aggiungi script utente"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Esempi"
@@ -311,6 +333,7 @@
     "download": "Scaricamento",
     "disabled": "Disabilitato",
     "sec": "sez",
+    "min": "minimo",
     "no": "NO",
     "yes": "SÌ",
     "local": "LOCALE",

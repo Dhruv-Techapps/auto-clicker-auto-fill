@@ -92,6 +92,12 @@
         "title": "조치를 제거하십시오",
         "message": "당신은 확실히 제거 할 것입니다 [{{name}}] 동작?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "사용자 스크립트 제거",
+        "message": "[{{name}}] 사용자 스크립트를 제거하시겠습니까?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "문서",
       "hotkey": "핫키",
       "documentHint": "<b>문서</b> 브라우저는 스크립트와 이미지가로드되기 전에 확장자를로드합니다 (더 빠르지 않음) (안전하지 않음)",
+      "triggerUrlChange": "URL 변경 시 트리거",
+      "triggerUrlChangeHint": "<b>URL 변경 트리거는</b> 페이지를 다시 로드하지 않고 URL이 변경되면 구성을 트리거합니다(SPA의 경우와 같음).",
       "urlMatch": "URL 일치",
       "regex": "정규식",
       "exact": "정확한"
@@ -218,6 +226,13 @@
         "refresh": "새로 고치다",
         "goto": "액션으로 이동"
       }
+    },
+    "schedule": {
+      "title": "일정",
+      "info": "특정 날짜 및 시간에 대한 일정 구성",
+      "date": "날짜",
+      "time": "시간",
+      "repeat": "반복하다"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "행동이 성공적으로 제거되었습니다!",
     "actionAddon": "Addon 저장 완료!",
     "actionStatement": "작업 조건이 성공적으로 저장되었습니다!",
-    "actionSettings": "Action 환경 저장 완료!"
+    "actionSettings": "Action 환경 저장 완료!",
+    "schedule": "일정이 성공적으로 저장되었습니다!"
   },
   "configuration": {
     "title": "구성",
@@ -263,6 +279,9 @@
     "interval": "유효한 숫자 만 허용됩니다",
     "url": "URL이 필요합니다",
     "initWait": "유효한 숫자 만 허용됩니다",
+    "scheduleDate": "일정 날짜는 YYYY-MM-DD(2025-12-01) 형식과 일치해야 합니다.",
+    "scheduleTime": "일정 시간은 HH:mm:ss.sss(23:59:59.000) 형식과 일치해야 합니다.",
+    "scheduleRepeat": "일정 반복은 숫자만 입력해야 합니다.",
     "startTime": "시작 시간은 hh : mm : ss : fff (12 : 12 : 12 : 000) 형식",
     "json": "선택한 JSON이 유효하지 않습니다",
     "hotKey": "한 편지가없는 Ctrl/Command 유효하지 않습니다",
@@ -288,6 +307,9 @@
     "repeat": "반복하다",
     "repeatInterval": "R 간격"
   },
+  "userscript": {
+    "add": "사용자 스크립트 추가"
+  },
   "popover": {
     "valueExtractor": {
       "title": "예"
@@ -311,6 +333,7 @@
     "download": "다운로드",
     "disabled": "장애가있는",
     "sec": "비서",
+    "min": "분",
     "no": "아니요",
     "yes": "예",
     "local": "현지의",

@@ -92,6 +92,12 @@
         "title": "Hapus Tindakan",
         "message": "Apakah Anda yakin akan menghapus Tindakan [{{name}}]?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Hapus Skrip Pengguna",
+        "message": "Apakah Anda yakin untuk menghapus Skrip Pengguna [{{name}}]?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Dokumen",
       "hotkey": "Tombol pintas",
       "documentHint": "Browser <b>dokumen</b> memuat ekstensi sebelum skrip dan gambar dimuat (lebih cepat) (tidak aman)",
+      "triggerUrlChange": "Pemicu pada Perubahan URL",
+      "triggerUrlChangeHint": "<b>Pemicu Perubahan URL</b> akan memicu konfigurasi jika URL diubah tanpa memuat ulang halaman (seperti di SPA)",
       "urlMatch": "Pencocokan URL",
       "regex": "Regex",
       "exact": "Akurat"
@@ -218,6 +226,13 @@
         "refresh": "Menyegarkan",
         "goto": "Aksi Goto"
       }
+    },
+    "schedule": {
+      "title": "Jadwal",
+      "info": "Konfigurasi jadwal untuk tanggal dan waktu tertentu",
+      "date": "Tanggal",
+      "time": "Waktu",
+      "repeat": "Mengulang"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Tindakan berhasil dihapus!",
     "actionAddon": "Addon berhasil disimpan!",
     "actionStatement": "Kondisi Tindakan berhasil disimpan!",
-    "actionSettings": "Pengaturan Tindakan berhasil disimpan!"
+    "actionSettings": "Pengaturan Tindakan berhasil disimpan!",
+    "schedule": "Jadwal berhasil disimpan!"
   },
   "configuration": {
     "title": "Konfigurasi",
@@ -263,6 +279,9 @@
     "interval": "Hanya nomor valid yang diperbolehkan",
     "url": "URL diperlukan",
     "initWait": "Hanya nomor valid yang diperbolehkan",
+    "scheduleDate": "Tanggal jadwal harus sesuai dengan format YYYY-MM-DD (2025-12-01)",
+    "scheduleTime": "Jadwal waktu harus sesuai dengan format HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "Pengulangan jadwal sebaiknya hanya berupa angka",
     "startTime": "Waktu mulai harus sesuai dengan format HH:mm:ss:fff (12:12:12:000)",
     "json": "Json yang dipilih tidak valid",
     "hotKey": "Satu huruf tanpa Ctrl/Command tidak valid",
@@ -288,6 +307,9 @@
     "repeat": "Mengulang",
     "repeatInterval": "R-Interval"
   },
+  "userscript": {
+    "add": "Tambahkan Skrip Pengguna"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Contoh"
@@ -311,6 +333,7 @@
     "download": "Unduh",
     "disabled": "Dengan disabilitas",
     "sec": "detik",
+    "min": "menit",
     "no": "TIDAK",
     "yes": "Ya",
     "local": "LOKAL",

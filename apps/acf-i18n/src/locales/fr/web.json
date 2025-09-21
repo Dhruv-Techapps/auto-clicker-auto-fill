@@ -92,6 +92,12 @@
         "title": "Supprimer Action",
         "message": "Êtes-vous sûr de supprimer [{{name}}] Action?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Supprimer le script utilisateur",
+        "message": "Êtes-vous sûr de vouloir supprimer le script utilisateur [{{name}}] ?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Document",
       "hotkey": "Gamper",
       "documentHint": "<b>Document</b> Le navigateur charge l'extension avant que les scripts et les images soient chargés (plus rapides) (dangereux)",
+      "triggerUrlChange": "Déclencheur lors du changement d'URL",
+      "triggerUrlChangeHint": "<b>Le changement d&#39;URL de déclenchement</b> déclenchera la configuration si l&#39;URL est modifiée sans rechargement de la page (comme dans SPA)",
       "urlMatch": "Correspondance d'URL",
       "regex": "Expression régulière",
       "exact": "Exact"
@@ -218,6 +226,13 @@
         "refresh": "Rafraîchir",
         "goto": "Passer à l'action"
       }
+    },
+    "schedule": {
+      "title": "Calendrier",
+      "info": "Configuration de la planification pour une date et une heure spécifiques",
+      "date": "Date",
+      "time": "Temps",
+      "repeat": "Répéter"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Action supprimée avec succès!",
     "actionAddon": "Addon enregistré avec succès !",
     "actionStatement": "Instruction d'action enregistrée avec succès!",
-    "actionSettings": "Paramètres d'action enregistrés avec succès!"
+    "actionSettings": "Paramètres d'action enregistrés avec succès!",
+    "schedule": "L'horaire a été enregistré avec succès !"
   },
   "configuration": {
     "title": "Configuration",
@@ -263,6 +279,9 @@
     "interval": "Seuls les nombres valides sont autorisés",
     "url": "URL est requis",
     "initWait": "Seuls les nombres valides sont autorisés",
+    "scheduleDate": "La date prévue doit correspondre au format AAAA-MM-JJ (2025-12-01)",
+    "scheduleTime": "L'heure programmée doit correspondre au format HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "La répétition programmée ne doit être que numérique",
     "startTime": "Le temps de début devrait correspondre à HH: MM: SS: FFF (12: 12: 12: 12: 000)",
     "json": "JSON sélectionné n'est pas valide",
     "hotKey": "Une seule lettre sans Ctrl/Command n'est pas valide",
@@ -288,6 +307,9 @@
     "repeat": "Répéter",
     "repeatInterval": "R-intervalle"
   },
+  "userscript": {
+    "add": "Ajouter un script utilisateur"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Exemples"
@@ -311,6 +333,7 @@
     "download": "Télécharger",
     "disabled": "Désactivé",
     "sec": "seconde",
+    "min": "min",
     "no": "Non",
     "yes": "Oui",
     "local": "LOCALE",
