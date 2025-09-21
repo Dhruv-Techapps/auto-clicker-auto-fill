@@ -92,6 +92,12 @@
         "title": "Aktion entfernen",
         "message": "Möchten Sie die Aktion [{{name}}] wirklich entfernen?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Benutzerskript entfernen",
+        "message": "Möchten Sie das Benutzerskript [{{name}}] wirklich entfernen?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Dokumentieren",
       "hotkey": "Tastenkombination",
       "documentHint": "<b>Der Dokumentenbrowser</b> lädt die Erweiterung, bevor Skripte und Bilder geladen werden (schneller) (unsicher)",
+      "triggerUrlChange": "Auslöser bei URL-Änderung",
+      "triggerUrlChangeHint": "<b>„URL-Änderung auslösen“</b> löst die Konfiguration aus, wenn die URL ohne Neuladen der Seite geändert wird (wie in SPA).",
       "urlMatch": "URL-Übereinstimmung",
       "regex": "Regulärer Ausdruck",
       "exact": "Genau"
@@ -218,6 +226,13 @@
         "refresh": "Aktualisierung",
         "goto": "Gehe zu Aktion"
       }
+    },
+    "schedule": {
+      "title": "Zeitplan",
+      "info": "Zeitplankonfiguration für bestimmtes Datum und Uhrzeit",
+      "date": "Datum",
+      "time": "Zeit",
+      "repeat": "Wiederholen"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Aktion erfolgreich entfernt!",
     "actionAddon": "Add-on erfolgreich gespeichert!",
     "actionStatement": "Aktionsbedingung erfolgreich gespeichert!",
-    "actionSettings": "Aktionseinstellungen erfolgreich gespeichert!"
+    "actionSettings": "Aktionseinstellungen erfolgreich gespeichert!",
+    "schedule": "Zeitplan erfolgreich gespeichert!"
   },
   "configuration": {
     "title": "Aufbau",
@@ -263,6 +279,9 @@
     "interval": "Es sind nur gültige Nummern zulässig.",
     "url": "URL ist erforderlich",
     "initWait": "Es sind nur gültige Nummern zulässig.",
+    "scheduleDate": "Das geplante Datum muss dem Format JJJJ-MM-TT (01.12.2025) entsprechen.",
+    "scheduleTime": "Die geplante Zeit muss dem Format HH:mm:ss.sss (23:59:59.000) entsprechen",
+    "scheduleRepeat": "Die Wiederholung des Zeitplans sollte nur eine Zahl sein",
     "startTime": "Die Startzeit muss dem Format HH:mm:ss:fff (12:12:12:000) entsprechen.",
     "json": "Das ausgewählte JSON ist ungültig",
     "hotKey": "Ein einzelner Buchstabe ohne Strg/Befehl ist ungültig",
@@ -288,6 +307,9 @@
     "repeat": "Wiederholen",
     "repeatInterval": "R-Intervall"
   },
+  "userscript": {
+    "add": "Benutzerskript hinzufügen"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Beispiele"
@@ -311,6 +333,7 @@
     "download": "Herunterladen",
     "disabled": "Deaktiviert",
     "sec": "Sek",
+    "min": "Min",
     "no": "NEIN",
     "yes": "Ja",
     "local": "LOKAL",

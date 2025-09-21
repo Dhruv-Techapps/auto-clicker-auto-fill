@@ -92,6 +92,12 @@
         "title": "Actie verwijderen",
         "message": "Weet u zeker dat u [{{name}}] actie wilt verwijderen?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Gebruikersscript verwijderen",
+        "message": "Weet u zeker dat u het gebruikersscript [{{name}}] wilt verwijderen?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Document",
       "hotkey": "Sneltoets",
       "documentHint": "<b>Documentbrowser</b> laadt extensie voordat scripts en afbeeldingen worden geladen (sneller) (onveilig)",
+      "triggerUrlChange": "Trigger bij URL-wijziging",
+      "triggerUrlChangeHint": "<b>Trigger URL-wijziging</b> activeert de configuratie als de URL wordt gewijzigd zonder dat de pagina opnieuw wordt geladen (zoals in SPA)",
       "urlMatch": "URL-overeenkomst",
       "regex": "Regex",
       "exact": "Exact"
@@ -218,6 +226,13 @@
         "refresh": "Vernieuwen",
         "goto": "Ga naar Actie"
       }
+    },
+    "schedule": {
+      "title": "Schema",
+      "info": "Planningconfiguratie voor specifieke datum en tijd",
+      "date": "Datum",
+      "time": "Tijd",
+      "repeat": "Herhalen"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Actie succesvol verwijderd!",
     "actionAddon": "Add-on succesvol opgeslagen!",
     "actionStatement": "Actie Conditie succesvol opgeslagen!",
-    "actionSettings": "Actie-instellingen succesvol opgeslagen!"
+    "actionSettings": "Actie-instellingen succesvol opgeslagen!",
+    "schedule": "Schema succesvol opgeslagen!"
   },
   "configuration": {
     "title": "Configuratie",
@@ -263,6 +279,9 @@
     "interval": "Alleen geldige nummers zijn toegestaan",
     "url": "URL is vereist",
     "initWait": "Alleen geldige nummers zijn toegestaan",
+    "scheduleDate": "De geplande datum moet overeenkomen met het formaat JJJJ-MM-DD (2025-12-01)",
+    "scheduleTime": "De geplande tijd moet overeenkomen met het formaat HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "Herhaling van het schema mag alleen een nummer zijn",
     "startTime": "De starttijd moet overeenkomen met de notatie HH:mm:ss:fff (12:12:12:000)",
     "json": "Geselecteerde JSON is niet geldig",
     "hotKey": "Eén letter zonder Ctrl/Command is niet geldig",
@@ -288,6 +307,9 @@
     "repeat": "Herhalen",
     "repeatInterval": "R-interval"
   },
+  "userscript": {
+    "add": "Gebruikersscript toevoegen"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Voorbeelden"
@@ -311,6 +333,7 @@
     "download": "Downloaden",
     "disabled": "Gehandicapt",
     "sec": "sec",
+    "min": "min",
     "no": "Nee",
     "yes": "Ja",
     "local": "LOKAAL",

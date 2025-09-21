@@ -92,6 +92,12 @@
         "title": "移除动作",
         "message": "确定移除 [{{name}}] 动作吗?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "删除用户脚本",
+        "message": "您确定要删除 [{{name}}] 用户脚本吗？"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "文档",
       "hotkey": "快捷键",
       "documentHint": "<b>文档</b>浏览器在加载脚本和图片之前加载扩展(更快)(不安全)",
+      "triggerUrlChange": "URL 更改时触发",
+      "triggerUrlChangeHint": "如果 URL 在没有重新加载页面的情况下发生更改（如在 SPA 中），<b>则触发 URL 更改</b>将触发配置",
       "urlMatch": "URL 匹配",
       "regex": "正则表达式",
       "exact": "精确的"
@@ -218,6 +226,13 @@
         "refresh": "刷新",
         "goto": "转到操作"
       }
+    },
+    "schedule": {
+      "title": "日程",
+      "info": "特定日期和时间的计划配置",
+      "date": "日期",
+      "time": "时间",
+      "repeat": "重复"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "操作删除成功！",
     "actionAddon": "附加组件保存成功!",
     "actionStatement": "动作条件保存成功!",
-    "actionSettings": "动作设置保存成功!"
+    "actionSettings": "动作设置保存成功!",
+    "schedule": "日程保存成功！"
   },
   "configuration": {
     "title": "配置",
@@ -263,6 +279,9 @@
     "interval": "只允许有效数字",
     "url": "需要 URL",
     "initWait": "只允许有效数字",
+    "scheduleDate": "计划日期应符合 YYYY-MM-DD (2025-12-01) 格式",
+    "scheduleTime": "计划时间应符合 HH:mm:ss.sss (23:59:59.000) 格式",
+    "scheduleRepeat": "计划重复应该仅是数字",
     "startTime": "开始时间应符合 HH:mm:ss:fff (12:12:12:000) 格式",
     "json": "所选 Json 无效",
     "hotKey": "单个字母加无 Ctrl/Command 无效",
@@ -288,6 +307,9 @@
     "repeat": "重复",
     "repeatInterval": "重复间隔"
   },
+  "userscript": {
+    "add": "添加用户脚本"
+  },
   "popover": {
     "valueExtractor": {
       "title": "例子"
@@ -311,6 +333,7 @@
     "download": "下载",
     "disabled": "已禁用",
     "sec": "秒",
+    "min": "分钟",
     "no": "否",
     "yes": "是",
     "local": "本地",

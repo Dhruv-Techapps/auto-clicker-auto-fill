@@ -166,6 +166,8 @@
       "document": "Document",
       "hotkey": "Hotkey",
       "documentHint": "<b>Document</b> browser loads extension before scripts and images are loaded (faster)(unsafe)",
+      "triggerUrlChange": "Trigger on URL Change",
+      "triggerUrlChangeHint": "<b>Trigger URL Change</b> will trigger configuration if URL is changed without page reload (like in SPA)",
       "urlMatch": "URL Match",
       "regex": "Regex",
       "exact": "Exact"
@@ -306,16 +308,7 @@
     "repeatInterval": "R-Interval"
   },
   "userscript": {
-    "title": "User Script",
-    "add": "Add User Script",
-    "addBefore": "Add User Script Above",
-    "addAfter": "Add User Script Below",
-    "remove": "Remove User Script",
-    "disable": "Disable User Script",
-    "enable": "Enable User Script",
-    "name": "Name",
-    "value": "Value",
-    "script": "Script"
+    "add": "Add User Script"
   },
   "popover": {
     "valueExtractor": {

@@ -92,6 +92,12 @@
         "title": "アクションの削除",
         "message": "[{{name}}] アクションを削除してもよろしいですか?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "ユーザースクリプトの削除",
+        "message": "[{{name}}] ユーザースクリプトを削除してもよろしいですか?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "書類",
       "hotkey": "ホットキー",
       "documentHint": "<b>ドキュメント</b>ブラウザはスクリプトと画像が読み込まれる前に拡張機能を読み込みます (高速) (安全ではありません)",
+      "triggerUrlChange": "URL変更時にトリガー",
+      "triggerUrlChangeHint": "<b>URL 変更をトリガーすると、</b>ページのリロードなしで URL が変更された場合 (SPA など)、構成がトリガーされます。",
       "urlMatch": "URL一致",
       "regex": "正規表現",
       "exact": "ちょうど"
@@ -218,6 +226,13 @@
         "refresh": "リフレッシュ",
         "goto": "アクションへ進む"
       }
+    },
+    "schedule": {
+      "title": "スケジュール",
+      "info": "特定の日時のスケジュール設定",
+      "date": "日付",
+      "time": "時間",
+      "repeat": "繰り返す"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "アクションが正常に削除されました。",
     "actionAddon": "アドオンが正常に保存されました!",
     "actionStatement": "アクション条件が正常に保存されました。",
-    "actionSettings": "アクション設定が正常に保存されました。"
+    "actionSettings": "アクション設定が正常に保存されました。",
+    "schedule": "スケジュールが正常に保存されました。"
   },
   "configuration": {
     "title": "構成",
@@ -263,6 +279,9 @@
     "interval": "有効な数字のみが許可されます",
     "url": "URLは必須です",
     "initWait": "有効な数字のみが許可されます",
+    "scheduleDate": "スケジュールの日付はYYYY-MM-DD（2025-12-01）形式と一致する必要があります",
+    "scheduleTime": "スケジュール時間はHH:mm:ss.sss (23:59:59.000)形式と一致する必要があります",
+    "scheduleRepeat": "スケジュールの繰り返しは数字のみで指定してください",
     "startTime": "開始時間は HH:mm:ss:fff (12:12:12:000) 形式に一致する必要があります。",
     "json": "選択されたJSONは無効です",
     "hotKey": "Ctrl/Commandなしの単一文字は無効です",
@@ -288,6 +307,9 @@
     "repeat": "繰り返す",
     "repeatInterval": "R間隔"
   },
+  "userscript": {
+    "add": "ユーザースクリプトの追加"
+  },
   "popover": {
     "valueExtractor": {
       "title": "例"
@@ -311,6 +333,7 @@
     "download": "ダウンロード",
     "disabled": "無効",
     "sec": "秒",
+    "min": "分",
     "no": "いいえ",
     "yes": "はい",
     "local": "地元",

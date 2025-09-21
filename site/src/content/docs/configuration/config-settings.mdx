@@ -11,6 +11,9 @@ tags:
     extension-load,
     window,
     document,
+    url-change,
+    spa,
+    single-page-application,
     google-sheet-id,
     start-time,
     url-match,
@@ -20,6 +23,8 @@ tags:
     prompt
   ]
 toc: true
+aliases:
+  - '/docs/configuration/config-settings'
 ---
 
 <img
@@ -48,6 +53,55 @@ Start the extension automatically or manually without refreshing the page.
 | [Document](https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event) | false   | Loads without waiting for stylesheets, images, and subframes to finish loading.<br />Faster than Window. |
 
 </BsTable>
+
+## Trigger on URL change
+
+Automatically run this configuration again when the page’s address (URL) changes, without needing a full page reload. This is common on modern websites and apps that update the screen while staying on the same page (often called “single‑page applications” or SPAs).
+
+### When to use
+
+- The website changes the URL as you click through steps, tabs, or sections (e.g., /checkout?step=shipping → /checkout?step=payment).
+- You want the configuration to run again whenever the address changes on the same page.
+
+### How to enable
+
+1. Open the configuration’s Settings.
+2. In the Extension Load section, turn on “Trigger on URL change”.
+3. This option appears only when Start is set to Auto.
+
+### What counts as a URL change?
+
+Any change to the page address, such as the path (…/profile → …/profile/edit) or the query (…?tab=info → …?tab=security). Some sites also change the part after # (called a “hash”).
+
+### Examples
+
+- Exact page example (safe):
+  - URL match: Exact → https://shop.example.com/checkout
+  - Result: Triggers when the site updates the URL within the checkout flow. Keeps scope limited to the checkout page.
+
+- Regex for a section (safe but broad):
+  - URL match: Regex → ^https://shop\.example\.com/checkout/.\*$
+  - Result: Triggers for any sub‑page under /checkout/ (e.g., /shipping, /payment). Good for multi‑step flows.
+
+- Too broad (avoid):
+  - URL match: Regex → ^https://example\.com/.\*$
+  - Result: Will trigger for almost every URL change across the entire site, which can cause repeated runs on SPAs.
+
+### Important: best practices and consequences
+
+<Callout type="warning">
+
+If you enable “Trigger on URL change” with a very broad URL (like the site’s home page or a wildcard pattern), the configuration can keep triggering repeatedly as the app navigates within a single page. This can lead to duplicate actions.
+
+</Callout>
+
+<Callout type="info">
+
+- Create separate configurations per subdomain or per section/route (for example, one for app.example.com and another for help.example.com, or separate ones for /cart and /checkout).
+- Prefer Exact match when possible; if using Regex, make it as specific as you can.
+- If you don’t need repeated runs during navigation, leave this switch off.
+
+</Callout>
 
 ## Hotkey
 

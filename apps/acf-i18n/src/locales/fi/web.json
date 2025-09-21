@@ -92,6 +92,12 @@
         "title": "Poista toiminto",
         "message": "Haluatko varmasti poistaa toiminnon [{{name}}]?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Poista käyttäjäskripti",
+        "message": "Haluatko varmasti poistaa [{{name}}] käyttäjäskriptin?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Asiakirja",
       "hotkey": "Pikanäppäin",
       "documentHint": "<b>Asiakirjaselain</b> lataa laajennuksen ennen skriptien ja kuvien lataamista (nopeammin) (vaarallinen)",
+      "triggerUrlChange": "URL-osoitteen muutoksen laukaisema",
+      "triggerUrlChangeHint": "<b>URL-osoitteen muutoksen laukaiseva</b> toiminto laukaisee määritykset, jos URL-osoitetta muutetaan ilman sivun uudelleenlatausta (kuten SPA:ssa)",
       "urlMatch": "URL-osuma",
       "regex": "Regex",
       "exact": "Tarkka"
@@ -218,6 +226,13 @@
         "refresh": "virkistää",
         "goto": "Siirry toimintoon"
       }
+    },
+    "schedule": {
+      "title": "Ajoittaa",
+      "info": "Aikatauluta määritys tietylle päivämäärälle ja kellonajalle",
+      "date": "Päivämäärä",
+      "time": "Aika",
+      "repeat": "Toistaa"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Toiminto poistettu onnistuneesti!",
     "actionAddon": "Lisäys tallennettu onnistuneesti!",
     "actionStatement": "Toimintoehto tallennettu onnistuneesti!",
-    "actionSettings": "Toimintoasetukset tallennettu onnistuneesti!"
+    "actionSettings": "Toimintoasetukset tallennettu onnistuneesti!",
+    "schedule": "Aikataulu tallennettu onnistuneesti!"
   },
   "configuration": {
     "title": "Kokoonpano",
@@ -263,6 +279,9 @@
     "interval": "Vain kelvolliset numerot ovat sallittuja",
     "url": "URL-osoite vaaditaan",
     "initWait": "Vain kelvolliset numerot ovat sallittuja",
+    "scheduleDate": "Aikataulun päivämäärän tulee olla muodossa VVVV-KK-PP (2025-12-01)",
+    "scheduleTime": "Aikataulun ajan tulee olla muodossa HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "Aikataulun toiston tulisi olla vain numero",
     "startTime": "Aloitusajan tulee vastata muotoa HH:mm:ss:fff (12:12:12:000)",
     "json": "Valittu Json ei kelpaa",
     "hotKey": "Yksittäinen kirjain ilman Ctrl/komentoa ei kelpaa",
@@ -288,6 +307,9 @@
     "repeat": "Toistaa",
     "repeatInterval": "R-väli"
   },
+  "userscript": {
+    "add": "Lisää käyttäjäskripti"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Esimerkkejä"
@@ -311,6 +333,7 @@
     "download": "ladata",
     "disabled": "Liikuntarajoitteinen",
     "sec": "sek",
+    "min": "min",
     "no": "Ei",
     "yes": "Joo",
     "local": "PAIKALLINEN",

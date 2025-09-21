@@ -24,6 +24,7 @@ import registerContextMenus from './context-menu';
 import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
 import { TabsMessenger } from './tab';
+import './watch-url-change';
 
 self['XMLHttpRequest'] = XMLHttpRequest;
 

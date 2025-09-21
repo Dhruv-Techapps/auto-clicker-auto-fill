@@ -92,6 +92,12 @@
         "title": "Xóa hành động",
         "message": "Bạn có chắc chắn xóa hành động [{{name}}] không?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Xóa tập lệnh người dùng",
+        "message": "Bạn có chắc chắn muốn xóa [{{name}}] User Script không?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Tài liệu",
       "hotkey": "Phím nóng",
       "documentHint": "Trình duyệt tài liệu tải <b>tiện ích</b> mở rộng trước khi tải tập lệnh và hình ảnh (nhanh hơn) (không an toàn)",
+      "triggerUrlChange": "Kích hoạt khi thay đổi URL",
+      "triggerUrlChangeHint": "<b>Kích hoạt thay đổi URL</b> sẽ kích hoạt cấu hình nếu URL được thay đổi mà không tải lại trang (như trong SPA)",
       "urlMatch": "Kết hợp URL",
       "regex": "Biểu thức chính quy",
       "exact": "Chính xác"
@@ -218,6 +226,13 @@
         "refresh": "Làm cho khỏe lại",
         "goto": "Đi đến hành động"
       }
+    },
+    "schedule": {
+      "title": "Lịch trình",
+      "info": "Cấu hình lịch trình cho ngày và giờ cụ thể",
+      "date": "Ngày",
+      "time": "Thời gian",
+      "repeat": "Lặp lại"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Đã xóa hành động thành công!",
     "actionAddon": "Addon đã được lưu thành công!",
     "actionStatement": "Điều kiện hành động đã được lưu thành công!",
-    "actionSettings": "Cài đặt hành động đã được lưu thành công!"
+    "actionSettings": "Cài đặt hành động đã được lưu thành công!",
+    "schedule": "Lịch trình đã được lưu thành công!"
   },
   "configuration": {
     "title": "Cấu hình",
@@ -263,6 +279,9 @@
     "interval": "Chỉ cho phép số hợp lệ",
     "url": "URL là bắt buộc",
     "initWait": "Chỉ cho phép số hợp lệ",
+    "scheduleDate": "Ngày lịch trình phải theo định dạng YYYY-MM-DD (2025-12-01)",
+    "scheduleTime": "Thời gian lịch trình phải phù hợp với định dạng HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "Lịch trình lặp lại chỉ nên là số",
     "startTime": "Thời gian bắt đầu phải khớp với định dạng HH:mm:ss:fff (12:12:12:000)",
     "json": "Json đã chọn không hợp lệ",
     "hotKey": "Một chữ cái không có Ctrl/Command là không hợp lệ",
@@ -288,6 +307,9 @@
     "repeat": "Lặp lại",
     "repeatInterval": "Khoảng R"
   },
+  "userscript": {
+    "add": "Thêm tập lệnh người dùng"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Ví dụ"
@@ -311,6 +333,7 @@
     "download": "Tải xuống",
     "disabled": "Tàn tật",
     "sec": "giây",
+    "min": "phút",
     "no": "KHÔNG",
     "yes": "Đúng",
     "local": "ĐỊA PHƯƠNG",

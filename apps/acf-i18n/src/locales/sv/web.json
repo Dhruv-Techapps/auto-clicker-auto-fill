@@ -92,6 +92,12 @@
         "title": "Ta bort åtgärd",
         "message": "Är du säker på att ta bort åtgärden [{{name}}]?"
       }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Ta bort användarskript",
+        "message": "Är du säker på att du vill ta bort användarskriptet [{{name}}]?"
+      }
     }
   },
   "modal": {
@@ -160,6 +166,8 @@
       "document": "Dokumentera",
       "hotkey": "Snabbtangent",
       "documentHint": "<b>Dokumentwebbläsaren</b> laddar tillägget innan skript och bilder laddas (snabbare) (osäkert)",
+      "triggerUrlChange": "Utlösare vid URL-ändring",
+      "triggerUrlChangeHint": "<b>Utlösande URL-ändring</b> utlöser konfigurationen om URL:en ändras utan att sidan laddas om (som i SPA).",
       "urlMatch": "URL Match",
       "regex": "Regex",
       "exact": "Exakt"
@@ -218,6 +226,13 @@
         "refresh": "Uppdatera",
         "goto": "Gå till Action"
       }
+    },
+    "schedule": {
+      "title": "Schema",
+      "info": "Schemaläggningskonfiguration för specifikt datum och tid",
+      "date": "Datum",
+      "time": "Tid",
+      "repeat": "Upprepa"
     }
   },
   "message": {
@@ -229,7 +244,8 @@
     "removeAction": "Åtgärden har tagits bort!",
     "actionAddon": "Tillägget har sparats!",
     "actionStatement": "Åtgärdsvillkoret har sparats!",
-    "actionSettings": "Åtgärdsinställningarna har sparats!"
+    "actionSettings": "Åtgärdsinställningarna har sparats!",
+    "schedule": "Schemat sparat!"
   },
   "configuration": {
     "title": "Konfiguration",
@@ -263,6 +279,9 @@
     "interval": "Endast giltiga nummer är tillåtna",
     "url": "URL krävs",
     "initWait": "Endast giltiga nummer är tillåtna",
+    "scheduleDate": "Schemaläggningsdatumet ska matcha formatet ÅÅÅÅ-MM-DD (2025-12-01)",
+    "scheduleTime": "Schemalagd tid ska matcha formatet HH:mm:ss.sss (23:59:59.000)",
+    "scheduleRepeat": "Schemalagd upprepning ska endast vara nummer",
     "startTime": "Starttiden bör matcha formatet HH:mm:ss:fff (12:12:12:000)",
     "json": "Vald Json är inte giltig",
     "hotKey": "En bokstav utan Ctrl/Command är inte giltig",
@@ -288,6 +307,9 @@
     "repeat": "Upprepa",
     "repeatInterval": "R-intervall"
   },
+  "userscript": {
+    "add": "Lägg till användarskript"
+  },
   "popover": {
     "valueExtractor": {
       "title": "Exempel"
@@ -311,6 +333,7 @@
     "download": "Ladda ner",
     "disabled": "Inaktiverad",
     "sec": "sek",
+    "min": "min",
     "no": "Nej",
     "yes": "Ja",
     "local": "LOKAL",
