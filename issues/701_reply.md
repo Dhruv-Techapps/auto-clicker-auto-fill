@@ -1,0 +1,1 @@
+Not yet. We don't have many users on Firefox, and some of the APIs required by Chrome are missing or unavailable in Firefox. We're keeping an eye on demand and browser support—if things change, we'll definitely reconsider a Firefox implementation!
