@@ -1,142 +1,89 @@
+import { ActionService } from '@dhruv-techapps/core-service';
 import { Timer } from '@dhruv-techapps/shared-util';
-import { STATUS_BAR_LOCATION } from './status-bar.types';
 
 export enum STATUS_BAR_TYPE {
   CONFIG_WAIT = 'Config wait',
-  BATCH_WAIT = 'Batch wait',
-  BATCH_REPEAT = 'Batch repeat',
   ACTION_WAIT = 'Action wait',
-  ACTION_REPEAT = 'Action repeat',
-  ADDON_RECHECK = 'Addon recheck'
+  BATCH_REPEAT = 'Batch repeat',
+  ADDON_RECHECK = 'Addon recheck',
+  ACTION_REPEAT = 'Action repeat'
 }
 
 export class StatusBar {
-  private readonly statusBar: HTMLDivElement = document.createElement('div');
-  private readonly icon: HTMLSpanElement = document.createElement('span');
-  private readonly batch: HTMLSpanElement = document.createElement('span');
-  private readonly action: HTMLSpanElement = document.createElement('span');
-  private readonly addon: HTMLSpanElement = document.createElement('span');
-  private readonly timer: HTMLSpanElement = document.createElement('span');
-  private readonly text: HTMLSpanElement = document.createElement('span');
+  private batch: string | number = '';
+  private action: string = '';
+  private totalActions: number = 0;
+  private totalBatches: number = 0;
 
-  constructor() {
-    this.statusBar = document.createElement('div');
-    this.statusBar.className = 'hide';
-    this.statusBar.id = 'auto-clicker-auto-fill-status';
-    ['icon', 'text', 'batch', 'action', 'addon', 'timer'].forEach((el) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (this as any)[el].className = el;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.statusBar.appendChild((this as any)[el]);
-    });
+  public enable(totalActions: number, totalBatches?: number): void {
+    this.batch = '';
+    this.action = '';
+    this.totalActions = totalActions;
+    this.totalBatches = totalBatches || 0;
+    ActionService.enable();
+    ActionService.setBadgeText({ text: '⚡' });
+    ActionService.setTitle({ title: 'Initializing setup...' });
   }
 
-  public setLocation = async (location: STATUS_BAR_LOCATION) => {
-    this.statusBar.className = location;
-    document.body.appendChild(this.statusBar);
-  };
+  public disable(): void {
+    ActionService.disable();
+  }
 
-  public async wait(text?: number | string, type?: STATUS_BAR_TYPE, name?: string | number): Promise<void> {
-    this.timer.textContent = '';
+  public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current?: number): Promise<void> {
     const waitTime = Timer.getWaitTime(text);
     if (!waitTime) {
       return;
     }
-    switch (type) {
+    const time = waitTime / 1000;
+    let title = '';
+    let icon = '🔄⏳';
+    switch (_type) {
       case STATUS_BAR_TYPE.CONFIG_WAIT:
-        this.text.textContent = 'Config';
+        icon = '▶️⏳';
+        title = `Waiting ${time}s before starting configuration.`;
         break;
-      case STATUS_BAR_TYPE.BATCH_WAIT:
-      case STATUS_BAR_TYPE.BATCH_REPEAT:
       case STATUS_BAR_TYPE.ACTION_WAIT:
+        icon = '🔁⏳';
+        title = `Waiting ${time}s before starting Action ${this.action} of ${this.totalActions}.`;
         break;
-      case STATUS_BAR_TYPE.ADDON_RECHECK:
-        this.timer.textContent = `🔁${name} ~`;
+      case STATUS_BAR_TYPE.BATCH_REPEAT:
+        icon = '📦⏳';
+        title = `Waiting ${time}s before starting Batch ${this.batch} of ${this.totalBatches}.`;
         break;
       case STATUS_BAR_TYPE.ACTION_REPEAT:
-        this.timer.textContent = `🔁${name} ~`;
+        title = `Waiting ${time}s before repeating Action ${this.action} (${current} repeats left).`;
+        break;
+      case STATUS_BAR_TYPE.ADDON_RECHECK:
+        icon = '✅⏳';
+        title = `Condition not met. Rechecking in ${time}s... ${current} checks left (Action ${this.action}).`;
         break;
       default:
-        this.timer.textContent = `🔍${name} ~`;
+        icon = '👀⏳';
+        title = `Element not found. Retrying in ${time}s... ${current} retries left (Action ${this.action}).`;
         break;
     }
-
-    this.timer.textContent += '🕒' + waitTime / 1000 + ' sec';
+    ActionService.setBadgeText({ text: icon });
+    ActionService.setTitle({ title });
     await Timer.sleep(waitTime);
   }
 
-  public addonUpdate(): void {
-    this.addon.textContent = '❓';
-    this.addon.title = 'Addon';
-    this.text.textContent = '';
-  }
-
-  public actionUpdate(number: number, text: string | undefined): void {
-    this.action.textContent = `🅰️${number}`;
-    this.action.title = text ?? 'Action';
-    this.addon.textContent = '';
-  }
-
   public batchUpdate(text: string | number): void {
-    this.batch.textContent = `🅱️${text}`;
-    this.batch.title = 'Batch';
-    this.action.textContent = '';
-    this.addon.textContent = '';
-    this.text.textContent = '';
+    this.batch = text;
+    this.action = '';
   }
 
-  public error = (text: string): void => {
-    this.icon.textContent = '❌';
-    this.batch.textContent = '';
-    this.action.textContent = '';
-    this.addon.textContent = '';
-    this.timer.textContent = '';
-    this.text.textContent = text;
+  public actionUpdate(number: string): void {
+    this.action = number;
+  }
+
+  public error = (error: string): void => {
+    console.error('Error: %s', error);
+    ActionService.setBadgeText({ text: '❌' });
+    ActionService.setTitle({ title: error });
   };
 
   public done = (): void => {
-    this.icon.textContent = '✨';
-    this.batch.textContent = '';
-    this.action.textContent = '';
-    this.addon.textContent = '';
-    this.timer.textContent = '';
-    this.text.textContent = 'Done';
+    ActionService.setBadgeText({ text: '✅' });
+    ActionService.setTitle({ title: 'Auto Clicker & Auto Fill' });
   };
-}
-
-export class ManualStatusBar {
-  private static instance: ManualStatusBar;
-  private readonly statusBar: HTMLDivElement;
-  private readonly manualContainer: HTMLUListElement = document.createElement('ul');
-
-  private constructor() {
-    this.statusBar = document.createElement('div');
-    this.statusBar.id = 'auto-clicker-auto-fill-manual';
-
-    this.manualSetup();
-    document.body.appendChild(this.statusBar);
-  }
-
-  public manual = (text: string): void => {
-    if (!this.manualContainer.textContent) {
-      const li = document.createElement('li');
-      li.textContent = '👋';
-      this.manualContainer.appendChild(li);
-    }
-    const li = document.createElement('li');
-    li.textContent = text;
-    this.manualContainer.appendChild(li);
-  };
-
-  private readonly manualSetup = (): void => {
-    this.manualContainer.className = 'manual';
-    this.statusBar.appendChild(this.manualContainer);
-  };
-
-  public static getInstance(): ManualStatusBar {
-    if (!ManualStatusBar.instance) {
-      ManualStatusBar.instance = new ManualStatusBar();
-    }
-    return ManualStatusBar.instance;
-  }
 }

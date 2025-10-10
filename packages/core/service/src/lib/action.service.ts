@@ -17,4 +17,16 @@ export class ActionService extends CoreService {
   static async setTitle(details: chrome.action.TitleDetails) {
     return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setTitle', message: details });
   }
+
+  static async setBadgeTextColor(details: chrome.action.BadgeColorDetails) {
+    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setBadgeTextColor', message: details });
+  }
+
+  static async enable(tabId?: number) {
+    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'enable', message: { tabId } });
+  }
+
+  static async disable(tabId?: number) {
+    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'disable', message: { tabId } });
+  }
 }

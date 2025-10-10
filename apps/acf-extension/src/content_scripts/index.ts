@@ -34,6 +34,8 @@ async function loadConfig(loadType: ELoadTypes) {
         }
       } else if (manualConfigs.length > 0 && loadType === ELoadTypes.DOCUMENT) {
         await ConfigProcessor.checkStartType(manualConfigs);
+      } else {
+        statusBar.disable();
       }
     });
   } catch (e) {

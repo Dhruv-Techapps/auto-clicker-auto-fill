@@ -18,7 +18,7 @@ export const messageListener = async (request: any, sender: chrome.runtime.Messa
       case 'manifest':
         return new ManifestMessenger()[(methodName as keyof ManifestMessenger) || 'values'](message);
       case 'action':
-        return new ActionMessenger()[(methodName as keyof ActionMessenger) || 'setIcon'](message);
+        return new ActionMessenger()[(methodName as keyof ActionMessenger) || 'setIcon'](message, sender);
       case 'alarms':
         return new AlarmsMessenger()[(methodName as keyof AlarmsMessenger) || 'create'](message);
       case 'userScripts':
