@@ -109,7 +109,9 @@ try {
     [RUNTIME_MESSAGE_OPENAI]: new OpenAIBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID)
   };
   Runtime.onMessageExternal(onMessageListener);
+
   Runtime.onMessage(onMessageListener);
+  Runtime.onConnect(onMessageListener);
 
   auth.authStateReady().then(() => {
     const clientId = auth.currentUser?.uid;

@@ -49,6 +49,26 @@ export class Runtime {
     chrome.runtime.sendMessage(message, callback);
   }
 
+  static onConnect(configs: MessengerConfigObject) {
+    chrome.runtime.onConnect.addListener((port) => {
+      const { sender = {}, name } = port;
+      const tabId = sender.tab?.id;
+      if (!tabId) {
+        port.postMessage({ error: 'no tab id' });
+        port.disconnect();
+        return;
+      }
+      console.log('port connected', name);
+      port.onMessage.addListener((msg) => {
+        messageListener(msg, sender, configs);
+      });
+    });
+  }
+
+  static onConnectExternal(configs: MessengerConfigObject) {
+    //TODO
+  }
+
   static onMessage(configs: MessengerConfigObject) {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       messageListener(request, sender, configs)
