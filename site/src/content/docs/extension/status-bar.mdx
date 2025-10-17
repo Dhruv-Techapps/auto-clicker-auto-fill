@@ -1,24 +1,29 @@
 ---
 title: Status Bar
-description: Track configuration and execution status from a compact on-page status bar
+description: Track configuration and execution status from the Chrome Action badge
 tags: [status-bar, configuration, execution, ui]
 toc: true
 ---
 
-The configuration status appears by default at the bottom-right of the page. You can disable or reposition it from global settings.
+The status experience now lives in the Chrome Action badge (the extension icon) instead of an on-page overlay. When automation starts, the badge becomes active and its badge text and tooltip communicate the current state. Once automation completes or is stopped, the badge is disabled and Chrome returns to its default icon behavior.
 
-<img class="d-block mb-4 img-fluid rounded-3" src="/docs/[[config:docs_version]]/assets/img/status-bar.png" alt="" />
+- Badge text changes to show the current phase using emoji indicators.
+- Tooltip (Chrome Action title) gives the full context, including timers, batch/action counters, and retry information.
+- The badge automatically resets to the default extension title when work is complete or when the automation is disabled.
 
 <BsTable>
 
-| Icon                   | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| 🅱️1                    | `🅱️` denotes the batch; `1` is the current batch index (1‑based).   |
-| 🅰️1                    | `🅰️` denotes the action; `1` is the current action index (1‑based). |
-| ❓                     | Addon condition check in progress.                                  |
-| 🔁 "addon" \| "action" | Repeat in progress for the specified scope: `addon` or `action`.    |
-| 🔍                     | Element Finder is searching for the target element (not yet found). |
-| 🕒                     | Waiting (Init Wait, Repeat Interval, or Retry Interval).            |
-| Done                   | Action completed successfully.                                      |
+| Badge text | Title preview                                                                          | When it appears                                                                                                           |
+| ---------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ⚡         | `Initializing setup...`                                                                | Immediately after automation starts; the badge is enabled and the extension icon signals that actions are being prepared. |
+| ▶️⏳       | `Waiting {time}s before starting configuration.`                                       | Configuration wait timers (Init Wait) before the first batch/action runs.                                                 |
+| 📦⏳       | `Waiting {time}s before starting Batch {current} of {total}.`                          | Batch level waits between batch executions.                                                                               |
+| 🔁⏳       | `Waiting {time}s before starting Action {current} of {total}.`                         | Delay before the next action executes.                                                                                    |
+| �⏳        | `Element not found. Retrying in {time}s... {retries} retries left (Action {current}).` | Retry logic while searching for page elements.                                                                            |
+| ✅⏳       | `Condition not met. Rechecking in {time}s... {checks} checks left (Action {current}).` | Add-on recheck countdowns before concluding conditions.                                                                   |
+| ❌         | `<error message>`                                                                      | An error occurred; the badge remains active until the issue is resolved or automation stops.                              |
+| ✅         | `Auto Clicker & Auto Fill`                                                             | Automation completed successfully; the badge resets but stays enabled momentarily before disable.                         |
 
 </BsTable>
+
+> **Note:** The badge is disabled (no text or custom title) whenever the automation is idle. Launching a workflow re-enables the badge and reinstates the live status indicators until completion or manual stop.

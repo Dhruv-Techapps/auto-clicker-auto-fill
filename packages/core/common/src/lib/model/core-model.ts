@@ -11,6 +11,7 @@ export interface IExtension {
   __currentActionName: string;
   __actionError: string;
   __actionRepeat: number;
+  __addonRecheck: number;
   __batchRepeat: number;
   __sessionCount: number;
   __sheets?: ISheets;

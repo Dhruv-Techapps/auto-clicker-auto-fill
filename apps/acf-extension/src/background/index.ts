@@ -15,7 +15,6 @@ import { registerNotifications } from '@dhruv-techapps/shared-notifications';
 import { OpenAIBackground, RUNTIME_MESSAGE_OPENAI } from '@dhruv-techapps/shared-openai';
 import { RUNTIME_MESSAGE_VISION, VisionBackground } from '@dhruv-techapps/shared-vision';
 import XMLHttpRequest from 'xhr-shim';
-import { ACTION_POPUP } from '../common/constant';
 import { DISCORD_CLIENT_ID, EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL, OPTIONS_PAGE_URL, VARIANT } from '../common/environments';
 import { scope } from '../common/instrument';
 import AcfBackup from './acf-backup';
@@ -33,11 +32,9 @@ try {
   /**
    * Browser Action set to open option page / configuration page
    */
-  chrome.action.onClicked.addListener((tab) => {
-    googleAnalytics?.fireEvent({ name: 'Wizard', params: { location: 'action:onClicked' } });
-    if (tab.id !== undefined) {
-      chrome.tabs.sendMessage(tab.id, { action: ACTION_POPUP });
-    }
+  chrome.action.onClicked.addListener(() => {
+    googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'action:onClicked' } });
+    chrome.tabs.create({ url: OPTIONS_PAGE_URL });
   });
 
   /**
@@ -109,7 +106,9 @@ try {
     [RUNTIME_MESSAGE_OPENAI]: new OpenAIBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID)
   };
   Runtime.onMessageExternal(onMessageListener);
+
   Runtime.onMessage(onMessageListener);
+  Runtime.onConnect(onMessageListener);
 
   auth.authStateReady().then(() => {
     const clientId = auth.currentUser?.uid;

@@ -29,7 +29,7 @@ const BatchProcessor = (() => {
           statusBar.batchUpdate(i + 2);
           console.groupCollapsed(`${BATCH_I18N.TITLE} #${i + 2} [${I18N_COMMON.REPEAT}]`);
           if (batch?.repeatInterval) {
-            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT, i + 2);
+            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
           }
           await Actions.start(actions, i + 2);
           const { notifications } = await new SettingsStorage().getSettings();
@@ -50,7 +50,7 @@ const BatchProcessor = (() => {
         while (true) {
           if (batch?.repeatInterval) {
             statusBar.batchUpdate('∞');
-            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT, '∞');
+            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
           }
           await Actions.start(actions, i);
           i += 1;
@@ -61,7 +61,6 @@ const BatchProcessor = (() => {
 
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
     try {
-      statusBar.batchUpdate(1);
       console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);
       await Actions.start(actions, 1);
       console.groupEnd();
