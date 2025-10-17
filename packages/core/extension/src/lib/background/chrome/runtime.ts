@@ -65,10 +65,6 @@ export class Runtime {
     });
   }
 
-  static onConnectExternal(configs: MessengerConfigObject) {
-    //TODO
-  }
-
   static onMessage(configs: MessengerConfigObject) {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       messageListener(request, sender, configs)
