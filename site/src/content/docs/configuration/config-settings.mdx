@@ -76,15 +76,15 @@ Any change to the page address, such as the path (…/profile → …/profile/ed
 ### Examples
 
 - Exact page example (safe):
-  - URL match: Exact → https://shop.example.com/checkout
+  - URL match: Exact → `https://shop.example.com/checkout`
   - Result: Triggers when the site updates the URL within the checkout flow. Keeps scope limited to the checkout page.
 
 - Regex for a section (safe but broad):
-  - URL match: Regex → ^https://shop\.example\.com/checkout/.\*$
+  - URL match: Regex → `^https://shop\.example\.com/checkout/.\*$`
   - Result: Triggers for any sub‑page under /checkout/ (e.g., /shipping, /payment). Good for multi‑step flows.
 
 - Too broad (avoid):
-  - URL match: Regex → ^https://example\.com/.\*$
+  - URL match: Regex → `^https://example\.com/.\*$`
   - Result: Will trigger for almost every URL change across the entire site, which can cause repeated runs on SPAs.
 
 ### Important: best practices and consequences
