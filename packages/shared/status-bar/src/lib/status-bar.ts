@@ -20,13 +20,8 @@ export class StatusBar {
     this.action = '';
     this.totalActions = totalActions;
     this.totalBatches = totalBatches || 0;
-    ActionService.enable();
     ActionService.setBadgeText({ text: '⚡' });
     ActionService.setTitle({ title: 'Initializing setup...' });
-  }
-
-  public disable(): void {
-    ActionService.disable();
   }
 
   public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current?: number): Promise<void> {
