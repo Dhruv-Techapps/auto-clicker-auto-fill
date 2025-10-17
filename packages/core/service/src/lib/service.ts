@@ -50,7 +50,7 @@ export class PortService {
   private readonly port: chrome.runtime.Port;
   private readonly portName: string;
 
-  private constructor(name: string = 'Auto Clicker & Auto Fill') {
+  private constructor(name = 'Auto Clicker & Auto Fill') {
     if (!chrome.runtime?.connect) {
       throw new Error('Extension context invalidated');
     }

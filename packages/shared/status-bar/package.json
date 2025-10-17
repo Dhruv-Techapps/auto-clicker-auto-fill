@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "@swc/helpers": "~0.5.11",
-    "@dhruv-techapps/shared-util": "0.0.1"
+    "@dhruv-techapps/shared-util": "0.0.1",
+    "@dhruv-techapps/core-service": "0.0.1"
   }
 }
