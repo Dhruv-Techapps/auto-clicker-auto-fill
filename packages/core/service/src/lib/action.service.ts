@@ -21,4 +21,12 @@ export class ActionService {
   static setBadgeTextColor(details: chrome.action.BadgeColorDetails) {
     PortService.getInstance().message<ActionRequest>({ messenger: 'action', methodName: 'setBadgeTextColor', message: details });
   }
+
+  static enable(tabId?: number) {
+    PortService.getInstance().message<ActionRequest>({ messenger: 'action', methodName: 'enable', message: { tabId } });
+  }
+
+  static disable(tabId?: number) {
+    PortService.getInstance().message<ActionRequest>({ messenger: 'action', methodName: 'disable', message: { tabId } });
+  }
 }

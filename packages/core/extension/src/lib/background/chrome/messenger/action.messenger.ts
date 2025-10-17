@@ -5,11 +5,11 @@ export interface ActionRequest {
 }
 
 export class ActionMessenger {
-  disable(sender: chrome.runtime.MessageSender) {
+  disable(_: void, sender: chrome.runtime.MessageSender) {
     return chrome.action.disable(sender.tab?.id);
   }
 
-  enable(sender: chrome.runtime.MessageSender) {
+  enable(_: void, sender: chrome.runtime.MessageSender) {
     return chrome.action.enable(sender.tab?.id);
   }
 
