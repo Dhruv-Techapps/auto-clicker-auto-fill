@@ -142,17 +142,12 @@ const ConfigProcessor = (() => {
     }
   };
 
-  const setupStatusBar = async () => {
-    const { statusBar: statusBarLocation } = await new SettingsStorage().getSettings();
-    statusBar.setLocation(statusBarLocation);
-  };
-
   const checkStartType = async (configs: Array<IConfiguration>, config?: IConfiguration) => {
-    setupStatusBar();
     configs.forEach((c) => {
       Hotkey.setup(start.bind(this, c), c.hotkey);
     });
     if (config) {
+      statusBar.enable(config.actions.length, config.batch?.repeat);
       await checkStartTime(config);
       await start(config);
     }

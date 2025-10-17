@@ -45,7 +45,7 @@ const Actions = (() => {
         i += 1;
         continue;
       }
-      statusBar.actionUpdate(i + 1, action.name);
+      statusBar.actionUpdate(i + 1);
       window.ext.__currentAction = i + 1;
       try {
         await checkStatement(actions, action);

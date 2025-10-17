@@ -18,7 +18,7 @@ export const messageListener = async (request: any, sender: chrome.runtime.Messa
       case 'manifest':
         return new ManifestMessenger()[(methodName as keyof ManifestMessenger) || 'values'](message);
       case 'action':
-        return new ActionMessenger()[(methodName as keyof ActionMessenger) || 'setIcon'](message);
+        return new ActionMessenger()[(methodName as keyof ActionMessenger) || 'setIcon'](message, sender);
       case 'alarms':
         return new AlarmsMessenger()[(methodName as keyof AlarmsMessenger) || 'create'](message);
       case 'userScripts':
@@ -47,6 +47,22 @@ export class Runtime {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static sendMessage(message: any, callback: (response: any) => void) {
     chrome.runtime.sendMessage(message, callback);
+  }
+
+  static onConnect(configs: MessengerConfigObject) {
+    chrome.runtime.onConnect.addListener((port) => {
+      const { sender = {}, name } = port;
+      const tabId = sender.tab?.id;
+      if (!tabId) {
+        port.postMessage({ error: 'no tab id' });
+        port.disconnect();
+        return;
+      }
+      console.log('port connected', name);
+      port.onMessage.addListener((msg) => {
+        messageListener(msg, sender, configs);
+      });
+    });
   }
 
   static onMessage(configs: MessengerConfigObject) {
