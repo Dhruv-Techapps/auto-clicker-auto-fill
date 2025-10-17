@@ -11,7 +11,7 @@ export enum STATUS_BAR_TYPE {
 
 export class StatusBar {
   private batch: string | number = '';
-  private action = '';
+  private action: string | number = '';
   private totalActions = 0;
   private totalBatches = 0;
 
@@ -67,7 +67,7 @@ export class StatusBar {
     this.action = '';
   }
 
-  public actionUpdate(number: string): void {
+  public actionUpdate(number: number | string): void {
     this.action = number;
   }
 

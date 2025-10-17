@@ -116,7 +116,6 @@ const AddonProcessor = (() => {
   };
 
   const start = async ({ elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }: IAddon, settings?: IActionSettings): Promise<void> => {
-    statusBar.addonUpdate();
     let nodeValue;
     if (/^Func::/gi.test(elementFinder)) {
       nodeValue = await Sandbox.sandboxEval(elementFinder.replace(/^Func::/gi, ''));
