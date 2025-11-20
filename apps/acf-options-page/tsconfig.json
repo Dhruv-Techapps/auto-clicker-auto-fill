@@ -3,36 +3,6 @@
   "include": [],
   "references": [
     {
-      "path": "../../packages/shared/firebase-firestore"
-    },
-    {
-      "path": "../../packages/shared/discord-oauth"
-    },
-    {
-      "path": "../../packages/shared/firebase-oauth"
-    },
-    {
-      "path": "../../packages/acf/service"
-    },
-    {
-      "path": "../../packages/core/service"
-    },
-    {
-      "path": "../../packages/shared/google-oauth"
-    },
-    {
-      "path": "../../packages/shared/google-drive"
-    },
-    {
-      "path": "../../packages/shared/status-bar"
-    },
-    {
-      "path": "../../packages/core/common"
-    },
-    {
-      "path": "../../packages/acf/common"
-    },
-    {
       "path": "./tsconfig.app.json"
     },
     {

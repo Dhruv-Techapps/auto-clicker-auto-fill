@@ -1,4 +1,5 @@
-import { IConfiguration, ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { ISchedule } from '@dhruv-techapps/acf-common';
+import { ConfigStorage } from '@dhruv-techapps/acf-store';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { auth } from './firebase';
 
@@ -10,8 +11,7 @@ interface IAlarmSchedule {
 const CONFIG_ALARM_PREFIX = 'config-alarm-';
 
 const getConfigs = async () => {
-  const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-  const configs: Array<IConfiguration> = storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [];
+  const configs = await ConfigStorage.getAllConfigs();
   return configs;
 };
 

@@ -24,7 +24,7 @@ const registerConfigsContextMenus = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
       const currentTab = tabs[0];
       if (currentTab?.url) {
-        const configs = await new ConfigStorage().getAllConfigs(currentTab.url);
+        const configs = await new ConfigStorage().getConfigsByUrl(currentTab.url);
         if (configs) {
           contextMenuExist = true;
           chrome.contextMenus.create({ id: 'configs-list-separator', type: 'separator', contexts: ['all'] });
@@ -74,7 +74,7 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
             throw new Error('optionsPageUrl is not defined');
           }
           const url = new URL(optionsPageUrl);
-          const { url: configURL, xpath } = await chrome.storage.local.get([LOCAL_STORAGE_KEY.URL, LOCAL_STORAGE_KEY.XPATH]);
+          const { url: configURL, xpath } = await chrome.storage.local.get<{ url: string; xpath: string }>([LOCAL_STORAGE_KEY.URL, LOCAL_STORAGE_KEY.XPATH]);
           url.searchParams.append('url', configURL);
           url.searchParams.append('elementFinder', xpath);
           chrome.tabs.create({ url: url.href });

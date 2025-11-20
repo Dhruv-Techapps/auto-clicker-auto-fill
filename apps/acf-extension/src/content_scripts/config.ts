@@ -71,7 +71,7 @@ const ConfigProcessor = (() => {
       // Clear any existing DOM watchers before starting new actions
       await BatchProcessor.start(config.actions, config.batch);
       InitializeDomWatcher(config);
-      const { notifications } = await new SettingsStorage().getSettings();
+      const { notifications } = await SettingsStorage.getSettings();
       if (notifications) {
         const { onConfig, sound, discord } = notifications;
         if (onConfig) {
@@ -93,7 +93,7 @@ const ConfigProcessor = (() => {
       if (e instanceof ConfigError) {
         statusBar.error(e.message);
         const error = { title: e.title, message: `${e.message}\n on ${config.url}` };
-        const { notifications } = await new SettingsStorage().getSettings();
+        const { notifications } = await SettingsStorage.getSettings();
         if (notifications?.onError) {
           const { sound, discord } = notifications;
           NotificationsService.create({ type: 'basic', ...error, silent: !sound, iconUrl: Common.getNotificationIcon() }, 'error');

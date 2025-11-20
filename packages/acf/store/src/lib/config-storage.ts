@@ -6,11 +6,15 @@ export interface GetConfigResult {
 }
 
 export class ConfigStorage {
+  static async getAllConfigs(): Promise<Array<IConfiguration>> {
+    const { configs } = await chrome.storage.local.get<{ configs: IConfiguration[] }>(LOCAL_STORAGE_KEY.CONFIGS);
+    return configs ?? [];
+  }
+
   async getConfig(): Promise<GetConfigResult> {
     try {
       const { href } = document.location;
-      const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-      const configs: Array<IConfiguration> = storageResult['configs'] || [];
+      const configs = await ConfigStorage.getAllConfigs();
       let autoConfig: IConfiguration | undefined;
       let manualConfigs: Array<IConfiguration> = [];
       let fullMatch = false;
@@ -39,14 +43,12 @@ export class ConfigStorage {
 
   //getConfigById
   async getConfigById(id: string): Promise<IConfiguration | undefined> {
-    const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-    const configs: Array<IConfiguration> = storageResult['configs'] || [];
+    const configs = await ConfigStorage.getAllConfigs();
     return configs.find((config) => config.id === id);
   }
 
-  async getAllConfigs(url: string): Promise<Array<IConfiguration>> {
-    const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-    let configs: Array<IConfiguration> = storageResult['configs'] || [];
+  async getConfigsByUrl(url: string): Promise<Array<IConfiguration>> {
+    let configs = await ConfigStorage.getAllConfigs();
     configs = configs.filter((config) => config.enable && config.url && this.urlMatcher(url, config.url));
     return configs;
   }

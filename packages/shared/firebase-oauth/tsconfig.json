@@ -4,15 +4,6 @@
   "include": [],
   "references": [
     {
-      "path": "../../core/service"
-    },
-    {
-      "path": "../../core/common"
-    },
-    {
-      "path": "../google-oauth"
-    },
-    {
       "path": "./tsconfig.lib.json"
     },
     {
