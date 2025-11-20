@@ -8,7 +8,6 @@ import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/
 import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
 import { GoogleSheetsCS } from '@dhruv-techapps/shared-google-sheets';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
-import { scope } from '../common/instrument';
 import Actions from './actions';
 import BatchProcessor from './batch';
 import Common from './common';
@@ -114,7 +113,7 @@ const ConfigProcessor = (() => {
         } else {
           console.error('%s: %s', error.title, error.message);
         }
-        scope.captureMessage(e.message, 'warning', { data: { title: e.title } });
+        //scope.captureMessage(e.message, 'warning', { data: { title: e.title } });
       } else {
         throw e;
       }
