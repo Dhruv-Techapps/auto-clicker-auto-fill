@@ -1,4 +1,5 @@
 import { IConfiguration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { ConfigStorage } from '@dhruv-techapps/acf-store';
 import { ConfigRequest, FirebaseFirestoreBackground } from '@dhruv-techapps/shared-firebase-firestore';
 import { Auth } from '@dhruv-techapps/shared-firebase-oauth';
 import { FirebaseStorageBackground } from '@dhruv-techapps/shared-firebase-storage';
@@ -55,8 +56,7 @@ export class SyncConfig {
   }
 
   async reset() {
-    const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-    const configs: Array<IConfiguration> = storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [];
+    const configs: Array<IConfiguration> = await ConfigStorage.getConfigs();
     const updatedConfigs = configs.map((config: IConfiguration) => {
       delete config.updated;
       return config;
@@ -109,13 +109,13 @@ export class SyncConfig {
     }
     try {
       const { uid } = this.auth.currentUser;
-      const storageResult = await chrome.storage.local.get(LOCAL_STORAGE_KEY.CONFIGS);
-      const configs: Array<IConfiguration> = this.filterConfig(storageResult[LOCAL_STORAGE_KEY.CONFIGS] || [], updated);
-      if (configs.length === 0) {
+      const configs: Array<IConfiguration> = await ConfigStorage.getConfigs();
+      const filteredConfigs: Array<IConfiguration> = this.filterConfig(configs, updated);
+      if (filteredConfigs.length === 0) {
         console.log('No configs to sync');
         return;
       }
-      for (const config of configs) {
+      for (const config of filteredConfigs) {
         try {
           // Update Database
           const data: ConfigRequest = { url: config.url, userId: uid, userName: this.auth.currentUser.displayName ?? '' };
@@ -131,7 +131,7 @@ export class SyncConfig {
           scope.captureException(error);
         }
       }
-      console.log(`Synced ${configs.length} configs`);
+      console.log(`Synced ${filteredConfigs.length} configs`);
       await this.reset();
     } catch (error) {
       scope.captureException(error);

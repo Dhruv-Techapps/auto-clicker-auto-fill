@@ -16,7 +16,7 @@ declare global {
 window.ext = window.ext || {};
 
 let reloadOnError = false;
-new SettingsStorage().getSettings().then((settings) => {
+SettingsStorage.getSettings().then((settings) => {
   if (settings.reloadOnError !== undefined) {
     reloadOnError = settings.reloadOnError;
   }

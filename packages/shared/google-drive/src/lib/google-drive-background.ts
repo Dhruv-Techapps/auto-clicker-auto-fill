@@ -32,7 +32,7 @@ export class GoogleDriveBackground extends FirebaseFunctionsBackground {
     chrome.alarms.create(BACKUP_ALARM, alarmInfo);
   }
 
-  async _createOrUpdate(name: string, data: string, fileId?: string) {
+  async _createOrUpdate(name: string, data: unknown, fileId?: string) {
     const result = await this.driveCreateOrUpdate({ name, data, fileId });
     return result;
   }

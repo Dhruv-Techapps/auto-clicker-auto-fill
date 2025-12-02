@@ -74,7 +74,7 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
             throw new Error('optionsPageUrl is not defined');
           }
           const url = new URL(optionsPageUrl);
-          const { url: configURL, xpath } = await chrome.storage.local.get([LOCAL_STORAGE_KEY.URL, LOCAL_STORAGE_KEY.XPATH]);
+          const { url: configURL, xpath } = await chrome.storage.local.get<{ url: string; xpath: string }>([LOCAL_STORAGE_KEY.URL, LOCAL_STORAGE_KEY.XPATH]);
           url.searchParams.append('url', configURL);
           url.searchParams.append('elementFinder', xpath);
           chrome.tabs.create({ url: url.href });

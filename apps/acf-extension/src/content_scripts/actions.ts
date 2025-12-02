@@ -22,7 +22,7 @@ const Actions = (() => {
   };
 
   const notify = async (action: IAction | IUserScript) => {
-    const settings = await new SettingsStorage().getSettings();
+    const settings = await SettingsStorage.getSettings();
     if (settings.notifications?.onAction) {
       NotificationsService.create({
         type: 'basic',

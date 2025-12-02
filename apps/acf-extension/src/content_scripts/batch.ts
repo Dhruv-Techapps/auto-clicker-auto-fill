@@ -32,7 +32,7 @@ const BatchProcessor = (() => {
             await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
           }
           await Actions.start(actions, i + 2);
-          const { notifications } = await new SettingsStorage().getSettings();
+          const { notifications } = await SettingsStorage.getSettings();
           if (notifications?.onBatch) {
             NotificationsService.create({
               type: 'basic',
