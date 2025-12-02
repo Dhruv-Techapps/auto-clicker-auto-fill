@@ -16,7 +16,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"],
+    "customConditions": ["@dhruv-techapps/source"],
     "paths": {
       "@acf-options-page/*": ["./apps/acf-options-page/src/*"]
     }
