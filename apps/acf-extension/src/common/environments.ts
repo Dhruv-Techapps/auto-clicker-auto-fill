@@ -1,5 +1,5 @@
 const VARIANT = process.env.VITE_PUBLIC_VARIANT;
-const OPTIONS_PAGE_URL = process.env.PUBLIC_URL;
+const OPTIONS_PAGE_URL = process.env.VITE_PUBLIC_URL;
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const MEASUREMENT_ID = process.env.MEASUREMENT_ID;
 const API_SECRET = process.env.API_SECRET;

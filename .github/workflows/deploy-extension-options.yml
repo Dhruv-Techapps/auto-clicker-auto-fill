@@ -55,7 +55,7 @@ jobs:
       - run: npx nx report
       - name: Build Options Page
         run: |
-          npx nx run acf-options-page:build --prod --base ${{ vars.PUBLIC_URL }} --verbose --skip-nx-cache
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{vars.VITE_PUBLIC_CHROME_EXTENSION_ID}}
@@ -84,7 +84,7 @@ jobs:
           DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
           OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
           EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
-          PUBLIC_URL: ${{vars.PUBLIC_URL}}
+          VITE_PUBLIC_URL: ${{vars.VITE_PUBLIC_URL}}
           API_SECRET: ${{vars.API_SECRET}}
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
