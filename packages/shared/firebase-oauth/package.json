@@ -25,6 +25,7 @@
     "@dhruv-techapps/core-service": "0.0.1",
     "firebase": "^12.1.0",
     "@firebase/app": "0.14.1",
-    "@firebase/util": "1.13.0"
+    "@firebase/util": "1.13.0",
+    "@dhruv-techapps/core-store": "0.0.1"
   }
 }

@@ -1,28 +1,19 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["dom"],
     "baseUrl": ".",
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "types": ["node"],
+    "lib": ["dom"]
   },
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../core/store/tsconfig.lib.json"
-    },
-    {
-      "path": "../../core/service/tsconfig.lib.json"
-    },
-    {
-      "path": "../../core/common/tsconfig.lib.json"
-    },
-    {
-      "path": "../google-oauth/tsconfig.lib.json"
+      "path": "../common/tsconfig.lib.json"
     }
   ],
   "exclude": [

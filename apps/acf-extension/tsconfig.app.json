@@ -51,6 +51,9 @@
       "path": "../../packages/shared/discord-messaging/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/core/store/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/core/extension/tsconfig.lib.json"
     },
     {

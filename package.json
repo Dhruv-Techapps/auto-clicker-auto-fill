@@ -4,13 +4,13 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many -t serve -p acf-extension acf-options-page acf-i18n",
-    "lint": "nx run-many -t lint",
+    "lint": "nx run-many -t lint --fix",
     "test": "nx run-many -t test --coverage",
     "typecheck": "nx run-many -t typecheck",
     "build": "nx run-many -t build",
     "format:check": "nx format check",
     "format:write": "nx format:write",
-    "local": "npm run lint && npm run test && npm run typecheck && npm run format:write && npm run build",
+    "local": "npm run lint && npm run typecheck && npm run format:write && npm run build && npm run test",
     "release:publish": "nx release publish",
     "docs": "npm-run-all docs-build docs-lint",
     "docs-build": "npm run astro-build",
@@ -130,7 +130,6 @@
     "tslib": "^2.3.0",
     "typescript": "5.9.3",
     "typescript-eslint": "^8.40.0",
-    "verdaccio": "^6.2.2",
     "vite": "7.2.6",
     "vitest": "^3.1.2",
     "vnu-jar": "^24.10.17",
@@ -142,18 +141,5 @@
     "packages/ui/*",
     "packages/core/*",
     "packages/shared/*"
-  ],
-  "nx": {
-    "includedScripts": [],
-    "targets": {
-      "local-registry": {
-        "executor": "@nx/js:verdaccio",
-        "options": {
-          "port": 4873,
-          "config": ".verdaccio/config.yml",
-          "storage": "tmp/local-registry/storage"
-        }
-      }
-    }
-  }
+  ]
 }

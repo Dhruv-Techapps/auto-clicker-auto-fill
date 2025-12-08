@@ -13,10 +13,10 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../core/service/tsconfig.lib.json"
+      "path": "../../core/store/tsconfig.lib.json"
     },
     {
-      "path": "../../core/common/tsconfig.lib.json"
+      "path": "../../core/service/tsconfig.lib.json"
     }
   ],
   "exclude": [
