@@ -1,4 +1,5 @@
 import { OPTIONS_PAGE_URL } from '../../common/environments';
+//to re run sonar
 export const Footer = () => {
   return (
     <footer className='modal-footer justify-content-center' id='collapse-footer'>
