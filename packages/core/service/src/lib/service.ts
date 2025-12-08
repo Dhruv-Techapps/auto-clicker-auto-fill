@@ -47,7 +47,7 @@ export class CoreService {
 
 export class PortService {
   private static readonly DEFAULT_NAME = 'Auto Clicker & Auto Fill';
-  private static instances: Map<string, PortService> = new Map();
+  private static readonly instances: Map<string, PortService> = new Map();
 
   private readonly port: chrome.runtime.Port;
   public readonly portName: string;
@@ -58,7 +58,7 @@ export class PortService {
       throw new Error('Extension context invalidated');
     }
 
-    const id = chrome.runtime.id || (window as any).EXTENSION_ID;
+    const id = chrome.runtime.id || globalThis.EXTENSION_ID;
     if (!id || typeof id !== 'string') {
       throw new Error('extensionId is not defined or not a string');
     }
