@@ -127,6 +127,7 @@
       "core-common",
       "core-extension",
       "core-service",
+      "core-store",
       "acf-common",
       "acf-service",
       "acf-events",

@@ -31,6 +31,9 @@
       "path": "./packages/core/service"
     },
     {
+      "path": "./packages/core/store"
+    },
+    {
       "path": "./packages/shared/discord-messaging"
     },
     {

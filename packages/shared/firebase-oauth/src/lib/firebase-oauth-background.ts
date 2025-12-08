@@ -1,3 +1,4 @@
+import { DeviceStorage } from '@dhruv-techapps/core-store';
 import { GoogleOauth2Background } from '@dhruv-techapps/shared-google-oauth';
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth/web-extension';
 import { Auth, FirebaseLoginResponse, FirebaseRole, User } from './firebase-oauth.types';
@@ -47,6 +48,8 @@ export class FirebaseOauth2Background extends GoogleOauth2Background {
     if (gToken) {
       headers.append('X-Auth-Token', gToken);
     }
+    const deviceInfo = await DeviceStorage.getDeviceInfo();
+    headers.append('X-Device-Id', deviceInfo.id);
     return headers;
   }
 

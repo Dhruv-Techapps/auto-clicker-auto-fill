@@ -1,4 +1,4 @@
-import { generateUUID } from '@dhruv-techapps/core-common';
+import { DeviceStorage, UserStorage } from '@dhruv-techapps/core-store';
 import { DEFAULT_ENGAGEMENT_TIME_MSEC, GA_DEBUG_ENDPOINT, GA_ENDPOINT, SESSION_EXPIRATION_IN_MIN } from './google-analytics.constant';
 import { FireErrorEventParams, FireEventParams, FirePageViewEventParams } from './google-analytics.types';
 
@@ -17,14 +17,14 @@ export class GoogleAnalyticsBackground {
   // Returns the client id, or creates a new one if one doesn't exist.
   // Stores client id in local storage to keep the same client id as long as
   // the extension is installed.
-  async getOrCreateClientId() {
-    let { clientId } = await chrome.storage.local.get('clientId');
-    if (!clientId) {
-      // Generate a unique client ID, the actual value is not relevant
-      clientId = generateUUID();
-      await chrome.storage.local.set({ clientId });
-    }
-    return clientId;
+  async getClientId() {
+    const deviceInfo = await DeviceStorage.getDeviceInfo();
+    return deviceInfo.id;
+  }
+
+  async getUserId() {
+    const userId = await UserStorage.getUserId();
+    return userId;
   }
 
   // Returns the current session id, or creates a new one if one doesn't exist or
@@ -73,8 +73,8 @@ export class GoogleAnalyticsBackground {
       await fetch(`${this.debug ? GA_DEBUG_ENDPOINT : GA_ENDPOINT}?measurement_id=${this.MEASUREMENT_ID}&api_secret=${this.API_SECRET}`, {
         method: 'POST',
         body: JSON.stringify({
-          client_id: await this.getOrCreateClientId(),
-          user_id: await this.getOrCreateClientId(),
+          client_id: await this.getClientId(),
+          user_id: await this.getUserId(),
           events: [
             {
               name,

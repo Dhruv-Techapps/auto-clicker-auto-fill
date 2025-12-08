@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE_KEY, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { MainWorldBackground, RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING } from '@dhruv-techapps/acf-main-world';
 import { Runtime } from '@dhruv-techapps/core-extension';
+import { DeviceStorage, UserStorage } from '@dhruv-techapps/core-store';
 import { DiscordMessagingBackground, RUNTIME_MESSAGE_DISCORD_MESSAGING } from '@dhruv-techapps/shared-discord-messaging';
 import { DiscordOauth2Background, RUNTIME_MESSAGE_DISCORD_OAUTH } from '@dhruv-techapps/shared-discord-oauth';
 import { FirebaseFirestoreBackground, RUNTIME_MESSAGE_FIREBASE_FIRESTORE } from '@dhruv-techapps/shared-firebase-firestore';
@@ -49,30 +50,9 @@ try {
       }
     } else {
       new AcfSchedule().check();
-    } /* else if (details.reason === 'update') {
-      const { action } = await chrome.runtime.getManifest();
-      chrome.notifications.create(
-        'update-notification',
-        {
-          type: 'basic',
-          iconUrl: action.default_icon,
-          title: '⚠ Important Update',
-          message: `We've updated Action Condition & Addon Goto to use Action IDs instead of indexes. Review your settings to ensure compatibility.`,
-          buttons: [{ title: 'Review Now' }, { title: `Ignore - I don't use these features` }],
-          requireInteraction: true,
-        },
-        function () {
-          chrome.notifications.onButtonClicked.addListener(function (notificationId, btnIdx) {
-            if (notificationId === 'update-notification') {
-              if (btnIdx === 0) {
-                chrome.tabs.create({ url: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions/521' });
-              }
-              chrome.notifications.clear(notificationId);
-            }
-          });
-        }
-      );
-    }*/
+    }
+
+    DeviceStorage.getDeviceInfo();
   });
 
   /**
@@ -111,10 +91,10 @@ try {
   Runtime.onConnect(onMessageListener);
 
   auth.authStateReady().then(() => {
-    const clientId = auth.currentUser?.uid;
-    if (clientId) {
-      chrome.storage.local.set({ clientId });
-      scope.setUser({ id: clientId });
+    const userId = auth.currentUser?.uid;
+    if (userId) {
+      UserStorage.setUserId(userId);
+      scope.setUser({ id: userId });
     }
   });
 } catch (error) {
