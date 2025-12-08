@@ -40,7 +40,8 @@ module.exports = composePlugins(
       wizard: './src/wizard/index.ts',
       'wizard-popup': ['./src/wizard/popup/wizard-popup.ts', './src/wizard/popup/wizard-popup.scss'],
       devtools: './src/devtools/index.ts',
-      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss'
+      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss',
+      'side-panel': ['./src/side_panel/side_panel.tsx', './src/side_panel/side_panel.scss']
     };
     if (config.module.rules) {
       config.module.rules.push({
@@ -58,9 +59,12 @@ module.exports = composePlugins(
           { from: `**/messages.json`, to: './_locales', context: `${options.root}/apps/acf-i18n/src/locales` },
           { from: path.join(__dirname, 'assets', assets ?? 'DEV'), to: './assets' },
           { from: `./*.html`, to: './html', context: 'src/wizard/popup' },
+          { from: `./*.html`, to: './html', context: 'src/side_panel' },
           { from: `./*.html`, to: './', context: 'src/devtools' },
           { from: `./*.html`, to: './html', context: '../../packages/shared/sandbox/src/lib' },
           { from: path.join(options.root, './node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js'), to: './webcomponents' },
+          { from: path.join(options.root, './node_modules/bootstrap/dist/css/bootstrap.min.css'), to: './css' },
+          { from: './*.css', to: './css', context: 'src/side_panel/theme' },
           {
             from: './src/manifest.json',
             to: './manifest.json',

@@ -4,12 +4,14 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many -t serve -p acf-extension acf-options-page acf-i18n",
+    "lint": "nx run-many -t lint",
     "test": "nx run-many -t test --coverage",
-    "release:publish": "nx release publish",
+    "typecheck": "nx run-many -t typecheck",
     "build": "nx run-many -t build",
     "format:check": "nx format check",
     "format:write": "nx format:write",
-    "lint": "nx run-many -t lint",
+    "prepublish": "npm run lint && npm run test && npm run typecheck && npm run format:write && npm run build",
+    "release:publish": "nx release publish",
     "docs": "npm-run-all docs-build docs-lint",
     "docs-build": "npm run astro-build",
     "docs-compile": "npm run docs-build",
@@ -28,6 +30,7 @@
     "@dhruv-techapps:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.28.5",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@monaco-editor/react": "^4.7.0",
@@ -44,6 +47,7 @@
     "i18next": "^25.4.2",
     "i18next-http-backend": "^3.0.2",
     "instantsearch.css": "^8.5.1",
+    "preact": "^10.28.0",
     "randexp": "^0.5.3",
     "react": "19.1.0",
     "react-bootstrap": "^2.10.9",
