@@ -52,7 +52,7 @@ try {
       new AcfSchedule().check();
     }
 
-    DeviceStorage.sync();
+    DeviceStorage.getDeviceInfo();
   });
 
   /**
