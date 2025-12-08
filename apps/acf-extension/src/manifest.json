@@ -5,7 +5,7 @@
   "version": "5.0.0",
   "manifest_version": 3,
   "default_locale": "en",
-  "permissions": ["storage", "notifications", "contextMenus", "activeTab", "identity", "alarms", "unlimitedStorage", "scripting", "userScripts", "webNavigation"],
+  "permissions": ["storage", "notifications", "contextMenus", "activeTab", "identity", "alarms", "unlimitedStorage", "scripting", "userScripts", "webNavigation", "sidePanel"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "icons": {
     "16": "assets/icons/icon16.png",
@@ -52,6 +52,25 @@
       "run_at": "document_end"
     }
   ],
+  "side_panel": {
+    "default_path": "html/side_panel.html"
+  },
+  "commands": {
+    "options-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1"
+      },
+      "description": "Open the options page."
+    },
+    "side-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Command+Shift+2"
+      },
+      "description": "Open the side panel."
+    }
+  },
   "externally_connectable": {
     "matches": ["http://localhost:*/*", "https://*.getautoclicker.com/*", "https://*.getdataentry.com/*"]
   },

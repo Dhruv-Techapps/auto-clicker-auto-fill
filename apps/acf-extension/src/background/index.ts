@@ -19,6 +19,7 @@ import { DISCORD_CLIENT_ID, EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL, OPTION
 import { scope } from '../common/instrument';
 import AcfBackup from './acf-backup';
 import { AcfSchedule } from './acf-schedule';
+import './commands';
 import registerContextMenus from './context-menu';
 import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
@@ -34,7 +35,7 @@ try {
    */
   chrome.action.onClicked.addListener(() => {
     googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'action:onClicked' } });
-    chrome.tabs.create({ url: OPTIONS_PAGE_URL });
+    TabsMessenger.optionsTab();
   });
 
   /**
@@ -44,7 +45,7 @@ try {
     if (details.reason === 'install') {
       const storageResult = await chrome.storage.local.get([LOCAL_STORAGE_KEY.CONFIGS]);
       if (!storageResult[LOCAL_STORAGE_KEY.CONFIGS]) {
-        TabsMessenger.optionsTab({ url: OPTIONS_PAGE_URL });
+        TabsMessenger.optionsTab();
       }
     } else {
       new AcfSchedule().check();

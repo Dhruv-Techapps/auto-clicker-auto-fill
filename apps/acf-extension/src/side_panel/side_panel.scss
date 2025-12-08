@@ -1,0 +1,45 @@
+@import url(/css/bootstrap.min.css);
+@import url(/css/_doc.css);
+
+:root {
+  font-size: 12px;
+  --bs-border-radius: 0.75rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+main {
+  flex: 1 0 auto;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: var(--bs-body-bg);
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*Footer*/
+.modal-footer {
+  padding: 0;
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.modal-footer a {
+  display: flex;
+  align-items: center;
+}
+
+.modal-footer a svg {
+  margin-right: 0.15em;
+}
+
+.modal-footer a:hover {
+  color: #712cf9 !important;
+}

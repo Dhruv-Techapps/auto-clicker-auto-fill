@@ -12,7 +12,7 @@
     "message": "Auto Clicker - AutoFill [LOCAL]"
   },
   "EXT_SHORT_NAME": {
-    "message": "Auto Fill"
+    "message": "Auto Clicker - AutoFill"
   },
   "EXT_DESCRIPTION": {
     "message": "AutoFill input field or auto click button or link anything anywhere.You can configure and check click speed test"
@@ -43,6 +43,9 @@
   },
   "@CONTEXT_MENU__RECORD": {
     "message": "☉ Auto Clicker (Record)"
+  },
+  "@CONTEXT_MENU__SIDE_PANEL": {
+    "message": "▤ Side Panel"
   },
   "@CONTEXT_MENU__CONFIG_PAGE": {
     "message": "↗ Open Configuration Page"

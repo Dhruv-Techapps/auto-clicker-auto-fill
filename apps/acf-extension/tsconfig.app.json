@@ -3,12 +3,13 @@
   "compilerOptions": {
     "outDir": "dist",
     "types": ["chrome", "node"],
+    "jsx": "react-jsx",
     "rootDir": "src",
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "lib": ["dom", "DOM.Iterable"]
   },
   "exclude": ["out-tsc", "dist", "jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"],
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [
     {
       "path": "../../packages/acf/events/tsconfig.lib.json"

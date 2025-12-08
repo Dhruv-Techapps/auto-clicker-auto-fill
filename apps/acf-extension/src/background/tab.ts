@@ -1,4 +1,6 @@
+import { PortService } from '@dhruv-techapps/core-service';
 import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { OPTIONS_PAGE_URL } from '../common/environments';
 
 let optionsTab: chrome.tabs.Tab | undefined;
 
@@ -15,13 +17,26 @@ const TABS_I18N = {
 
 const NOTIFICATIONS_ID = 'Tabs Messenger';
 export class TabsMessenger {
-  static optionsTab(properties: chrome.tabs.UpdateProperties) {
+  static optionsTab(properties?: chrome.tabs.UpdateProperties) {
     if (optionsTab?.id) {
-      chrome.tabs.update(optionsTab.id, { ...properties, active: true });
+      chrome.tabs.update(optionsTab.id, { url: OPTIONS_PAGE_URL, ...properties, active: true });
     } else {
-      chrome.tabs.create(properties, (tab) => {
+      chrome.tabs.create({ url: OPTIONS_PAGE_URL, ...properties, active: true }, (tab) => {
         optionsTab = tab;
       });
+    }
+  }
+
+  async openOptionsPage(queryParams?: Record<string, string>) {
+    if (OPTIONS_PAGE_URL) {
+      const url = new URL(OPTIONS_PAGE_URL);
+      if (queryParams) {
+        Object.entries(queryParams).forEach(([key, value]) => {
+          if (value === undefined || value === null) return;
+          url.searchParams.append(key, value); // append allows duplicates
+        });
+      }
+      TabsMessenger.optionsTab({ url: url.toString() });
     }
   }
 
@@ -41,3 +56,20 @@ export class TabsMessenger {
     }
   }
 }
+
+chrome.tabs.onActivated.addListener(async (activeInfo) => {
+  const isPanelOpen = (await chrome.runtime.getContexts({ contextTypes: ['SIDE_PANEL'] })).some((context) => context.contextType === 'SIDE_PANEL');
+  if (isPanelOpen) {
+    const currentTab = await chrome.tabs.get(activeInfo.tabId);
+    PortService.getInstance('SidePanel').message({ messenger: 'SidePanelMessenger', methodName: 'onTabActivated', message: currentTab.url });
+  }
+});
+
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  const isPanelOpen = (await chrome.runtime.getContexts({ contextTypes: ['SIDE_PANEL'] })).some((context) => context.contextType === 'SIDE_PANEL');
+  if (isPanelOpen) {
+    if (changeInfo.status === 'complete') {
+      PortService.getInstance('SidePanel').message({ messenger: 'SidePanelMessenger', methodName: 'onTabUpdated', message: tab.url });
+    }
+  }
+});

@@ -46,54 +46,79 @@ export class CoreService {
 }
 
 export class PortService {
-  private static instance?: PortService;
-  private readonly port: chrome.runtime.Port;
-  private readonly portName: string;
+  private static readonly DEFAULT_NAME = 'Auto Clicker & Auto Fill';
+  private static readonly instances: Map<string, PortService> = new Map();
 
-  private constructor(name = 'Auto Clicker & Auto Fill') {
+  private readonly port: chrome.runtime.Port;
+  public readonly portName: string;
+  private disconnected = false;
+
+  private constructor(name = PortService.DEFAULT_NAME) {
     if (!chrome.runtime?.connect) {
       throw new Error('Extension context invalidated');
     }
 
-    const id = chrome.runtime.id || window.EXTENSION_ID;
+    const id = chrome.runtime.id || globalThis.EXTENSION_ID;
     if (!id || typeof id !== 'string') {
-      throw new Error('extensionId is not undefined neither string');
+      throw new Error('extensionId is not defined or not a string');
     }
 
     this.portName = name;
     this.port = chrome.runtime.connect(id, { name: this.portName });
+
+    // When port disconnects, remove from instances map so a new instance may be created later
+    this.port.onDisconnect.addListener(() => {
+      this.disconnected = true;
+      console.log(`Port "${this.portName}" disconnected — clearing instance`);
+      PortService.instances.delete(this.portName);
+    });
   }
 
+  /**
+   * Returns a PortService instance scoped to the given name.
+   * If an instance for that name was previously created and still connected, returns it.
+   * Otherwise creates a new one.
+   */
   static getInstance(name?: string): PortService {
-    if (!PortService.instance) {
-      PortService.instance = new PortService(name);
-      return PortService.instance;
+    const key = name ?? PortService.DEFAULT_NAME;
+    const existing = PortService.instances.get(key);
+
+    if (existing && !existing.disconnected) {
+      return existing;
     }
 
-    if (name && PortService.instance.portName !== name) {
-      console.warn(`PortService already initialized with name "${PortService.instance.portName}". Ignoring request for "${name}".`);
-    }
-
-    return PortService.instance;
+    const instance = new PortService(key);
+    PortService.instances.set(key, instance);
+    return instance;
   }
 
   private postMessage(message: unknown): void {
+    if (this.disconnected) {
+      throw new Error(`Cannot postMessage: port "${this.portName}" is disconnected`);
+    }
     this.port.postMessage(message);
   }
 
   public onMessage(listener: (message: unknown) => void): void {
-    if (this.port.onMessage.hasListener(listener)) {
-      return;
+    if (!this.port.onMessage.hasListener(listener)) {
+      this.port.onMessage.addListener(listener);
     }
-    this.port.onMessage.addListener(listener);
-  }
-
-  public disconnect(): void {
-    this.port.disconnect();
   }
 
   public onDisconnect(listener: () => void): void {
     this.port.onDisconnect.addListener(listener);
+  }
+
+  public disconnect(): void {
+    if (this.disconnected) return;
+    try {
+      this.port.disconnect();
+    } finally {
+      // if onDisconnect listener from chrome doesn't fire synchronously, ensure cleanup
+      this.disconnected = true;
+      PortService.instances.delete(this.portName);
+      console.log(`Port "${this.portName}" manually disconnected and cleared.`);
+    }
   }
 
   public message<K extends CoreServiceRequest>(message: K): void {

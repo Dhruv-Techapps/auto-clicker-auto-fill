@@ -1,8 +1,7 @@
 import { LOCAL_STORAGE_KEY, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage } from '@dhruv-techapps/acf-store';
 import { GoogleAnalyticsBackground } from '@dhruv-techapps/shared-google-analytics';
-import { ACTION_POPUP } from '../common/constant';
-
+import { SIDE_PANEL } from '../common/constant';
 const CONTEXT_MENU_ELEMENT_ID = 'element-mode';
 const CONTEXT_MENU_SEPARATOR_ID = 'config-separator';
 const CONTEXT_MENU_CONFIG_PAGE_ID = 'config-page-mode';
@@ -10,6 +9,7 @@ const CONTEXT_MENU_CONFIG_PAGE_ID = 'config-page-mode';
 const CONTEXT_MENU_I18N = {
   FIELD: chrome.i18n.getMessage('@CONTEXT_MENU__FIELD'),
   RECORD: chrome.i18n.getMessage('@CONTEXT_MENU__RECORD'),
+  SIDE_PANEL: chrome.i18n.getMessage('@CONTEXT_MENU__SIDE_PANEL'),
   CONFIG_PAGE: chrome.i18n.getMessage('@CONTEXT_MENU__CONFIG_PAGE')
 };
 
@@ -50,7 +50,7 @@ const registerConfigsContextMenus = () => {
 export default function registerContextMenus(optionsPageUrl?: string, googleAnalytics?: GoogleAnalyticsBackground) {
   chrome.contextMenus.removeAll();
   chrome.contextMenus.create({ id: CONTEXT_MENU_ELEMENT_ID, title: CONTEXT_MENU_I18N.FIELD, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
-  chrome.contextMenus.create({ id: ACTION_POPUP, title: CONTEXT_MENU_I18N.RECORD, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
+  chrome.contextMenus.create({ id: SIDE_PANEL, title: CONTEXT_MENU_I18N.SIDE_PANEL, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
   chrome.contextMenus.create({ id: CONTEXT_MENU_SEPARATOR_ID, type: 'separator', contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
   chrome.contextMenus.create({ id: CONTEXT_MENU_CONFIG_PAGE_ID, title: CONTEXT_MENU_I18N.CONFIG_PAGE, contexts: ['all'] });
 
@@ -62,11 +62,11 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
         chrome.tabs.create({ url: optionsPageUrl });
         googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'contextMenus.onClicked' } });
         break;
-      case ACTION_POPUP:
+      case SIDE_PANEL:
         if (tab?.id) {
-          chrome.tabs.sendMessage(tab.id, { action: ACTION_POPUP });
+          chrome.sidePanel.open({ tabId: tab.id }).catch(console.warn);
+          googleAnalytics?.fireEvent({ name: 'SidePanel', params: { location: 'contextMenus.onClicked' } });
         }
-        googleAnalytics?.fireEvent({ name: 'Wizard', params: { location: 'contextMenus.onClicked' } });
         break;
       case CONTEXT_MENU_ELEMENT_ID:
         {
@@ -78,14 +78,14 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
           url.searchParams.append('url', configURL);
           url.searchParams.append('elementFinder', xpath);
           chrome.tabs.create({ url: url.href });
-          googleAnalytics?.fireEvent({ name: 'Wizard', params: { location: 'contextMenus.onClicked', data: true } });
+          googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'contextMenus.onClicked', data: true } });
           chrome.storage.local.remove(['url', 'xpath']);
         }
         break;
       default:
         if (typeof menuItemId === 'string' && menuItemId.includes('config|')) {
           const [, configId, tabId] = menuItemId.split('|');
-          chrome.tabs.sendMessage(Number(tabId), { configId, action: RUNTIME_MESSAGE_ACF.RUN_CONFIG }, console.log);
+          chrome.tabs.sendMessage(Number(tabId), { configId, action: RUNTIME_MESSAGE_ACF.RUN_CONFIG });
         }
         break;
     }
