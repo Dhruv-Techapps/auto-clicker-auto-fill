@@ -5,8 +5,8 @@ export class UserStorage {
     await chrome.storage.local.set({ [UserStorage.KEY]: userId });
   }
 
-  static async getUserId(): Promise<string | null> {
+  static async getUserId(): Promise<string | undefined> {
     const result = await chrome.storage.local.get<{ [UserStorage.KEY]: string }>([UserStorage.KEY]);
-    return result[UserStorage.KEY] || null;
+    return result[UserStorage.KEY];
   }
 }
