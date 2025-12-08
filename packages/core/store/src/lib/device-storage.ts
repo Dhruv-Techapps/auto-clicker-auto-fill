@@ -6,7 +6,7 @@ export interface DeviceInfo {
 }
 
 export class DeviceStorage {
-  static KEY = 'device_info';
+  private static readonly KEY = 'device_info';
 
   static async getDeviceInfo(): Promise<DeviceInfo> {
     const result = await chrome.storage.local.get<{ [DeviceStorage.KEY]: DeviceInfo }>([DeviceStorage.KEY]);

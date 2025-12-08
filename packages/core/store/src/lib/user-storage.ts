@@ -1,5 +1,5 @@
 export class UserStorage {
-  static KEY = 'user_id';
+  private static readonly KEY = 'user_id';
   // Placeholder for future user-related storage methods
   static async setUserId(userId: string) {
     await chrome.storage.local.set({ [UserStorage.KEY]: userId });
