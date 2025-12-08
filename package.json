@@ -10,7 +10,7 @@
     "build": "nx run-many -t build",
     "format:check": "nx format check",
     "format:write": "nx format:write",
-    "prepublish": "npm run lint && npm run test && npm run typecheck && npm run format:write && npm run build",
+    "local": "npm run lint && npm run test && npm run typecheck && npm run format:write && npm run build",
     "release:publish": "nx release publish",
     "docs": "npm-run-all docs-build docs-lint",
     "docs-build": "npm run astro-build",
