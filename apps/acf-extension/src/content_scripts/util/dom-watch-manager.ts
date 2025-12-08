@@ -22,7 +22,7 @@ const DomWatchManager = (() => {
   };
 
   // Process added nodes and check if any match actions
-  const processAddedNodes = async (addedNodes: NodeList): Promise<void> => {
+  const processAddedNodes = async (): Promise<void> => {
     if (!state.watchSettings || !state.sequenceRestartCallback) {
       return;
     }
@@ -89,7 +89,7 @@ const DomWatchManager = (() => {
       if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
         // Debounce the processing to avoid excessive restarts
         debounceProcessing(
-          () => processAddedNodes(mutation.addedNodes),
+          () => processAddedNodes(),
           (state.watchSettings.debounce || 1) * 1000 // Convert seconds to milliseconds
         );
       }
