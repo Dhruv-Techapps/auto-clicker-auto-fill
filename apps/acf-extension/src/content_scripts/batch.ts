@@ -62,6 +62,7 @@ const BatchProcessor = (() => {
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
     try {
       console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);
+      statusBar.batchUpdate(1);
       await Actions.start(actions, 1);
       console.groupEnd();
       if (batch) {

@@ -1,5 +1,6 @@
 import { ActionService } from '@dhruv-techapps/core-service';
 import { Timer } from '@dhruv-techapps/shared-util';
+import { STATUS_BAR_LOCATION } from './status-bar.types';
 
 export enum STATUS_BAR_TYPE {
   CONFIG_WAIT = 'Config wait',
@@ -10,18 +11,37 @@ export enum STATUS_BAR_TYPE {
 }
 
 export class StatusBar {
-  private batch: string | number = '';
-  private action: string | number = '';
   private totalActions = 0;
   private totalBatches = 0;
 
+  private readonly statusBar: HTMLDivElement = document.createElement('div');
+  private readonly iconEle: HTMLSpanElement = document.createElement('span');
+  private readonly textEle: HTMLSpanElement = document.createElement('span');
+  private readonly batchEle: HTMLSpanElement = document.createElement('span');
+  private readonly actionEle: HTMLSpanElement = document.createElement('span');
+  private readonly remainingEle: HTMLSpanElement = document.createElement('span');
+  private readonly issueEle: HTMLSpanElement = document.createElement('span');
+  constructor() {
+    this.statusBar = document.createElement('div');
+    this.statusBar.className = 'hide';
+    this.statusBar.id = 'auto-clicker-auto-fill-status';
+    ['iconEle', 'batchEle', 'actionEle', 'issueEle', 'textEle', 'remainingEle'].forEach((el) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this as any)[el].className = el;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.statusBar.appendChild((this as any)[el]);
+    });
+  }
+
+  public setLocation = async (location: STATUS_BAR_LOCATION) => {
+    this.statusBar.className = location;
+    document.body.appendChild(this.statusBar);
+  };
+
   public enable(totalActions: number, totalBatches?: number): void {
-    this.batch = '';
-    this.action = '';
     this.totalActions = totalActions;
     this.totalBatches = totalBatches || 0;
     ActionService.setBadgeText({ text: '⚡' });
-    ActionService.setTitle({ title: 'Initializing setup...' });
   }
 
   public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current?: number): Promise<void> {
@@ -31,54 +51,66 @@ export class StatusBar {
     }
     const time = waitTime / 1000;
     let title = '';
-    let icon = '🔄⏳';
+    let issue = '';
+    let remaining = '';
     switch (_type) {
       case STATUS_BAR_TYPE.CONFIG_WAIT:
-        icon = '▶️⏳';
-        title = `Waiting ${time}s before starting configuration.`;
+        title = `⏳ ${time}s ▶️ configuration.`;
         break;
       case STATUS_BAR_TYPE.ACTION_WAIT:
-        icon = '🔁⏳';
-        title = `Waiting ${time}s before starting Action ${this.action} of ${this.totalActions}.`;
+        title = `⏳ ${time}s ▶️ Action.`;
         break;
       case STATUS_BAR_TYPE.BATCH_REPEAT:
-        icon = '📦⏳';
-        title = `Waiting ${time}s before starting Batch ${this.batch} of ${this.totalBatches}.`;
+        title = `⏳ ${time}s 📦 Batch.`;
         break;
       case STATUS_BAR_TYPE.ACTION_REPEAT:
-        title = `Waiting ${time}s before repeating Action ${this.action} (${current} repeats left).`;
+        title = `⏳ ${time}s 🔁 Action.`;
+        remaining = `${current} repeats left`;
         break;
       case STATUS_BAR_TYPE.ADDON_RECHECK:
-        icon = '✅⏳';
-        title = `Condition not met. Rechecking in ${time}s... ${current} checks left (Action ${this.action}).`;
+        issue = '⚠️ Condition not met.';
+        title = `⏳ ${time}s 🔁 Action.`;
+        remaining = `${current} checks left`;
         break;
       default:
-        icon = '👀⏳';
-        title = `Element not found. Retrying in ${time}s... ${current} retries left (Action ${this.action}).`;
+        issue = '⚠️ Element not found.';
+        title = `⏳ ${time}s 🔁 Action.`;
+        remaining = `${current} retries left`;
         break;
     }
-    ActionService.setBadgeText({ text: icon });
-    ActionService.setTitle({ title });
+    this.textEle.textContent = title;
+    this.issueEle.textContent = issue;
+    this.remainingEle.textContent = remaining;
     await Timer.sleep(waitTime);
   }
 
   public batchUpdate(text: string | number): void {
-    this.batch = text;
-    this.action = '';
+    this.batchEle.textContent = `🅱️ ${text}/${this.totalBatches}`;
+    this.remainingEle.textContent = '';
+    this.actionEle.textContent = '';
+    this.issueEle.textContent = '';
   }
 
   public actionUpdate(number: number | string): void {
-    this.action = number;
+    this.actionEle.textContent = `🅰️ ${number}/${this.totalActions}`;
+    this.remainingEle.textContent = '';
+    this.issueEle.textContent = '';
   }
 
   public error = (error: string): void => {
     console.error('Error: %s', error);
     ActionService.setBadgeText({ text: '❌' });
-    ActionService.setTitle({ title: error });
+    this.iconEle.textContent = '❌';
+    this.textEle.textContent = error;
   };
 
   public done = (): void => {
     ActionService.setBadgeText({ text: '✅' });
-    ActionService.setTitle({ title: 'Auto Clicker & Auto Fill' });
+    this.batchEle.textContent = '';
+    this.actionEle.textContent = '';
+    this.remainingEle.textContent = '';
+    this.issueEle.textContent = '';
+    this.iconEle.textContent = '✅';
+    this.textEle.textContent = 'Done';
   };
 }
