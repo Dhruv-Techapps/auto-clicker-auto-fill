@@ -141,7 +141,13 @@ const ConfigProcessor = (() => {
     }
   };
 
+  const setupStatusBar = async () => {
+    const { statusBar: statusBarLocation } = await SettingsStorage.getSettings();
+    statusBar.setLocation(statusBarLocation);
+  };
+
   const checkStartType = async (configs: Array<IConfiguration>, config?: IConfiguration) => {
+    await setupStatusBar();
     configs.forEach((c) => {
       Hotkey.setup(start.bind(this, c), c.hotkey);
     });
