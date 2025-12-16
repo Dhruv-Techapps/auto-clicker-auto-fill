@@ -15,7 +15,8 @@ export const ReplaceEvents = (() => {
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'ReplaceEvents'
+        event: 'ReplaceEvents',
+        source: 'content_script'
       });
       element.textContent = element.textContent?.replace(new RegExp(target, 'g'), string) || null;
     } else {

@@ -13,7 +13,8 @@ export const AppendEvents = (() => {
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'AppendEvents'
+        event: 'AppendEvents',
+        source: 'content_script'
       });
       element.textContent += value;
     } else {

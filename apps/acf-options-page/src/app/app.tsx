@@ -1,4 +1,5 @@
 import ConfirmationModalContextProvider from '@acf-options-page/_providers/confirm.provider';
+import { StorageService } from '@dhruv-techapps/core-service';
 import * as Sentry from '@sentry/react';
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
@@ -18,6 +19,14 @@ function App() {
   const [show, setShow] = useState(localStorage.getItem('login') !== 'true');
   const { user } = useAppSelector(firebaseSelector);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    StorageService.get<string>('device_info').then(({ device_info: { id: deviceId } }) => {
+      Sentry.setContext('device_info', { device_id: deviceId });
+      window.dataLayer.push({ device_id: deviceId });
+    });
+  }, []);
+
   useEffect(() => {
     dispatch(getManifest());
     dispatch(firebaseIsLoginAPI());

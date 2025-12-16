@@ -11,14 +11,15 @@ export interface FireErrorEventParams {
   additionalParams?: Record<string, unknown>;
 }
 
+export type TEventSource = 'background' | 'content_script' | 'options_page' | 'wizard' | 'devtools' | 'unknown' | 'side_panel';
+
 export interface FireEventParams {
   name: string;
   params?: {
+    source: TEventSource;
     session_id?: string;
     engagement_time_msec?: number;
-    user_id?: string;
     version?: string;
-    client_id?: string;
     page_title?: string;
     page_location?: string;
     location?: string;

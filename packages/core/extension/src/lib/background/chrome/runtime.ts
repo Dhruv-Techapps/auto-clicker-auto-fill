@@ -1,4 +1,4 @@
-import { ActionMessenger, AlarmsMessenger, ManifestMessenger, NotificationsMessenger, StorageMessenger, UserScriptsMessenger } from './messenger';
+import { ActionMessenger, AlarmsMessenger, ManifestMessenger, NotificationsMessenger, SessionStorageMessenger, StorageMessenger, UserScriptsMessenger } from './messenger';
 
 export interface MessengerConfigObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,6 +15,8 @@ export const messageListener = async (request: any, sender: chrome.runtime.Messa
         return new NotificationsMessenger()[(methodName as keyof NotificationsMessenger) || 'create'](message);
       case 'storage':
         return new StorageMessenger()[(methodName as keyof StorageMessenger) || 'get'](message);
+      case 'session-storage':
+        return new SessionStorageMessenger()[(methodName as keyof SessionStorageMessenger) || 'get'](message);
       case 'manifest':
         return new ManifestMessenger()[(methodName as keyof ManifestMessenger) || 'values'](message);
       case 'action':

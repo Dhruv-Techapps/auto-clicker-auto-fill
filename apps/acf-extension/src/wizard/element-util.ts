@@ -91,7 +91,7 @@ export const WizardElementUtil = (() => {
         return { name: getName(element), id: generateUUID(), elementFinder, value };
       }
     } else if (element.isContentEditable && listener) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', { event: 'Wizard' });
+      GoogleAnalyticsService.fireEvent('isContentEditable', { event: 'Wizard', source: 'wizard' });
       const value = await inputListener(element);
       if (value) {
         return { elementFinder, id: generateUUID(), value };

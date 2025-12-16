@@ -67,7 +67,7 @@ const AddonProcessor = (() => {
         value = element.value;
       }
     } else if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', { event: 'Addon' });
+      GoogleAnalyticsService.fireEvent('isContentEditable', { event: 'Addon', source: 'content_script' });
       value = element.textContent ?? element.innerText;
     } else {
       value = element.innerText;

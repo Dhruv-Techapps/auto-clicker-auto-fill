@@ -35,7 +35,7 @@ try {
    * Browser Action set to open option page / configuration page
    */
   chrome.action.onClicked.addListener(() => {
-    googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'action:onClicked' } });
+    googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'action:onClicked', source: 'background' } });
     TabsMessenger.optionsTab();
   });
 

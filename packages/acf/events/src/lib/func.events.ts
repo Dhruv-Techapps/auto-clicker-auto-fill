@@ -15,7 +15,8 @@ export const FuncEvents = (() => {
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'FuncEvents'
+        event: 'FuncEvents',
+        source: 'content_script'
       });
       element.textContent = value;
     } else {
