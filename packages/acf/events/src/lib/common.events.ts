@@ -1,4 +1,6 @@
+import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
 
 export const UNKNOWN_ELEMENT_TYPE_ERROR = 'Unknown element type';
 
@@ -104,7 +106,39 @@ const CommonEvents = (() => {
     return element.ownerDocument.defaultView || window;
   };
 
-  return { getFillEvent, getElementWindow, getMouseEvent, getMouseEventProperties, getKeyboardEventProperties, loopElements, getVerifiedEvents, getTouchEvent, getTouchEventProperties, getTouch };
+  const checkNode = (element: HTMLElement, value: string, CHANGE_EVENT: string[], EventName: string) => {
+    const eW = CommonEvents.getElementWindow(element);
+    if (element instanceof eW.HTMLSelectElement || element instanceof eW.HTMLTextAreaElement || (element instanceof eW.HTMLInputElement && !RADIO_CHECKBOX_NODE_NAME.test(element.type))) {
+      element.value = value;
+      element.dispatchEvent(CommonEvents.getFillEvent());
+    } else if (element.isContentEditable) {
+      GoogleAnalyticsService.fireEvent('isContentEditable', {
+        event: EventName,
+        source: 'content_script'
+      });
+      element.textContent = value;
+    } else {
+      throw new ConfigError(UNKNOWN_ELEMENT_TYPE_ERROR, EventName);
+    }
+    CHANGE_EVENT.forEach((event) => {
+      element.dispatchEvent(new MouseEvent(event, CommonEvents.getMouseEventProperties()));
+    });
+    element.focus();
+  };
+
+  return {
+    getFillEvent,
+    getElementWindow,
+    getMouseEvent,
+    getMouseEventProperties,
+    getKeyboardEventProperties,
+    loopElements,
+    getVerifiedEvents,
+    getTouchEvent,
+    getTouchEventProperties,
+    getTouch,
+    checkNode
+  };
 })();
 
 export const EVENTS = {
