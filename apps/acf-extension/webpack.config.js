@@ -31,17 +31,20 @@ module.exports = composePlugins(
     // `options` is the options passed to the `@nx/webpack:webpack` executor
     // `context` is the context passed to the `@nx/webpack:webpack` executor
     // customize configuration here
+    const { VITE_PUBLIC_VARIANT } = process.env;
+    const assets = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'DEV' : VITE_PUBLIC_VARIANT;
+
     config.output.clean = true;
-    config.devtool = 'source-map';
+    config.devtool = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'source-map' : false;
+    console.log(config.devtool);
     config.entry = {
       background: './src/background/index.ts',
       content_scripts: './src/content_scripts/index.ts',
       content_scripts_main: './src/content_scripts_main/index.ts',
       wizard: './src/wizard/index.ts',
-      'wizard-popup': ['./src/wizard/popup/wizard-popup.ts', './src/wizard/popup/wizard-popup.scss'],
       devtools: './src/devtools/index.ts',
-      'status-bar': '../../packages/shared/status-bar/src/lib/status-bar.scss',
-      'side-panel': ['./src/side_panel/side_panel.tsx', './src/side_panel/side_panel.scss']
+      status_bar: '../../packages/shared/status-bar/src/lib/status-bar.scss',
+      side_panel: ['./src/side_panel/side_panel.tsx', './src/side_panel/side_panel.scss']
     };
     if (config.module.rules) {
       config.module.rules.push({
@@ -51,18 +54,14 @@ module.exports = composePlugins(
       config.module.rules[2].options.cacheDirectory = path.resolve(options.root, 'node_modules/.cache/babel-loader');
     }
 
-    const { VITE_PUBLIC_VARIANT } = process.env;
-    const assets = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'DEV' : VITE_PUBLIC_VARIANT;
     config.plugins.push(
       new CopyPlugin({
         patterns: [
           { from: `**/messages.json`, to: './_locales', context: `${options.root}/apps/acf-i18n/src/locales` },
           { from: path.join(__dirname, 'assets', assets ?? 'DEV'), to: './assets' },
-          { from: `./*.html`, to: './html', context: 'src/wizard/popup' },
           { from: `./*.html`, to: './html', context: 'src/side_panel' },
           { from: `./*.html`, to: './', context: 'src/devtools' },
           { from: `./*.html`, to: './html', context: '../../packages/shared/sandbox/src/lib' },
-          { from: path.join(options.root, './node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js'), to: './webcomponents' },
           { from: path.join(options.root, './node_modules/bootstrap/dist/css/bootstrap.min.css'), to: './css' },
           { from: './*.css', to: './css', context: 'src/side_panel/theme' },
           {

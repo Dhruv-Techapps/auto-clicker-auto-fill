@@ -47,8 +47,7 @@
     },
     {
       "matches": ["<all_urls>"],
-      "css": ["css/wizard-popup.min.css"],
-      "js": ["webcomponents/webcomponents-bundle.js", "wizard-popup.js", "wizard.js"],
+      "js": ["wizard.js"],
       "run_at": "document_end"
     }
   ],

@@ -1,39 +1,50 @@
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { useEffect, useState } from 'preact/hooks';
 import { Footer } from './footer';
-import { Header } from './header';
+import { Header, TPage } from './header';
 import { List } from './list';
+import { Recorder } from './recorder';
 
 export const App = () => {
-  const [query, setQuery] = useState('');
   const [url, setUrl] = useState('');
+  const [page, setPage] = useState<TPage>('list');
+  const [config, setConfig] = useState<IConfiguration | null>(null);
+
+  const process = (msg: any) => {
+    switch (msg.methodName) {
+      case 'onRecordSync':
+        setConfig(msg.message);
+        return;
+      default:
+        if (msg.message === null || msg.message === undefined) {
+          setUrl('');
+          return;
+        }
+        setUrl(new URL(msg.message).hostname);
+        break;
+    }
+  };
 
   useEffect(() => {
     let port: chrome.runtime.Port | null = null;
     chrome.runtime.onConnect.addListener((_port) => {
-      console.log('App port connected', _port.name);
       if (_port.name !== 'SidePanel') return;
       port = _port;
       port?.onMessage.addListener((msg) => {
-        console.log('App port message received', msg);
         if (msg.messenger === 'SidePanelMessenger') {
-          if (msg.message === null || msg.message === undefined) {
-            setUrl('');
-            return;
-          }
-          setUrl(new URL(msg.message).hostname);
+          process(msg);
         }
       });
     });
     return () => {
       port?.disconnect();
-      console.log('App port disconnected');
     };
   }, []);
-  console.log('Rendering App with url:', url);
+
   return (
     <>
-      <Header query={query} setQuery={setQuery} />
-      <List query={query} url={url} />
+      <Header page={page} setPage={setPage} />
+      <main className='container-fluid p-3'>{page === 'list' ? <List url={url} /> : <Recorder config={config} setConfig={setConfig} />}</main>
       <Footer />
     </>
   );

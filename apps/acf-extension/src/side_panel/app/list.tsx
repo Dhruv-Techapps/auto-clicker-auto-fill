@@ -3,12 +3,12 @@ import { useEffect, useState } from 'preact/hooks';
 import { Item } from './item';
 
 interface IListProps {
-  query: string;
   url?: string;
 }
 
 export const List = (props: IListProps) => {
-  const { query, url } = props;
+  const { url } = props;
+  const [query, setQuery] = useState('');
   const [list, setList] = useState<IConfiguration[]>([]);
   const [matchedConfigs, setMatchedConfigs] = useState<IConfiguration[]>([]);
   const [unMatchedConfigs, setUnMatchedConfigs] = useState<IConfiguration[]>([]);
@@ -36,10 +36,11 @@ export const List = (props: IListProps) => {
   }, [url, list]);
 
   return (
-    <main>
+    <div>
+      <input type='search' placeholder='Search' className='form-control' value={query} onInput={(e) => setQuery((e.target as HTMLInputElement).value)} />
       {matchedConfigs.length > 0 && (
         <>
-          <h3>
+          <h3 className='mt-3'>
             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' className='bi bi-check-circle-fill me-2' viewBox='0 0 16 16'>
               <path d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z' />
             </svg>{' '}
@@ -66,6 +67,6 @@ export const List = (props: IListProps) => {
           </div>
         </>
       )}
-    </main>
+    </div>
   );
 };

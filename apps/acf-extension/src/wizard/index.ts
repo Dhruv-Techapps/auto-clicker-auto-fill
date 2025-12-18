@@ -1,24 +1,24 @@
-import { ACTION_POPUP } from '../common/constant';
+import { ERecordMethod, WIZARD } from '../common/constant';
 import { Action } from './action';
+import { Auto } from './auto';
 import { Config } from './config';
 import { IndividualField } from './individual-field';
-import { Popup } from './popup';
+import { SidePanel } from './side-panel';
 
 chrome.runtime.onMessage.addListener(async (msg) => {
-  if (msg.action === ACTION_POPUP) {
-    const autoClicker = document.querySelector('auto-clicker-autofill-popup');
-    if (autoClicker?.shadowRoot) {
-      (autoClicker.shadowRoot.querySelector('button[aria-label="collapse"]') as HTMLButtonElement).click();
-    } else {
+  if (msg.messenger === WIZARD) {
+    if (msg.methodName === ERecordMethod.StartRecording) {
       await Config.setup();
-      Popup.setup();
       Action.setup();
+      SidePanel.setup();
+    } else if (msg.methodName === ERecordMethod.StopRecording) {
+      Config.disconnect();
+      Action.disconnect();
+      SidePanel.disconnect();
+    } else if (msg.methodName === ERecordMethod.AutoGenerateConfig) {
+      Auto.generate();
     }
   }
 });
 
 IndividualField.setup();
-
-fetch(chrome.runtime.getURL('/html/wizard-popup.html'))
-  .then((r) => r.text())
-  .then((html) => document.body.insertAdjacentHTML('beforeend', html));

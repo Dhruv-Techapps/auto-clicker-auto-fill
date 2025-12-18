@@ -4,8 +4,9 @@ import { store } from './store';
 import { updatedConfig } from './store/slice';
 
 export const Config = (() => {
+  let unsubscribe: () => void;
   const subscribe = () => {
-    store.subscribe(async () => {
+    unsubscribe = store.subscribe(async () => {
       const config = store.getState().wizard;
       const configs: Array<IConfiguration> = await ConfigStorage.getConfigs();
       const index = configs.findIndex((_config) => _config.enable && _config.url === config.url);
@@ -27,5 +28,9 @@ export const Config = (() => {
     store.dispatch(updatedConfig(config));
   };
 
-  return { setup };
+  const disconnect = () => {
+    unsubscribe?.();
+  };
+
+  return { setup, disconnect };
 })();
