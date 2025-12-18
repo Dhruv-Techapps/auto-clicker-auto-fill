@@ -36,7 +36,6 @@ module.exports = composePlugins(
 
     config.output.clean = true;
     config.devtool = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'source-map' : false;
-    console.log(config.devtool);
     config.entry = {
       background: './src/background/index.ts',
       content_scripts: './src/content_scripts/index.ts',
