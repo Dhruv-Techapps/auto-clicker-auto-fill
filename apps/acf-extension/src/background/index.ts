@@ -88,7 +88,6 @@ try {
   };
   Runtime.onMessageExternal(onMessageListener);
   Runtime.onMessage(onMessageListener);
-  Runtime.onConnect(onMessageListener);
 
   auth.authStateReady().then(() => {
     const userId = auth.currentUser?.uid;
