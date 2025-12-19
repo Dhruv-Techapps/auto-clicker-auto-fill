@@ -60,12 +60,12 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
     switch (menuItemId) {
       case CONTEXT_MENU_CONFIG_PAGE_ID:
         chrome.tabs.create({ url: optionsPageUrl });
-        googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'contextMenus.onClicked' } });
+        googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'contextMenus.onClicked', source: 'background' } });
         break;
       case SIDE_PANEL:
         if (tab?.id) {
           chrome.sidePanel.open({ tabId: tab.id }).catch(console.warn);
-          googleAnalytics?.fireEvent({ name: 'SidePanel', params: { location: 'contextMenus.onClicked' } });
+          googleAnalytics?.fireEvent({ name: 'SidePanel', params: { location: 'contextMenus.onClicked', source: 'background' } });
         }
         break;
       case CONTEXT_MENU_ELEMENT_ID:
@@ -78,7 +78,7 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
           url.searchParams.append('url', configURL);
           url.searchParams.append('elementFinder', xpath);
           chrome.tabs.create({ url: url.href });
-          googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'contextMenus.onClicked', data: true } });
+          googleAnalytics?.fireEvent({ name: 'Web', params: { location: 'contextMenus.onClicked', data: true, source: 'background' } });
           chrome.storage.local.remove(['url', 'xpath']);
         }
         break;

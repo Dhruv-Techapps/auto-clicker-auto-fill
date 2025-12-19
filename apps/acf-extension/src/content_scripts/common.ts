@@ -155,7 +155,10 @@ const Common = (() => {
     return elements;
   };
 
-  const getNotificationIcon = () => chrome.runtime.getManifest().action.default_icon;
+  const getNotificationIcon = (): string => {
+    const manifest = chrome.runtime.getManifest() as chrome.runtime.ManifestV3;
+    return manifest.action?.default_icon?.['32'] || 'assets/icons/icon32.png';
+  };
 
   return { start, getElements, getNotificationIcon };
 })();

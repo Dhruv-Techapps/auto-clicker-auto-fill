@@ -23,7 +23,8 @@ export const CopyEvents = (() => {
     }
     if (element.isContentEditable) {
       GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'CopyEvents'
+        event: 'CopyEvents',
+        source: 'content_script'
       });
       return element.textContent || element.innerText;
     }

@@ -49,7 +49,13 @@ export class FirebaseOauth2Background extends GoogleOauth2Background {
       headers.append('X-Auth-Token', gToken);
     }
     const deviceInfo = await DeviceStorage.getDeviceInfo();
+    const version = chrome.runtime.getManifest().version;
     headers.append('X-Device-Id', deviceInfo.id);
+    headers.append('X-Extension-Version', version);
+    const sessionId = (await chrome.storage.session.get<{ sessionData: { session_id: string; timestamp: number } | null }>('sessionData')).sessionData?.session_id;
+    if (sessionId) {
+      headers.append('X-Session-Id', sessionId);
+    }
     return headers;
   }
 

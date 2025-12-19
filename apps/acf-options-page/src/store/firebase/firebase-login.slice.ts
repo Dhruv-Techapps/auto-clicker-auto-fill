@@ -38,6 +38,7 @@ const slice = createSlice({
       if (action.payload?.user) {
         state.user = action.payload.user;
         state.role = action.payload.role;
+        window.dataLayer.push({ user_id: action.payload.user?.uid });
         Sentry.setUser({ id: action.payload.user.uid });
       }
       state.isLoading = false;
@@ -55,6 +56,7 @@ const slice = createSlice({
         state.user = action.payload.user;
         state.role = action.payload.role;
         Sentry.setUser({ id: action.payload.user?.uid });
+        window.dataLayer.push({ user_id: action.payload.user?.uid });
       }
       state.isLoading = false;
       state.visible = false;
@@ -67,6 +69,8 @@ const slice = createSlice({
     builder.addCase(firebaseLogoutAPI.fulfilled, (state) => {
       delete state.user;
       delete state.role;
+      window.dataLayer.push({ user_id: null });
+      Sentry.setUser(null);
     });
     builder.addCase(firebaseLogoutAPI.rejected, (state, action) => {
       state.error = action.error.message;

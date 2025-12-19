@@ -58,7 +58,7 @@ export class GoogleAnalyticsBackground {
     return sessionData.session_id;
   }
 
-  async fireEvent({ name, params = {} }: FireEventParams) {
+  async fireEvent({ name, params = { source: 'unknown' } }: FireEventParams) {
     if (!this.MEASUREMENT_ID || !this.API_SECRET) {
       return;
     }
@@ -69,6 +69,7 @@ export class GoogleAnalyticsBackground {
       params.engagement_time_msec = DEFAULT_ENGAGEMENT_TIME_MSEC;
     }
     params.version = chrome.runtime.getManifest().version;
+
     try {
       await fetch(`${this.debug ? GA_DEBUG_ENDPOINT : GA_ENDPOINT}?measurement_id=${this.MEASUREMENT_ID}&api_secret=${this.API_SECRET}`, {
         method: 'POST',
@@ -96,6 +97,7 @@ export class GoogleAnalyticsBackground {
     return this.fireEvent({
       name,
       params: {
+        source: 'unknown',
         page_title: pageTitle,
         page_location: pageLocation,
         ...additionalParams
@@ -108,6 +110,7 @@ export class GoogleAnalyticsBackground {
     return this.fireEvent({
       name,
       params: {
+        source: 'unknown',
         error,
         ...additionalParams
       }

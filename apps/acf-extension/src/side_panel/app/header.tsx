@@ -1,17 +1,25 @@
-interface IHeaderProps {
-  query: string;
-  setQuery: (query: string) => void;
-}
+export type TPage = 'list' | 'record';
 
+interface IHeaderProps {
+  page: TPage;
+  setPage: (page: TPage) => void;
+}
 export const Header = (props: IHeaderProps) => {
+  const { page, setPage } = props;
   return (
-    <header className='bd-navbar navbar navbar-expand-lg navbar-light sticky-top px-3'>
-      <nav className='d-flex w-100'>
-        <a href='/' className='navbar-brand mb-0 h1 ps-3'>
-          Configurations
-        </a>
-        <input type='search' placeholder='Search' className='form-control' value={props.query} onInput={(e) => props.setQuery((e.target as HTMLInputElement).value)} />
-      </nav>
-    </header>
+    <div className='container-fluid'>
+      <ul className='nav nav-underline nav-justified'>
+        <li className='nav-item'>
+          <a className={`nav-link ${page === 'list' ? 'active' : ''}`} href='#' onClick={() => setPage('list')}>
+            Configuration
+          </a>
+        </li>
+        <li className='nav-item'>
+          <a className={`nav-link ${page === 'record' ? 'active' : ''}`} href='#' onClick={() => setPage('record')}>
+            Recording
+          </a>
+        </li>
+      </ul>
+    </div>
   );
 };

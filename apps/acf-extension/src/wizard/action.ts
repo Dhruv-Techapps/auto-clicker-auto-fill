@@ -1,5 +1,5 @@
-import { store } from './store';
 import { WizardElementUtil } from './element-util';
+import { store } from './store';
 import { updateWizardAction } from './store/slice';
 
 const FORM_CONTROL_ELEMENTS = ['INPUT', 'SELECT', 'TEXTAREA', 'BUTTON', 'A'];
@@ -44,6 +44,15 @@ export const Action = (() => {
     });
   };
 
+  const disconnectListenersFromElements = (elements?: NodeList) => {
+    elements?.forEach((element) => {
+      if (FORM_CONTROL_ELEMENTS.includes(element.nodeName)) {
+        element.removeEventListener('click', clickTrack);
+        element.removeEventListener('keyup', keyupTrack);
+      }
+    });
+  };
+
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
@@ -60,5 +69,13 @@ export const Action = (() => {
     document.addEventListener('keyup', keyupTrack);
   };
 
-  return { setup };
+  const disconnect = () => {
+    const elements = document.querySelector('body')?.querySelectorAll(FORM_CONTROL_ELEMENTS.map((element) => element.toLowerCase()).join(', '));
+    disconnectListenersFromElements(elements);
+    observer.disconnect();
+    document.removeEventListener('click', clickTrack);
+    document.removeEventListener('keyup', keyupTrack);
+  };
+
+  return { setup, disconnect };
 })();

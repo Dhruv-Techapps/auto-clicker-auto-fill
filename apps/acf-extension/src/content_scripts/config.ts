@@ -3,9 +3,9 @@ import { MainWorldService } from '@dhruv-techapps/acf-main-world';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { Session } from '@dhruv-techapps/acf-util';
 import { ConfigError } from '@dhruv-techapps/core-common';
-import { NotificationsService } from '@dhruv-techapps/core-service';
+import { NotificationsService, SessionStorageService } from '@dhruv-techapps/core-service';
 import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
+import { GoogleAnalyticsService, TEventSource } from '@dhruv-techapps/shared-google-analytics';
 import { GoogleSheetsCS } from '@dhruv-techapps/shared-google-sheets';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
@@ -29,8 +29,27 @@ const ConfigProcessor = (() => {
     return fields;
   };
 
-  const getEvents = (config: IConfiguration) => {
-    const events: { [key: string]: string | number | boolean | undefined } = { url: config.url, loadType: config.loadType, actions: config.actions.length };
+  const allowEvent = async (url: string): Promise<boolean> => {
+    const key = 'ga4-event-fired-urls';
+    if (!url) return false;
+    const { [key]: urls = [] } = await SessionStorageService.get(key);
+    if (urls.includes(url)) return false;
+    urls.push(url);
+    await SessionStorageService.set({ [key]: urls });
+    return true;
+  };
+
+  const getEvents = async (config: IConfiguration) => {
+    const isAllowed = await allowEvent(config.url);
+    if (!isAllowed) {
+      return null;
+    }
+    const events: { [key: string]: string | number | boolean | undefined; source: TEventSource } = {
+      url: config.url,
+      loadType: config.loadType,
+      actions: config.actions.length,
+      source: 'content_script'
+    };
     if (config.batch) {
       events['batch'] = config.batch.refresh || config.batch.repeat;
     }
@@ -88,7 +107,10 @@ const ConfigProcessor = (() => {
         }
       }
       statusBar.done();
-      GoogleAnalyticsService.fireEvent('configuration_completed', getEvents(config));
+      const event = await getEvents(config);
+      if (event) {
+        GoogleAnalyticsService.fireEvent('configuration_completed', event);
+      }
     } catch (e) {
       if (e instanceof ConfigError) {
         statusBar.error(e.message);
