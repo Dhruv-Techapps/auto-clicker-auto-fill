@@ -30,7 +30,7 @@ const ConfigProcessor = (() => {
   };
 
   const allowEvent = async (url: string): Promise<boolean> => {
-    const key = 'ga4-last-url-check';
+    const key = 'ga4-event-fired-urls';
     if (!url) return false;
     const { [key]: urls = [] } = await SessionStorageService.get(key);
     if (urls.includes(url)) return false;
