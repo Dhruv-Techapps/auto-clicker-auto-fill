@@ -10,7 +10,7 @@ export const App = () => {
   const [page, setPage] = useState<TPage>('list');
   const [config, setConfig] = useState<IConfiguration | null>(null);
 
-  const process = (msg: any) => {
+  const process = (msg: { methodName: string; message: any; messenger: string }) => {
     switch (msg.methodName) {
       case 'onRecordSync':
         setConfig(msg.message);

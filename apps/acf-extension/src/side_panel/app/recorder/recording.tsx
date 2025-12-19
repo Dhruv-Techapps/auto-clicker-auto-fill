@@ -25,7 +25,7 @@ export const Recording = ({ config, tabId, setTabId, setConfig }: IRecordProps) 
           Stop Recording
         </button>
       </div>
-      {!config || config.actions.length === 0 ? (
+      {!config ? (
         <div className='card w-100'>
           <div className='card-body'>
             <h5 className='card-title mb-3 text-primary'>Start filling form...</h5>
