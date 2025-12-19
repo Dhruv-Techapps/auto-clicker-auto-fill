@@ -4,10 +4,9 @@ import { importAll, importConfig } from '@acf-options-page/store/config';
 import { configGetAllAPI } from '@acf-options-page/store/config/config.api';
 import { useAppDispatch } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
-import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { ChangeEvent, createRef, useEffect } from 'react';
-import { Alert, Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { BatchModal, ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal, ScheduleModal, WatchModal } from '../../modal';
 import Footer from '../footer';
@@ -16,12 +15,7 @@ import Config from './config';
 import { ConfigDropdown } from './config/config-dropdown';
 import { ConfigSidebar } from './config/config-sidebar';
 
-interface ConfigsProps {
-  error?: string;
-  errorButton?: boolean;
-}
-
-function Configs(props: Readonly<ConfigsProps>) {
+function Configs() {
   const { t } = useTranslation();
   const importFiled = createRef<HTMLInputElement>();
   const dispatch = useAppDispatch();
@@ -73,18 +67,6 @@ function Configs(props: Readonly<ConfigsProps>) {
 
   return (
     <Container fluid id='main'>
-      {props.error && (
-        <Alert variant='danger'>
-          <p className='m-0'>
-            {props.error}
-            {props.errorButton && (
-              <Alert.Link href={`${CHROME_WEB_STORE}${import.meta.env.VITE_PUBLIC_CHROME_EXTENSION_ID}`} target='_blank' className='ms-2'>
-                download
-              </Alert.Link>
-            )}
-          </p>
-        </Alert>
-      )}
       <Row>
         <Col lg='3' className='pt-3 d-none d-lg-block'>
           <ConfigSidebar importFiled={importFiled} onExportAll={onExportAll} />
