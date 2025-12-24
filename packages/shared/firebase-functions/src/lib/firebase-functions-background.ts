@@ -89,6 +89,9 @@ export class FirebaseFunctionsBackground extends FirebaseOauth2Background {
 
       const response = await fetch(url.href, init);
       const result = await response.json();
+      if (!response.ok) {
+        throw new CustomError(result.code || 'NetworkError', result.message || 'Error calling cloud function');
+      }
       if (result.error) {
         throw new CustomError(result.error, result.message);
       }
