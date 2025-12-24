@@ -16,9 +16,6 @@
       "path": "../../core/service/tsconfig.lib.json"
     },
     {
-      "path": "../notifications/tsconfig.lib.json"
-    },
-    {
       "path": "../firebase-oauth/tsconfig.lib.json"
     },
     {

@@ -22,7 +22,6 @@
     "@swc/helpers": "~0.5.11",
     "@dhruv-techapps/shared-firebase-functions": "0.0.1",
     "@dhruv-techapps/shared-firebase-oauth": "0.0.1",
-    "@dhruv-techapps/shared-notifications": "0.0.1",
     "@dhruv-techapps/core-service": "0.0.1"
   }
 }
