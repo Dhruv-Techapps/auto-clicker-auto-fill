@@ -90,14 +90,14 @@ export class FirebaseFunctionsBackground extends FirebaseOauth2Background {
       const response = await fetch(url.href, init);
       const result = await response.json();
       if (!response.ok) {
-        throw new CustomError(result.code || 'NetworkError', result.message || 'Error calling cloud function');
+        throw new NetworkError(result.code || 'NetworkError', result.message || 'Error calling cloud function');
       }
       if (result.error) {
         throw new CustomError(result.error, result.message);
       }
       return result;
     } catch (error) {
-      if (error instanceof CustomError || error instanceof Error) {
+      if (error instanceof NetworkError) {
         NotificationHandler.notify(NOTIFICATIONS_ID, error.name, error.message, true);
       }
       throw error;
@@ -109,5 +109,14 @@ class CustomError extends Error {
   constructor(name: string, message: string) {
     super(message);
     this.name = name;
+  }
+}
+
+class NetworkError extends Error {
+  code: string;
+  constructor(code: string, message: string) {
+    super(message);
+    this.name = 'NetworkError';
+    this.code = code;
   }
 }

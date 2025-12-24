@@ -42,10 +42,7 @@ export class GoogleDriveBackground extends FirebaseFunctionsBackground {
   }
 
   async delete(request: { id: string; name: string }) {
-    const response = await this.driveDelete<{ id: string; name: string }, { error: string }>(request);
-    if (response.error) {
-      throw new Error(response.error);
-    }
+    await this.driveDelete<{ id: string; name: string }, { error: string }>(request);
   }
 
   async listWithContent(): Promise<Array<IDriveFile>> {
