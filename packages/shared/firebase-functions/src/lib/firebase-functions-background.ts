@@ -54,15 +54,17 @@ export class FirebaseFunctionsBackground extends FirebaseOauth2Background {
 
   async driveGet<Req extends { id: string }, Res>(data: Req): Promise<Res> {
     const headers = await this._getFirebaseHeaders([GOOGLE_SCOPES.DRIVE]);
-    const url = new URL(this.cloudFunctionUrl + this.version + `/drive/${data.id}`);
-    const response = await this.#fetch(url, headers, data, 'GET');
+    const { id } = data;
+    const url = new URL(this.cloudFunctionUrl + this.version + `/drive/${id}`);
+    const response = await this.#fetch(url, headers, undefined, 'GET');
     return response;
   }
 
   async driveDelete<Req extends { id: string }, Res>(data: Req): Promise<Res> {
     const headers = await this._getFirebaseHeaders([GOOGLE_SCOPES.DRIVE]);
-    const url = new URL(this.cloudFunctionUrl + this.version + `/drive/${data.id}`);
-    const response = await this.#fetch(url, headers, data, 'DELETE');
+    const { id } = data;
+    const url = new URL(this.cloudFunctionUrl + this.version + `/drive/${id}`);
+    const response = await this.#fetch(url, headers, undefined, 'DELETE');
     return response;
   }
 
@@ -75,15 +77,16 @@ export class FirebaseFunctionsBackground extends FirebaseOauth2Background {
 
   async driveUpdate<Req extends { id: string }, Res>(data: Req): Promise<Res> {
     const headers = await this._getFirebaseHeaders([GOOGLE_SCOPES.DRIVE]);
-    const url = new URL(this.cloudFunctionUrl + this.version + `/drive/${data.id}`);
-    const response = await this.#fetch(url, headers, data, 'PATCH');
+    const { id, ...rest } = data;
+    const url = new URL(this.cloudFunctionUrl + this.version + `/drive/${id}`);
+    const response = await this.#fetch(url, headers, rest, 'PATCH');
     return response;
   }
 
   async #fetch(url: URL, headers: Headers, data?: unknown, method: 'POST' | 'GET' | 'DELETE' | 'PATCH' = 'POST') {
     try {
       const init: RequestInit = { method, headers };
-      if (data && (method === 'POST' || method === 'PATCH' || method === 'DELETE')) {
+      if (data && (method === 'POST' || method === 'PATCH')) {
         init.body = JSON.stringify(data);
       }
 
