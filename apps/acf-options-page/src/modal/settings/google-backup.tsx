@@ -30,11 +30,13 @@ export function SettingsGoogleBackup() {
   };
 
   useEffect(() => {
-    if (user) {
-      if (grantedScopes.includes(scope)) {
-        dispatch(googleDriveListWithContentAPI());
-      } else {
-        dispatch(googleHasAccessAPI([scope]));
+    if ((!files || files.length === 0) && !filesLoading) {
+      if (user) {
+        if (grantedScopes.includes(scope)) {
+          dispatch(googleDriveListWithContentAPI());
+        } else {
+          dispatch(googleHasAccessAPI([scope]));
+        }
       }
     }
   }, [user, grantedScopes, scope, dispatch]);
