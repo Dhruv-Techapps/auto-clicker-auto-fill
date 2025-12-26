@@ -1,4 +1,5 @@
 /// <reference types='vitest' />
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -39,7 +40,20 @@ export default defineConfig(() => ({
       },
       include: '**/*.svg'
     }),
-    visualizer({ open: true, filename: 'dist/stats.html' })
+    visualizer({ open: true, filename: 'dist/stats.html' }),
+    sentryVitePlugin({
+      org: 'dhruv-techapps',
+      project: 'acf-options-page',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      sourcemaps: {
+        // As you're enabling client source maps, you probably want to delete them after they're uploaded to Sentry.
+        // Set the appropriate glob pattern for your output folder - some glob examples below:
+        filesToDeleteAfterUpload: ['./**/*.map', '.*/**/public/**/*.map', './dist/**/client/**/*.map']
+      },
+      reactComponentAnnotation: {
+        enabled: true
+      }
+    })
   ],
   // Uncomment this if you are using workers.
   // worker: {
@@ -47,6 +61,7 @@ export default defineConfig(() => ({
   // },
   build: {
     outDir: './dist',
+    sourcemap: 'hidden',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {

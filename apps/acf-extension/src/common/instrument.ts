@@ -1,4 +1,4 @@
-import { BrowserClient, browserTracingIntegration, captureConsoleIntegration, defaultStackParser, getDefaultIntegrations, makeFetchTransport, Scope } from '@sentry/browser';
+import { BrowserClient, browserTracingIntegration, consoleLoggingIntegration, defaultStackParser, getDefaultIntegrations, makeFetchTransport, Scope } from '@sentry/browser';
 import { RELEASE_VERSION, SENTRY_DSN, VARIANT } from './environments';
 
 const scope = new Scope();
@@ -10,15 +10,10 @@ if (VARIANT === 'PROD' || VARIANT === 'LOCAL') {
   const client = new BrowserClient({
     dsn: SENTRY_DSN,
     environment: VARIANT,
+    enableLogs: true,
     transport: makeFetchTransport,
     stackParser: defaultStackParser,
-    integrations: [
-      ...integrations,
-      browserTracingIntegration(),
-      captureConsoleIntegration({
-        levels: ['error']
-      })
-    ],
+    integrations: [...integrations, browserTracingIntegration(), consoleLoggingIntegration({ levels: ['log', 'warn', 'error'] })],
     ignoreErrors: [
       'The browser is shutting down.',
       'Extension context invalidated.',
@@ -27,14 +22,19 @@ if (VARIANT === 'PROD' || VARIANT === 'LOCAL') {
       'unlabeled event'
     ],
     release: `acf-extension@${RELEASE_VERSION?.replace('v', '')}`,
-    sampleRate: 1,
-    tracesSampleRate: 1.0,
     beforeSend: (event, hint) => {
       if (VARIANT === 'LOCAL') {
         console.log('SENTRY', event, hint);
         return null;
       }
       return event;
+    },
+    beforeSendLog: (log) => {
+      if (log.level === 'info') {
+        // Filter out all info logs
+        return null;
+      }
+      return log;
     }
   });
   scope.setClient(client);

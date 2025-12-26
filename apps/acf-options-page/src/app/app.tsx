@@ -21,7 +21,9 @@ function App() {
   const { manifest } = useAppSelector(appSelector);
   useEffect(() => {
     StorageService.get<string>('device_info').then(({ device_info: { id: deviceId } }) => {
-      Sentry.setContext('device_info', { device_id: deviceId });
+      Sentry.getGlobalScope().setAttributes({
+        device_info: { device_id: deviceId }
+      });
       window.dataLayer.push({ device_id: deviceId });
     });
   }, []);

@@ -35,7 +35,7 @@ module.exports = composePlugins(
     const assets = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'DEV' : VITE_PUBLIC_VARIANT;
 
     config.output.clean = true;
-    config.devtool = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'source-map' : false;
+    config.devtool = VITE_PUBLIC_VARIANT === 'LOCAL' ? 'source-map' : "hidden-source-map";
     config.entry = {
       background: './src/background/index.ts',
       content_scripts: './src/content_scripts/index.ts',
@@ -78,7 +78,7 @@ module.exports = composePlugins(
       }),
       new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
     );
-    if (VITE_PUBLIC_VARIANT === 'PROD') {
+    if (VITE_PUBLIC_VARIANT === 'PROD' || VITE_PUBLIC_VARIANT === 'LOCAL') {
       config.plugins.push(
         sentryWebpackPlugin({
           org: 'dhruv-techapps',
@@ -95,7 +95,14 @@ module.exports = composePlugins(
             excludeReplayIframe: true,
             excludeReplayShadowDom: true,
             excludeReplayWorker: true
-          }
+          },
+          sourcemaps: {
+            // As you're enabling client source maps, you probably want to delete them after they're uploaded to Sentry.
+            // Set the appropriate glob pattern for your output folder - some glob examples below:
+            filesToDeleteAfterUpload: [
+              "./**/*.map",
+            ],
+          },
         })
       );
     }

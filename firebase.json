@@ -42,6 +42,17 @@
           "source": "**",
           "destination": "/index.html"
         }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "Document-Policy",
+              "value": "js-profiling"
+            }
+          ]
+        }
       ]
     },
     {

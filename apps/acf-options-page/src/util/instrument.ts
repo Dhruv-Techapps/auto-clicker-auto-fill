@@ -1,13 +1,23 @@
 import * as Sentry from '@sentry/react';
 
-if (import.meta.env.VITE_PUBLIC_VARIANT === 'PROD') {
+if (import.meta.env.VITE_PUBLIC_VARIANT === 'PROD' || import.meta.env.VITE_PUBLIC_VARIANT === 'LOCAL') {
   Sentry.init({
     dsn: import.meta.env.VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN,
     environment: import.meta.env.VITE_PUBLIC_VARIANT,
     release: `acf-options-page@${import.meta.env.VITE_PUBLIC_RELEASE_VERSION?.replace('v', '')}`,
-    integrations: [Sentry.browserTracingIntegration()],
+    integrations: [
+      Sentry.browserTracingIntegration(),
+      Sentry.consoleLoggingIntegration({ levels: ['log', 'warn', 'error'] }),
+      Sentry.replayIntegration({
+        maskAllText: true,
+        blockAllMedia: true
+      })
+    ],
     ignoreErrors: ['Could not establish connection. Receiving end does not exist.'],
-    debug: import.meta.env.VITE_PUBLIC_RELEASE_VERSION === 'v9.9.9',
+    debug: import.meta.env.VITE_PUBLIC_VARIANT === 'LOCAL',
+    sendDefaultPii: true,
+    enableLogs: true,
+    replaysOnErrorSampleRate: 1.0,
     beforeSend: async (event, hint) => {
       const data = captureScreen();
       if (data) {
