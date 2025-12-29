@@ -40,9 +40,9 @@ export default defineConfig({
       all: true,
       extensions: ['.ts', '.tsx'],
       ignoreEmptyLines: false,
-      experimentalAstAwareRemapping: true,
-    },
-  },
+      experimentalAstAwareRemapping: true
+    }
+  }
 });
 
 // ✅ AFTER (Vitest 4.0)
@@ -50,10 +50,10 @@ export default defineConfig({
   test: {
     coverage: {
       // Explicitly define files to include in coverage
-      include: ['src/**/*.{ts,tsx}'],
+      include: ['src/**/*.{ts,tsx}']
       // Remove: all, extensions, ignoreEmptyLines, experimentalAstAwareRemapping
-    },
-  },
+    }
+  }
 });
 ```
 
@@ -81,13 +81,13 @@ export default defineConfig({
     singleThread: false,
     poolOptions: {
       threads: {
-        useAtomics: true,
+        useAtomics: true
       },
       vmThreads: {
-        memoryLimit: '512MB',
-      },
-    },
-  },
+        memoryLimit: '512MB'
+      }
+    }
+  }
 });
 
 // ✅ AFTER (Vitest 4.0)
@@ -96,8 +96,8 @@ export default defineConfig({
     maxWorkers: 4, // Consolidates maxThreads and maxForks
     isolate: true, // Replaces singleThread: false
     // Remove: poolOptions, threads.useAtomics
-    vmMemoryLimit: '512MB', // Moved to top-level
-  },
+    vmMemoryLimit: '512MB' // Moved to top-level
+  }
 });
 ```
 
@@ -119,15 +119,15 @@ export default defineConfig({
 // ❌ BEFORE (Vitest 3.x)
 export default defineConfig({
   test: {
-    workspace: ['apps/*', 'libs/*'],
-  },
+    workspace: ['apps/*', 'libs/*']
+  }
 });
 
 // ✅ AFTER (Vitest 4.0)
 export default defineConfig({
   test: {
-    projects: ['apps/*', 'libs/*'],
-  },
+    projects: ['apps/*', 'libs/*']
+  }
 });
 ```
 
@@ -151,9 +151,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright', // String value
-      testerScripts: ['./setup.js'],
-    },
-  },
+      testerScripts: ['./setup.js']
+    }
+  }
 });
 
 // Import changes
@@ -165,9 +165,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: { name: 'playwright' }, // Object value
-      testerHtmlPath: './test-setup.html', // Renamed from testerScripts
-    },
-  },
+      testerHtmlPath: './test-setup.html' // Renamed from testerScripts
+    }
+  }
 });
 
 // Import changes
@@ -194,9 +194,9 @@ export default defineConfig({
     deps: {
       external: ['some-package'],
       inline: ['inline-package'],
-      fallbackCJS: true,
-    },
-  },
+      fallbackCJS: true
+    }
+  }
 });
 
 // ✅ AFTER (Vitest 4.0)
@@ -206,10 +206,10 @@ export default defineConfig({
       deps: {
         external: ['some-package'],
         inline: ['inline-package'],
-        fallbackCJS: true,
-      },
-    },
-  },
+        fallbackCJS: true
+      }
+    }
+  }
 });
 ```
 
@@ -361,7 +361,7 @@ const spy = vi.spyOn({ method: mock }, 'method');
 vi.mock('./utils', () => ({
   get value() {
     return 42;
-  }, // Would call getter
+  } // Would call getter
 }));
 
 import { value } from './utils';
@@ -375,7 +375,7 @@ spy.mockRestore(); // Might work on automocks
 vi.mock('./utils', () => ({
   get value() {
     return 42;
-  },
+  }
 }));
 
 import { value } from './utils';
@@ -383,7 +383,7 @@ console.log(value); // Returns undefined (doesn't call getter)
 
 // Explicitly return value if needed
 vi.mock('./utils', () => ({
-  value: 42, // Not a getter
+  value: 42 // Not a getter
 }));
 
 // mockRestore no longer works on automocks
@@ -415,14 +415,14 @@ const promise = asyncMock();
 // settledResults is immediately populated with 'incomplete' status
 expect(asyncMock.mock.settledResults[0]).toEqual({
   type: 'incomplete',
-  value: undefined,
+  value: undefined
 });
 
 // After promise resolves
 await promise;
 expect(asyncMock.mock.settledResults[0]).toEqual({
   type: 'fulfilled',
-  value: 'result',
+  value: 'result'
 });
 ```
 
@@ -451,7 +451,7 @@ export default {
   },
   onFinished(files) {
     // Handle completion
-  },
+  }
 };
 
 // ✅ AFTER (Vitest 4.0)
@@ -474,15 +474,15 @@ export default {
 // ❌ BEFORE (Vitest 3.x)
 export default defineConfig({
   test: {
-    reporters: ['basic'],
-  },
+    reporters: ['basic']
+  }
 });
 
 // ✅ AFTER (Vitest 4.0)
 export default defineConfig({
   test: {
-    reporters: [['default', { summary: false }]], // Equivalent to 'basic'
-  },
+    reporters: [['default', { summary: false }]] // Equivalent to 'basic'
+  }
 });
 
 // For verbose (tree output)
@@ -510,8 +510,8 @@ reporters: ['tree']; // Use 'tree' for hierarchical output
 // If you want old behavior (don't print shadow root):
 export default defineConfig({
   test: {
-    printShadowRoot: false,
-  },
+    printShadowRoot: false
+  }
 });
 ```
 
