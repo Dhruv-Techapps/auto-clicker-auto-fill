@@ -15,7 +15,6 @@ import { GoogleSheetsBackground, RUNTIME_MESSAGE_GOOGLE_SHEETS } from '@dhruv-te
 import { registerNotifications } from '@dhruv-techapps/shared-notifications';
 import { OpenAIBackground, RUNTIME_MESSAGE_OPENAI } from '@dhruv-techapps/shared-openai';
 import { RUNTIME_MESSAGE_VISION, VisionBackground } from '@dhruv-techapps/shared-vision';
-import * as api from '@opentelemetry/api';
 import XMLHttpRequest from 'xhr-shim';
 import { DISCORD_CLIENT_ID, EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL, OPTIONS_PAGE_URL, VARIANT } from '../common/environments';
 import '../common/instrumentation';
@@ -27,12 +26,9 @@ import { auth } from './firebase';
 import { googleAnalytics } from './google-analytics';
 import { TabsMessenger } from './tab';
 import './watch-url-change';
-import './global-error-handler';
 
 self['XMLHttpRequest'] = XMLHttpRequest;
-const tracer = api.trace.getTracer('content-script');
-const span = tracer.startSpan('background-startup');
-api.ROOT_CONTEXT.setValue(api.createContextKey('page'), 'background');
+
 try {
   /**
    * Browser Action set to open option page / configuration page
@@ -96,12 +92,12 @@ try {
     const userId = auth.currentUser?.uid;
     if (userId) {
       UserStorage.setUserId(userId);
-      api.ROOT_CONTEXT.setValue(api.createContextKey('userId'), userId);
+      //api.ROOT_CONTEXT.setValue(api.createContextKey('userId'), userId);
     }
   });
 } catch (error) {
-  span.recordException(error as Error);
+  //span.recordException(error as Error);
   console.error('background', error);
 } finally {
-  span.end();
+  //span.end();
 }

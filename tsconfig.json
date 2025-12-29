@@ -95,9 +95,6 @@
     },
     {
       "path": "./packages/core/open-telemetry"
-    },
-    {
-      "path": "./packages/core/open-telemetry"
     }
   ]
 }

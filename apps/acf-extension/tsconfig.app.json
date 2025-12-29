@@ -21,19 +21,22 @@
       "path": "../../packages/shared/sandbox/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/core/service/tsconfig.lib.json"
-    },
-    {
       "path": "../../packages/shared/status-bar/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/shared/firebase-storage/tsconfig.lib.json"
+      "path": "../../packages/core/service/tsconfig.lib.json"
     },
     {
       "path": "../../packages/shared/vision/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/shared/openai/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/shared/google-sheets/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/shared/firebase-storage/tsconfig.lib.json"
     },
     {
       "path": "../../packages/shared/firebase-oauth/tsconfig.lib.json"
@@ -60,13 +63,10 @@
       "path": "../../packages/acf/main-world/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/core/open-telemetry/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/shared/google-analytics/tsconfig.lib.json"
-    },
-    {
-      "path": "../../packages/shared/openai/tsconfig.lib.json"
-    },
-    {
-      "path": "../../packages/acf/store/tsconfig.lib.json"
     },
     {
       "path": "../../packages/core/common/tsconfig.lib.json"
@@ -79,6 +79,9 @@
     },
     {
       "path": "../../packages/shared/google-drive/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/acf/store/tsconfig.lib.json"
     },
     {
       "path": "../../packages/acf/common/tsconfig.lib.json"

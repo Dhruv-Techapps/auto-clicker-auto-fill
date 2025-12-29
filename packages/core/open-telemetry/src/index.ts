@@ -1,1 +1,1 @@
-export * from './lib/core-open-telemetry.js';
+export * from './lib/logger.js';
