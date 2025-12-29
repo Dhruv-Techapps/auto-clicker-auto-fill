@@ -92,6 +92,12 @@
     },
     {
       "path": "./apps/acf-i18n"
+    },
+    {
+      "path": "./packages/core/open-telemetry"
+    },
+    {
+      "path": "./packages/core/open-telemetry"
     }
   ]
 }

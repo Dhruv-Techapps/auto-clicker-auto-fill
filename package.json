@@ -105,6 +105,7 @@
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "^4.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitest/coverage-v8": "^4.0.0",
     "@vitest/ui": "4.0.9",
     "astro": "^5.15.9",
     "astro-auto-import": "^0.4.4",
@@ -136,6 +137,7 @@
     "tslib": "^2.3.0",
     "typescript": "5.9.3",
     "typescript-eslint": "^8.40.0",
+    "verdaccio": "^6.0.5",
     "vite": "7.2.6",
     "vitest": "4.0.9",
     "vnu-jar": "^24.10.17",
@@ -160,5 +162,18 @@
   "bugs": {
     "url": "https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/issues"
   },
-  "homepage": "https://github.com/Dhruv-Techapps/auto-clicker-auto-fill#readme"
+  "homepage": "https://github.com/Dhruv-Techapps/auto-clicker-auto-fill#readme",
+  "nx": {
+    "includedScripts": [],
+    "targets": {
+      "local-registry": {
+        "executor": "@nx/js:verdaccio",
+        "options": {
+          "port": 4873,
+          "config": ".verdaccio/config.yml",
+          "storage": "tmp/local-registry/storage"
+        }
+      }
+    }
+  }
 }
