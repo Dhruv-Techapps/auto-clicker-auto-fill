@@ -155,7 +155,8 @@
       "acf-main-world",
       "firebase-storage",
       "vision",
-      "openai"
+      "openai",
+      "core-open-telemetry"
     ],
     "changelog": {
       "workspaceChangelog": {
