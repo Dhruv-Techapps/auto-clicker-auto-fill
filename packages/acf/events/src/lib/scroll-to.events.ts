@@ -1,12 +1,15 @@
 import { ConfigError } from '@dhruv-techapps/core-common';
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 const SCROLL_COORDINATES = ['Top', 'Bottom', 'Left', 'Right', 'TopLeft', 'BottomLeft', 'BottomRight', 'TopRight', 'XPath'];
 
 export const ScrollToEvents = (() => {
   const scrollToCoordinates = (axis: string) => {
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, axis);
+    Logger.debug('ScrollToEvents.scrollToCoordinates', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     let xAxis = 0;
     let yAxis = 0;
     if (axis.indexOf('Right') !== -1) {
@@ -19,7 +22,10 @@ export const ScrollToEvents = (() => {
   };
 
   const scrollToElement = (elements: Array<HTMLElement>) => {
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements[0]);
+    Logger.debug('ScrollToEvents.scrollToElement', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     elements[0].scrollIntoView();
   };
 

@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/acf-options-page/src",
   "projectType": "application",
-  "tags": ["scope:apps"],
+  "tags": ["scope:apps", "type:application", "platform:all", "domain:options-page"],
   "// targets": "to see all targets run: nx show project acf-options-page --web",
   "targets": {
     "dev": {

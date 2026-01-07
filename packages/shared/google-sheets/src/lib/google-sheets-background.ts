@@ -1,6 +1,6 @@
-import { FirebaseFunctionsBackground } from '@dhruv-techapps/shared-firebase-functions';
-import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
-import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { FirebaseFunctionsBackground } from '@dhruv-techapps/shared-firebase-functions/background';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth/background';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications/handler';
 import { GoogleSheetsRequest, GoogleSheetsResponse } from './google-sheets.types';
 
 const NOTIFICATIONS_TITLE = 'Google Sheets';

@@ -1,8 +1,8 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
-import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';
 
 const LOGGER_LETTER = 'ClipboardEvents';
@@ -57,7 +57,10 @@ export const ClipboardEvents = (() => {
   const copy = async (elements: Array<HTMLElement>, value: string) => {
     const text = getValue(elements[0]);
     const result = applyFilter(text, value.replace(/copy::/gi, ''));
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements[0], text, result);
+    Logger.debug('ClipboardEventsCopy', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     await navigator.clipboard.writeText(result);
   };
 
@@ -65,7 +68,10 @@ export const ClipboardEvents = (() => {
     await navigator.clipboard.readText().then(async (clipText = '') => {
       value = value.replace(/paste::/i, '');
       value = await Sandbox.sandboxEval(value, clipText);
-      console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, clipText, value);
+      Logger.debug('ClipboardEventsPaste', {
+        actionId: window.ext.__currentAction,
+        actionName: window.ext.__currentActionName
+      });
       CommonEvents.loopElements(elements, value, checkNode);
     });
   };

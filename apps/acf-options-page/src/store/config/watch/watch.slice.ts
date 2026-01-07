@@ -1,6 +1,6 @@
 import { defaultWatchSettings, IWatchSettings } from '@dhruv-techapps/acf-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../..';
 import { openWatchModalAPI } from './watch.api';
 
@@ -45,7 +45,7 @@ const slice = createSlice({
     },
     setWatchError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Watch Modal', state.error || 'Unknown Error');
       state.message = undefined;
     }
   },

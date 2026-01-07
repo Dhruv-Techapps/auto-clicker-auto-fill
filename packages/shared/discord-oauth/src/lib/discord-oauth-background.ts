@@ -1,7 +1,7 @@
 import { getParameterByName, getRandomValues } from '@dhruv-techapps/core-common';
 import { FirebaseFunctionsBackground } from '@dhruv-techapps/shared-firebase-functions';
 import { Auth } from '@dhruv-techapps/shared-firebase-oauth';
-import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications/handler';
 import { NOTIFICATIONS_ID, NOTIFICATIONS_TITLE } from './discord-oauth.constant';
 import { Discord } from './discord-oauth.types';
 

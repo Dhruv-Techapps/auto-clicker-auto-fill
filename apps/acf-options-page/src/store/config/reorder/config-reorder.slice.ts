@@ -1,6 +1,6 @@
 import { IConfiguration } from '@dhruv-techapps/acf-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 import { configReorderUpdateAPI } from './config-reorder.api';
 
@@ -35,7 +35,7 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(configReorderUpdateAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Config Reorder', state.error || 'Unknown Error');
       state.message = undefined;
     });
     builder.addCase(configReorderUpdateAPI.fulfilled, (state) => {

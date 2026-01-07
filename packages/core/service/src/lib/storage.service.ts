@@ -1,7 +1,8 @@
 import { StorageMessengerGetProps, StorageMessengerRemoveProps, StorageMessengerSetProps, StorageRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import { CoreService } from './core-service';
 
 export class StorageService extends CoreService {
+  static override shouldTrace = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static async get<T extends string | number | symbol = string, K = any>(keys: StorageMessengerGetProps) {
     return await this.message<StorageRequest, StorageMessengerSetProps<T, K>>({ messenger: 'storage', methodName: 'get', message: keys });
@@ -17,6 +18,7 @@ export class StorageService extends CoreService {
 }
 
 export class SessionStorageService extends CoreService {
+  static override shouldTrace = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static async get<T extends string | number | symbol = string, K = any>(keys: StorageMessengerGetProps) {
     return await this.message<StorageRequest, StorageMessengerSetProps<T, K>>({ messenger: 'session-storage', methodName: 'get', message: keys });

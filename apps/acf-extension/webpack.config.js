@@ -77,6 +77,17 @@ module.exports = composePlugins(
       }),
       new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
     );
+
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@acf-extension': path.resolve(__dirname, 'src')
+    };
+    config.optimization = {
+      usedExports: true,
+      minimize: VITE_PUBLIC_VARIANT !== 'LOCAL',
+      concatenateModules: true
+    };
     return config;
   }
 );

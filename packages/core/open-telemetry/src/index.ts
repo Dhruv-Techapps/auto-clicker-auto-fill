@@ -1,1 +1,3 @@
-export * from './lib/logger.js';
+/// <reference types="chrome"/>
+
+export {};

@@ -1,5 +1,5 @@
 import { PortService } from '@dhruv-techapps/core-service';
-import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications/handler';
 import { OPTIONS_PAGE_URL } from '../common/environments';
 
 let optionsTab: chrome.tabs.Tab | undefined;

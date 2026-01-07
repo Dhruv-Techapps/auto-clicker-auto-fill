@@ -1,5 +1,5 @@
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
-import { ACTION_I18N_TITLE } from '.';
 import CommonEvents from './common.events';
 
 const LOCAL_STORAGE_COPY = 'auto-clicker-copy';
@@ -14,7 +14,10 @@ export const PasteEvents = (() => {
     const copyContent = localStorage.getItem(LOCAL_STORAGE_COPY);
     value = value.replace(/paste::/i, '');
     value = await Sandbox.sandboxEval(value, copyContent);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, copyContent, value);
+    Logger.debug('PasteEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, value, checkNode);
     return true;
   };

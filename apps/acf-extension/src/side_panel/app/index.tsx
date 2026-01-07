@@ -10,17 +10,17 @@ export const App = () => {
   const [page, setPage] = useState<TPage>('list');
   const [config, setConfig] = useState<IConfiguration | null>(null);
 
-  const process = (msg: { methodName: string; message: any; messenger: string }) => {
+  const process = (msg: { methodName: string; message: unknown; messenger: string }) => {
     switch (msg.methodName) {
       case 'onRecordSync':
-        setConfig(msg.message);
+        setConfig(msg.message as IConfiguration);
         return;
       default:
         if (msg.message === null || msg.message === undefined) {
           setUrl('');
           return;
         }
-        setUrl(new URL(msg.message).hostname);
+        setUrl(new URL(msg.message as string).hostname);
         break;
     }
   };

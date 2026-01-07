@@ -1,7 +1,6 @@
 import { RootState } from '@acf-options-page/store';
 import { IAddon, TGoto, defaultAddon } from '@dhruv-techapps/acf-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { openActionAddonModalAPI } from './addon.api';
 
 export interface IActionAddonStore {
@@ -35,7 +34,7 @@ const slice = createSlice({
     },
     setActionAddonError: (state, action: PayloadAction<string | undefined>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+      console.error('actionAddon.slice', { message: state.error || 'Unknown Error' });
       state.message = undefined;
     }
   },

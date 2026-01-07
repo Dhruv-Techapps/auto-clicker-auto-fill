@@ -1,5 +1,5 @@
 import { BROWSER } from '@dhruv-techapps/core-common';
-import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications/handler';
 import { GOOGLE_SCOPES, GoogleOauth2LoginResponse } from './google-oauth.types';
 
 const NOTIFICATIONS_TITLE = 'Google OAuth';

@@ -6,7 +6,11 @@
     "jsx": "react-jsx",
     "rootDir": "src",
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
-    "lib": ["dom", "DOM.Iterable"]
+    "lib": ["dom", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@acf-extension/*": ["src/*"]
+    }
   },
   "exclude": ["out-tsc", "dist", "jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"],
   "include": ["src/**/*.ts", "src/**/*.tsx"],
@@ -54,19 +58,16 @@
       "path": "../../packages/shared/discord-messaging/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/core/store/tsconfig.lib.json"
-    },
-    {
       "path": "../../packages/core/extension/tsconfig.lib.json"
     },
     {
       "path": "../../packages/acf/main-world/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/core/open-telemetry/tsconfig.lib.json"
+      "path": "../../packages/shared/google-analytics/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/shared/google-analytics/tsconfig.lib.json"
+      "path": "../../packages/core/store/tsconfig.lib.json"
     },
     {
       "path": "../../packages/core/common/tsconfig.lib.json"
@@ -79,6 +80,9 @@
     },
     {
       "path": "../../packages/shared/google-drive/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/open-telemetry/tsconfig.lib.json"
     },
     {
       "path": "../../packages/acf/store/tsconfig.lib.json"

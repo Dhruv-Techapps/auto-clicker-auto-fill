@@ -18,7 +18,8 @@
     "target": "es2022",
     "customConditions": ["@dhruv-techapps/source"],
     "paths": {
-      "@acf-options-page/*": ["./apps/acf-options-page/src/*"]
+      "@acf-options-page/*": ["./apps/acf-options-page/src/*"],
+      "@acf-extension/*": ["./apps/acf-extension/src/*"]
     }
   }
 }

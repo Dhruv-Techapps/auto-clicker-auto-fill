@@ -1,4 +1,4 @@
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 export const ElementEvents = (() => {
@@ -14,7 +14,12 @@ export const ElementEvents = (() => {
           const options = JSON.parse(prop);
           element.scrollIntoView(options);
         } catch (e) {
-          console.error(e);
+          Logger.error(`Invalid scrollIntoView options`, {
+            actionId: window.ext.__currentAction,
+            actionName: window.ext.__currentActionName,
+            'error.message': (e as Error).message,
+            'error.stack': (e as Error).stack
+          });
         }
       }
     } else if (action === 'remove') {
@@ -23,7 +28,10 @@ export const ElementEvents = (() => {
   };
 
   const start = (elements: Array<HTMLElement>, value: string) => {
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, value);
+    Logger.debug('ElementEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, value, execCommand);
   };
   return { start };

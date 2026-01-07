@@ -1,6 +1,6 @@
 import { SystemError } from '@dhruv-techapps/core-common';
-import { ACTION_I18N_TITLE } from '.';
 
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 const WINDOW_COMMANDS = ['copy', 'cut', 'delete', 'paste', 'selectAll', 'open', 'close', 'focus', 'blur', 'print', 'stop', 'moveBy', 'moveTo'];
@@ -52,7 +52,10 @@ export const WindowCommandEvents = (() => {
   };
   const start = (value: string) => {
     const commands = CommonEvents.getVerifiedEvents(WINDOW_COMMANDS, value);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, commands, value);
+    Logger.debug('WindowCommandEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     execCommand(commands, value);
   };
   return { start };

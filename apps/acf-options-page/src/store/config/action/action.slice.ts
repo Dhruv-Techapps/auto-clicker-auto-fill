@@ -1,7 +1,7 @@
 import { LocalStorage } from '@acf-options-page/_helpers';
 import { RootState } from '@acf-options-page/store';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 
 const HIDDEN_COLUMN_KEY = 'columnVisibility';
 const defaultColumnVisibility = { name: true, initWait: false, repeat: false, repeatInterval: false };
@@ -31,7 +31,7 @@ const slice = createSlice({
     },
     setActionError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Action Table', state.error || 'Unknown Error');
       state.message = undefined;
     }
   }

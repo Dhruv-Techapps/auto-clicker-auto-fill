@@ -1,6 +1,6 @@
 import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Timer } from '@dhruv-techapps/shared-util';
-import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';
 
 const KEYBOARD_EVENT_KEYDOWN = 'keydown';
@@ -54,7 +54,10 @@ export const KeyEvents = (() => {
 
   const start = (elements: Array<HTMLElement>, event: string) => {
     const events = getVerifiedEvents(event);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, events);
+    Logger.debug('KeyEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements<HTMLElement, Array<KeyEvent>>(elements, events, dispatchEvent);
   };
   return { start };

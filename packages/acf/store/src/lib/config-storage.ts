@@ -37,7 +37,8 @@ export class ConfigStorage {
       manualConfigs = manualConfigs.filter((config) => config.startType === EStartTypes.MANUAL && (!autoConfig || autoConfig.id !== config.id));
       return { autoConfig, manualConfigs };
     } catch (error) {
-      console.warn(error);
+      console.error('Error in fetching config from storage', error);
+      throw error;
     }
     return { autoConfig: undefined, manualConfigs: [] };
   }

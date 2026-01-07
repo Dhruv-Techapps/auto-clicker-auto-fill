@@ -1,7 +1,7 @@
 import ConfirmationModalContextProvider from '@acf-options-page/_providers/confirm.provider';
 import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
 import { StorageService } from '@dhruv-techapps/core-service';
-import * as Sentry from '@sentry/react';
+import { trace } from '@opentelemetry/api';
 import { useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { DataList, Loading, ToastHandler } from '../components';
@@ -21,7 +21,7 @@ function App() {
   const { manifest } = useAppSelector(appSelector);
   useEffect(() => {
     StorageService.get<string>('device_info').then(({ device_info: { id: deviceId } }) => {
-      Sentry.setContext('device_info', { device_id: deviceId });
+      trace.getActiveSpan()?.addEvent('Set GA Device ID', { device_id: deviceId });
       window.dataLayer.push({ device_id: deviceId });
     });
   }, []);
@@ -29,12 +29,6 @@ function App() {
   useEffect(() => {
     dispatch(getManifest());
     dispatch(firebaseIsLoginAPI());
-    Sentry.setContext('screen_resolution', {
-      innerWidth: window.innerWidth,
-      innerHeight: window.innerHeight,
-      outerWidth: window.outerWidth,
-      outerHeight: window.outerHeight
-    });
   }, [dispatch]);
 
   function compareVersions(a: string, b: string): number {

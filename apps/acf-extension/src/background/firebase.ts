@@ -15,11 +15,15 @@ const auth = getAuth(firebase);
 auth.setPersistence(indexedDBLocalPersistence);
 
 if (process.env.CONNECT_EMULATOR === 'true') {
-  connectAuthEmulator(auth, 'http://localhost:9099');
-  connectFirestoreEmulator(getFirestore(auth.app), 'localhost', 8080);
-  connectStorageEmulator(getStorage(auth.app), 'localhost', 9199);
-  if (process.env.LOCAL_USER_EMAIL && process.env.LOCAL_USER_PASSWORD) {
-    signInWithEmailAndPassword(auth, process.env.LOCAL_USER_EMAIL, process.env.LOCAL_USER_PASSWORD).then(console.log).catch(console.error);
+  try {
+    connectAuthEmulator(auth, 'http://localhost:9099');
+    connectFirestoreEmulator(getFirestore(auth.app), 'localhost', 8080);
+    connectStorageEmulator(getStorage(auth.app), 'localhost', 9199);
+    if (process.env.LOCAL_USER_EMAIL && process.env.LOCAL_USER_PASSWORD) {
+      signInWithEmailAndPassword(auth, process.env.LOCAL_USER_EMAIL, process.env.LOCAL_USER_PASSWORD).then(console.log).catch(console.error);
+    }
+  } catch (error) {
+    console.error('Error connecting to Firebase Emulator:', error);
   }
 }
 export { auth };

@@ -1,7 +1,8 @@
 import { IAlarmsRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import { CoreService } from './core-service';
 
 export class AlarmsService extends CoreService {
+  static override shouldTrace = false;
   static async create(name: string, alarmInfo: chrome.alarms.AlarmCreateInfo) {
     return await this.message<IAlarmsRequest>({ messenger: 'alarms', methodName: 'create', message: { name, alarmInfo } });
   }

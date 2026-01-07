@@ -1,6 +1,6 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
-import { ACTION_I18N_TITLE } from '.';
 import CommonEvents from './common.events';
 
 const LOCAL_STORAGE_COPY = 'auto-clicker-copy';
@@ -34,7 +34,10 @@ export const CopyEvents = (() => {
   const start = (elements: Array<HTMLElement>, value: string) => {
     const text = getValue(elements[0]);
     const result = applyFilter(text, value.replace(/copy::/gi, ''));
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements[0], text, result);
+    Logger.debug('CopyEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     localStorage.setItem(LOCAL_STORAGE_COPY, result);
   };
 

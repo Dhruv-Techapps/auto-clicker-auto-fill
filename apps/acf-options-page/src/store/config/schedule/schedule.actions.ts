@@ -1,6 +1,6 @@
 import { ISchedule } from '@dhruv-techapps/acf-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { ConfigStore } from '../config.slice';
 
 export const scheduleActions = {
@@ -10,7 +10,7 @@ export const scheduleActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('syncSchedule', 'Invalid Configuration');
       return;
     }
 

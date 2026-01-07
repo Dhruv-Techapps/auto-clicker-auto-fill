@@ -1,65 +1,39 @@
-import { logger, trace } from '@dhruv-techapps/core-open-telemetry';
-
+import { context, handleError, trace, tracer } from '@dhruv-techapps/core-open-telemetry/background';
 self.onunhandledrejection = async (event) => {
-  const tracer = trace.getTracer('service-worker');
-  const span = tracer.startSpan('unhandled_promise_rejection', {
-    attributes: {
-      'error.type': 'unhandledrejection',
-      'error.origin': 'service-worker'
-    }
-  });
-
   try {
-    const error = event.reason instanceof Error ? event.reason : new Error(String(event.reason));
-    // 1️⃣ Attach error to trace
-    span.recordException(error);
-    span.setStatus({
-      code: 2, // SpanStatusCode.ERROR
-      message: error.message
-    });
-  } finally {
+    const activeCtx = context.active();
+    const activeSpan = trace.getSpan(activeCtx);
+
+    // CASE 1: attach to existing span
+    if (activeSpan) {
+      handleError(activeSpan, event.reason, 'Unhandled Promise Rejection');
+
+      return;
+    }
+    const span = tracer.startSpan('unhandled_promise_rejection');
+    handleError(span, event.reason, 'Unhandled Promise Rejection');
     span.end();
+  } catch (e) {
+    console.error('Error in self.onunhandledrejection handler', e);
   }
 };
 
 self.onerror = (message: string | Event, source?: string, lineno?: number, colno?: number, error?: Error) => {
-  const tracer = trace.getTracer('service-worker');
-  const span = tracer.startSpan('unhandled_js_error', {
-    attributes: {
-      'error.type': 'onerror',
-      'error.origin': 'service-worker',
-      'error.source': source,
-      'code.lineno': lineno,
-      'code.colno': colno
-    }
-  });
-
   try {
-    const err = error instanceof Error ? error : new Error(typeof message === 'string' ? message : 'Unknown error');
+    const activeCtx = context.active();
+    const activeSpan = trace.getSpan(activeCtx);
 
-    // 1️⃣ Attach error to trace
-    span.recordException(err);
-    span.setStatus({
-      code: 2, // SpanStatusCode.ERROR
-      message: err.message
-    });
-
-    // 2️⃣ Emit structured log
-    logger.emit({
-      severityText: 'ERROR',
-      body: 'Unhandled JavaScript error',
-      attributes: {
-        'error.message': err.message,
-        'error.stack': err.stack,
-        'error.source': source,
-        'code.lineno': lineno,
-        'code.colno': colno
-      }
-    });
-  } finally {
+    // CASE 1: attach to existing span
+    if (activeSpan) {
+      handleError(activeSpan, error ?? message, 'Global Error Handler', { 'error.source': source, 'code.lineno': lineno, 'code.colno': colno });
+      return false;
+    }
+    const span = tracer.startSpan('global_error_handler');
+    handleError(span, error ?? message, 'Global Error Handler', { 'error.source': source, 'code.lineno': lineno, 'code.colno': colno });
     span.end();
+  } catch (error) {
+    console.error('Error in self.onerror handler', error);
   }
-
   // Return false → allow default browser handling (recommended)
   return false;
 };

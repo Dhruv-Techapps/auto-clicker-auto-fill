@@ -1,5 +1,5 @@
 import { SystemError } from '@dhruv-techapps/core-common';
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 const HISTORY_COMMANDS = ['back', 'forward', 'go', 'pushState', 'replaceState'];
@@ -40,7 +40,10 @@ export const HistoryCommandEvents = (() => {
 
   const start = (value: string) => {
     const commands = CommonEvents.getVerifiedEvents(HISTORY_COMMANDS, value);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, commands);
+    Logger.debug('HistoryCommandEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     execCommand(commands, value);
   };
 

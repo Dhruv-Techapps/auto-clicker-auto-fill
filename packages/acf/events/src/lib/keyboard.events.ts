@@ -1,5 +1,5 @@
 import { SystemError } from '@dhruv-techapps/core-common';
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 import keyCodes from './keyboard-keycode';
 
@@ -53,7 +53,10 @@ export const KeyboardEvents = (() => {
 
   const start = (elements: Array<HTMLElement>, event: string) => {
     const events = getVerifiedEvents(event);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, events);
+    Logger.debug('KeyboardEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, events, dispatchEvent);
   };
   return { start };

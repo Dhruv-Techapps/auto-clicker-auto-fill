@@ -1,6 +1,6 @@
 import { Auth, FirebaseOauth2Background } from '@dhruv-techapps/shared-firebase-oauth';
-import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
-import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth/background';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications/handler';
 import { NOTIFICATIONS_ID } from './firebase-functions.constant';
 
 export class FirebaseFunctionsBackground extends FirebaseOauth2Background {

@@ -1,7 +1,8 @@
 import { ActionRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import { CoreService } from './core-service';
 
 export class ActionService extends CoreService {
+  static override shouldTrace = false;
   static async setBadgeBackgroundColor(details: chrome.action.BadgeColorDetails) {
     return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setBadgeBackgroundColor', message: details });
   }

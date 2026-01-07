@@ -25,6 +25,7 @@
     "@dhruv-techapps/core-common": "0.0.1",
     "@dhruv-techapps/shared-google-analytics": "0.0.1",
     "@dhruv-techapps/shared-sandbox": "0.0.1",
-    "@dhruv-techapps/shared-util": "0.0.1"
+    "@dhruv-techapps/shared-util": "0.0.1",
+    "@dhruv-techapps/core-open-telemetry": "0.0.1"
   }
 }
