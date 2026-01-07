@@ -1,7 +1,7 @@
 import { RootState } from '@acf-options-page/store';
 import { ISchedule, defaultSchedule } from '@dhruv-techapps/acf-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { openScheduleModalAPI } from './schedule.api';
 
 export interface IScheduleStore {
@@ -32,7 +32,7 @@ const slice = createSlice({
     },
     setScheduleError: (state, action: PayloadAction<string | undefined>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Schedule Modal', state.error || 'Unknown Error');
       state.message = undefined;
     }
   },

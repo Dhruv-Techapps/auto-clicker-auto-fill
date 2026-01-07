@@ -1,6 +1,6 @@
-import { FirebaseFirestoreService, Product, Subscription } from '@dhruv-techapps/shared-firebase-firestore';
+import { FirebaseFirestoreService, Product, Subscription } from '@dhruv-techapps/shared-firebase-firestore/service';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../store';
 
 export interface ISubscribeStore {
@@ -58,14 +58,14 @@ const slice = createSlice({
     });
     builder.addCase(getSubscription.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Get Subscription', state.error || 'Unknown Error');
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload;
     });
     builder.addCase(getProducts.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Get Products', state.error || 'Unknown Error');
     });
     builder.addCase(subscribe.pending, (state) => {
       state.isSubscribing = true;
@@ -73,7 +73,7 @@ const slice = createSlice({
     builder.addCase(subscribe.rejected, (state, action) => {
       state.isSubscribing = false;
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Subscribe', state.error || 'Unknown Error');
     });
   }
 });

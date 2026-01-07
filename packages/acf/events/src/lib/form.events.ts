@@ -1,5 +1,5 @@
 import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 const FORM_EVENTS = ['blur', 'click', 'click-once', 'focus', 'select', 'submit', 'remove', 'clear'];
@@ -41,7 +41,11 @@ export const FormEvents = (() => {
           ) {
             element.form?.submit();
           } else {
-            console.error(element);
+            Logger.error('FormEvents', {
+              actionId: window.ext.__currentAction,
+              actionName: window.ext.__currentActionName,
+              message: 'Invalid element for submit'
+            });
             throw new ConfigError(`invalid elementFinder`, 'Invalid Element for submit');
           }
           break;
@@ -57,7 +61,11 @@ export const FormEvents = (() => {
           if (element instanceof eW.HTMLSelectElement || element instanceof eW.HTMLTextAreaElement || element instanceof eW.HTMLInputElement) {
             element.value = '';
           } else {
-            console.error(element);
+            Logger.error('FormEvents', {
+              actionId: window.ext.__currentAction,
+              actionName: window.ext.__currentActionName,
+              message: 'Invalid element for clear'
+            });
             throw new ConfigError(`invalid elementFinder`, 'Invalid Element for clear');
           }
           break;
@@ -69,7 +77,10 @@ export const FormEvents = (() => {
 
   const start = (elements: Array<HTMLElement>, action: string) => {
     const events = CommonEvents.getVerifiedEvents(FORM_EVENTS, action);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, events);
+    Logger.debug('FormEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, events, dispatchEvent);
   };
   return { start };

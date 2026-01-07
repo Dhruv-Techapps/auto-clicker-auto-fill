@@ -1,3 +1,4 @@
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { AppendEvents } from './append.events';
 import { AttributeEvents } from './attribute.events';
 import { ClassEvents } from './class-list.events';
@@ -99,7 +100,10 @@ export const Events = (() => {
           PlainEvents.start(elements, value);
       }
     } else {
-      console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, 'Default Click Events');
+      Logger.debug('Default Click Events', {
+        actionId: window.ext.__currentAction,
+        actionName: window.ext.__currentActionName
+      });
       elements.forEach((element) => {
         DEFAULT_EVENT.forEach((event) => {
           element.dispatchEvent(new MouseEvent(event, CommonEvents.getMouseEventProperties()));

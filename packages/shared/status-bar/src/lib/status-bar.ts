@@ -1,15 +1,8 @@
 import { ActionService } from '@dhruv-techapps/core-service';
 import { Timer } from '@dhruv-techapps/shared-util';
+import { trace } from '@opentelemetry/api';
+import { STATUS_BAR_TYPE } from './status-bar.constant';
 import { STATUS_BAR_LOCATION } from './status-bar.types';
-
-export enum STATUS_BAR_TYPE {
-  CONFIG_WAIT = 'Config wait',
-  ACTION_WAIT = 'Action wait',
-  BATCH_REPEAT = 'Batch repeat',
-  ADDON_RECHECK = 'Addon recheck',
-  ACTION_REPEAT = 'Action repeat'
-}
-
 export class StatusBar {
   private totalActions = 0;
   private totalBatches = 0;
@@ -45,6 +38,7 @@ export class StatusBar {
   }
 
   public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current?: number): Promise<void> {
+    trace.getActiveSpan()?.addEvent('StatusBar.wait', { text: String(text), type: String(_type), current: current });
     const waitTime = Timer.getWaitTime(text);
     if (!waitTime) {
       return;

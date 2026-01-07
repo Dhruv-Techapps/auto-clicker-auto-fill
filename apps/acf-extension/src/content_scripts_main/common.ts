@@ -32,7 +32,8 @@ const Common = (() => {
         }
       }
     } catch (e) {
-      console.error(e);
+      console.error('Error in getElements:', e);
+      throw e;
     }
 
     return elements;

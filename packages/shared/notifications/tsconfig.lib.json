@@ -13,7 +13,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../core/common/tsconfig.lib.json"
+      "path": "../../core/open-telemetry/tsconfig.lib.json"
     }
   ],
   "exclude": [

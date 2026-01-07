@@ -1,8 +1,9 @@
 import { generateUUID } from '@dhruv-techapps/core-common';
 import { NotificationsRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import { CoreService } from './core-service';
 
 export class NotificationsService extends CoreService {
+  static override shouldTrace = false;
   static async create(options: chrome.notifications.NotificationCreateOptions, notificationId: string = generateUUID()) {
     return await this.message<NotificationsRequest>({ messenger: 'notifications', message: { notificationId, options }, methodName: 'create' });
   }

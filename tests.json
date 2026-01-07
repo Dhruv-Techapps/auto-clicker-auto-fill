@@ -1,0 +1,32 @@
+{
+  "resourceLogs": [
+    {
+      "resource": {
+        "attributes": [
+          { "key": "service.name", "value": { "stringValue": "Auto Clicker & Auto Fill" } },
+          { "key": "service.version", "value": { "stringValue": "9.9.9" } },
+          { "key": "device.id", "value": { "stringValue": "7d3ef38e-b70d-4398-b108-c12d6671df55" } }
+        ],
+        "droppedAttributesCount": 0
+      },
+      "scopeLogs": [
+        {
+          "logRecords": [
+            {
+              "resource": { "attributes": { "service.name": "Auto Clicker & Auto Fill", "service.version": "9.9.9", "device.id": "7d3ef38e-b70d-4398-b108-c12d6671df55" } },
+              "instrumentationScope": { "name": "Auto Clicker - AutoFill [DEV]", "version": "9.9.9", "schemaUrl": "https://opentelemetry.io/schemas/1.17.0" },
+              "timestamp": 1767426928106000,
+              "traceId": "08cc0cac06929aaf17dcadb6cbf1838c",
+              "spanId": "3157717e6b926c15",
+              "traceFlags": 1,
+              "severityText": "DEBUG",
+              "severityNumber": 5,
+              "body": "Starting configuration for https://test.getautoclicker.com/",
+              "attributes": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

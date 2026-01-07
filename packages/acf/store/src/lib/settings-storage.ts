@@ -6,7 +6,8 @@ export class SettingsStorage {
       const { settings = defaultSettings } = await chrome.storage.local.get<{ settings: ISettings }>(LOCAL_STORAGE_KEY.SETTINGS);
       return settings;
     } catch (error) {
-      console.warn(error);
+      console.error('Error in fetching settings from storage', error);
+      throw error;
     }
     return defaultSettings;
   }

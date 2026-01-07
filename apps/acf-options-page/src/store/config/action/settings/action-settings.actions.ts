@@ -1,6 +1,6 @@
 import { IActionSettings } from '@dhruv-techapps/acf-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { ConfigStore } from '../../config.slice';
 
 export const actionSettingsActions = {
@@ -10,13 +10,14 @@ export const actionSettingsActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('syncActionSettings', 'Invalid Configuration');
       return;
     }
     const selectedAction = selectedConfig.actions.find((action) => action.id === selectedActionId);
     if (!selectedAction) {
       state.error = 'Invalid Action';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('syncActionSettings', 'Invalid Action');
+
       return;
     }
 

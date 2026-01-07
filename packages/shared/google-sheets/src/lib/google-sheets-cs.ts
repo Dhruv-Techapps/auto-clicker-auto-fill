@@ -1,4 +1,5 @@
 import { ConfigError, ISheets } from '@dhruv-techapps/core-common';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { RANGE_REGEX } from './google-sheets.constant';
 import { GoogleSheetsService } from './google-sheets.service';
 import { ValueRange } from './google-sheets.types';
@@ -61,14 +62,22 @@ export class GoogleSheetsCS {
         if (result) {
           return this.transformResult(result);
         }
-        console.debug('Google Sheets', result);
+        Logger.debug('GoogleSheetsCS.getValues', {
+          actionId: window.ext.__currentAction,
+          actionName: window.ext.__currentActionName
+        });
         return result;
       }
     } catch (error) {
       if (error instanceof Error && error.message === 'OAuth2 not granted or revoked.') {
         throw new ConfigError('Please connect to Google Sheets from global menu', 'Google Sheets');
       }
-      console.warn('Google Sheets', error);
+      Logger.warn('GoogleSheetsCS.getValues', {
+        actionId: window.ext.__currentAction,
+        actionName: window.ext.__currentActionName,
+        'error.message': (error as Error).message,
+        'error.stack': (error as Error).stack
+      });
       throw error;
     }
     return undefined;

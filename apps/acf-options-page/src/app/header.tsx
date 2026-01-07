@@ -1,5 +1,5 @@
 import { ThemeNavDropdown } from '@acf-options-page/components/theme';
-import * as Sentry from '@sentry/react';
+import { trace } from '@opentelemetry/api';
 import { useEffect, useState } from 'react';
 import { Badge, Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -42,7 +42,7 @@ function Header() {
     await i18n.changeLanguage(lng);
     document.documentElement.lang = lng;
     localStorage.setItem('language', lng);
-    Sentry.setTag('page_locale', lng);
+    trace.getActiveSpan()?.addEvent('Change Language', { language: lng });
   };
 
   let appName = t('common.appName');

@@ -1,4 +1,4 @@
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 export const AttributeEvents = (() => {
@@ -12,7 +12,10 @@ export const AttributeEvents = (() => {
   };
 
   const start = (elements: Array<HTMLElement>, value: string) => {
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, value);
+    Logger.debug('AttributeEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, value, execCommand);
   };
   return { start };

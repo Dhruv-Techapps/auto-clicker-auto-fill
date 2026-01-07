@@ -1,5 +1,5 @@
 import { GoogleBackupService } from '@dhruv-techapps/acf-service';
-import { EAutoBackup, GoogleDriveService } from '@dhruv-techapps/shared-google-drive';
+import { EAutoBackup, GoogleDriveService } from '@dhruv-techapps/shared-google-drive/service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateSettingsBackup } from '../../settings';
 

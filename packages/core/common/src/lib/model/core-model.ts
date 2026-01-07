@@ -16,3 +16,9 @@ export interface IExtension {
   __sessionCount: number;
   __sheets?: ISheets;
 }
+
+export interface ICoreModel {
+  __extensionId: string;
+  __releaseVersion: string;
+  __productName: string;
+}

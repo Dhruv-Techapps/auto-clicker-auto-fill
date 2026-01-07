@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/acf/main-world/src",
   "projectType": "library",
-  "tags": ["scope:acf"],
+  "tags": ["scope:acf", "type:library", "platform:all", "domain:main-world"],
   "targets": {
     "build": {
       "executor": "@nx/js:swc",

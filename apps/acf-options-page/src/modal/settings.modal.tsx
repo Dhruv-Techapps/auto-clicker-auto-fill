@@ -1,4 +1,4 @@
-import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/shared-status-bar';
+import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/shared-status-bar/service';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';

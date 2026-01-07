@@ -1,4 +1,4 @@
-import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth/service';
 import { useEffect } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { firebaseSelector, switchFirebaseLoginModal } from '../../store/firebase';

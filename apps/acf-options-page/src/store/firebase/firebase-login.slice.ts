@@ -1,6 +1,6 @@
-import { FirebaseRole, User } from '@dhruv-techapps/shared-firebase-oauth';
+import { FirebaseRole, User } from '@dhruv-techapps/shared-firebase-oauth/service';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../store';
 import { firebaseIsLoginAPI, firebaseLoginAPI, firebaseLogoutAPI } from './firebase-login.api';
 
@@ -29,7 +29,7 @@ const slice = createSlice({
     },
     setFirebaseLoginError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Firebase Login', state.error || 'Unknown Error');
       state.message = undefined;
     }
   },
@@ -39,14 +39,13 @@ const slice = createSlice({
         state.user = action.payload.user;
         state.role = action.payload.role;
         window.dataLayer.push({ user_id: action.payload.user?.uid });
-        Sentry.setUser({ id: action.payload.user.uid });
       }
       state.isLoading = false;
     });
     builder.addCase(firebaseIsLoginAPI.rejected, (state, action) => {
       state.error = action.error.message;
       state.isLoading = false;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Firebase Login', state.error || 'Unknown Error');
     });
     builder.addCase(firebaseLoginAPI.pending, (state) => {
       state.isLoading = true;
@@ -55,7 +54,6 @@ const slice = createSlice({
       if (action.payload) {
         state.user = action.payload.user;
         state.role = action.payload.role;
-        Sentry.setUser({ id: action.payload.user?.uid });
         window.dataLayer.push({ user_id: action.payload.user?.uid });
       }
       state.isLoading = false;
@@ -63,18 +61,17 @@ const slice = createSlice({
     });
     builder.addCase(firebaseLoginAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Firebase Login', state.error || 'Unknown Error');
       state.isLoading = false;
     });
     builder.addCase(firebaseLogoutAPI.fulfilled, (state) => {
       delete state.user;
       delete state.role;
       window.dataLayer.push({ user_id: null });
-      Sentry.setUser(null);
     });
     builder.addCase(firebaseLogoutAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Firebase Login', state.error || 'Unknown Error');
     });
   }
 });

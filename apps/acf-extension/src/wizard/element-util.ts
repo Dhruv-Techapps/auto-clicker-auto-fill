@@ -1,5 +1,4 @@
 import { generateUUID } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
 import { BUTTON_FILE_SUBMIT_NODE_NAME, RADIO_CHECKBOX_NODE_NAME } from '../common/constant';
 import { xPath } from './dom-path';
 import { WizardAction } from './type';
@@ -91,7 +90,6 @@ export const WizardElementUtil = (() => {
         return { name: getName(element), id: generateUUID(), elementFinder, value };
       }
     } else if (element.isContentEditable && listener) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', { event: 'Wizard', source: 'wizard' });
       const value = await inputListener(element);
       if (value) {
         return { elementFinder, id: generateUUID(), value };

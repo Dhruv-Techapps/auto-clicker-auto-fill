@@ -1,3 +1,4 @@
 /// <reference types="chrome"/>
 
-export * from './lib/notifications';
+export * from './handler';
+export * from './register';

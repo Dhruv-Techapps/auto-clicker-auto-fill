@@ -1,5 +1,5 @@
 import { sanitizeUrl, SystemError } from '@dhruv-techapps/core-common';
-import { ACTION_I18N_TITLE } from '.';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 const LOCATION_COMMANDS = ['reload', 'href', 'replace', 'open', 'close', 'focus', 'blur', 'print', 'stop', 'moveBy', 'moveTo'];
@@ -62,7 +62,10 @@ export const LocationCommandEvents = (() => {
 
   const start = (value: string) => {
     const commands = CommonEvents.getVerifiedEvents(LOCATION_COMMANDS, value);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, commands);
+    Logger.debug('LocationCommandEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     execCommand(commands, value);
   };
   return { start };

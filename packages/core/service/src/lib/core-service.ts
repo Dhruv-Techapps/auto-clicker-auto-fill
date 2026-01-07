@@ -1,12 +1,20 @@
 import { ConfigError } from '@dhruv-techapps/core-common';
+import { context, propagation, trace } from '@opentelemetry/api';
+
+interface Carrier {
+  traceparent?: string;
+  tracestate?: string;
+}
 
 interface CoreServiceRequest {
   messenger: string;
   methodName: string;
   message?: unknown;
+  carrier?: Carrier;
 }
 
 export class CoreService {
+  static shouldTrace = true;
   static messageChrome<K extends CoreServiceRequest, T = void>(message: K): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       try {
@@ -20,11 +28,12 @@ export class CoreService {
           reject(new Error('extensionId is not undefined neither string'));
           return;
         }
+
         // This line is kept for debugging purpose console.debug(`${message.messenger}.${message.methodName}`, message.message);
         chrome.runtime.sendMessage(id, message, (response) => {
           if (chrome.runtime.lastError || response?.error) {
             const error: string = chrome.runtime.lastError?.message ?? response?.error;
-            console.error(error);
+
             if (error.includes('User not logged in')) {
               reject(new ConfigError('Authentication', error));
             }
@@ -41,7 +50,30 @@ export class CoreService {
   }
 
   static async message<K extends CoreServiceRequest, T = void>(message: K): Promise<T> {
-    return await this.messageChrome<K, T>(message);
+    if (!this.shouldTrace) {
+      return this.messageChrome<K, T>(message);
+    }
+    const span = trace.getTracer('core-service').startSpan(`${message.messenger}.${message.methodName}`, {
+      attributes: {
+        message: JSON.stringify(message.message)
+      }
+    });
+    const carrier: Carrier = {};
+    propagation.inject(trace.setSpan(context.active(), span), carrier);
+    message.carrier = carrier;
+    return await this.messageChrome<K, T>(message)
+      .catch((error) => {
+        span.recordException(new Error(error));
+        span.setStatus({
+          code: 2, // SpanStatusCode.ERROR
+          message: error
+        });
+
+        throw error;
+      })
+      .finally(() => {
+        span.end();
+      });
   }
 }
 

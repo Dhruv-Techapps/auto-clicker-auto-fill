@@ -1,6 +1,6 @@
-import { IDriveFile } from '@dhruv-techapps/shared-google-drive';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
+import { IDriveFile } from '@dhruv-techapps/shared-google-drive/service';
 import { createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 import { googleDriveDeleteAPI, googleDriveListWithContentAPI } from './google-drive.api';
 
@@ -28,7 +28,7 @@ const slice = createSlice({
     builder.addCase(googleDriveListWithContentAPI.rejected, (state, action) => {
       state.filesLoading = false;
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Google Drive List', state.error || 'Unknown Error');
     });
     builder.addCase(googleDriveDeleteAPI.fulfilled, (state, action) => {
       state.files = state.files.filter((file) => file.id !== action.payload.id);

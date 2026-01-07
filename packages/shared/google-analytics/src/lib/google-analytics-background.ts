@@ -88,7 +88,7 @@ export class GoogleAnalyticsBackground {
         return;
       }
     } catch (e) {
-      console.error('Google Analytics request failed with an exception', e);
+      console.error(e);
     }
   }
 

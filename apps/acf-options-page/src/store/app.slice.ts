@@ -1,5 +1,5 @@
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { NO_EXTENSION_ERROR } from '../util/constants';
 import { getManifest } from './app.api';
 import { RootState } from './store';
@@ -27,7 +27,7 @@ const slice = createSlice({
     },
     setAppError: (state, action) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('App Store', state.error || 'Unknown Error');
       state.loading = false;
     },
     switchExtensionNotFound: (state, action: PayloadAction<string | undefined>) => {
@@ -49,7 +49,7 @@ const slice = createSlice({
       const error = action.error.message;
       if (error) {
         state.error = error;
-        Sentry.captureException(state.error);
+        GoogleAnalyticsService.fireErrorEvent('App Store', state.error || 'Unknown Error');
         if (NO_EXTENSION_ERROR.includes(error)) {
           state.error = "Kindly download the extension first. If it's already installed, please refresh the page to proceed.";
           state.errorButton = true;

@@ -33,6 +33,14 @@ export default [
               onlyDependOnLibsWithTags: ['*']
             },
             {
+              sourceTag: 'domain:acf-extension',
+              onlyDependOnLibsWithTags: ['domain:acf-extension', 'domain:core-common', 'scope:shared', 'scope:acf']
+            },
+            {
+              sourceTag: 'domain:acf-options-page',
+              onlyDependOnLibsWithTags: ['domain:acf-options-page', 'scope:shared', 'scope:acf', 'domain:core-common', 'domain:core-service']
+            },
+            {
               sourceTag: '*',
               onlyDependOnLibsWithTags: ['*']
             }

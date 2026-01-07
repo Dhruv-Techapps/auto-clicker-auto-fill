@@ -1,12 +1,12 @@
 import { ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { createListenerMiddleware, isAnyOf, UnknownAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import i18next from 'i18next';
 import { RootState } from '../store';
 import { addToast } from '../toast.slice';
 
 import { ScheduleService } from '@dhruv-techapps/acf-service';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import {
   setActionAddonError,
   setActionAddonMessage,
@@ -121,13 +121,15 @@ configsListenerMiddleware.startListening({
       .catch((error) => {
         const { failure } = getMessageFunc(action);
         if (failure) {
-          Sentry.captureException(error);
           if (error instanceof Error) {
             listenerApi.dispatch(failure(error.message));
+            GoogleAnalyticsService.fireErrorEvent('Configs Listener Middleware', error.message, { stack: error.stack, source: 'options_page' });
           } else if (typeof error === 'string') {
             listenerApi.dispatch(failure(error));
+            GoogleAnalyticsService.fireErrorEvent('Configs Listener Middleware', error, { source: 'options_page' });
           } else {
             listenerApi.dispatch(failure(JSON.stringify(error)));
+            GoogleAnalyticsService.fireErrorEvent('Configs Listener Middleware', 'Unknown Error', { error: JSON.stringify(error), source: 'options_page' });
           }
         }
       });

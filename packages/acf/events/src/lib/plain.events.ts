@@ -1,7 +1,7 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
-import { ACTION_I18N_TITLE } from '.';
 
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import CommonEvents from './common.events';
 
 const DEFAULT_EVENT = ['mouseover', 'mousedown', 'mouseup', 'click'];
@@ -47,7 +47,10 @@ export const PlainEvents = (() => {
 
   const start = (elements: Array<HTMLElement>, value: string) => {
     value = checkEmptyValue(value);
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, value);
+    Logger.debug('PlainEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, value, dispatchEvent);
   };
 

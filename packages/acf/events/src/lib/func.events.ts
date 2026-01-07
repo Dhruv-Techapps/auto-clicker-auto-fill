@@ -1,5 +1,5 @@
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
-import { ACTION_I18N_TITLE } from '.';
 import CommonEvents from './common.events';
 
 const CHANGE_EVENT = ['input', 'change'];
@@ -11,7 +11,10 @@ export const FuncEvents = (() => {
 
   const start = async (elements: Array<HTMLElement>, value: string) => {
     value = value.replace(/func::/i, '');
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, value);
+    Logger.debug('FuncEvents', {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     value = await Sandbox.sandboxEval(value);
 
     CommonEvents.loopElements(elements, value, checkNode);

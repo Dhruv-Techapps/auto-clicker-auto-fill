@@ -2,11 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
-    "jsx": "react-jsx",
-    "lib": ["dom"],
     "types": ["chrome", "node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts", "vite/client", "vitest/importMeta"],
+    "jsx": "react-jsx",
     "rootDir": "src",
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "lib": ["dom"],
     "baseUrl": ".",
     "paths": {
       "@acf-options-page/*": ["src/*"]
@@ -27,7 +27,7 @@
     "eslint.config.cjs",
     "eslint.config.mjs"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "../../packages/core/open-telemetry/src/lib/open-telemetry-web.ts"],
   "references": [
     {
       "path": "../../packages/shared/firebase-firestore/tsconfig.lib.json"
@@ -42,7 +42,7 @@
       "path": "../../packages/acf/service/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/core/service/tsconfig.lib.json"
+      "path": "../../packages/shared/google-analytics/tsconfig.lib.json"
     },
     {
       "path": "../../packages/shared/google-oauth/tsconfig.lib.json"
@@ -52,6 +52,12 @@
     },
     {
       "path": "../../packages/shared/status-bar/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/open-telemetry/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/service/tsconfig.lib.json"
     },
     {
       "path": "../../packages/core/common/tsconfig.lib.json"

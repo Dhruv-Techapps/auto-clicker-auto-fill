@@ -1,8 +1,8 @@
 /*global chrome*/
 
-import { FirebaseFunctionsBackground } from '@dhruv-techapps/shared-firebase-functions';
-import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
-import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
+import { FirebaseFunctionsBackground } from '@dhruv-techapps/shared-firebase-functions/background';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth/background';
+import { NotificationHandler } from '@dhruv-techapps/shared-notifications/handler';
 import { BACKUP_ALARM, MINUTES_IN_DAY, NOTIFICATIONS_ID, NOTIFICATIONS_TITLE } from './google-drive.constant';
 import { EAutoBackup, IDriveFile, IGoogleDriveFile } from './google-drive.types';
 

@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/shared/google-analytics/src",
   "projectType": "library",
-  "tags": ["scope:shared"],
+  "tags": ["scope:shared", "type:library", "platform:all", "domain:shared-google-analytics"],
   "targets": {
     "build": {
       "executor": "@nx/js:swc",

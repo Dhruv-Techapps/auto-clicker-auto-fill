@@ -1,7 +1,7 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
-import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';
 
 const CHANGE_EVENT = ['input', 'change'];
@@ -28,7 +28,10 @@ export const AppendEvents = (() => {
 
   const start = (elements: Array<HTMLElement>, value: string) => {
     value = value.replace(/^append::/i, '');
-    console.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`, elements, value);
+    Logger.debug(`AppendEvents`, {
+      actionId: window.ext.__currentAction,
+      actionName: window.ext.__currentActionName
+    });
     CommonEvents.loopElements(elements, value, checkNode);
   };
 

@@ -1,7 +1,7 @@
 import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 import { configRemoveUpdateAPI } from './config-remove.api';
 
@@ -32,7 +32,7 @@ const slice = createSlice({
         const config = state.configs.find((config) => config.id === action.payload);
         if (!config) {
           state.error = 'Invalid Config';
-          Sentry.captureException(state.error);
+          GoogleAnalyticsService.fireErrorEvent('switchConfigRemoveSelection', state.error);
           return;
         }
 
@@ -50,7 +50,7 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(configRemoveUpdateAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('Config Remove', state.error || 'Unknown Error');
       state.message = undefined;
     });
     builder.addCase(configRemoveUpdateAPI.fulfilled, (state) => {

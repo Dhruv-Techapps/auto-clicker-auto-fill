@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/react';
 import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
@@ -9,7 +8,6 @@ let lng = window.localStorage.getItem('language') || navigator.language.replace(
 if (!APP_LANGUAGES.includes(lng)) {
   lng = 'en';
   window.localStorage.setItem('language', lng);
-  Sentry.setTag('page_locale', lng);
 }
 
 i18n

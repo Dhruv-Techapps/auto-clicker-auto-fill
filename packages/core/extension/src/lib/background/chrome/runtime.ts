@@ -1,5 +1,6 @@
+import { Logger } from '@dhruv-techapps/core-open-telemetry/background';
+import { context, propagation, SpanStatusCode, trace } from '@opentelemetry/api';
 import { ActionMessenger, AlarmsMessenger, ManifestMessenger, NotificationsMessenger, SessionStorageMessenger, StorageMessenger, UserScriptsMessenger } from './messenger';
-
 export interface MessengerConfigObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
@@ -7,8 +8,12 @@ export interface MessengerConfigObject {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const messageListener = async (request: any, sender: chrome.runtime.MessageSender, configs: MessengerConfigObject): Promise<any> => {
-  const { messenger, methodName, message } = request;
-
+  const { messenger, methodName, message, carrier } = request;
+  let span = null;
+  if (carrier) {
+    const activeContext = propagation.extract(context.active(), carrier);
+    span = trace.getTracer('background').startSpan(`${messenger}.${methodName}`, {}, activeContext);
+  }
   try {
     switch (messenger) {
       case 'notifications':
@@ -30,33 +35,42 @@ export const messageListener = async (request: any, sender: chrome.runtime.Messa
           if (typeof configs[messenger][methodName] === 'function') {
             return configs[messenger][methodName](message, sender);
           } else {
-            throw new Error(`${messenger}.${methodName} ${chrome.i18n.getMessage('@PORT__METHOD_NOT_FOUND')}`);
+            throw new Error(`${messenger} ${chrome.i18n.getMessage('@PORT__METHOD_NOT_FOUND')}`);
           }
         } else {
           throw new Error(`${messenger} ${chrome.i18n.getMessage('@PORT__ACTION_NOT_FOUND')}`);
         }
     }
   } catch (error) {
+    Logger.error('background.messageListener', {
+      'messenger.name': messenger,
+      'method.name': methodName,
+      'error.message': error instanceof Error ? error.message : String(error),
+      'error.stack': error instanceof Error ? error.stack : 'N/A'
+    });
+    span?.recordException(error instanceof Error ? error : new Error(String(error)));
+    span?.setStatus({
+      code: SpanStatusCode.ERROR,
+      message: error instanceof Error ? error.message : String(error)
+    });
     if (error instanceof Error) {
       throw new Error(`${messenger}.${methodName} ${error.message}`);
     } else {
       throw new Error(`${messenger}.${methodName} ${error}`);
     }
+  } finally {
+    span?.end();
   }
 };
 
 export class Runtime {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  static sendMessage(message: any, callback: (response: any) => void) {
-    chrome.runtime.sendMessage(message, callback);
-  }
-
   static onMessage(configs: MessengerConfigObject) {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       messageListener(request, sender, configs)
         .then(sendResponse)
         .catch((error) => {
           sendResponse({ error: error.message });
+          Logger.error('Runtime.onMessage', { message: error.message, stack: error.stack });
         });
       return true;
     });

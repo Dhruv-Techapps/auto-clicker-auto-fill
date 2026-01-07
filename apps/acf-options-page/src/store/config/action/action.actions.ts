@@ -1,7 +1,7 @@
 import { IAction, getDefaultAction, getDefaultUserscript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { PayloadAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { ConfigStore } from '../config.slice';
 import { actionAddonActions } from './addon';
 import { actionSettingsActions } from './settings';
@@ -29,7 +29,7 @@ export const actionActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('reorderActions', state.error);
       return;
     }
     // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -41,7 +41,7 @@ export const actionActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('addAction', state.error);
       return;
     }
     if (action.payload?.actionId) {
@@ -60,7 +60,7 @@ export const actionActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('addUserscript', state.error);
       return;
     }
     selectedConfig.actions.push(getDefaultUserscript());
@@ -74,14 +74,14 @@ export const actionActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('updateAction', state.error);
       return;
     }
 
     const selectedAction = selectedConfig.actions.find((action) => action.id === selectedActionId);
     if (!selectedAction) {
       state.error = 'Invalid Action';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('updateAction', state.error);
       return;
     }
     // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -102,14 +102,14 @@ export const actionActions = {
     const selectedConfig = configs.find((config) => config.id === selectedConfigId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('removeAction', state.error);
       return;
     }
 
     const selectedActionIndex = selectedConfig.actions.findIndex((action) => action.id === selectedActionId);
     if (selectedActionIndex === -1) {
       state.error = 'Invalid Action';
-      Sentry.captureException(state.error);
+      GoogleAnalyticsService.fireErrorEvent('removeAction', state.error);
       return;
     }
 
