@@ -1,7 +1,9 @@
 import { RuntimeMessageRequest } from '@dhruv-techapps/core-common';
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_FIREBASE_OAUTH } from './firebase-oauth.constant';
-import { FirebaseLoginResponse } from './firebase-oauth.types';
+import { RUNTIME_MESSAGE_FIREBASE_OAUTH } from './lib/firebase-oauth.constant';
+import type { FirebaseLoginResponse } from './lib/firebase-oauth.types';
+
+export type { FirebaseRole, User } from './lib/firebase-oauth.types';
 
 export class FirebaseOauthService extends CoreService {
   static async isLogin() {

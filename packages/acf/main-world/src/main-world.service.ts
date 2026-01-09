@@ -1,6 +1,6 @@
 import { IBypass } from '@dhruv-techapps/acf-common';
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING } from './main-world.constant';
+import { RUNTIME_MESSAGE_MAIN_WORLD_MESSAGING } from './lib/main-world.constant';
 
 export class MainWorldService extends CoreService {
   static async click(elementFinder: string) {

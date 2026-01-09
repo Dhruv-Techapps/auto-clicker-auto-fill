@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/firebase-functions.service.d.ts",
+      "import": "./dist/firebase-functions.service.js",
+      "default": "./dist/firebase-functions.service.js"
     }
   },
   "files": [

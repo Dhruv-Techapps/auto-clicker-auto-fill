@@ -1,11 +1,8 @@
 import { ELoadTypes, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
 import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
-import { scope } from '../common/instrument';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';
-
-scope.setTag('page', 'content-script');
 
 declare global {
   interface Window {
@@ -40,7 +37,7 @@ async function loadConfig(loadType: ELoadTypes) {
     if (e instanceof Error) {
       statusBar.error(e.message);
     }
-    scope.captureException(e);
+    console.error(e);
   }
 }
 
@@ -57,11 +54,11 @@ addEventListener('unhandledrejection', (event) => {
     window.location.reload();
     return;
   }
-  scope.captureException(event.reason, { captureContext: { tags: { errorType: 'unhandledrejection' } } });
+  console.error('Unhandled Rejection:', event.reason);
 });
 
 self.onerror = (...rest) => {
-  scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
+  console.error('Global Error Caught:', ...rest);
 };
 
 chrome.runtime.onMessage.addListener(async (message) => {
@@ -78,7 +75,7 @@ chrome.runtime.onMessage.addListener(async (message) => {
       if (e instanceof Error) {
         statusBar.error(e.message);
       }
-      scope.captureException(e);
+      console.error(e);
     }
   } else if (action === RUNTIME_MESSAGE_ACF.URL_CHANGE) {
     try {
@@ -87,7 +84,7 @@ chrome.runtime.onMessage.addListener(async (message) => {
       if (e instanceof Error) {
         statusBar.error(e.message);
       }
-      scope.captureException(e);
+      console.error(e);
     }
   }
 });

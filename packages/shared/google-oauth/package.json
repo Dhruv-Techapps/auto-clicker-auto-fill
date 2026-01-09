@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/google-oauth.service.d.ts",
+      "import": "./dist/google-oauth.service.js",
+      "default": "./dist/google-oauth.service.js"
     }
   },
   "files": [

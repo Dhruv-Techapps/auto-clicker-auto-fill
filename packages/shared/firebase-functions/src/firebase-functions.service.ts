@@ -1,6 +1,6 @@
 import { RuntimeMessageRequest } from '@dhruv-techapps/core-common';
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_FIREBASE_FUNCTIONS } from './firebase-functions.constant';
+import { RUNTIME_MESSAGE_FIREBASE_FUNCTIONS } from './lib/firebase-functions.constant';
 
 export class FirebaseFunctionsService extends CoreService {
   static async vision() {

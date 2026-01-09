@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/firebase-oauth.service.d.ts",
+      "import": "./dist/firebase-oauth.service.js",
+      "default": "./dist/firebase-oauth.service.js"
     }
   },
   "files": [

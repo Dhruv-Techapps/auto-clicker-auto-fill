@@ -1,5 +1,5 @@
-import { ManifestRequest, ManifestResult } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import type { ManifestRequest, ManifestResult } from '@dhruv-techapps/core-extension';
+import { CoreService } from './core-service';
 
 export class ManifestService extends CoreService {
   static async values(keys: string[]) {

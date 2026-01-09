@@ -1,9 +1,10 @@
 import { ConfigError, ISheets } from '@dhruv-techapps/core-common';
-import { RANGE_REGEX } from './google-sheets.constant';
 import { GoogleSheetsService } from './google-sheets.service';
-import { ValueRange } from './google-sheets.types';
+import { RANGE_REGEX } from './lib/google-sheets.constant';
+import { ValueRange } from './lib/google-sheets.types';
+export { GoogleSheetsValue } from './lib/google-sheets-value';
 
-export class GoogleSheetsCS {
+export class GoogleSheetsContentScript {
   transformSheets(sheets: Map<string, Set<string> | string>) {
     sheets.forEach((ranges, sheetName) => {
       let lowestColumn = 'ZZ';

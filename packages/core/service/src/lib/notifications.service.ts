@@ -1,6 +1,6 @@
 import { generateUUID } from '@dhruv-techapps/core-common';
 import { NotificationsRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import { CoreService } from './core-service';
 
 export class NotificationsService extends CoreService {
   static async create(options: chrome.notifications.NotificationCreateOptions, notificationId: string = generateUUID()) {

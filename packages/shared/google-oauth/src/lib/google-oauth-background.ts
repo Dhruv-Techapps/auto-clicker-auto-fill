@@ -1,6 +1,7 @@
 import { BROWSER } from '@dhruv-techapps/core-common';
 import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
-import { GOOGLE_SCOPES, GoogleOauth2LoginResponse } from './google-oauth.types';
+import { GOOGLE_SCOPES } from './google-oauth.enums';
+import type { GoogleOauth2LoginResponse } from './google-oauth.types';
 
 const NOTIFICATIONS_TITLE = 'Google OAuth';
 const NOTIFICATIONS_ID = 'authentication';

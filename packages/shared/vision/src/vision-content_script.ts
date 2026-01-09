@@ -1,4 +1,4 @@
-import { VisionImageRequest } from './vision-types';
+import type { VisionImageRequest } from './lib/vision-types';
 
 export class VisionValue {
   static isBase64Image(dataURL: string) {

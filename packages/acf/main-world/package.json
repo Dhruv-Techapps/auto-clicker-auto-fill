@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/main-world.service.d.ts",
+      "import": "./dist/main-world.service.js",
+      "default": "./dist/main-world.service.js"
     }
   },
   "files": [

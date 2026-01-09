@@ -4,7 +4,6 @@ import { ConfigRequest, FirebaseFirestoreBackground } from '@dhruv-techapps/shar
 import { Auth } from '@dhruv-techapps/shared-firebase-oauth';
 import { FirebaseStorageBackground } from '@dhruv-techapps/shared-firebase-storage';
 import { EDGE_OAUTH_CLIENT_ID } from '../common/environments';
-import { scope } from '../common/instrument';
 
 export const EVENTS_REGEX =
   /scrollto|clickevents|mouseevents|touchevents|formevents|keyevents|tabs|keyboardevents|attr|class|copy|paste|windowcommand|locationcommand|func|replace|append|prepend|clipboard|GoogleSheets/i;
@@ -128,13 +127,13 @@ export class SyncConfig {
           const blob = this.getBlob(config);
           await new FirebaseStorageBackground(this.auth).uploadFile(blob, `users/${uid}/${config.id}.json`);
         } catch (error) {
-          scope.captureException(error);
+          console.error('Error syncing config', config.id, error);
         }
       }
       console.log(`Synced ${filteredConfigs.length} configs`);
       await this.reset();
     } catch (error) {
-      scope.captureException(error);
+      console.error('Error syncing configs', error);
     }
   }
 }

@@ -1,7 +1,9 @@
 import { RuntimeMessageRequest } from '@dhruv-techapps/core-common';
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_FIREBASE_FIRESTORE } from './firebase-firestore.constant';
-import { Product, Subscription } from './firebase-firestore.types';
+import { RUNTIME_MESSAGE_FIREBASE_FIRESTORE } from './lib/firebase-firestore.constant';
+import type { Product, Subscription } from './lib/firebase-firestore.types';
+
+export type { Product, Subscription } from './lib/firebase-firestore.types';
 
 export class FirebaseFirestoreService extends CoreService {
   static async getProducts() {

@@ -1,6 +1,6 @@
 import { RuntimeMessageRequest } from '@dhruv-techapps/core-common';
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_FIREBASE_STORAGE } from './firebase-storage.constant';
+import { RUNTIME_MESSAGE_FIREBASE_STORAGE } from './lib/firebase-storage.constant';
 
 export class FirebaseStorageService extends CoreService {
   static async downloadFile<T>(path: string) {

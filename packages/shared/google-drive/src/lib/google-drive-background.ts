@@ -4,7 +4,8 @@ import { FirebaseFunctionsBackground } from '@dhruv-techapps/shared-firebase-fun
 import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
 import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
 import { BACKUP_ALARM, MINUTES_IN_DAY, NOTIFICATIONS_ID, NOTIFICATIONS_TITLE } from './google-drive.constant';
-import { EAutoBackup, IDriveFile, IGoogleDriveFile } from './google-drive.types';
+import { EAutoBackup } from './google-drive.enums';
+import type { IDriveFile, IGoogleDriveFile } from './google-drive.types';
 
 export class GoogleDriveBackground extends FirebaseFunctionsBackground {
   scopes = [GOOGLE_SCOPES.DRIVE];

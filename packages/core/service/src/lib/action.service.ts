@@ -1,5 +1,5 @@
-import { ActionRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import type { ActionRequest } from '@dhruv-techapps/core-extension';
+import { CoreService } from './core-service';
 
 export class ActionService extends CoreService {
   static async setBadgeBackgroundColor(details: chrome.action.BadgeColorDetails) {

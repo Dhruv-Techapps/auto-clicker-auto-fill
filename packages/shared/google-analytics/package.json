@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/google-analytics.service.d.ts",
+      "import": "./dist/google-analytics.service.js",
+      "default": "./dist/google-analytics.service.js"
     }
   },
   "files": [

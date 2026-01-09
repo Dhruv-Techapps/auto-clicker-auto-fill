@@ -1,9 +1,10 @@
 import { IActionSettings } from '@dhruv-techapps/acf-common';
 import { Value } from '@dhruv-techapps/acf-util';
-import { GoogleSheetsValue } from '@dhruv-techapps/shared-google-sheets';
-import { OpenAIService } from '@dhruv-techapps/shared-openai';
+import { GoogleSheetsValue } from '@dhruv-techapps/shared-google-sheets/content_script';
+import { OpenAIService } from '@dhruv-techapps/shared-openai/service';
 import { SandboxValue } from '@dhruv-techapps/shared-sandbox';
-import { VisionService, VisionValue } from '@dhruv-techapps/shared-vision';
+import { VisionValue } from '@dhruv-techapps/shared-vision/content_script';
+import { VisionService } from '@dhruv-techapps/shared-vision/service';
 import Common from '../common';
 import { I18N_ERROR } from '../i18n';
 

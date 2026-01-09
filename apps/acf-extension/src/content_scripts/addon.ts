@@ -1,6 +1,6 @@
 import { EActionStatus, EAddonConditions, ERecheckOptions, IActionSettings, IAddon } from '@dhruv-techapps/acf-common';
 import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { RADIO_CHECKBOX_NODE_NAME } from '../common/constant';
