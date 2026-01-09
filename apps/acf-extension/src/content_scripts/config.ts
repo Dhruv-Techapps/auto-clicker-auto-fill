@@ -1,12 +1,12 @@
 import { IConfiguration } from '@dhruv-techapps/acf-common';
-import { MainWorldService } from '@dhruv-techapps/acf-main-world';
+import { MainWorldService } from '@dhruv-techapps/acf-main-world/service';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { Session } from '@dhruv-techapps/acf-util';
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { NotificationsService, SessionStorageService } from '@dhruv-techapps/core-service';
-import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging';
-import { GoogleAnalyticsService, TEventSource } from '@dhruv-techapps/shared-google-analytics';
-import { GoogleSheetsCS } from '@dhruv-techapps/shared-google-sheets';
+import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging/service';
+import { GoogleAnalyticsService, TEventSource } from '@dhruv-techapps/shared-google-analytics/service';
+import { GoogleSheetsContentScript } from '@dhruv-techapps/shared-google-sheets/content_script';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
 import BatchProcessor from './batch';
@@ -86,7 +86,7 @@ const ConfigProcessor = (() => {
         await MainWorldService.bypass(config.bypass);
       }
       const sheets = GoogleSheets.getSheets(config);
-      window.ext.__sheets = await new GoogleSheetsCS().getValues(sheets, config.spreadsheetId);
+      window.ext.__sheets = await new GoogleSheetsContentScript().getValues(sheets, config.spreadsheetId);
       // Clear any existing DOM watchers before starting new actions
       await BatchProcessor.start(config.actions, config.batch);
       InitializeDomWatcher(config);

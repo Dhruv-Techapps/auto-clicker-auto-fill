@@ -1,5 +1,6 @@
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_DISCORD_MESSAGING } from './discord-messaging.constant';
+import { RUNTIME_MESSAGE_DISCORD_MESSAGING } from './lib/discord-messaging.constant';
+export { DiscordMessagingColor } from './lib/discord-messaging.types';
 
 export class DiscordMessagingService extends CoreService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

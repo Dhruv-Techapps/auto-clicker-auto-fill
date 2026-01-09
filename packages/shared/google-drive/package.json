@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/google-drive.service.d.ts",
+      "import": "./dist/google-drive.service.js",
+      "default": "./dist/google-drive.service.js"
     }
   },
   "files": [

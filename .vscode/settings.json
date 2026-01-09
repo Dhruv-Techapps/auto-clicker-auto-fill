@@ -4,6 +4,12 @@
   "[html]": {
     "editor.formatOnSave": false
   },
+  "[browserslistrc]": {
+    "editor.formatOnSave": false
+  },
+  "[browserslist]": {
+    "editor.formatOnSave": false
+  },
   "sonarlint.connectedMode.project": {
     "connectionId": "dhruv-techapps",
     "projectKey": "Dhruv-Techapps_auto-clicker-auto-fill"

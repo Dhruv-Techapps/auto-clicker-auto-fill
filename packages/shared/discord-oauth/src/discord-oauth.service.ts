@@ -1,7 +1,9 @@
 import { RuntimeMessageRequest } from '@dhruv-techapps/core-common';
 import { CoreService } from '@dhruv-techapps/core-service';
-import { RUNTIME_MESSAGE_DISCORD_OAUTH } from './discord-oauth.constant';
-import { Discord } from './discord-oauth.types';
+import { RUNTIME_MESSAGE_DISCORD_OAUTH } from './lib/discord-oauth.constant';
+import type { Discord } from './lib/discord-oauth.types';
+
+export type { Discord } from './lib/discord-oauth.types';
 
 export class DiscordOauthService extends CoreService {
   static async login() {

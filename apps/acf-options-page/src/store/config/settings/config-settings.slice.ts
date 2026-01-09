@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../../store';
 
 export interface IConfigSettingsStore {
@@ -25,7 +24,6 @@ const slice = createSlice({
     setConfigSettingsError: (state, action: PayloadAction<string>) => {
       state.message = undefined;
       state.error = action.payload;
-      Sentry.captureException(state.error);
     }
   }
 });

@@ -2,7 +2,6 @@ import { CONFIGURATIONS } from '@acf-options-page/data/configurations';
 import { EConfigSource, EStartTypes, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { LocalStorage } from '../../_helpers';
 import { RootState } from '../store';
 import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
@@ -45,7 +44,7 @@ const slice = createSlice({
   reducers: {
     setConfigError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+
       state.message = undefined;
     },
     setConfigMessage: (state, action: PayloadAction<string | undefined>) => {
@@ -72,7 +71,7 @@ const slice = createSlice({
       const selectedConfig = configs.find((config) => config.id === selectedConfigId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-        Sentry.captureException(state.error);
+
         return;
       }
       // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -89,7 +88,7 @@ const slice = createSlice({
       const selectedConfig = configs.find((config) => config.id === selectedConfigId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-        Sentry.captureException(state.error);
+
         return;
       }
       // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -104,7 +103,7 @@ const slice = createSlice({
       const selectConfigIndex = configs.findIndex((config) => config.id === action.payload);
       if (selectConfigIndex === -1) {
         state.error = 'Invalid Configuration';
-        Sentry.captureException(state.error);
+
         return;
       }
       configs.splice(selectConfigIndex, 1);
@@ -131,7 +130,7 @@ const slice = createSlice({
       const selectedConfig = configs.find((config) => config.id === selectedConfigId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-        Sentry.captureException(state.error);
+
         return;
       }
       const name = '(Duplicate) ' + (selectedConfig.name || selectedConfig.url || 'Configuration');
@@ -165,7 +164,7 @@ const slice = createSlice({
     });
     builder.addCase(configGetAllAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
+
       state.loading = false;
     });
     builder.addCase(openActionAddonModalAPI.fulfilled, (state, action) => {
@@ -173,25 +172,21 @@ const slice = createSlice({
     });
     builder.addCase(openActionAddonModalAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
     });
     builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
       state.selectedActionId = action.payload.selectedActionId;
     });
     builder.addCase(openActionSettingsModalAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
     });
     builder.addCase(openWatchModalAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
     });
     builder.addCase(openActionStatementModalAPI.fulfilled, (state, action) => {
       state.selectedActionId = action.payload.selectedActionId;
     });
     builder.addCase(openActionStatementModalAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      Sentry.captureException(state.error);
     });
   }
 });

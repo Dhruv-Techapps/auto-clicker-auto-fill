@@ -12,6 +12,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/vision.service.d.ts",
+      "import": "./dist/vision.service.js",
+      "default": "./dist/vision.service.js"
+    },
+    "./content_script": {
+      "types": "./dist/vision-content_script.d.ts",
+      "import": "./dist/vision-content_script.js",
+      "default": "./dist/vision-content_script.js"
     }
   },
   "files": [

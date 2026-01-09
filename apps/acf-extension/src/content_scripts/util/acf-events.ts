@@ -1,5 +1,5 @@
 import { Events } from '@dhruv-techapps/acf-events';
-import { MainWorldService } from '@dhruv-techapps/acf-main-world';
+import { MainWorldService } from '@dhruv-techapps/acf-main-world/service';
 
 export class ACFEvents {
   static async check(elementFinder: string, elements: Array<HTMLElement>, value?: string) {

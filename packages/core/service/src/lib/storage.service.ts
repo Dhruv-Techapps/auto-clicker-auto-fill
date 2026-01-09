@@ -1,5 +1,5 @@
-import { StorageMessengerGetProps, StorageMessengerRemoveProps, StorageMessengerSetProps, StorageRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import type { StorageMessengerGetProps, StorageMessengerRemoveProps, StorageMessengerSetProps, StorageRequest } from '@dhruv-techapps/core-extension';
+import { CoreService } from './core-service';
 
 export class StorageService extends CoreService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

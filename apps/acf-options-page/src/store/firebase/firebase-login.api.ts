@@ -1,4 +1,4 @@
-import { FirebaseOauthService } from '@dhruv-techapps/shared-firebase-oauth';
+import { FirebaseOauthService } from '@dhruv-techapps/shared-firebase-oauth/service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const firebaseIsLoginAPI = createAsyncThunk('firebase/isLogin', async () => {

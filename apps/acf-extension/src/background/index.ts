@@ -7,7 +7,6 @@ import { DiscordOauth2Background, RUNTIME_MESSAGE_DISCORD_OAUTH } from '@dhruv-t
 import { FirebaseFirestoreBackground, RUNTIME_MESSAGE_FIREBASE_FIRESTORE } from '@dhruv-techapps/shared-firebase-firestore';
 import { FirebaseFunctionsBackground, RUNTIME_MESSAGE_FIREBASE_FUNCTIONS } from '@dhruv-techapps/shared-firebase-functions';
 import { FirebaseOauth2Background, RUNTIME_MESSAGE_FIREBASE_OAUTH } from '@dhruv-techapps/shared-firebase-oauth';
-import { FirebaseStorageBackground, RUNTIME_MESSAGE_FIREBASE_STORAGE } from '@dhruv-techapps/shared-firebase-storage';
 import { RUNTIME_MESSAGE_GOOGLE_ANALYTICS } from '@dhruv-techapps/shared-google-analytics';
 import { GoogleDriveBackground, RUNTIME_MESSAGE_GOOGLE_DRIVE } from '@dhruv-techapps/shared-google-drive';
 import { GoogleOauth2Background, RUNTIME_MESSAGE_GOOGLE_OAUTH } from '@dhruv-techapps/shared-google-oauth';
@@ -17,7 +16,6 @@ import { OpenAIBackground, RUNTIME_MESSAGE_OPENAI } from '@dhruv-techapps/shared
 import { RUNTIME_MESSAGE_VISION, VisionBackground } from '@dhruv-techapps/shared-vision';
 import XMLHttpRequest from 'xhr-shim';
 import { DISCORD_CLIENT_ID, EDGE_OAUTH_CLIENT_ID, FIREBASE_FUNCTIONS_URL, OPTIONS_PAGE_URL, VARIANT } from '../common/environments';
-import { scope } from '../common/instrument';
 import AcfBackup from './acf-backup';
 import { AcfSchedule } from './acf-schedule';
 import './commands';
@@ -30,7 +28,6 @@ import './watch-url-change';
 self['XMLHttpRequest'] = XMLHttpRequest;
 
 try {
-  scope.setTag('page', 'background');
   /**
    * Browser Action set to open option page / configuration page
    */
@@ -82,7 +79,6 @@ try {
     [RUNTIME_MESSAGE_FIREBASE_OAUTH]: new FirebaseOauth2Background(auth, EDGE_OAUTH_CLIENT_ID),
     [RUNTIME_MESSAGE_FIREBASE_FIRESTORE]: new FirebaseFirestoreBackground(auth, EDGE_OAUTH_CLIENT_ID, OPTIONS_PAGE_URL),
     [RUNTIME_MESSAGE_FIREBASE_FUNCTIONS]: new FirebaseFunctionsBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID),
-    [RUNTIME_MESSAGE_FIREBASE_STORAGE]: new FirebaseStorageBackground(auth, EDGE_OAUTH_CLIENT_ID),
     [RUNTIME_MESSAGE_VISION]: new VisionBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID),
     [RUNTIME_MESSAGE_OPENAI]: new OpenAIBackground(auth, FIREBASE_FUNCTIONS_URL, EDGE_OAUTH_CLIENT_ID)
   };
@@ -93,18 +89,16 @@ try {
     const userId = auth.currentUser?.uid;
     if (userId) {
       UserStorage.setUserId(userId);
-      scope.setUser({ id: userId });
     }
   });
 } catch (error) {
-  scope.captureException(error);
   console.error('background', error);
 }
 
 self.onunhandledrejection = async (event) => {
-  scope.captureException(event.reason, { captureContext: { tags: { errorType: 'onunhandledrejection' } } });
+  console.error('Unhandled Promise Rejection', event.reason);
 };
 
 self.onerror = async (...rest) => {
-  scope.captureException({ ...rest }, { captureContext: { tags: { errorType: 'onerror' } } });
+  console.error('Error', ...rest);
 };

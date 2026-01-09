@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as FirebaseFirestore from 'firebase/firestore';
+import * as FirebaseFirestore from 'firebase/firestore/lite';
 
 export interface ConfigRequest {
   url: string;

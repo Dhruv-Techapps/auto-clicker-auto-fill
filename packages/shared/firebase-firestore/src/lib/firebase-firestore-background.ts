@@ -1,5 +1,5 @@
 import { Auth, FirebaseOauth2Background, User } from '@dhruv-techapps/shared-firebase-oauth';
-import { Firestore, Timestamp, addDoc, collection, doc, getDoc, getDocs, getFirestore, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { Firestore, Timestamp, addDoc, collection, doc, getDoc, getDocs, getFirestore, orderBy, query, setDoc, where } from 'firebase/firestore/lite';
 import { ConfigRequest } from './firebase-firestore.types';
 
 export class FirebaseFirestoreBackground extends FirebaseOauth2Background {

@@ -12,6 +12,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/google-sheets.service.d.ts",
+      "import": "./dist/google-sheets.service.js",
+      "default": "./dist/google-sheets.service.js"
+    },
+    "./content_script": {
+      "types": "./dist/google-sheets-content_script.d.ts",
+      "import": "./dist/google-sheets-content_script.js",
+      "default": "./dist/google-sheets-content_script.js"
     }
   },
   "files": [

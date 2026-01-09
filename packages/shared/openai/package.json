@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./service": {
+      "types": "./dist/openai.service.d.ts",
+      "import": "./dist/openai.service.js",
+      "default": "./dist/openai.service.js"
     }
   },
   "files": [

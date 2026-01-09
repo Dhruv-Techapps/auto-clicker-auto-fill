@@ -1,6 +1,6 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 
 export const UNKNOWN_ELEMENT_TYPE_ERROR = 'Unknown element type';
 

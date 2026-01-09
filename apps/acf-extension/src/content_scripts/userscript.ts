@@ -1,5 +1,5 @@
 import { EActionStatus, IUserScript } from '@dhruv-techapps/acf-common';
-import { IUserScriptsExecuteResponse } from '@dhruv-techapps/core-extension';
+import type { IUserScriptsExecuteResponse } from '@dhruv-techapps/core-extension';
 import { UserScriptsService } from '@dhruv-techapps/core-service';
 import { I18N_COMMON } from './i18n';
 

@@ -1,5 +1,5 @@
-import { FirebaseApp } from '@firebase/app';
-import { CompleteFn, ErrorFn, NextFn, Observer, Unsubscribe } from '@firebase/util';
+import type { FirebaseApp } from '@firebase/app';
+import type { CompleteFn, ErrorFn, NextFn, Observer, Unsubscribe } from '@firebase/util';
 export type FirebaseRole = 'pro' | 'discord' | 'sheets' | 'vision' | 'chatgpt';
 
 export type FirebaseLoginResponse = {

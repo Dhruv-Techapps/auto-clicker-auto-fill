@@ -1,6 +1,6 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics';
+import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
 import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';

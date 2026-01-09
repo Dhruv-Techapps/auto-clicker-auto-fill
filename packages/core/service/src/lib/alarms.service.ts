@@ -1,5 +1,5 @@
-import { IAlarmsRequest } from '@dhruv-techapps/core-extension';
-import { CoreService } from './service';
+import type { IAlarmsRequest } from '@dhruv-techapps/core-extension';
+import { CoreService } from './core-service';
 
 export class AlarmsService extends CoreService {
   static async create(name: string, alarmInfo: chrome.alarms.AlarmCreateInfo) {
