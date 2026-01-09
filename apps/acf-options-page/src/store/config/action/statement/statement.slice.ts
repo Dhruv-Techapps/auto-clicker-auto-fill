@@ -1,7 +1,6 @@
 import { ERetryOptions, IActionCondition, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../../../store';
 import { openActionStatementModalAPI } from './statement.api';
 
@@ -29,7 +28,6 @@ const slice = createSlice({
       const condition = state.statement.conditions?.find((condition) => condition.id === id);
       if (!condition) {
         state.error = 'Invalid Condition';
-        Sentry.captureException(state.error);
       } else {
         // @ts-expect-error "making is generic function difficult for TypeScript"
         condition[name] = value;
@@ -47,7 +45,6 @@ const slice = createSlice({
       const conditionIndex = state.statement.conditions?.findIndex((condition) => condition.id === action.payload);
       if (conditionIndex === -1 || conditionIndex === undefined) {
         state.error = 'Invalid Condition';
-        Sentry.captureException(state.error);
       } else {
         state.statement.conditions?.splice(conditionIndex, 1);
       }
@@ -68,7 +65,7 @@ const slice = createSlice({
     },
     setActionStatementError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+
       state.message = undefined;
     }
   },

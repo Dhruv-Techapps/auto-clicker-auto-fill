@@ -1,6 +1,5 @@
 import { defaultWatchSettings, IWatchSettings } from '@dhruv-techapps/acf-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { RootState } from '../..';
 import { openWatchModalAPI } from './watch.api';
 
@@ -45,7 +44,7 @@ const slice = createSlice({
     },
     setWatchError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+
       state.message = undefined;
     }
   },

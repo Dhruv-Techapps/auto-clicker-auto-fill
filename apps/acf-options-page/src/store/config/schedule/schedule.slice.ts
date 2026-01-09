@@ -1,7 +1,6 @@
 import { RootState } from '@acf-options-page/store';
 import { ISchedule, defaultSchedule } from '@dhruv-techapps/acf-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
 import { openScheduleModalAPI } from './schedule.api';
 
 export interface IScheduleStore {
@@ -32,7 +31,7 @@ const slice = createSlice({
     },
     setScheduleError: (state, action: PayloadAction<string | undefined>) => {
       state.error = action.payload;
-      Sentry.captureException(state.error);
+
       state.message = undefined;
     }
   },

@@ -1,5 +1,5 @@
-import { EAutoBackup } from '@dhruv-techapps/shared-google-drive';
-import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth';
+import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
+import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth/service';
 import { useEffect } from 'react';
 import { Accordion, Button, Card, ListGroup, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';

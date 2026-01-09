@@ -1,5 +1,4 @@
 const { composePlugins, withNx } = require('@nx/webpack');
-const { sentryWebpackPlugin } = require('@sentry/webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
@@ -76,29 +75,13 @@ module.exports = composePlugins(
         path: `${options.root}/.env`,
         systemvars: true
       }),
-      new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
+      new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8')),
     );
-    if (VITE_PUBLIC_VARIANT === 'PROD') {
-      config.plugins.push(
-        sentryWebpackPlugin({
-          org: 'dhruv-techapps',
-          project: 'acf-extension',
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-          release: {
-            name: process.env.VITE_PUBLIC_RELEASE_VERSION?.replace('v', '')
-          },
-          bundleSizeOptimizations: {
-            excludeDebugStatements: true,
-            // Only relevant if you added `browserTracingIntegration`
-            excludePerformanceMonitoring: true,
-            // Only relevant if you added `replayIntegration`
-            excludeReplayIframe: true,
-            excludeReplayShadowDom: true,
-            excludeReplayWorker: true
-          }
-        })
-      );
-    }
+    config.optimization = {
+      usedExports: true,
+      minimize: false,
+      concatenateModules: true
+    };
     return config;
   }
 );

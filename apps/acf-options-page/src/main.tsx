@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './app/app';
 import { store } from './store/store';
 import './util/i18n';
-import './util/instrument';
 
 window.EXTENSION_ID = import.meta.env[`VITE_PUBLIC_CHROME_EXTENSION_ID`];
 

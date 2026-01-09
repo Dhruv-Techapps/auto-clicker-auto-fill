@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import * as Sentry from '@sentry/react';
+
 import { RootState } from './store';
 
 const getInitialState = () => {
   const theme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-bs-theme', theme);
-  Sentry.setTag('theme', theme);
   return theme;
 };
 
@@ -17,7 +16,6 @@ const slice = createSlice({
       const theme = state === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-bs-theme', theme);
       localStorage.setItem('theme', theme);
-      Sentry.setTag('theme', theme);
       return theme;
     }
   }

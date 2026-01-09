@@ -68,7 +68,6 @@ jobs:
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
           VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
-          VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN: ${{vars.VITE_PUBLIC_OPTIONS_PAGE_SENTRY_DSN}}
       - name: Build Extension
         run: |
           npx nx run acf-extension:build --prod --verbose --skip-nx-cache
@@ -81,14 +80,12 @@ jobs:
           VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
           VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL}}
           VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
-          VITE_PUBLIC_EXTENSION_SENTRY_DSN: ${{vars.VITE_PUBLIC_EXTENSION_SENTRY_DSN}}
           DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
           OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
           EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
           VITE_PUBLIC_URL: ${{vars.VITE_PUBLIC_URL}}
           API_SECRET: ${{vars.API_SECRET}}
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
-          SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
       - name: Determine Firebase Target
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
