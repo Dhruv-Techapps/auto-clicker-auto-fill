@@ -79,7 +79,7 @@ module.exports = composePlugins(
     );
     config.optimization = {
       usedExports: true,
-      minimize: false,
+      minimize: true,
       concatenateModules: true
     };
     return config;
