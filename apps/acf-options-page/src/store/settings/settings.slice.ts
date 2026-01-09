@@ -80,7 +80,6 @@ const slice = createSlice({
     });
     builder.addCase(discordGetAPI.rejected, (state, action) => {
       state.error = action.error.message;
-
       state.loading = false;
     });
     builder.addCase(discordLoginAPI.fulfilled, (state, action) => {

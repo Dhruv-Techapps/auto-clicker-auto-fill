@@ -75,7 +75,7 @@ module.exports = composePlugins(
         path: `${options.root}/.env`,
         systemvars: true
       }),
-      new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8')),
+      new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
     );
     config.optimization = {
       usedExports: true,
