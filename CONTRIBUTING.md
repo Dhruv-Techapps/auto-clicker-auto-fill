@@ -11,7 +11,7 @@ Welcome, and thanks for your interest in improving Auto Clicker AutoFill! This g
    ```
 3. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 4. Make changes with tests + docs.
 5. Run quality gates:

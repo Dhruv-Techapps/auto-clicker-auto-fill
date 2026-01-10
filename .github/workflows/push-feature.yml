@@ -25,14 +25,28 @@ jobs:
           node-version: '${{ env.NODE }}'
           registry-url: https://npm.pkg.github.com
           scope: ${{github.repository_owner}}
-          cache: 'npm'
+      - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
+        with:
+          version: 9
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
-      - run: npm ci
-      - run: npx nx report
-      - run: npx nx format:check --verbose --exclude=acf-configs
-      - run: npx nx affected --target=lint --parallel=3 --verbose --exclude=acf-configs
-      - run: npx nx affected --target=test --parallel=3 --verbose --coverage --exclude=acf-configs
-      - run: npx nx affected --target=typecheck --parallel=3 --verbose --exclude=acf-configs
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec nx report
+      - run: pnpm exec nx format:check --verbose --exclude=acf-configs
+      - run: pnpm exec nx affected --target=lint --parallel=3 --verbose --exclude=acf-configs
+      - run: pnpm exec nx affected --target=test --parallel=3 --verbose --coverage --exclude=acf-configs
+      - run: pnpm exec nx affected --target=typecheck --parallel=3 --verbose --exclude=acf-configs
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 # v1.3.0
         if: ${{  github.actor != 'dependabot[bot]' }}

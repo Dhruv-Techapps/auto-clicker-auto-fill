@@ -82,18 +82,18 @@ Before getting started, create a new `.env` file from the provided `.env.example
 ### Prerequisites
 
 - Node.js (LTS recommended)
-- npm
+- pnpm
 - [Nx CLI](https://nx.dev/)
 
 ### Setup
 
 1. **Install dependencies:**
    ```bash
-   npm install
+   pnpm install
    ```
 2. **Install Nx globally (if not already):**
    ```bash
-   npm install -g nx
+   pnpm install -g nx
    ```
 3. **Create .env files:** Copy `.env.example` to `.env` in both `apps/acf-extension/` and `apps/acf-options-page/`.
 

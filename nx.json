@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
@@ -164,7 +167,7 @@
       }
     },
     "version": {
-      "preVersionCommand": "npx nx run-many --targets=lint,test,build"
+      "preVersionCommand": "pnpm nx run-many --targets=lint,test,build"
     }
   },
   "nxCloudId": "681267b172b61fd02e1e2666"
