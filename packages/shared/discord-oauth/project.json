@@ -10,7 +10,6 @@
         "outputPath": "packages/shared/discord-oauth/dist",
         "main": "packages/shared/discord-oauth/src/index.ts",
         "tsConfig": "packages/shared/discord-oauth/tsconfig.lib.json",
-        "skipTypeCheck": true,
         "stripLeadingPaths": true
       }
     }

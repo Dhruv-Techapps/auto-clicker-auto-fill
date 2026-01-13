@@ -4,7 +4,7 @@ export interface ISheets {
   [index: string]: {
     startRange: string;
     endRange: string;
-    values: Array<any>;
+    values: Array<Array<string>>;
   };
 }
 

@@ -10,7 +10,6 @@
         "outputPath": "packages/core/open-telemetry/dist",
         "main": "packages/core/open-telemetry/src/index.ts",
         "tsConfig": "packages/core/open-telemetry/tsconfig.lib.json",
-        "skipTypeCheck": true,
         "stripLeadingPaths": true
       }
     }
