@@ -56,7 +56,7 @@ const BatchProcessor = (() => {
         }
         batchCount++;
       } finally {
-        console.groupEnd();
+        OpenTelemetryService.endSpan(key);
         window.ext.__batchHeaders = undefined;
         console.groupEnd();
       }
