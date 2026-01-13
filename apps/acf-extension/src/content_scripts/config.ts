@@ -2,7 +2,8 @@ import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { MainWorldService } from '@dhruv-techapps/acf-main-world/service';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { Session } from '@dhruv-techapps/acf-util';
-import { ConfigError } from '@dhruv-techapps/core-common';
+import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
+import { handleError, LoggerService, OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { NotificationsService, SessionStorageService } from '@dhruv-techapps/core-service';
 import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging/service';
 import { GoogleAnalyticsService, TEventSource } from '@dhruv-techapps/shared-google-analytics/service';
@@ -143,13 +144,13 @@ const ConfigProcessor = (() => {
   };
 
   const schedule = async (startTime: string) => {
-    console.debug(I18N_COMMON.SCHEDULE, { startTime: startTime });
+    LoggerService.debug(I18N_COMMON.SCHEDULE, { startTime: startTime });
     const rDate = new Date();
     rDate.setHours(Number(startTime.split(':')[0]));
     rDate.setMinutes(Number(startTime.split(':')[1]));
     rDate.setSeconds(Number(startTime.split(':')[2]));
     rDate.setMilliseconds(Number(startTime.split(':')[3]));
-    console.debug(I18N_COMMON.SCHEDULE, { date: rDate });
+    LoggerService.debug(I18N_COMMON.SCHEDULE, { startTime: rDate.toISOString() });
     await new Promise((resolve) => {
       setTimeout(resolve, rDate.getTime() - new Date().getTime());
     });
@@ -174,9 +175,19 @@ const ConfigProcessor = (() => {
       Hotkey.setup(start.bind(this, c), c.hotkey);
     });
     if (config) {
-      statusBar.enable(config.actions.length, config.batch?.repeat);
-      await checkStartTime(config);
-      await start(config);
+      const key = generateUUID();
+      try {
+        window.ext.__configHeaders = await OpenTelemetryService.startActiveSpan(key, 'Configuration', { attributes: { loadType: config.loadType, url: config.url } });
+        statusBar.enable(config.actions.length, config.batch?.repeat);
+        await checkStartTime(config);
+        await start(config);
+      } catch (error) {
+        handleError(key, error, 'Error in checkStartType');
+        throw error;
+      } finally {
+        OpenTelemetryService.endSpan(key);
+        window.ext.__configHeaders = undefined;
+      }
     }
   };
 

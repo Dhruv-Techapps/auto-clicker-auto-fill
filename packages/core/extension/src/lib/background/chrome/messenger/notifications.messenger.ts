@@ -1,19 +1,4 @@
-interface NotificationsMessengerProps {
-  notificationId: string;
-}
-
-type NotificationsMessengerCreateProps = NotificationsMessengerProps & {
-  options: chrome.notifications.NotificationCreateOptions;
-};
-type NotificationsMessengerUpdateProps = NotificationsMessengerProps & {
-  options: chrome.notifications.NotificationOptions;
-};
-
-export interface NotificationsRequest {
-  messenger: 'notifications';
-  methodName: 'create' | 'update' | 'clear';
-  message: NotificationsMessengerProps | NotificationsMessengerCreateProps | NotificationsMessengerUpdateProps;
-}
+import type { NotificationsMessengerCreateProps, NotificationsMessengerProps, NotificationsMessengerUpdateProps } from '@dhruv-techapps/core-types';
 
 export class NotificationsMessenger {
   create({ notificationId, options }: NotificationsMessengerCreateProps) {

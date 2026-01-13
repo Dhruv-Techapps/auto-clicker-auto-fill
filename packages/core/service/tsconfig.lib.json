@@ -13,10 +13,10 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../common/tsconfig.lib.json"
+      "path": "../types/tsconfig.lib.json"
     },
     {
-      "path": "../extension/tsconfig.lib.json"
+      "path": "../common/tsconfig.lib.json"
     }
   ],
   "exclude": [

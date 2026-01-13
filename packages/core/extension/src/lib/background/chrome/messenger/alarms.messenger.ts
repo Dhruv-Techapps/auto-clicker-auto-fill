@@ -1,13 +1,4 @@
-interface IAlarmsCreateReq {
-  name: string;
-  alarmInfo: chrome.alarms.AlarmCreateInfo;
-}
-
-export interface IAlarmsRequest {
-  messenger: 'alarms';
-  methodName: 'create' | 'clear' | 'clearAll' | 'get' | 'getAll';
-  message?: string | IAlarmsCreateReq;
-}
+import { IAlarmsCreateReq } from '@dhruv-techapps/core-types';
 
 export class AlarmsMessenger {
   create({ name, alarmInfo }: IAlarmsCreateReq) {

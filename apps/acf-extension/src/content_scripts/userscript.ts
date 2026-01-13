@@ -1,6 +1,6 @@
 import { EActionStatus, IUserScript } from '@dhruv-techapps/acf-common';
-import type { IUserScriptsExecuteResponse } from '@dhruv-techapps/core-extension';
 import { UserScriptsService } from '@dhruv-techapps/core-service';
+import type { IUserScriptsExecuteResponse } from '@dhruv-techapps/core-types';
 import { I18N_COMMON } from './i18n';
 
 const USER_SCRIPTS_I18N = {

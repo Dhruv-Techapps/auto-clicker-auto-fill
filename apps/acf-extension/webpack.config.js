@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const { BannerPlugin } = require('webpack');
 const fs = require('fs');
-
+//const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RELEASE_VERSION }) {
   // copy-webpack-plugin passes a buffer
   const manifest = JSON.parse(buffer.toString());
@@ -76,11 +76,17 @@ module.exports = composePlugins(
         systemvars: true
       }),
       new BannerPlugin(fs.readFileSync(`${options.root}/LICENSE`, 'utf8'))
+      //new BundleAnalyzerPlugin()
     );
     config.optimization = {
-      usedExports: true,
-      minimize: true,
-      concatenateModules: true
+      ...config.optimization,
+      ...(VITE_PUBLIC_VARIANT === 'LOCAL'
+        ? {}
+        : {
+            usedExports: true,
+            minimize: true,
+            concatenateModules: true
+          })
     };
     return config;
   }

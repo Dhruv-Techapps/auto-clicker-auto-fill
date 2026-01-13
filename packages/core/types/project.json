@@ -1,0 +1,20 @@
+{
+  "name": "core-types",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/core/types/src",
+  "projectType": "library",
+  "tags": ["scope:core"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/core/types/dist",
+        "main": "packages/core/types/src/index.ts",
+        "tsConfig": "packages/core/types/tsconfig.lib.json",
+        "skipTypeCheck": true,
+        "stripLeadingPaths": true
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@dhruv-techapps/core-open-telemetry",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@dhruv-techapps/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./background": {
+      "types": "./dist/open-telemetry-background.d.ts",
+      "import": "./dist/open-telemetry-background.js",
+      "default": "./dist/open-telemetry-background.js"
+    },
+    "./content-script": {
+      "types": "./dist/open-telemetry-content-script.d.ts",
+      "import": "./dist/open-telemetry-content-script.js",
+      "default": "./dist/open-telemetry-content-script.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "dependencies": {
+    "@swc/helpers": "~0.5.11",
+    "@opentelemetry/api": "^1.9.0",
+    "@dhruv-techapps/core-store": "0.0.1",
+    "@opentelemetry/api-logs": "0.208.0",
+    "@opentelemetry/resources": "2.2.0",
+    "@opentelemetry/semantic-conventions": "1.38.0",
+    "@opentelemetry/exporter-logs-otlp-http": "^0.209.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.209.0",
+    "@opentelemetry/sdk-logs": "0.209.0",
+    "@opentelemetry/context-zone": "2.3.0",
+    "@opentelemetry/sdk-trace-base": "2.3.0",
+    "@opentelemetry/sdk-trace-web": "2.3.0",
+    "@dhruv-techapps/core-common": "0.0.1",
+    "@dhruv-techapps/core-service": "0.0.1"
+  }
+}

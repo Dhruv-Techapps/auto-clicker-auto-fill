@@ -1,5 +1,6 @@
 import { EActionConditionOperator, EActionRunning, ERetryOptions, IAction, IActionCondition, IActionStatement, IUserScript, TGoto } from '@dhruv-techapps/acf-common';
-import { ConfigError } from '@dhruv-techapps/core-common';
+import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
+import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
 
 const ACTION_CONDITION_I18N = {
@@ -48,7 +49,16 @@ const Statement = (() => {
     if (statement) {
       const { conditions, then, goto } = statement;
       if (conditions && then) {
-        checkThen(conditionResult(conditions, actions), then, goto);
+        const key = generateUUID();
+        try {
+          OpenTelemetryService.startSpan(key, `Statement #${window.ext.__currentAction}`, {
+            headers: window.ext.__actionHeaders,
+            attributes: { then, goto: goto || 'none', conditions: conditions.length }
+          });
+          checkThen(conditionResult(conditions, actions), then, goto);
+        } finally {
+          OpenTelemetryService.endSpan(key);
+        }
       }
     }
   };

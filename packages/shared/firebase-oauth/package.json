@@ -31,6 +31,7 @@
     "firebase": "^12.1.0",
     "@firebase/app": "0.14.1",
     "@firebase/util": "1.13.0",
-    "@dhruv-techapps/core-store": "0.0.1"
+    "@dhruv-techapps/core-store": "0.0.1",
+    "@dhruv-techapps/core-open-telemetry": "0.0.1"
   }
 }

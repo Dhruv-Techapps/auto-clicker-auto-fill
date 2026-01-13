@@ -15,6 +15,9 @@
       "path": "../../packages/acf/events/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/core/types/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/acf/util/tsconfig.lib.json"
     },
     {
@@ -51,9 +54,6 @@
       "path": "../../packages/shared/discord-messaging/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/core/store/tsconfig.lib.json"
-    },
-    {
       "path": "../../packages/core/extension/tsconfig.lib.json"
     },
     {
@@ -61,6 +61,12 @@
     },
     {
       "path": "../../packages/shared/google-analytics/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/store/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/core/open-telemetry/tsconfig.lib.json"
     },
     {
       "path": "../../packages/core/common/tsconfig.lib.json"

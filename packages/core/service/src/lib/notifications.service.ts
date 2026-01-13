@@ -1,5 +1,5 @@
 import { generateUUID } from '@dhruv-techapps/core-common';
-import { NotificationsRequest } from '@dhruv-techapps/core-extension';
+import type { NotificationsRequest } from '@dhruv-techapps/core-types';
 import { CoreService } from './core-service';
 
 export class NotificationsService extends CoreService {

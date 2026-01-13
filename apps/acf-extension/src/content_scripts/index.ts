@@ -1,6 +1,6 @@
 import { ELoadTypes, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, GetConfigResult, SettingsStorage } from '@dhruv-techapps/acf-store';
-import { IExtension, Logger, LoggerColor } from '@dhruv-techapps/core-common';
+import { IExtension } from '@dhruv-techapps/core-common';
 import ConfigProcessor from './config';
 import { statusBar } from './status-bar';
 
@@ -25,9 +25,9 @@ async function loadConfig(loadType: ELoadTypes) {
       if (autoConfig) {
         if (autoConfig.loadType === loadType || (autoConfig.triggerUrlChange && loadType === ELoadTypes.URL_CHANGE)) {
           const { host } = document.location;
-          Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', host, loadType);
+          console.debug(host, loadType);
           await ConfigProcessor.checkStartType(manualConfigs, autoConfig);
-          Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', host, 'END');
+          console.debug(host, 'END');
         }
       } else if (manualConfigs.length > 0 && loadType === ELoadTypes.DOCUMENT) {
         await ConfigProcessor.checkStartType(manualConfigs);
@@ -67,9 +67,9 @@ chrome.runtime.onMessage.addListener(async (message) => {
   if (action === RUNTIME_MESSAGE_ACF.RUN_CONFIG) {
     try {
       new ConfigStorage().getConfigById(configId).then(async (config) => {
-        Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', config?.url, 'START');
+        console.debug(config?.url, 'START');
         await ConfigProcessor.checkStartType([], config);
-        Logger.color(chrome.runtime.getManifest().name, LoggerColor.PRIMARY, 'debug', config?.url, 'END');
+        console.debug(config?.url, 'END');
       });
     } catch (e) {
       if (e instanceof Error) {

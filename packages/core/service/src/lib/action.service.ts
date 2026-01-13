@@ -1,32 +1,32 @@
-import type { ActionRequest } from '@dhruv-techapps/core-extension';
+import type { IActionRequest } from '@dhruv-techapps/core-types';
 import { CoreService } from './core-service';
 
 export class ActionService extends CoreService {
   static async setBadgeBackgroundColor(details: chrome.action.BadgeColorDetails) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setBadgeBackgroundColor', message: details });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'setBadgeBackgroundColor', message: details });
   }
 
   static async setBadgeText(details: chrome.action.BadgeTextDetails) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setBadgeText', message: details });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'setBadgeText', message: details });
   }
 
   static async setIcon(details: chrome.action.TabIconDetails) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setIcon', message: details });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'setIcon', message: details });
   }
 
   static async setTitle(details: chrome.action.TitleDetails) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setTitle', message: details });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'setTitle', message: details });
   }
 
   static async setBadgeTextColor(details: chrome.action.BadgeColorDetails) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'setBadgeTextColor', message: details });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'setBadgeTextColor', message: details });
   }
 
   static async enable(tabId?: number) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'enable', message: { tabId } });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'enable', message: { tabId } });
   }
 
   static async disable(tabId?: number) {
-    return await this.message<ActionRequest>({ messenger: 'action', methodName: 'disable', message: { tabId } });
+    return await this.message<IActionRequest>({ messenger: 'action', methodName: 'disable', message: { tabId } });
   }
 }

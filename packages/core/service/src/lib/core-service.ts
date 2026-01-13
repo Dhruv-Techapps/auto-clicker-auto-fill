@@ -4,9 +4,16 @@ interface CoreServiceRequest {
   messenger: string;
   methodName: string;
   message?: unknown;
+  otHeaders?: Record<string, string>;
 }
 
 export class CoreService {
+  static trace = false;
+
+  static getOtHeaders = (): Record<string, string> | undefined => {
+    return window.ext.__actionHeaders || window.ext.__batchHeaders || window.ext.__configHeaders;
+  };
+
   static messageChrome<K extends CoreServiceRequest, T = void>(message: K): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       try {
@@ -17,10 +24,14 @@ export class CoreService {
 
         const id = chrome.runtime.id || window.EXTENSION_ID;
         if (!id || typeof id !== 'string') {
-          reject(new Error('extensionId is not undefined neither string'));
+          reject(new Error('extensionId is not defined or not a string'));
           return;
         }
-        // This line is kept for debugging purpose console.debug(`${message.messenger}.${message.methodName}`, message.message);
+        if (this.trace) {
+          message.otHeaders = this.getOtHeaders();
+        }
+        // This line is kept for debugging purpose
+        // console.debug(`${message.messenger}.${message.methodName}`, message.message);
         chrome.runtime.sendMessage(id, message, (response) => {
           if (chrome.runtime.lastError || response?.error) {
             const error: string = chrome.runtime.lastError?.message ?? response?.error;

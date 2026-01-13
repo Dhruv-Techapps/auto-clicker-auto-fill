@@ -1,6 +1,7 @@
 import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
-import { ConfigError, isValidUUID } from '@dhruv-techapps/core-common';
+import { ConfigError, generateUUID, isValidUUID } from '@dhruv-techapps/core-common';
+import { LoggerService, OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { NotificationsService } from '@dhruv-techapps/core-service';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import ActionProcessor from './action';
@@ -42,12 +43,15 @@ const Actions = (() => {
       window.ext.__currentActionName = action.name ?? ACTION_I18N.NO_NAME;
       if (action.disabled) {
         console.debug(`${ACTION_I18N.TITLE} #${i + 1}`, `[${window.ext.__currentActionName}]`, `🚫 ${I18N_COMMON.DISABLED} `);
+        LoggerService.info(`Action #${i + 1} [${window.ext.__currentActionName}] 🚫 (Disabled)`);
         i += 1;
         continue;
       }
       statusBar.actionUpdate(i + 1);
       window.ext.__currentAction = i + 1;
+      window.ext.__actionKey = generateUUID();
       try {
+        window.ext.__actionHeaders = await OpenTelemetryService.startSpan(window.ext.__actionKey, `${ACTION_I18N.TITLE} #${i + 1}`, { headers: window.ext.__batchHeaders });
         await checkStatement(actions, action);
         await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
         await AddonProcessor.check(action.addon, action.settings);
@@ -71,6 +75,9 @@ const Actions = (() => {
         } else {
           throw error;
         }
+      } finally {
+        OpenTelemetryService.endSpan(window.ext.__actionKey);
+        window.ext.__actionHeaders = undefined;
       }
       // Increment
       i += 1;

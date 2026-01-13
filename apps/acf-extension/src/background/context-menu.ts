@@ -1,5 +1,6 @@
 import { LOCAL_STORAGE_KEY, RUNTIME_MESSAGE_ACF } from '@dhruv-techapps/acf-common';
 import { ConfigStorage } from '@dhruv-techapps/acf-store';
+import { Logger } from '@dhruv-techapps/core-open-telemetry/background';
 import { GoogleAnalyticsBackground } from '@dhruv-techapps/shared-google-analytics';
 import { SIDE_PANEL } from '../common/constant';
 const CONTEXT_MENU_ELEMENT_ID = 'element-mode';
@@ -14,8 +15,10 @@ const CONTEXT_MENU_I18N = {
 };
 
 const registerConfigsContextMenus = () => {
+  Logger.info('Registering configs context menus');
   let contextMenuExist = false;
   chrome.tabs.onActivated.addListener(() => {
+    Logger.info('Tab activated - updating configs context menus');
     if (contextMenuExist) {
       contextMenuExist = false;
       chrome.contextMenus.remove('configs-list-separator');
@@ -48,6 +51,7 @@ const registerConfigsContextMenus = () => {
 };
 
 export default function registerContextMenus(optionsPageUrl?: string, googleAnalytics?: GoogleAnalyticsBackground) {
+  Logger.info('Registering context menus');
   chrome.contextMenus.removeAll();
   chrome.contextMenus.create({ id: CONTEXT_MENU_ELEMENT_ID, title: CONTEXT_MENU_I18N.FIELD, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
   chrome.contextMenus.create({ id: SIDE_PANEL, title: CONTEXT_MENU_I18N.SIDE_PANEL, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
@@ -57,6 +61,7 @@ export default function registerContextMenus(optionsPageUrl?: string, googleAnal
   registerConfigsContextMenus();
 
   chrome.contextMenus.onClicked.addListener(async ({ menuItemId }, tab) => {
+    Logger.info(`Context menu clicked: ${menuItemId}`);
     switch (menuItemId) {
       case CONTEXT_MENU_CONFIG_PAGE_ID:
         chrome.tabs.create({ url: optionsPageUrl });

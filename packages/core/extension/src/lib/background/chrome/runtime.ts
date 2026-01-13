@@ -1,3 +1,4 @@
+import { context, handleError, propagation, tracer } from '@dhruv-techapps/core-open-telemetry/background';
 import { ActionMessenger, AlarmsMessenger, ManifestMessenger, NotificationsMessenger, SessionStorageMessenger, StorageMessenger, UserScriptsMessenger } from './messenger';
 
 export interface MessengerConfigObject {
@@ -53,11 +54,28 @@ export class Runtime {
 
   static onMessage(configs: MessengerConfigObject) {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      messageListener(request, sender, configs)
-        .then(sendResponse)
-        .catch((error) => {
-          sendResponse({ error: error.message });
+      const { otHeaders } = request;
+      if (otHeaders) {
+        context.with(propagation.extract(context.active(), otHeaders), () => {
+          tracer.startActiveSpan(`${request.messenger}.${request.methodName}`, {}, (span) => {
+            messageListener(request, sender, configs)
+              .then(sendResponse)
+              .catch((error) => {
+                sendResponse({ error: error.message });
+                handleError(span, error, 'Error in Runtime.onMessage');
+              })
+              .finally(() => {
+                span.end();
+              });
+          });
         });
+      } else {
+        messageListener(request, sender, configs)
+          .then(sendResponse)
+          .catch((error) => {
+            sendResponse({ error: error.message });
+          });
+      }
       return true;
     });
   }
