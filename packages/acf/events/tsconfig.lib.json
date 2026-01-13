@@ -22,9 +22,6 @@
       "path": "../../shared/sandbox/tsconfig.lib.json"
     },
     {
-      "path": "../../shared/google-analytics/tsconfig.lib.json"
-    },
-    {
       "path": "../../core/common/tsconfig.lib.json"
     },
     {

@@ -13,9 +13,6 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../core/open-telemetry/tsconfig.lib.json"
-    },
-    {
       "path": "../../core/service/tsconfig.lib.json"
     },
     {

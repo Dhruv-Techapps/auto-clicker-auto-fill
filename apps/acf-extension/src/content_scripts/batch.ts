@@ -82,8 +82,6 @@ const BatchProcessor = (() => {
           await checkRepeat(actions, batch);
         }
       }
-    } catch (error) {
-      throw error;
     } finally {
       console.groupEnd();
       OpenTelemetryService.endSpan(key);
