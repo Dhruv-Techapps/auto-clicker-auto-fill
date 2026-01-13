@@ -24,69 +24,43 @@ const BatchProcessor = (() => {
     }
   };
 
-  const checkRepeat = async (actions: Array<IAction | IUserScript>, batch: IBatch) => {
-    if (batch.repeat) {
-      if (batch.repeat > 0) {
-        for (let i = 2; i <= batch.repeat + 1; i++) {
-          const key = generateUUID();
-          window.ext.__batchHeaders = await OpenTelemetryService.startSpan(key, `${BATCH_I18N.TITLE} #${i}`, { headers: window.ext.__configHeaders });
-          statusBar.batchUpdate(i);
-          console.groupCollapsed(`${BATCH_I18N.TITLE} #${i} [${I18N_COMMON.REPEAT}]`);
-          if (batch.repeatInterval) {
-            await statusBar.wait(batch.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
-          }
-          await Actions.start(actions, i);
-          const { notifications } = await SettingsStorage.getSettings();
-          if (notifications?.onBatch) {
-            NotificationsService.create({
-              type: 'basic',
-              title: `${BATCH_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
-              message: `#${i} ${BATCH_I18N.TITLE}`,
-              silent: !notifications.sound,
-              iconUrl: Common.getNotificationIcon()
-            });
-          }
-          OpenTelemetryService.endSpan(key);
-          window.ext.__batchHeaders = undefined;
-          console.groupEnd();
-        }
-      } else if (batch.repeat < -1) {
-        let i = 1;
-
-        while (true) {
-          if (batch?.repeatInterval) {
-            statusBar.batchUpdate('∞');
-            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
-          }
-          await Actions.start(actions, i);
-          i += 1;
-        }
-      }
+  const notifyCompletion = async (batchCount: number) => {
+    const { notifications } = await SettingsStorage.getSettings();
+    if (notifications?.onBatch) {
+      NotificationsService.create({
+        type: 'basic',
+        title: `${BATCH_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
+        message: `#${batchCount} ${BATCH_I18N.TITLE}`,
+        silent: !notifications.sound,
+        iconUrl: Common.getNotificationIcon()
+      });
     }
   };
 
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
-    const key = generateUUID();
-    try {
-      console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);
-      window.ext.__batchHeaders = await OpenTelemetryService.startSpan(key, `${BATCH_I18N.TITLE} #1`, { headers: window.ext.__configHeaders });
-      statusBar.batchUpdate(1);
-      await Actions.start(actions, 1);
-      OpenTelemetryService.endSpan(key);
-      window.ext.__batchHeaders = undefined;
-      console.groupEnd();
-      if (batch) {
-        if (batch.refresh) {
-          refresh();
-        } else {
-          await checkRepeat(actions, batch);
+    let batchCount = 1;
+    let batchRepeat = batch?.repeat ?? 0;
+    do {
+      const key = generateUUID();
+      try {
+        console.groupCollapsed(`${BATCH_I18N.TITLE} #${batchCount} ${batchCount === 1 ? `(${I18N_COMMON.DEFAULT})` : `[${I18N_COMMON.REPEAT}]`}`);
+        window.ext.__batchHeaders = await OpenTelemetryService.startSpan(key, `${BATCH_I18N.TITLE} #${batchCount}`, { headers: window.ext.__configHeaders });
+        if (batch?.repeatInterval) {
+          await statusBar.wait(batch.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
         }
+        statusBar.batchUpdate(batchRepeat < 0 ? '∞' : batchCount);
+        await Actions.start(actions, batchCount);
+        await notifyCompletion(batchCount);
+        if (batch?.refresh) {
+          refresh();
+        }
+        batchCount++;
+      } finally {
+        console.groupEnd();
+        window.ext.__batchHeaders = undefined;
+        console.groupEnd();
       }
-    } finally {
-      console.groupEnd();
-      OpenTelemetryService.endSpan(key);
-      window.ext.__batchHeaders = undefined;
-    }
+    } while (batchRepeat < -1 || batchCount < batchRepeat + 1);
   };
 
   return { start };
