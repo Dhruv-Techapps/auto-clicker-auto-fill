@@ -60,7 +60,7 @@ const BatchProcessor = (() => {
         window.ext.__batchHeaders = undefined;
         console.groupEnd();
       }
-    } while (batchRepeat < -1 || batchCount < batchRepeat + 1);
+    } while (batchRepeat < -1 || batchCount <= batchRepeat + 1);
   };
 
   return { start };
