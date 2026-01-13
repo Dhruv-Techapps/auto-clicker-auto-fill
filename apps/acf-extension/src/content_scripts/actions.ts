@@ -35,6 +35,24 @@ const Actions = (() => {
     }
   };
 
+  // Helper function to handle action status results (SKIP or GOTO)
+  // Returns the new index if control flow should change, or null to continue normally
+  const handleStatusResult = (result: TActionResult, actions: Array<IAction | IUserScript>, action: IAction | IUserScript, currentIndex: number): number | null => {
+    if (result.status === EActionStatus.SKIPPED) {
+      console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+      action.status = EActionStatus.SKIPPED;
+      return currentIndex + 1;
+    } else if (result.status === EActionRunning.GOTO) {
+      const index = typeof result.goto === 'number' ? result.goto : actions.findIndex((a) => a.id === result.goto);
+      if (index === -1) {
+        throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
+      }
+      console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
+      return index;
+    }
+    return null;
+  };
+
   const start = async (actions: Array<IAction | IUserScript>, batchRepeat: number) => {
     window.ext.__batchRepeat = batchRepeat;
     let i = 0;
@@ -55,19 +73,9 @@ const Actions = (() => {
         // Check statement and handle status result
         const statementResult = await checkStatement(actions, action);
         if (statementResult) {
-          if (statementResult.status === EActionStatus.SKIPPED) {
-            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
-            action.status = EActionStatus.SKIPPED;
-            i += 1;
-            continue;
-          } else if (statementResult.status === EActionRunning.GOTO) {
-            const index = typeof statementResult.goto === 'number' ? statementResult.goto : actions.findIndex((a) => a.id === statementResult.goto);
-            if (index === -1) {
-              throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
-            }
-            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
-            i = index - 1;
-            i += 1;
+          const newIndex = handleStatusResult(statementResult, actions, action, i);
+          if (newIndex !== null) {
+            i = newIndex;
             continue;
           }
         }
@@ -77,19 +85,9 @@ const Actions = (() => {
         // Check addon and handle status result
         const addonResult = await AddonProcessor.check(action.addon, action.settings);
         if (addonResult) {
-          if (addonResult.status === EActionStatus.SKIPPED) {
-            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
-            action.status = EActionStatus.SKIPPED;
-            i += 1;
-            continue;
-          } else if (addonResult.status === EActionRunning.GOTO) {
-            const index = typeof addonResult.goto === 'number' ? addonResult.goto : actions.findIndex((a) => a.id === addonResult.goto);
-            if (index === -1) {
-              throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
-            }
-            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
-            i = index - 1;
-            i += 1;
+          const newIndex = handleStatusResult(addonResult, actions, action, i);
+          if (newIndex !== null) {
+            i = newIndex;
             continue;
           }
         }
@@ -104,22 +102,10 @@ const Actions = (() => {
 
         // Handle action result
         if (typeof actionResult === 'object') {
-          if (actionResult.status === EActionStatus.SKIPPED) {
-            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
-            action.status = EActionStatus.SKIPPED;
-            i += 1;
+          const newIndex = handleStatusResult(actionResult, actions, action, i);
+          if (newIndex !== null) {
+            i = newIndex;
             continue;
-          } else if (actionResult.status === EActionRunning.GOTO) {
-            const index = typeof actionResult.goto === 'number' ? actionResult.goto : actions.findIndex((a) => a.id === actionResult.goto);
-            if (index === -1) {
-              throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
-            }
-            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
-            i = index - 1;
-            i += 1;
-            continue;
-          } else {
-            action.status = actionResult.status;
           }
         } else {
           action.status = actionResult;
