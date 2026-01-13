@@ -1,4 +1,4 @@
-import { EActionConditionOperator, EActionRunning, ERetryOptions, IAction, IActionCondition, IActionStatement, IUserScript, TGoto } from '@dhruv-techapps/acf-common';
+import { EActionConditionOperator, EActionRunning, EActionStatus, ERetryOptions, IAction, IActionCondition, IActionStatement, IUserScript, TActionResult, TGoto } from '@dhruv-techapps/acf-common';
 import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
@@ -25,11 +25,11 @@ const Statement = (() => {
       }, false);
   };
 
-  const checkThen = (condition: boolean, then: ERetryOptions, goto?: TGoto) => {
+  const checkThen = (condition: boolean, then: ERetryOptions, goto?: TGoto): TActionResult | null => {
     window.ext.__actionError = `↔️ ${ACTION_CONDITION_I18N.TITLE} ${condition ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`;
     if (!condition) {
       if (then === ERetryOptions.GOTO && goto) {
-        throw goto;
+        return { status: EActionRunning.GOTO, goto };
       } else if (then === ERetryOptions.RELOAD) {
         if (document.readyState === 'complete') {
           window.location.reload();
@@ -41,11 +41,12 @@ const Statement = (() => {
       } else if (then === ERetryOptions.STOP) {
         throw new ConfigError(I18N_ERROR.NO_MATCH, ACTION_CONDITION_I18N.TITLE);
       }
-      throw EActionRunning.SKIP;
+      return { status: EActionStatus.SKIPPED };
     }
+    return null;
   };
 
-  const check = (actions: Array<IAction | IUserScript>, statement?: IActionStatement) => {
+  const check = (actions: Array<IAction | IUserScript>, statement?: IActionStatement): TActionResult | null => {
     if (statement) {
       const { conditions, then, goto } = statement;
       if (conditions && then) {
@@ -61,6 +62,7 @@ const Statement = (() => {
         }
       }
     }
+    return null;
   };
 
   return { check };

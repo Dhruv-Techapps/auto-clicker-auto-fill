@@ -16,6 +16,12 @@ export enum EActionRunning {
   PROCEED = 'proceed'
 }
 
+// Action Result Type for control flow
+export type TActionResult =
+  | { status: EActionStatus.DONE }
+  | { status: EActionStatus.SKIPPED }
+  | { status: EActionRunning.GOTO; goto: TGoto };
+
 export enum EActionConditionOperator {
   AND = 'and',
   OR = 'or'

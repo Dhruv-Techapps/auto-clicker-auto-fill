@@ -1,6 +1,6 @@
-import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
+import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript, TActionResult } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
-import { ConfigError, generateUUID, isValidUUID } from '@dhruv-techapps/core-common';
+import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
 import { LoggerService, OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { NotificationsService } from '@dhruv-techapps/core-service';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
@@ -18,8 +18,8 @@ const ACTION_I18N = {
 };
 
 const Actions = (() => {
-  const checkStatement = async (actions: Array<IAction | IUserScript>, action: IAction | IUserScript) => {
-    Statement.check(actions, action.statement);
+  const checkStatement = async (actions: Array<IAction | IUserScript>, action: IAction | IUserScript): Promise<TActionResult | null> => {
+    return Statement.check(actions, action.statement);
   };
 
   const notify = async (action: IAction | IUserScript) => {
@@ -52,29 +52,83 @@ const Actions = (() => {
       window.ext.__actionKey = generateUUID();
       try {
         window.ext.__actionHeaders = await OpenTelemetryService.startSpan(window.ext.__actionKey, `${ACTION_I18N.TITLE} #${i + 1}`, { headers: window.ext.__batchHeaders });
-        await checkStatement(actions, action);
-        await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
-        await AddonProcessor.check(action.addon, action.settings);
-        if (action.type === 'userscript') {
-          action.status = await UserScriptProcessor.start(action);
-        } else {
-          action.status = await ActionProcessor.start(action);
+        // Check statement and handle status result
+        const statementResult = await checkStatement(actions, action);
+        if (statementResult) {
+          if (statementResult.status === EActionStatus.SKIPPED) {
+            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+            action.status = EActionStatus.SKIPPED;
+            i += 1;
+            continue;
+          } else if (statementResult.status === EActionRunning.GOTO) {
+            const index = typeof statementResult.goto === 'number' ? statementResult.goto : actions.findIndex((a) => a.id === statementResult.goto);
+            if (index === -1) {
+              throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
+            }
+            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
+            i = index - 1;
+            i += 1;
+            continue;
+          }
         }
+
+        await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
+
+        // Check addon and handle status result
+        const addonResult = await AddonProcessor.check(action.addon, action.settings);
+        if (addonResult) {
+          if (addonResult.status === EActionStatus.SKIPPED) {
+            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+            action.status = EActionStatus.SKIPPED;
+            i += 1;
+            continue;
+          } else if (addonResult.status === EActionRunning.GOTO) {
+            const index = typeof addonResult.goto === 'number' ? addonResult.goto : actions.findIndex((a) => a.id === addonResult.goto);
+            if (index === -1) {
+              throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
+            }
+            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
+            i = index - 1;
+            i += 1;
+            continue;
+          }
+        }
+
+        // Execute action and handle status result
+        let actionResult: EActionStatus | TActionResult;
+        if (action.type === 'userscript') {
+          actionResult = await UserScriptProcessor.start(action);
+        } else {
+          actionResult = await ActionProcessor.start(action);
+        }
+
+        // Handle action result
+        if (typeof actionResult === 'object') {
+          if (actionResult.status === EActionStatus.SKIPPED) {
+            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
+            action.status = EActionStatus.SKIPPED;
+            i += 1;
+            continue;
+          } else if (actionResult.status === EActionRunning.GOTO) {
+            const index = typeof actionResult.goto === 'number' ? actionResult.goto : actions.findIndex((a) => a.id === actionResult.goto);
+            if (index === -1) {
+              throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
+            }
+            console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
+            i = index - 1;
+            i += 1;
+            continue;
+          } else {
+            action.status = actionResult.status;
+          }
+        } else {
+          action.status = actionResult;
+        }
+
         notify(action);
       } catch (error) {
-        if (error === EActionStatus.SKIPPED || error === EActionRunning.SKIP) {
-          console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
-          action.status = EActionStatus.SKIPPED;
-        } else if (typeof error === 'number' || (typeof error === 'string' && isValidUUID(error))) {
-          const index = typeof error === 'number' ? error : actions.findIndex((a) => a.id === error);
-          if (index === -1) {
-            throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
-          }
-          console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
-          i = index - 1;
-        } else {
-          throw error;
-        }
+        OpenTelemetryService.recordException(window.ext.__actionKey, error as Error);
+        throw error;
       } finally {
         OpenTelemetryService.endSpan(window.ext.__actionKey);
         window.ext.__actionHeaders = undefined;
