@@ -36,19 +36,20 @@ const Actions = (() => {
   };
 
   // Helper function to handle action status results (SKIP or GOTO)
-  // Returns the new index if control flow should change, or null to continue normally
+  // Returns the new index to jump to, or null to continue normally
+  // Note: Returned index is used directly (with continue), not decremented
   const handleStatusResult = (result: TActionResult, actions: Array<IAction | IUserScript>, action: IAction | IUserScript, currentIndex: number): number | null => {
     if (result.status === EActionStatus.SKIPPED) {
       console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
       action.status = EActionStatus.SKIPPED;
-      return currentIndex + 1;
+      return currentIndex + 1; // Skip to next action
     } else if (result.status === EActionRunning.GOTO) {
       const index = typeof result.goto === 'number' ? result.goto : actions.findIndex((a) => a.id === result.goto);
       if (index === -1) {
         throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
       }
       console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `${I18N_COMMON.GOTO} Action ➡️ ${index + 1}`);
-      return index;
+      return index; // Jump to target action
     }
     return null;
   };
@@ -93,22 +94,20 @@ const Actions = (() => {
         }
 
         // Execute action and handle status result
-        let actionResult: EActionStatus | TActionResult;
         if (action.type === 'userscript') {
-          actionResult = await UserScriptProcessor.start(action);
+          action.status = await UserScriptProcessor.start(action);
         } else {
-          actionResult = await ActionProcessor.start(action);
-        }
-
-        // Handle action result
-        if (typeof actionResult === 'object') {
-          const newIndex = handleStatusResult(actionResult, actions, action, i);
-          if (newIndex !== null) {
-            i = newIndex;
-            continue;
+          const actionResult = await ActionProcessor.start(action);
+          // ActionProcessor can return status object or DONE enum
+          if (typeof actionResult === 'object') {
+            const newIndex = handleStatusResult(actionResult, actions, action, i);
+            if (newIndex !== null) {
+              i = newIndex;
+              continue;
+            }
+          } else {
+            action.status = actionResult;
           }
-        } else {
-          action.status = actionResult;
         }
 
         notify(action);
