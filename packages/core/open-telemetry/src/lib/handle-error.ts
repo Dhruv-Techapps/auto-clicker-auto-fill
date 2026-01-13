@@ -7,11 +7,10 @@ export const handleError = (span: Span, event: unknown, message: string, logger:
   const errorAttribute = {
     [ATTRIBUTE_ERROR_TYPE]: error.name,
     [ATTRIBUTE_ERROR_MESSAGE]: error.message,
-    [ATTRIBUTE_ERROR_STACK]: error.stack
+    [ATTRIBUTE_ERROR_STACK]: error.stack || 'N/A'
   };
   span.recordException(error);
   span.setStatus({ code: SpanStatusCode.ERROR, message });
-  span.addEvent('error', errorAttribute);
 
   attributes = {
     ...errorAttribute,

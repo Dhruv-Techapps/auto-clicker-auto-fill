@@ -64,13 +64,17 @@ const sharedHandleError = (key: TRandomUUID, event: unknown, message: string, lo
   };
 
   OpenTelemetryService.recordException(key, exception);
-  OpenTelemetryService.addEvent(key, 'error', errorAttribute);
 
   attributes = {
     ...errorAttribute,
     ...attributes
   };
-  LoggerService[logger](message, error, attributes);
+
+  if (logger === 'error') {
+    LoggerService.error(message, error, attributes);
+  } else {
+    LoggerService.fatal(message, error, attributes);
+  }
 };
 
 export const handleError = (key: TRandomUUID, event: unknown, message: string, attributes?: AnyValueMap) => sharedHandleError(key, event, message, 'error', attributes);

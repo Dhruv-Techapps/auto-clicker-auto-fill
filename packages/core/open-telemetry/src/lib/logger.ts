@@ -27,7 +27,7 @@ export class CoreLogger {
     });
   }
 
-  static info(body: AnyValue, attributes?: AnyValueMap | string) {
+  static info(body: AnyValue, attributes?: AnyValueMap) {
     if (typeof attributes === 'string') {
       attributes = {
         message: attributes
@@ -55,7 +55,7 @@ export class CoreLogger {
       attributes = {
         ...attributes,
         [ATTRIBUTE_ERROR_MESSAGE]: error.message,
-        [ATTRIBUTE_ERROR_STACK]: error.stack
+        [ATTRIBUTE_ERROR_STACK]: error.stack || 'N/A'
       };
     } else if (typeof error === 'string') {
       attributes = {
@@ -82,7 +82,7 @@ export class CoreLogger {
       attributes = {
         ...attributes,
         [ATTRIBUTE_ERROR_MESSAGE]: error.message,
-        [ATTRIBUTE_ERROR_STACK]: error.stack
+        [ATTRIBUTE_ERROR_STACK]: error.stack || 'N/A'
       };
     } else if (typeof error === 'string') {
       attributes = {

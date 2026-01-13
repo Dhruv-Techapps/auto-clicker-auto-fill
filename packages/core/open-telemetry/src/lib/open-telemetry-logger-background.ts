@@ -1,10 +1,10 @@
 import { LogRecord, logs } from '@opentelemetry/api-logs';
-import { LoggerProvider, SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs';
-import { otlpLogExporter } from './exporter/otlp-exporter';
+import { BatchLogRecordProcessor, LoggerProvider } from '@opentelemetry/sdk-logs';
+import { bufferConfig, otlpLogExporter } from './exporter/otlp-exporter';
 import { CoreLogger } from './logger';
 import { resource } from './resource/open-telemetry-resource';
 
-const processor = new SimpleLogRecordProcessor(otlpLogExporter);
+const processor = new BatchLogRecordProcessor(otlpLogExporter, bufferConfig);
 const loggerProvider = new LoggerProvider({
   processors: [processor],
   resource

@@ -1,17 +1,20 @@
 import { context, propagation, Span, trace } from '@opentelemetry/api';
 import { AnyValueMap } from '@opentelemetry/api-logs';
 import { ZoneContextManager } from '@opentelemetry/context-zone'; // or StackContextManager for SW
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
+import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
-import { otlpTraceExporter } from './exporter/otlp-exporter';
+import { bufferConfig, otlpTraceExporter } from './exporter/otlp-exporter';
 import { handleError as sharedHandleError } from './handle-error';
 import { Logger } from './open-telemetry-logger-background';
 import { resource } from './resource/open-telemetry-resource';
+import { sampler } from './sampler/open-telemetry-sampler';
 
-const spanProcessor = new SimpleSpanProcessor(otlpTraceExporter);
+const spanProcessor = new BatchSpanProcessor(otlpTraceExporter, bufferConfig);
+
 const provider = new WebTracerProvider({
   spanProcessors: [spanProcessor],
-  resource
+  resource,
+  ...(process.env.VITE_PUBLIC_VARIANT === 'LOCAL' ? {} : { sampler })
 });
 provider.register({
   contextManager: new ZoneContextManager()

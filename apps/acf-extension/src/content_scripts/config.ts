@@ -136,7 +136,6 @@ const ConfigProcessor = (() => {
         } else {
           console.error('%s: %s', error.title, error.message);
         }
-        //scope.captureMessage(e.message, 'warning', { data: { title: e.title } });
       } else {
         throw e;
       }
@@ -182,7 +181,7 @@ const ConfigProcessor = (() => {
         await checkStartTime(config);
         await start(config);
       } catch (error) {
-        handleError(key, error, 'Error in checkStartType');
+        handleError(key, error, 'Error in Configuration');
         throw error;
       } finally {
         OpenTelemetryService.endSpan(key);
