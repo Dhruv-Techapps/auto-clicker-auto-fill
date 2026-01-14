@@ -1,4 +1,4 @@
-import { EActionStatus, EAddonConditions, ERecheckOptions, IActionSettings, IAddon } from '@dhruv-techapps/acf-common';
+import { EActionRunning, EActionStatus, EAddonConditions, ERecheckOptions, IActionSettings, IAddon, TActionResult } from '@dhruv-techapps/acf-common';
 import { ConfigError, generateUUID, SystemError } from '@dhruv-techapps/core-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
@@ -18,7 +18,7 @@ interface IAddonType extends IAddon {
 }
 
 const AddonProcessor = (() => {
-  const recheckFunc = async ({ nodeValue, elementFinder, value, condition, recheck, recheckOption, ...props }: IAddonType, settings?: IActionSettings): Promise<void> => {
+  const recheckFunc = async ({ nodeValue, elementFinder, value, condition, recheck, recheckOption, ...props }: IAddonType, settings?: IActionSettings): Promise<TActionResult | void> => {
     if (recheck !== undefined) {
       if (recheck > 0 || recheck < -1) {
         recheck -= 1;
@@ -39,9 +39,9 @@ const AddonProcessor = (() => {
     } else if (recheckOption === ERecheckOptions.STOP) {
       throw new ConfigError(`'${nodeValue}' ${condition} '${value}'`, I18N_ERROR.NO_MATCH);
     } else if (recheckOption === ERecheckOptions.GOTO && props.recheckGoto !== undefined) {
-      throw props.recheckGoto;
+      return { status: EActionRunning.GOTO, goto: props.recheckGoto };
     }
-    throw EActionStatus.SKIPPED;
+    return { status: EActionStatus.SKIPPED };
   };
 
   const extractValue = (element: HTMLElement, value: string, valueExtractor?: string, valueExtractorFlags?: string): string => {
@@ -114,7 +114,7 @@ const AddonProcessor = (() => {
     }
   };
 
-  const start = async ({ elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }: IAddon, settings?: IActionSettings): Promise<void> => {
+  const start = async ({ elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }: IAddon, settings?: IActionSettings): Promise<TActionResult | void> => {
     let nodeValue;
     if (/^Func::/gi.test(elementFinder)) {
       nodeValue = await Sandbox.sandboxEval(elementFinder.replace(/^Func::/gi, ''));
@@ -128,7 +128,7 @@ const AddonProcessor = (() => {
     if (nodeValue !== undefined) {
       const result: boolean = compare(nodeValue, condition, value);
       if (!result) {
-        await recheckFunc({ nodeValue, elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }, settings);
+        return await recheckFunc({ nodeValue, elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }, settings);
       }
       console.debug(
         `${ADDON_I18N.TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`,
@@ -136,7 +136,7 @@ const AddonProcessor = (() => {
       );
     }
   };
-  const check = async (addon?: IAddon, actionSettings?: IActionSettings) => {
+  const check = async (addon?: IAddon, actionSettings?: IActionSettings): Promise<TActionResult | void> => {
     if (addon) {
       let { value } = addon;
       const { elementFinder, condition, ...props } = addon;
@@ -154,7 +154,6 @@ const AddonProcessor = (() => {
         }
       }
     }
-    return true;
   };
 
   return { check };
