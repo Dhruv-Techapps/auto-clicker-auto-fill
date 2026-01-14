@@ -39,7 +39,7 @@ const BatchProcessor = (() => {
 
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
     let batchCount = 1;
-    let batchRepeat = batch?.repeat ?? 0;
+    const batchRepeat = batch?.repeat ?? 0;
     do {
       const key = generateUUID();
       try {
