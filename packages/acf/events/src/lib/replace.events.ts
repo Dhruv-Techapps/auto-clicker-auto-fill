@@ -1,6 +1,5 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';
 
@@ -14,10 +13,6 @@ export const ReplaceEvents = (() => {
       element.value = element.value.replace(new RegExp(target, 'g'), string);
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'ReplaceEvents',
-        source: 'content_script'
-      });
       element.textContent = element.textContent?.replace(new RegExp(target, 'g'), string) || null;
     } else {
       throw new ConfigError(UNKNOWN_ELEMENT_TYPE_ERROR, 'ReplaceEvents');

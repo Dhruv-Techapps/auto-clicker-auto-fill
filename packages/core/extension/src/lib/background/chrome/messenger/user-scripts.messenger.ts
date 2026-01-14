@@ -1,21 +1,5 @@
-import { IExtension } from '@dhruv-techapps/core-common';
+import type { IUserScriptsExecuteProps, IUserScriptsExecuteResponse } from '@dhruv-techapps/core-types';
 import { NotificationsMessenger } from './notifications.messenger';
-
-export interface IUserScriptsRequest {
-  messenger: 'userScripts';
-  methodName: 'execute';
-  message: IUserScriptsExecuteProps;
-}
-
-export interface IUserScriptsExecuteProps {
-  code: string;
-  ext: IExtension;
-}
-
-export interface IUserScriptsExecuteResponse {
-  result: unknown;
-  error?: string;
-}
 
 async function isUserScriptsAvailable() {
   try {

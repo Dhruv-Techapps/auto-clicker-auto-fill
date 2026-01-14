@@ -1,6 +1,5 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';
 
@@ -12,10 +11,6 @@ export const AppendEvents = (() => {
       element.value += value;
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'AppendEvents',
-        source: 'content_script'
-      });
       element.textContent += value;
     } else {
       throw new ConfigError(UNKNOWN_ELEMENT_TYPE_ERROR, 'Append Events');

@@ -1,0 +1,19 @@
+{
+  "name": "core-open-telemetry",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/core/open-telemetry/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/core/open-telemetry/dist",
+        "main": "packages/core/open-telemetry/src/index.ts",
+        "tsConfig": "packages/core/open-telemetry/tsconfig.lib.json",
+        "stripLeadingPaths": true
+      }
+    }
+  },
+  "projectType": "library",
+  "tags": ["scope:core", "type:library", "platform:all", "domain:core-open-telemetry"]
+}

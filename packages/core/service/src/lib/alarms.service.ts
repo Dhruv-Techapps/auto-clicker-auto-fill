@@ -1,4 +1,4 @@
-import type { IAlarmsRequest } from '@dhruv-techapps/core-extension';
+import type { IAlarmsRequest } from '@dhruv-techapps/core-types';
 import { CoreService } from './core-service';
 
 export class AlarmsService extends CoreService {

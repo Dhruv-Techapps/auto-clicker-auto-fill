@@ -1,5 +1,4 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { ACTION_I18N_TITLE } from '.';
 import CommonEvents from './common.events';
 
@@ -22,10 +21,6 @@ export const CopyEvents = (() => {
       return element.value;
     }
     if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: 'CopyEvents',
-        source: 'content_script'
-      });
       return element.textContent || element.innerText;
     }
     return element.innerText || element.innerHTML;

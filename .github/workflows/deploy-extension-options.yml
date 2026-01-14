@@ -68,6 +68,8 @@ jobs:
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
           VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
       - name: Build Extension
         run: |
           npx nx run acf-extension:build --prod --verbose --skip-nx-cache
@@ -86,6 +88,8 @@ jobs:
           VITE_PUBLIC_URL: ${{vars.VITE_PUBLIC_URL}}
           API_SECRET: ${{vars.API_SECRET}}
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
       - name: Determine Firebase Target
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')

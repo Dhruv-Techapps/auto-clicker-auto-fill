@@ -3,6 +3,7 @@ import { CoreService } from '@dhruv-techapps/core-service';
 import { RUNTIME_MESSAGE_FIREBASE_FUNCTIONS } from './lib/firebase-functions.constant';
 
 export class FirebaseFunctionsService extends CoreService {
+  static override readonly trace = true;
   static async vision() {
     return await this.message<RuntimeMessageRequest, string>({ messenger: RUNTIME_MESSAGE_FIREBASE_FUNCTIONS, methodName: 'visionImagesAnnotate' });
   }

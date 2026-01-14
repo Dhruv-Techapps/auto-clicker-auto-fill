@@ -1,4 +1,4 @@
-import type { StorageMessengerGetProps, StorageMessengerRemoveProps, StorageMessengerSetProps, StorageRequest } from '@dhruv-techapps/core-extension';
+import type { StorageMessengerGetProps, StorageMessengerRemoveProps, StorageMessengerSetProps, StorageRequest } from '@dhruv-techapps/core-types';
 import { CoreService } from './core-service';
 
 export class StorageService extends CoreService {

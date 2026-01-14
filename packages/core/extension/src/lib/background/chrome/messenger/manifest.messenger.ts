@@ -1,12 +1,4 @@
-export type ManifestResult = Partial<chrome.runtime.Manifest>;
-
-type ManifestValuesProps = string[];
-
-export interface ManifestRequest {
-  messenger: 'manifest';
-  methodName: 'values' | 'value';
-  message: string | ManifestValuesProps;
-}
+import type { ManifestResult, ManifestValuesProps } from '@dhruv-techapps/core-types';
 
 export class ManifestMessenger {
   async values(keys: ManifestValuesProps): Promise<ManifestResult> {

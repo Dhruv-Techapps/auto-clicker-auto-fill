@@ -1,5 +1,7 @@
 import { IAction, IBatch, IUserScript } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
+import { generateUUID } from '@dhruv-techapps/core-common';
+import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { NotificationsService } from '@dhruv-techapps/core-service';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
@@ -22,60 +24,43 @@ const BatchProcessor = (() => {
     }
   };
 
-  const checkRepeat = async (actions: Array<IAction | IUserScript>, batch: IBatch) => {
-    if (batch.repeat) {
-      if (batch.repeat > 0) {
-        for (let i = 0; i < batch.repeat; i += 1) {
-          statusBar.batchUpdate(i + 2);
-          console.groupCollapsed(`${BATCH_I18N.TITLE} #${i + 2} [${I18N_COMMON.REPEAT}]`);
-          if (batch?.repeatInterval) {
-            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
-          }
-          await Actions.start(actions, i + 2);
-          const { notifications } = await SettingsStorage.getSettings();
-          if (notifications?.onBatch) {
-            NotificationsService.create({
-              type: 'basic',
-              title: `${BATCH_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
-              message: `#${i + 1} ${BATCH_I18N.TITLE}`,
-              silent: !notifications.sound,
-              iconUrl: Common.getNotificationIcon()
-            });
-          }
-          console.groupEnd();
-        }
-      } else if (batch.repeat < -1) {
-        let i = 1;
-
-        while (true) {
-          if (batch?.repeatInterval) {
-            statusBar.batchUpdate('∞');
-            await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
-          }
-          await Actions.start(actions, i);
-          i += 1;
-        }
-      }
+  const notifyCompletion = async (batchCount: number) => {
+    const { notifications } = await SettingsStorage.getSettings();
+    if (notifications?.onBatch) {
+      NotificationsService.create({
+        type: 'basic',
+        title: `${BATCH_I18N.TITLE} ${I18N_COMMON.COMPLETED}`,
+        message: `#${batchCount} ${BATCH_I18N.TITLE}`,
+        silent: !notifications.sound,
+        iconUrl: Common.getNotificationIcon()
+      });
     }
   };
 
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
-    try {
-      console.groupCollapsed(`${BATCH_I18N.TITLE} #1 (${I18N_COMMON.DEFAULT})`);
-      statusBar.batchUpdate(1);
-      await Actions.start(actions, 1);
-      console.groupEnd();
-      if (batch) {
-        if (batch.refresh) {
-          refresh();
-        } else {
-          await checkRepeat(actions, batch);
+    let batchCount = 1;
+    const batchRepeat = batch?.repeat ?? 0;
+    do {
+      const key = generateUUID();
+      try {
+        console.groupCollapsed(`${BATCH_I18N.TITLE} #${batchCount} ${batchCount === 1 ? `(${I18N_COMMON.DEFAULT})` : `[${I18N_COMMON.REPEAT}]`}`);
+        window.ext.__batchHeaders = await OpenTelemetryService.startSpan(key, `${BATCH_I18N.TITLE} #${batchCount}`, { headers: window.ext.__configHeaders });
+        if (batchCount !== 1 && batch?.repeatInterval) {
+          await statusBar.wait(batch.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
         }
+        statusBar.batchUpdate(batchRepeat < 0 ? '∞' : batchCount);
+        await Actions.start(actions, batchCount);
+        await notifyCompletion(batchCount);
+        if (batch?.refresh) {
+          refresh();
+        }
+        batchCount++;
+      } finally {
+        OpenTelemetryService.endSpan(key);
+        window.ext.__batchHeaders = undefined;
+        console.groupEnd();
       }
-    } catch (error) {
-      console.groupEnd();
-      throw error;
-    }
+    } while (batchRepeat < -1 || batchCount <= batchRepeat + 1);
   };
 
   return { start };

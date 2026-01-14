@@ -1,6 +1,6 @@
 import { EActionStatus, EAddonConditions, ERecheckOptions, IActionSettings, IAddon } from '@dhruv-techapps/acf-common';
-import { ConfigError, SystemError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
+import { ConfigError, generateUUID, SystemError } from '@dhruv-techapps/core-common';
+import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { RADIO_CHECKBOX_NODE_NAME } from '../common/constant';
@@ -67,7 +67,6 @@ const AddonProcessor = (() => {
         value = element.value;
       }
     } else if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', { event: 'Addon', source: 'content_script' });
       value = element.textContent ?? element.innerText;
     } else {
       value = element.innerText;
@@ -142,8 +141,17 @@ const AddonProcessor = (() => {
       let { value } = addon;
       const { elementFinder, condition, ...props } = addon;
       if (elementFinder && value && condition) {
-        value = await ACFValue.getValue(value);
-        return await start({ ...props, elementFinder, value, condition }, actionSettings);
+        const key = generateUUID();
+        try {
+          OpenTelemetryService.startSpan(key, `Addon #${window.ext.__currentAction}`, {
+            headers: window.ext.__actionHeaders,
+            attributes: { condition, elementFinder, value }
+          });
+          value = await ACFValue.getValue(value);
+          return await start({ ...props, elementFinder, value, condition }, actionSettings);
+        } finally {
+          OpenTelemetryService.endSpan(key);
+        }
       }
     }
     return true;

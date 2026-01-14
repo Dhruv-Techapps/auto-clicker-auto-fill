@@ -6,6 +6,7 @@ import type { Product, Subscription } from './lib/firebase-firestore.types';
 export type { Product, Subscription } from './lib/firebase-firestore.types';
 
 export class FirebaseFirestoreService extends CoreService {
+  static override readonly trace = true;
   static async getProducts() {
     return await this.message<RuntimeMessageRequest, Product[]>({ messenger: RUNTIME_MESSAGE_FIREBASE_FIRESTORE, methodName: 'getProducts' });
   }

@@ -37,8 +37,7 @@ export class GoogleSheetsValue {
           console.warn(`Sheet "${sheetName}" do not have value in ${column}${row}`, 'Sheet cell not found');
           return '::empty';
         }
-        value = values[rowIndex][colIndex];
-        return value;
+        return values[rowIndex][colIndex];
       }
     }
     return value;

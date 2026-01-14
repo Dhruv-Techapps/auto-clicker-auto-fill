@@ -1,6 +1,5 @@
 import { RADIO_CHECKBOX_NODE_NAME } from '@dhruv-techapps/acf-common';
 import { ConfigError } from '@dhruv-techapps/core-common';
-import { GoogleAnalyticsService } from '@dhruv-techapps/shared-google-analytics/service';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
 import { ACTION_I18N_TITLE } from '.';
 import CommonEvents, { UNKNOWN_ELEMENT_TYPE_ERROR } from './common.events';
@@ -25,10 +24,6 @@ export const ClipboardEvents = (() => {
       return element.value;
     }
     if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: LOGGER_LETTER,
-        source: 'content_script'
-      });
       return element.textContent || element.innerText;
     }
     return element.innerText || element.innerHTML;
@@ -40,10 +35,6 @@ export const ClipboardEvents = (() => {
       element.value = value;
       element.dispatchEvent(CommonEvents.getFillEvent());
     } else if (element.isContentEditable) {
-      GoogleAnalyticsService.fireEvent('isContentEditable', {
-        event: LOGGER_LETTER,
-        source: 'content_script'
-      });
       element.textContent = value;
     } else {
       throw new ConfigError(UNKNOWN_ELEMENT_TYPE_ERROR, LOGGER_LETTER);

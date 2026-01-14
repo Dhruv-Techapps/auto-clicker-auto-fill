@@ -1,3 +1,4 @@
+import { LoggerService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { ActionService } from '@dhruv-techapps/core-service';
 import { Timer } from '@dhruv-techapps/shared-util';
 import { STATUS_BAR_LOCATION } from './status-bar.types';
@@ -35,12 +36,14 @@ export class StatusBar {
 
   public setLocation = async (location: STATUS_BAR_LOCATION) => {
     this.statusBar.className = location;
+    LoggerService.debug(`Status Bar Location Set ${location}`);
     document.body.appendChild(this.statusBar);
   };
 
   public enable(totalActions: number, totalBatches?: number): void {
     this.totalActions = totalActions;
     this.totalBatches = totalBatches || 0;
+    LoggerService.debug(`Status Bar Enabled Actions:${totalActions} Batches:${totalBatches}`);
     ActionService.setBadgeText({ text: '⚡' });
   }
 
@@ -81,6 +84,7 @@ export class StatusBar {
     this.textEle.textContent = title;
     this.issueEle.textContent = issue;
     this.remainingEle.textContent = remaining;
+    LoggerService.debug(`Status Bar Wait ${title} > ${issue} > ${remaining}`);
     await Timer.sleep(waitTime);
   }
 
@@ -89,12 +93,14 @@ export class StatusBar {
     this.remainingEle.textContent = '';
     this.actionEle.textContent = '';
     this.issueEle.textContent = '';
+    LoggerService.debug(`Status Bar Batch Update ${this.batchEle.textContent}`);
   }
 
   public actionUpdate(number: number | string): void {
     this.actionEle.textContent = `🅰️ ${number}/${this.totalActions}`;
     this.remainingEle.textContent = '';
     this.issueEle.textContent = '';
+    LoggerService.debug(`Status Bar Action Update ${this.actionEle.textContent}`);
   }
 
   public error = (error: string): void => {
@@ -102,6 +108,7 @@ export class StatusBar {
     ActionService.setBadgeText({ text: '❌' });
     this.iconEle.textContent = '❌';
     this.textEle.textContent = error;
+    LoggerService.debug(`Status Bar Error ${this.textEle.textContent}`);
   };
 
   public done = (): void => {
@@ -112,5 +119,6 @@ export class StatusBar {
     this.issueEle.textContent = '';
     this.iconEle.textContent = '✅';
     this.textEle.textContent = 'Done';
+    LoggerService.debug('Status Bar Done');
   };
 }

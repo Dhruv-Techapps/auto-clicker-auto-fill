@@ -1,9 +1,3 @@
-export interface ActionRequest {
-  messenger: 'action';
-  methodName: 'setIcon' | 'setBadgeBackgroundColor' | 'setBadgeText' | 'setTitle' | 'setBadgeTextColor' | 'enable' | 'disable';
-  message: chrome.action.TabIconDetails | chrome.action.BadgeColorDetails | chrome.action.BadgeTextDetails | chrome.action.TitleDetails;
-}
-
 export class ActionMessenger {
   disable(_: void, sender: chrome.runtime.MessageSender) {
     return chrome.action.disable(sender.tab?.id);

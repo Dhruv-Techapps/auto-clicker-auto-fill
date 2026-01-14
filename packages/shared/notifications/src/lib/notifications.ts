@@ -1,5 +1,3 @@
-import { Logger } from '@dhruv-techapps/core-common';
-
 export function registerNotifications(optionsPageUrl?: string) {
   if (optionsPageUrl) {
     chrome.notifications.onClicked.addListener((notificationId) => {
@@ -9,7 +7,7 @@ export function registerNotifications(optionsPageUrl?: string) {
     });
 
     chrome.notifications.onClosed.addListener((notificationId, byUser) => {
-      Logger.colorInfo('Notification onClosed', notificationId, byUser);
+      console.log('Notification closed', { notificationId, byUser });
     });
   }
 }

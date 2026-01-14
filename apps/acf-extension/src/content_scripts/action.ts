@@ -1,4 +1,5 @@
 import { EActionStatus, IAction } from '@dhruv-techapps/acf-common';
+import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Common from './common';
 import { statusBar } from './status-bar';
@@ -12,6 +13,7 @@ const ActionProcessor = (() => {
         await statusBar.wait(repeatInterval, STATUS_BAR_TYPE.ACTION_REPEAT, repeat);
         repeat -= 1;
         window.ext.__actionRepeat = window.ext.__actionRepeat + 1;
+        OpenTelemetryService.addEvent(window.ext.__actionKey, `Action Repeat - ${window.ext.__actionRepeat}`);
         await process(action);
         return await repeatFunc(action, repeat, repeatInterval);
       }
