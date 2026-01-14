@@ -4,7 +4,7 @@ import { RUNTIME_MESSAGE_GOOGLE_SHEETS } from './lib/google-sheets.constant';
 import { GoogleSheetsRequest, GoogleSheetsResponse } from './lib/google-sheets.types';
 
 export class GoogleSheetsService extends CoreService {
-  static override trace = true;
+  static override readonly trace = true;
   static async getSheets(spreadsheetId: string, ranges: Array<string>) {
     return await this.message<RuntimeMessageRequest<GoogleSheetsRequest>, GoogleSheetsResponse>({
       messenger: RUNTIME_MESSAGE_GOOGLE_SHEETS,

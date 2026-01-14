@@ -7,7 +7,7 @@ export * from './lib/google-drive.enums';
 export type { IDriveFile } from './lib/google-drive.types';
 
 export class GoogleDriveService extends CoreService {
-  static override trace = true;
+  static override readonly trace = true;
   static async listWithContent() {
     return await this.message<RuntimeMessageRequest<boolean>, Array<IDriveFile>>({ messenger: RUNTIME_MESSAGE_GOOGLE_DRIVE, methodName: 'listWithContent', message: true });
   }

@@ -6,7 +6,7 @@ import type { FirebaseLoginResponse } from './lib/firebase-oauth.types';
 export type { FirebaseRole, User } from './lib/firebase-oauth.types';
 
 export class FirebaseOauthService extends CoreService {
-  static override trace = true;
+  static override readonly trace = true;
   static async isLogin() {
     return await this.message<RuntimeMessageRequest, FirebaseLoginResponse>({ messenger: RUNTIME_MESSAGE_FIREBASE_OAUTH, methodName: 'firebaseIsLogin' });
   }

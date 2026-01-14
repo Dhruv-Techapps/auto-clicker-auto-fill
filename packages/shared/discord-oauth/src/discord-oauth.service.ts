@@ -6,7 +6,7 @@ import type { Discord } from './lib/discord-oauth.types';
 export type { Discord } from './lib/discord-oauth.types';
 
 export class DiscordOauthService extends CoreService {
-  static override trace = true;
+  static override readonly trace = true;
   static async login() {
     return await this.message<RuntimeMessageRequest, Discord>({ messenger: RUNTIME_MESSAGE_DISCORD_OAUTH, methodName: 'discordLogin' });
   }

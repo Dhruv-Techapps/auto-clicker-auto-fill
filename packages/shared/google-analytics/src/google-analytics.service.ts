@@ -4,7 +4,7 @@ import type { TEventSource } from './lib/google-analytics.types';
 
 export type { TEventSource } from './lib/google-analytics.types';
 export class GoogleAnalyticsService extends CoreService {
-  static override trace = true;
+  static override readonly trace = true;
   static async fireEvent(name: string, params: Record<string, unknown> & { source: TEventSource }) {
     return await this.message({ messenger: RUNTIME_MESSAGE_GOOGLE_ANALYTICS, methodName: 'fireEvent', message: { name, params } });
   }
