@@ -51,8 +51,13 @@ const AddonProcessor = (() => {
     if (/^@\w+(-\w+)?$/.test(valueExtractor)) {
       return element.getAttribute(valueExtractor.replace('@', '')) || value;
     }
-    const matches = value.match(RegExp(valueExtractor, valueExtractorFlags || ''));
-    return matches?.join('') || value;
+    try {
+      const regex = new RegExp(valueExtractor, valueExtractorFlags || '');
+      const matches = value.match(regex);
+      return matches?.join('') || value;
+    } catch (error) {
+      throw new ConfigError(`Invalid value extractor regex pattern: '${valueExtractor}'`, 'Invalid Regex Pattern');
+    }
   };
 
   const getNodeValue = (elements: Array<HTMLElement>, valueExtractor?: string, valueExtractorFlags?: string): string | boolean => {
@@ -77,6 +82,15 @@ const AddonProcessor = (() => {
     return value;
   };
 
+  const safeRegExpTest = (pattern: string, testString: string): boolean => {
+    try {
+      const regex = new RegExp(pattern, 'gi');
+      return regex.test(testString);
+    } catch (error) {
+      throw new ConfigError(`Invalid regular expression pattern: '${pattern}'`, 'Invalid Regex Pattern');
+    }
+  };
+
   const compare = (nodeValue: string | boolean, condition: EAddonConditions, value: string): boolean => {
     if (/than/gi.test(condition) && (Number.isNaN(Number(nodeValue)) || Number.isNaN(Number(value)))) {
       throw new ConfigError(`${I18N_ERROR.WRONG_DESCRIPTION}'${nodeValue}' '${value}'`, I18N_ERROR.WRONG_TITLE);
@@ -94,13 +108,13 @@ const AddonProcessor = (() => {
 
     switch (condition) {
       case EAddonConditions['= Equals']:
-        return new RegExp(`^${value}$`, 'gi').test(nodeValue);
+        return safeRegExpTest(`^${value}$`, nodeValue);
       case EAddonConditions['!= Not Equals']:
-        return !new RegExp(`^${value}$`, 'gi').test(nodeValue);
+        return !safeRegExpTest(`^${value}$`, nodeValue);
       case EAddonConditions['~ Contains']:
-        return new RegExp(`${value}`, 'gi').test(nodeValue);
+        return safeRegExpTest(value, nodeValue);
       case EAddonConditions['!~ Not Contains']:
-        return !new RegExp(`${value}`, 'gi').test(nodeValue);
+        return !safeRegExpTest(value, nodeValue);
       case EAddonConditions['> Greater Than']:
         return Number(nodeValue) > Number(value);
       case EAddonConditions['>= Greater Than Equals']:
