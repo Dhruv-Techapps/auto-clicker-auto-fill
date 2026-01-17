@@ -51,7 +51,7 @@ const Actions = (() => {
       window.ext.__currentAction = i + 1;
       window.ext.__actionKey = generateUUID();
       try {
-        window.ext.__actionHeaders = await OpenTelemetryService.startSpan(window.ext.__actionKey, `${ACTION_I18N.TITLE} #${i + 1}`, { headers: window.ext.__batchHeaders });
+        window.ext.__actionHeaders = await OpenTelemetryService.startSpan(window.ext.__actionKey, `ACTION #${i + 1}`, { headers: window.ext.__batchHeaders });
         await checkStatement(actions, action);
         await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
         await AddonProcessor.check(action.addon, action.settings);

@@ -58,6 +58,7 @@ export class TabsMessenger {
 }
 
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
+  if (chrome.runtime.getContexts === undefined) return;
   const isPanelOpen = (await chrome.runtime.getContexts({ contextTypes: ['SIDE_PANEL'] })).some((context) => context.contextType === 'SIDE_PANEL');
   if (isPanelOpen) {
     const currentTab = await chrome.tabs.get(activeInfo.tabId);
@@ -66,6 +67,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 });
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  if (chrome.runtime.getContexts === undefined) return;
   const isPanelOpen = (await chrome.runtime.getContexts({ contextTypes: ['SIDE_PANEL'] })).some((context) => context.contextType === 'SIDE_PANEL');
   if (isPanelOpen) {
     if (changeInfo.status === 'complete') {
