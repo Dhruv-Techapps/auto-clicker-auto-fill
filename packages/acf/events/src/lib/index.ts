@@ -1,4 +1,4 @@
-import { LoggerService } from '@dhruv-techapps/core-open-telemetry/content-script';
+import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { AppendEvents } from './append.events';
 import { AttributeEvents } from './attribute.events';
 import { ClassEvents } from './class-list.events';
@@ -33,7 +33,7 @@ export const Events = (() => {
       let event;
       if (eventRegexArray) {
         event = eventRegexArray[1].toLowerCase();
-        LoggerService.debug(`${ACTION_I18N_TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}] Event: ${event}`);
+        OpenTelemetryService.addEvent(window.ext.__actionKey, `Event Type - ${event}`);
       }
       switch (event) {
         case EVENTS.SCROLL_TO:
