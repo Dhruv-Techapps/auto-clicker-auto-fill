@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 interface DetectedInfo<N extends string, O, V = null> {
   readonly name: N;
   readonly version: V;
@@ -74,7 +75,6 @@ type UserAgentRule = [Browser, RegExp];
 type UserAgentMatch = [Browser, RegExpExecArray] | false;
 type OperatingSystemRule = [OperatingSystem, RegExp];
 
-//eslint-disable-next-line max-len
 const SEARCHBOX_UA_REGEX = /alexa|bot|crawl(er|ing)|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo!|yandex/;
 const REQUIRED_VERSION_PARTS = 3;
 
