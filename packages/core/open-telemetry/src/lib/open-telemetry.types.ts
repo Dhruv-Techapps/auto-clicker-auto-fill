@@ -31,8 +31,12 @@ export interface SpanEventMessage extends CommonOpenTelemetryMessage {
   attributes?: Record<string, AttributeValue>;
 }
 
+export interface LogMessage extends Partial<CommonOpenTelemetryMessage> {
+  logRecord: LogRecord;
+}
+
 export interface OpenTelemetryRequest {
   messenger: 'open-telemetry';
   methodName: 'log' | 'setAttribute' | 'startActiveSpan' | 'startSpan' | 'endSpan' | 'recordException' | 'addEvent';
-  message: LogRecord | SpanAttributeMessage | StartActiveSpanMessage | EndSpanMessage | RecordExceptionMessage | SpanEventMessage;
+  message: LogMessage | SpanAttributeMessage | StartActiveSpanMessage | EndSpanMessage | RecordExceptionMessage | SpanEventMessage;
 }
