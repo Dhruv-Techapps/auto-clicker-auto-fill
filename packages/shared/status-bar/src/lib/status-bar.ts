@@ -42,7 +42,7 @@ export class StatusBar {
   public enable(totalActions: number, totalBatches?: number): void {
     this.totalActions = totalActions;
     this.totalBatches = totalBatches || 0;
-    LoggerService.debug(`Status 🅰️:${totalActions} 🅱️:${totalBatches}`);
+    LoggerService.debug(`Status ACTION:${totalActions} BATCH:${totalBatches}`);
     ActionService.setBadgeText({ text: '⚡' });
   }
 
@@ -90,7 +90,7 @@ export class StatusBar {
   }
 
   public batchUpdate(text: string | number): void {
-    this.batchEle.textContent = `🅱️ ${text}/${this.totalBatches}`;
+    this.batchEle.textContent = `BATCH ${text}/${this.totalBatches}`;
     this.remainingEle.textContent = '';
     this.actionEle.textContent = '';
     this.issueEle.textContent = '';
@@ -98,7 +98,7 @@ export class StatusBar {
   }
 
   public actionUpdate(number: number | string): void {
-    this.actionEle.textContent = `🅰️ ${number}/${this.totalActions}`;
+    this.actionEle.textContent = `ACTION ${number}/${this.totalActions}`;
     this.remainingEle.textContent = '';
     this.issueEle.textContent = '';
     LoggerService.debug(this.actionEle.textContent || '');

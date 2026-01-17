@@ -74,7 +74,7 @@ type UserAgentRule = [Browser, RegExp];
 type UserAgentMatch = [Browser, RegExpExecArray] | false;
 type OperatingSystemRule = [OperatingSystem, RegExp];
 
-// tslint:disable-next-line:max-line-length
+//eslint-disable-next-line max-len
 const SEARCHBOX_UA_REGEX = /alexa|bot|crawl(er|ing)|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo!|yandex/;
 const REQUIRED_VERSION_PARTS = 3;
 

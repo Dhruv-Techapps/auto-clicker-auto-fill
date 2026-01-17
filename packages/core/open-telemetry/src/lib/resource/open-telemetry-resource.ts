@@ -6,18 +6,17 @@ import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic
 const deviceInfo = await DeviceStorage.getDeviceInfo();
 const { version } = chrome.runtime.getManifest();
 
+const browser = detect();
+
 const resource = resourceFromAttributes({
   [ATTR_SERVICE_NAME]: 'ACF',
   [ATTR_SERVICE_VERSION]: version,
-  ...(deviceInfo?.id && { ['device.id']: deviceInfo.id })
+  ...(deviceInfo?.id && { ['device.id']: deviceInfo.id }),
+  ...(browser && {
+    'browser.name': browser.name,
+    'browser.version': browser.version,
+    'os.name': browser.os || 'unknown'
+  })
 });
-
-const browser = detect();
-
-if (browser) {
-  resource.attributes['browser.name'] = browser.name;
-  resource.attributes['browser.version'] = browser.version;
-  resource.attributes['os.name'] = browser.os || 'unknown';
-}
 
 export { resource };
