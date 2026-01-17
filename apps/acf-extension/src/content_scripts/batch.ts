@@ -44,7 +44,7 @@ const BatchProcessor = (() => {
       const key = generateUUID();
       try {
         console.groupCollapsed(`${BATCH_I18N.TITLE} #${batchCount} ${batchCount === 1 ? `(${I18N_COMMON.DEFAULT})` : `[${I18N_COMMON.REPEAT}]`}`);
-        window.ext.__batchHeaders = await OpenTelemetryService.startSpan(key, `${BATCH_I18N.TITLE} #${batchCount}`, { headers: window.ext.__configHeaders });
+        window.ext.__batchHeaders = await OpenTelemetryService.startSpan(key, `🅱️ #${batchCount}`, { headers: window.ext.__configHeaders });
         if (batchCount !== 1 && batch?.repeatInterval) {
           await statusBar.wait(batch.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT);
         }

@@ -1,4 +1,4 @@
-import { BROWSER } from '@dhruv-techapps/core-common';
+import { detect } from '@dhruv-techapps/core-common';
 import { NotificationHandler } from '@dhruv-techapps/shared-notifications';
 import { GOOGLE_SCOPES } from './google-oauth.enums';
 import type { GoogleOauth2LoginResponse } from './google-oauth.types';
@@ -52,7 +52,8 @@ export class GoogleOauth2Background {
       throw new Error('No scopes found');
     }
     try {
-      const result = BROWSER === 'EDGE' ? await this.#launchWebAuthFlow(scopes, interactive) : await chrome.identity.getAuthToken({ scopes, interactive });
+      const browser = detect();
+      const result = browser?.name !== 'chrome' ? await this.#launchWebAuthFlow(scopes, interactive) : await chrome.identity.getAuthToken({ scopes, interactive });
       return result;
     } catch (error) {
       if (error instanceof Error && interactive) {
