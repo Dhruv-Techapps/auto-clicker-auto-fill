@@ -51,9 +51,9 @@ export class StatusBar {
     const waitTime = Timer.getWaitTime(text);
     if (!waitTime) {
       if (_type === STATUS_BAR_TYPE.ACTION_WAIT) {
-        this.actionUpdate(current ?? 0);
+        this.actionUpdate(current);
       } else if (_type === STATUS_BAR_TYPE.BATCH_REPEAT) {
-        this.batchUpdate(current ?? 0);
+        this.batchUpdate(current);
       }
       return;
     }
