@@ -8,3 +8,4 @@ codecov.yml
 /.nx/workspace-data
 **/dist/**
 /.github/instructions/**
+.codacy/codacy.yaml
