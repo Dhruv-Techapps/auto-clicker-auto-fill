@@ -13,7 +13,7 @@ export enum STATUS_BAR_TYPE {
 
 export class StatusBar {
   private totalActions = 0;
-  private totalBatches: string = '0';
+  private totalBatches = '0';
   private currentBatch = 0;
 
   private readonly statusBar: HTMLDivElement = document.createElement('div');
@@ -40,14 +40,14 @@ export class StatusBar {
     document.body.appendChild(this.statusBar);
   };
 
-  public enable(totalActions: number, totalBatches: number = 0): void {
+  public enable(totalActions: number, totalBatches = 0): void {
     this.totalActions = totalActions;
     this.totalBatches = totalBatches > 0 ? totalBatches.toString() : '∞';
     LoggerService.debug(`Status ACTION:${totalActions} BATCH:${this.totalBatches}`);
     ActionService.setBadgeText({ text: '⚡' });
   }
 
-  public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current: number = 0): Promise<void> {
+  public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current = 0): Promise<void> {
     const waitTime = Timer.getWaitTime(text);
     if (!waitTime) {
       if (_type === STATUS_BAR_TYPE.ACTION_WAIT) {
@@ -61,7 +61,7 @@ export class StatusBar {
     let title = '';
     let issue = '';
     let remaining = '';
-    let currentLabel = current > 0 ? current : '∞';
+    const currentLabel = current > 0 ? current : '∞';
     switch (_type) {
       case STATUS_BAR_TYPE.CONFIG_WAIT:
         title = `⏳ ${time}s ▶️ Configuration.`;
@@ -99,7 +99,7 @@ export class StatusBar {
     await Timer.sleep(waitTime);
   }
 
-  public batchUpdate(text: number, title: string = ''): void {
+  public batchUpdate(text: number, title = ''): void {
     this.currentBatch = text;
     this.batchEle.textContent = `BATCH ${text}/${this.totalBatches}`;
     this.remainingEle.textContent = '';
@@ -108,7 +108,7 @@ export class StatusBar {
     if (this.currentBatch === 1) LoggerService.debug(this.batchEle.textContent + ' ' + title);
   }
 
-  private actionUpdate(number: number, title: string = ''): void {
+  private actionUpdate(number: number, title = ''): void {
     this.actionEle.textContent = `ACTION ${number}/${this.totalActions}`;
     this.remainingEle.textContent = '';
     this.issueEle.textContent = '';
