@@ -47,13 +47,12 @@ const Actions = (() => {
         i += 1;
         continue;
       }
-      statusBar.actionUpdate(i + 1);
       window.ext.__currentAction = i + 1;
       window.ext.__actionKey = generateUUID();
       try {
         window.ext.__actionHeaders = await OpenTelemetryService.startSpan(window.ext.__actionKey, `ACTION #${i + 1}`, { headers: window.ext.__batchHeaders });
         await checkStatement(actions, action);
-        await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT);
+        await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT, i + 1);
         await AddonProcessor.check(action.addon, action.settings);
         if (action.type === 'userscript') {
           action.status = await UserScriptProcessor.start(action);

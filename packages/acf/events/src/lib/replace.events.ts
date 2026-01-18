@@ -9,13 +9,18 @@ export const ReplaceEvents = (() => {
   const checkNode = (element: HTMLElement, value: string) => {
     const [target, string] = value.split('::');
     const eW = CommonEvents.getElementWindow(element);
-    if (element instanceof eW.HTMLSelectElement || element instanceof eW.HTMLTextAreaElement || (element instanceof eW.HTMLInputElement && !RADIO_CHECKBOX_NODE_NAME.test(element.type))) {
-      element.value = element.value.replace(new RegExp(target, 'g'), string);
-      element.dispatchEvent(CommonEvents.getFillEvent());
-    } else if (element.isContentEditable) {
-      element.textContent = element.textContent?.replace(new RegExp(target, 'g'), string) || null;
-    } else {
-      throw new ConfigError(UNKNOWN_ELEMENT_TYPE_ERROR, 'ReplaceEvents');
+    try {
+      const regex = new RegExp(target, 'g');
+      if (element instanceof eW.HTMLSelectElement || element instanceof eW.HTMLTextAreaElement || (element instanceof eW.HTMLInputElement && !RADIO_CHECKBOX_NODE_NAME.test(element.type))) {
+        element.value = element.value.replace(regex, string);
+        element.dispatchEvent(CommonEvents.getFillEvent());
+      } else if (element.isContentEditable) {
+        element.textContent = element.textContent?.replace(regex, string) || null;
+      } else {
+        throw new ConfigError(UNKNOWN_ELEMENT_TYPE_ERROR, 'ReplaceEvents');
+      }
+    } catch (error) {
+      throw new ConfigError(`Invalid regular expression pattern: '${target}'`, 'Invalid Regex Pattern');
     }
     CHANGE_EVENT.forEach((event) => {
       element.dispatchEvent(new MouseEvent(event, CommonEvents.getMouseEventProperties()));
