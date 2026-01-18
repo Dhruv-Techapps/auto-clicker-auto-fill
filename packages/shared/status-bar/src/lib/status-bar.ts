@@ -47,6 +47,15 @@ export class StatusBar {
     ActionService.setBadgeText({ text: '⚡' });
   }
 
+  /**
+   * Log only for first batch and first or infinite first current action
+   * @param current
+   * @returns
+   */
+  public isLogAllowed(current: number): boolean {
+    return this.currentBatch === 1 && (current === 1 || current === -2);
+  }
+
   public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current = 0): Promise<void> {
     const waitTime = Timer.getWaitTime(text);
     if (!waitTime) {
@@ -78,19 +87,19 @@ export class StatusBar {
       case STATUS_BAR_TYPE.ACTION_REPEAT:
         title = `⏳ ${time}s 🔁 Action.`;
         remaining = `${currentLabel} repeats left`;
-        if (this.currentBatch === 1 && (current === 1 || current === -2)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${remaining}`);
+        if (this.isLogAllowed(current)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${remaining}`);
         break;
       case STATUS_BAR_TYPE.ADDON_RECHECK:
         issue = '⚠️ Addon Condition not met.';
         title = `⏳ ${time}s 🔁 Addon.`;
         remaining = `${currentLabel} checks left`;
-        if (this.currentBatch === 1 && (current === 1 || current === -2)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`);
+        if (this.isLogAllowed(current)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`);
         break;
       default:
         issue = '⚠️ Element not found.';
         title = `⏳ ${time}s 🔁 Action.`;
         remaining = `${currentLabel} retries left`;
-        if (this.currentBatch === 1 && (current === 1 || current === -2)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`);
+        if (this.isLogAllowed(current)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`);
         break;
     }
     this.textEle.textContent = title;
