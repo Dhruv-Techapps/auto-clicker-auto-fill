@@ -16,7 +16,7 @@ export class OpenTelemetryService extends CoreService {
   }
 
   static async startSpan(key: TRandomUUID, name: string, rest?: { headers?: Record<string, string>; options?: SpanOptions; attributes?: Record<string, AttributeValue> }) {
-    return await this.message<OpenTelemetryRequest, Record<string, string>>({
+    return await this.message<OpenTelemetryRequest, Record<string, string> | undefined>({
       messenger: RUNTIME_MESSAGE_OPEN_TELEMETRY,
       methodName: 'startSpan',
       message: { key, name, ...rest }

@@ -23,7 +23,6 @@ const AddonProcessor = (() => {
       if (recheck > 0 || recheck < -1) {
         recheck -= 1;
         await statusBar.wait(props.recheckInterval, STATUS_BAR_TYPE.ADDON_RECHECK, recheck + 1);
-
         return await start({ elementFinder, value, condition, recheck, recheckOption, ...props }, settings);
       }
     }

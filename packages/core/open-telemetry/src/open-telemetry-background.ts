@@ -24,7 +24,7 @@ export class OpenTelemetryBackground {
     });
   }
 
-  async startActiveSpan({ key, name, options, attributes, headers = {} }: StartActiveSpanMessage) {
+  async startActiveSpan({ key, name, options, attributes, headers = {} }: StartActiveSpanMessage): Promise<Record<string, string>> {
     return new Promise((resolve) => {
       context.with(propagation.extract(context.active(), headers), () => {
         this.tracer.startActiveSpan(name, options, (span) => {
@@ -40,7 +40,10 @@ export class OpenTelemetryBackground {
     });
   }
 
-  async startSpan({ key, name, options, attributes, headers = {} }: StartActiveSpanMessage) {
+  async startSpan({ key, name, options, attributes, headers }: StartActiveSpanMessage): Promise<Record<string, string> | undefined> {
+    if (!headers) {
+      return;
+    }
     return new Promise((resolve) => {
       context.with(propagation.extract(context.active(), headers), () => {
         this.tracer.startActiveSpan(name, options, (span) => {
