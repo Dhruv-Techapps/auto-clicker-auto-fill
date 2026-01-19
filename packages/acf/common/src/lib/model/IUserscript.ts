@@ -1,5 +1,6 @@
 import { generateUUID, TRandomUUID } from '@dhruv-techapps/core-common';
-import { EActionStatus, IActionSettings, IActionStatement } from './IAction';
+import { IActionSettings } from './IAction';
+import { EActionStatus, IActionStatement } from './IActionStatement';
 import { IAddon } from './IAddon';
 
 export interface IUserScript {

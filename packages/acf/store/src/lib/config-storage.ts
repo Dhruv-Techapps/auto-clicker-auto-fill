@@ -12,6 +12,10 @@ export class ConfigStorage {
     return configs;
   }
 
+  static async setConfigs(configs: Array<IConfiguration>): Promise<void> {
+    await chrome.storage.local.set({ [LOCAL_STORAGE_KEY.CONFIGS]: configs });
+  }
+
   async getConfig(): Promise<GetConfigResult> {
     try {
       const { href } = document.location;

@@ -2,13 +2,14 @@ import { IAction } from './IAction';
 import { IUserScript } from './IUserscript';
 
 export * from './IAction';
+export * from './IActionStatement';
 export * from './IAddon';
 export * from './IBatch';
+export * from './ICommon';
 export * from './IConfiguration';
 export * from './ISetting';
 export * from './IUserscript';
 export * from './IWatch';
-export * from './TGoto';
 export const BATCH_REPEAT = '<batchRepeat>';
 export const ACTION_REPEAT = '<actionRepeat>';
 export const SESSION_COUNT = '<sessionCount>';

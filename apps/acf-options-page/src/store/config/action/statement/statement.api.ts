@@ -1,4 +1,4 @@
-import { ERetryOptions, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
+import { EErrorOptions, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
@@ -23,7 +23,7 @@ export const openActionStatementModalAPI = createAsyncThunk<OpenActionStatementM
   }
   const { statement } = action;
   let goto = statement?.goto;
-  if (statement?.then === ERetryOptions.GOTO && typeof statement.goto === 'number') {
+  if (statement?.option === EErrorOptions.GOTO && typeof statement.goto === 'number') {
     goto = config.actions[statement.goto].id;
   }
   return { statement: statement, selectedActionId, goto, firstActionId: config.actions[0].id };

@@ -1,4 +1,4 @@
-import { EActionConditionOperator, EActionRunning, ERetryOptions, IAction, IActionCondition, IActionStatement, IUserScript, TGoto } from '@dhruv-techapps/acf-common';
+import { EActionConditionOperator, EActionRunning, EErrorOptions, IAction, IActionCondition, IActionStatement, IUserScript, TGoto } from '@dhruv-techapps/acf-common';
 import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
@@ -25,12 +25,12 @@ const Statement = (() => {
       }, false);
   };
 
-  const checkThen = (condition: boolean, then: ERetryOptions, goto?: TGoto) => {
+  const checkThen = (condition: boolean, option: EErrorOptions, goto?: TGoto) => {
     window.ext.__actionError = `↔️ ${ACTION_CONDITION_I18N.TITLE} ${condition ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`;
     if (!condition) {
-      if (then === ERetryOptions.GOTO && goto) {
+      if (option === EErrorOptions.GOTO && goto) {
         throw goto;
-      } else if (then === ERetryOptions.RELOAD) {
+      } else if (option === EErrorOptions.RELOAD) {
         if (document.readyState === 'complete') {
           window.location.reload();
         } else {
@@ -38,7 +38,7 @@ const Statement = (() => {
             window.location.reload();
           });
         }
-      } else if (then === ERetryOptions.STOP) {
+      } else if (option === EErrorOptions.STOP) {
         throw new ConfigError(I18N_ERROR.NO_MATCH, ACTION_CONDITION_I18N.TITLE);
       }
       throw EActionRunning.SKIP;
@@ -47,15 +47,15 @@ const Statement = (() => {
 
   const check = (actions: Array<IAction | IUserScript>, statement?: IActionStatement) => {
     if (statement) {
-      const { conditions, then, goto } = statement;
-      if (conditions && then) {
+      const { conditions, option, goto } = statement;
+      if (conditions && option) {
         const key = generateUUID();
         try {
           OpenTelemetryService.startSpan(key, `Statement #${window.ext.__currentAction}`, {
             headers: window.ext.__actionHeaders,
-            attributes: { then, goto: goto || 'none', conditions: conditions.length }
+            attributes: { option, goto: goto || 'none', conditions: conditions.length }
           });
-          checkThen(conditionResult(conditions, actions), then, goto);
+          checkThen(conditionResult(conditions, actions), option, goto);
         } finally {
           OpenTelemetryService.endSpan(key);
         }

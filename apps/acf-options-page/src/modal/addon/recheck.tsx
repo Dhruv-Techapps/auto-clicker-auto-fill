@@ -1,4 +1,4 @@
-import { ERecheckOptions } from '@dhruv-techapps/acf-common';
+import { EErrorOptions } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent } from 'react';
 import { Card, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
@@ -18,7 +18,7 @@ function AddonRecheck() {
     const update = getFieldNameValue(e, addon);
     if (update) {
       dispatch(updateActionAddon(update));
-      if (update.name === 'recheckOption' && update.value === ERecheckOptions.GOTO) {
+      if (update.name === 'recheckOption' && update.value === EErrorOptions.GOTO) {
         const actionId = config?.actions[0].id;
         if (actionId) {
           dispatch(updateActionAddonGoto(actionId));
@@ -70,9 +70,9 @@ function AddonRecheck() {
             <Col>
               <Form.Check
                 type='radio'
-                defaultChecked={addon.recheckOption === ERecheckOptions.STOP}
+                defaultChecked={addon.recheckOption === EErrorOptions.STOP}
                 onChange={onUpdate}
-                value={ERecheckOptions.STOP}
+                value={EErrorOptions.STOP}
                 name='recheckOption'
                 label={t('modal.addon.recheck.stop')}
               />
@@ -80,9 +80,9 @@ function AddonRecheck() {
             <Col>
               <Form.Check
                 type='radio'
-                defaultChecked={addon.recheckOption === ERecheckOptions.SKIP}
+                defaultChecked={addon.recheckOption === EErrorOptions.SKIP}
                 onChange={onUpdate}
-                value={ERecheckOptions.SKIP}
+                value={EErrorOptions.SKIP}
                 name='recheckOption'
                 label={t('modal.addon.recheck.skip')}
               />
@@ -90,9 +90,9 @@ function AddonRecheck() {
             <Col>
               <Form.Check
                 type='radio'
-                defaultChecked={addon.recheckOption === ERecheckOptions.RELOAD}
+                defaultChecked={addon.recheckOption === EErrorOptions.RELOAD}
                 onChange={onUpdate}
-                value={ERecheckOptions.RELOAD}
+                value={EErrorOptions.RELOAD}
                 name='recheckOption'
                 label={t('modal.addon.recheck.refresh')}
               />{' '}
@@ -100,14 +100,14 @@ function AddonRecheck() {
             <Col>
               <Form.Check
                 type='radio'
-                defaultChecked={addon.recheckOption === ERecheckOptions.GOTO}
+                defaultChecked={addon.recheckOption === EErrorOptions.GOTO}
                 onChange={onUpdate}
-                value={ERecheckOptions.GOTO}
+                value={EErrorOptions.GOTO}
                 name='recheckOption'
                 label={t('modal.addon.recheck.goto')}
               />
             </Col>
-            {addon.recheckOption === ERecheckOptions.GOTO && (
+            {addon.recheckOption === EErrorOptions.GOTO && (
               <Col xs={{ span: 3, offset: 9 }}>
                 <Form.Select value={addon.recheckGoto} onChange={onUpdateGoto} name='goto' required>
                   {actions.map((_action, index) => (

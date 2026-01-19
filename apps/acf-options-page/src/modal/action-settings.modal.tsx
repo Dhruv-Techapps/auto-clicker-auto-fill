@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 
-import { ERetryOptions } from '@dhruv-techapps/acf-common';
+import { EErrorOptions } from '@dhruv-techapps/acf-common';
 import { Alert, Button, Card, Col, Form, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -39,7 +39,7 @@ const ActionSettingsModal = () => {
     const update = getFieldNameValue(e, settings);
     if (update) {
       dispatch(updateActionSettings(update));
-      if (update.name === 'retryOption' && update.value === ERetryOptions.GOTO) {
+      if (update.name === 'retryOption' && update.value === EErrorOptions.GOTO) {
         dispatch(updateActionSettingsGoto(actions[0].id));
       }
     }
@@ -129,8 +129,8 @@ const ActionSettingsModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
-                    value={ERetryOptions.STOP}
-                    checked={settings.retryOption === ERetryOptions.STOP}
+                    value={EErrorOptions.STOP}
+                    checked={settings.retryOption === EErrorOptions.STOP}
                     onChange={onUpdate}
                     name='retryOption'
                     label={t('modal.actionSettings.retry.stop')}
@@ -139,8 +139,8 @@ const ActionSettingsModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
-                    value={ERetryOptions.SKIP}
-                    checked={settings.retryOption === ERetryOptions.SKIP}
+                    value={EErrorOptions.SKIP}
+                    checked={settings.retryOption === EErrorOptions.SKIP}
                     onChange={onUpdate}
                     name='retryOption'
                     label={t('modal.actionSettings.retry.skip')}
@@ -149,8 +149,8 @@ const ActionSettingsModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
-                    value={ERetryOptions.RELOAD}
-                    checked={settings.retryOption === ERetryOptions.RELOAD}
+                    value={EErrorOptions.RELOAD}
+                    checked={settings.retryOption === EErrorOptions.RELOAD}
                     onChange={onUpdate}
                     name='retryOption'
                     label={t('modal.actionSettings.retry.refresh')}
@@ -159,14 +159,14 @@ const ActionSettingsModal = () => {
                 <Col>
                   <Form.Check
                     type='radio'
-                    value={ERetryOptions.GOTO}
-                    checked={settings.retryOption === ERetryOptions.GOTO}
+                    value={EErrorOptions.GOTO}
+                    checked={settings.retryOption === EErrorOptions.GOTO}
                     onChange={onUpdate}
                     name='retryOption'
                     label={t('modal.actionSettings.retry.goto')}
                   />
                 </Col>
-                {settings.retryOption === ERetryOptions.GOTO && (
+                {settings.retryOption === EErrorOptions.GOTO && (
                   <Col xs={{ span: 3, offset: 9 }}>
                     <Form.Select value={settings.retryGoto} onChange={onUpdateGoto} name='goto' required>
                       {actions.map((_action, index) => (

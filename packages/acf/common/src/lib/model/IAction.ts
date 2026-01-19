@@ -1,60 +1,14 @@
 import { TRandomUUID, generateUUID } from '@dhruv-techapps/core-common';
-
+import { EActionStatus, IActionStatement } from './IActionStatement';
 import { IAddon } from './IAddon';
-import { ERetryOptions } from './ISetting';
-import { TGoto } from './TGoto';
-
-// Action Condition
-export enum EActionStatus {
-  DONE = 'done',
-  SKIPPED = 'skipped'
-}
-
-export enum EActionRunning {
-  SKIP = 'skip',
-  GOTO = 'goto',
-  PROCEED = 'proceed'
-}
-
-export enum EActionConditionOperator {
-  AND = 'and',
-  OR = 'or'
-}
-
-export interface IActionCondition {
-  id: TRandomUUID;
-  actionIndex?: number;
-  actionId: TRandomUUID;
-  status: EActionStatus;
-  operator?: EActionConditionOperator;
-}
-
-export const getDefaultActionCondition = (actionId: TRandomUUID, operator?: EActionConditionOperator): IActionCondition => ({
-  id: generateUUID(),
-  actionId,
-  status: EActionStatus.DONE,
-  operator
-});
-
-// Action Statement
-
-export interface IActionStatement {
-  conditions: Array<IActionCondition>;
-  then: ERetryOptions;
-  goto?: TGoto;
-}
-
-export const getDefaultActionStatement = (actionId: TRandomUUID, operator?: EActionConditionOperator): IActionStatement => ({
-  conditions: [getDefaultActionCondition(actionId, operator)],
-  then: ERetryOptions.STOP
-});
+import { EErrorOptions, TGoto } from './ICommon';
 
 // Action Setting
 export interface IActionSettings {
   iframeFirst?: boolean;
   retry?: number;
   retryInterval?: number | string;
-  retryOption?: ERetryOptions;
+  retryOption?: EErrorOptions;
   retryGoto?: TGoto;
 }
 
