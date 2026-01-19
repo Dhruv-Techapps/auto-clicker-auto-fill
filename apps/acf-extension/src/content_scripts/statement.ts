@@ -50,6 +50,10 @@ const Statement = (() => {
       const { conditions, option, then, goto } = statement;
       // Backward compatibility: use 'then' if 'option' is undefined
       const errorOption = option ?? then;
+      // Validate that when conditions are provided, an error option is also specified
+      if (conditions && conditions.length > 0 && !errorOption) {
+        throw new ConfigError(I18N_ERROR.ACTION_CONDITION_CONFIG_ERROR, ACTION_CONDITION_I18N.TITLE);
+      }
       if (conditions && errorOption) {
         const key = generateUUID();
         try {
