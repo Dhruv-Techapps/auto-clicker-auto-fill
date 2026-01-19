@@ -12,10 +12,10 @@ export class StorageMigration {
       const updatedConfigs = configs.map((config) => {
         const updatedActions = config.actions.map((action) => {
           if (action.statement?.then !== undefined) {
-            const { then: thenOption } = action.statement;
+            const { then: thenOption, option, ...restStatement } = action.statement;
             action.statement = {
-              ...action.statement,
-              option: thenOption
+              ...restStatement,
+              option: option !== undefined ? option : thenOption
             };
           }
           return action;
