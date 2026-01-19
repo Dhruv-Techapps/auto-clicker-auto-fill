@@ -12,9 +12,11 @@ export class StorageMigration {
       const updatedConfigs = configs.map((config) => {
         const updatedActions = config.actions.map((action) => {
           if (action.statement?.then !== undefined) {
-            const thenOption = action.statement.then;
-            delete action.statement.then;
-            action.statement.option = thenOption;
+            const { then: thenOption } = action.statement;
+            action.statement = {
+              ...action.statement,
+              option: thenOption
+            };
           }
           return action;
         });
