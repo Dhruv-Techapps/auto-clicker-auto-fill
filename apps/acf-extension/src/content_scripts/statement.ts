@@ -47,15 +47,17 @@ const Statement = (() => {
 
   const check = (actions: Array<IAction | IUserScript>, statement?: IActionStatement) => {
     if (statement) {
-      const { conditions, option, goto } = statement;
-      if (conditions && option) {
+      const { conditions, option, then, goto } = statement;
+      // Backward compatibility: use 'then' if 'option' is undefined
+      const errorOption = option ?? then;
+      if (conditions && errorOption) {
         const key = generateUUID();
         try {
           OpenTelemetryService.startSpan(key, `Statement #${window.ext.__currentAction}`, {
             headers: window.ext.__actionHeaders,
-            attributes: { option, goto: goto || 'none', conditions: conditions.length }
+            attributes: { option: errorOption, goto: goto || 'none', conditions: conditions.length }
           });
-          checkThen(conditionResult(conditions, actions), option, goto);
+          checkThen(conditionResult(conditions, actions), errorOption, goto);
         } finally {
           OpenTelemetryService.endSpan(key);
         }
