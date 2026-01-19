@@ -14,7 +14,7 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const onUpdateThen = (option: EErrorOptions) => {
+  const onUpdateOption = (option: EErrorOptions) => {
     dispatch(updateActionStatementOption(option));
     if (option === EErrorOptions.GOTO) {
       const actionId = config?.actions[0].id;
@@ -47,7 +47,7 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
               required
               checked={option === EErrorOptions.STOP}
               value={EErrorOptions.STOP}
-              onChange={() => onUpdateThen(EErrorOptions.STOP)}
+              onChange={() => onUpdateOption(EErrorOptions.STOP)}
               name='then'
               label={t('modal.actionSettings.retry.stop')}
             />
@@ -58,7 +58,7 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
               required
               checked={option === EErrorOptions.SKIP}
               value={EErrorOptions.SKIP}
-              onChange={() => onUpdateThen(EErrorOptions.SKIP)}
+              onChange={() => onUpdateOption(EErrorOptions.SKIP)}
               name='then'
               label={t('modal.actionSettings.retry.skip')}
             />
@@ -69,7 +69,7 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
               required
               checked={option === EErrorOptions.RELOAD}
               value={EErrorOptions.RELOAD}
-              onChange={() => onUpdateThen(EErrorOptions.RELOAD)}
+              onChange={() => onUpdateOption(EErrorOptions.RELOAD)}
               name='then'
               label={t('modal.actionSettings.retry.refresh')}
             />
@@ -80,7 +80,7 @@ export const ActionStatementRetry = (props: ActionStatementRetryProps) => {
               required
               checked={option === EErrorOptions.GOTO}
               value={EErrorOptions.GOTO}
-              onChange={() => onUpdateThen(EErrorOptions.GOTO)}
+              onChange={() => onUpdateOption(EErrorOptions.GOTO)}
               name='then'
               label={t('modal.actionSettings.retry.goto')}
             />
