@@ -15,8 +15,8 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     }
   } else {
     new AcfSchedule().check();
-    await StorageMigration.migrate();
   }
 
+  await StorageMigration.migrate();
   DeviceStorage.getDeviceInfo();
 });
