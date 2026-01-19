@@ -9,14 +9,6 @@ export class StorageMigration {
     const configs = await ConfigStorage.getConfigs();
     const needsMigration = configs.some((config) => config.actions.some((action) => action.statement?.then !== undefined));
     if (needsMigration) {
-      ConfigStorage.getConfigs().then((configs) => {
-        const updatedConfigs = configs.map((config) => {
-          const updatedActions = config.actions.map((action) => {
-            if (action.statement?.then !== undefined) {
-              const { then: thenOption, ...restStatement } = action.statement;
-              const updatedStatement = {
-                ...restStatement,
-                option: thenOption,
       const updatedConfigs = configs.map((config) => {
         const updatedActions = config.actions.map((action) => {
           if (action.statement?.then !== undefined) {
