@@ -17,21 +17,19 @@ export class StorageMigration {
               const updatedStatement = {
                 ...restStatement,
                 option: thenOption,
-              };
-              return {
-                ...action,
-                statement: updatedStatement,
-              };
-            }
-            return action;
-          });
-          return {
-            ...config,
-            actions: updatedActions,
-          };
+      const updatedConfigs = configs.map((config) => {
+        const updatedActions = config.actions.map((action) => {
+          if (action.statement?.then !== undefined) {
+            const thenOption = action.statement.then;
+            delete action.statement.then;
+            action.statement.option = thenOption;
+          }
+          return action;
         });
-        ConfigStorage.setConfigs(updatedConfigs);
+        config.actions = updatedActions;
+        return config;
       });
+      await ConfigStorage.setConfigs(updatedConfigs);
     }
   }
 }
