@@ -13,14 +13,22 @@ export class StorageMigration {
         const updatedConfigs = configs.map((config) => {
           const updatedActions = config.actions.map((action) => {
             if (action.statement?.then !== undefined) {
-              const thenOption = action.statement.then;
-              delete action.statement.then;
-              action.statement.option = thenOption;
+              const { then: thenOption, ...restStatement } = action.statement;
+              const updatedStatement = {
+                ...restStatement,
+                option: thenOption,
+              };
+              return {
+                ...action,
+                statement: updatedStatement,
+              };
             }
             return action;
           });
-          config.actions = updatedActions;
-          return config;
+          return {
+            ...config,
+            actions: updatedActions,
+          };
         });
         ConfigStorage.setConfigs(updatedConfigs);
       });
