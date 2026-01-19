@@ -23,8 +23,10 @@ export const openActionStatementModalAPI = createAsyncThunk<OpenActionStatementM
   }
   const { statement } = action;
   let goto = statement?.goto;
-  if ((statement?.option ?? statement?.then) === EErrorOptions.GOTO && typeof statement.goto === 'number') {
-    goto = config.actions[statement.goto].id;
+  if (statement) {
+    if ((statement.option ?? statement.then) === EErrorOptions.GOTO && typeof statement.goto === 'number') {
+      goto = config.actions[statement.goto].id;
+    }
   }
   return { statement: statement, selectedActionId, goto, firstActionId: config.actions[0].id };
 });
