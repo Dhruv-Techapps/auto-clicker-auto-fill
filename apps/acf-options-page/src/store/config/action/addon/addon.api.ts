@@ -1,4 +1,4 @@
-import { ERecheckOptions, IAddon, TGoto } from '@dhruv-techapps/acf-common';
+import { EErrorOptions, IAddon, TGoto } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
@@ -22,7 +22,7 @@ export const openActionAddonModalAPI = createAsyncThunk<OpenActionAddonModalAPIR
   }
   const { addon } = action;
   let recheckGoto = addon?.recheckGoto;
-  if (addon?.recheckOption === ERecheckOptions.GOTO && typeof addon.recheckGoto === 'number') {
+  if (addon?.recheckOption === EErrorOptions.GOTO && typeof addon.recheckGoto === 'number') {
     recheckGoto = config.actions[addon.recheckGoto].id;
   }
   return { addon: action.addon, selectedActionId, recheckGoto };

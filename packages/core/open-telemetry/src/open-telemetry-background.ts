@@ -1,7 +1,7 @@
 import { context, propagation, Span } from '@opentelemetry/api';
-import { logs, type LogRecord } from '@opentelemetry/api-logs';
+import { logs } from '@opentelemetry/api-logs';
 import { trace } from './lib/open-telemetry-trace-background';
-import type { EndSpanMessage, RecordExceptionMessage, SpanAttributeMessage, SpanEventMessage, StartActiveSpanMessage } from './lib/open-telemetry.types';
+import type { EndSpanMessage, LogMessage, RecordExceptionMessage, SpanAttributeMessage, SpanEventMessage, StartActiveSpanMessage } from './lib/open-telemetry.types';
 
 export * from './lib/open-telemetry-constant';
 export * from './lib/open-telemetry-logger-background';
@@ -18,11 +18,13 @@ const activeSpans = new Map<string, Span>(); // key -> Span
 export class OpenTelemetryBackground {
   private readonly tracer = trace.getTracer('content-script', version);
   // This class can be expanded in the future if needed
-  async log(logRecord: LogRecord) {
-    contentScriptLogger.emit(logRecord);
+  async log({ logRecord, headers = {} }: LogMessage) {
+    context.with(propagation.extract(context.active(), headers), () => {
+      contentScriptLogger.emit(logRecord);
+    });
   }
 
-  async startActiveSpan({ key, name, options, attributes, headers = {} }: StartActiveSpanMessage) {
+  async startActiveSpan({ key, name, options, attributes, headers = {} }: StartActiveSpanMessage): Promise<Record<string, string>> {
     return new Promise((resolve) => {
       context.with(propagation.extract(context.active(), headers), () => {
         this.tracer.startActiveSpan(name, options, (span) => {
@@ -38,7 +40,10 @@ export class OpenTelemetryBackground {
     });
   }
 
-  async startSpan({ key, name, options, attributes, headers = {} }: StartActiveSpanMessage) {
+  async startSpan({ key, name, options, attributes, headers }: StartActiveSpanMessage): Promise<Record<string, string> | undefined> {
+    if (!headers) {
+      return;
+    }
     return new Promise((resolve) => {
       context.with(propagation.extract(context.active(), headers), () => {
         this.tracer.startActiveSpan(name, options, (span) => {

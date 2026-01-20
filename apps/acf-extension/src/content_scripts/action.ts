@@ -26,6 +26,7 @@ const ActionProcessor = (() => {
 
   const process = async (action: IAction): Promise<TActionResult | void> => {
     const elementFinder = await ACFValue.getValue(action.elementFinder);
+    OpenTelemetryService.addEvent(window.ext.__actionKey, `Element Finder - ${elementFinder}`);
     const elements = await Common.start(elementFinder, action.settings);
     if (elements === undefined || elements.length === 0) {
       return { status: EActionStatus.SKIPPED };

@@ -1,9 +1,4 @@
-export enum ERetryOptions {
-  STOP = 'stop',
-  SKIP = 'skip',
-  RELOAD = 'reload',
-  GOTO = 'goto'
-}
+import { EErrorOptions } from './ICommon';
 
 export interface ISettingsNotifications {
   onAction: boolean;
@@ -35,7 +30,7 @@ export const defaultSettingsBackup = {
 export interface ISettings {
   retry: number;
   retryInterval: number | string;
-  retryOption: ERetryOptions;
+  retryOption: EErrorOptions;
   checkiFrames: boolean;
   statusBar: 'hide' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   backup?: ISettingsBackup;
@@ -48,7 +43,7 @@ export const defaultSettings: ISettings = {
   retry: 5,
   retryInterval: 1,
   statusBar: 'bottom-right',
-  retryOption: ERetryOptions.STOP,
+  retryOption: EErrorOptions.STOP,
   checkiFrames: false
 };
 

@@ -1,4 +1,4 @@
-import { ERetryOptions, IActionCondition, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
+import { EErrorOptions, IActionCondition, IActionStatement, TGoto } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
@@ -49,8 +49,8 @@ const slice = createSlice({
         state.statement.conditions?.splice(conditionIndex, 1);
       }
     },
-    updateActionStatementThen: (state, action: PayloadAction<ERetryOptions>) => {
-      state.statement.then = action.payload;
+    updateActionStatementOption: (state, action: PayloadAction<EErrorOptions>) => {
+      state.statement.option = action.payload;
     },
     updateActionStatementGoto: (state, action: PayloadAction<TGoto>) => {
       state.statement.goto = action.payload;
@@ -89,7 +89,7 @@ export const {
   switchActionStatementModal,
   updateActionStatementCondition,
   updateActionStatementGoto,
-  updateActionStatementThen
+  updateActionStatementOption
 } = slice.actions;
 
 export const actionStatementSelector = (state: RootState) => state.actionStatement;

@@ -1,4 +1,4 @@
-import { ERetryOptions, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
+import { EErrorOptions, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { I18N_ERROR } from './i18n';
@@ -109,17 +109,17 @@ const Common = (() => {
     return elements;
   };
 
-  const checkRetryOption = (retryOption: ERetryOptions, elementFinder: string, retryGoto?: TGoto): void => {
-    if (retryOption === ERetryOptions.RELOAD) {
+  const checkRetryOption = (retryOption: EErrorOptions, elementFinder: string, retryGoto?: TGoto): void => {
+    if (retryOption === EErrorOptions.RELOAD) {
       if (document.readyState === 'complete') {
         window.location.reload();
       } else {
         window.addEventListener('load', window.location.reload);
       }
       throw new ConfigError(`elementFinder: ${elementFinder}`, I18N_ERROR.NOT_FOUND_RELOAD);
-    } else if (retryOption === ERetryOptions.STOP) {
+    } else if (retryOption === EErrorOptions.STOP) {
       throw new ConfigError(`elementFinder: ${elementFinder}`, I18N_ERROR.NOT_FOUND_STOP);
-    } else if (retryOption === ERetryOptions.GOTO) {
+    } else if (retryOption === EErrorOptions.GOTO) {
       throw retryGoto;
     }
   };

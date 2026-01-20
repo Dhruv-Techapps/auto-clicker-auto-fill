@@ -16,7 +16,7 @@ export class OpenTelemetryService extends CoreService {
   }
 
   static async startSpan(key: TRandomUUID, name: string, rest?: { headers?: Record<string, string>; options?: SpanOptions; attributes?: Record<string, AttributeValue> }) {
-    return await this.message<OpenTelemetryRequest, Record<string, string>>({
+    return await this.message<OpenTelemetryRequest, Record<string, string> | undefined>({
       messenger: RUNTIME_MESSAGE_OPEN_TELEMETRY,
       methodName: 'startSpan',
       message: { key, name, ...rest }
@@ -39,14 +39,15 @@ export class OpenTelemetryService extends CoreService {
     return await this.message<OpenTelemetryRequest>({ messenger: RUNTIME_MESSAGE_OPEN_TELEMETRY, methodName: 'addEvent', message: { key, name, attributes } });
   }
 
-  static async log(logRecord: LogRecord) {
-    return await this.message<OpenTelemetryRequest>({ messenger: RUNTIME_MESSAGE_OPEN_TELEMETRY, methodName: 'log', message: logRecord });
+  static async log(logRecord: LogRecord, headers: Record<string, string> = {}) {
+    return await this.message<OpenTelemetryRequest>({ messenger: RUNTIME_MESSAGE_OPEN_TELEMETRY, methodName: 'log', message: { logRecord, headers } });
   }
 }
 
 export class LoggerService extends CoreLogger {
   static override emit(logRecord: LogRecord) {
-    return OpenTelemetryService.log(logRecord);
+    const headers = window.ext?.__actionHeaders || window.ext?.__batchHeaders || window.ext?.__configHeaders || {};
+    return OpenTelemetryService.log(logRecord, headers);
   }
 }
 const sharedHandleError = (key: TRandomUUID, event: unknown, message: string, logger: 'error' | 'fatal', attributes?: AnyValueMap) => {

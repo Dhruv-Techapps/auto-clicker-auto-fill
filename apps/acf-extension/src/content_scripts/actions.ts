@@ -1,4 +1,4 @@
-import { EActionRunning, EActionStatus, IAction, isUserScript, IUserScript, TActionResult } from '@dhruv-techapps/acf-common';
+import { EActionStatus, EErrorOptions, IAction, isUserScript, IUserScript, TActionResult } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, generateUUID } from '@dhruv-techapps/core-common';
 import { LoggerService, OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
@@ -43,7 +43,7 @@ const Actions = (() => {
       console.debug(`${ACTION_I18N.TITLE} #${window.ext.__currentAction}`, `[${window.ext.__currentActionName}]`, window.ext.__actionError, `⏭️ ${EActionStatus.SKIPPED}`);
       action.status = EActionStatus.SKIPPED;
       return currentIndex + 1; // Skip to next action
-    } else if (result.status === EActionRunning.GOTO) {
+    } else if (result.status === EErrorOptions.GOTO) {
       const index = typeof result.goto === 'number' ? result.goto : actions.findIndex((a) => a.id === result.goto);
       if (index === -1) {
         throw new ConfigError(I18N_ERROR.ACTION_NOT_FOUND_FOR_GOTO, ACTION_I18N.TITLE);
@@ -66,7 +66,6 @@ const Actions = (() => {
         i += 1;
         continue;
       }
-      statusBar.actionUpdate(i + 1);
       window.ext.__currentAction = i + 1;
       window.ext.__actionKey = generateUUID();
       try {

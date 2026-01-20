@@ -1,4 +1,4 @@
-import { ERetryOptions, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
+import { EErrorOptions, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
@@ -23,7 +23,7 @@ export const openActionSettingsModalAPI = createAsyncThunk<OpenActionSettingsMod
   }
   const { settings } = action;
   let retryGoto = settings?.retryGoto;
-  if (settings?.retryOption === ERetryOptions.GOTO && typeof settings.retryGoto === 'number') {
+  if (settings?.retryOption === EErrorOptions.GOTO && typeof settings.retryGoto === 'number') {
     retryGoto = config.actions[settings.retryGoto].id;
   }
   return { settings: action.settings, selectedActionId, retryGoto };
