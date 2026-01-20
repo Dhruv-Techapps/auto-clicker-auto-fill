@@ -1,4 +1,4 @@
-import { EActionStatus, EAddonConditions, ERecheckOptions, IActionSettings, IAddon } from '@dhruv-techapps/acf-common';
+import { EActionStatus, EAddonConditions, EErrorOptions, IActionSettings, IAddon } from '@dhruv-techapps/acf-common';
 import { ConfigError, generateUUID, SystemError } from '@dhruv-techapps/core-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
@@ -27,7 +27,7 @@ const AddonProcessor = (() => {
       }
     }
     window.ext.__actionError = `${ADDON_I18N.TITLE} ${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${I18N_COMMON.CONDITION_NOT_SATISFIED}`;
-    if (recheckOption === ERecheckOptions.RELOAD) {
+    if (recheckOption === EErrorOptions.RELOAD) {
       if (document.readyState === 'complete') {
         window.location.reload();
       } else {
@@ -35,9 +35,9 @@ const AddonProcessor = (() => {
           window.location.reload();
         });
       }
-    } else if (recheckOption === ERecheckOptions.STOP) {
+    } else if (recheckOption === EErrorOptions.STOP) {
       throw new ConfigError(`'${nodeValue}' ${condition} '${value}'`, I18N_ERROR.NO_MATCH);
-    } else if (recheckOption === ERecheckOptions.GOTO && props.recheckGoto !== undefined) {
+    } else if (recheckOption === EErrorOptions.GOTO && props.recheckGoto !== undefined) {
       throw props.recheckGoto;
     }
     throw EActionStatus.SKIPPED;

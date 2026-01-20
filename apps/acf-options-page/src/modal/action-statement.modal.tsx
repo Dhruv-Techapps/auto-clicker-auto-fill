@@ -64,13 +64,13 @@ const ActionStatementModal = () => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     form.checkValidity();
-    if (!statement.conditions || !statement.then) {
+    if (!statement.conditions || !statement.option) {
       dispatch(setActionStatementError(t('error.condition')));
       return;
     }
     const conditions = verifyConditions(statement.conditions);
-    const then = statement.then;
-    dispatch(syncActionStatement({ ...statement, then, conditions }));
+    const option = statement.option;
+    dispatch(syncActionStatement({ ...statement, option, conditions }));
   };
 
   if (!config) {
@@ -105,7 +105,7 @@ const ActionStatementModal = () => {
             </tbody>
           </Table>
           {statement.conditions ? (
-            <ActionStatementRetry then={statement.then} goto={statement.goto} />
+            <ActionStatementRetry option={statement.option} goto={statement.goto} />
           ) : (
             <div className='p-5 d-flex justify-content-center'>
               <Button type='button' aria-label='Add' onClick={() => addCondition(config.actions[0].id)}>

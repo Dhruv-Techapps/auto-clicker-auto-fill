@@ -1,4 +1,4 @@
-import { TGoto } from './TGoto';
+import { EErrorOptions, TGoto } from './ICommon';
 
 export enum EAddonConditions {
   '~~ Select Condition ~~' = '',
@@ -14,13 +14,6 @@ export enum EAddonConditions {
   '✕ Is Not Checked ' = 'IsNotChecked'
 }
 
-export enum ERecheckOptions {
-  STOP = 'stop',
-  SKIP = 'skip',
-  RELOAD = 'reload',
-  GOTO = 'goto'
-}
-
 export interface IAddon {
   elementFinder: string;
   value: string;
@@ -29,7 +22,7 @@ export interface IAddon {
   valueExtractorFlags?: string;
   recheck?: number;
   recheckInterval?: number | string;
-  recheckOption: ERecheckOptions;
+  recheckOption: EErrorOptions;
   recheckGoto?: TGoto;
 }
 
@@ -37,5 +30,5 @@ export const defaultAddon: IAddon = {
   elementFinder: '',
   value: '',
   condition: EAddonConditions['~~ Select Condition ~~'],
-  recheckOption: ERecheckOptions.STOP
+  recheckOption: EErrorOptions.STOP
 };
