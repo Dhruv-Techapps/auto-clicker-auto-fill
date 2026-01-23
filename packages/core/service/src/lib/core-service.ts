@@ -11,6 +11,9 @@ export class CoreService {
   static trace = false;
 
   static getOtHeaders = (): Record<string, string> | undefined => {
+    if (window.ext == null) {
+      return undefined;
+    }
     return window.ext.__actionHeaders || window.ext.__batchHeaders || window.ext.__configHeaders;
   };
 

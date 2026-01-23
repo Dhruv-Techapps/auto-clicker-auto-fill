@@ -59,6 +59,12 @@ export class ConfigStorage {
   }
 
   urlMatcher(url: string, href: string) {
-    return new RegExp(url).test(href) || href.indexOf(url) !== -1;
+    try {
+      const regex = new RegExp(url);
+      return regex.test(href);
+    } catch (e) {
+      // Invalid regex, fallback to substring match
+    }
+    return href.indexOf(url) !== -1;
   }
 }
