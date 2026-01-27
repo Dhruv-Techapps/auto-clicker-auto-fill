@@ -52,19 +52,19 @@ export class ConfigStorage {
     return configs.find((config) => config.id === id);
   }
 
-  async getAllConfigs(url: string): Promise<Array<IConfiguration>> {
+  async getAllConfigs(href: string): Promise<Array<IConfiguration>> {
     let configs: Array<IConfiguration> = await ConfigStorage.getConfigs();
-    configs = configs.filter((config) => config.enable && config.url && this.urlMatcher(url, config.url));
+    configs = configs.filter((config) => config.enable && config.url && this.urlMatcher(config.url, href));
     return configs;
   }
 
   urlMatcher(url: string, href: string) {
     try {
       const regex = new RegExp(url);
-      return regex.test(href) || href.indexOf(url) !== -1;
+      return regex.test(href) || href.includes(url);
     } catch (e) {
       // Invalid regex, fallback to substring match
     }
-    return href.indexOf(url) !== -1;
+    return href.includes(url);
   }
 }
