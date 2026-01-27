@@ -149,7 +149,6 @@ const ConfigProcessor = (() => {
     rDate.setMinutes(Number(startTime.split(':')[1]));
     rDate.setSeconds(Number(startTime.split(':')[2]));
     rDate.setMilliseconds(Number(startTime.split(':')[3]));
-    LoggerService.debug(I18N_COMMON.SCHEDULE, { startTime: rDate.toISOString() });
     await new Promise((resolve) => {
       setTimeout(resolve, rDate.getTime() - new Date().getTime());
     });

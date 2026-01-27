@@ -15,10 +15,8 @@ const CONTEXT_MENU_I18N = {
 };
 
 const registerConfigsContextMenus = () => {
-  Logger.info('Registering configs context menus');
   let contextMenuExist = false;
   chrome.tabs.onActivated.addListener(() => {
-    Logger.info('Tab activated - updating configs context menus');
     if (contextMenuExist) {
       contextMenuExist = false;
       chrome.contextMenus.remove('configs-list-separator');
@@ -51,7 +49,6 @@ const registerConfigsContextMenus = () => {
 };
 
 export default function registerContextMenus(optionsPageUrl?: string, googleAnalytics?: GoogleAnalyticsBackground) {
-  Logger.info('Registering context menus');
   chrome.contextMenus.removeAll();
   chrome.contextMenus.create({ id: CONTEXT_MENU_ELEMENT_ID, title: CONTEXT_MENU_I18N.FIELD, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
   chrome.contextMenus.create({ id: SIDE_PANEL, title: CONTEXT_MENU_I18N.SIDE_PANEL, contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'video'] });
