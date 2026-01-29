@@ -10,6 +10,7 @@ const FIREBASE_PROJECT_ID = process.env.VITE_PUBLIC_FIREBASE_PROJECT_ID;
 const FIREBASE_BUCKET = process.env.VITE_PUBLIC_FIREBASE_BUCKET;
 const FIREBASE_FUNCTIONS_URL = process.env.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL ?? 'https://us-central1-auto-clicker-autofill.cloudfunctions.net';
 const RELEASE_VERSION = process.env.VITE_PUBLIC_RELEASE_VERSION;
+const UNINSTALL_URL = process.env.VITE_UNINSTALL_URL;
 export {
   API_SECRET,
   DISCORD_CLIENT_ID,
@@ -22,5 +23,6 @@ export {
   MEASUREMENT_ID,
   OPTIONS_PAGE_URL,
   RELEASE_VERSION,
+  UNINSTALL_URL,
   VARIANT
 };

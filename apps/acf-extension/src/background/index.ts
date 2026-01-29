@@ -22,6 +22,7 @@ import { AcfSchedule } from './acf-schedule';
 import './chrome.action.on-clicked';
 import './chrome.commands.on-command';
 import './chrome.runtime.on-installed';
+import './chrome.runtime.set-uninstall-url';
 import registerContextMenus from './context-menu';
 import { auth } from './firebase';
 import './global-error-handler';
