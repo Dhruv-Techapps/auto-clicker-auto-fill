@@ -90,6 +90,7 @@ jobs:
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
+          VITE_PUBLIC_UNINSTALL_URL: ${{vars.VITE_PUBLIC_UNINSTALL_URL}}
       - name: Determine Firebase Target
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
