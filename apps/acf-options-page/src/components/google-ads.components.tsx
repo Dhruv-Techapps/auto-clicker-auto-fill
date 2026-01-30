@@ -1,13 +1,24 @@
 import { memo, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import useAdRotator from '../hooks/useAdRotator';
 
 interface GoogleAdsProps {
   readonly client?: string;
   readonly slot?: string;
+  /** Optional: multiple ad slots to rotate through. */
+  readonly slots?: string[];
+  /** Rotation interval in ms (applies when `slots` length > 1). */
+  readonly rotateIntervalMs?: number;
   readonly className?: string;
 }
 
-const GoogleAds = memo(function GoogleAds({ client = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_CLIENT, slot = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_SLOT, className = 'mb-3' }: GoogleAdsProps) {
+const GoogleAds = memo(function GoogleAds({
+  client = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_CLIENT,
+  slot = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_SLOT,
+  slots,
+  rotateIntervalMs = Number(import.meta.env.VITE_PUBLIC_GOOGLE_ADS_ROTATE_INTERVAL_MS) || 30000,
+  className = 'mt-2'
+}: GoogleAdsProps) {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9512495707028343';
@@ -27,15 +38,54 @@ const GoogleAds = memo(function GoogleAds({ client = import.meta.env.VITE_PUBLIC
     document.head.appendChild(scriptFunding);
     return () => {
       // Cleanup the script when the component unmounts
-      document.head.removeChild(script);
-      document.head.removeChild(scriptFunding);
+      try {
+        document.head.removeChild(script);
+      } catch (e) {
+        console.error('Error while removing Google Ads script:', e);
+      }
+      try {
+        document.head.removeChild(scriptFunding);
+      } catch (e) {
+        console.error('Error while removing Funding Choices script:', e);
+      }
     };
   }, []);
+
+  // Build the list of slot IDs to rotate. Favor explicit `slots` prop.
+  const slotIds =
+    slots && slots.length > 0
+      ? slots
+      : slot
+        ? slot
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : [];
+
+  const { activeSlotId } = useAdRotator(slotIds, { intervalMs: rotateIntervalMs });
+
+  // Use the active slot id (fall back to provided single `slot` if no rotation)
+  const renderSlot = activeSlotId ?? slotIds[0] ?? slot;
+
+  useEffect(() => {
+    // After the ins element is mounted/changed, ask adsbygoogle to render.
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.error('adsbygoogle push error:', err);
+    }
+  }, [renderSlot]);
 
   return (
     <Row>
       <Col xs={12} className='text-center'>
-        <ins className={`${className} adsbygoogle`} style={{ display: 'block' }} data-ad-client={client} data-ad-slot={slot} data-ad-format='auto' data-full-width-responsive='true' />
+        <ins
+          key={String(renderSlot)}
+          className={`${className} adsbygoogle`}
+          style={{ display: 'inline-block', width: '728px', height: '90px', transition: 'opacity 300ms ease' }}
+          data-ad-client={client}
+          data-ad-slot={renderSlot}
+        />
       </Col>
     </Row>
   );

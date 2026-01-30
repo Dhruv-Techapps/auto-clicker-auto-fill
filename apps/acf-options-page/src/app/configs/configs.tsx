@@ -1,5 +1,4 @@
 import { download } from '@acf-options-page/_helpers';
-import { Ads } from '@acf-options-page/components';
 import { importAll, importConfig } from '@acf-options-page/store/config';
 import { configGetAllAPI } from '@acf-options-page/store/config/config.api';
 import { useAppDispatch } from '@acf-options-page/store/hooks';
@@ -77,7 +76,6 @@ function Configs() {
             <main>
               <Config />
               <Action />
-              <Ads />
               <Footer />
               <ConfigSettingsModal />
               <BatchModal />

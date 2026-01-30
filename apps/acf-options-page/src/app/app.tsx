@@ -4,7 +4,7 @@ import { StorageService } from '@dhruv-techapps/core-service';
 
 import { useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
-import { DataList, Loading, ToastHandler } from '../components';
+import { Ads, DataList, Loading, ToastHandler } from '../components';
 import { BlogModal, ExtensionNotFoundModal } from '../modal';
 import { LoginModal } from '../modal/login.modal';
 import { SubscribeModal } from '../modal/subscribe.modal';
@@ -69,6 +69,7 @@ function App() {
         )}
         <Header />
         {loading && <Loading message='Connecting with extension...' className='m-5 p-5' />}
+        <Ads />
         <Configs />
         <ToastHandler />
         <BlogModal />
