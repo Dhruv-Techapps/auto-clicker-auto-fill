@@ -16,7 +16,7 @@ const GoogleAds = memo(function GoogleAds({
   client = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_CLIENT,
   slot = import.meta.env.VITE_PUBLIC_GOOGLE_ADS_SLOT,
   slots,
-  rotateIntervalMs = 3000,
+  rotateIntervalMs = Number(import.meta.env.VITE_PUBLIC_GOOGLE_ADS_ROTATE_INTERVAL_MS) || 30000,
   className = 'mt-2'
 }: GoogleAdsProps) {
   useEffect(() => {
@@ -81,7 +81,7 @@ const GoogleAds = memo(function GoogleAds({
       <Col xs={12} className='text-center'>
         <ins
           key={String(renderSlot)}
-          className={`${className} adsbygoogle ad-fade`}
+          className={`${className} adsbygoogle`}
           style={{ display: 'inline-block', width: '728px', height: '90px', transition: 'opacity 300ms ease' }}
           data-ad-client={client}
           data-ad-slot={renderSlot}
