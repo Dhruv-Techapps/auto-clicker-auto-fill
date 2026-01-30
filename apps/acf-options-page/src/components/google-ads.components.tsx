@@ -40,10 +40,14 @@ const GoogleAds = memo(function GoogleAds({
       // Cleanup the script when the component unmounts
       try {
         document.head.removeChild(script);
-      } catch {}
+      } catch (e) {
+        console.error('Error while removing Google Ads script:', e);
+      }
       try {
         document.head.removeChild(scriptFunding);
-      } catch {}
+      } catch (e) {
+        console.error('Error while removing Funding Choices script:', e);
+      }
     };
   }, []);
 
@@ -68,7 +72,7 @@ const GoogleAds = memo(function GoogleAds({
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (err) {
-      // swallow errors — ad library may not be ready in tests
+      console.error('adsbygoogle push error:', err);
     }
   }, [renderSlot]);
 

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-type UseAdRotatorOptions = {
+interface UseAdRotatorOptions {
   intervalMs?: number;
   enabled?: boolean;
   pauseOnHidden?: boolean;
-};
+}
 
 export function useAdRotator(slotIds: string[] = [], options: UseAdRotatorOptions = {}) {
   const { intervalMs = 3000, enabled = true, pauseOnHidden = true } = options;
