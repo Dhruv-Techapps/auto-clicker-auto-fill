@@ -39,39 +39,40 @@ export class VisionValue {
     } else {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      if (ctx) {
-        if (element instanceof HTMLImageElement) {
-          canvas.width = element.naturalWidth;
-          canvas.height = element.naturalHeight;
-          ctx.drawImage(element, 0, 0);
-          const dataURL = canvas.toDataURL('image/png');
-          content = this.extractBase64Data(dataURL);
-        } else if (element instanceof SVGImageElement) {
-          const svg = element.ownerSVGElement;
-          if (!svg) {
-            throw new Error('No SVG owner found');
-          }
-          const svgData = new XMLSerializer().serializeToString(svg);
-          const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-          const url = URL.createObjectURL(svgBlob);
-          const img = new Image();
-          img.src = url;
-          await new Promise((resolve, reject) => {
-            img.onload = () => {
-              canvas.width = img.width;
-              canvas.height = img.height;
-              ctx.drawImage(img, 0, 0);
-              URL.revokeObjectURL(url);
-              resolve(true);
-            };
-            img.onerror = (e) => {
-              URL.revokeObjectURL(url);
-              reject(e);
-            };
-          });
-          const dataURL = canvas.toDataURL('image/png');
-          content = this.extractBase64Data(dataURL);
+      if (!ctx) {
+        throw new Error('Unable to obtain 2D canvas context for image processing');
+      }
+      if (element instanceof HTMLImageElement) {
+        canvas.width = element.naturalWidth;
+        canvas.height = element.naturalHeight;
+        ctx.drawImage(element, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        content = this.extractBase64Data(dataURL);
+      } else if (element instanceof SVGImageElement) {
+        const svg = element.ownerSVGElement;
+        if (!svg) {
+          throw new Error('No SVG owner found');
         }
+        const svgData = new XMLSerializer().serializeToString(svg);
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+        const img = new Image();
+        img.src = url;
+        await new Promise((resolve, reject) => {
+          img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            URL.revokeObjectURL(url);
+            resolve(true);
+          };
+          img.onerror = (e) => {
+            URL.revokeObjectURL(url);
+            reject(e);
+          };
+        });
+        const dataURL = canvas.toDataURL('image/png');
+        content = this.extractBase64Data(dataURL);
       }
     }
     return { content, imageUri: '' };
