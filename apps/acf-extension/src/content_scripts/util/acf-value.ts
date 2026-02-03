@@ -61,7 +61,7 @@ export class ACFValue {
       if (elements === undefined || typeof elements === 'number' || elements.length === 0) {
         throw new Error(I18N_ERROR.NO_ELEMENT_FOUND);
       }
-      const data = VisionValue.getImageSrc(elements);
+      const data = await VisionValue.getImageSrc(elements);
       return await VisionService.imagesAnnotate(data);
     } catch (error) {
       if (error instanceof Error) {
