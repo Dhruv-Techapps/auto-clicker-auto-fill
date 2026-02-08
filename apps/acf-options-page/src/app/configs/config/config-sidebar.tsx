@@ -66,10 +66,10 @@ export const ConfigSidebar = (props: ConfigSidebarProps) => {
 
   return (
     <div className='rounded sidebar bg-body'>
+      <Button variant='primary btn-large' onClick={() => dispatch(addConfig())} data-testid='add-configuration'>
+        <i className='bi bi-plus-lg' /> {t('configuration.add')}
+      </Button>
       <div className='d-flex justify-content-between align-items-center border-bottom p-2 rounded-top'>
-        <Button variant='primary' onClick={() => dispatch(addConfig())} data-testid='add-configuration'>
-          <i className='bi bi-plus-lg' /> {t('configuration.add')}
-        </Button>
         <Form className='flex-grow-1 mx-2'>
           <Form.Control className='d-flex' ref={searchRef} type='search' onChange={onSearchChange} placeholder='Search' id='search-configuration'></Form.Control>
         </Form>

@@ -1,57 +1,47 @@
-import { Nav, NavDropdown } from 'react-bootstrap';
-import { firebaseLogoutAPI, firebaseSelector, switchFirebaseLoginModal } from '../store/firebase';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router';
+import { firebaseSelector, switchFirebaseLoginModal } from '../store/firebase';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { switchSubscribeModal } from '../store/subscribe';
 
 export const HeaderGoogle = () => {
   const dispatch = useAppDispatch();
   const { user, role } = useAppSelector(firebaseSelector);
-
-  /*
-  const onPortalLink = async () => {
-    dispatch(switchIsPortalLinkLoading());
-    dispatch(addToast({ header: 'Loading Manage Subscription', variant: 'primary' }));
-    const token = await GoogleOauthService.getAuthToken([GOOGLE_SCOPES.PROFILE, GOOGLE_SCOPES.EMAIL]);
-
-    if (!token) {
-      return;
-    }
-    const credential = GoogleAuthProvider.credential(null, token);
-    if (credential) {
-      await signInWithCredential(getAuth(firebase), credential);
-    }
-
-    const functions = getFunctions(firebase, 'us-central1');
-    const httpsCallableFunc = httpsCallable<unknown, { url: string }>(functions, 'ext-firestore-stripe-payments-createPortalLink');
-    const { data } = await httpsCallableFunc({ returnUrl: window.location.origin });
-    if (data?.url) {
-      window.location.href = data.url;
-    } else {
-      dispatch(switchIsPortalLinkLoading());
-    }
+  const { t, i18n } = useTranslation();
+  const changeLanguage = async (lng: string) => {
+    await i18n.changeLanguage(lng);
+    document.documentElement.lang = lng;
+    localStorage.setItem('language', lng);
   };
-  */
-
   return (
-    <div>
+    <div className='d-flex flex-column p-3 border-top'>
       {user ? (
-        <NavDropdown title={user.displayName} id='subscription-nav-dropdown' align='end'>
-          {!role && (
-            <>
-              <NavDropdown.Item title='subscribe' onClick={() => dispatch(switchSubscribeModal())}>
-                Subscribe
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-            </>
-          )}
-          <NavDropdown.Item title='logout' onClick={() => dispatch(firebaseLogoutAPI())}>
-            Logout
-          </NavDropdown.Item>
-        </NavDropdown>
+        <Dropdown className='dropdown'>
+          <Dropdown.Toggle variant='secondary' as='div' className='d-flex align-items-center cursor-pointer'>
+            <div className='d-inline-flex align-items-center flex-grow-1'>
+              <div className='rounded-circle me-2 bg-secondary d-flex justify-content-center align-items-center' style={{ width: '36px', height: '36px' }}>
+                {user.displayName
+                  ?.split(' ')
+                  .map((name) => name.charAt(0).toUpperCase())
+                  .join('')}
+              </div>
+              <div>
+                {user.displayName}
+                {role && <small className='d-block text-body-secondary'>{role.toUpperCase()}</small>}
+              </div>
+            </div>
+          </Dropdown.Toggle>
+          <Dropdown.Menu className='w-100'>
+            <Dropdown.ItemText>{user.email}</Dropdown.ItemText>
+            <Dropdown.Item as={NavLink} to='/settings/general' className='text-decoration-none text-body'>
+              <i className='bi bi-gear me-2' /> Settings
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       ) : (
-        <Nav.Link title='login' onClick={() => dispatch(switchFirebaseLoginModal())}>
-          Login
-        </Nav.Link>
+        <button className='btn btn-primary' onClick={() => dispatch(switchFirebaseLoginModal())}>
+          {t('header.login')}
+        </button>
       )}
     </div>
   );

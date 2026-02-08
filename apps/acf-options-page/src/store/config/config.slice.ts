@@ -240,7 +240,11 @@ const selectedConfigIdSelector = (state: RootState) => state.configuration.selec
 const selectedActionIdSelector = (state: RootState) => state.configuration.selectedActionId;
 
 export const selectedConfigSelector = createSelector(filteredConfigsSelector, selectedConfigIdSelector, (configs, selectedConfigId) => configs.find((config) => config.id === selectedConfigId));
-
+export const configByIdSelector = createSelector(
+  filteredConfigsSelector,
+  (_: RootState, id: string | number | undefined) => id,
+  (configs, id) => configs.find((c) => String(c.id) === String(id))
+);
 //Action Selectors
 export const selectedActionSelector = createSelector(selectedConfigSelector, selectedActionIdSelector, (config, selectedActionId) => config?.actions.find((action) => action.id === selectedActionId));
 
