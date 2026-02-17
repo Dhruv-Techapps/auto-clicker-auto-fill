@@ -1,6 +1,7 @@
 'use client';
 
 import { Loading } from '@acf-options-page/components/loading.components';
+import { LoginModal } from '@acf-options-page/modal/login.modal';
 import { getManifest } from '@acf-options-page/store/app.api';
 import { appSelector } from '@acf-options-page/store/app.slice';
 import { firebaseIsLoginAPI } from '@acf-options-page/store/firebase/firebase-login.api';
@@ -29,14 +30,15 @@ export const Layout = () => {
 
   return (
     <>
-      <VersionAlert />
-      <ExtensionNotFoundAlert />
-      {loading && <Loading message='Connecting with extension...' className='m-5 p-5' />}
+      {loading && <Loading message='Connecting with extension...' className='text-secondary' />}
       <div className='d-flex flex-nowrap w-100 h-100'>
         <Sidebar />
         <main className='w-100 h-100 overflow-auto'>
+          <VersionAlert />
+          <ExtensionNotFoundAlert />
           <Outlet />
         </main>
+        <LoginModal />
       </div>
     </>
   );

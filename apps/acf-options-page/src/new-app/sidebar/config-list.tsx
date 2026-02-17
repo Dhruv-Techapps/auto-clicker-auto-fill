@@ -6,12 +6,17 @@ import { NavLink } from 'react-router';
 export const SidebarConfigList = () => {
   const configs = useAppSelector(filteredConfigsSelector);
   return (
-    <Nav className='mb-auto flex-column'>
-      {configs.map((config) => (
-        <NavLink to={`/config/${config.id}`} className='nav-link' key={config.id}>
-          {config.name || config.url}
-        </NavLink>
-      ))}
-    </Nav>
+    <>
+      <Nav className='flex-column mt-4'>
+        <Nav.Item className='mx-3'>
+          <small className='text-body-secondary'>Configurations</small>
+        </Nav.Item>
+        {configs.map((config) => (
+          <NavLink to={`/config/${config.id}`} className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')} key={config.id}>
+            {config.name || config.url}
+          </NavLink>
+        ))}
+      </Nav>
+    </>
   );
 };

@@ -26,6 +26,7 @@ export const AdditionalSettings = () => {
         </Form.Label>
         <Form.Check type='switch' name='checkiFrames' onChange={onUpdate} id='settings-checkiFrames' checked={settings.checkiFrames || false} />
       </li>
+      <hr />
       <li className='list-group-item d-flex justify-content-between align-items-center'>
         <Form.Label className='ms-2 me-auto' htmlFor='settings-reload-onerror'>
           <div className='fw-bold'>{t('modal.settings.reloadOnError')}</div>
@@ -34,6 +35,7 @@ export const AdditionalSettings = () => {
         </Form.Label>
         <Form.Check type='switch' name='reloadOnError' onChange={onUpdate} id='settings-reloadOnError' checked={settings.reloadOnError || false} />
       </li>
+      <hr />
       <li className='list-group-item d-flex justify-content-between align-items-center'>
         <Form.Label className='ms-2' htmlFor='settings-statusBar'>
           <div className='fw-bold'>{t('modal.settings.statusBar.title')}</div>
