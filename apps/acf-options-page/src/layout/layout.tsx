@@ -1,5 +1,7 @@
 'use client';
 
+import { ExtensionNotFoundAlert } from '@acf-options-page/alerts/extension-not-found-alert';
+import { VersionAlert } from '@acf-options-page/alerts/version-alert';
 import { Loading } from '@acf-options-page/components/loading.components';
 import { LoginModal } from '@acf-options-page/modal/login.modal';
 import { getManifest } from '@acf-options-page/store/app.api';
@@ -9,8 +11,6 @@ import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router';
-import { ExtensionNotFoundAlert } from './alerts/extension-not-found-alert';
-import { VersionAlert } from './alerts/version-alert';
 import { Sidebar } from './sidebar';
 
 export const Layout = () => {

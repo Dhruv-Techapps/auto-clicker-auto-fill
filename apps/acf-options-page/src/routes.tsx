@@ -1,15 +1,10 @@
-import { createBrowserRouter, Navigate } from 'react-router';
-import { SettingNotifications } from './modal/settings/notifications';
-import { Config } from './new-app/components/config';
-import { Home } from './new-app/components/home';
-import { Search } from './new-app/components/search';
-import { Settings } from './new-app/components/settings';
-import { AdditionalSettings } from './new-app/components/settings/additional';
-import { SettingsGeneral } from './new-app/components/settings/general';
-import { SettingsGoogleBackup } from './new-app/components/settings/google-backup';
-import { SettingGoogleSheets } from './new-app/components/settings/google-sheets';
-import { SettingRetry } from './new-app/components/settings/retry';
-import { Layout } from './new-app/layout';
+import { createBrowserRouter } from 'react-router';
+import { Layout } from './layout/layout';
+import { Config } from './routes/config';
+import { Home } from './routes/home';
+import { Search } from './routes/search';
+import { SettingsRoutes } from './routes/settings/settings-route';
+import { Upgrade } from './routes/upgrade';
 
 export const router = createBrowserRouter([
   {
@@ -22,22 +17,20 @@ export const router = createBrowserRouter([
         Component: Search
       },
       {
-        path: 'config/:id',
-        Component: () => <Config />
+        path: 'upgrade',
+        Component: () => <Upgrade />
       },
       {
-        path: 'settings',
-        Component: Settings,
+        path: 'config/:configId',
+        Component: () => <Config />,
         children: [
-          { index: true, Component: () => <Navigate to='general' replace /> },
-          { path: 'general', Component: () => <SettingsGeneral /> },
-          { path: 'notification', Component: () => <SettingNotifications /> },
-          { path: 'retry', Component: () => <SettingRetry /> },
-          { path: 'backup', Component: () => <SettingsGoogleBackup /> },
-          { path: 'google-sheets', Component: () => <SettingGoogleSheets /> },
-          { path: 'additional', Component: () => <AdditionalSettings /> }
+          {
+            path: 'action/:actionId',
+            Component: () => <div>Action</div>
+          }
         ]
-      }
+      },
+      SettingsRoutes
     ]
   }
 ]);
