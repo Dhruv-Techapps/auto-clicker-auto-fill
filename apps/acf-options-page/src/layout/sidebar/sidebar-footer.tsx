@@ -1,8 +1,11 @@
 import { firebaseLogoutAPI, firebaseSelector, switchFirebaseLoginModal } from '@acf-options-page/store/firebase';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { Dropdown } from 'react-bootstrap';
+import { Nav, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
+import { LanguageDropdown } from './sidebar-footer/language-dropdown';
+import { LearnMoreDropdown } from './sidebar-footer/learn-more-dropdown';
+import { ThemeDropdown } from './sidebar-footer/theme-dropdown';
 
 interface ISidebarFooterProps {
   visible: boolean;
@@ -11,17 +14,13 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
   const { visible } = props;
   const dispatch = useAppDispatch();
   const { user, role } = useAppSelector(firebaseSelector);
-  const { t, i18n } = useTranslation();
-  const changeLanguage = async (lng: string) => {
-    await i18n.changeLanguage(lng);
-    document.documentElement.lang = lng;
-    localStorage.setItem('language', lng);
-  };
+  const { t } = useTranslation();
+
   return (
-    <div className='d-flex flex-column p-3 border-top'>
-      <Dropdown className='dropdown'>
-        <Dropdown.Toggle variant='secondary' as='div' className='d-flex align-items-center cursor-pointer'>
-          <div className='d-inline-flex align-items-center flex-grow-1'>
+    <Nav className='p-2 border-top flex-column'>
+      <NavDropdown
+        title={
+          <div className='d-inline-flex align-items-center w-100 text-secondary-emphasis'>
             <div className='rounded-circle me-2 bg-body-tertiary d-flex justify-content-center align-items-center' style={{ width: '36px', height: '36px' }}>
               {user?.displayName
                 ?.split(' ')
@@ -31,36 +30,40 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
             {visible && (
               <div>
                 {user?.displayName ?? 'Explorer'}
-                <small className='d-block text-body-secondary'>{role?.toUpperCase() ?? 'FREE'}</small>
+                <small className='d-block text-body-tertiary'>{role?.toUpperCase() ?? 'FREE'}</small>
               </div>
             )}
           </div>
-        </Dropdown.Toggle>
-        <Dropdown.Menu className='w-100'>
-          {user?.email && <Dropdown.ItemText>{user?.email}</Dropdown.ItemText>}
-          <Dropdown.Item as={NavLink} to='/settings/general' className='text-decoration-none'>
-            <i className='bi bi-gear me-2' /> Settings
-          </Dropdown.Item>
-          <Dropdown.Divider />
-          {!role && (
-            <>
-              <Dropdown.Item as={NavLink} to='/upgrade' className='text-decoration-none'>
-                <i className='bi bi-arrow-up-circle me-2' /> Upgrade Plan
-              </Dropdown.Item>
-              <Dropdown.Divider />
-            </>
-          )}
-          {user ? (
-            <Dropdown.Item onClick={() => dispatch(firebaseLogoutAPI())} className='text-decoration-none'>
-              <i className='bi bi-door-closed me-2' /> {t('header.logout')}
-            </Dropdown.Item>
-          ) : (
-            <Dropdown.Item onClick={() => dispatch(switchFirebaseLoginModal())} className='text-decoration-none'>
-              <i className='bi bi-door-open me-2' /> {t('header.login')}
-            </Dropdown.Item>
-          )}
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
+        }
+        as='div'
+        id='nav-dropdown'
+        drop='up'
+        className='d-block w-100'
+      >
+        {user?.email && <NavDropdown.ItemText className='text-truncate text-body-tertiary'>{user?.email}</NavDropdown.ItemText>}
+        <NavDropdown.Item as={NavLink} to='/settings/general'>
+          <i className='bi bi-gear me-2' /> {t('sidebar.settings')}
+        </NavDropdown.Item>
+        <LanguageDropdown />
+        <ThemeDropdown />
+        <NavDropdown.Divider />
+        {!role && (
+          <NavDropdown.Item as={NavLink} to='/upgrade'>
+            <i className='bi bi-arrow-up-circle me-2' /> {t('sidebar.upgradePlan')}
+          </NavDropdown.Item>
+        )}
+        <LearnMoreDropdown />
+        <NavDropdown.Divider />
+        {user ? (
+          <NavDropdown.Item onClick={() => dispatch(firebaseLogoutAPI())}>
+            <i className='bi bi-door-open me-2' /> {t('sidebar.logout')}
+          </NavDropdown.Item>
+        ) : (
+          <NavDropdown.Item onClick={() => dispatch(switchFirebaseLoginModal())}>
+            <i className='bi bi-door-closed me-2' /> {t('sidebar.login')}
+          </NavDropdown.Item>
+        )}
+      </NavDropdown>
+    </Nav>
   );
 };

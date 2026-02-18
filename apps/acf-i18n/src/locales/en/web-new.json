@@ -1,0 +1,445 @@
+{
+  "meta": {
+    "appName": "Auto Clicker - AutoFill",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+
+  "status": {
+    "connecting": "Connecting..."
+  },
+
+  "shared": {
+    "links": {
+      "googleGroup": "Google Group",
+      "docs": "Docs",
+      "blog": "Blog",
+      "configuration": "Configuration",
+      "issues": "Issues",
+      "discussion": "Discussion",
+      "test": "Practice Form",
+      "about": "About",
+      "contact": "Contact",
+      "chat": "Chat",
+      "connect": "Connect",
+      "privacy": "Privacy & Policy"
+    },
+    "social": {
+      "discord": "Discord",
+      "youtube": "Youtube",
+      "facebook": "Facebook",
+      "whatsapp": "Whatsapp",
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "github": "Github"
+    },
+    "statusBarPositions": {
+      "hide": "Hide",
+      "topLeft": "Top Left",
+      "topRight": "Top Right",
+      "bottomLeft": "Bottom Left",
+      "bottomRight": "Bottom Right"
+    }
+  },
+
+  "header": {
+    "theme": {
+      "light": "Switch to the light theme",
+      "dark": "Switch to the dark theme"
+    },
+    "googleGroup": "Google Group",
+    "login": "Login",
+    "logout": "Logout",
+    "settings": "Global Settings"
+  },
+
+  "footer": {
+    "resources": "Resources",
+    "links": {
+      "docs": "Docs",
+      "blog": "Blog",
+      "configuration": "Configuration",
+      "issues": "Issues",
+      "rateUs": "Rate us",
+      "discussion": "Discussion",
+      "test": "Practice Form",
+      "about": "About",
+      "contact": "Contact",
+      "chat": "Chat",
+      "connect": "Connect",
+      "googleGroup": "Google Group",
+      "privacy": "Privacy & Policy"
+    },
+    "social": {
+      "title": "Social",
+      "networks": {
+        "discord": "Discord",
+        "youtube": "Youtube",
+        "facebook": "Facebook",
+        "whatsapp": "Whatsapp",
+        "instagram": "Instagram",
+        "twitter": "Twitter",
+        "github": "Github"
+      }
+    }
+  },
+
+  "toast": {
+    "configuration": {
+      "addConfig": {
+        "header": "Configuration",
+        "body": "[{{name}}] added successfully"
+      },
+      "duplicateConfig": {
+        "header": "Configuration",
+        "body": "[{{name}}] duplicated successfully"
+      },
+      "removeConfig": {
+        "header": "Configuration",
+        "body": "[{{name}}] removed successfully"
+      },
+      "exportAll": {
+        "header": "Bulk Export",
+        "body": "Configurations exported successfully"
+      },
+      "importAll": {
+        "header": "Bulk Import",
+        "body": "Configurations imported successfully"
+      },
+      "importError": { "header": "Import Error" },
+      "importSuccess": {
+        "header": "Configuration",
+        "body": "[{{name}}] imported successfully"
+      },
+      "updateBatch": {
+        "header": "Batch",
+        "body": "Batch saved successfully!"
+      }
+    },
+    "action": {
+      "save": {
+        "header": "Actions",
+        "body": "Actions saved successfully!"
+      }
+    }
+  },
+
+  "confirm": {
+    "configuration": {
+      "remove": {
+        "title": "Remove Configuration",
+        "message": "Are you sure to remove [{{name}}] Configuration?"
+      }
+    },
+    "backup": {
+      "restore": {
+        "title": "Restore Configurations from cloud",
+        "message": "Are you sure to restore configurations from cloud? It will replace all your configurations and this process is not reversible."
+      }
+    },
+    "action": {
+      "remove": {
+        "title": "Remove Action",
+        "message": "Are you sure to remove [{{name}}] Action?"
+      }
+    },
+    "userscript": {
+      "remove": {
+        "title": "Remove User Script",
+        "message": "Are you sure to remove [{{name}}] User Script?"
+      }
+    }
+  },
+
+  "modal": {
+    "settings": {
+      "title": "Global Settings",
+      "checkIFrames": "Check IFrames",
+      "checkIFramesHint": "This checks elements within iFrames",
+      "reloadOnError": "Reload on Errors",
+      "reloadOnErrorHint": "This reloads page if any error occurs",
+      "advance": "Advance",
+      "advanceHint": "Enable advance mode for more features",
+      "notification": {
+        "title": "Show Notification",
+        "error": "On Error occurred",
+        "action": "On Action completion",
+        "batch": "On Batch completion",
+        "config": "On Config completion",
+        "sound": "Notification Sound",
+        "discord": {
+          "title": "Notification on Discord",
+          "hint": "You need to login and join our <1>Discord server</1> in order to receive notification on Discord",
+          "info": "It's currently under development and feature may move to <b>action</b> specific notification in upcoming release"
+        }
+      },
+      "statusBar": {
+        "title": "Status Bar",
+        "hint": "Show status bar at bottom of the page",
+        "positions": {
+          "hide": "Hide",
+          "topLeft": "Top Left",
+          "topRight": "Top Right",
+          "bottomLeft": "Bottom Left",
+          "bottomRight": "Bottom Right"
+        }
+      },
+      "retry": {
+        "title": "Retry",
+        "interval": "Retry Interval",
+        "stop": "Stop",
+        "skip": "Skip Not Found",
+        "refresh": "Refresh",
+        "hint": "Below are actions which can be performed if xpath is not found by extension after retry"
+      },
+      "backup": {
+        "title": "Backup",
+        "lastBackup": "Last Backup:",
+        "backup": "Backup to Cloud",
+        "restore": "Restore from Cloud",
+        "now": "Backup Now",
+        "autoBackup": "Auto Backup",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "off": "Off"
+      },
+      "saveMessage": "Settings saved successfully!"
+    },
+
+    "configSettings": {
+      "title": "Config Settings",
+      "start": "Start",
+      "auto": "Auto",
+      "autoHint": "<b>Auto</b> (default) once browser is refreshed or new page is loaded extension auto loads with it",
+      "manual": "Manual",
+      "manualHint": "<b>Manual</b> once browser is loaded, user can manually invoke extension using hotkey",
+      "extensionLoad": "Extension Load",
+      "window": "Window",
+      "windowHint": "<b>Window</b> (default) browser loads extension once all its content is loaded",
+      "document": "Document",
+      "documentHint": "<b>Document</b> browser loads extension before scripts and images are loaded (faster)(unsafe)",
+      "triggerUrlChange": "Trigger on URL Change",
+      "triggerUrlChangeHint": "<b>Trigger URL Change</b> will trigger configuration if URL is changed without page reload (like in SPA)",
+      "urlMatch": "URL Match",
+      "regex": "Regex",
+      "exact": "Exact"
+    },
+
+    "reorder": {
+      "title": "Reorder Configurations",
+      "hint": "Please save all configurations before reordering"
+    },
+
+    "extensionNotFound": {
+      "title": "Extension Not Found",
+      "subTitle": "This is configuration page for <b>Auto Clicker - AutoFill {{VITE_PUBLIC_VARIANT}}</b> extension",
+      "hint": "You need to download extension first in order to make use of this"
+    },
+
+    "actionSettings": {
+      "title": "Action Settings",
+      "info": "Action settings will override global settings, and it's applicable for both action and its addon condition",
+      "iframeFirst": "Iframe First",
+      "iframeFirstHint": "This checks element within iframe first and then on main page",
+      "retry": {
+        "title": "Retry",
+        "hint": "* Below are actions which can be performed if xpath is not found by extension after retry",
+        "interval": "Retry Interval",
+        "stop": "Stop",
+        "skip": "Skip Action",
+        "goto": "Goto Action",
+        "refresh": "Refresh"
+      }
+    },
+
+    "actionCondition": {
+      "action": "Action",
+      "status": "Status",
+      "title": "Action Condition",
+      "info": "Action condition are used to add condition with relates to previous action status",
+      "skip": "Skip Action",
+      "goto": "Goto Action",
+      "proceed": "Proceed Action",
+      "hint": "Below are actions which can be performed if condition is not matched by extension"
+    },
+
+    "ads": {
+      "title": "Please allow ads on our site",
+      "subTitle": "Which of these extensions do you have?"
+    },
+
+    "addon": {
+      "title": "Addon",
+      "info": "Addon condition will be checked before executing Action",
+      "elementFinder": "Element Finder",
+      "condition": "Condition",
+      "value": "Value",
+      "valueExtractor": "Value Extractor",
+      "recheck": {
+        "title": "Recheck",
+        "hint": "* Below are actions which can be performed if recheck is not matched by extension after recheck",
+        "interval": "Recheck Interval",
+        "stop": "Stop",
+        "skip": "Skip Action",
+        "refresh": "Refresh",
+        "goto": "Goto Action"
+      }
+    },
+
+    "schedule": {
+      "title": "Schedule",
+      "info": "Schedule configuration for specific date and time",
+      "date": "Date",
+      "time": "Time",
+      "repeat": "Repeat"
+    }
+  },
+
+  "messages": {
+    "config": "Configuration saved successfully!",
+    "configSettings": "Config Setting saved successfully!",
+    "batch": "Batch saved successfully!",
+    "action": "Action saved successfully!",
+    "reorderActions": "Action reordered successfully!",
+    "removeAction": "Action removed successfully!",
+    "actionAddon": "Addon saved successfully!",
+    "actionStatement": "Action Condition saved successfully!",
+    "actionSettings": "Action Settings saved successfully!",
+    "schedule": "Schedule saved successfully!"
+  },
+
+  "sidebar": {
+    "newConfig": "New config",
+    "search": "Search",
+    "configurations": "Configurations ({{count}})",
+    "settings": "Settings",
+    "upgradePlan": "Upgrade Plan",
+    "login": "Login",
+    "logout": "Logout",
+    "language": "Language",
+    "theme": "Theme",
+    "learnMore": "Learn More"
+  },
+
+  "configuration": {
+    "title": "Configuration",
+    "add": "New Config",
+    "search": "Search",
+    "exportAll": "Bulk Export Configuration",
+    "importAll": "Bulk Import Configuration",
+    "remove": "Remove Configuration",
+    "duplicate": "Duplicate Configuration",
+    "reorder": "Reorder Configurations",
+    "removeConfigs": "Bulk Remove Configuration",
+    "settings": "Configuration Settings",
+    "enable": "Enable",
+    "export": "Export Configuration",
+    "import": "Import Configuration",
+    "url": "URL",
+    "name": "Name",
+    "initWait": "Init Wait",
+    "startTime": "Start Time",
+    "noConfig": "No Configuration Found, Please refine your search."
+  },
+
+  "batch": {
+    "title": "Batch",
+    "repeat": "Repeat",
+    "repeatHint": "<b>Repeat</b> will re run all actions without reloading page with the interval given.",
+    "repeatInterval": "R-Interval",
+    "refresh": "Refresh",
+    "refreshHint": "<b>Refresh</b> will reload the page once all actions are completed."
+  },
+
+  "error": {
+    "number": "Only valid numbers are allowed",
+    "interval": "Only valid numbers are allowed",
+    "url": "URL is required",
+    "initWait": "Only valid numbers are allowed",
+    "scheduleDate": "Schedule date should match YYYY-MM-DD (2025-12-01) format",
+    "scheduleTime": "Schedule time should match HH:mm:ss.sss (23:59:59.000) format",
+    "scheduleRepeat": "Schedule repeat should be number only",
+    "startTime": "Start time should match HH:mm:ss:fff (12:12:12:000) format",
+    "json": "Selected Json is not valid",
+    "hotKey": "Single letter without Ctrl/Command is not valid",
+    "valueExtractor": "Not a valid regex",
+    "value": "Value is required",
+    "condition": "Condition is required",
+    "elementFinder": "Element Finder is required"
+  },
+
+  "action": {
+    "title": "Action",
+    "add": "Add Action",
+    "addBefore": "Add Action Above",
+    "addAfter": "Add Action Below",
+    "addon": "Addon",
+    "remove": "Remove Action",
+    "settings": "Action Settings",
+    "disable": "Disable Action",
+    "enable": "Enable Action",
+    "initWait": "Init Wait",
+    "name": "Name",
+    "elementFinder": "Element Finder",
+    "value": "Value",
+    "repeat": "Repeat",
+    "repeatInterval": "R-Interval"
+  },
+
+  "userscript": {
+    "add": "Add User Script"
+  },
+
+  "popover": {
+    "valueExtractor": { "title": "Examples" },
+    "startTime": {
+      "content": "Try <1>Schedule URL</1> our new browser extension. <br /> it's used to schedule webpage / URL at particular day and time"
+    },
+    "hotkey": {
+      "title": "Hotkey",
+      "content": "Press hotkey on keyboard to auto type in field",
+      "hint": "Single letter without <kbd>Ctrl</kbd>, <kbd>Alt</kbd> or <kbd>Shift</kbd> is not valid"
+    }
+  },
+
+  "common": {
+    "appName": "Auto Clicker - AutoFill",
+    "settings": "Settings",
+    "error": "Error",
+    "save": "Save",
+    "clear": "Clear",
+    "close": "Close",
+    "download": "Download",
+    "disabled": "Disabled",
+    "sec": "sec",
+    "min": "min",
+    "no": "No",
+    "yes": "Yes",
+    "local": "LOCAL",
+    "dev": "DEV",
+    "stable": "STABLE",
+    "examples": "Examples"
+  },
+
+  "languages": {
+    "en": "English",
+    "fr": "French",
+    "ko": "Korean",
+    "ca": "Canada",
+    "hi": "Hindi",
+    "zh_CN": "Chinese (Simplified)",
+    "zh_TW": "Chinese (Traditional)",
+    "sv": "Swedish",
+    "pt": "Portuguese",
+    "ja": "Japanese",
+    "nl": "Dutch",
+    "de": "German",
+    "es": "Spanish",
+    "vi": "Vietnamese",
+    "fi": "Finnish",
+    "ar": "Arabic",
+    "it": "Italian",
+    "ru": "Russian",
+    "id": "Indonesian"
+  }
+}
