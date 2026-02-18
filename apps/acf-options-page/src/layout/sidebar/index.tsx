@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SidebarConfigList } from './config-list';
+import { SidebarConfigList } from './sidebar-config-list';
 import { SidebarFooter } from './sidebar-footer';
 import { SidebarHeader } from './sidebar-header';
 import { SidebarMenu } from './sidebar-menu';

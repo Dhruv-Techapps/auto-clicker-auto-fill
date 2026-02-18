@@ -10,10 +10,10 @@ export const SidebarConfigList = () => {
   return (
     <Nav className='flex-column mt-4'>
       <Nav.Item className='mx-3'>
-        <small className='text-body-secondary'>{t('sidebar.configurations', { count: configs.length })}</small>
+        <small className='text-body-tertiary'>{t('sidebar.configurations', { count: configs.length })}</small>
       </Nav.Item>
       {configs.map((config) => (
-        <NavLink to={`/config/${config.id}`} className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')} key={config.id}>
+        <NavLink to={`/config/${config.id}`} className={({ isActive }) => (isActive ? 'nav-link active text-body-emphasis bg-body-tertiary' : 'nav-link text-secondary-emphasis')} key={config.id}>
           {config.name || config.url}
         </NavLink>
       ))}
