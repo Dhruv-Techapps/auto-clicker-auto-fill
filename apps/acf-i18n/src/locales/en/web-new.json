@@ -442,5 +442,63 @@
     "it": "Italian",
     "ru": "Russian",
     "id": "Indonesian"
+  },
+
+  "home": {
+    "title": "Welcome to Auto Clicker – AutoFill",
+    "subtitle": "Automate clicks and form fills on any website by defining targets and actions.",
+    "quickStart": {
+      "title": "Quick Start Guide",
+      "step1": {
+        "title": "1. Install the Extension",
+        "desc": "Download and install the extension from the Chrome Web Store or Edge Add-ons.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Configure a Target Page",
+        "desc": "Open a web page, right-click any element and choose Auto Clicker – AutoFill → Configure for this Field.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Save & Run",
+        "desc": "Save your configuration and reload the target page. The automation runs automatically.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Helpful Tips",
+      "tip1": {
+        "title": "Try on the Test Page",
+        "desc": "Open test.getautoclicker.com, add two actions — one to fill a username field and one to click a button — then save and run.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Use XPath Element Finders",
+        "desc": "Target elements precisely using XPath expressions like //input[@name=\"username\"] instead of CSS selectors.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Handle Slow Page Loads",
+        "desc": "Set an Init Wait on your configuration if the page loads slowly before your actions run.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Global Settings & Hotkeys",
+        "desc": "Configure start mode, define a keyboard shortcut, and adjust the status bar position in Global Settings.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Right-click to Auto-Capture",
+        "desc": "Right-click any input or button on a page and select Configure for this Field to auto-fill the URL and Element Finder.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Video Guides",
+      "video1": { "title": "Getting Started with Auto Clicker AutoFill" },
+      "video2": { "title": "AutoFill Forms Automatically" },
+      "video3": { "title": "Click Buttons Automatically" },
+      "video4": { "title": "Advanced Configuration Tips" }
+    }
   }
 }

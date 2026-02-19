@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 import { Layout } from './layout/layout';
+import { Configuration } from './routes/configuration';
 import { Configurations } from './routes/configurations';
 import { Home } from './routes/home';
 import { SettingsRoutes } from './routes/settings/settings-route';
@@ -17,18 +18,14 @@ export const router = createBrowserRouter([
       },
       {
         path: 'configurations',
-        Component: () => <Configurations />
-      },
-      /*{
-        path: 'configurations/:configId',
-        Component: () => <Config />,
         children: [
+          { index: true, Component: () => <Configurations /> },
           {
-            path: 'actions/:actionId',
-            Component: () => <div>Action</div>
+            path: ':configId',
+            Component: () => <Configuration />
           }
         ]
-      },*/
+      },
       SettingsRoutes
     ]
   }
