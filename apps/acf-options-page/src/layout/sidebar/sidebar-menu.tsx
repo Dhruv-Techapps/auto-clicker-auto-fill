@@ -27,11 +27,6 @@ export const SidebarMenu = ({ visible }: SidebarMenuProps) => {
           <i className='bi bi-collection mx-2 text-body-emphasis' /> {visible && t('sidebar.configurations')}
         </Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link as={NavLink} to='/search' end className='text-body-secondary px-1'>
-          <i className='bi bi-search mx-2 text-body-emphasis' /> {visible && t('sidebar.search')}
-        </Nav.Link>
-      </Nav.Item>
     </Nav>
   );
 };

@@ -1,5 +1,4 @@
-import { firebaseLogoutAPI, firebaseSelector, switchFirebaseLoginModal } from '@acf-options-page/store/firebase';
-import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { firebaseLogoutAPI, firebaseSelector, switchFirebaseLoginModal, useAppDispatch, useAppSelector } from '@acf-options-page/store';
 import { Nav, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';

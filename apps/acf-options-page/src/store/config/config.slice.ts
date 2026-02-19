@@ -1,7 +1,7 @@
 import { CONFIGURATIONS } from '@acf-options-page/data/configurations';
 import { EConfigSource, EStartTypes, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
-import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LocalStorage } from '../../_helpers';
 import { RootState } from '../store';
 import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
@@ -16,7 +16,6 @@ const defaultDetailVisibility = { name: true, url: true };
 
 export interface ConfigStore {
   loading: boolean;
-  selectedConfigId: TRandomUUID;
   selectedActionId: TRandomUUID;
   error?: string;
   configs: Array<IConfiguration>;
@@ -26,6 +25,7 @@ export interface ConfigStore {
 }
 
 interface ConfigAction {
+  selectedConfigId: TRandomUUID;
   name: string;
   value: any;
 }
@@ -33,7 +33,6 @@ interface ConfigAction {
 const initialState: ConfigStore = {
   loading: true,
   configs: CONFIGURATIONS,
-  selectedConfigId: CONFIGURATIONS[0].id,
   selectedActionId: CONFIGURATIONS[0].actions[0].id,
   detailVisibility: LocalStorage.getItem(HIDDEN_DETAIL_KEY, defaultDetailVisibility)
 };
@@ -56,7 +55,6 @@ const slice = createSlice({
     addConfig: {
       reducer: (state, action: PayloadAction<IConfiguration>) => {
         state.configs.unshift(action.payload);
-        state.selectedConfigId = action.payload.id;
       },
       prepare: () => {
         const config = getDefaultConfig(EConfigSource.WEB);
@@ -64,8 +62,8 @@ const slice = createSlice({
       }
     },
     updateConfig: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value } = action.payload;
-      const { configs, selectedConfigId } = state;
+      const { name, value, selectedConfigId } = action.payload;
+      const { configs } = state;
 
       const selectedConfig = configs.find((config) => config.id === selectedConfigId);
       if (!selectedConfig) {
@@ -81,8 +79,8 @@ const slice = createSlice({
       }
     },
     updateConfigSettings: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value } = action.payload;
-      const { configs, selectedConfigId } = state;
+      const { name, value, selectedConfigId } = action.payload;
+      const { configs } = state;
 
       const selectedConfig = configs.find((config) => config.id === selectedConfigId);
       if (!selectedConfig) {
@@ -106,25 +104,20 @@ const slice = createSlice({
         return;
       }
       configs.splice(selectConfigIndex, 1);
-      if (configs.length !== 0) {
-        state.selectedConfigId = configs[0].id;
-      }
     },
     setConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = updateConfigIds(action.payload);
-      state.selectedConfigId = state.configs[0].id;
     },
     importAll: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs.push(...updateConfigIds(action.payload));
-      state.selectedConfigId = state.configs[0].id;
     },
     importConfig: (state, action: PayloadAction<IConfiguration>) => {
       const config = updateConfigId(action.payload);
       state.configs.push(config);
-      state.selectedConfigId = config.id;
     },
-    duplicateConfig: (state) => {
-      const { configs, selectedConfigId } = state;
+    duplicateConfig: (state, action: PayloadAction<TRandomUUID>) => {
+      const selectedConfigId = action.payload;
+      const { configs } = state;
       const id = crypto.randomUUID();
       const selectedConfig = configs.find((config) => config.id === selectedConfigId);
       if (!selectedConfig) {
@@ -135,10 +128,6 @@ const slice = createSlice({
       const name = '(Duplicate) ' + (selectedConfig.name || selectedConfig.url || 'Configuration');
       const actions = selectedConfig.actions.map((action) => ({ ...action, id: crypto.randomUUID() }));
       state.configs.push({ ...selectedConfig, name, id, actions });
-      state.selectedConfigId = id;
-    },
-    selectConfig: (state, action: PayloadAction<TRandomUUID>) => {
-      state.selectedConfigId = action.payload;
     },
     setDetailVisibility: (state, action: PayloadAction<string>) => {
       // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -153,10 +142,9 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(configGetAllAPI.fulfilled, (state, action) => {
       if (action.payload) {
-        const { configurations, selectedConfigId } = action.payload;
+        const { configurations } = action.payload;
         if (configurations.length !== 0) {
           state.configs = configurations;
-          state.selectedConfigId = selectedConfigId || configurations[0].id;
         }
       }
       state.loading = false;
@@ -195,7 +183,6 @@ export const {
   setConfigError,
   addConfig,
   setConfigs,
-  selectConfig,
   updateConfig,
   updateConfigSettings,
   removeConfig,
@@ -219,44 +206,5 @@ export const {
 
 //Config Selectors
 export const configSelector = (state: RootState) => state.configuration;
-
-const searchSelector = (state: RootState) => state.configuration.search;
-export const filteredConfigsSelector = createSelector(
-  (state: RootState) => state.configuration.configs,
-  searchSelector,
-  (configs, search) => {
-    return configs.filter((config) => {
-      if (!search) {
-        return true;
-      }
-      const name = config.name ? config.name.toLowerCase() : '';
-      const url = config.url ? config.url.toLowerCase() : '';
-      return name.includes(search.toLowerCase()) || url.includes(search.toLowerCase());
-    });
-  }
-);
-const selectedConfigIdSelector = (state: RootState) => state.configuration.selectedConfigId;
-const selectedActionIdSelector = (state: RootState) => state.configuration.selectedActionId;
-
-export const selectedConfigSelector = createSelector(filteredConfigsSelector, selectedConfigIdSelector, (configs, selectedConfigId) => configs.find((config) => config.id === selectedConfigId));
-export const configByIdSelector = createSelector(
-  filteredConfigsSelector,
-  (_: RootState, id: string | number | undefined) => id,
-  (configs, id) => configs.find((c) => String(c.id) === String(id))
-);
-//Action Selectors
-export const selectedActionSelector = createSelector(selectedConfigSelector, selectedActionIdSelector, (config, selectedActionId) => config?.actions.find((action) => action.id === selectedActionId));
-
-//Action Settings Selectors
-export const selectedActionSettingsSelector = createSelector(selectedActionSelector, (action) => action?.settings);
-
-//Action Statement Selectors
-export const selectedActionStatementSelector = createSelector(selectedActionSelector, (action) => action?.statement);
-
-// Action Addon Selectors
-export const selectedActionAddonSelector = createSelector(selectedActionSelector, (action) => action?.addon);
-
-// Action Statement Conditions Selectors
-export const selectedActionStatementConditionsSelector = createSelector(selectedActionSelector, (action) => action?.statement?.conditions);
 
 export const configReducer = slice.reducer;
