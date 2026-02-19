@@ -44,7 +44,6 @@ const slice = createSlice({
   reducers: {
     setConfigError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-
       state.message = undefined;
     },
     setConfigMessage: (state, action: PayloadAction<string | undefined>) => {

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import { Layout } from './layout/layout';
 import { Config } from './routes/config';
+import { Configurations } from './routes/configurations';
 import { Home } from './routes/home';
 import { Search } from './routes/search';
 import { SettingsRoutes } from './routes/settings/settings-route';
@@ -21,11 +22,15 @@ export const router = createBrowserRouter([
         Component: () => <Upgrade />
       },
       {
-        path: 'config/:configId',
+        path: 'configurations',
+        Component: () => <Configurations />
+      },
+      {
+        path: 'configurations/:configId',
         Component: () => <Config />,
         children: [
           {
-            path: 'action/:actionId',
+            path: 'actions/:actionId',
             Component: () => <div>Action</div>
           }
         ]

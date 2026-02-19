@@ -17,7 +17,7 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
   const { t } = useTranslation();
 
   return (
-    <Nav className='p-2 border-top flex-column'>
+    <Nav className={visible ? 'p-2 border-top flex-column' : 'flex-column'}>
       <NavDropdown
         title={
           <div className='d-inline-flex align-items-center w-100 text-secondary-emphasis'>
@@ -36,9 +36,9 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
           </div>
         }
         as='div'
-        id='nav-dropdown'
+        id='user-dropdown'
         drop='up'
-        className='d-block w-100'
+        className={visible ? 'd-block w-100 user-expand' : 'user-collapse'}
       >
         {user?.email && <NavDropdown.ItemText className='text-truncate text-body-tertiary'>{user?.email}</NavDropdown.ItemText>}
         <NavDropdown.Item as={NavLink} to='/settings/general'>

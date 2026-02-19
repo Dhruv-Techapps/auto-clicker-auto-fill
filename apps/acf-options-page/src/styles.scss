@@ -6,10 +6,12 @@ body {
   font-size: 14px;
 }
 
-.popover {
-  --bs-popover-max-width: 550px;
+.user-collapse > .dropdown-toggle {
+  padding: 0.5rem;
+  &::after {
+    display: none;
+  }
 }
-
-.bi {
-  font-size: 16px;
+.user-expand > .dropdown-toggle {
+  padding-left: 0;
 }

@@ -6,7 +6,7 @@ import { SidebarMenu } from './sidebar-menu';
 
 export const Sidebar = () => {
   const [visible, setVisible] = useState(localStorage.getItem('sidebar-state') !== 'collapsed');
-  const sidebarWidth = visible ? '21rem' : '4.5rem';
+  const sidebarWidth = visible ? '20rem' : '3.5rem';
 
   const toggleSidebar = () => {
     setVisible((prev) => {
@@ -19,7 +19,7 @@ export const Sidebar = () => {
   return (
     <div className='d-flex flex-column flex-shrink-0 border-end' style={{ width: sidebarWidth }}>
       <SidebarHeader visible={visible} toggleSidebar={toggleSidebar} />
-      <div className='mb-auto'>
+      <div className='mb-auto p-2'>
         <SidebarMenu visible={visible} />
         {visible && <SidebarConfigList />}
       </div>

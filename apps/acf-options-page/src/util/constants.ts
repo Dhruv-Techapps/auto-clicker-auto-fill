@@ -7,6 +7,7 @@ export const APP_LINK = {
   ISSUES: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/issues',
   DISCUSSIONS: 'https://github.com/Dhruv-Techapps/auto-clicker-auto-fill/discussions'
 };
+
 // Application Languages
 export const APP_LANGUAGES = ['en', 'ar', 'de', 'es', 'fi', 'fr', 'id', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'sv', 'vi', 'zh_CN', 'zh_TW'];
 

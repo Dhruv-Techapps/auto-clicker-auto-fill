@@ -311,7 +311,8 @@
   "sidebar": {
     "newConfig": "New config",
     "search": "Search",
-    "configurations": "Configurations ({{count}})",
+    "configurations": "Configurations",
+    "configurationsCount": "Configurations ({{count}})",
     "settings": "Settings",
     "upgradePlan": "Upgrade Plan",
     "login": "Login",
