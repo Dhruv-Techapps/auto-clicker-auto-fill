@@ -322,6 +322,22 @@
     "learnMore": "Learn More"
   },
 
+  "configurations": {
+    "title": "Configurations",
+    "newConfig": "New config",
+    "searchPlaceholder": "Search your configurations...",
+    "selected": "selected",
+    "selectAll": "Select all",
+    "exportSelected": "Export selected",
+    "deleteSelected": "Delete selected",
+    "cancelSelection": "Cancel selection",
+    "configsWithinExtension": "configs within extension",
+    "selectConfigs": "Select configurations",
+    "select": "Select",
+    "import": "Import",
+    "importAll": "Bulk Import Configuration"
+  },
+
   "configuration": {
     "title": "Configuration",
     "add": "New Config",
