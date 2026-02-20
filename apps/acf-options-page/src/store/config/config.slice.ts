@@ -208,3 +208,14 @@ export const {
 export const configSelector = (state: RootState) => state.configuration;
 
 export const configReducer = slice.reducer;
+
+export const configByIdSelector = (state: RootState, id: TRandomUUID) => state.configuration.configs.find((config) => config.id === id);
+
+export const actionByIdSelector = (state: RootState, id: TRandomUUID) => {
+  for (const config of state.configuration.configs) {
+    const action = config.actions.find((action) => action.id === id);
+    if (action) {
+      return action;
+    }
+  }
+};
