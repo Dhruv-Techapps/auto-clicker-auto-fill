@@ -4,19 +4,18 @@ import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LocalStorage } from '../../_helpers';
 import { RootState } from '../store';
-import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
+import { actionActions } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
 import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
 import { scheduleActions } from './schedule';
-import { openWatchModalAPI, watchActions } from './watch';
+import { watchActions } from './watch';
 
 const HIDDEN_DETAIL_KEY = 'config-detail-visibility';
 const defaultDetailVisibility = { name: true, url: true };
 
 export interface ConfigStore {
   loading: boolean;
-  selectedActionId: TRandomUUID;
   error?: string;
   configs: Array<IConfiguration>;
   message?: string;
@@ -33,7 +32,6 @@ interface ConfigAction {
 const initialState: ConfigStore = {
   loading: true,
   configs: CONFIGURATIONS,
-  selectedActionId: CONFIGURATIONS[0].actions[0].id,
   detailVisibility: LocalStorage.getItem(HIDDEN_DETAIL_KEY, defaultDetailVisibility)
 };
 
@@ -154,27 +152,6 @@ const slice = createSlice({
 
       state.loading = false;
     });
-    builder.addCase(openActionAddonModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionAddonModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionSettingsModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(openWatchModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(openActionStatementModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionStatementModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
   }
 });
 
@@ -189,7 +166,7 @@ export const {
   duplicateConfig,
   importAll,
   importConfig,
-  updateBatch,
+  syncBatch,
   addAction,
   addUserscript,
   reorderActions,
@@ -209,13 +186,12 @@ export const configSelector = (state: RootState) => state.configuration;
 
 export const configReducer = slice.reducer;
 
-export const configByIdSelector = (state: RootState, id: TRandomUUID) => state.configuration.configs.find((config) => config.id === id);
+export const configByIdSelector = (state: RootState, configId: TRandomUUID) => state.configuration.configs.find((config) => config.id === configId);
 
-export const actionByIdSelector = (state: RootState, id: TRandomUUID) => {
-  for (const config of state.configuration.configs) {
-    const action = config.actions.find((action) => action.id === id);
-    if (action) {
-      return action;
-    }
+export const actionByIdSelector = (state: RootState, configId: TRandomUUID, actionId: TRandomUUID) => {
+  const config = state.configuration.configs.find((config) => config.id === configId);
+  if (!config) {
+    return undefined;
   }
+  return config.actions.find((action) => action.id === actionId);
 };

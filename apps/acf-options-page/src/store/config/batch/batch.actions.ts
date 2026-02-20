@@ -1,36 +1,27 @@
+import { IBatch } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ConfigStore } from '../config.slice';
 
+export interface SyncBatchPayload {
+  batch: IBatch;
+  configId: TRandomUUID;
+}
+
 export const batchActions = {
-  updateBatch: (state: ConfigStore, action: PayloadAction<{ name: string; value: number }>) => {
-    const { configs, selectedConfigId } = state;
-    const { name, value } = action.payload;
-    const config = configs.find((config) => config.id === selectedConfigId);
+  syncBatch: (state: ConfigStore, action: PayloadAction<SyncBatchPayload>) => {
+    const { configId, batch } = action.payload;
+    const { configs } = state;
+    const config = configs.find((config) => config.id === configId);
     if (!config) {
       state.error = 'Invalid Configuration';
-
       return;
     }
-    const { batch } = config;
+
     if (batch) {
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      batch[name] = value;
+      config.batch = batch;
     } else {
-      config.batch = { [name]: value };
-    }
-    config.updated = true;
-  },
-  updateBatchRefresh: (state: ConfigStore) => {
-    const { configs, selectedConfigId } = state;
-    const config = configs.find((config) => config.id === selectedConfigId);
-    if (!config) {
-      state.error = 'Invalid Configuration';
-
-      return;
-    }
-    const { batch } = config;
-    if (batch) {
-      batch.refresh = !batch.refresh;
+      delete config.batch;
     }
     config.updated = true;
   }

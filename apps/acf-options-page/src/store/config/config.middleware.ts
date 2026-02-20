@@ -18,10 +18,10 @@ import {
   syncActionAddon,
   syncActionSettings,
   syncActionStatement,
+  syncBatch,
   syncSchedule,
   syncWatch,
   updateAction,
-  updateBatch,
   updateConfig,
   updateConfigSettings
 } from './config.slice';
@@ -40,28 +40,28 @@ configsToastListenerMiddleware.startListening({
   }
 });
 
-const getMessageFunc = (action: UnknownAction): { message: string } => {
+const getMessageFunc = (action: UnknownAction): { header: string; body: string } => {
   switch (action.type) {
     case updateConfigSettings.type:
-      return { message: i18next.t(`message.configSettings`) };
-    case updateBatch.type:
-      return { message: i18next.t(`message.batch`) };
+      return { header: i18next.t(`toast.config.header`), body: i18next.t(`toast.config.settings`) };
+    case syncBatch.type:
+      return { header: i18next.t(`toast.batch.header`), body: i18next.t(`toast.batch.body`) };
     case updateAction.type:
     case reorderActions.type:
     case removeAction.type:
-      return { message: i18next.t(`message.action`) };
+      return { header: i18next.t(`toast.action.header`), body: i18next.t(`toast.action.body`) };
     case syncActionAddon.type:
-      return { message: i18next.t(`message.actionAddon`) };
+      return { header: i18next.t(`toast.actionAddon.header`), body: i18next.t(`toast.actionAddon.body`) };
     case syncWatch.type:
-      return { message: i18next.t(`message.watch`) };
+      return { header: i18next.t(`toast.watch.header`), body: i18next.t(`toast.watch.body`) };
     case syncActionStatement.type:
-      return { message: i18next.t(`message.actionStatement`) };
+      return { header: i18next.t(`toast.actionStatement.header`), body: i18next.t(`toast.actionStatement.body`) };
     case syncActionSettings.type:
-      return { message: i18next.t(`message.actionSettings`) };
+      return { header: i18next.t(`toast.actionSettings.header`), body: i18next.t(`toast.actionSettings.body`) };
     case syncSchedule.type:
-      return { message: i18next.t(`message.schedule`) };
+      return { header: i18next.t(`toast.config.header`), body: i18next.t(`toast.config.schedule`) };
     default:
-      return { message: i18next.t(`message.config`) };
+      return { header: i18next.t(`toast.config.header`), body: i18next.t(`toast.config.body`) };
   }
 };
 
@@ -74,7 +74,7 @@ configsListenerMiddleware.startListening({
     updateConfigSettings,
     removeConfig,
     duplicateConfig,
-    updateBatch,
+    syncBatch,
     updateAction,
     reorderActions,
     removeAction,
@@ -90,7 +90,6 @@ configsListenerMiddleware.startListening({
 
     StorageService.set({ [LOCAL_STORAGE_KEY.CONFIGS]: state.configuration.configs })
       .then(() => {
-        const { message } = getMessageFunc(action);
         if (action.type === syncSchedule.type) {
           const { configId, schedule } = action.payload as { configId: string; schedule?: ISchedule };
           if (schedule) {
@@ -99,17 +98,19 @@ configsListenerMiddleware.startListening({
             ScheduleService.clear(configId);
           }
         }
-        if (message) {
-          listenerApi.dispatch(addToast({ header: action.type, body: message, variant: 'success' }));
+        const { header, body } = getMessageFunc(action);
+        if (body) {
+          listenerApi.dispatch(addToast({ header, body, variant: 'success' }));
         }
       })
       .catch((error) => {
+        const { header } = getMessageFunc(action);
         if (error instanceof Error) {
-          listenerApi.dispatch(addToast({ header: action.type, body: error.message, variant: 'danger' }));
+          listenerApi.dispatch(addToast({ header, body: error.message, variant: 'danger' }));
         } else if (typeof error === 'string') {
-          listenerApi.dispatch(addToast({ header: action.type, body: error, variant: 'danger' }));
+          listenerApi.dispatch(addToast({ header, body: error, variant: 'danger' }));
         } else {
-          listenerApi.dispatch(addToast({ header: action.type, body: JSON.stringify(error), variant: 'danger' }));
+          listenerApi.dispatch(addToast({ header, body: JSON.stringify(error), variant: 'danger' }));
         }
       });
   }

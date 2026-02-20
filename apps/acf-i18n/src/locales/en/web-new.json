@@ -84,42 +84,44 @@
   },
 
   "toast": {
-    "configuration": {
-      "addConfig": {
-        "header": "Configuration",
-        "body": "[{{name}}] added successfully"
-      },
-      "duplicateConfig": {
-        "header": "Configuration",
-        "body": "[{{name}}] duplicated successfully"
-      },
-      "removeConfig": {
-        "header": "Configuration",
-        "body": "[{{name}}] removed successfully"
-      },
-      "exportAll": {
-        "header": "Bulk Export",
-        "body": "Configurations exported successfully"
-      },
-      "importAll": {
-        "header": "Bulk Import",
-        "body": "Configurations imported successfully"
-      },
-      "importError": { "header": "Import Error" },
-      "importSuccess": {
-        "header": "Configuration",
-        "body": "[{{name}}] imported successfully"
-      },
-      "updateBatch": {
-        "header": "Batch",
-        "body": "Batch saved successfully!"
-      }
+    "batch": {
+      "header": "Batch",
+      "body": "Batch saved successfully!"
     },
     "action": {
-      "save": {
-        "header": "Actions",
-        "body": "Actions saved successfully!"
-      }
+      "header": "Action",
+      "body": "Action saved successfully!",
+      "remove": "Action removed successfully!",
+      "reorder": "Actions reordered successfully!"
+    },
+    "save": {
+      "header": "Actions",
+      "body": "Actions saved successfully!"
+    },
+    "actionAddon": {
+      "header": "Action Addon",
+      "body": "Action addon saved successfully!"
+    },
+    "actionStatement": {
+      "header": "Action Condition",
+      "body": "Action condition saved successfully!"
+    },
+    "actionSettings": {
+      "header": "Action Settings",
+      "body": "Action settings saved successfully!"
+    },
+    "config": {
+      "header": "Configuration",
+      "body": "Configuration saved successfully!",
+      "schedule": "Configuration schedule saved successfully!",
+      "settings": "Configuration settings saved successfully!",
+      "add": "Configuration added successfully",
+      "duplicate": "Configuration duplicated successfully",
+      "remove": "Configuration removed successfully",
+      "export": "Configurations exported successfully",
+      "import": "Configurations imported successfully",
+      "importError": "Import Error",
+      "importSuccess": "Configuration imported successfully"
     }
   },
 
@@ -295,19 +297,6 @@
     }
   },
 
-  "messages": {
-    "config": "Configuration saved successfully!",
-    "configSettings": "Config Setting saved successfully!",
-    "batch": "Batch saved successfully!",
-    "action": "Action saved successfully!",
-    "reorderActions": "Action reordered successfully!",
-    "removeAction": "Action removed successfully!",
-    "actionAddon": "Addon saved successfully!",
-    "actionStatement": "Action Condition saved successfully!",
-    "actionSettings": "Action Settings saved successfully!",
-    "schedule": "Schedule saved successfully!"
-  },
-
   "sidebar": {
     "newConfig": "New config",
     "search": "Search",
@@ -350,8 +339,13 @@
     "removeConfigs": "Bulk Remove Configuration",
     "settings": "Configuration Settings",
     "enable": "Enable",
+    "edit": "Edit Configuration",
     "export": "Export Configuration",
     "import": "Import Configuration",
+    "schedule": "Schedule",
+    "batch": "Batch Settings",
+    "watch": "Watch Settings",
+    "delete": "Delete Configuration",
     "url": "URL",
     "name": "Name",
     "initWait": "Init Wait",

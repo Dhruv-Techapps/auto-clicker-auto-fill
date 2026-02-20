@@ -7,6 +7,7 @@ import { ChangeEvent } from 'react';
 import { Button, ButtonGroup, Card, Col, Container, Dropdown, Form, FormControl, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router';
+import Action from './configuration/action';
 
 export const Configuration = () => {
   const config = useConfig();
@@ -38,31 +39,40 @@ export const Configuration = () => {
     <div className='d-flex h-100 p-3'>
       {config.url ? (
         <Container fluid>
-          <Row className='align-items-center'>
+          <Row className='align-items-center mb-3'>
             <Col>
               <Dropdown as={ButtonGroup} size='sm'>
                 <Button>{config.name || config.url || config.id}</Button>
                 <Dropdown.Toggle split id='config-dropdown'></Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item>
-                    <i className='bi bi-pencil me-2' /> Edit
+                    <i className='bi bi-pencil me-2' /> {t('configuration.edit')}
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => download(config.name || config.url, config)}>
-                    <i className='bi bi-download me-2' /> Export
+                    <i className='bi bi-download me-2' /> {t('configuration.export')}
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => navigate(`schedule`)}>
-                    <i className='bi bi-stopwatch-fill me-2' /> Schedule
+                    <i className='bi bi-stopwatch-fill me-2' /> {t('configuration.schedule')}
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate(`batch`)}>
+                    <i className='bi bi-arrow-repeat me-2' /> {t('configuration.batch')}
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate(`watch`)}>
+                    <i className='bi bi-eye-fill me-2' /> {t('configuration.watch')}
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={onDuplicateConfig}>
-                    <i className='bi bi-copy me-2' /> Duplicate
+                    <i className='bi bi-copy me-2' /> {t('configuration.duplicate')}
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={onDeleteConfig}>
-                    <i className='bi bi-trash me-2' /> Delete
+                    <i className='bi bi-trash me-2' /> {t('configuration.delete')}
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+            </Col>
+            <Col>
+              <small className='text-body-tertiary'>{config.url}</small>
             </Col>
             <Col xs='auto'>
               <Form.Check type='switch' name='enable' id='config-enable' label={t('configuration.enable')} checked={config.enable} onChange={onUpdate} />
@@ -73,6 +83,7 @@ export const Configuration = () => {
               </Button>
             </Col>
           </Row>
+          <Action />
         </Container>
       ) : (
         <Container className='m-auto'>

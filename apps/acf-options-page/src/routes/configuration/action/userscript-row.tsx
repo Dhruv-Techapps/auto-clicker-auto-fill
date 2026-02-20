@@ -1,3 +1,4 @@
+import { useConfigId } from '@acf-options-page/_hooks/useConfigId';
 import { useConfirmationModalContext } from '@acf-options-page/_providers/confirm.provider';
 import { removeAction } from '@acf-options-page/store/config';
 import { useAppDispatch } from '@acf-options-page/store/hooks';
@@ -12,16 +13,14 @@ interface UserScriptRowProps {
   row: Row<IUserScript>;
   index: number;
   actions: Array<IAction | IUserScript>;
-  showAddon: (actionId: TRandomUUID) => void;
-  showSettings: (actionId: TRandomUUID) => void;
-  showCondition: (actionId: TRandomUUID) => void;
   onAddClick: (actionId: TRandomUUID, position: 1 | 0) => void;
   onDisableClick: (actionId: TRandomUUID, disabled?: boolean) => void;
   flexRender: (cell: any, context: any) => React.ReactNode;
 }
 
 export const UserScriptRow: React.FC<UserScriptRowProps> = (props) => {
-  const { row, index, actions, onDisableClick, showAddon, showSettings, showCondition, onAddClick, flexRender } = props;
+  const configId = useConfigId();
+  const { row, index, actions, onDisableClick, onAddClick, flexRender } = props;
   const modalContext = useConfirmationModalContext();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -33,7 +32,7 @@ export const UserScriptRow: React.FC<UserScriptRowProps> = (props) => {
       message: t('confirm.userscript.remove.message', { name }),
       headerClass: 'text-danger'
     });
-    result && dispatch(removeAction(actionId));
+    result && dispatch(removeAction({ actionId, configId }));
   };
 
   const getValueCell = (row: Row<IUserScript>) => {
@@ -65,9 +64,6 @@ export const UserScriptRow: React.FC<UserScriptRowProps> = (props) => {
             actionId={row.original.id}
             disabled={row.original.disabled}
             removeActionConfirm={removeActionConfirm}
-            showAddon={showAddon}
-            showSettings={showSettings}
-            showCondition={showCondition}
             onAddClick={onAddClick}
             onDisableClick={onDisableClick}
           />

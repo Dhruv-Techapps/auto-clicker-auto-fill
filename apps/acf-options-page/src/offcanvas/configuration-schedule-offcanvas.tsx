@@ -31,13 +31,17 @@ export const ConfigurationScheduleOffcanvas = ({ show }: ConfigurationScheduleOf
 
   const handleClose = () => navigate(-1);
 
-  const onSubmit = (data: ISchedule) => {
-    dispatch(syncSchedule({ configId: config.id, schedule: data }));
+  const onSubmit = (schedule: ISchedule) => {
+    dispatch(syncSchedule({ configId: config.id, schedule }));
+  };
+
+  const handleReset = () => {
+    dispatch(syncSchedule({ configId: config.id, schedule: undefined }));
   };
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
-      <Form onSubmit={handleSubmit(onSubmit)} className='h-100 d-flex flex-column'>
+      <Form onSubmit={handleSubmit(onSubmit)} onReset={handleReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{t('modal.schedule.title')}</Offcanvas.Title>
         </Offcanvas.Header>

@@ -1,4 +1,5 @@
-import { actionSelector, addAction, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI, setColumnVisibility, updateAction } from '@acf-options-page/store/config';
+import { useConfigId } from '@acf-options-page/_hooks';
+import { actionSelector, addAction, setColumnVisibility, updateAction } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
@@ -27,6 +28,7 @@ interface ActionProps {
 
 const ActionTable = ({ actions }: ActionProps) => {
   const { t } = useTranslation();
+  const configId = useConfigId();
   const { columnVisibility } = useAppSelector(actionSelector);
   const dispatch = useAppDispatch();
 
@@ -121,33 +123,21 @@ const ActionTable = ({ actions }: ActionProps) => {
     // Provide our updateData function to our table meta
     meta: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      updateData: (selectedActionId: TRandomUUID, columnId: string, value: any) => {
-        dispatch(updateAction({ selectedActionId, name: columnId, value }));
+      updateData: (actionId: TRandomUUID, columnId: string, value: any) => {
+        dispatch(updateAction({ actionId, name: columnId, value, configId }));
       },
-      updateValueFieldTypes: (selectedActionId: TRandomUUID, valueFieldType: 'input' | 'textarea' | 'script') => {
-        dispatch(updateAction({ selectedActionId, name: 'valueFieldType', value: valueFieldType }));
+      updateValueFieldTypes: (actionId: TRandomUUID, valueFieldType: 'input' | 'textarea' | 'script') => {
+        dispatch(updateAction({ actionId, name: 'valueFieldType', value: valueFieldType, configId }));
       }
     }
   });
 
-  const showAddon = (actionId: TRandomUUID) => {
-    dispatch(openActionAddonModalAPI(actionId));
-  };
-
-  const showCondition = (actionId: TRandomUUID) => {
-    dispatch(openActionStatementModalAPI(actionId));
-  };
-
-  const showSettings = (actionId: TRandomUUID) => {
-    dispatch(openActionSettingsModalAPI(actionId));
-  };
-
   const onDisableClick = (actionId: TRandomUUID, disabled?: boolean) => {
-    dispatch(updateAction({ selectedActionId: actionId, name: 'disabled', value: !disabled }));
+    dispatch(updateAction({ actionId, name: 'disabled', value: !disabled, configId }));
   };
 
   const onAddClick = (actionId: TRandomUUID, position: 1 | 0) => {
-    dispatch(addAction({ actionId: actionId, position }));
+    dispatch(addAction({ actionId, position, configId }));
   };
 
   return (
@@ -190,35 +180,9 @@ const ActionTable = ({ actions }: ActionProps) => {
         <tbody>
           {table.getRowModel().rows.map((row, index) => {
             if (isUserScript(row.original)) {
-              return (
-                <UserScriptRow
-                  key={row.id}
-                  row={row as Row<IUserScript>}
-                  index={index}
-                  actions={actions}
-                  showAddon={showAddon}
-                  showSettings={showSettings}
-                  showCondition={showCondition}
-                  onAddClick={onAddClick}
-                  onDisableClick={onDisableClick}
-                  flexRender={flexRender}
-                />
-              );
+              return <UserScriptRow key={row.id} row={row as Row<IUserScript>} index={index} actions={actions} onAddClick={onAddClick} onDisableClick={onDisableClick} flexRender={flexRender} />;
             }
-            return (
-              <ActionRow
-                key={row.id}
-                row={row as Row<IAction>}
-                index={index}
-                actions={actions}
-                showAddon={showAddon}
-                showSettings={showSettings}
-                showCondition={showCondition}
-                onAddClick={onAddClick}
-                onDisableClick={onDisableClick}
-                flexRender={flexRender}
-              />
-            );
+            return <ActionRow key={row.id} row={row as Row<IAction>} index={index} actions={actions} onAddClick={onAddClick} onDisableClick={onDisableClick} flexRender={flexRender} />;
           })}
         </tbody>
       </Table>

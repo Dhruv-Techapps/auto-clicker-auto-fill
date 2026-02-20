@@ -2,36 +2,36 @@ import { DropdownToggle } from '@acf-options-page/components';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
 interface ActionOptionsDropdownProps {
   index: number;
   actionId: TRandomUUID;
   disabled?: boolean;
   removeActionConfirm: (actionId: TRandomUUID, index: number) => void;
-  showAddon: (actionId: TRandomUUID) => void;
-  showSettings: (actionId: TRandomUUID) => void;
-  showCondition: (actionId: TRandomUUID) => void;
   onAddClick: (actionId: TRandomUUID, position: 1 | 0) => void;
   onDisableClick: (actionId: TRandomUUID, disabled?: boolean) => void;
 }
 
 export const ActionOptionsDropdown: React.FC<ActionOptionsDropdownProps> = (props) => {
-  const { index, actionId, disabled, showAddon, showSettings, showCondition, onAddClick, onDisableClick } = props;
+  const { index, actionId, disabled, onAddClick, onDisableClick } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   return (
     <Dropdown id='action-dropdown-wrapper' className='d-inline-block'>
       <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option'>
         <i className='bi bi-three-dots' />
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item data-testid='action-addon' onClick={() => showAddon(actionId)}>
+        <Dropdown.Item data-testid='action-addon' onClick={() => navigate(`/action/${actionId}/addon`)}>
           {t('action.addon')}
         </Dropdown.Item>
-        <Dropdown.Item data-testid='action-settings' onClick={() => showSettings(actionId)}>
+        <Dropdown.Item data-testid='action-settings' onClick={() => navigate(`/action/${actionId}/settings`)}>
           {t('action.settings')}
         </Dropdown.Item>
         {index !== 0 && (
-          <Dropdown.Item data-testid='action-statement' onClick={() => showCondition(actionId)}>
+          <Dropdown.Item data-testid='action-statement' onClick={() => navigate(`/action/${actionId}/condition`)}>
             {t('modal.actionCondition.title')}
           </Dropdown.Item>
         )}

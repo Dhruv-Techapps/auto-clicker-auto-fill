@@ -90,7 +90,7 @@ export const ConfigurationSettingsOffcanvas = ({ show }: ConfigurationSettingsOf
               checked={config.startType === EStartTypes.MANUAL}
               label={t('modal.configSettings.manual')}
             />
-            <small>
+            <small className='text-body-tertiary'>
               <ul className='mb-0 mt-2'>
                 <li>
                   <Trans i18nKey='modal.configSettings.autoHint' components={{ b: <b /> }} />
@@ -137,7 +137,7 @@ export const ConfigurationSettingsOffcanvas = ({ show }: ConfigurationSettingsOf
             />
             <span className='mx-2 border-start'></span>
             <Form.Check inline type='switch' id='triggerUrlChange' onChange={onUpdate} checked={config.triggerUrlChange} name='triggerUrlChange' label={t('modal.configSettings.triggerUrlChange')} />
-            <small>
+            <small className='text-body-tertiary'>
               <ul className='mb-0 mt-2'>
                 <li>
                   <Trans i18nKey='modal.configSettings.windowHint' components={{ b: <b /> }} />
@@ -159,7 +159,7 @@ export const ConfigurationSettingsOffcanvas = ({ show }: ConfigurationSettingsOf
               <InputGroup.Text>Google Sheets ID</InputGroup.Text>
               <FormControl name='spreadsheetId' defaultValue={config.spreadsheetId} autoComplete='off' onBlur={onUpdate} placeholder='Google Sheets ID' />
             </InputGroup>
-            <small className='text-muted'>
+            <small className='text-body-tertiary'>
               https://docs.google.com/spreadsheets/d/<code>1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA</code>/
             </small>
           </Col>

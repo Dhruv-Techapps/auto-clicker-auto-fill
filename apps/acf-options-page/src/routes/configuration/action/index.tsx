@@ -1,0 +1,61 @@
+import { useConfigId } from '@acf-options-page/_hooks';
+import { useTimeout } from '@acf-options-page/_hooks/message.hooks';
+import { useConfig } from '@acf-options-page/_hooks/useConfig';
+import { addAction, addUserscript } from '@acf-options-page/store/config';
+import { actionSelector, setActionMessage } from '@acf-options-page/store/config/action/action.slice';
+import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import ActionTable from './action-table';
+
+function Action() {
+  const { t } = useTranslation();
+  const configId = useConfigId();
+  const { message, error } = useAppSelector(actionSelector);
+  const config = useConfig();
+  const dispatch = useAppDispatch();
+
+  useTimeout(() => {
+    dispatch(setActionMessage());
+  }, message);
+
+  const onAddAction = () => {
+    dispatch(addAction({ configId }));
+  };
+
+  const onAddUserscript = () => {
+    dispatch(addUserscript({ configId }));
+  };
+
+  if (!config) {
+    return null;
+  }
+
+  const { actions } = config;
+
+  return (
+    <Card className='mb-3 shadow-sm'>
+      <Card.Header as='h6'>
+        <Row>
+          <Col className='d-flex align-items-center'>
+            {t('action.title')}
+            <small className='text-success ms-3'>{message}</small>
+            <small className='text-danger ms-3'>{error}</small>
+          </Col>
+          <Col xs='auto' className='d-flex align-items-center'>
+            <Button size='sm' variant='outline-primary px-3 ms-3' onClick={onAddAction} id='add-action'>
+              <i className='bi bi-plus-lg me-2' /> {t('action.add')}
+            </Button>
+            <Button size='sm' variant='outline-primary px-3 ms-3' onClick={onAddUserscript} id='add-userscript'>
+              <i className='bi bi-plus-lg me-2' /> {t('userscript.add')}
+            </Button>
+          </Col>
+        </Row>
+      </Card.Header>
+      <Card.Body className='p-0'>
+        <ActionTable actions={actions} />
+      </Card.Body>
+    </Card>
+  );
+}
+export default Action;

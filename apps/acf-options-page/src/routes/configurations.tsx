@@ -1,6 +1,7 @@
 import { download } from '@acf-options-page/_helpers';
 import { addConfig, configSelector, setConfigs } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { addToast } from '@acf-options-page/store/toast.slice';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { useState } from 'react';
 import { Button, Container, Form, ListGroup } from 'react-bootstrap';
@@ -40,6 +41,7 @@ export const Configurations = () => {
 
     const remainingConfigs = configs.filter((config) => !selectedConfigs.includes(config.id));
     dispatch(setConfigs(remainingConfigs));
+    dispatch(addToast({ header: t('toast.config.header'), body: t('toast.config.remove'), variant: 'success' }));
     setSelectedConfigs([]);
   };
 

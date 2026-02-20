@@ -1,54 +1,62 @@
-import { updateForm } from '@acf-options-page/util';
-import { FormEvent, useEffect } from 'react';
+import { IWatchSettings, defaultWatchSettings } from '@dhruv-techapps/acf-common';
 import { Alert, Badge, Button, Form, Modal } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useTimeout } from '../_hooks/message.hooks';
 import { setWatchMessage, switchWatchModal, syncWatch, watchSelector } from '../store/config';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { LifecycleStopConditions, WatchSettings } from './config-watch';
 
-const FORM_ID = 'watch-settings';
-
 const WatchModal = () => {
   const { t } = useTranslation();
-  const { visible, error, message, watch } = useAppSelector(watchSelector) as any;
+  const { visible, error, message, watch: watchStore } = useAppSelector(watchSelector) as any;
   const dispatch = useAppDispatch();
 
   useTimeout(() => {
     dispatch(setWatchMessage(undefined));
   }, message);
 
+  const { register, handleSubmit, watch, reset } = useForm<IWatchSettings>({
+    defaultValues: watchStore ?? { ...defaultWatchSettings }
+  });
+
+  const watchEnabled = watch('watchEnabled');
+
   const onHide = () => dispatch(switchWatchModal());
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    form.checkValidity();
-    if (Object.keys(watch).length !== 0) {
-      dispatch(syncWatch(watch));
-    }
-  };
-
-  const onReset = () => {
-    dispatch(syncWatch());
+  const onSubmit = (data: IWatchSettings) => {
+    const watchAttributes = data.watchAttributes;
+    const normalized: IWatchSettings = {
+      ...data,
+      watchAttributes:
+        typeof watchAttributes === 'string'
+          ? (watchAttributes as string)
+              .split(',')
+              .map((s) => s.trim())
+              .filter(Boolean)
+          : watchAttributes
+    };
+    dispatch(syncWatch(normalized));
     onHide();
   };
 
-  useEffect(() => {
-    updateForm(FORM_ID, { ...watch, ...watch.lifecycleStopConditions });
-  }, [watch]);
+  const onReset = () => {
+    reset({ ...defaultWatchSettings });
+    dispatch(syncWatch(undefined));
+    onHide();
+  };
 
   return (
     <Modal show={visible} size='lg' onHide={onHide} data-testid='watch-modal'>
-      <Form id={FORM_ID} onSubmit={onSubmit} onReset={onReset}>
+      <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset}>
         <Modal.Header closeButton>
           <Modal.Title as='h6'>
             {t('modal.watch.title', 'Watch Settings')} <Badge>Beta</Badge>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <WatchSettings />
-          <LifecycleStopConditions />
+          <WatchSettings register={register} watchEnabled={watchEnabled} />
+          <LifecycleStopConditions register={register} watchEnabled={watchEnabled} />
           {error && (
             <Alert className='mt-3' variant='danger'>
               {error}
@@ -61,8 +69,8 @@ const WatchModal = () => {
           )}
         </Modal.Body>
         <Modal.Footer className='justify-content-between'>
-          <Button type='button' variant='outline-primary' onClick={onHide} className='px-5'>
-            {t('common.close', 'Close')}
+          <Button type='reset' variant='outline-primary' className='px-5'>
+            {t('common.clear', 'Clear')}
           </Button>
           <Button type='submit' variant='primary' className='px-5'>
             {t('common.save', 'Save')}

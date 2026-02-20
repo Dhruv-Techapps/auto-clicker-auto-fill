@@ -1,3 +1,4 @@
+import { useConfigId } from '@acf-options-page/_hooks/useConfigId';
 import { useConfirmationModalContext } from '@acf-options-page/_providers/confirm.provider';
 import { removeAction } from '@acf-options-page/store/config';
 import { useAppDispatch } from '@acf-options-page/store/hooks';
@@ -12,16 +13,15 @@ interface ActionRowProps {
   row: Row<IAction>;
   index: number;
   actions: Array<IAction | IUserScript>;
-  showAddon: (actionId: TRandomUUID) => void;
-  showSettings: (actionId: TRandomUUID) => void;
-  showCondition: (actionId: TRandomUUID) => void;
+
   onAddClick: (actionId: TRandomUUID, position: 1 | 0) => void;
   onDisableClick: (actionId: TRandomUUID, disabled?: boolean) => void;
   flexRender: (cell: any, context: any) => React.ReactNode;
 }
 
 export const ActionRow: React.FC<ActionRowProps> = (props) => {
-  const { row, index, actions, showAddon, showSettings, showCondition, onAddClick, onDisableClick, flexRender } = props;
+  const configId = useConfigId();
+  const { row, index, actions, onAddClick, onDisableClick, flexRender } = props;
   const modalContext = useConfirmationModalContext();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ export const ActionRow: React.FC<ActionRowProps> = (props) => {
     }
 
     if (Object.keys(action).length === 3 && action.elementFinder === '') {
-      dispatch(removeAction(actionId));
+      dispatch(removeAction({ actionId, configId }));
       return;
     }
 
@@ -43,7 +43,7 @@ export const ActionRow: React.FC<ActionRowProps> = (props) => {
       message: t('confirm.action.remove.message', { name }),
       headerClass: 'text-danger'
     });
-    result && dispatch(removeAction(actionId));
+    result && dispatch(removeAction({ actionId, configId }));
   };
   return (
     <tr key={row.id} className={row.original.disabled ? 'table-secondary' : ''}>
@@ -69,9 +69,6 @@ export const ActionRow: React.FC<ActionRowProps> = (props) => {
             actionId={row.original.id}
             disabled={row.original.disabled}
             removeActionConfirm={removeActionConfirm}
-            showAddon={showAddon}
-            showSettings={showSettings}
-            showCondition={showCondition}
             onAddClick={onAddClick}
             onDisableClick={onDisableClick}
           />

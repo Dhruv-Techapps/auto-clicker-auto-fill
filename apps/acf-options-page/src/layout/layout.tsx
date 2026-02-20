@@ -8,6 +8,7 @@ import { ToastHandler } from '@acf-options-page/components/toast-handler.compone
 import { LoginModal } from '@acf-options-page/modal/login.modal';
 import { getManifest } from '@acf-options-page/store/app.api';
 import { appSelector } from '@acf-options-page/store/app.slice';
+import { configGetAllAPI } from '@acf-options-page/store/config/config.api';
 import { firebaseIsLoginAPI } from '@acf-options-page/store/firebase/firebase-login.api';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { StorageService } from '@dhruv-techapps/core-service';
@@ -26,6 +27,12 @@ export const Layout = () => {
       window.dataLayer.push({ device_id: deviceId });
     });
   }, []);
+
+  useEffect(() => {
+    if (window.chrome?.runtime) {
+      dispatch(configGetAllAPI());
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getManifest());
