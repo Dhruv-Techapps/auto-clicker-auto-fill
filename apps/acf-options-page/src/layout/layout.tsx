@@ -2,7 +2,9 @@
 
 import { ExtensionNotFoundAlert } from '@acf-options-page/alerts/extension-not-found-alert';
 import { VersionAlert } from '@acf-options-page/alerts/version-alert';
+import { DataList } from '@acf-options-page/components/data-list.components';
 import { Loading } from '@acf-options-page/components/loading.components';
+import { ToastHandler } from '@acf-options-page/components/toast-handler.component';
 import { LoginModal } from '@acf-options-page/modal/login.modal';
 import { getManifest } from '@acf-options-page/store/app.api';
 import { appSelector } from '@acf-options-page/store/app.slice';
@@ -42,6 +44,8 @@ export const Layout = () => {
         </main>
         <LoginModal />
       </div>
+      <ToastHandler />
+      <DataList />
     </>
   );
 };

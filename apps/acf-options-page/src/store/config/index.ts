@@ -3,7 +3,6 @@ import { batchReducer } from './batch';
 import { configReducer } from './config.slice';
 import { configRemoveReducer } from './remove';
 import { configReorderReducer } from './reorder';
-import { scheduleReducer } from './schedule';
 import { configSettingsReducer } from './settings';
 import { watchReducer } from './watch';
 
@@ -22,7 +21,6 @@ export const configReducers = {
   configRemove: configRemoveReducer,
   configReorder: configReorderReducer,
   configSettings: configSettingsReducer,
-  schedule: scheduleReducer,
   batch: batchReducer,
   watch: watchReducer,
   ...actionReducers

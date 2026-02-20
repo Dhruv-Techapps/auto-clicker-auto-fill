@@ -9,5 +9,5 @@ export * from './confirm.modal';
 export * from './extension-not-found.modal';
 export * from './remove-configs.modal';
 export * from './reorder-configs.modal';
-export * from './schedule.modal';
-export * from './settings.modal';
+//export * from './schedule.modal';
+//export * from './settings.modal';

@@ -25,7 +25,7 @@ export interface ConfigStore {
 }
 
 interface ConfigAction {
-  selectedConfigId: TRandomUUID;
+  configId: TRandomUUID;
   name: string;
   value: any;
 }
@@ -62,10 +62,10 @@ const slice = createSlice({
       }
     },
     updateConfig: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value, selectedConfigId } = action.payload;
+      const { name, value, configId } = action.payload;
       const { configs } = state;
 
-      const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+      const selectedConfig = configs.find((config) => config.id === configId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
 
@@ -79,10 +79,10 @@ const slice = createSlice({
       }
     },
     updateConfigSettings: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value, selectedConfigId } = action.payload;
+      const { name, value, configId } = action.payload;
       const { configs } = state;
 
-      const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+      const selectedConfig = configs.find((config) => config.id === configId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
 
@@ -97,13 +97,13 @@ const slice = createSlice({
     },
     removeConfig: (state, action: PayloadAction<TRandomUUID>) => {
       const { configs } = state;
-      const selectConfigIndex = configs.findIndex((config) => config.id === action.payload);
-      if (selectConfigIndex === -1) {
+      const configIndex = configs.findIndex((config) => config.id === action.payload);
+      if (configIndex === -1) {
         state.error = 'Invalid Configuration';
 
         return;
       }
-      configs.splice(selectConfigIndex, 1);
+      configs.splice(configIndex, 1);
     },
     setConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = updateConfigIds(action.payload);
@@ -116,10 +116,10 @@ const slice = createSlice({
       state.configs.push(config);
     },
     duplicateConfig: (state, action: PayloadAction<TRandomUUID>) => {
-      const selectedConfigId = action.payload;
+      const configId = action.payload;
       const { configs } = state;
       const id = crypto.randomUUID();
-      const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+      const selectedConfig = configs.find((config) => config.id === configId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
 

@@ -8,17 +8,6 @@ import { addToast } from '../toast.slice';
 
 import { ScheduleService } from '@dhruv-techapps/acf-service';
 import {
-  setActionAddonError,
-  setActionAddonMessage,
-  setActionError,
-  setActionMessage,
-  setActionSettingsError,
-  setActionSettingsMessage,
-  setActionStatementError,
-  setActionStatementMessage
-} from './action';
-import { setBatchError, setBatchMessage } from './batch';
-import {
   addConfig,
   duplicateConfig,
   importAll,
@@ -26,8 +15,6 @@ import {
   removeAction,
   removeConfig,
   reorderActions,
-  setConfigError,
-  setConfigMessage,
   syncActionAddon,
   syncActionSettings,
   syncActionStatement,
@@ -38,9 +25,6 @@ import {
   updateConfig,
   updateConfigSettings
 } from './config.slice';
-import { setScheduleError, setScheduleMessage } from './schedule';
-import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
-import { setWatchError, setWatchMessage } from './watch';
 
 const configsToastListenerMiddleware = createListenerMiddleware();
 configsToastListenerMiddleware.startListening({
@@ -56,28 +40,28 @@ configsToastListenerMiddleware.startListening({
   }
 });
 
-const getMessageFunc = (action: UnknownAction): { success: any; failure: any; message: string } => {
+const getMessageFunc = (action: UnknownAction): { message: string } => {
   switch (action.type) {
     case updateConfigSettings.type:
-      return { success: setConfigSettingsMessage, failure: setConfigSettingsError, message: i18next.t(`message.configSettings`) };
+      return { message: i18next.t(`message.configSettings`) };
     case updateBatch.type:
-      return { success: setBatchMessage, failure: setBatchError, message: i18next.t(`message.batch`) };
+      return { message: i18next.t(`message.batch`) };
     case updateAction.type:
     case reorderActions.type:
     case removeAction.type:
-      return { success: setActionMessage, failure: setActionError, message: i18next.t(`message.action`) };
+      return { message: i18next.t(`message.action`) };
     case syncActionAddon.type:
-      return { success: setActionAddonMessage, failure: setActionAddonError, message: i18next.t(`message.actionAddon`) };
+      return { message: i18next.t(`message.actionAddon`) };
     case syncWatch.type:
-      return { success: setWatchMessage, failure: setWatchError, message: i18next.t(`message.watch`) };
+      return { message: i18next.t(`message.watch`) };
     case syncActionStatement.type:
-      return { success: setActionStatementMessage, failure: setActionStatementError, message: i18next.t(`message.actionStatement`) };
+      return { message: i18next.t(`message.actionStatement`) };
     case syncActionSettings.type:
-      return { success: setActionSettingsMessage, failure: setActionSettingsError, message: i18next.t(`message.actionSettings`) };
+      return { message: i18next.t(`message.actionSettings`) };
     case syncSchedule.type:
-      return { success: setScheduleMessage, failure: setScheduleError, message: i18next.t(`message.schedule`) };
+      return { message: i18next.t(`message.schedule`) };
     default:
-      return { success: setConfigMessage, failure: setConfigError, message: i18next.t(`message.config`) };
+      return { message: i18next.t(`message.config`) };
   }
 };
 
@@ -106,28 +90,26 @@ configsListenerMiddleware.startListening({
 
     StorageService.set({ [LOCAL_STORAGE_KEY.CONFIGS]: state.configuration.configs })
       .then(() => {
-        const { success, message } = getMessageFunc(action);
-        if (success && action.type === syncSchedule.type) {
-          if (action.payload) {
-            ScheduleService.create(state.configuration.selectedConfigId, action.payload as ISchedule);
+        const { message } = getMessageFunc(action);
+        if (action.type === syncSchedule.type) {
+          const { configId, schedule } = action.payload as { configId: string; schedule?: ISchedule };
+          if (schedule) {
+            ScheduleService.create(configId, schedule);
           } else {
-            ScheduleService.clear(state.configuration.selectedConfigId);
+            ScheduleService.clear(configId);
           }
         }
-        if (success && message) {
-          listenerApi.dispatch(success(message));
+        if (message) {
+          listenerApi.dispatch(addToast({ header: action.type, body: message, variant: 'success' }));
         }
       })
       .catch((error) => {
-        const { failure } = getMessageFunc(action);
-        if (failure) {
-          if (error instanceof Error) {
-            listenerApi.dispatch(failure(error.message));
-          } else if (typeof error === 'string') {
-            listenerApi.dispatch(failure(error));
-          } else {
-            listenerApi.dispatch(failure(JSON.stringify(error)));
-          }
+        if (error instanceof Error) {
+          listenerApi.dispatch(addToast({ header: action.type, body: error.message, variant: 'danger' }));
+        } else if (typeof error === 'string') {
+          listenerApi.dispatch(addToast({ header: action.type, body: error, variant: 'danger' }));
+        } else {
+          listenerApi.dispatch(addToast({ header: action.type, body: JSON.stringify(error), variant: 'danger' }));
         }
       });
   }

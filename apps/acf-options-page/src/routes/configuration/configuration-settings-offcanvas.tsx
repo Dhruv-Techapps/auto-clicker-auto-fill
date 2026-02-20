@@ -1,14 +1,13 @@
+import { useConfig } from '@acf-options-page/_hooks/useConfig';
 import { HotkeyPopover } from '@acf-options-page/popover';
-import { configByIdSelector, updateConfigSettings, useAppDispatch, useAppSelector } from '@acf-options-page/store';
+import { updateConfigSettings, useAppDispatch } from '@acf-options-page/store';
 import { getFieldNameValue, REGEX } from '@acf-options-page/util';
 import { defaultHotkey, ELoadTypes, EStartTypes, EUrlMatch, IBypass } from '@dhruv-techapps/acf-common';
 import { t } from 'i18next';
-
 import { ChangeEvent } from 'react';
 import { Col, Form, FormControl, InputGroup, Offcanvas, Row } from 'react-bootstrap';
 import { Trans } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router';
-import { TRandomUUID } from '../../../../../packages/core/common/src/lib/utilities';
+import { useNavigate } from 'react-router';
 
 interface ConfigurationSettingsOffcanvasProps {
   show: boolean;
@@ -16,10 +15,13 @@ interface ConfigurationSettingsOffcanvasProps {
 
 export const ConfigurationSettingsOffcanvas = ({ show }: ConfigurationSettingsOffcanvasProps) => {
   const dispatch = useAppDispatch();
-  const { configId } = useParams<{ configId: TRandomUUID }>();
-  const config = useAppSelector((state) => configByIdSelector(state, configId!));
+  const config = useConfig();
   const navigate = useNavigate();
   const handleClose = () => navigate(-1);
+
+  if (!config) {
+    return null;
+  }
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     let value = '';
@@ -45,7 +47,7 @@ export const ConfigurationSettingsOffcanvas = ({ show }: ConfigurationSettingsOf
   const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const update = getFieldNameValue(e, config);
     if (update) {
-      dispatch(updateConfigSettings({ ...update, selectedConfigId: configId } as any));
+      dispatch(updateConfigSettings({ ...update, configId: config.id }));
     }
   };
 
@@ -56,12 +58,8 @@ export const ConfigurationSettingsOffcanvas = ({ show }: ConfigurationSettingsOf
       // @ts-expect-error "making is generic function difficult for TypeScript"
       bypass[name] = checked;
     });
-    dispatch(updateConfigSettings({ name: 'bypass', value: bypass, selectedConfigId: configId } as any));
+    dispatch(updateConfigSettings({ name: 'bypass', value: bypass, configId: config.id }));
   };
-
-  if (!config) {
-    return <div>Configuration not found</div>;
-  }
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>

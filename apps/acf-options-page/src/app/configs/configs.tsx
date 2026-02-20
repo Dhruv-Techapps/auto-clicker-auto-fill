@@ -7,7 +7,7 @@ import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { ChangeEvent, createRef, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { BatchModal, ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal, ScheduleModal, WatchModal } from '../../modal';
+import { BatchModal, ConfigSettingsModal, RemoveConfigsModal, ReorderConfigsModal, WatchModal } from '../../modal';
 import Footer from '../footer';
 import Action from './action';
 import Config from './config';
@@ -82,7 +82,6 @@ function Configs() {
               <WatchModal />
               <ReorderConfigsModal />
               <RemoveConfigsModal />
-              <ScheduleModal />
             </main>
           </div>
         </Col>

@@ -1,31 +1,38 @@
 import { download } from '@acf-options-page/_helpers/download';
-import { configByIdSelector, updateConfig, useAppDispatch, useAppSelector } from '@acf-options-page/store';
+import { useConfig } from '@acf-options-page/_hooks/useConfig';
+import { duplicateConfig, removeConfig, updateConfig, useAppDispatch } from '@acf-options-page/store';
 import { APP_LINK } from '@acf-options-page/util/constants';
 import { getFieldNameValue } from '@acf-options-page/util/element';
-import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ChangeEvent } from 'react';
 import { Button, ButtonGroup, Card, Col, Container, Dropdown, Form, FormControl, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Outlet, useNavigate, useParams } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 
 export const Configuration = () => {
-  const { configId } = useParams<{ configId: TRandomUUID }>();
+  const config = useConfig();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  if (!config) {
+    return null;
+  }
+
   const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const update = getFieldNameValue(e, config);
     if (update) {
-      dispatch(updateConfig({ ...update, selectedConfigId: configId } as any));
+      dispatch(updateConfig({ ...update, configId: config.id }));
     }
   };
-  if (!configId) {
-    return <div>Configuration ID is missing</div>;
-  }
-  const config = useAppSelector((state) => configByIdSelector(state, configId));
-  if (!config) {
-    return <div>Configuration not found</div>;
-  }
+
+  const onDuplicateConfig = () => {
+    dispatch(duplicateConfig(config.id));
+  };
+
+  const onDeleteConfig = () => {
+    dispatch(removeConfig(config.id));
+    navigate(-1);
+  };
 
   return (
     <div className='d-flex h-100 p-3'>
@@ -43,15 +50,15 @@ export const Configuration = () => {
                   <Dropdown.Item onClick={() => download(config.name || config.url, config)}>
                     <i className='bi bi-download me-2' /> Export
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={() => window.open(config.url, '_blank')}>
+                  <Dropdown.Item onClick={() => navigate(`schedule`)}>
                     <i className='bi bi-stopwatch-fill me-2' /> Schedule
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={() => window.open(config.url, '_blank')}>
+                  <Dropdown.Item onClick={onDuplicateConfig}>
                     <i className='bi bi-copy me-2' /> Duplicate
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={() => window.open(config.url, '_blank')}>
+                  <Dropdown.Item onClick={onDeleteConfig}>
                     <i className='bi bi-trash me-2' /> Delete
                   </Dropdown.Item>
                 </Dropdown.Menu>
