@@ -1,6 +1,6 @@
 import { download } from '@acf-options-page/_helpers/download';
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
-import { duplicateConfig, removeConfig, updateConfig, useAppDispatch } from '@acf-options-page/store';
+import { duplicateConfig, removeConfigs, updateConfig, useAppDispatch } from '@acf-options-page/store';
 import { ROUTES } from '@acf-options-page/util';
 import { APP_LINK } from '@acf-options-page/util/constants';
 import { getFieldNameValue } from '@acf-options-page/util/element';
@@ -32,7 +32,7 @@ export const Automation = () => {
   };
 
   const onDeleteConfig = () => {
-    dispatch(removeConfig(config.id));
+    dispatch(removeConfigs([config.id]));
     navigate(-1);
   };
 

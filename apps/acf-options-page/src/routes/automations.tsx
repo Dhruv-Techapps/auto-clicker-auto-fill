@@ -1,5 +1,5 @@
 import { download } from '@acf-options-page/_helpers';
-import { addConfig, configSelector, setConfigs } from '@acf-options-page/store/config';
+import { addConfig, configSelector, removeConfigs } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { ROUTES } from '@acf-options-page/util';
@@ -32,17 +32,15 @@ export const Automations = () => {
       return;
     }
     const configsToExport = configs.filter((config) => selectedConfigs.includes(config.id));
-    download(t('automations.selected'), configsToExport);
+    download(t('automations.title'), configsToExport);
+    dispatch(addToast({ header: t('automations.toast.header'), body: t('automations.toast.export', { count: selectedConfigs.length }) }));
   };
 
   const onDelete = () => {
     if (selectedConfigs.length === 0) {
       return;
     }
-
-    const remainingConfigs = configs.filter((config) => !selectedConfigs.includes(config.id));
-    dispatch(setConfigs(remainingConfigs));
-    dispatch(addToast({ header: t('automation.toast.header'), body: t('automation.toast.remove'), variant: 'success' }));
+    dispatch(removeConfigs(selectedConfigs));
     setSelectedConfigs([]);
   };
 
@@ -61,7 +59,7 @@ export const Automations = () => {
           {selectionMode ? (
             <>
               <Form.Check
-                label={`${selectedConfigs.length} ${t('automations.selected')}`}
+                label={t('automations.selected', { count: selectedConfigs.length })}
                 id='config-all'
                 title={t('automations.selectAll')}
                 className='text-body-tertiary'
@@ -79,9 +77,7 @@ export const Automations = () => {
             </>
           ) : (
             <>
-              <span className='text-body-tertiary'>
-                {configs.length} {t('automations.automationsWithinExtension')}
-              </span>
+              <span className='text-body-tertiary'>{t('automations.automationsWithinExtension', { count: configs.length })}</span>
               <Button variant='link' size='sm' onClick={() => setSelectionMode(true)} title={t('automations.selectAutomations')}>
                 {t('automations.select')}
               </Button>

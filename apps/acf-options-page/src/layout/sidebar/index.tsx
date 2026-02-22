@@ -17,9 +17,9 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className='d-flex flex-column flex-shrink-0 border-end' style={{ width: sidebarWidth }}>
+    <div className='d-flex flex-column flex-shrink-0 border-end' style={{ width: sidebarWidth, height: '100vh' }}>
       <SidebarHeader visible={visible} toggleSidebar={toggleSidebar} />
-      <div className='mb-auto p-2'>
+      <div className='p-2 d-flex flex-column flex-grow-1' style={{ minHeight: 0 }}>
         <SidebarMenu visible={visible} />
         {visible && <SidebarConfigList />}
       </div>

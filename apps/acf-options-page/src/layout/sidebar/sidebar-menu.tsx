@@ -24,9 +24,9 @@ export const SidebarMenu = ({ visible }: SidebarMenuProps) => {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={NavLink} to={ROUTES.AUTOMATIONS} end className='text-body-secondary px-1'>
-          <i className='bi bi-collection mx-2 text-body-emphasis' /> {visible && t('automations.title')}
-        </Nav.Link>
+        <NavLink to={ROUTES.AUTOMATIONS} end className={({ isActive }) => (isActive ? 'active nav-link px-2 text-truncate' : 'text-body-secondary nav-link px-2 text-truncate')}>
+          <i className='bi bi-collection mx-2' /> {visible && t('automations.title')}
+        </NavLink>
       </Nav.Item>
     </Nav>
   );

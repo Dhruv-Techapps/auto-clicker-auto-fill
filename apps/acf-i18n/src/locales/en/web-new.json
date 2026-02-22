@@ -52,7 +52,7 @@
     "title": "Show Notification",
     "error": "On Error occurred",
     "step": "On Step completion",
-    "loop": "On Steps completion",
+    "loop": "On Loop completion",
     "automation": "On Automation completion",
     "sound": "Notification Sound"
   },
@@ -190,14 +190,31 @@
     }
   },
   "schedule": {
-    "title": "Schedule",
+    "title": "Schedule Automation",
     "info": "Run this automation on a specific date and time",
     "date": "Date",
     "time": "Time",
     "repeat": "Repeat in minutes"
   },
   "upgradePlan": {
-    "title": "Upgrade Plan"
+    "title": "Upgrade Plan",
+    "subtitle": "Unlock advanced features and get the most out of Auto Clicker AutoFill.",
+    "pro": {
+      "name": "Pro Subscription",
+      "tagline": "Everything you need to automate without limits",
+      "perMonth": "per\nmonth",
+      "cta": "Upgrade to Pro",
+      "includes": "This includes:",
+      "features": {
+        "sheets": "Unlimited Google Sheets",
+        "discord": "Unlimited Discord Messaging",
+        "captcha": "Captcha Resolver (Coming Soon)",
+        "noAds": "No Ads",
+        "vipSupport": "VIP Assistance over Discord",
+        "earlyAccess": "Early access to new Features",
+        "prideAndJoy": "Pride and Joy"
+      }
+    }
   },
   "googleSheets": {
     "title": "Google Sheets",
@@ -224,6 +241,8 @@
     "search": "Search your automation...",
     "add": "New Automation",
     "selected": "selected",
+    "selected_one": "1 automation selected",
+    "selected_other": "{{count}} automations selected",
     "selectAll": "Select all",
     "exportSelected": "Export selected",
     "deleteSelected": "Delete selected",
@@ -231,8 +250,19 @@
     "automationsWithinExtension": "automations within extension",
     "selectAutomations": "Select automations to export or delete",
     "select": "Select",
-    "import": "Import",
-    "importAll": "Bulk Import Automation"
+    "import": "Import Automation",
+    "toast": {
+      "header": "Automations",
+      "remove": "Automations removed successfully",
+      "remove_one": "Automation removed successfully",
+      "remove_other": "{{count}} Automations removed successfully",
+      "export": "Automations exported successfully",
+      "export_one": "1 automation exported successfully",
+      "export_other": "{{count}} automations exported successfully",
+      "import": "Automations imported successfully",
+      "import_one": "1 automation imported successfully",
+      "import_other": "{{count}} automations imported successfully"
+    }
   },
   "automation": {
     "title": "Automation",
@@ -266,17 +296,13 @@
       "schedule": "Automation schedule saved successfully!",
       "settings": "Automation settings saved successfully!",
       "add": "Automation added successfully",
-      "duplicate": "Automation duplicated successfully",
-      "remove": "Automation removed successfully",
-      "export": "Automations exported successfully",
-      "import": "Automations imported successfully",
-      "importError": "Import Error",
-      "importSuccess": "Automation imported successfully"
+      "duplicate": "Automation duplicated successfully"
     }
   },
   "automationSettings": {
     "title": "Automation Settings",
     "start": "Run Mode",
+    "hotkey": "Hotkey",
     "auto": "Automatic",
     "autoHint": "<b>Automatic</b> — runs by itself every time the page loads. No action needed from you.",
     "manual": "Manual (Hotkey)",
@@ -290,7 +316,15 @@
     "triggerUrlChangeHint": "<b>Run on Page Navigation</b> — re-runs the automation when the page address changes without a full reload. Useful for Gmail, Twitter, and other modern apps.",
     "urlMatch": "URL Match Type",
     "regex": "Pattern Match",
-    "exact": "Exact URL"
+    "exact": "Exact URL",
+    "startTime": "Start Time (For Automations)",
+    "googleSheetsId": "Google Sheets ID",
+    "bypass": {
+      "title": "Bypass Browser Default Behavior for Hotkeys",
+      "alert": "Alert",
+      "confirm": "Confirm",
+      "prompt": "Prompt"
+    }
   },
   "loop": {
     "title": "Loop",
@@ -372,7 +406,7 @@
   },
   "common": {
     "appName": "Auto Clicker - AutoFill",
-
+    "file": "File",
     "error": "Error",
     "save": "Save",
     "clear": "Clear",
@@ -411,13 +445,13 @@
     "id": "Indonesian"
   },
   "monitor": {
-    "title": "Watch Settings",
+    "title": "Monitor",
     "enabled": "Enable Monitoring",
     "enabledHint": "Automatically re-run actions when new matching elements are added to the page (e.g., for infinite scrolling, async content)",
-    "rootSelector": "Watch Root",
+    "rootSelector": "Monitor Root",
     "rootSelectorPlaceholder": "body",
     "rootSelectorHint": "CSS selector for container to observe",
-    "watchAttributes": "Watch Attributes",
+    "watchAttributes": "Monitor Attributes",
     "attributesPlaceholder": "style, class, hidden",
     "attributesHint": "Comma-separated list of attributes to observe for changes",
     "debounce": "Debounce",
@@ -427,8 +461,8 @@
     "urlChange": "Stop on URL Change",
     "urlChangeHint": "Automatically stop watching when page URL changes",
     "toast": {
-      "header": "Monitor Settings",
-      "body": "Monitor settings saved successfully!"
+      "header": "Monitor",
+      "body": "Monitor saved successfully!"
     }
   },
   "home": {

@@ -1,4 +1,4 @@
-import { ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { IConfiguration, ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { createListenerMiddleware, isAnyOf, UnknownAction } from '@reduxjs/toolkit';
 
@@ -7,13 +7,13 @@ import { RootState } from '../store';
 import { addToast } from '../toast.slice';
 
 import { ScheduleService } from '@dhruv-techapps/acf-service';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import {
   addConfig,
   duplicateConfig,
-  importAll,
-  importConfig,
+  importConfigs,
   removeAction,
-  removeConfig,
+  removeConfigs,
   reorderActions,
   syncActionAddon,
   syncActionSettings,
@@ -28,12 +28,10 @@ import {
 
 const configsToastListenerMiddleware = createListenerMiddleware();
 configsToastListenerMiddleware.startListening({
-  matcher: isAnyOf(addConfig, removeConfig, duplicateConfig),
+  matcher: isAnyOf(addConfig),
   effect: async (action, listenerApi) => {
-    const [type, method] = action.type.split('/');
-
-    const header = i18next.t(`toast.${type}.${method}.header`, { name: type });
-    const body = i18next.t(`toast.${type}.${method}.body`, { name: type });
+    const header = i18next.t(`automation.toast.header`);
+    const body = i18next.t(`automation.toast.add`);
     if (header) {
       listenerApi.dispatch(addToast({ header, body }));
     }
@@ -60,6 +58,12 @@ const getMessageFunc = (action: UnknownAction): { header: string; body: string }
       return { header: i18next.t(`stepSettings.toast.header`), body: i18next.t(`stepSettings.toast.body`) };
     case syncSchedule.type:
       return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.schedule`) };
+    case removeConfigs.type:
+      return { header: i18next.t(`automations.toast.header`), body: i18next.t(`automations.toast.remove`, { count: (action.payload as TRandomUUID[]).length }) };
+    case importConfigs.type:
+      return { header: i18next.t(`automations.toast.header`), body: i18next.t(`automations.toast.import`, { count: (action.payload as IConfiguration[]).length }) };
+    case duplicateConfig.type:
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.duplicate`) };
     default:
       return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.body`) };
   }
@@ -68,11 +72,10 @@ const getMessageFunc = (action: UnknownAction): { header: string; body: string }
 const configsListenerMiddleware = createListenerMiddleware();
 configsListenerMiddleware.startListening({
   matcher: isAnyOf(
-    importAll,
-    importConfig,
+    importConfigs,
     updateConfig,
     updateConfigSettings,
-    removeConfig,
+    removeConfigs,
     duplicateConfig,
     syncBatch,
     updateAction,

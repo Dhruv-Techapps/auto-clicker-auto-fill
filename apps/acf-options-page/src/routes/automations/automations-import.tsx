@@ -1,4 +1,4 @@
-import { importAll, importConfig, useAppDispatch } from '@acf-options-page/store';
+import { importConfigs, useAppDispatch } from '@acf-options-page/store';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { ChangeEvent, createRef } from 'react';
@@ -18,22 +18,18 @@ export const AutomationsImport = () => {
     fr.onload = function ({ target }) {
       try {
         if (target?.result === null) {
-          dispatch(addToast({ header: 'File', body: t('error.json'), variant: 'danger' }));
+          dispatch(addToast({ header: t('common.file'), body: t('error.json'), variant: 'danger' }));
         } else {
           const importedConfigs: Array<IConfiguration> | IConfiguration = JSON.parse(target?.result as string);
-          if (!Array.isArray(importedConfigs)) {
-            dispatch(importConfig(importedConfigs));
-          } else {
-            dispatch(importAll(importedConfigs));
-          }
+          dispatch(importConfigs(!Array.isArray(importedConfigs) ? [importedConfigs] : importedConfigs));
         }
       } catch (error) {
         if (error instanceof Error) {
-          dispatch(addToast({ header: 'File', body: error.message, variant: 'danger' }));
+          dispatch(addToast({ header: t('common.file'), body: error.message, variant: 'danger' }));
         } else if (typeof error === 'string') {
-          dispatch(addToast({ header: 'File', body: error, variant: 'danger' }));
+          dispatch(addToast({ header: t('common.file'), body: error, variant: 'danger' }));
         } else {
-          dispatch(addToast({ header: 'File', body: JSON.stringify(error), variant: 'danger' }));
+          dispatch(addToast({ header: t('common.file'), body: JSON.stringify(error), variant: 'danger' }));
         }
       }
     };

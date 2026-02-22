@@ -48,14 +48,14 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
     <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{t('batch.title')}</Offcanvas.Title>
+          <Offcanvas.Title>{t('loop.title')}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className='flex-grow-1'>
           <Row>
             <Col md='12' sm='12'>
-              <Form.Check type='switch' id='batch-refresh' label={t('batch.refresh')} {...register('refresh')} />
+              <Form.Check type='switch' id='batch-refresh' label={t('loop.refresh')} {...register('refresh')} />
               <Form.Text className='text-body-tertiary'>
-                <Trans i18nKey='batch.refreshHint' components={{ b: <b /> }} />
+                <Trans i18nKey='loop.refreshHint' components={{ b: <b /> }} />
               </Form.Text>
             </Col>
             {!refresh && (
@@ -63,7 +63,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
                 <hr className='my-3' />
                 <Col md='6' sm='12'>
                   <Form.Group controlId='batch-repeat'>
-                    <Form.Label>{t('batch.repeat')}</Form.Label>
+                    <Form.Label>{t('loop.repeat')}</Form.Label>
                     <FormControl
                       type='number'
                       autoComplete='off'
@@ -77,7 +77,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
                 <Col md='6' sm='12'>
                   <Form.Group controlId='batch-repeat-interval'>
                     <Form.Label>
-                      {t('batch.repeatInterval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
+                      {t('loop.repeatInterval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
                     </Form.Label>
                     <FormControl
                       autoComplete='off'
@@ -89,7 +89,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
                   </Form.Group>
                 </Col>
                 <Form.Text className='text-body-tertiary'>
-                  <Trans i18nKey='batch.repeatHint' components={{ b: <b /> }} />
+                  <Trans i18nKey='loop.repeatHint' components={{ b: <b /> }} />
                 </Form.Text>
               </>
             )}

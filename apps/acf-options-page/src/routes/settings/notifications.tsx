@@ -31,7 +31,7 @@ function SettingNotifications() {
         </li>
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='notifications.onStep'>
-            <div className='fw-bold'>{t('notification.action')} </div>
+            <div className='fw-bold'>{t('notification.step')}</div>
           </Form.Label>
           <Form.Check type='switch' name='onAction' checked={notifications?.onAction || false} onChange={onUpdate} id='notifications.onStep' />
         </li>

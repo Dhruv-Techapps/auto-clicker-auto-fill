@@ -45,14 +45,14 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
     <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={handleReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{t('modal.schedule.title')}</Offcanvas.Title>
+          <Offcanvas.Title>{t('schedule.title')}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className='flex-grow-1'>
-          <p className='text-muted'>{t('modal.schedule.info')}</p>
+          <p className='text-muted'>{t('schedule.info')}</p>
           <Row>
             <Col md='6' sm='12'>
               <InputGroup>
-                <InputGroup.Text>{t('modal.schedule.date')}</InputGroup.Text>
+                <InputGroup.Text>{t('schedule.date')}</InputGroup.Text>
                 <FormControl
                   {...register('date', {
                     required: t('error.scheduleDate'),
@@ -68,7 +68,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
             </Col>
             <Col md='6' sm='12'>
               <InputGroup>
-                <InputGroup.Text>{t('modal.schedule.time')}</InputGroup.Text>
+                <InputGroup.Text>{t('schedule.time')}</InputGroup.Text>
                 <FormControl
                   {...register('time', {
                     required: t('error.scheduleTime'),
@@ -86,7 +86,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
           <Row className='mt-3'>
             <Col md='12' sm='12'>
               <InputGroup>
-                <InputGroup.Text>{t('modal.schedule.repeat')}</InputGroup.Text>
+                <InputGroup.Text>{t('schedule.repeat')}</InputGroup.Text>
                 <FormControl
                   {...register('repeat', {
                     required: t('error.scheduleRepeat'),

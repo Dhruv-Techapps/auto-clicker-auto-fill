@@ -7,7 +7,7 @@ import { RootState } from '../store';
 import { actionActions } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
-import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
+import { getConfigName, updateConfigIds } from './config.slice.util';
 import { scheduleActions } from './schedule';
 import { watchActions } from './watch';
 
@@ -93,25 +93,17 @@ const slice = createSlice({
         delete selectedConfig.hotkey;
       }
     },
-    removeConfig: (state, action: PayloadAction<TRandomUUID>) => {
+    removeConfigs: (state, action: PayloadAction<Array<TRandomUUID>>) => {
+      const selectedConfigs = action.payload;
       const { configs } = state;
-      const configIndex = configs.findIndex((config) => config.id === action.payload);
-      if (configIndex === -1) {
-        state.error = 'Invalid Configuration';
-
-        return;
-      }
-      configs.splice(configIndex, 1);
+      const remainingConfigs = configs.filter((config) => !selectedConfigs.includes(config.id));
+      state.configs = remainingConfigs;
     },
     setConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = updateConfigIds(action.payload);
     },
-    importAll: (state, action: PayloadAction<Array<IConfiguration>>) => {
+    importConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs.push(...updateConfigIds(action.payload));
-    },
-    importConfig: (state, action: PayloadAction<IConfiguration>) => {
-      const config = updateConfigId(action.payload);
-      state.configs.push(config);
     },
     duplicateConfig: (state, action: PayloadAction<TRandomUUID>) => {
       const configId = action.payload;
@@ -120,7 +112,6 @@ const slice = createSlice({
       const selectedConfig = configs.find((config) => config.id === configId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-
         return;
       }
       const name = '(Duplicate) ' + (selectedConfig.name || selectedConfig.url || 'Configuration');
@@ -162,10 +153,9 @@ export const {
   setConfigs,
   updateConfig,
   updateConfigSettings,
-  removeConfig,
+  removeConfigs,
   duplicateConfig,
-  importAll,
-  importConfig,
+  importConfigs,
   syncBatch,
   addAction,
   addUserscript,

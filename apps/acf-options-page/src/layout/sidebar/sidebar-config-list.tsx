@@ -14,12 +14,12 @@ export const SidebarConfigList = () => {
   };
 
   return (
-    <Nav className='flex-column mt-4' variant='pills'>
-      <Nav.Item className='mx-2 d-flex align-items-center justify-content-between'>
+    <div className='d-flex flex-column' style={{ minHeight: 0, flex: 1 }}>
+      <div className='mx-2 mt-4 d-flex align-items-center justify-content-between'>
         <small className='text-body-tertiary'>{t('automations.count', { count: configs.length })}</small>
         <i className='bi bi-search' onClick={toggleSearchMode} />
-      </Nav.Item>
-      <Nav.Item className='mx-2 mt-2'>
+      </div>
+      <div className='mx-2 mt-2'>
         <Form.Control
           type='search'
           placeholder={t('automations.search')}
@@ -29,19 +29,23 @@ export const SidebarConfigList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           onBlur={() => setSearchMode(false)}
         />
-      </Nav.Item>
-      {configs
-        .filter(
-          (config) =>
-            config.name?.toLowerCase().includes(searchTerm.toLowerCase()) || config.url?.toLowerCase().includes(searchTerm.toLowerCase()) || config.id?.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .map((config) => (
-          <Nav.Item key={config.id} className='w-100'>
-            <NavLink to={`/automations/${config.id}`} className={({ isActive }) => (isActive ? 'active nav-link px-2 text-truncate' : 'text-body-secondary nav-link px-2 text-truncate')}>
-              {config.name || config.url || config.id}
-            </NavLink>
-          </Nav.Item>
-        ))}
-    </Nav>
+      </div>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }}>
+        <Nav className='flex-column mt-2' variant='pills'>
+        {configs
+          .filter(
+            (config) =>
+              config.name?.toLowerCase().includes(searchTerm.toLowerCase()) || config.url?.toLowerCase().includes(searchTerm.toLowerCase()) || config.id?.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+          .map((config) => (
+            <Nav.Item key={config.id} className='w-100'>
+              <NavLink to={`/automations/${config.id}`} className={({ isActive }) => (isActive ? 'active nav-link px-2 text-truncate' : 'text-body-secondary nav-link px-2 text-truncate')}>
+                {config.name || config.url || config.id}
+              </NavLink>
+            </Nav.Item>
+          ))}
+        </Nav>
+      </div>
+    </div>
   );
 };
