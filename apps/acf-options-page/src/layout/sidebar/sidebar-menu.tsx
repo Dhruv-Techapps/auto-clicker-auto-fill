@@ -17,7 +17,7 @@ export const SidebarMenu = ({ visible }: SidebarMenuProps) => {
     navigate(ROUTES.AUTOMATION(action.payload.id));
   };
   return (
-    <Nav className='flex-column' variant='pills'>
+    <Nav className='flex-column mt-2' variant='pills'>
       <Nav.Item>
         <Nav.Link as='button' onClick={onAddConfig} className='text-body-secondary px-1'>
           <i className='bi bi-plus-circle mx-2 text-body-emphasis' /> {visible && t('automations.add')}

@@ -41,7 +41,7 @@ export const Automation = () => {
       {config.url ? (
         <Container fluid>
           <Row className='align-items-center mb-3'>
-            <Col>
+            <Col xs='auto'>
               <Dropdown as={ButtonGroup} size='sm'>
                 <Button variant='outline-primary'>{config.name || config.url || config.id}</Button>
                 <Dropdown.Toggle split id='config-dropdown' variant='outline-primary'></Dropdown.Toggle>
@@ -72,7 +72,7 @@ export const Automation = () => {
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
-            <Col>
+            <Col className='text-center'>
               <small className='text-body-tertiary'>{config.url}</small>
             </Col>
             <Col xs='auto'>
