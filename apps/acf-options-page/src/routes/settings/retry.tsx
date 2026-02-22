@@ -23,13 +23,13 @@ function SettingRetry() {
       <Card bg='warning-subtle' text='warning-emphasis'>
         <Card.Body className='d-flex gap-3'>
           <InputGroup>
-            <InputGroup.Text>{t('modal.settings.retry.title')}</InputGroup.Text>
+            <InputGroup.Text>{t('retry.title')}</InputGroup.Text>
             <FormControl placeholder='5' autoComplete='off' name='retry' defaultValue={settings.retry} onBlur={onUpdate} type='number' pattern={REGEX.NUMBER} list='retry' />
             <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
           </InputGroup>
           <InputGroup>
             <InputGroup.Text>
-              {t('modal.settings.retry.interval')}&nbsp;<small>({t('common.sec')})</small>
+              {t('retry.interval')}&nbsp;<small>({t('common.sec')})</small>
             </InputGroup.Text>
             <FormControl placeholder='1' autoComplete='off' name='retryInterval' defaultValue={settings.retryInterval} onBlur={onUpdate} pattern={REGEX.INTERVAL} list='interval' />
             <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
@@ -38,18 +38,11 @@ function SettingRetry() {
       </Card>
       <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>
         <Card.Body>
-          <p>{t('modal.settings.retry.hint')}</p>
+          <p>{t('retry.hint')}</p>
           <div className='d-flex justify-content-between mt-3'>
-            <Form.Check type='radio' value={EErrorOptions.STOP} checked={settings.retryOption === EErrorOptions.STOP} onChange={onUpdate} name='retryOption' label={t('modal.settings.retry.stop')} />
-            <Form.Check type='radio' value={EErrorOptions.SKIP} checked={settings.retryOption === EErrorOptions.SKIP} onChange={onUpdate} name='retryOption' label={t('modal.settings.retry.skip')} />
-            <Form.Check
-              type='radio'
-              value={EErrorOptions.RELOAD}
-              checked={settings.retryOption === EErrorOptions.RELOAD}
-              onChange={onUpdate}
-              name='retryOption'
-              label={t('modal.settings.retry.refresh')}
-            />
+            <Form.Check type='radio' value={EErrorOptions.STOP} checked={settings.retryOption === EErrorOptions.STOP} onChange={onUpdate} name='retryOption' label={t('retry.stop')} />
+            <Form.Check type='radio' value={EErrorOptions.SKIP} checked={settings.retryOption === EErrorOptions.SKIP} onChange={onUpdate} name='retryOption' label={t('retry.skip')} />
+            <Form.Check type='radio' value={EErrorOptions.RELOAD} checked={settings.retryOption === EErrorOptions.RELOAD} onChange={onUpdate} name='retryOption' label={t('retry.refresh')} />
           </div>
         </Card.Body>
       </Card>

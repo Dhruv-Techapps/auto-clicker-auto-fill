@@ -40,26 +40,26 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
         className={visible ? 'd-block w-100 user-expand' : 'user-collapse'}
       >
         {user?.email && <NavDropdown.ItemText className='text-truncate text-body-tertiary'>{user?.email}</NavDropdown.ItemText>}
-        <NavDropdown.Item as={NavLink} to='/settings/general'>
-          <i className='bi bi-gear me-2' /> {t('sidebar.settings')}
+        <NavDropdown.Item as={NavLink} to='/settings'>
+          <i className='bi bi-gear me-2' /> {t('settings.title')}
         </NavDropdown.Item>
         <LanguageDropdown />
         <ThemeDropdown />
         <NavDropdown.Divider />
         {!role && (
           <NavDropdown.Item as={NavLink} to='/upgrade'>
-            <i className='bi bi-arrow-up-circle me-2' /> {t('sidebar.upgradePlan')}
+            <i className='bi bi-arrow-up-circle me-2' /> {t('upgradePlan.title')}
           </NavDropdown.Item>
         )}
         <LearnMoreDropdown />
         <NavDropdown.Divider />
         {user ? (
           <NavDropdown.Item onClick={() => dispatch(firebaseLogoutAPI())}>
-            <i className='bi bi-door-open me-2' /> {t('sidebar.logout')}
+            <i className='bi bi-door-open me-2' /> {t('logout')}
           </NavDropdown.Item>
         ) : (
           <NavDropdown.Item onClick={() => dispatch(switchFirebaseLoginModal())}>
-            <i className='bi bi-door-closed me-2' /> {t('sidebar.login')}
+            <i className='bi bi-door-closed me-2' /> {t('login')}
           </NavDropdown.Item>
         )}
       </NavDropdown>

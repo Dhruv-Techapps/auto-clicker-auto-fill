@@ -12,7 +12,7 @@ export const LanguageDropdown = () => {
     <NavDropdown
       title={
         <div className='d-inline-flex align-items-center w-100 text-secondary-emphasis'>
-          <i className='bi bi-translate me-2' /> {t('sidebar.language')}
+          <i className='bi bi-translate me-2' /> {t('languages.title')}
         </div>
       }
       drop='end'

@@ -3,6 +3,7 @@ import { Loading } from '@acf-options-page/components/loading.components';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { settingsGetAPI } from '@acf-options-page/store/settings/settings.api';
 import { settingsSelector } from '@acf-options-page/store/settings/settings.slice';
+import { ROUTES } from '@acf-options-page/util';
 import { useEffect } from 'react';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -22,34 +23,34 @@ export const Settings = () => {
     <Container className='my-5'>
       <h3>{t('settings.title')}</h3>
       <Row>
-        <Col sm={2}>
-          <Nav variant='pills' defaultActiveKey='/settings/general' className='flex-column'>
+        <Col xs={2}>
+          <Nav variant='pills' defaultActiveKey={ROUTES.SETTINGS_RETRY} className='flex-column'>
             <Nav.Item>
-              <NavLink to='/settings/retry' className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_RETRY} className='nav-link'>
                 <i className='bi bi-arrow-repeat me-2' />
-                {t('settings.retry')}
+                {t('retry.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to='/settings/notification' className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_NOTIFICATION} className='nav-link'>
                 <i className='bi bi-bell-fill me-2' />
-                {t('settings.notification')}
+                {t('notification.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to='/settings/backup' className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_BACKUP} className='nav-link'>
                 <i className='bi bi-cloud-arrow-up-fill me-2' />
-                {t('settings.backup')}
+                {t('backup.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to='/settings/google-sheets' className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_GOOGLE_SHEETS} className='nav-link'>
                 <i className='bi bi-file-spreadsheet-fill me-2' />
-                {t('settings.googleSheets')}
+                {t('googleSheets.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to='/settings/additional' className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_ADDITIONAL} className='nav-link'>
                 <i className='bi bi-cloud-fill me-2' />
                 {t('settings.additional')}
               </NavLink>

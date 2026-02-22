@@ -4,15 +4,16 @@ import { settingsSelector } from '@acf-options-page/store/settings';
 import { discordDeleteAPI, discordGetAPI, discordLoginAPI } from '@acf-options-page/store/settings/settings.api';
 import { useEffect } from 'react';
 import { Button, Form, Image } from 'react-bootstrap';
+import { Trans, useTranslation } from 'react-i18next';
 
 interface SettingDiscordProps {
   checked: boolean;
-  label: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function SettingDiscord({ onChange, label, checked }: SettingDiscordProps) {
-  const { discord } = useAppSelector(settingsSelector);
+function SettingDiscord({ onChange, checked }: SettingDiscordProps) {
+  const { t } = useTranslation();
+  const { discord, discordLoading } = useAppSelector(settingsSelector);
   const { user } = useAppSelector(firebaseSelector);
   const dispatch = useAppDispatch();
 
@@ -30,16 +31,17 @@ function SettingDiscord({ onChange, label, checked }: SettingDiscordProps) {
     dispatch(discordDeleteAPI());
   };
 
-  if (!user) {
+  if (discordLoading) {
     return (
-      <p>
-        Please
-        <Button variant='link' title='login' onClick={() => dispatch(switchFirebaseLoginModal())}>
-          Login
-        </Button>
-        to your account before connecting with Discord.
-      </p>
+      <div className='w-100'>
+        <div className='d-flex justify-content-between align-items-center'> </div>
+        <div>{t('loading')}</div>
+      </div>
     );
+  }
+
+  if (!user) {
+    return <Trans i18nKey='discord.loginRequired' components={{ 1: <Button variant='link' title='login' onClick={() => dispatch(switchFirebaseLoginModal())} /> }} />;
   }
 
   if (discord) {
@@ -47,7 +49,7 @@ function SettingDiscord({ onChange, label, checked }: SettingDiscordProps) {
       <div className='w-100'>
         <div className='d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='discord'>
-            <div className='fw-bold mb-2'>{label}</div>
+            <div className='fw-bold mb-2'>{t('discord.title')}</div>
             <Image
               alt={discord.displayName}
               className='me-2'
@@ -59,7 +61,7 @@ function SettingDiscord({ onChange, label, checked }: SettingDiscordProps) {
             />
             {discord.username}
             <Button variant='link' onClick={remove}>
-              (disconnect)
+              ({t('disconnect')})
             </Button>
           </Form.Label>
           <Form.Check type='switch' id='discord' onChange={onChange} checked={checked || false} name='discord' data-testid='discord-switch' />
@@ -70,7 +72,7 @@ function SettingDiscord({ onChange, label, checked }: SettingDiscordProps) {
 
   return (
     <Button variant='link' onClick={connect} data-testid='discord-connect'>
-      Connect with discord
+      {t('connect')}
     </Button>
   );
 }

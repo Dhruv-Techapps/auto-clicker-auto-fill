@@ -1,2 +1,2 @@
 export * from './useAdRotator';
-export * from './useConfigId';
+export * from './useAutomationId';

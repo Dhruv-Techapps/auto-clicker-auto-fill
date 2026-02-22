@@ -10,6 +10,7 @@ export interface ISettingsStore {
   error?: string;
   settings: ISettings;
   discord?: IDiscord;
+  discordLoading?: boolean;
   message?: string;
 }
 
@@ -72,15 +73,15 @@ const slice = createSlice({
     });
     builder.addCase(discordGetAPI.pending, (state) => {
       delete state.error;
-      state.loading = true;
+      state.discordLoading = true;
     });
     builder.addCase(discordGetAPI.fulfilled, (state, action) => {
       state.discord = action.payload;
-      state.loading = false;
+      state.discordLoading = false;
     });
     builder.addCase(discordGetAPI.rejected, (state, action) => {
       state.error = action.error.message;
-      state.loading = false;
+      state.discordLoading = false;
     });
     builder.addCase(discordLoginAPI.fulfilled, (state, action) => {
       state.discord = action.payload;

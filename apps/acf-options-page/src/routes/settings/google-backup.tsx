@@ -4,7 +4,7 @@ import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
 import { GOOGLE_SCOPES } from '@dhruv-techapps/shared-google-oauth/service';
 import { useEffect } from 'react';
 import { Accordion, Button, Card, ListGroup, NavDropdown } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { ErrorAlert } from '@acf-options-page/components';
 import { firebaseSelector, switchFirebaseLoginModal } from '@acf-options-page/store/firebase';
@@ -57,8 +57,8 @@ export function SettingsGoogleBackup() {
 
   const restore = async (id: string, name: string) => {
     const result = await modalContext.showConfirmation({
-      title: t('confirm.backup.restore.title'),
-      message: t('confirm.backup.restore.message'),
+      title: t('backup.confirm.restore.title'),
+      message: t('backup.confirm.restore.message'),
       headerClass: 'text-danger'
     });
     result && dispatch(googleDriveRestoreAPI({ id, name }));
@@ -71,11 +71,13 @@ export function SettingsGoogleBackup() {
   if (!user) {
     return (
       <p>
-        Please
-        <Button variant='link' title='login' onClick={() => dispatch(switchFirebaseLoginModal())}>
-          Login
-        </Button>
-        to your account before connecting with Google Drive.
+        <Trans i18nKey='backup.loginRequired'>
+          Please
+          <Button variant='link' title='login' onClick={() => dispatch(switchFirebaseLoginModal())}>
+            Login
+          </Button>
+          to your account before connecting with Google Drive.
+        </Trans>
       </p>
     );
   }
@@ -84,7 +86,7 @@ export function SettingsGoogleBackup() {
     return (
       <div className='d-flex align-items-center justify-content-center'>
         <span className='spinner-border me-3' aria-hidden='true'></span>
-        <span>Checking Google Drive access...</span>
+        <span>{t('backup.checkingAccess')}</span>
       </div>
     );
   }
@@ -93,7 +95,7 @@ export function SettingsGoogleBackup() {
     return (
       <div className='d-flex flex-column align-items-start'>
         <Button variant='link' onClick={connect} data-testid='google-backup-connect'>
-          Connect with Google Drive
+          {t('backup.connect')}
         </Button>
       </div>
     );
@@ -103,46 +105,46 @@ export function SettingsGoogleBackup() {
     <>
       <div>
         {error && <ErrorAlert error={error} />}
-        <b className='text-muted d-block mb-2'>Google Drive {t('modal.settings.backup.title')}</b>
+        <b className='text-muted d-block mb-2'>{t('backup.connected')}</b>
       </div>
       <hr />
       <ol className='list-group'>
         <ListGroup.Item as='li'>
-          <NavDropdown.Item href='#backup-now' title={t('modal.settings.backup.now')} onClick={() => onBackup()}>
+          <NavDropdown.Item href='#backup-now' title={t('backup.now')} onClick={() => onBackup()}>
             <i className='bi bi-cloud-arrow-up-fill me-2' />
-            {t('modal.settings.backup.now')}
+            {t('backup.now')}
           </NavDropdown.Item>
         </ListGroup.Item>
       </ol>
-      <h6 className='mt-4'>{t('modal.settings.backup.auto-backup')}</h6>
+      <h6 className='mt-4'>{t('backup.auto-backup')}</h6>
       <ol className='list-group'>
         <ListGroup.Item as='li' active={backup?.autoBackup === EAutoBackup.DAILY}>
-          <NavDropdown.Item href='#backup-daily' title={t('modal.settings.backup.daily')} onClick={() => onBackup(EAutoBackup.DAILY)}>
-            {t('modal.settings.backup.daily')}
+          <NavDropdown.Item href='#backup-daily' title={t('backup.daily')} onClick={() => onBackup(EAutoBackup.DAILY)}>
+            {t('backup.daily')}
           </NavDropdown.Item>
         </ListGroup.Item>
         <ListGroup.Item as='li' active={backup?.autoBackup === EAutoBackup.WEEKLY}>
-          <NavDropdown.Item href='#backup-weekly' title={t('modal.settings.backup.weekly')} onClick={() => onBackup(EAutoBackup.WEEKLY)}>
-            {t('modal.settings.backup.weekly')}
+          <NavDropdown.Item href='#backup-weekly' title={t('backup.weekly')} onClick={() => onBackup(EAutoBackup.WEEKLY)}>
+            {t('backup.weekly')}
           </NavDropdown.Item>
         </ListGroup.Item>
         <ListGroup.Item as='li' active={backup?.autoBackup === EAutoBackup.MONTHLY}>
-          <NavDropdown.Item href='#backup-monthly' title={t('modal.settings.backup.monthly')} onClick={() => onBackup(EAutoBackup.MONTHLY)}>
-            {t('modal.settings.backup.monthly')}
+          <NavDropdown.Item href='#backup-monthly' title={t('backup.monthly')} onClick={() => onBackup(EAutoBackup.MONTHLY)}>
+            {t('backup.monthly')}
           </NavDropdown.Item>
         </ListGroup.Item>
         <ListGroup.Item as='li' active={!backup?.autoBackup || backup?.autoBackup === EAutoBackup.OFF}>
-          <NavDropdown.Item href='#backup-off' title={t('modal.settings.backup.off')} onClick={() => onBackup(EAutoBackup.OFF)}>
-            {t('modal.settings.backup.off')}
+          <NavDropdown.Item href='#backup-off' title={t('backup.off')} onClick={() => onBackup(EAutoBackup.OFF)}>
+            {t('backup.off')}
           </NavDropdown.Item>
         </ListGroup.Item>
       </ol>
       <hr />
-      <h6 className='mt-4'>{t('modal.settings.backup.restore')}</h6>
+      <h6 className='mt-4'>{t('backup.restore')}</h6>
       {filesLoading ? (
         <div className='d-flex align-items-center '>
           <span className='spinner-border me-3' aria-hidden='true'></span>
-          <span>Loading your files...</span>
+          <span>{t('backup.loadingFiles')}</span>
         </div>
       ) : (
         <div>
@@ -156,11 +158,11 @@ export function SettingsGoogleBackup() {
                   <Accordion.Body>
                     <Button onClick={() => restore(file.id, file.name)} variant='link' type='button' size='sm' className='text-danger'>
                       <i className='bi bi-cloud-arrow-down-fill me-2' />
-                      Restore
+                      {t('backup.restoreAction')}
                     </Button>
                     <Button onClick={() => deleteFile(file.id, file.name)} variant='link' type='button' size='sm' className='text-danger'>
                       <i className='bi bi-trash me-2' />
-                      Delete
+                      {t('backup.delete')}
                     </Button>
                     <Card>
                       <pre>{JSON.stringify(file.content, null, 2)}</pre>
@@ -170,7 +172,7 @@ export function SettingsGoogleBackup() {
               ))}
             </Accordion>
           ) : (
-            <div> No Backup found</div>
+            <div>{t('backup.noBackup')}</div>
           )}
         </div>
       )}

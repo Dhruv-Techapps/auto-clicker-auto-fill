@@ -2,7 +2,6 @@ import { EErrorOptions, IActionCondition, IActionStatement, TGoto } from '@dhruv
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
-import { openActionStatementModalAPI } from './statement.api';
 
 export interface IActionStatementStore {
   visible: boolean;
@@ -65,19 +64,8 @@ const slice = createSlice({
     },
     setActionStatementError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-
       state.message = undefined;
     }
-  },
-  extraReducers(builder) {
-    builder.addCase(openActionStatementModalAPI.fulfilled, (state, action) => {
-      if (action.payload.statement) {
-        state.statement = { ...action.payload.statement, goto: action.payload.goto };
-      } else {
-        state.statement = {};
-      }
-      state.visible = !state.visible;
-    });
   }
 });
 

@@ -1,5 +1,6 @@
 import { addConfig } from '@acf-options-page/store/config';
 import { useAppDispatch } from '@acf-options-page/store/hooks';
+import { ROUTES } from '@acf-options-page/util';
 import { Button, Card, Carousel, Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
@@ -32,7 +33,7 @@ export const Home = () => {
 
   const onAddConfig = () => {
     const action = dispatch(addConfig());
-    navigate(`/configurations/${action.payload.id}`);
+    navigate(ROUTES.AUTOMATION(action.payload.id));
   };
 
   return (
@@ -45,7 +46,7 @@ export const Home = () => {
           <p className='lead text-body-secondary mb-4'>{t('home.subtitle')}</p>
           <Button variant='primary' size='lg' onClick={onAddConfig}>
             <i className='bi bi-plus-lg me-2' />
-            {t('configuration.add')}
+            {t('automations.add')}
           </Button>
         </Col>
       </Row>

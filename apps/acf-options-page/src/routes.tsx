@@ -1,11 +1,14 @@
 import { createBrowserRouter } from 'react-router';
 import { Layout } from './layout/layout';
-import { ConfigurationBatchOffcanvas } from './offcanvas/configuration-batch-offcanvas';
-import { ConfigurationScheduleOffcanvas } from './offcanvas/configuration-schedule-offcanvas';
-import { ConfigurationSettingsOffcanvas } from './offcanvas/configuration-settings-offcanvas';
-import { ConfigurationWatchOffcanvas } from './offcanvas/configuration-watch-offcanvas';
-import { Configuration } from './routes/configuration';
-import { Configurations } from './routes/configurations';
+import { AutomationLoopOffcanvas } from './offcanvas/automation-loop-offcanvas';
+import { AutomationMonitorOffcanvas } from './offcanvas/automation-monitor-offcanvas';
+import { AutomationScheduleOffcanvas } from './offcanvas/automation-schedule-offcanvas';
+import { AutomationSettingsOffcanvas } from './offcanvas/automation-settings-offcanvas';
+import { StepConditionOffcanvas } from './offcanvas/step-condition-offcanvas';
+import { StepPreCheckOffcanvas } from './offcanvas/step-prec-check-offcanvas';
+import { AutomationStepSettingsOffcanvas } from './offcanvas/step-settings-offcanvas';
+import { Automation } from './routes/automation';
+import { Automations } from './routes/automations';
 import { Home } from './routes/home';
 import { SettingsRoutes } from './routes/settings/settings-route';
 import { Upgrade } from './routes/upgrade';
@@ -21,17 +24,25 @@ export const router = createBrowserRouter([
         Component: () => <Upgrade />
       },
       {
-        path: 'configurations',
+        path: 'automations',
         children: [
-          { index: true, Component: () => <Configurations /> },
+          { index: true, Component: () => <Automations /> },
           {
-            path: ':configId',
-            Component: () => <Configuration />,
+            path: ':automationId',
+            Component: () => <Automation />,
             children: [
-              { path: 'settings', Component: () => <ConfigurationSettingsOffcanvas show={true} /> },
-              { path: 'schedule', Component: () => <ConfigurationScheduleOffcanvas show={true} /> },
-              { path: 'batch', Component: () => <ConfigurationBatchOffcanvas show={true} /> },
-              { path: 'watch', Component: () => <ConfigurationWatchOffcanvas show={true} /> }
+              { path: 'settings', Component: () => <AutomationSettingsOffcanvas show={true} /> },
+              { path: 'schedule', Component: () => <AutomationScheduleOffcanvas show={true} /> },
+              { path: 'loop', Component: () => <AutomationLoopOffcanvas show={true} /> },
+              { path: 'monitor', Component: () => <AutomationMonitorOffcanvas show={true} /> },
+              {
+                path: ':stepId',
+                children: [
+                  { path: 'pre-check', Component: () => <StepPreCheckOffcanvas show={true} /> },
+                  { path: 'settings', Component: () => <AutomationStepSettingsOffcanvas show={true} /> },
+                  { path: 'condition', Component: () => <StepConditionOffcanvas show={true} /> }
+                ]
+              }
             ]
           }
         ]

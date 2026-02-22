@@ -14,7 +14,7 @@ export const LearnMoreDropdown = () => {
     <NavDropdown
       title={
         <div className='d-inline-flex align-items-center w-100 text-secondary-emphasis'>
-          <i className='bi bi-info-circle me-2' /> {t('sidebar.learnMore')}
+          <i className='bi bi-info-circle me-2' /> {t('learnMore')}
         </div>
       }
       drop='end'

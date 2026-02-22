@@ -16,13 +16,13 @@ export const SidebarConfigList = () => {
   return (
     <Nav className='flex-column mt-4' variant='pills'>
       <Nav.Item className='mx-2 d-flex align-items-center justify-content-between'>
-        <small className='text-body-tertiary'>{t('sidebar.configurationsCount', { count: configs.length })}</small>
+        <small className='text-body-tertiary'>{t('automations.count', { count: configs.length })}</small>
         <i className='bi bi-search' onClick={toggleSearchMode} />
       </Nav.Item>
       <Nav.Item className='mx-2 mt-2'>
         <Form.Control
           type='search'
-          placeholder={t('sidebar.search')}
+          placeholder={t('automations.search')}
           size='sm'
           className={`${searchMode ? 'd-block' : 'd-none'}`}
           value={searchTerm}
@@ -37,7 +37,7 @@ export const SidebarConfigList = () => {
         )
         .map((config) => (
           <Nav.Item key={config.id} className='w-100'>
-            <NavLink to={`/configurations/${config.id}`} className={({ isActive }) => (isActive ? 'active nav-link px-2 text-truncate' : 'text-body-secondary nav-link px-2 text-truncate')}>
+            <NavLink to={`/automations/${config.id}`} className={({ isActive }) => (isActive ? 'active nav-link px-2 text-truncate' : 'text-body-secondary nav-link px-2 text-truncate')}>
               {config.name || config.url || config.id}
             </NavLink>
           </Nav.Item>

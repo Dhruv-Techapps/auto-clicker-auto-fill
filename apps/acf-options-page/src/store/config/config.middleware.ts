@@ -43,25 +43,25 @@ configsToastListenerMiddleware.startListening({
 const getMessageFunc = (action: UnknownAction): { header: string; body: string } => {
   switch (action.type) {
     case updateConfigSettings.type:
-      return { header: i18next.t(`toast.config.header`), body: i18next.t(`toast.config.settings`) };
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.settings`) };
     case syncBatch.type:
-      return { header: i18next.t(`toast.batch.header`), body: i18next.t(`toast.batch.body`) };
+      return { header: i18next.t(`loop.toast.header`), body: i18next.t(`loop.toast.body`) };
     case updateAction.type:
     case reorderActions.type:
     case removeAction.type:
-      return { header: i18next.t(`toast.action.header`), body: i18next.t(`toast.action.body`) };
+      return { header: i18next.t(`step.toast.header`), body: i18next.t(`step.toast.body`) };
     case syncActionAddon.type:
-      return { header: i18next.t(`toast.actionAddon.header`), body: i18next.t(`toast.actionAddon.body`) };
+      return { header: i18next.t(`stepPreCheck.toast.header`), body: i18next.t(`stepPreCheck.toast.body`) };
     case syncWatch.type:
-      return { header: i18next.t(`toast.watch.header`), body: i18next.t(`toast.watch.body`) };
+      return { header: i18next.t(`monitor.toast.header`), body: i18next.t(`monitor.toast.body`) };
     case syncActionStatement.type:
-      return { header: i18next.t(`toast.actionStatement.header`), body: i18next.t(`toast.actionStatement.body`) };
+      return { header: i18next.t(`stepCondition.toast.header`), body: i18next.t(`stepCondition.toast.body`) };
     case syncActionSettings.type:
-      return { header: i18next.t(`toast.actionSettings.header`), body: i18next.t(`toast.actionSettings.body`) };
+      return { header: i18next.t(`stepSettings.toast.header`), body: i18next.t(`stepSettings.toast.body`) };
     case syncSchedule.type:
-      return { header: i18next.t(`toast.config.header`), body: i18next.t(`toast.config.schedule`) };
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.schedule`) };
     default:
-      return { header: i18next.t(`toast.config.header`), body: i18next.t(`toast.config.body`) };
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.body`) };
   }
 };
 

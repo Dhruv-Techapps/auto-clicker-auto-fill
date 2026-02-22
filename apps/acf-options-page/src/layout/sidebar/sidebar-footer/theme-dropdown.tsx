@@ -15,7 +15,7 @@ export const ThemeDropdown = () => {
     <NavDropdown
       title={
         <div className='d-inline-flex align-items-center w-100 text-secondary-emphasis'>
-          <i className='bi bi-palette me-2' /> {t('sidebar.theme')}
+          <i className='bi bi-palette me-2' /> {t('theme.title')}
         </div>
       }
       drop='end'
@@ -23,13 +23,13 @@ export const ThemeDropdown = () => {
       className='d-block w-100'
     >
       <NavDropdown.Item active={theme === 'light'} onClick={() => onClickTheme('light')} className='d-flex align-items-center'>
-        <i className='bi bi-sun-fill me-2 opacity-50'></i> Light
+        <i className='bi bi-sun-fill me-2 opacity-50'></i> {t('theme.light')}
       </NavDropdown.Item>
       <NavDropdown.Item active={theme === 'dark'} onClick={() => onClickTheme('dark')} className='d-flex align-items-center'>
-        <i className='bi bi-moon-stars-fill me-2 opacity-50 '></i> Dark
+        <i className='bi bi-moon-stars-fill me-2 opacity-50 '></i> {t('theme.dark')}
       </NavDropdown.Item>
       <NavDropdown.Item active={theme === null} onClick={() => onClickTheme(null)} className='d-flex align-items-center'>
-        <i className='bi bi-circle-half me-2 opacity-50 '></i> Auto
+        <i className='bi bi-circle-half me-2 opacity-50 '></i> {t('theme.auto')}
       </NavDropdown.Item>
     </NavDropdown>
   );
