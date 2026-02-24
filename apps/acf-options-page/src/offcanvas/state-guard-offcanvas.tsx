@@ -6,8 +6,8 @@ import { Button, Form, Offcanvas, Table } from 'react-bootstrap';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { StepConditionCondition } from './step-condition/step-condition-condition';
-import { StepConditionRetry } from './step-condition/step-condition-retry';
+import { StepConditionCondition } from './step-state-guard/step-condition-condition';
+import { StepConditionRetry } from './step-state-guard/step-condition-retry';
 
 interface StateGuardOffcanvasProps {
   show: boolean;

@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { ValueExtractorPopover } from '../popover';
-import { PreCheckRecheck } from './step-pre-check/recheck';
-import { PreCheckValueExtractorFlags } from './step-pre-check/value-extractor-flags';
+import { PreCheckRecheck } from './step-page-guard/recheck';
+import { PreCheckValueExtractorFlags } from './step-page-guard/value-extractor-flags';
 
 interface PageGuardOffcanvasProps {
   show: boolean;
