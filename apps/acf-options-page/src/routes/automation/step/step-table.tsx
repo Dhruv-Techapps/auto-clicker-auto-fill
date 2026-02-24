@@ -5,7 +5,7 @@ import { IAction, isUserScript, IUserScript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, Row, useReactTable } from '@tanstack/react-table';
 import { useMemo } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Container, Form, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
 import { REGEX } from '../../../util';
@@ -23,9 +23,10 @@ interface StepTableMeta {
 
 interface StepTableProps {
   actions: Array<IAction | IUserScript>;
+  expand: boolean;
 }
 
-const StepTable = ({ actions }: StepTableProps) => {
+const StepTable = ({ actions, expand }: StepTableProps) => {
   const { t } = useTranslation();
   const configId = useAutomationId();
   const { columnVisibility } = useAppSelector(actionSelector);
@@ -132,7 +133,7 @@ const StepTable = ({ actions }: StepTableProps) => {
   };
 
   return (
-    <div className='pt-2 overflow-auto'>
+    <Container fluid={expand} className='pt-2 overflow-auto'>
       <Form>
         <Table id='actions' hover className='mb-0'>
           <thead>
@@ -159,7 +160,7 @@ const StepTable = ({ actions }: StepTableProps) => {
           </tbody>
         </Table>
       </Form>
-    </div>
+    </Container>
   );
 };
 

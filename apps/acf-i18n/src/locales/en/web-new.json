@@ -149,10 +149,10 @@
       "body": "Step settings saved successfully!"
     }
   },
-  "stepCondition": {
+  "stateGuard": {
     "action": "Previous Step",
     "status": "Result",
-    "title": "Conditions",
+    "title": "State Guard",
     "add": "Add Condition",
     "info": "Set a rule to control whether this step should run, based on what happened in the previous steps.",
     "stop": "Stop Automation",
@@ -162,12 +162,12 @@
     "proceed": "Run This Step Anyway",
     "hint": "What should happen if the rule is not met?",
     "toast": {
-      "header": "Step Condition",
-      "body": "Step condition saved successfully!"
+      "header": "State Guard",
+      "body": "State guard saved successfully!"
     }
   },
-  "stepPreCheck": {
-    "title": "Pre Check",
+  "pageGuard": {
+    "title": "Page Guard",
     "info": "Only run this step if a value on the page meets your condition.",
     "elementFinder": "Find Item on Page",
     "condition": "Compare",
@@ -185,8 +185,8 @@
       "goto": "Go to Step"
     },
     "toast": {
-      "header": "Step Pre-check",
-      "body": "Step pre-check saved successfully!"
+      "header": "Page Guard",
+      "body": "Page guard saved successfully!"
     }
   },
   "schedule": {
@@ -268,20 +268,17 @@
     "title": "Automation",
     "exportAll": "Bulk Export Automations",
     "importAll": "Bulk Import Automations",
-    "remove": "Remove Automation",
-    "duplicate": "Duplicate Automation",
+    "remove": "Remove",
+    "duplicate": "Duplicate",
     "reorder": "Reorder Automations",
-    "selected": "Selected Automation",
-    "removeAutomations": "Bulk Remove Automations",
-    "enable": "Enable Automation",
-    "disable": "Disable Automation",
-    "edit": "Edit Automation",
-    "export": "Export Automation",
-    "import": "Import Automation",
+    "enable": "Enable",
+    "disable": "Disable",
+    "edit": "Edit",
+    "export": "Export",
+    "import": "Import",
     "schedule": "Schedule",
     "batch": "Loop Settings",
     "watch": "Monitor Settings",
-    "delete": "Delete Automation",
     "url": "URL",
     "name": "Name",
     "initWait": "Wait Before Start",

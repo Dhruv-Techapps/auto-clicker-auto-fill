@@ -21,9 +21,9 @@ export const ROUTES = {
   AUTOMATION_MONITOR: 'monitor',
 
   // Step child routes — relative (used inside :automationId/:stepId context)
-  STEP_PRE_CHECK: (stepId: string) => `${stepId}/pre-check`,
+  PAGE_GUARD: (stepId: string) => `${stepId}/page-guard`,
+  STATE_GUARD: (stepId: string) => `${stepId}/state-guard`,
   STEP_SETTINGS: (stepId: string) => `${stepId}/settings`,
-  STEP_CONDITION: (stepId: string) => `${stepId}/condition`,
 
   // Settings
   SETTINGS: '/settings',

@@ -31,7 +31,7 @@ export function PreCheckRecheck({ register, watch, setValue, actions }: PreCheck
           <Row>
             <Col md={6} sm={12}>
               <InputGroup>
-                <InputGroup.Text>{t('stepPreCheck.recheck.recheck')}</InputGroup.Text>
+                <InputGroup.Text>{t('pageGuard.recheck.recheck')}</InputGroup.Text>
                 <FormControl placeholder='0' type='number' list='recheck' {...register('recheck', { pattern: { value: new RegExp(REGEX.NUMBER), message: t('error.number') } })} />
                 <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
               </InputGroup>
@@ -39,7 +39,7 @@ export function PreCheckRecheck({ register, watch, setValue, actions }: PreCheck
             <Col md={6} sm={12}>
               <InputGroup>
                 <InputGroup.Text>
-                  {t('stepPreCheck.recheck.interval')}&nbsp;<small>({t('common.sec')})</small>
+                  {t('pageGuard.recheck.interval')}&nbsp;<small>({t('common.sec')})</small>
                 </InputGroup.Text>
                 <FormControl placeholder='0' list='interval' {...register('recheckInterval', { pattern: { value: new RegExp(REGEX.INTERVAL), message: t('error.number') } })} />
                 <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
@@ -52,19 +52,19 @@ export function PreCheckRecheck({ register, watch, setValue, actions }: PreCheck
         <Card.Body>
           <Row>
             <Col xs={12} className='mb-2'>
-              {t('stepPreCheck.recheck.hint')}
+              {t('pageGuard.recheck.hint')}
             </Col>
             <Col>
-              <Form.Check type='radio' value={EErrorOptions.STOP} label={t('stepPreCheck.recheck.stop')} {...register('recheckOption')} />
+              <Form.Check type='radio' value={EErrorOptions.STOP} label={t('pageGuard.recheck.stop')} {...register('recheckOption')} />
             </Col>
             <Col>
-              <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('stepPreCheck.recheck.skip')} {...register('recheckOption')} />
+              <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('pageGuard.recheck.skip')} {...register('recheckOption')} />
             </Col>
             <Col>
-              <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('stepPreCheck.recheck.refresh')} {...register('recheckOption')} />
+              <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('pageGuard.recheck.refresh')} {...register('recheckOption')} />
             </Col>
             <Col>
-              <Form.Check type='radio' value={EErrorOptions.GOTO} label={t('stepPreCheck.recheck.goto')} {...register('recheckOption')} />
+              <Form.Check type='radio' value={EErrorOptions.GOTO} label={t('pageGuard.recheck.goto')} {...register('recheckOption')} />
             </Col>
             {recheckOption === EErrorOptions.GOTO && (
               <Col xs={{ span: 3, offset: 9 }}>

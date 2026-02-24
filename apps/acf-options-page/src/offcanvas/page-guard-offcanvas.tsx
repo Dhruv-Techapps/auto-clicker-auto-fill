@@ -1,27 +1,27 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
+import { useStepId } from '@acf-options-page/_hooks/useStepId';
 import { syncActionAddon, useAppDispatch } from '@acf-options-page/store';
 import { EAddonConditions, IAddon, defaultAddon } from '@dhruv-techapps/acf-common';
-import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Button, Col, Form, InputGroup, Offcanvas, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { ValueExtractorPopover } from '../popover';
 import { PreCheckRecheck } from './step-pre-check/recheck';
 import { PreCheckValueExtractorFlags } from './step-pre-check/value-extractor-flags';
 
-interface StepPreCheckOffcanvasProps {
+interface PageGuardOffcanvasProps {
   show: boolean;
 }
 
-export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
+export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const config = useAutomation();
   const navigate = useNavigate();
-  const { actionId } = useParams<{ actionId: TRandomUUID }>();
+  const stepId = useStepId();
 
-  const action = config?.actions.find((a) => a.id === actionId);
+  const action = config?.actions.find((a) => a.id === stepId);
 
   const {
     register,
@@ -33,7 +33,7 @@ export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
     defaultValues: action?.addon ?? { ...defaultAddon }
   });
 
-  if (!config || !action || !actionId) {
+  if (!config || !action) {
     return null;
   }
 
@@ -45,12 +45,12 @@ export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
   const value = watch('value');
 
   const onSubmit = (data: IAddon) => {
-    dispatch(syncActionAddon({ configId: config.id, actionId, addon: data }));
+    dispatch(syncActionAddon({ configId: config.id, actionId: stepId, addon: data }));
     navigate(-1);
   };
 
   const onReset = () => {
-    dispatch(syncActionAddon({ configId: config.id, actionId, addon: undefined }));
+    dispatch(syncActionAddon({ configId: config.id, actionId: stepId, addon: undefined }));
     navigate(-1);
   };
 
@@ -58,15 +58,15 @@ export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
     <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{t('stepPreCheck.title')}</Offcanvas.Title>
+          <Offcanvas.Title>{t('pageGuard.title')}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className='flex-grow-1 overflow-auto'>
-          <p className='text-muted'>{t('stepPreCheck.info')}</p>
+          <p className='text-muted'>{t('pageGuard.info')}</p>
           <Row className='mb-3'>
             <Col md={6} sm={12}>
               <Form.Group controlId='addon-element'>
                 <Form.Label>
-                  {t('stepPreCheck.elementFinder')} <small className='text-danger'>*</small>
+                  {t('pageGuard.elementFinder')} <small className='text-danger'>*</small>
                 </Form.Label>
                 <Form.Control type='text' placeholder='Element Finder' list='elementFinder' isInvalid={!!errors.elementFinder} {...register('elementFinder', { required: t('error.elementFinder') })} />
                 <Form.Control.Feedback type='invalid'>{errors.elementFinder?.message}</Form.Control.Feedback>
@@ -75,7 +75,7 @@ export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
             <Col md={6} sm={12}>
               <Form.Group controlId='addon-condition'>
                 <Form.Label>
-                  {t('stepPreCheck.condition')} <small className='text-danger'>*</small>
+                  {t('pageGuard.condition')} <small className='text-danger'>*</small>
                 </Form.Label>
                 <Form.Select
                   isInvalid={!!errors.condition}
@@ -98,7 +98,7 @@ export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
             <Col md sm={12}>
               <Form.Group controlId='addon-value'>
                 <Form.Label>
-                  {t('stepPreCheck.value')} <small className='text-danger'>*</small>
+                  {t('pageGuard.value')} <small className='text-danger'>*</small>
                 </Form.Label>
                 <Form.Control type='text' placeholder='Value' list='value' isInvalid={!!errors.value} {...register('value', { required: t('error.value') })} />
                 <Form.Control.Feedback type='invalid'>{errors.value?.message}</Form.Control.Feedback>
@@ -106,7 +106,7 @@ export const StepPreCheckOffcanvas = ({ show }: StepPreCheckOffcanvasProps) => {
             </Col>
             <Col md sm={12}>
               <Form.Group controlId='addon-value-extractor' className='addon-value-extractor'>
-                <Form.Label>{t('stepPreCheck.valueExtractor')}</Form.Label>
+                <Form.Label>{t('pageGuard.valueExtractor')}</Form.Label>
                 <InputGroup>
                   <Form.Control type='text' placeholder='Value Extractor' list='valueExtractor' {...register('valueExtractor')} />
                   {valueExtractor ? (

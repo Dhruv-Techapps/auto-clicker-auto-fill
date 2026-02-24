@@ -3,6 +3,7 @@ import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
 import { DropdownToggle } from '@acf-options-page/components';
 import { actionSelector, addAction, addUserscript, setColumnVisibility } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { useState } from 'react';
 import { Button, ButtonGroup, Col, Container, Dropdown, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import StepTable from './step-table';
@@ -12,6 +13,7 @@ function Step() {
   const configId = useAutomationId();
   const config = useAutomation();
   const dispatch = useAppDispatch();
+  const [expand, setExpand] = useState(true);
 
   const { columnVisibility } = useAppSelector(actionSelector);
 
@@ -39,10 +41,13 @@ function Step() {
 
   return (
     <>
-      <Container fluid className='border-top'>
+      <Container fluid={expand}>
         <Row className='p-2'>
           <Col className='d-flex align-items-center text-body-tertiary'>{t('step.title')}</Col>
           <Col xs='auto' className='d-flex align-items-center'>
+            <Button size='sm' className='me-2' variant='link' onClick={() => setExpand((prev: boolean) => !prev)}>
+              <i className={`bi bi-arrows-${expand ? 'collapse' : 'expand'}-vertical`} />
+            </Button>
             <Dropdown className='ml-2' id='acton-column-filter-wrapper'>
               <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 me-3' aria-label='Toggle Action Column'>
                 <i className='bi bi-filter fs-4' />
@@ -79,7 +84,7 @@ function Step() {
           </Col>
         </Row>
       </Container>
-      <StepTable actions={actions} />
+      <StepTable actions={actions} expand={expand} />
     </>
   );
 }

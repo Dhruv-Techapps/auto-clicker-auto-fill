@@ -1,11 +1,11 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
+import { useStepId } from '@acf-options-page/_hooks/useStepId';
 import { syncActionSettings, useAppDispatch } from '@acf-options-page/store';
 import { EErrorOptions, IActionSettings } from '@dhruv-techapps/acf-common';
-import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Button, Card, Col, Form, FormControl, InputGroup, Offcanvas, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { REGEX } from '../util';
 
 interface AutomationStepSettingsOffcanvasProps {
@@ -17,9 +17,9 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
   const dispatch = useAppDispatch();
   const config = useAutomation();
   const navigate = useNavigate();
-  const { actionId } = useParams<{ actionId: TRandomUUID }>();
+  const stepId = useStepId();
 
-  const action = config?.actions.find((a) => a.id === actionId);
+  const action = config?.actions.find((a) => a.id === stepId);
 
   const {
     register,
@@ -30,7 +30,7 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
     defaultValues: action?.settings ?? {}
   });
 
-  if (!config || !action || !actionId) {
+  if (!config || !action) {
     return null;
   }
 
@@ -38,12 +38,12 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
   const retryOption = watch('retryOption');
 
   const onSubmit = (data: IActionSettings) => {
-    dispatch(syncActionSettings({ configId: config.id, actionId, settings: Object.keys(data).length !== 0 ? data : undefined }));
+    dispatch(syncActionSettings({ configId: config.id, actionId: stepId, settings: Object.keys(data).length !== 0 ? data : undefined }));
     navigate(-1);
   };
 
   const onReset = () => {
-    dispatch(syncActionSettings({ configId: config.id, actionId, settings: undefined }));
+    dispatch(syncActionSettings({ configId: config.id, actionId: stepId, settings: undefined }));
     navigate(-1);
   };
 

@@ -49,11 +49,11 @@ const getMessageFunc = (action: UnknownAction): { header: string; body: string }
     case removeAction.type:
       return { header: i18next.t(`step.toast.header`), body: i18next.t(`step.toast.body`) };
     case syncActionAddon.type:
-      return { header: i18next.t(`stepPreCheck.toast.header`), body: i18next.t(`stepPreCheck.toast.body`) };
+      return { header: i18next.t(`pageGuard.toast.header`), body: i18next.t(`pageGuard.toast.body`) };
     case syncWatch.type:
       return { header: i18next.t(`monitor.toast.header`), body: i18next.t(`monitor.toast.body`) };
     case syncActionStatement.type:
-      return { header: i18next.t(`stepCondition.toast.header`), body: i18next.t(`stepCondition.toast.body`) };
+      return { header: i18next.t(`stateGuard.toast.header`), body: i18next.t(`stateGuard.toast.body`) };
     case syncActionSettings.type:
       return { header: i18next.t(`stepSettings.toast.header`), body: i18next.t(`stepSettings.toast.body`) };
     case syncSchedule.type:

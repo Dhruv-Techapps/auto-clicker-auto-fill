@@ -1,26 +1,26 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
+import { useStepId } from '@acf-options-page/_hooks/useStepId';
 import { syncActionStatement, useAppDispatch } from '@acf-options-page/store';
 import { EActionConditionOperator, EErrorOptions, IActionStatement, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
-import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Button, Form, Offcanvas, Table } from 'react-bootstrap';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { StepConditionCondition } from './step-condition/step-condition-condition';
 import { StepConditionRetry } from './step-condition/step-condition-retry';
 
-interface StepConditionOffcanvasProps {
+interface StateGuardOffcanvasProps {
   show: boolean;
 }
 
-export const StepConditionOffcanvas = ({ show }: StepConditionOffcanvasProps) => {
+export const StateGuardOffcanvas = ({ show }: StateGuardOffcanvasProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const config = useAutomation();
   const navigate = useNavigate();
-  const { actionId } = useParams<{ actionId: TRandomUUID }>();
+  const stepId = useStepId();
 
-  const action = config?.actions.find((a) => a.id === actionId);
+  const action = config?.actions.find((a) => a.id === stepId);
 
   const { register, handleSubmit, watch, control } = useForm<IActionStatement>({
     defaultValues: action?.statement ?? { conditions: [], option: EErrorOptions.STOP }
@@ -28,7 +28,7 @@ export const StepConditionOffcanvas = ({ show }: StepConditionOffcanvasProps) =>
 
   const { fields, append, update, remove } = useFieldArray({ control, name: 'conditions' });
 
-  if (!config || !action || !actionId) {
+  if (!config || !action) {
     return null;
   }
 
@@ -41,13 +41,13 @@ export const StepConditionOffcanvas = ({ show }: StepConditionOffcanvasProps) =>
 
   const onSubmit = (data: IActionStatement) => {
     if (data.conditions.length > 0) {
-      dispatch(syncActionStatement({ configId: config.id, actionId, statement: data }));
+      dispatch(syncActionStatement({ configId: config.id, actionId: stepId, statement: data }));
     }
     navigate(-1);
   };
 
   const onReset = () => {
-    dispatch(syncActionStatement({ configId: config.id, actionId, statement: undefined }));
+    dispatch(syncActionStatement({ configId: config.id, actionId: stepId, statement: undefined }));
     navigate(-1);
   };
 
@@ -55,10 +55,10 @@ export const StepConditionOffcanvas = ({ show }: StepConditionOffcanvasProps) =>
     <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{t('stepCondition.title')}</Offcanvas.Title>
+          <Offcanvas.Title>{t('stateGuard.title')}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className='flex-grow-1 overflow-auto'>
-          <p className='text-muted'>{t('stepCondition.info')}</p>
+          <p className='text-muted'>{t('stateGuard.info')}</p>
           <Table className='mb-0'>
             <thead>
               <tr>
@@ -83,7 +83,7 @@ export const StepConditionOffcanvas = ({ show }: StepConditionOffcanvasProps) =>
           ) : (
             <div className='p-5 d-flex justify-content-center'>
               <Button type='button' aria-label='Add' onClick={() => addCondition()}>
-                <i className='bi bi-plus-lg' /> {t('stepCondition.add')}
+                <i className='bi bi-plus-lg' /> {t('stateGuard.add')}
               </Button>
             </div>
           )}

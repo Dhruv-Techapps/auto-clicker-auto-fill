@@ -27,23 +27,23 @@ export const StepOptionsDropdown: React.FC<StepOptionsDropdownProps> = (props) =
         <i className='bi bi-three-dots' />
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item data-testid='action-addon' onClick={() => navigate(ROUTES.STEP_PRE_CHECK(actionId))}>
-          <i className='bi bi-shield-check me-2' /> {t('stepPreCheck.title')}
-        </Dropdown.Item>
-        <Dropdown.Item data-testid='action-settings' onClick={() => navigate(ROUTES.STEP_SETTINGS(actionId))}>
-          <i className='bi bi-gear me-2' /> {t('stepSettings.title')}
-        </Dropdown.Item>
-        {index !== 0 && (
-          <Dropdown.Item data-testid='action-statement' onClick={() => navigate(ROUTES.STEP_CONDITION(actionId))}>
-            <i className='bi bi-signpost-split me-2' /> {t('stepCondition.title')}
-          </Dropdown.Item>
-        )}
-        <Dropdown.Divider />
         <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(actionId, 0)}>
           <i className='bi bi-plus-lg me-2' /> {t('step.addBefore')}
         </Dropdown.Item>
         <Dropdown.Item data-testid='action-add' onClick={() => onAddClick(actionId, 1)}>
           <i className='bi bi-plus-lg me-2' /> {t('step.addAfter')}
+        </Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item data-testid='action-addon' onClick={() => navigate(ROUTES.PAGE_GUARD(actionId))}>
+          <i className='bi bi-shield-check me-2' /> {t('pageGuard.title')}
+        </Dropdown.Item>
+        {index !== 0 && (
+          <Dropdown.Item data-testid='action-statement' onClick={() => navigate(ROUTES.STATE_GUARD(actionId))}>
+            <i className='bi bi-sliders me-2' /> {t('stateGuard.title')}
+          </Dropdown.Item>
+        )}
+        <Dropdown.Item data-testid='action-settings' onClick={() => navigate(ROUTES.STEP_SETTINGS(actionId))}>
+          <i className='bi bi-gear me-2' /> {t('stepSettings.title')}
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(actionId, disabled)}>

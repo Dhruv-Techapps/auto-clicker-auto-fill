@@ -18,19 +18,19 @@ export const ActionStatementRetry = ({ register, watch, actions }: ActionStateme
       <Card.Body>
         <Row>
           <Col xs={12} className='mb-2'>
-            {t('stepCondition.hint')}
+            {t('stateGuard.hint')}
           </Col>
           <Col>
-            <Form.Check type='radio' required value={EErrorOptions.STOP} label={t('stepCondition.stop')} {...register('option')} />
+            <Form.Check type='radio' required value={EErrorOptions.STOP} label={t('stateGuard.stop')} {...register('option')} />
           </Col>
           <Col>
-            <Form.Check type='radio' required value={EErrorOptions.SKIP} label={t('stepCondition.skip')} {...register('option')} />
+            <Form.Check type='radio' required value={EErrorOptions.SKIP} label={t('stateGuard.skip')} {...register('option')} />
           </Col>
           <Col>
-            <Form.Check type='radio' required value={EErrorOptions.RELOAD} label={t('stepCondition.refresh')} {...register('option')} />
+            <Form.Check type='radio' required value={EErrorOptions.RELOAD} label={t('stateGuard.refresh')} {...register('option')} />
           </Col>
           <Col>
-            <Form.Check type='radio' required value={EErrorOptions.GOTO} label={t('stepCondition.goto')} {...register('option')} />
+            <Form.Check type='radio' required value={EErrorOptions.GOTO} label={t('stateGuard.goto')} {...register('option')} />
           </Col>
         </Row>
         {option === EErrorOptions.GOTO && (
