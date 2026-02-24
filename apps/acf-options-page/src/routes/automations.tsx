@@ -88,7 +88,7 @@ export const Automations = () => {
           {configs
             .filter((config) => config.name?.toLowerCase().includes(searchTerm.toLowerCase()) || config.url?.toLowerCase().includes(searchTerm.toLowerCase()))
             .map((config) => (
-              <ListGroup.Item key={config.id} className='d-flex gap-3'>
+              <ListGroup.Item key={config.id} className='d-flex gap-3' action={!selectionMode}>
                 {selectionMode ? (
                   <Form.Check type='checkbox' className='w-100'>
                     <Form.Check.Input type='checkbox' checked={selectedConfigs.includes(config.id)} onChange={() => toggleConfigSelection(config.id)} id={`config-${config.id}`} />

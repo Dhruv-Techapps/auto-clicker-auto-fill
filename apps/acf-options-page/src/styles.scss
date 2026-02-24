@@ -1,4 +1,8 @@
-@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap/scss/bootstrap' with (
+  $primary: #6f42c1,
+  // Bootstrap's built-in "warning" yellow / amber
+  $min-contrast-ratio: 2
+);
 @use 'theme/new-main.scss';
 html,
 body {

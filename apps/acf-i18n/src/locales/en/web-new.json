@@ -239,7 +239,7 @@
     "title": "My Automations",
     "count": "Automations ({{count}})",
     "search": "Search your automation...",
-    "add": "New Automation",
+    "add": "New",
     "selected": "selected",
     "selected_one": "1 automation selected",
     "selected_other": "{{count}} automations selected",
@@ -250,7 +250,7 @@
     "automationsWithinExtension": "automations within extension",
     "selectAutomations": "Select automations to export or delete",
     "select": "Select",
-    "import": "Import Automation",
+    "import": "Import",
     "toast": {
       "header": "Automations",
       "remove": "Automations removed successfully",
