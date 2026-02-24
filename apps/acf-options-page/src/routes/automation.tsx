@@ -41,7 +41,7 @@ export const Automation = () => {
   };
 
   return (
-    <div className='h-100'>
+    <>
       {config.url ? (
         <>
           <Container fluid>
@@ -108,6 +108,6 @@ export const Automation = () => {
         </Container>
       )}
       <Outlet />
-    </div>
+    </>
   );
 };

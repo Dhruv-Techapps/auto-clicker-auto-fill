@@ -38,8 +38,8 @@ function Step() {
   const { actions } = config;
 
   return (
-    <div className='h-100'>
-      <Container fluid>
+    <>
+      <Container fluid className='border-top'>
         <Row className='p-2'>
           <Col className='d-flex align-items-center text-body-tertiary'>{t('step.title')}</Col>
           <Col xs='auto' className='d-flex align-items-center'>
@@ -80,7 +80,7 @@ function Step() {
         </Row>
       </Container>
       <StepTable actions={actions} />
-    </div>
+    </>
   );
 }
 export default Step;

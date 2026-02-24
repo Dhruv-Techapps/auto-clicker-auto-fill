@@ -42,7 +42,7 @@ export const Layout = () => {
       {loading && <LoadingBar />}
       <div className={`d-flex h-100 pt-${loading ? '1' : '0'}`}>
         <Sidebar />
-        <main className='d-flex flex-column flex-grow-1 overflow-hidden h-100'>
+        <main className='d-flex flex-column flex-grow-1 h-100'>
           <VersionAlert />
           <ExtensionNotFoundAlert />
           <Outlet />

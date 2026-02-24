@@ -37,99 +37,101 @@ export const Home = () => {
   };
 
   return (
-    <Container className='p-4 overflow-auto h-100'>
-      {/* ── Hero ── */}
-      <Row className='py-5 mb-4 rounded-4 bg-body-secondary text-center align-items-center justify-content-center'>
-        <Col md={8}>
-          <i className='bi bi-lightning-charge-fill text-primary' style={{ fontSize: '3rem' }} />
-          <h1 className='mt-3 fw-bold'>{t('home.title')}</h1>
-          <p className='lead text-body-secondary mb-4'>{t('home.subtitle')}</p>
-          <Button variant='primary' size='lg' onClick={onAddConfig}>
-            <i className='bi bi-plus-lg me-2' />
-            {t('automations.add')}
-          </Button>
-        </Col>
-      </Row>
-
-      {/* ── Quick Start Guide ── */}
-      <section className='mb-5'>
-        <h4 className='mb-4 fw-semibold'>
-          <i className='bi bi-flag-fill text-success me-2' />
-          {t('home.quickStart.title')}
-        </h4>
-        <Row className='g-3'>
-          {QUICK_START_STEPS.map(({ icon, titleKey, descKey, linkKey }) => (
-            <Col md={4} key={titleKey}>
-              <Card className='h-100 shadow-sm border-0'>
-                <Card.Body className='d-flex flex-column gap-2'>
-                  <div className='text-primary mb-1' style={{ fontSize: '1.75rem' }}>
-                    <i className={`bi ${icon}`} />
-                  </div>
-                  <Card.Title className='fw-semibold fs-6 mb-1'>{t(titleKey)}</Card.Title>
-                  <Card.Text className='text-body-secondary small flex-grow-1'>{t(descKey)}</Card.Text>
-                  <a href={t(linkKey)} target='_blank' rel='noreferrer' className='btn btn-outline-primary btn-sm mt-auto align-self-start'>
-                    {t('sidebar.learnMore')} <i className='bi bi-arrow-right ms-1' />
-                  </a>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+    <div className='h-100 overflow-auto'>
+      <Container className='p-4 h-100'>
+        {/* ── Hero ── */}
+        <Row className='py-5 mb-4 rounded-4 bg-body-secondary text-center align-items-center justify-content-center'>
+          <Col md={8}>
+            <i className='bi bi-lightning-charge-fill text-primary' style={{ fontSize: '3rem' }} />
+            <h1 className='mt-3 fw-bold'>{t('home.title')}</h1>
+            <p className='lead text-body-secondary mb-4'>{t('home.subtitle')}</p>
+            <Button variant='primary' size='lg' onClick={onAddConfig}>
+              <i className='bi bi-plus-lg me-2' />
+              {t('automations.add')}
+            </Button>
+          </Col>
         </Row>
-      </section>
 
-      {/* ── Helpful Tips ── */}
-      <section className='mb-5'>
-        <h4 className='mb-4 fw-semibold'>
-          <i className='bi bi-lightbulb-fill text-warning me-2' />
-          {t('home.tips.title')}
-        </h4>
-        <Row className='g-3'>
-          {TIPS.map(({ icon, titleKey, descKey, linkKey }) => (
-            <Col md={6} lg={4} key={titleKey}>
-              <Card className='h-100 shadow-sm border-0'>
-                <Card.Body className='d-flex flex-column gap-2'>
-                  <div className='d-flex align-items-center gap-2 mb-1'>
-                    <span className='text-warning' style={{ fontSize: '1.4rem' }}>
+        {/* ── Quick Start Guide ── */}
+        <section className='mb-5'>
+          <h4 className='mb-4 fw-semibold'>
+            <i className='bi bi-flag-fill text-success me-2' />
+            {t('home.quickStart.title')}
+          </h4>
+          <Row className='g-3'>
+            {QUICK_START_STEPS.map(({ icon, titleKey, descKey, linkKey }) => (
+              <Col md={4} key={titleKey}>
+                <Card className='h-100 shadow-sm border-0'>
+                  <Card.Body className='d-flex flex-column gap-2'>
+                    <div className='text-primary mb-1' style={{ fontSize: '1.75rem' }}>
                       <i className={`bi ${icon}`} />
-                    </span>
-                    <Card.Title className='fw-semibold fs-6 mb-0'>{t(titleKey)}</Card.Title>
-                  </div>
-                  <Card.Text className='text-body-secondary small flex-grow-1'>{t(descKey)}</Card.Text>
-                  <a href={t(linkKey)} target='_blank' rel='noreferrer' className='btn btn-link btn-sm p-0 align-self-start text-decoration-none'>
-                    {t('sidebar.learnMore')} <i className='bi bi-box-arrow-up-right ms-1' />
-                  </a>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </section>
+                    </div>
+                    <Card.Title className='fw-semibold fs-6 mb-1'>{t(titleKey)}</Card.Title>
+                    <Card.Text className='text-body-secondary small flex-grow-1'>{t(descKey)}</Card.Text>
+                    <a href={t(linkKey)} target='_blank' rel='noreferrer' className='btn btn-outline-primary btn-sm mt-auto align-self-start'>
+                      {t('sidebar.learnMore')} <i className='bi bi-arrow-right ms-1' />
+                    </a>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </section>
 
-      {/* ── Video Guides ── */}
-      <section className='mb-4'>
-        <h4 className='mb-4 fw-semibold'>
-          <i className='bi bi-play-btn-fill text-danger me-2' />
-          {t('home.videos.title')}
-        </h4>
-        <Carousel className='rounded-4 overflow-hidden shadow-sm bg-black' interval={null}>
-          {VIDEOS.map(({ id, titleKey }) => (
-            <Carousel.Item key={id}>
-              <div className='ratio ratio-16x9'>
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${id}`}
-                  title={t(titleKey)}
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                  allowFullScreen
-                  style={{ border: 0 }}
-                />
-              </div>
-              <Carousel.Caption className='py-3 bg-black bg-opacity-50 rounded-bottom-4'>
-                <p className='mb-0 fw-semibold'>{t(titleKey)}</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </section>
-    </Container>
+        {/* ── Helpful Tips ── */}
+        <section className='mb-5'>
+          <h4 className='mb-4 fw-semibold'>
+            <i className='bi bi-lightbulb-fill text-warning me-2' />
+            {t('home.tips.title')}
+          </h4>
+          <Row className='g-3'>
+            {TIPS.map(({ icon, titleKey, descKey, linkKey }) => (
+              <Col md={6} lg={4} key={titleKey}>
+                <Card className='h-100 shadow-sm border-0'>
+                  <Card.Body className='d-flex flex-column gap-2'>
+                    <div className='d-flex align-items-center gap-2 mb-1'>
+                      <span className='text-warning' style={{ fontSize: '1.4rem' }}>
+                        <i className={`bi ${icon}`} />
+                      </span>
+                      <Card.Title className='fw-semibold fs-6 mb-0'>{t(titleKey)}</Card.Title>
+                    </div>
+                    <Card.Text className='text-body-secondary small flex-grow-1'>{t(descKey)}</Card.Text>
+                    <a href={t(linkKey)} target='_blank' rel='noreferrer' className='btn btn-link btn-sm p-0 align-self-start text-decoration-none'>
+                      {t('sidebar.learnMore')} <i className='bi bi-box-arrow-up-right ms-1' />
+                    </a>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </section>
+
+        {/* ── Video Guides ── */}
+        <section className='mb-4'>
+          <h4 className='mb-4 fw-semibold'>
+            <i className='bi bi-play-btn-fill text-danger me-2' />
+            {t('home.videos.title')}
+          </h4>
+          <Carousel className='rounded-4 overflow-hidden shadow-sm bg-black' interval={null}>
+            {VIDEOS.map(({ id, titleKey }) => (
+              <Carousel.Item key={id}>
+                <div className='ratio ratio-16x9'>
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${id}`}
+                    title={t(titleKey)}
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    allowFullScreen
+                    style={{ border: 0 }}
+                  />
+                </div>
+                <Carousel.Caption className='py-3 bg-black bg-opacity-50 rounded-bottom-4'>
+                  <p className='mb-0 fw-semibold'>{t(titleKey)}</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </section>
+      </Container>
+    </div>
   );
 };
