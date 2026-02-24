@@ -5,6 +5,9 @@ body {
   height: 100%;
   font-size: 14px;
 }
+:root {
+  --accent: #d4a853;
+}
 
 .user-collapse > .dropdown-toggle {
   padding: 0.5rem;

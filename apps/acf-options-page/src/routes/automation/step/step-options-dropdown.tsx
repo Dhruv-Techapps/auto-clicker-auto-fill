@@ -1,5 +1,6 @@
 import { DropdownToggle } from '@acf-options-page/components';
 import { ROUTES } from '@acf-options-page/util';
+import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +8,7 @@ import { useNavigate } from 'react-router';
 
 interface StepOptionsDropdownProps {
   index: number;
+  actions: Array<IAction | IUserScript>;
   actionId: TRandomUUID;
   disabled?: boolean;
   removeActionConfirm: (actionId: TRandomUUID, index: number) => void;
@@ -15,7 +17,7 @@ interface StepOptionsDropdownProps {
 }
 
 export const StepOptionsDropdown: React.FC<StepOptionsDropdownProps> = (props) => {
-  const { index, actionId, disabled, onAddClick, onDisableClick } = props;
+  const { index, actionId, disabled, actions, onAddClick, onDisableClick, removeActionConfirm } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -45,7 +47,10 @@ export const StepOptionsDropdown: React.FC<StepOptionsDropdownProps> = (props) =
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item data-testid='action-disable' onClick={() => onDisableClick(actionId, disabled)}>
-          <i className={`bi bi-toggle-${disabled ? 'on' : 'off'} me-2`} /> {t(`step.${disabled ? 'enable' : 'disable'}`)}
+          <i className={`bi bi-toggle-${disabled ? 'off' : 'on'} me-2`} /> {t(`step.${disabled ? 'enable' : 'disable'}`)}
+        </Dropdown.Item>
+        <Dropdown.Item data-testid='action-remove' onClick={() => removeActionConfirm(actionId, index)} disabled={actions.length === 1}>
+          <i className={`bi bi-trash me-2`} /> {t(`step.remove`)}
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

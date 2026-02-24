@@ -26,7 +26,6 @@ const slice = createSlice({
     },
     setAppError: (state, action) => {
       state.error = action.payload;
-
       state.loading = false;
     },
     switchExtensionNotFound: (state, action: PayloadAction<string | undefined>) => {

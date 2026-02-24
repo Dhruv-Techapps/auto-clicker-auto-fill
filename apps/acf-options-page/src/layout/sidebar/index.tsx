@@ -17,12 +17,12 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className='d-flex flex-column flex-shrink-0 border-end' style={{ width: sidebarWidth, height: '100vh' }}>
+    <div className='d-flex flex-column flex-shrink-0 border-end h-100 overflow-hidden' style={{ width: sidebarWidth }}>
       <SidebarHeader visible={visible} toggleSidebar={toggleSidebar} />
-      <div className='d-flex flex-column flex-grow-1' style={{ minHeight: 0 }}>
-        <SidebarMenu visible={visible} />
-        {visible && <SidebarConfigList />}
-      </div>
+      <SidebarMenu visible={visible} />
+
+      {visible ? <SidebarConfigList /> : <div className='d-flex flex-grow-1'></div>}
+
       <SidebarFooter visible={visible} />
     </div>
   );

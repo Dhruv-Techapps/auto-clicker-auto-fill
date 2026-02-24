@@ -1,23 +1,19 @@
 import { useAutomationId } from '@acf-options-page/_hooks';
-import { useTimeout } from '@acf-options-page/_hooks/message.hooks';
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
-import { addAction, addUserscript } from '@acf-options-page/store/config';
-import { actionSelector, setActionMessage } from '@acf-options-page/store/config/action/action.slice';
+import { DropdownToggle } from '@acf-options-page/components';
+import { actionSelector, addAction, addUserscript, setColumnVisibility } from '@acf-options-page/store/config';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Button, ButtonGroup, Col, Container, Dropdown, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import StepTable from './step-table';
 
 function Step() {
   const { t } = useTranslation();
   const configId = useAutomationId();
-  const { message, error } = useAppSelector(actionSelector);
   const config = useAutomation();
   const dispatch = useAppDispatch();
 
-  useTimeout(() => {
-    dispatch(setActionMessage());
-  }, message);
+  const { columnVisibility } = useAppSelector(actionSelector);
 
   const onAddAction = () => {
     dispatch(addAction({ configId }));
@@ -27,6 +23,14 @@ function Step() {
     dispatch(addUserscript({ configId }));
   };
 
+  const onColumnChange = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement | HTMLAnchorElement>) => {
+    const column = e.currentTarget.getAttribute('data-column');
+    if (!column) {
+      return;
+    }
+    dispatch(setColumnVisibility(column));
+  };
+
   if (!config) {
     return null;
   }
@@ -34,28 +38,49 @@ function Step() {
   const { actions } = config;
 
   return (
-    <Card className='mb-3 shadow-sm'>
-      <Card.Header as='h6'>
-        <Row>
-          <Col className='d-flex align-items-center'>
-            {t('step.title')}
-            <small className='text-success ms-3'>{message}</small>
-            <small className='text-danger ms-3'>{error}</small>
-          </Col>
+    <div className='h-100'>
+      <Container fluid>
+        <Row className='p-2'>
+          <Col className='d-flex align-items-center text-body-tertiary'>{t('step.title')}</Col>
           <Col xs='auto' className='d-flex align-items-center'>
-            <Button size='sm' variant='outline-primary px-3 ms-3' onClick={onAddAction} id='add-action'>
-              <i className='bi bi-plus-lg me-2' /> {t('step.add')}
-            </Button>
-            <Button size='sm' variant='outline-primary px-3 ms-3' onClick={onAddUserscript} id='add-userscript'>
-              <i className='bi bi-plus-lg me-2' /> {t('userscript.add')}
-            </Button>
+            <Dropdown className='ml-2' id='acton-column-filter-wrapper'>
+              <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 me-3' aria-label='Toggle Action Column'>
+                <i className='bi bi-filter fs-4' />
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={onColumnChange} data-column='name' active={columnVisibility.name}>
+                  {t('step.name')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={onColumnChange} data-column='initWait' active={columnVisibility.initWait}>
+                  {t('step.initWait')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={onColumnChange} data-column='repeat' active={columnVisibility.repeat}>
+                  {t('step.repeat')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={onColumnChange} data-column='repeatInterval' active={columnVisibility.repeatInterval}>
+                  {t('step.repeatInterval')}
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown as={ButtonGroup} size='sm'>
+              <Button onClick={onAddAction} variant='outline-primary'>
+                {t('common.add')}
+              </Button>
+              <Dropdown.Toggle id='step-add' variant='outline-primary'></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={onAddAction}>
+                  <i className='bi bi-plus-circle me-2' /> {t('step.add')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={onAddUserscript}>
+                  <i className='bi bi-plus-circle me-2' /> {t('userscript.add')}
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Col>
         </Row>
-      </Card.Header>
-      <Card.Body className='p-0'>
-        <StepTable actions={actions} />
-      </Card.Body>
-    </Card>
+      </Container>
+      <StepTable actions={actions} />
+    </div>
   );
 }
 export default Step;

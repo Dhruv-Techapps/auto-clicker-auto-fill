@@ -8,3 +8,11 @@ export function Loading({ message = 'Loading...', className = '' }) {
     </div>
   );
 }
+
+export function LoadingBar() {
+  return (
+    <div id='loading-strip'>
+      <div className='bar'></div>
+    </div>
+  );
+}

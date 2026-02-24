@@ -5,7 +5,6 @@ import { useAppDispatch } from '@acf-options-page/store/hooks';
 import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { Row } from '@tanstack/react-table';
-import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { StepOptionsDropdown } from './step-options-dropdown';
 
@@ -47,20 +46,10 @@ export const UserScriptRow: React.FC<UserScriptRowProps> = (props) => {
         {getValueCell(row)}
       </td>
       <td align='center'>
-        {row.original.disabled && <i className='bi bi-ban me-2' title='Disabled' />}
-        <Button
-          variant='link'
-          data-testid='action-remove'
-          onClick={() => {
-            removeActionConfirm(row.original.id, index);
-          }}
-          disabled={actions.length === 1}
-        >
-          <i className={`bi bi-trash ${actions.length === 1 ? '' : 'text-danger'}`} title='Delete' />
-        </Button>
         {row.original.value && (
           <StepOptionsDropdown
             index={index}
+            actions={actions}
             actionId={row.original.id}
             disabled={row.original.disabled}
             removeActionConfirm={removeActionConfirm}

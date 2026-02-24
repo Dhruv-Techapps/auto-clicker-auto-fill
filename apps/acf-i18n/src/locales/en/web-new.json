@@ -273,7 +273,8 @@
     "reorder": "Reorder Automations",
     "selected": "Selected Automation",
     "removeAutomations": "Bulk Remove Automations",
-    "enable": "Enable",
+    "enable": "Enable Automation",
+    "disable": "Disable Automation",
     "edit": "Edit Automation",
     "export": "Export Automation",
     "import": "Import Automation",
@@ -420,7 +421,8 @@
     "local": "LOCAL",
     "dev": "DEV",
     "stable": "STABLE",
-    "examples": "Examples"
+    "examples": "Examples",
+    "add": "Add"
   },
   "languages": {
     "title": "Language",

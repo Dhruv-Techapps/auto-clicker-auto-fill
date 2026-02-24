@@ -15,7 +15,7 @@ export const SidebarConfigList = () => {
   };
 
   return (
-    <div className='d-flex flex-column mt-2' style={{ minHeight: 0, flex: 1 }}>
+    <>
       {!searchMode ? (
         <div className='ms-3 me-2 py-2 d-flex align-items-center justify-content-between'>
           <small className='text-body-tertiary'>{t('automations.count', { count: configs.length })}</small>
@@ -32,7 +32,7 @@ export const SidebarConfigList = () => {
           onBlur={() => setSearchMode(false)}
         />
       )}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }} className='border-top'>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }}>
         <Nav className='flex-column mt-1' variant='pills'>
           {configs
             .filter(
@@ -50,6 +50,6 @@ export const SidebarConfigList = () => {
             ))}
         </Nav>
       </div>
-    </div>
+    </>
   );
 };

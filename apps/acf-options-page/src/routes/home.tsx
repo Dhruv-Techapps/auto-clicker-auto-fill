@@ -37,7 +37,7 @@ export const Home = () => {
   };
 
   return (
-    <Container className='p-4'>
+    <Container className='p-4 overflow-auto h-100'>
       {/* ── Hero ── */}
       <Row className='py-5 mb-4 rounded-4 bg-body-secondary text-center align-items-center justify-content-center'>
         <Col md={8}>

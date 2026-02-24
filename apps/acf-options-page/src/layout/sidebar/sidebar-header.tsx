@@ -16,9 +16,9 @@ export const SidebarHeader = (props: ISidebarHeaderProps) => {
   }
 
   return (
-    <div className='d-flex justify-content-center align-items-center pt-2'>
+    <div className='d-flex justify-content-center align-items-center align-items-center pt-2'>
       {visible && (
-        <NavLink to='/' className='d-flex align-items-center mb-md-0 me-md-auto text-decoration-none px-2 fs-5 text-secondary-emphasis'>
+        <NavLink to='/' className='d-flex align-items-center mb-md-0 me-md-auto text-decoration-none px-3 fs-5 text-secondary-emphasis'>
           <img src={imageURL} width='24' height='24' className='d-inline-block align-top me-2' alt='Auto click Auto Fill logo' title='Auto click Auto Fill logo' />
           {appName}
         </NavLink>

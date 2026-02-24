@@ -2,8 +2,8 @@
 
 import { ExtensionNotFoundAlert } from '@acf-options-page/alerts/extension-not-found-alert';
 import { VersionAlert } from '@acf-options-page/alerts/version-alert';
+import { LoadingBar } from '@acf-options-page/components';
 import { DataList } from '@acf-options-page/components/data-list.components';
-import { Loading } from '@acf-options-page/components/loading.components';
 import { ToastHandler } from '@acf-options-page/components/toast-handler.component';
 import { LoginModal } from '@acf-options-page/modal/login.modal';
 import { getManifest } from '@acf-options-page/store/app.api';
@@ -13,14 +13,12 @@ import { firebaseIsLoginAPI } from '@acf-options-page/store/firebase/firebase-lo
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Outlet } from 'react-router';
 import { Sidebar } from './sidebar';
 
 export const Layout = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector(appSelector);
-  const { t } = useTranslation();
 
   useEffect(() => {
     StorageService.get<string>('device_info').then(({ device_info: { id: deviceId } }) => {
@@ -41,16 +39,16 @@ export const Layout = () => {
 
   return (
     <>
-      {loading && <Loading message={t('status.connecting')} className='text-secondary' />}
-      <div className='d-flex flex-nowrap w-100 h-100'>
+      {loading && <LoadingBar />}
+      <div className={`d-flex h-100 pt-${loading ? '1' : '0'}`}>
         <Sidebar />
-        <main className='w-100 h-100 overflow-auto'>
+        <main className='d-flex flex-column flex-grow-1 overflow-hidden h-100'>
           <VersionAlert />
           <ExtensionNotFoundAlert />
           <Outlet />
         </main>
-        <LoginModal />
       </div>
+      <LoginModal />
       <ToastHandler />
       <DataList />
     </>
