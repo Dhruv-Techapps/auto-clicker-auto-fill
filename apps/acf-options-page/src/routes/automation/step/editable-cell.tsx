@@ -1,11 +1,13 @@
 import { ThemeContext } from '@acf-options-page/context';
+import { ValueFieldTypeTooltip } from '@acf-options-page/tooltip';
 import { getFieldNameValue } from '@acf-options-page/util/element';
 import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
 import Editor from '@monaco-editor/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
-import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
-export const defaultColumn: Partial<ColumnDef<IAction | IUserScript>> = {
+import { Button, Form, InputGroup } from 'react-bootstrap';
+
+export const defaultColumn: Partial<ColumnDef<IAction | IUserScript, { width: string }>> = {
   cell: Cell
 };
 
@@ -81,6 +83,7 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
       value={value || ''}
       name={id}
       as={as}
+      size='sm'
       {...(as === 'textarea' && { rows: 1 })}
       {...rest}
       onChange={onChange}
@@ -125,11 +128,11 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
     }
     return (
       <InputGroup>
-        <OverlayTrigger overlay={<Tooltip id={id}>{valueFieldType === 'input' ? `Switch to Textarea` : 'Switch to Input'}</Tooltip>}>
-          <Button type='button' variant='outline-secondary' id='action-field-type' onClick={onValueFieldTypeChange}>
+        <ValueFieldTypeTooltip id={id} valueFieldType={valueFieldType}>
+          <Button type='button' variant='outline-secondary' id='action-field-type' onClick={onValueFieldTypeChange} size='sm'>
             {valueFieldType === 'input' ? 'I' : 'T'}
           </Button>
-        </OverlayTrigger>
+        </ValueFieldTypeTooltip>
         {getInput(valueFieldType)}
       </InputGroup>
     );

@@ -11,9 +11,9 @@ export const defaultWatchSettings: IWatchSettings = {
 // Configuration-level Watch Settings
 export interface IWatchSettings {
   watchEnabled?: boolean; // Enable DOM watching for this action
-  watchRootSelector?: string; // Container to observe (default: 'body')
+  watchRootSelector: string; // Container to observe (default: 'body')
   watchAttributes?: string[]; // Attributes to observe (default: ['style', 'class', 'hidden'])
-  debounce?: number; // Debounce delay in seconds (default: 1)
+  debounce: number; // Debounce delay in seconds (default: 1)
   lifecycleStopConditions?: {
     // Auto-stop conditions
     timeout?: number; // Stop after N seconds

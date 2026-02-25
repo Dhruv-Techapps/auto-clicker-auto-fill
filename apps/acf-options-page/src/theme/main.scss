@@ -1,29 +1,34 @@
-@use 'sidebar';
-@use 'configs';
-@use 'doc';
-@use 'subscription';
-
-.btn {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+@use '_loading.scss';
+.resizer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
 }
 
-.sticky-top {
-  z-index: 999;
+.resizer.ltr {
+  right: 0;
 }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input::-webkit-calendar-picker-indicator {
-  -webkit-appearance: none;
-  opacity: 0;
-  display: none;
+.resizer.rtl {
+  left: 0;
 }
 
-#main {
-  height: calc(100vh - 56px);
+.resizer.isResizing {
+  background: blue;
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .resizer {
+    opacity: 0;
+  }
+
+  *:hover > .resizer {
+    opacity: 1;
+  }
 }

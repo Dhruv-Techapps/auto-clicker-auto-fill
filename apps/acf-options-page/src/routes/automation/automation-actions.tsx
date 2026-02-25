@@ -23,7 +23,7 @@ export const AutomationActions = ({ onToggleEditMode }: AutomationActionsProps) 
         </Button>
       )}
       {config.schedule && (
-        <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SCHEDULE)}>
+        <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SCHEDULE)} title='schedule'>
           <i className='bi bi-stopwatch-fill me-2' />
         </Button>
       )}

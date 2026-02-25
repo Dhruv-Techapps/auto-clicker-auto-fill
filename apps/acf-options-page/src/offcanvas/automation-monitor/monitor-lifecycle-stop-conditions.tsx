@@ -1,15 +1,16 @@
 import { REGEX } from '@acf-options-page/util';
 import { IWatchSettings } from '@dhruv-techapps/acf-common';
 import { Card, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 interface LifecycleStopConditionsProps {
   register: UseFormRegister<IWatchSettings>;
   watchEnabled: boolean | undefined;
+  errors: FieldErrors<IWatchSettings>;
 }
 
-function LifecycleStopConditions({ register, watchEnabled }: LifecycleStopConditionsProps) {
+function LifecycleStopConditions({ register, watchEnabled, errors }: LifecycleStopConditionsProps) {
   const { t } = useTranslation();
 
   if (!watchEnabled) return null;
@@ -28,7 +29,8 @@ function LifecycleStopConditions({ register, watchEnabled }: LifecycleStopCondit
                 type='number'
                 min='1'
                 max='180'
-                {...register('lifecycleStopConditions.timeout', { pattern: { value: new RegExp(REGEX.NUMBER), message: t('error.number') }, min: 1, max: 180 })}
+                isInvalid={!!errors.lifecycleStopConditions?.timeout}
+                {...register('lifecycleStopConditions.timeout', { pattern: { value: REGEX.NUMBER, message: t('error.number') }, min: 1, max: 180 })}
               />
               <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
             </InputGroup>

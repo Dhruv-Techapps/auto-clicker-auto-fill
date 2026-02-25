@@ -23,7 +23,7 @@ export const StepOptionsDropdown: React.FC<StepOptionsDropdownProps> = (props) =
 
   return (
     <Dropdown id='action-dropdown-wrapper' className='d-inline-block'>
-      <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option'>
+      <Dropdown.Toggle as={DropdownToggle} id='action-dropdown' aria-label='Action more option' className='btn-sm'>
         <i className='bi bi-three-dots' />
       </Dropdown.Toggle>
       <Dropdown.Menu>

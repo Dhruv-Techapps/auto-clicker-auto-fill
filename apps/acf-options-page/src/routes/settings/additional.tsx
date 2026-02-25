@@ -31,7 +31,7 @@ export const AdditionalSettings = () => {
         <Form.Label className='ms-2 me-auto' htmlFor='settings-reload-onerror'>
           <div className='fw-bold'>{t('reloadOnError.title')}</div>
           <small className='text-body-tertiary'>{t('reloadOnError.hint')}</small> <br />
-          <small className='text-danger'>{t('reloadOnError.contextInvalidated')}</small>
+          <small className='text-danger-emphasis'>{t('reloadOnError.contextInvalidated')}</small>
         </Form.Label>
         <Form.Check type='switch' name='reloadOnError' onChange={onUpdate} id='settings-reloadOnError' checked={settings.reloadOnError || false} />
       </li>

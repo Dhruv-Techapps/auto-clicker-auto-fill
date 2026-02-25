@@ -24,14 +24,14 @@ function SettingRetry() {
         <Card.Body className='d-flex gap-3'>
           <InputGroup>
             <InputGroup.Text>{t('retry.title')}</InputGroup.Text>
-            <FormControl placeholder='5' autoComplete='off' name='retry' defaultValue={settings.retry} onBlur={onUpdate} type='number' pattern={REGEX.NUMBER} list='retry' />
+            <FormControl placeholder='5' autoComplete='off' name='retry' defaultValue={settings.retry} onBlur={onUpdate} type='number' pattern={REGEX.NUMBER.source} list='retry' />
             <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
           </InputGroup>
           <InputGroup>
             <InputGroup.Text>
               {t('retry.interval')}&nbsp;<small>({t('common.sec')})</small>
             </InputGroup.Text>
-            <FormControl placeholder='1' autoComplete='off' name='retryInterval' defaultValue={settings.retryInterval} onBlur={onUpdate} pattern={REGEX.INTERVAL} list='interval' />
+            <FormControl placeholder='1' autoComplete='off' name='retryInterval' defaultValue={settings.retryInterval} onBlur={onUpdate} pattern={REGEX.INTERVAL.source} list='interval' />
             <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
           </InputGroup>
         </Card.Body>

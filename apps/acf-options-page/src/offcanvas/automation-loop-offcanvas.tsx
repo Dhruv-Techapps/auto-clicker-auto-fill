@@ -21,8 +21,9 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors, isDirty, isValid }
   } = useForm<IBatch>({
+    mode: 'onChange',
     defaultValues: config?.batch
   });
 
@@ -45,7 +46,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
   };
 
   return (
-    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
+    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{t('loop.title')}</Offcanvas.Title>
@@ -69,7 +70,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
                       autoComplete='off'
                       placeholder='0'
                       isInvalid={!!errors.repeat}
-                      {...register('repeat', { pattern: { value: new RegExp(REGEX.NUMBER), message: t('error.number') } })}
+                      {...register('repeat', { pattern: { value: REGEX.NUMBER, message: t('error.number') } })}
                     />
                     <Form.Control.Feedback type='invalid'>{errors.repeat?.message}</Form.Control.Feedback>
                   </Form.Group>
@@ -83,7 +84,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
                       autoComplete='off'
                       placeholder='0'
                       isInvalid={!!errors.repeatInterval}
-                      {...register('repeatInterval', { pattern: { value: new RegExp(REGEX.INTERVAL), message: t('error.number') } })}
+                      {...register('repeatInterval', { pattern: { value: REGEX.INTERVAL, message: t('error.number') } })}
                     />
                     <Form.Control.Feedback type='invalid'>{errors.repeatInterval?.message}</Form.Control.Feedback>
                   </Form.Group>
@@ -99,7 +100,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
           <Button type='reset' variant='outline-primary' className='px-5' data-testid='config-batch-reset'>
             {t('common.clear')}
           </Button>
-          <Button type='submit' variant='primary' className='px-5' data-testid='config-batch-save'>
+          <Button type='submit' variant='primary' className='px-5' data-testid='config-batch-save' disabled={!isDirty || !isValid}>
             {t('common.save')}
           </Button>
         </div>

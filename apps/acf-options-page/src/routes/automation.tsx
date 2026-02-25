@@ -18,7 +18,7 @@ export const Automation = () => {
   }
 
   return (
-    <div>
+    <>
       {config.url ? (
         <>
           <Container fluid className='border-bottom'>
@@ -37,6 +37,6 @@ export const Automation = () => {
         <AutomationNew />
       )}
       <Outlet />
-    </div>
+    </>
   );
 };

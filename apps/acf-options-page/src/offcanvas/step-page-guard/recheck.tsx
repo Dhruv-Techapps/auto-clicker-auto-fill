@@ -1,7 +1,7 @@
 import { EErrorOptions, IAction, IAddon, IUserScript } from '@dhruv-techapps/acf-common';
 import { useEffect } from 'react';
 import { Card, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { REGEX } from '../../util';
 
@@ -9,10 +9,11 @@ interface PreCheckRecheckProps {
   register: UseFormRegister<IAddon>;
   watch: UseFormWatch<IAddon>;
   setValue: UseFormSetValue<IAddon>;
+  errors?: FieldErrors<IAddon>;
   actions: Array<IAction | IUserScript>;
 }
 
-export function PreCheckRecheck({ register, watch, setValue, actions }: PreCheckRecheckProps) {
+export function PreCheckRecheck({ register, watch, setValue, actions, errors }: PreCheckRecheckProps) {
   const { t } = useTranslation();
 
   const recheckOption = watch('recheckOption');
@@ -32,7 +33,7 @@ export function PreCheckRecheck({ register, watch, setValue, actions }: PreCheck
             <Col md={6} sm={12}>
               <InputGroup>
                 <InputGroup.Text>{t('pageGuard.recheck.recheck')}</InputGroup.Text>
-                <FormControl placeholder='0' type='number' list='recheck' {...register('recheck', { pattern: { value: new RegExp(REGEX.NUMBER), message: t('error.number') } })} />
+                <FormControl placeholder='0' type='number' list='recheck' {...register('recheck', { pattern: { value: REGEX.NUMBER, message: t('error.number') } })} isInvalid={!!errors?.recheck} />
                 <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
               </InputGroup>
             </Col>
@@ -41,7 +42,12 @@ export function PreCheckRecheck({ register, watch, setValue, actions }: PreCheck
                 <InputGroup.Text>
                   {t('pageGuard.recheck.interval')}&nbsp;<small>({t('common.sec')})</small>
                 </InputGroup.Text>
-                <FormControl placeholder='0' list='interval' {...register('recheckInterval', { pattern: { value: new RegExp(REGEX.INTERVAL), message: t('error.number') } })} />
+                <FormControl
+                  placeholder='0'
+                  list='interval'
+                  {...register('recheckInterval', { pattern: { value: REGEX.INTERVAL, message: t('error.number') } })}
+                  isInvalid={!!errors?.recheckInterval}
+                />
                 <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
               </InputGroup>
             </Col>

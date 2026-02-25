@@ -273,6 +273,7 @@
     "reorder": "Reorder Automations",
     "enable": "Enable",
     "disable": "Disable",
+    "disabled": "Disabled",
     "edit": "Edit",
     "export": "Export",
     "import": "Import",
@@ -299,13 +300,13 @@
   },
   "automationSettings": {
     "title": "Automation Settings",
-    "start": "Run Mode",
+    "startType": "Run Mode",
     "hotkey": "Hotkey",
     "auto": "Automatic",
     "autoHint": "<b>Automatic</b> — runs by itself every time the page loads. No action needed from you.",
     "manual": "Manual (Hotkey)",
     "manualHint": "<b>Manual</b> — only runs when you press your defined keyboard shortcut.",
-    "extensionLoad": "Page Load Timing",
+    "loadType": "Page Load Timing",
     "window": "After Full Load",
     "windowHint": "<b>After Full Load</b> (Recommended) — automation starts after the entire page including images and scripts has finished loading.",
     "document": "As Page Loads",
@@ -337,6 +338,7 @@
     }
   },
   "error": {
+    "required": "This field is required",
     "number": "Please enter a valid number",
     "interval": "Please enter a valid number",
     "url": "Please enter a website URL to continue",
@@ -350,7 +352,8 @@
     "valueExtractor": "The pattern you entered is not valid — please check and try again",
     "value": "Please enter a value to continue",
     "condition": "Please select a condition to continue",
-    "elementFinder": "Please enter how to find the item on the page"
+    "elementFinder": "Please enter how to find the item on the page",
+    "spreadsheetId": "Please enter a valid Google Sheets ID (44 characters, e.g. 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
   },
   "step": {
     "title": "Step",

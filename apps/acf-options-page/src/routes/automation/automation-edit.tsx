@@ -26,7 +26,8 @@ export const AutomationEdit = ({ onDone }: AutomationEditProps) => {
     defaultValues: {
       url: config?.url,
       initWait: config?.initWait
-    }
+    },
+    mode: 'onChange'
   });
 
   if (!config) {
@@ -34,19 +35,14 @@ export const AutomationEdit = ({ onDone }: AutomationEditProps) => {
   }
 
   const onSubmit = (data: AutomationEditFormValues) => {
-    if (data.url !== config.url) {
-      dispatch(updateConfig({ configId: config.id, name: 'url', value: data.url }));
-    }
-    if (data.initWait !== config.initWait) {
-      dispatch(updateConfig({ configId: config.id, name: 'initWait', value: data.initWait }));
-    }
+    dispatch(updateConfig({ configId: config.id, ...data }));
     onDone();
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Container fluid className='border-bottom p-2 mb-1'>
-        <Row className='align-items-end'>
+      <Container fluid className='border-bottom p-2'>
+        <Row className='align-items-end p-1'>
           <Col xs='auto'>
             <Form.Label>
               {t('automation.initWait')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
@@ -57,7 +53,7 @@ export const AutomationEdit = ({ onDone }: AutomationEditProps) => {
               size='sm'
               placeholder='0'
               isInvalid={!!errors.initWait}
-              {...register('initWait', { pattern: { value: new RegExp(REGEX.INTERVAL), message: t('error.initWait') } })}
+              {...register('initWait', { pattern: { value: REGEX.INTERVAL, message: t('error.initWait') } })}
             />
             <Form.Control.Feedback type='invalid'>{errors.initWait?.message}</Form.Control.Feedback>
           </Col>

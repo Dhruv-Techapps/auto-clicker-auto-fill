@@ -23,7 +23,8 @@ export const StateGuardOffcanvas = ({ show }: StateGuardOffcanvasProps) => {
   const action = config?.actions.find((a) => a.id === stepId);
 
   const { register, handleSubmit, watch, control } = useForm<IActionStatement>({
-    defaultValues: action?.statement ?? { conditions: [], option: EErrorOptions.STOP }
+    defaultValues: action?.statement ?? { conditions: [], option: EErrorOptions.STOP },
+    mode: 'onChange'
   });
 
   const { fields, append, update, remove } = useFieldArray({ control, name: 'conditions' });
@@ -52,7 +53,7 @@ export const StateGuardOffcanvas = ({ show }: StateGuardOffcanvasProps) => {
   };
 
   return (
-    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
+    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{t('stateGuard.title')}</Offcanvas.Title>

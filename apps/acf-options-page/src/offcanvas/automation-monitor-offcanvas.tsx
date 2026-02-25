@@ -17,7 +17,14 @@ export const AutomationMonitorOffcanvas = ({ show }: AutomationMonitorOffcanvasP
   const config = useAutomation();
   const navigate = useNavigate();
 
-  const { register, handleSubmit, watch, reset } = useForm<IWatchSettings>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors, isDirty, isValid }
+  } = useForm<IWatchSettings>({
+    mode: 'onChange',
     defaultValues: config?.watch ?? { ...defaultWatchSettings }
   });
 
@@ -52,20 +59,20 @@ export const AutomationMonitorOffcanvas = ({ show }: AutomationMonitorOffcanvasP
   };
 
   return (
-    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
+    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{t('monitor.title')}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className='flex-grow-1 overflow-auto'>
-          <MonitorSettings register={register} watchEnabled={watchEnabled} />
-          <LifecycleStopConditions register={register} watchEnabled={watchEnabled} />
+          <MonitorSettings register={register} watchEnabled={watchEnabled} errors={errors} />
+          <LifecycleStopConditions register={register} watchEnabled={watchEnabled} errors={errors} />
         </Offcanvas.Body>
         <div className='offcanvas-footer d-flex justify-content-between p-3 border-top'>
           <Button type='reset' variant='outline-primary' className='px-5' data-testid='config-watch-reset'>
             {t('common.clear')}
           </Button>
-          <Button type='submit' variant='primary' className='px-5' data-testid='config-watch-save'>
+          <Button type='submit' variant='primary' className='px-5' data-testid='config-watch-save' disabled={!isDirty || !isValid}>
             {t('common.save')}
           </Button>
         </div>

@@ -1,5 +1,6 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
 import { updateConfig, useAppDispatch } from '@acf-options-page/store';
+import { getConfigName } from '@acf-options-page/store/config/config.slice.util';
 import { APP_LINK } from '@acf-options-page/util/constants';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { Card, Container, Form, FormControl } from 'react-bootstrap';
@@ -18,7 +19,8 @@ export const AutomationNew = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<AutomationNewFormValues>({
-    defaultValues: { url: config?.url }
+    defaultValues: { url: config?.url },
+    mode: 'onChange'
   });
 
   if (!config) {
@@ -26,7 +28,7 @@ export const AutomationNew = () => {
   }
 
   const onSubmit = (data: AutomationNewFormValues) => {
-    dispatch(updateConfig({ configId: config.id, name: 'url', value: data.url }));
+    dispatch(updateConfig({ configId: config.id, ...data, name: getConfigName(data.url) }));
   };
 
   return (

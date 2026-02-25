@@ -1,5 +1,5 @@
 import { CONFIGURATIONS } from '@acf-options-page/data/configurations';
-import { EConfigSource, EStartTypes, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { EConfigSource, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LocalStorage } from '../../_helpers';
@@ -7,7 +7,7 @@ import { RootState } from '../store';
 import { actionActions } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
-import { getConfigName, updateConfigIds } from './config.slice.util';
+import { updateConfigIds } from './config.slice.util';
 import { scheduleActions } from './schedule';
 import { watchActions } from './watch';
 
@@ -23,11 +23,7 @@ export interface ConfigStore {
   detailVisibility: { name: boolean; url: boolean };
 }
 
-interface ConfigAction {
-  configId: TRandomUUID;
-  name: string;
-  value: any;
-}
+type ConfigSettingsAction = { configId: TRandomUUID } & Partial<Omit<IConfiguration, 'id' | 'configId' | 'actions'>>;
 
 const initialState: ConfigStore = {
   loading: true,
@@ -59,39 +55,16 @@ const slice = createSlice({
         return { payload: config };
       }
     },
-    updateConfig: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value, configId } = action.payload;
+    updateConfig: (state, action: PayloadAction<ConfigSettingsAction>) => {
+      const { configId, ...settings } = action.payload;
       const { configs } = state;
-
       const selectedConfig = configs.find((config) => config.id === configId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-
         return;
       }
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      selectedConfig[name] = value;
-      selectedConfig['updated'] = true;
-      if (name === 'url' && !selectedConfig.name) {
-        selectedConfig.name = getConfigName(value);
-      }
-    },
-    updateConfigSettings: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value, configId } = action.payload;
-      const { configs } = state;
-
-      const selectedConfig = configs.find((config) => config.id === configId);
-      if (!selectedConfig) {
-        state.error = 'Invalid Configuration';
-
-        return;
-      }
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      selectedConfig[name] = value;
-      selectedConfig['updated'] = true;
-      if (name === 'startType' && value === EStartTypes.AUTO) {
-        delete selectedConfig.hotkey;
-      }
+      Object.assign(selectedConfig, settings);
+      selectedConfig.updated = true;
     },
     removeConfigs: (state, action: PayloadAction<Array<TRandomUUID>>) => {
       const selectedConfigs = action.payload;
@@ -152,7 +125,6 @@ export const {
   addConfig,
   setConfigs,
   updateConfig,
-  updateConfigSettings,
   removeConfigs,
   duplicateConfig,
   importConfigs,

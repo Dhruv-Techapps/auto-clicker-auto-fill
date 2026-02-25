@@ -28,8 +28,9 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors }
+    formState: { errors, isDirty, isValid }
   } = useForm<IAddon>({
+    mode: 'onChange',
     defaultValues: action?.addon ?? { ...defaultAddon }
   });
 
@@ -55,7 +56,7 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
   };
 
   return (
-    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
+    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{t('pageGuard.title')}</Offcanvas.Title>
@@ -121,13 +122,13 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
               </Form.Group>
             </Col>
           </Row>
-          {elementFinder && condition && value && <PreCheckRecheck register={register} watch={watch} setValue={setValue} actions={config.actions} />}
+          {elementFinder && condition && value && <PreCheckRecheck register={register} watch={watch} setValue={setValue} errors={errors} actions={config.actions} />}
         </Offcanvas.Body>
         <div className='offcanvas-footer d-flex justify-content-between p-3 border-top'>
           <Button type='reset' variant='outline-primary' className='px-5' data-testid='config-addon-reset'>
             {t('common.clear')}
           </Button>
-          <Button type='submit' variant='primary' className='px-5' data-testid='config-addon-save'>
+          <Button type='submit' variant='primary' className='px-5' data-testid='config-addon-save' disabled={!isDirty || !isValid}>
             {t('common.save')}
           </Button>
         </div>

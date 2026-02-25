@@ -22,8 +22,7 @@ import {
   syncSchedule,
   syncWatch,
   updateAction,
-  updateConfig,
-  updateConfigSettings
+  updateConfig
 } from './config.slice';
 
 const configsToastListenerMiddleware = createListenerMiddleware();
@@ -40,8 +39,6 @@ configsToastListenerMiddleware.startListening({
 
 const getMessageFunc = (action: UnknownAction): { header: string; body: string } => {
   switch (action.type) {
-    case updateConfigSettings.type:
-      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.settings`) };
     case syncBatch.type:
       return { header: i18next.t(`loop.toast.header`), body: i18next.t(`loop.toast.body`) };
     case updateAction.type:
@@ -74,7 +71,6 @@ configsListenerMiddleware.startListening({
   matcher: isAnyOf(
     importConfigs,
     updateConfig,
-    updateConfigSettings,
     removeConfigs,
     duplicateConfig,
     syncBatch,

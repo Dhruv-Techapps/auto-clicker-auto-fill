@@ -25,9 +25,10 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors, isDirty, isValid }
   } = useForm<IActionSettings>({
-    defaultValues: action?.settings ?? {}
+    defaultValues: action?.settings ?? {},
+    mode: 'onChange'
   });
 
   if (!config || !action) {
@@ -50,19 +51,19 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
   const { actions } = config;
 
   return (
-    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
+    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={onReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{t('modal.actionSettings.title')}</Offcanvas.Title>
+          <Offcanvas.Title>{t('stepSettings.title')}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className='flex-grow-1 overflow-auto'>
-          <p className='text-muted'>{t('modal.actionSettings.info')}</p>
+          <p className='text-muted'>{t('stepSettings.info')}</p>
           <Card>
             <Card.Body>
               <Row>
                 <Col md={12} sm={12}>
-                  <Form.Check type='switch' label={t('modal.actionSettings.iframeFirst')} {...register('iframeFirst')} />
-                  <small className='text-muted'>{t('modal.actionSettings.iframeFirstHint')}</small>
+                  <Form.Check type='switch' label={t('stepSettings.iframeFirst')} {...register('iframeFirst')} />
+                  <small className='text-muted'>{t('stepSettings.iframeFirstHint')}</small>
                 </Col>
               </Row>
             </Card.Body>
@@ -72,13 +73,13 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
               <Row className='mb-2 mb-md-0'>
                 <Col md={6} sm={12}>
                   <InputGroup>
-                    <InputGroup.Text>{t('modal.actionSettings.retry.retry')}</InputGroup.Text>
+                    <InputGroup.Text>{t('stepSettings.retry.retry')}</InputGroup.Text>
                     <FormControl
-                      placeholder={t('modal.actionSettings.retry.retry')}
+                      placeholder={t('stepSettings.retry.retry')}
                       type='number'
                       isInvalid={!!errors.retry}
                       list='retry'
-                      {...register('retry', { pattern: { value: new RegExp(REGEX.NUMBER), message: t('error.number') } })}
+                      {...register('retry', { pattern: { value: REGEX.NUMBER, message: t('error.number') } })}
                     />
                     <Form.Control.Feedback type='invalid'>{errors.retry?.message}</Form.Control.Feedback>
                   </InputGroup>
@@ -86,13 +87,13 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
                 <Col md={6} sm={12}>
                   <InputGroup>
                     <InputGroup.Text>
-                      {t('modal.actionSettings.retry.interval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
+                      {t('stepSettings.retry.interval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
                     </InputGroup.Text>
                     <FormControl
-                      placeholder={`${t('modal.actionSettings.retry.interval')} (${t('common.sec')})`}
+                      placeholder={`${t('stepSettings.retry.interval')} (${t('common.sec')})`}
                       list='interval'
                       isInvalid={!!errors.retryInterval}
-                      {...register('retryInterval', { pattern: { value: new RegExp(REGEX.INTERVAL), message: t('error.number') } })}
+                      {...register('retryInterval', { pattern: { value: REGEX.INTERVAL, message: t('error.number') } })}
                     />
                     <Form.Control.Feedback type='invalid'>{errors.retryInterval?.message}</Form.Control.Feedback>
                   </InputGroup>
@@ -104,19 +105,19 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
             <Card.Body>
               <Row>
                 <Col xs={12} className='mb-2'>
-                  {t('modal.actionSettings.retry.hint')}
+                  {t('stepSettings.retry.hint')}
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.STOP} label={t('modal.actionSettings.retry.stop')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.STOP} label={t('stepSettings.retry.stop')} {...register('retryOption')} />
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('modal.actionSettings.retry.skip')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('stepSettings.retry.skip')} {...register('retryOption')} />
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('modal.actionSettings.retry.refresh')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('stepSettings.retry.refresh')} {...register('retryOption')} />
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.GOTO} label={t('modal.actionSettings.retry.goto')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.GOTO} label={t('stepSettings.retry.goto')} {...register('retryOption')} />
                 </Col>
                 {retryOption === EErrorOptions.GOTO && (
                   <Col xs={{ span: 3, offset: 9 }}>
@@ -137,7 +138,7 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
           <Button type='reset' variant='outline-primary' className='px-5' data-testid='action-settings-reset'>
             {t('common.clear')}
           </Button>
-          <Button type='submit' variant='primary' className='px-5' data-testid='action-settings-save'>
+          <Button type='submit' variant='primary' className='px-5' data-testid='action-settings-save' disabled={!isDirty || !isValid}>
             {t('common.save')}
           </Button>
         </div>

@@ -3,7 +3,6 @@ import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
 import { duplicateConfig, removeConfigs, updateConfig, useAppDispatch } from '@acf-options-page/store';
 import { ROUTES } from '@acf-options-page/util';
 import { APP_LINK } from '@acf-options-page/util/constants';
-import { getFieldNameValue } from '@acf-options-page/util/element';
 import { ChangeEvent } from 'react';
 import { Col, Dropdown, FormControl, InputGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -24,10 +23,8 @@ export const AutomationMenu = ({ onToggleEditMode }: AutomationMenuProps) => {
   }
 
   const onUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const update = getFieldNameValue(e, config);
-    if (update) {
-      dispatch(updateConfig({ ...update, configId: config.id }));
-    }
+    const update = { name: e.target.name, value: e.target.value };
+    dispatch(updateConfig({ configId: config.id, [update.name]: update.value }));
   };
 
   const onDuplicateConfig = () => {
@@ -40,7 +37,7 @@ export const AutomationMenu = ({ onToggleEditMode }: AutomationMenuProps) => {
   };
 
   const onToggleEnable = () => {
-    dispatch(updateConfig({ configId: config.id, name: 'enable', value: !config.enable }));
+    dispatch(updateConfig({ configId: config.id, enable: !config.enable }));
   };
 
   return (

@@ -20,9 +20,10 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isDirty, isValid }
   } = useForm<ISchedule>({
-    defaultValues: config?.schedule
+    defaultValues: config?.schedule,
+    mode: 'onChange'
   });
 
   if (!config) {
@@ -42,7 +43,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
   };
 
   return (
-    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true} style={{ width: '800px' }}>
+    <Offcanvas show={show} onHide={handleClose} placement='end' backdrop={true}>
       <Form onSubmit={handleSubmit(onSubmit)} onReset={handleReset} className='h-100 d-flex flex-column'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{t('schedule.title')}</Offcanvas.Title>
@@ -56,7 +57,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
                 <FormControl
                   {...register('date', {
                     required: t('error.scheduleDate'),
-                    pattern: { value: new RegExp(REGEX.SCHEDULE_DATE), message: t('error.scheduleDate') }
+                    pattern: { value: REGEX.SCHEDULE_DATE, message: t('error.scheduleDate') }
                   })}
                   placeholder='YYYY-MM-DD'
                   autoComplete='off'
@@ -72,7 +73,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
                 <FormControl
                   {...register('time', {
                     required: t('error.scheduleTime'),
-                    pattern: { value: new RegExp(REGEX.SCHEDULE_TIME), message: t('error.scheduleTime') }
+                    pattern: { value: REGEX.SCHEDULE_TIME, message: t('error.scheduleTime') }
                   })}
                   placeholder='HH:mm:ss.sss'
                   autoComplete='off'
@@ -90,7 +91,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
                 <FormControl
                   {...register('repeat', {
                     required: t('error.scheduleRepeat'),
-                    pattern: { value: new RegExp(REGEX.SCHEDULE_REPEAT), message: t('error.scheduleRepeat') }
+                    pattern: { value: REGEX.SCHEDULE_REPEAT, message: t('error.scheduleRepeat') }
                   })}
                   placeholder='60'
                   autoComplete='off'
@@ -107,7 +108,7 @@ export const AutomationScheduleOffcanvas = ({ show }: AutomationScheduleOffcanva
           <Button type='reset' variant='outline-primary' className='px-5' data-testid='config-schedule-reset'>
             {t('common.clear')}
           </Button>
-          <Button type='submit' variant='primary' className='px-5' data-testid='config-schedule-save'>
+          <Button type='submit' variant='primary' className='px-5' data-testid='config-schedule-save' disabled={!isDirty || !isValid}>
             {t('common.save')}
           </Button>
         </div>

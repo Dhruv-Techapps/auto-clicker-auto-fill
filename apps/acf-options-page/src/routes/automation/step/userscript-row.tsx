@@ -41,7 +41,7 @@ export const UserScriptRow: React.FC<UserScriptRowProps> = (props) => {
 
   return (
     <tr key={row.id} className={row.original.disabled ? 'table-secondary' : ''}>
-      <td className='align-middle'>{index + 1}</td>
+      <td className='align-middle text-body-tertiary'>{index + 1}</td>
       <td className='align-middle' colSpan={row.getVisibleCells().length}>
         {getValueCell(row)}
       </td>
