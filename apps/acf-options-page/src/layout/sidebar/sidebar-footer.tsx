@@ -1,9 +1,10 @@
 import { firebaseLogoutAPI, firebaseSelector, switchFirebaseLoginModal, useAppDispatch, useAppSelector } from '@acf-options-page/store';
+import { ABOUT_LINKS, LEARN_MORE_LINKS, SOCIAL_LINKS } from '@acf-options-page/util/constants';
 import { Nav, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
 import { LanguageDropdown } from './sidebar-footer/language-dropdown';
-import { LearnMoreDropdown } from './sidebar-footer/learn-more-dropdown';
+import { LinkDropdown } from './sidebar-footer/link-dropdown';
 import { ThemeDropdown } from './sidebar-footer/theme-dropdown';
 
 interface ISidebarFooterProps {
@@ -16,7 +17,7 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
   const { t } = useTranslation();
 
   return (
-    <Nav className={visible ? 'p-2 border-top flex-column' : 'flex-column'}>
+    <Nav className={visible ? 'px-2 border-top flex-column' : 'flex-column'}>
       <NavDropdown
         title={
           <div className='d-inline-flex align-items-center w-100 text-secondary-emphasis'>
@@ -47,13 +48,13 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
         <LanguageDropdown />
         <ThemeDropdown />
         <NavDropdown.Divider />
-        {!role && (
-          <NavDropdown.Item as={NavLink} to='/upgrade'>
-            <i className='bi bi-arrow-up-circle me-2' />
-            {t('upgradePlan.title')}
-          </NavDropdown.Item>
-        )}
-        <LearnMoreDropdown />
+        {/*<NavDropdown.Item as={NavLink} to='/upgrade'>
+          <i className='bi bi-arrow-up-circle me-2' />
+          {t('upgradePlan.title')}
+        </NavDropdown.Item>*/}
+        <LinkDropdown title='learnMore' icon='bi-info-circle' links={LEARN_MORE_LINKS} />
+        <LinkDropdown title='about' icon='bi-info-square' links={ABOUT_LINKS} />
+        <LinkDropdown title='social' icon='bi-people' links={SOCIAL_LINKS} />
         <NavDropdown.Divider />
         {user ? (
           <NavDropdown.Item onClick={() => dispatch(firebaseLogoutAPI())}>

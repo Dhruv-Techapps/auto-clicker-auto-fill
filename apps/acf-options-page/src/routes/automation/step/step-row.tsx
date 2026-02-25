@@ -57,12 +57,12 @@ export const StepRow: React.FC<StepRowProps> = (props) => {
       <td align='right'>
         {row.original.addon && (
           <Button onClick={() => navigate(ROUTES.PAGE_GUARD(row.original.id))} variant='link' className='p-0 ms-2' data-testid='config-addon'>
-            <i className='bi bi-shield-check me-2' title={t('step.addon')} />
+            <i className='bi bi-shield-check me-2' title={t('pageGuard.title')} />
           </Button>
         )}
         {row.original.statement && (
           <Button onClick={() => navigate(ROUTES.STATE_GUARD(row.original.id))} variant='link' className='p-0 ms-2' data-testid='config-statement'>
-            <i className='bi bi-sliders me-2' title={t('step.statement')} />
+            <i className='bi bi-sliders me-2' title={t('stateGuard.title')} />
           </Button>
         )}
         {row.original.elementFinder && (

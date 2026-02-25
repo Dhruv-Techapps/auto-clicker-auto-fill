@@ -109,7 +109,7 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
               <Form.Group controlId='addon-value-extractor' className='addon-value-extractor'>
                 <Form.Label>{t('pageGuard.valueExtractor')}</Form.Label>
                 <InputGroup>
-                  <Form.Control type='text' placeholder='Value Extractor' list='valueExtractor' {...register('valueExtractor')} />
+                  <Form.Control type='text' placeholder='Value Extractor' list='valueExtractor' {...register('valueExtractor')} isInvalid={!!errors.valueExtractor} />
                   {valueExtractor ? (
                     <PreCheckValueExtractorFlags watch={watch} setValue={setValue} />
                   ) : (
@@ -118,7 +118,7 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
                     </InputGroup.Text>
                   )}
                 </InputGroup>
-                <Form.Control.Feedback type='invalid'>{t('error.valueExtractor')}</Form.Control.Feedback>
+                <Form.Control.Feedback type='invalid'>{errors.valueExtractor?.message}</Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>

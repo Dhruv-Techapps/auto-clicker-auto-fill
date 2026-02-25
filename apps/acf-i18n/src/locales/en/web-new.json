@@ -13,22 +13,14 @@
     "issues": "Issues",
     "discussion": "Discussion",
     "test": "Practice Form",
-    "about": "About",
     "contact": "Contact",
     "chat": "Chat",
     "connect": "Connect",
     "privacy": "Privacy & Policy",
     "googleGroup": "Google Group"
   },
-  "social": {
-    "discord": "Discord",
-    "youtube": "Youtube",
-    "facebook": "Facebook",
-    "whatsapp": "Whatsapp",
-    "instagram": "Instagram",
-    "twitter": "Twitter",
-    "github": "Github"
-  },
+  "about": "About",
+  "social": "Social",
   "theme": {
     "title": "Theme",
     "switchLight": "Switch to the light theme",
@@ -199,20 +191,47 @@
   "upgradePlan": {
     "title": "Upgrade Plan",
     "subtitle": "Unlock advanced features and get the most out of Auto Clicker AutoFill.",
-    "pro": {
-      "name": "Pro Subscription",
-      "tagline": "Everything you need to automate without limits",
-      "perMonth": "per\nmonth",
-      "cta": "Upgrade to Pro",
-      "includes": "This includes:",
+    "currentPlan": "Your Current Plan",
+    "free": {
+      "name": "🆓 FREE",
+      "tagline": "Powerful automation for everyone — no account required.",
+      "perMonth": "forever",
+      "cta": "Current Plan",
+      "includes": "What's included:",
       "features": {
-        "sheets": "Unlimited Google Sheets",
-        "discord": "Unlimited Discord Messaging",
-        "captcha": "Captcha Resolver (Coming Soon)",
-        "noAds": "No Ads",
-        "vipSupport": "VIP Assistance over Discord",
-        "earlyAccess": "Early access to new Features",
-        "prideAndJoy": "Pride and Joy"
+        "unlimitedAutomations": "Unlimited automations",
+        "unlimitedSteps": "Unlimited steps per automation",
+        "loopSteps": "Repeat steps in a loop",
+        "recording": "Visual step recorder",
+        "allValues": "All value types — no API required"
+      }
+    },
+    "plus": {
+      "name": "🚀 PLUS",
+      "tagline": "All the essentials, plus deeper control over pre-check and settings within steps.",
+      "perMonth": "per month",
+      "cta": "Upgrade to Plus",
+      "includes": "Everything in Free, plus:",
+      "features": {
+        "addonCondition": "Conditional addon logic",
+        "actionCondition": "Per-action condition rules",
+        "actionSettings": "Action-level settings & overrides",
+        "noAds": "Ad-free experience"
+      }
+    },
+    "pro": {
+      "name": "🔹 PRO",
+      "tagline": "The full power of automation — with integrations, AI, and priority support.",
+      "perMonth": "per month",
+      "cta": "Upgrade to Pro",
+      "includes": "Everything in Plus, plus:",
+      "features": {
+        "sheets": "Google Sheets integration",
+        "discord": "Discord notifications",
+        "captcha": "Captcha resolver (coming soon)",
+        "vipSupport": "Priority support via Discord",
+        "earlyAccess": "Early access to new features",
+        "prideAndJoy": "Supporter badge & community recognition"
       }
     }
   },
