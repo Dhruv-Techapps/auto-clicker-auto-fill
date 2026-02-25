@@ -1,6 +1,6 @@
+import { NO_EXTENSION_ERROR } from '@acf-options-page/util/constants';
 import { ManifestService } from '@dhruv-techapps/core-service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { NO_EXTENSION_ERROR } from '../util/constants';
 
 export const getManifest = createAsyncThunk('app/getManifest', async () => {
   if (window.chrome?.runtime) {

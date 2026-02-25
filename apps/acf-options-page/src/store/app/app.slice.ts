@@ -1,7 +1,7 @@
+import { NO_EXTENSION_ERROR } from '@acf-options-page/util/constants';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NO_EXTENSION_ERROR } from '../util/constants';
+import { RootState } from '../store';
 import { getManifest } from './app.api';
-import { RootState } from './store';
 
 export interface IAppStore {
   manifest?: Partial<chrome.runtime.Manifest>;
@@ -62,4 +62,4 @@ export const { switchExtensionNotFound, setAppError, setManifest } = slice.actio
 
 export const appSelector = (state: RootState) => state.app;
 
-export default slice.reducer;
+export const appReducer = slice.reducer;

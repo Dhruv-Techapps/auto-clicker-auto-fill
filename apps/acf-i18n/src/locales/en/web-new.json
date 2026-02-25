@@ -259,6 +259,8 @@
     "count": "Automations ({{count}})",
     "search": "Search your automation...",
     "add": "New",
+    "reorder": "Reorder",
+    "reorderByName": "Reorder by Name",
     "selected": "selected",
     "selected_one": "1 automation selected",
     "selected_other": "{{count}} automations selected",
@@ -280,16 +282,14 @@
       "export_other": "{{count}} automations exported successfully",
       "import": "Automations imported successfully",
       "import_one": "1 automation imported successfully",
-      "import_other": "{{count}} automations imported successfully"
+      "import_other": "{{count}} automations imported successfully",
+      "reorder": "Automations reordered successfully"
     }
   },
   "automation": {
     "title": "Automation",
-    "exportAll": "Bulk Export Automations",
-    "importAll": "Bulk Import Automations",
     "remove": "Remove",
     "duplicate": "Duplicate",
-    "reorder": "Reorder Automations",
     "enable": "Enable",
     "disable": "Disable",
     "disabled": "Disabled",

@@ -1,16 +1,9 @@
 'use client';
 
-import { ExtensionNotFoundAlert } from '@acf-options-page/alerts/extension-not-found-alert';
-import { VersionAlert } from '@acf-options-page/alerts/version-alert';
-import { LoadingBar } from '@acf-options-page/components';
-import { DataList } from '@acf-options-page/components/data-list.components';
-import { ToastHandler } from '@acf-options-page/components/toast-handler.component';
-import { LoginModal } from '@acf-options-page/modal/login.modal';
-import { getManifest } from '@acf-options-page/store/app.api';
-import { appSelector } from '@acf-options-page/store/app.slice';
-import { configGetAllAPI } from '@acf-options-page/store/config/config.api';
-import { firebaseIsLoginAPI } from '@acf-options-page/store/firebase/firebase-login.api';
-import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
+import { ExtensionNotFoundAlert, VersionAlert } from '@acf-options-page/alerts';
+import { DataList, LoadingBar, ToastHandler } from '@acf-options-page/components';
+import { LoginModal } from '@acf-options-page/modal';
+import { appSelector, configGetAllAPI, firebaseIsLoginAPI, getManifest, useAppDispatch, useAppSelector } from '@acf-options-page/store';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router';

@@ -7,7 +7,7 @@ import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { useState } from 'react';
 import { Button, Container, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, Outlet, useNavigate } from 'react-router';
 import { AutomationsImport } from './automations/automations-import';
 import { AutomationsListItem } from './automations/automations-list-item';
 
@@ -81,6 +81,9 @@ export const Automations = () => {
               <Button variant='link' size='sm' onClick={() => setSelectionMode(true)} title={t('automations.selectAutomations')}>
                 {t('automations.select')}
               </Button>
+              <Button variant='link' size='sm' onClick={() => navigate(ROUTES.AUTOMATIONS_REORDER)} title={t('automations.reorder')}>
+                {t('automations.reorder')}
+              </Button>
             </>
           )}
         </div>
@@ -105,6 +108,7 @@ export const Automations = () => {
             ))}
         </ListGroup>
       </Form>
+      <Outlet />
     </Container>
   );
 };

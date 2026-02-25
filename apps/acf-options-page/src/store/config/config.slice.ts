@@ -75,6 +75,9 @@ const slice = createSlice({
     setConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = updateConfigIds(action.payload);
     },
+    reorderConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
+      state.configs = action.payload;
+    },
     importConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs.push(...updateConfigIds(action.payload));
     },
@@ -132,6 +135,7 @@ export const {
   addAction,
   addUserscript,
   reorderActions,
+  reorderConfigs,
   removeAction,
   updateAction,
   syncActionAddon,

@@ -1,4 +1,4 @@
-import { appSelector } from '@acf-options-page/store/app.slice';
+import { appSelector } from '@acf-options-page/store';
 import { useAppSelector } from '@acf-options-page/store/hooks';
 import { Alert } from 'react-bootstrap';
 

@@ -1,4 +1,4 @@
-import { appSelector } from '@acf-options-page/store/app.slice';
+import { appSelector } from '@acf-options-page/store';
 import { useAppSelector } from '@acf-options-page/store/hooks';
 import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
 import { Alert } from 'react-bootstrap';

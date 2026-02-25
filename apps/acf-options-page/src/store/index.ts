@@ -1,3 +1,4 @@
+export * from './app';
 export * from './config';
 export * from './firebase';
 export { useAppDispatch, useAppSelector } from './hooks';

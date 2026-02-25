@@ -10,6 +10,7 @@ export const ROUTES = {
 
   // Automations list
   AUTOMATIONS: '/automations',
+  AUTOMATIONS_REORDER: '/automations/reorder',
 
   // Single automation — absolute path
   AUTOMATION: (automationId: string) => `/automations/${automationId}`,

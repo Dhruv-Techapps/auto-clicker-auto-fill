@@ -4,6 +4,7 @@ import { AutomationLoopOffcanvas } from './offcanvas/automation-loop-offcanvas';
 import { AutomationMonitorOffcanvas } from './offcanvas/automation-monitor-offcanvas';
 import { AutomationScheduleOffcanvas } from './offcanvas/automation-schedule-offcanvas';
 import { AutomationSettingsOffcanvas } from './offcanvas/automation-settings-offcanvas';
+import { AutomationsReorderOffcanvas } from './offcanvas/automations-reorder-offcanvas';
 import { PageGuardOffcanvas } from './offcanvas/page-guard-offcanvas';
 import { StateGuardOffcanvas } from './offcanvas/state-guard-offcanvas';
 import { AutomationStepSettingsOffcanvas } from './offcanvas/step-settings-offcanvas';
@@ -25,8 +26,10 @@ export const router = createBrowserRouter([
       },
       {
         path: 'automations',
+        Component: () => <Automations />,
         children: [
-          { index: true, Component: () => <Automations /> },
+          { index: true, Component: () => null },
+          { path: 'reorder', Component: () => <AutomationsReorderOffcanvas show={true} /> },
           {
             path: ':automationId',
             Component: () => <Automation />,
