@@ -29,23 +29,23 @@ export const router = createBrowserRouter([
         Component: () => <Automations />,
         children: [
           { index: true, Component: () => null },
-          { path: 'reorder', Component: () => <AutomationsReorderOffcanvas show={true} /> },
+          { path: 'reorder', Component: () => <AutomationsReorderOffcanvas show={true} /> }
+        ]
+      },
+      {
+        path: 'automations/:automationId',
+        Component: () => <Automation />,
+        children: [
+          { path: 'schedule', Component: () => <AutomationScheduleOffcanvas show={true} /> },
+          { path: 'loop', Component: () => <AutomationLoopOffcanvas show={true} /> },
+          { path: 'monitor', Component: () => <AutomationMonitorOffcanvas show={true} /> },
+          { path: 'settings', Component: () => <AutomationSettingsOffcanvas show={true} /> },
           {
-            path: ':automationId',
-            Component: () => <Automation />,
+            path: ':stepId',
             children: [
-              { path: 'schedule', Component: () => <AutomationScheduleOffcanvas show={true} /> },
-              { path: 'loop', Component: () => <AutomationLoopOffcanvas show={true} /> },
-              { path: 'monitor', Component: () => <AutomationMonitorOffcanvas show={true} /> },
-              { path: 'settings', Component: () => <AutomationSettingsOffcanvas show={true} /> },
-              {
-                path: ':stepId',
-                children: [
-                  { path: 'page-guard', Component: () => <PageGuardOffcanvas show={true} /> },
-                  { path: 'state-guard', Component: () => <StateGuardOffcanvas show={true} /> },
-                  { path: 'settings', Component: () => <AutomationStepSettingsOffcanvas show={true} /> }
-                ]
-              }
+              { path: 'page-guard', Component: () => <PageGuardOffcanvas show={true} /> },
+              { path: 'state-guard', Component: () => <StateGuardOffcanvas show={true} /> },
+              { path: 'settings', Component: () => <AutomationStepSettingsOffcanvas show={true} /> }
             ]
           }
         ]

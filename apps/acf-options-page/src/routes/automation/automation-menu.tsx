@@ -43,7 +43,7 @@ export const AutomationMenu = ({ onToggleEditMode }: AutomationMenuProps) => {
   return (
     <Col xs='auto'>
       <Dropdown as={InputGroup} size='sm'>
-        <FormControl name='name' className='border border-secondary' defaultValue={config.name || config.url || config.id} autoComplete='off' onBlur={onUpdate} placeholder={APP_LINK.TEST} />
+        <FormControl name='name' className='border border-secondary' value={config.name || config.url || config.id} autoComplete='off' onBlur={onUpdate} placeholder={APP_LINK.TEST} />
         <Dropdown.Toggle split id='config-dropdown' variant='outline-secondary'></Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={onToggleEditMode}>
