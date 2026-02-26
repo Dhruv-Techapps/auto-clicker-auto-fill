@@ -1,0 +1,20 @@
+#steps {
+  th[data-column='number'] {
+    width: 2%;
+  }
+  th[data-column='initWait'] {
+    width: 6%;
+  }
+  th[data-column='name'] {
+    width: 9%;
+  }
+  th[data-column='repeat'] {
+    width: 6%;
+  }
+  th[data-column='repeatInterval'] {
+    width: 6%;
+  }
+  th[data-column='menu'] {
+    width: 105px;
+  }
+}

@@ -1,4 +1,4 @@
-import { ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { IConfiguration, ISchedule, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { createListenerMiddleware, isAnyOf, UnknownAction } from '@reduxjs/toolkit';
 
@@ -7,90 +7,73 @@ import { RootState } from '../store';
 import { addToast } from '../toast.slice';
 
 import { ScheduleService } from '@dhruv-techapps/acf-service';
-import {
-  setActionAddonError,
-  setActionAddonMessage,
-  setActionError,
-  setActionMessage,
-  setActionSettingsError,
-  setActionSettingsMessage,
-  setActionStatementError,
-  setActionStatementMessage
-} from './action';
-import { setBatchError, setBatchMessage } from './batch';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import {
   addConfig,
   duplicateConfig,
-  importAll,
-  importConfig,
+  importConfigs,
   removeAction,
-  removeConfig,
+  removeConfigs,
   reorderActions,
-  setConfigError,
-  setConfigMessage,
   syncActionAddon,
   syncActionSettings,
   syncActionStatement,
+  syncBatch,
   syncSchedule,
   syncWatch,
   updateAction,
-  updateBatch,
-  updateConfig,
-  updateConfigSettings
+  updateConfig
 } from './config.slice';
-import { setScheduleError, setScheduleMessage } from './schedule';
-import { setConfigSettingsError, setConfigSettingsMessage } from './settings';
-import { setWatchError, setWatchMessage } from './watch';
 
 const configsToastListenerMiddleware = createListenerMiddleware();
 configsToastListenerMiddleware.startListening({
-  matcher: isAnyOf(addConfig, removeConfig, duplicateConfig),
+  matcher: isAnyOf(addConfig),
   effect: async (action, listenerApi) => {
-    const [type, method] = action.type.split('/');
-
-    const header = i18next.t(`toast.${type}.${method}.header`, { name: type });
-    const body = i18next.t(`toast.${type}.${method}.body`, { name: type });
+    const header = i18next.t(`automation.toast.header`);
+    const body = i18next.t(`automation.toast.add`);
     if (header) {
       listenerApi.dispatch(addToast({ header, body }));
     }
   }
 });
 
-const getMessageFunc = (action: UnknownAction): { success: any; failure: any; message: string } => {
+const getMessageFunc = (action: UnknownAction): { header: string; body: string } => {
   switch (action.type) {
-    case updateConfigSettings.type:
-      return { success: setConfigSettingsMessage, failure: setConfigSettingsError, message: i18next.t(`message.configSettings`) };
-    case updateBatch.type:
-      return { success: setBatchMessage, failure: setBatchError, message: i18next.t(`message.batch`) };
+    case syncBatch.type:
+      return { header: i18next.t(`loop.toast.header`), body: i18next.t(`loop.toast.body`) };
     case updateAction.type:
     case reorderActions.type:
     case removeAction.type:
-      return { success: setActionMessage, failure: setActionError, message: i18next.t(`message.action`) };
+      return { header: i18next.t(`step.toast.header`), body: i18next.t(`step.toast.body`) };
     case syncActionAddon.type:
-      return { success: setActionAddonMessage, failure: setActionAddonError, message: i18next.t(`message.actionAddon`) };
+      return { header: i18next.t(`pageGuard.toast.header`), body: i18next.t(`pageGuard.toast.body`) };
     case syncWatch.type:
-      return { success: setWatchMessage, failure: setWatchError, message: i18next.t(`message.watch`) };
+      return { header: i18next.t(`monitor.toast.header`), body: i18next.t(`monitor.toast.body`) };
     case syncActionStatement.type:
-      return { success: setActionStatementMessage, failure: setActionStatementError, message: i18next.t(`message.actionStatement`) };
+      return { header: i18next.t(`stateGuard.toast.header`), body: i18next.t(`stateGuard.toast.body`) };
     case syncActionSettings.type:
-      return { success: setActionSettingsMessage, failure: setActionSettingsError, message: i18next.t(`message.actionSettings`) };
+      return { header: i18next.t(`stepSettings.toast.header`), body: i18next.t(`stepSettings.toast.body`) };
     case syncSchedule.type:
-      return { success: setScheduleMessage, failure: setScheduleError, message: i18next.t(`message.schedule`) };
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.schedule`) };
+    case removeConfigs.type:
+      return { header: i18next.t(`automations.toast.header`), body: i18next.t(`automations.toast.remove`, { count: (action.payload as TRandomUUID[]).length }) };
+    case importConfigs.type:
+      return { header: i18next.t(`automations.toast.header`), body: i18next.t(`automations.toast.import`, { count: (action.payload as IConfiguration[]).length }) };
+    case duplicateConfig.type:
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.duplicate`) };
     default:
-      return { success: setConfigMessage, failure: setConfigError, message: i18next.t(`message.config`) };
+      return { header: i18next.t(`automation.toast.header`), body: i18next.t(`automation.toast.body`) };
   }
 };
 
 const configsListenerMiddleware = createListenerMiddleware();
 configsListenerMiddleware.startListening({
   matcher: isAnyOf(
-    importAll,
-    importConfig,
+    importConfigs,
     updateConfig,
-    updateConfigSettings,
-    removeConfig,
+    removeConfigs,
     duplicateConfig,
-    updateBatch,
+    syncBatch,
     updateAction,
     reorderActions,
     removeAction,
@@ -106,28 +89,27 @@ configsListenerMiddleware.startListening({
 
     StorageService.set({ [LOCAL_STORAGE_KEY.CONFIGS]: state.configuration.configs })
       .then(() => {
-        const { success, message } = getMessageFunc(action);
-        if (success && action.type === syncSchedule.type) {
-          if (action.payload) {
-            ScheduleService.create(state.configuration.selectedConfigId, action.payload as ISchedule);
+        if (action.type === syncSchedule.type) {
+          const { configId, schedule } = action.payload as { configId: string; schedule?: ISchedule };
+          if (schedule) {
+            ScheduleService.create(configId, schedule);
           } else {
-            ScheduleService.clear(state.configuration.selectedConfigId);
+            ScheduleService.clear(configId);
           }
         }
-        if (success && message) {
-          listenerApi.dispatch(success(message));
+        const { header, body } = getMessageFunc(action);
+        if (body) {
+          listenerApi.dispatch(addToast({ header, body, variant: 'success' }));
         }
       })
       .catch((error) => {
-        const { failure } = getMessageFunc(action);
-        if (failure) {
-          if (error instanceof Error) {
-            listenerApi.dispatch(failure(error.message));
-          } else if (typeof error === 'string') {
-            listenerApi.dispatch(failure(error));
-          } else {
-            listenerApi.dispatch(failure(JSON.stringify(error)));
-          }
+        const { header } = getMessageFunc(action);
+        if (error instanceof Error) {
+          listenerApi.dispatch(addToast({ header, body: error.message, variant: 'danger' }));
+        } else if (typeof error === 'string') {
+          listenerApi.dispatch(addToast({ header, body: error, variant: 'danger' }));
+        } else {
+          listenerApi.dispatch(addToast({ header, body: JSON.stringify(error), variant: 'danger' }));
         }
       });
   }

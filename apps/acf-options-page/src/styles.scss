@@ -1,3 +1,8 @@
+@use 'bootstrap/scss/bootstrap' with (
+  $primary: #6f42c1,
+  // Bootstrap's built-in "warning" yellow / amber
+  $min-contrast-ratio: 2
+);
 @use 'theme/main.scss';
 html,
 body {
@@ -5,10 +10,24 @@ body {
   font-size: 14px;
 }
 
+:root {
+  --accent: #d4a853;
+}
+
 .popover {
   --bs-popover-max-width: 550px;
 }
+.offcanvas {
+  --bs-offcanvas-width: 50vw;
+}
 
-.bi {
-  font-size: 16px;
+.user-collapse > .dropdown-toggle {
+  padding: 0.5rem;
+  &::after {
+    display: none;
+  }
+}
+
+.user-expand > .dropdown-toggle {
+  padding-left: 0;
 }

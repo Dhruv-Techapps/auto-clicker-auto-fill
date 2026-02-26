@@ -2,7 +2,8 @@ import { ThemeProvider } from '@acf-options-page/context';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import App from './app/app';
+import { RouterProvider } from 'react-router/dom';
+import { router } from './routes';
 import { store } from './store/store';
 import './util/i18n';
 
@@ -14,7 +15,7 @@ root.render(
   <StrictMode>
     <Provider store={store}>
       <ThemeProvider>
-        <App />
+        <RouterProvider router={router} />
       </ThemeProvider>
     </Provider>
   </StrictMode>

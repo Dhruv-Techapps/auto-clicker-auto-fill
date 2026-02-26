@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "자동 클릭 - 자동 채우기",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "연결 중..."
+  },
+  "links": {
+    "docs": "문서",
+    "blog": "블로그",
+    "configuration": "구성",
+    "issues": "문제점",
+    "discussion": "논의",
+    "test": "연습 양식",
+    "contact": "연락하다",
+    "chat": "채팅",
+    "connect": "연결하다",
+    "privacy": "개인정보 보호정책",
+    "googleGroup": "구글 그룹"
+  },
+  "about": "에 대한",
+  "social": "사회의",
+  "theme": {
+    "title": "주제",
+    "switchLight": "밝은 테마로 전환하세요",
+    "switchDark": "다크 모드로 전환하세요",
+    "light": "빛",
+    "dark": "어두운",
+    "auto": "자동"
+  },
+  "loading": "로딩 중...",
+  "learnMore": "더 알아보기",
+  "login": "로그인",
+  "logout": "로그아웃",
+  "connect": "연결하다",
+  "disconnect": "연결을 끊으세요",
+  "resources": "자원",
+  "settings": {
+    "title": "전역 설정",
+    "additional": "추가 설정"
+  },
+  "notification": {
+    "title": "알림 표시",
+    "error": "오류가 발생했습니다",
+    "step": "단계 완료 시",
+    "loop": "루프 완료 시",
+    "automation": "자동화 완료 시",
+    "sound": "알림음"
+  },
+  "discord": {
+    "title": "디스코드 알림",
+    "loginRequired": "Discord에 접속하기 전에 계정에 <1>로그인</1>하십시오."
+  },
+  "checkIFrames": {
+    "title": "내장 페이지 내부 검색",
+    "hint": "페이지에 포함된 섹션 내의 항목도 찾아보세요."
+  },
+  "reloadOnError": {
+    "title": "오류 발생 시 페이지 새로 고침",
+    "hint": "오류 발생 시 페이지를 자동으로 새로 고침합니다.",
+    "contextInvalidated": "확장 컨텍스트가 무효화되었습니다."
+  },
+  "statusBar": {
+    "title": "상태 표시줄",
+    "hint": "페이지 하단에 상태 표시줄을 표시합니다.",
+    "hide": "숨다",
+    "topLeft": "왼쪽 상단",
+    "topRight": "오른쪽 상단",
+    "bottomLeft": "왼쪽 하단",
+    "bottomRight": "오른쪽 하단",
+    "positions": {
+      "hide": "숨다",
+      "top-left": "왼쪽 상단",
+      "top-right": "오른쪽 상단",
+      "bottom-left": "왼쪽 하단",
+      "bottom-right": "오른쪽 하단"
+    }
+  },
+  "retry": {
+    "title": "재시도 횟수",
+    "interval": "재시도 간 대기 시간",
+    "stop": "자동화 중지",
+    "skip": "이 단계를 건너뛰세요",
+    "refresh": "새로 고침 후 다시 시도",
+    "hint": "페이지에서 해당 항목을 찾을 수 없는 경우 어떻게 해야 할까요?"
+  },
+  "backup": {
+    "title": "지원",
+    "lastBackup": "마지막 백업:",
+    "backup": "클라우드 백업",
+    "restore": "클라우드에서 복원",
+    "now": "지금 백업하세요",
+    "autoBackup": "자동 백업",
+    "auto-backup": "자동 백업",
+    "daily": "일일",
+    "weekly": "주간",
+    "monthly": "월간 간행물",
+    "off": "끄다",
+    "loginRequired": "Google Drive에 연결하기 전에 계정에 <1>로그인</1>하십시오.",
+    "checkingAccess": "구글 드라이브 접근 권한을 확인하는 중...",
+    "connect": "Google Drive에 연결하세요",
+    "connected": "Google 드라이브 백업",
+    "loadingFiles": "파일을 불러오는 중...",
+    "restoreAction": "복원하다",
+    "delete": "삭제",
+    "noBackup": "백업 파일을 찾을 수 없습니다.",
+    "confirm": {
+      "restore": {
+        "title": "클라우드에서 자동화 복원",
+        "message": "클라우드에서 자동화를 복원하시겠습니까? 이렇게 하면 모든 자동화가 덮어쓰여지며 되돌릴 수 없습니다."
+      }
+    }
+  },
+  "reorder": {
+    "title": "자동 재주문",
+    "hint": "재주문하기 전에 모든 자동화 설정을 저장해 주세요."
+  },
+  "extensionNotFound": {
+    "title": "확장 프로그램이 설치되지 않았습니다",
+    "subTitle": "이 페이지는 Chrome 및 Edge용 <b>Auto Clicker - AutoFill</b> 확장 프로그램과 연동됩니다.",
+    "hint": "먼저 확장 프로그램을 설치해 주세요."
+  },
+  "stepSettings": {
+    "title": "단계 설정",
+    "info": "이 설정은 이 단계와 사전 확인에만 적용되며, 전역 설정보다 우선 적용됩니다.",
+    "iframeFirst": "먼저 임베디드 페이지를 검색하세요",
+    "iframeFirstHint": "메인 페이지를 검색하기 전에 페이지에 포함된 콘텐츠 내부를 먼저 살펴보세요.",
+    "retry": {
+      "title": "상품을 찾을 수 없는 경우",
+      "hint": "재시도 후에도 해당 항목을 찾을 수 없는 경우 어떤 조치를 취할지 선택하세요.",
+      "retry": "재시도 횟수",
+      "interval": "재시도 간 대기 시간",
+      "stop": "자동화 중지",
+      "skip": "이 단계를 건너뛰세요",
+      "goto": "다음 단계로 이동",
+      "refresh": "새로 고침 후 다시 시도"
+    },
+    "toast": {
+      "header": "단계 설정",
+      "body": "단계 설정이 성공적으로 저장되었습니다!"
+    }
+  },
+  "stateGuard": {
+    "action": "이전 단계",
+    "status": "결과",
+    "title": "주 방위군",
+    "add": "조건 추가",
+    "info": "이전 단계에서 발생한 상황에 따라 이 단계를 실행할지 여부를 제어하는 규칙을 설정하세요.",
+    "stop": "자동화 중지",
+    "skip": "이 단계를 건너뛰세요",
+    "refresh": "새로 고침 후 다시 시도",
+    "goto": "다음 단계로 이동",
+    "proceed": "그래도 이 단계를 실행하세요",
+    "hint": "규칙이 지켜지지 않으면 어떻게 되어야 할까요?",
+    "toast": {
+      "header": "주 방위군",
+      "body": "주 방위군을 성공적으로 구출했습니다!"
+    }
+  },
+  "pageGuard": {
+    "title": "페이지 가드",
+    "info": "페이지의 값이 조건을 만족하는 경우에만 이 단계를 실행하세요.",
+    "elementFinder": "페이지에서 항목을 찾으세요",
+    "condition": "비교하다",
+    "value": "~와 비교하세요",
+    "valueExtractor": "숫자 또는 텍스트 추출",
+    "valueExtractorHint": "패턴을 사용하여 값의 특정 부분을 추출할 수 있습니다. 예를 들어, $24.00에서 24.00을 추출하거나 10개의 자동화에서 10을 추출할 수 있습니다.",
+    "recheck": {
+      "title": "조건이 충족되지 않을 경우",
+      "hint": "필터 조건이 충족되지 않을 경우 어떤 일이 발생할지 선택하세요.",
+      "recheck": "다시 확인하세요",
+      "interval": "다시 확인하기 전에 잠시 기다리세요",
+      "stop": "자동화 중지",
+      "skip": "이 단계를 건너뛰세요",
+      "refresh": "새로 고침 후 다시 시도",
+      "goto": "다음 단계로 이동"
+    },
+    "toast": {
+      "header": "페이지 가드",
+      "body": "페이지 보호 기능이 성공적으로 저장되었습니다!"
+    }
+  },
+  "schedule": {
+    "title": "일정 자동화",
+    "info": "이 자동화 기능을 특정 날짜와 시간에 실행합니다.",
+    "date": "날짜",
+    "time": "시간",
+    "repeat": "몇 분 안에 반복됩니다"
+  },
+  "upgradePlan": {
+    "title": "업그레이드 플랜",
+    "subtitle": "Auto Clicker AutoFill의 고급 기능을 활용하여 최대한의 효과를 누리세요.",
+    "currentPlan": "현재 사용 중인 플랜",
+    "free": {
+      "name": "🆓 무료",
+      "tagline": "누구나 사용할 수 있는 강력한 자동화 기능 - 계정 필요 없음",
+      "perMonth": "영원히",
+      "cta": "현재 계획",
+      "includes": "포함 내용:",
+      "features": {
+        "unlimitedAutomations": "무제한 자동화",
+        "unlimitedSteps": "자동화당 단계 수 제한 없음",
+        "loopSteps": "단계를 반복합니다.",
+        "recording": "시각적 걸음 수 기록기",
+        "allValues": "모든 값 유형 - API 필요 없음"
+      }
+    },
+    "plus": {
+      "name": "🚀 플러스",
+      "tagline": "모든 필수 기능은 물론, 단계별 사전 점검 및 설정에 대한 더욱 심층적인 제어 기능까지 제공합니다.",
+      "perMonth": "월",
+      "cta": "플러스로 업그레이드하세요",
+      "includes": "무료 콘텐츠의 모든 기능에 더해 다음이 포함됩니다:",
+      "features": {
+        "addonCondition": "조건부 추가 기능 로직",
+        "actionCondition": "액션별 조건 규칙",
+        "actionSettings": "액션 레벨 설정 및 재정의",
+        "noAds": "광고 없는 경험"
+      }
+    },
+    "pro": {
+      "name": "🔹 프로",
+      "tagline": "통합 기능, AI, 우선 지원 등 자동화의 모든 기능을 활용하세요.",
+      "perMonth": "월",
+      "cta": "프로 버전으로 업그레이드하세요",
+      "includes": "플러스의 모든 기능에 더해 다음이 추가됩니다:",
+      "features": {
+        "sheets": "Google Sheets 연동",
+        "discord": "디스코드 알림",
+        "captcha": "캡차 해결 기능 (출시 예정)",
+        "vipSupport": "디스코드를 통한 우선 지원",
+        "earlyAccess": "새로운 기능에 대한 조기 액세스",
+        "prideAndJoy": "서포터 배지 및 커뮤니티 인정"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "구글 시트",
+    "hint": "Google Sheets 계정을 연결하면 자동화 및 로그를 간편하게 내보내고 자동화 기록을 한 곳에서 관리할 수 있습니다.",
+    "useStable": {
+      "title": "Google Sheets 기능을 사용하려면 안정적인 버전을 사용하세요.",
+      "message": "Google Sheets에서 최적의 성능과 안정성을 확보하려면 <1>안정 버전</1>을 사용하는 것이 좋습니다. 이러한 버전은 철저한 테스트를 거쳐 원활한 기능을 보장하며, 작업에 필요한 안정적인 플랫폼을 제공합니다. 안정성을 우선시함으로써 생산성을 향상하고 예상치 못한 문제 발생 위험을 최소화할 수 있습니다. Google Sheets를 효과적으로 활용하는 데 도움이 필요하시면 언제든지 지원팀에 문의해 주세요!"
+    },
+    "loginRequired": "Google Sheets에 연결하기 전에 계정에 <1>로그인</1>하십시오.",
+    "connect": "Google Sheets와 연결하세요",
+    "connected": "Google Sheets와 연동됨"
+  },
+  "sidebar": {
+    "search": "찾다",
+    "upgradePlan": "업그레이드 플랜",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "language": "언어",
+    "learnMore": "더 알아보기"
+  },
+  "automations": {
+    "title": "내 자동화",
+    "count": "자동화({{count}})",
+    "search": "자동화 기능을 검색하세요...",
+    "add": "새로운",
+    "reorder": "재주문",
+    "reorderByName": "이름으로 재정렬",
+    "selected": "선택된",
+    "selected_one": "자동화 1개가 선택되었습니다.",
+    "selected_other": "{{count}}개의 자동화가 선택되었습니다",
+    "selectAll": "모두 선택하세요",
+    "exportSelected": "선택한 내보내기",
+    "deleteSelected": "선택한 항목 삭제",
+    "cancelSelection": "선택 취소",
+    "automationsWithinExtension": "확장 프로그램 내 자동화",
+    "selectAutomations": "내보낼 자동화 항목을 선택하거나 삭제하세요.",
+    "select": "선택하다",
+    "import": "수입",
+    "toast": {
+      "header": "자동화",
+      "remove": "자동화 기능이 성공적으로 제거되었습니다.",
+      "remove_one": "자동화 기능이 성공적으로 제거되었습니다.",
+      "remove_other": "{{count}}개의 자동화 항목이 성공적으로 제거되었습니다.",
+      "export": "자동화 기능이 성공적으로 내보내졌습니다.",
+      "export_one": "자동화 1건이 성공적으로 내보내졌습니다.",
+      "export_other": "{{count}}개의 자동화가 성공적으로 내보내졌습니다.",
+      "import": "자동화 기능이 성공적으로 가져와졌습니다.",
+      "import_one": "자동화 1개를 성공적으로 가져왔습니다.",
+      "import_other": "{{count}}개의 자동화 항목이 성공적으로 가져와졌습니다.",
+      "reorder": "자동화 재정렬이 성공적으로 완료되었습니다."
+    }
+  },
+  "automation": {
+    "title": "오토메이션",
+    "remove": "제거하다",
+    "duplicate": "복제하다",
+    "enable": "할 수 있게 하다",
+    "disable": "장애를 입히다",
+    "disabled": "장애가 있는",
+    "edit": "편집하다",
+    "export": "내보내다",
+    "import": "수입",
+    "schedule": "일정",
+    "batch": "루프 설정",
+    "watch": "모니터 설정",
+    "url": "URL",
+    "name": "이름",
+    "initWait": "시작하기 전에 기다리세요",
+    "startTime": "예정된 시작 시간",
+    "noConfig": "자동화된 검색 결과가 없습니다. 검색 조건을 구체화해 주세요.",
+    "confirm": {
+      "title": "자동화 제거",
+      "message": "[{{name}}] 자동화를 정말로 제거하시겠습니까?"
+    },
+    "toast": {
+      "header": "오토메이션",
+      "body": "자동화가 성공적으로 저장되었습니다!",
+      "schedule": "자동화 일정이 성공적으로 저장되었습니다!",
+      "settings": "자동화 설정이 성공적으로 저장되었습니다!",
+      "add": "자동화 기능이 성공적으로 추가되었습니다.",
+      "duplicate": "자동화 기능이 성공적으로 복제되었습니다."
+    }
+  },
+  "automationSettings": {
+    "title": "자동화 설정",
+    "startType": "실행 모드",
+    "hotkey": "단축키",
+    "auto": "오토매틱",
+    "autoHint": "<b>자동 실행</b> — 페이지가 로드될 때마다 자동으로 실행됩니다. 사용자의 별도 조치는 필요하지 않습니다.",
+    "manual": "수동(단축키)",
+    "manualHint": "<b>수동 모드</b> — 사용자가 지정한 키보드 단축키를 눌렀을 때만 실행됩니다.",
+    "loadType": "페이지 로딩 시간",
+    "window": "최대 부하 후",
+    "windowHint": "페이지 <b>전체 로딩 완료 후</b> (권장) — 이미지와 스크립트를 포함한 페이지 전체 로딩이 완료된 후 자동화가 시작됩니다.",
+    "document": "페이지 로딩 중",
+    "documentHint": "<b>페이지 로딩 중</b> - 페이지 구조가 준비되는 즉시, 이미지와 스크립트 로딩이 완료되기 전에 자동화가 시작됩니다. 더 빠르지만 일부 페이지에서는 불안정할 수 있습니다.",
+    "triggerUrlChange": "페이지 탐색 시 실행",
+    "triggerUrlChangeHint": "<b>페이지 이동 시 실행</b> — 페이지 주소가 변경될 때 전체 새로 고침 없이 자동화를 다시 실행합니다. Gmail, Twitter 및 기타 최신 앱에 유용합니다.",
+    "urlMatch": "URL 일치 유형",
+    "regex": "패턴 일치",
+    "exact": "정확한 URL",
+    "startTime": "시작 시간 (자동화용)",
+    "googleSheetsId": "구글 시트 ID",
+    "bypass": {
+      "title": "브라우저 기본 단축키 동작 우회",
+      "alert": "알리다",
+      "confirm": "확인하다",
+      "prompt": "즉각적인"
+    }
+  },
+  "loop": {
+    "title": "고리",
+    "repeat": "반복하다",
+    "repeatHint": "<b>반복 기능을 사용하면</b> 지정된 간격으로 페이지를 새로 고침하지 않고 모든 단계를 다시 실행합니다.",
+    "repeatInterval": "루프 간 간격",
+    "refresh": "새로 고치다",
+    "refreshHint": "모든 단계가 완료되면 <b>새로 고침을 클릭하여</b> 페이지를 다시 로드합니다.",
+    "toast": {
+      "header": "루프 설정",
+      "body": "반복 설정이 성공적으로 저장되었습니다!"
+    }
+  },
+  "error": {
+    "required": "이 항목은 필수 입력 사항입니다.",
+    "number": "유효한 숫자를 입력하세요",
+    "interval": "유효한 숫자를 입력하세요",
+    "url": "계속하려면 웹사이트 URL을 입력하세요.",
+    "initWait": "유효한 숫자를 입력하세요",
+    "scheduleDate": "다음 형식으로 유효한 날짜를 입력해 주세요: 2025-12-01",
+    "scheduleTime": "다음 형식으로 유효한 시간을 입력해 주세요: 23:59:59.000",
+    "scheduleRepeat": "반복 횟수를 입력하세요.",
+    "startTime": "시작 시간을 12:12:12:000 형식으로 입력해 주세요.",
+    "json": "선택한 파일이 유효한 JSON 형식이 아닙니다. 확인 후 다시 시도해 주세요.",
+    "hotKey": "Ctrl, Alt 또는 Shift 키와 함께 문자를 입력하세요(예: Ctrl + A).",
+    "valueExtractor": "입력하신 패턴이 유효하지 않습니다. 확인 후 다시 시도해 주세요.",
+    "value": "계속하려면 값을 입력하세요.",
+    "condition": "계속하려면 조건을 선택하세요.",
+    "elementFinder": "페이지에서 해당 항목을 찾는 방법을 입력해 주세요.",
+    "spreadsheetId": "유효한 Google Sheets ID(44자, 예: 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)를 입력해 주세요."
+  },
+  "step": {
+    "title": "단계",
+    "plural": "단계",
+    "add": "단계 추가",
+    "addBefore": "위에 단계를 추가하세요",
+    "addAfter": "아래에 단계를 추가하세요",
+    "remove": "제거 단계",
+    "disable": "단계 비활성화",
+    "enable": "활성화 단계",
+    "initWait": "지연",
+    "name": "이름",
+    "elementFinder": "목표",
+    "value": "값",
+    "repeat": "반복하다",
+    "repeatInterval": "간격",
+    "confirm": {
+      "remove": {
+        "title": "제거 단계",
+        "message": "[{{name}}] 단계를 확실히 삭제하셨나요?"
+      }
+    },
+    "toast": {
+      "header": "단계",
+      "body": "단계가 성공적으로 저장되었습니다!",
+      "remove": "단계가 성공적으로 제거되었습니다!",
+      "reorder": "단계 순서가 성공적으로 재정렬되었습니다!"
+    }
+  },
+  "userscript": {
+    "add": "사용자 스크립트 추가",
+    "confirm": {
+      "remove": {
+        "title": "사용자 스크립트 제거",
+        "message": "[{{name}}] 사용자 스크립트를 정말로 삭제하시겠습니까?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "예시"
+    },
+    "startTime": {
+      "content": "&lt;1&gt;일정 URL을 시도해 보세요</1> 저희의 새로운 브라우저 확장 프로그램입니다.<br /> 웹페이지/URL을 특정 날짜와 시간에 예약하여 표시하는 데 사용됩니다."
+    },
+    "hotkey": {
+      "title": "단축키",
+      "content": "키보드 단축키를 눌러 입력란을 자동으로 채우세요.",
+      "hint": "<kbd>Ctrl</kbd> , <kbd>Alt</kbd> 또는 <kbd>Shift 키</kbd> 없이 한 글자만 입력하면 유효하지 않습니다."
+    }
+  },
+  "common": {
+    "appName": "자동 클릭 - 자동 채우기",
+    "file": "파일",
+    "error": "오류",
+    "save": "구하다",
+    "clear": "분명한",
+    "close": "닫다",
+    "download": "다운로드",
+    "disabled": "장애가 있는",
+    "sec": "비서",
+    "min": "최소",
+    "no": "아니요",
+    "yes": "예",
+    "local": "현지의",
+    "dev": "개발",
+    "stable": "안정적인",
+    "examples": "예시",
+    "add": "추가하다"
+  },
+  "languages": {
+    "title": "언어",
+    "en": "영어",
+    "fr": "프랑스 국민",
+    "ko": "한국인",
+    "ca": "캐나다",
+    "hi": "힌디 어",
+    "zh_CN": "중국어(간체)",
+    "zh_TW": "중국어(번체)",
+    "sv": "스웨덴어",
+    "pt": "포르투갈 인",
+    "ja": "일본어",
+    "nl": "네덜란드 사람",
+    "de": "독일 사람",
+    "es": "스페인 사람",
+    "vi": "베트남 사람",
+    "fi": "핀란드어",
+    "ar": "아라비아 말",
+    "it": "이탈리아 사람",
+    "ru": "러시아인",
+    "id": "인도네시아 인"
+  },
+  "monitor": {
+    "title": "감시 장치",
+    "enabled": "모니터링 활성화",
+    "enabledHint": "페이지에 일치하는 새로운 요소가 추가될 때 작업을 자동으로 다시 실행합니다(예: 무한 스크롤, 비동기 콘텐츠).",
+    "rootSelector": "모니터 루트",
+    "rootSelectorPlaceholder": "몸",
+    "rootSelectorHint": "관찰할 컨테이너에 대한 CSS 선택자",
+    "watchAttributes": "모니터 속성",
+    "attributesPlaceholder": "스타일, 품격, 숨겨진",
+    "attributesHint": "변화를 관찰할 속성 목록을 쉼표로 구분하여 입력하십시오.",
+    "debounce": "디바운스",
+    "debounceHint": "새로운 요소를 처리하기 전 지연 시간(1~5초)",
+    "timeout": "타임아웃",
+    "timeoutHint": "N분 후 자동 정지 (1-180분)",
+    "urlChange": "URL 변경 시 중지",
+    "urlChangeHint": "페이지 URL이 변경되면 자동으로 감시를 중지합니다.",
+    "toast": {
+      "header": "감시 장치",
+      "body": "모니터가 성공적으로 저장되었습니다!"
+    }
+  },
+  "home": {
+    "title": "Auto Clicker - 자동 채우기에 오신 것을 환영합니다.",
+    "subtitle": "목표와 액션을 정의하여 모든 웹사이트에서 클릭 및 양식 작성을 자동화하세요.",
+    "quickStart": {
+      "title": "빠른 시작 가이드",
+      "step1": {
+        "title": "1. 확장 프로그램을 설치하세요",
+        "desc": "크롬 웹 스토어 또는 엣지 부가 기능에서 확장 프로그램을 다운로드하여 설치하세요.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. 대상 페이지 구성",
+        "desc": "웹 페이지를 열고 아무 요소나 마우스 오른쪽 버튼으로 클릭한 다음 자동 클릭 - 자동 채우기 → 이 필드에 대한 구성을 선택하세요.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. 저장 및 실행",
+        "desc": "설정을 저장하고 대상 페이지를 새로고침하세요. 자동화가 자동으로 실행됩니다.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "유용한 팁",
+      "tip1": {
+        "title": "테스트 페이지에서 시도해 보세요",
+        "desc": "test.getautoclicker.com을 열고, 사용자 이름 필드를 채우는 동작과 버튼을 클릭하는 동작, 이렇게 두 가지 동작을 추가한 다음 저장하고 실행하세요.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "목표 항목을 정확하게",
+        "desc": "자동화를 더욱 안정적으로 실행하려면 //input[@name=\"username\"]과 같이 페이지의 특정 항목을 대상으로 하는 요소 경로를 사용하세요.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "페이지 로딩 속도가 느린 문제를 해결합니다.",
+        "desc": "페이지 로딩 속도가 느린 경우 자동화 단계에 '시작 전 대기' 설정을 추가하세요.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "전역 설정 및 단축키",
+        "desc": "전역 설정에서 시작 모드를 구성하고, 키보드 단축키를 정의하고, 상태 표시줄 위치를 조정할 수 있습니다.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "마우스 오른쪽 버튼을 클릭하여 자동 캡처하세요.",
+        "desc": "페이지의 입력란이나 버튼을 마우스 오른쪽 버튼으로 클릭하고 '이 필드에 대한 구성'을 선택하면 URL과 요소 찾기가 자동으로 채워집니다.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "비디오 가이드",
+      "video1": {
+        "title": "Auto Clicker AutoFill 시작하기"
+      },
+      "video2": {
+        "title": "양식을 자동으로 채웁니다"
+      },
+      "video3": {
+        "title": "버튼 자동 클릭"
+      },
+      "video4": {
+        "title": "고급 구성 팁"
+      }
+    }
+  }
+}

@@ -18,14 +18,18 @@ const arrayMove = (arr: Array<IAction | undefined>, oldIndex: number, newIndex: 
   return arr; // for testing
 };
 
-type AddActionPayload = undefined | { actionId: TRandomUUID; position: 1 | 0 };
+export interface AddActionPayload {
+  actionId?: TRandomUUID;
+  position?: 1 | 0;
+  configId: TRandomUUID;
+}
 
 export const actionActions = {
-  reorderActions: (state: ConfigStore, action: PayloadAction<{ oldIndex: number; newIndex: number }>) => {
-    const { configs, selectedConfigId } = state;
-    const { oldIndex, newIndex } = action.payload;
+  reorderActions: (state: ConfigStore, action: PayloadAction<{ oldIndex: number; newIndex: number; configId: TRandomUUID }>) => {
+    const { configs } = state;
+    const { oldIndex, newIndex, configId } = action.payload;
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
@@ -35,15 +39,16 @@ export const actionActions = {
     selectedConfig.actions = [...arrayMove(selectedConfig.actions, oldIndex, newIndex)];
   },
   addAction: (state: ConfigStore, action: PayloadAction<AddActionPayload>) => {
-    const { configs, selectedConfigId } = state;
+    const { configs } = state;
+    const { configId } = action.payload;
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
       return;
     }
-    if (action.payload?.actionId) {
+    if (action.payload?.actionId && action.payload?.position) {
       const { actionId, position } = action.payload;
       const index = selectedConfig.actions.findIndex((action) => action.id === actionId);
       if (index !== -1) {
@@ -55,8 +60,9 @@ export const actionActions = {
     selectedConfig.updated = true;
   },
   addUserscript: (state: ConfigStore, action: PayloadAction<AddActionPayload>) => {
-    const { configs, selectedConfigId } = state;
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+    const { configs } = state;
+    const { configId } = action.payload;
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
@@ -66,18 +72,18 @@ export const actionActions = {
     selectedConfig.updated = true;
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  updateAction: (state: ConfigStore, action: PayloadAction<{ selectedActionId: TRandomUUID; name: string; value: any }>) => {
-    const { configs, selectedConfigId } = state;
-    const { name, value, selectedActionId } = action.payload;
+  updateAction: (state: ConfigStore, action: PayloadAction<{ actionId: TRandomUUID; name: string; value: any; configId: TRandomUUID }>) => {
+    const { configs } = state;
+    const { name, value, actionId, configId } = action.payload;
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
       return;
     }
 
-    const selectedAction = selectedConfig.actions.find((action) => action.id === selectedActionId);
+    const selectedAction = selectedConfig.actions.find((action) => action.id === actionId);
     if (!selectedAction) {
       state.error = 'Invalid Action';
 
@@ -94,18 +100,18 @@ export const actionActions = {
     }
     selectedConfig.updated = true;
   },
-  removeAction: (state: ConfigStore, action: PayloadAction<TRandomUUID>) => {
-    const { configs, selectedConfigId } = state;
-    const selectedActionId = action.payload;
+  removeAction: (state: ConfigStore, action: PayloadAction<{ actionId: TRandomUUID; configId: TRandomUUID }>) => {
+    const { configs } = state;
+    const { actionId, configId } = action.payload;
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
       return;
     }
 
-    const selectedActionIndex = selectedConfig.actions.findIndex((action) => action.id === selectedActionId);
+    const selectedActionIndex = selectedConfig.actions.findIndex((action) => action.id === actionId);
     if (selectedActionIndex === -1) {
       state.error = 'Invalid Action';
 

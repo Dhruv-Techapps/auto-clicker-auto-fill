@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["checki"],
+  "cSpell.words": ["automations", "checki"],
   "eslint.validate": ["json"],
   "[html]": {
     "editor.formatOnSave": false

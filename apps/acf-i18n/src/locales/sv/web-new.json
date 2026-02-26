@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "Autoklickare - Autofyll",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Ansluter..."
+  },
+  "links": {
+    "docs": "Dokument",
+    "blog": "Blogg",
+    "configuration": "Konfiguration",
+    "issues": "Problem",
+    "discussion": "Diskussion",
+    "test": "Övningsformulär",
+    "contact": "Kontakta",
+    "chat": "Chatt",
+    "connect": "Ansluta",
+    "privacy": "Integritet och policy",
+    "googleGroup": "Google-grupp"
+  },
+  "about": "Om",
+  "social": "Social",
+  "theme": {
+    "title": "Tema",
+    "switchLight": "Växla till det ljusa temat",
+    "switchDark": "Växla till det mörka temat",
+    "light": "Ljus",
+    "dark": "Mörk",
+    "auto": "Bil"
+  },
+  "loading": "Belastning...",
+  "learnMore": "Läs mer",
+  "login": "Inloggning",
+  "logout": "Utloggning",
+  "connect": "Ansluta",
+  "disconnect": "Koppla från",
+  "resources": "Resurser",
+  "settings": {
+    "title": "Globala inställningar",
+    "additional": "Ytterligare inställningar"
+  },
+  "notification": {
+    "title": "Visa avisering",
+    "error": "Fel uppstod",
+    "step": "Vid stegslutförande",
+    "loop": "Vid loop-slutförande",
+    "automation": "Vid slutförande av automatiseringen",
+    "sound": "Aviseringsljud"
+  },
+  "discord": {
+    "title": "Avisering på Discord",
+    "loginRequired": "Vänligen <1>Logga in</1> på ditt konto innan du ansluter till Discord."
+  },
+  "checkIFrames": {
+    "title": "Sök inuti inbäddade sidor",
+    "hint": "Leta även efter objekt i inbäddade avsnitt på sidan"
+  },
+  "reloadOnError": {
+    "title": "Uppdatera sidan vid fel",
+    "hint": "Ladda om sidan automatiskt om något går fel",
+    "contextInvalidated": "Tilläggskontexten ogiltigförklarad."
+  },
+  "statusBar": {
+    "title": "Statusfält",
+    "hint": "Visa statusfältet längst ner på sidan",
+    "hide": "Dölja",
+    "topLeft": "Övre vänster",
+    "topRight": "Övre högra",
+    "bottomLeft": "Nederst till vänster",
+    "bottomRight": "Nederst till höger",
+    "positions": {
+      "hide": "Dölja",
+      "top-left": "Övre vänster",
+      "top-right": "Övre högra",
+      "bottom-left": "Nederst till vänster",
+      "bottom-right": "Nederst till höger"
+    }
+  },
+  "retry": {
+    "title": "Återförsök",
+    "interval": "Vänta mellan försök",
+    "stop": "Stoppa automatiseringen",
+    "skip": "Hoppa över detta steg",
+    "refresh": "Uppdatera och försök igen",
+    "hint": "Vad ska hända om varan inte hittas på sidan?"
+  },
+  "backup": {
+    "title": "Säkerhetskopiering",
+    "lastBackup": "Senaste säkerhetskopia:",
+    "backup": "Säkerhetskopiering till molnet",
+    "restore": "Återställ från molnet",
+    "now": "Säkerhetskopiera nu",
+    "autoBackup": "Automatisk säkerhetskopiering",
+    "auto-backup": "Automatisk säkerhetskopiering",
+    "daily": "Dagligen",
+    "weekly": "Varje vecka",
+    "monthly": "Månatlig",
+    "off": "Av",
+    "loginRequired": "Vänligen <1>Logga in</1> på ditt konto innan du ansluter till Google Drive.",
+    "checkingAccess": "Kontrollerar åtkomst till Google Drive...",
+    "connect": "Anslut med Google Drive",
+    "connected": "Google Drive-säkerhetskopiering",
+    "loadingFiles": "Laddar dina filer...",
+    "restoreAction": "Återställa",
+    "delete": "Radera",
+    "noBackup": "Ingen säkerhetskopia hittades",
+    "confirm": {
+      "restore": {
+        "title": "Återställ automatiseringar från molnet",
+        "message": "Är du säker på att du vill återställa automatiseringar från molnet? Detta kommer att ersätta alla dina automatiseringar och kan inte ångras."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Omordna automatiseringar",
+    "hint": "Spara alla automatiseringar innan du gör en ny beställning"
+  },
+  "extensionNotFound": {
+    "title": "Tillägget är inte installerat",
+    "subTitle": "Den här sidan fungerar med tillägget <b>Auto Clicker - AutoFill</b> för Chrome och Edge.",
+    "hint": "Installera tillägget först för att komma igång."
+  },
+  "stepSettings": {
+    "title": "Steginställningar",
+    "info": "Dessa inställningar gäller endast för det här steget och dess förkontroll, och prioriteras framför dina globala inställningar.",
+    "iframeFirst": "Sök först efter inbäddade sidor",
+    "iframeFirstHint": "Titta in i allt inbäddat innehåll på sidan innan du söker på huvudsidan",
+    "retry": {
+      "title": "Om föremålet inte hittas",
+      "hint": "Välj vad som ska hända om objektet inte kan hittas, även efter ett nytt försök.",
+      "retry": "Återförsök",
+      "interval": "Vänta mellan försök",
+      "stop": "Stoppa automatiseringen",
+      "skip": "Hoppa över detta steg",
+      "goto": "Gå till steg",
+      "refresh": "Uppdatera och försök igen"
+    },
+    "toast": {
+      "header": "Steginställningar",
+      "body": "Steginställningarna har sparats!"
+    }
+  },
+  "stateGuard": {
+    "action": "Föregående steg",
+    "status": "Resultat",
+    "title": "Statsgarde",
+    "add": "Lägg till villkor",
+    "info": "Ställ in en regel för att styra om det här steget ska köras, baserat på vad som hände i föregående steg.",
+    "stop": "Stoppa automatiseringen",
+    "skip": "Hoppa över detta steg",
+    "refresh": "Uppdatera och försök igen",
+    "goto": "Gå till steg",
+    "proceed": "Kör det här steget ändå",
+    "hint": "Vad ska hända om regeln inte följs?",
+    "toast": {
+      "header": "Statsgarde",
+      "body": "Statsvakten räddades!"
+    }
+  },
+  "pageGuard": {
+    "title": "Sidvakt",
+    "info": "Kör bara det här steget om ett värde på sidan uppfyller ditt villkor.",
+    "elementFinder": "Hitta objekt på sidan",
+    "condition": "Jämföra",
+    "value": "Jämför med",
+    "valueExtractor": "Extrahera nummer eller text",
+    "valueExtractorHint": "Använd ett mönster för att hämta en specifik del av värdet. Till exempel, extrahera 24,00 från $24,00, eller 10 från 10 automatiseringar.",
+    "recheck": {
+      "title": "Om villkoret inte är uppfyllt",
+      "hint": "Välj vad som ska hända om filtervillkoret inte uppfylls.",
+      "recheck": "Kontrollera igen",
+      "interval": "Vänta innan du kontrollerar igen",
+      "stop": "Stoppa automatiseringen",
+      "skip": "Hoppa över detta steg",
+      "refresh": "Uppdatera och försök igen",
+      "goto": "Gå till steg"
+    },
+    "toast": {
+      "header": "Sidvakt",
+      "body": "Sidskyddet har sparats!"
+    }
+  },
+  "schedule": {
+    "title": "Schemaläggningsautomation",
+    "info": "Kör den här automatiseringen på ett specifikt datum och tid",
+    "date": "Datum",
+    "time": "Tid",
+    "repeat": "Upprepa i minuter"
+  },
+  "upgradePlan": {
+    "title": "Uppgraderingsplan",
+    "subtitle": "Lås upp avancerade funktioner och få ut det mesta av Auto Clicker AutoFill.",
+    "currentPlan": "Din nuvarande plan",
+    "free": {
+      "name": "🆓 GRATIS",
+      "tagline": "Kraftfull automatisering för alla – inget konto krävs.",
+      "perMonth": "evigt",
+      "cta": "Nuvarande plan",
+      "includes": "Vad ingår:",
+      "features": {
+        "unlimitedAutomations": "Obegränsade automatiseringar",
+        "unlimitedSteps": "Obegränsade steg per automatisering",
+        "loopSteps": "Upprepa steg i en loop",
+        "recording": "Visuell stegregistrering",
+        "allValues": "Alla värdetyper — inget API krävs"
+      }
+    },
+    "plus": {
+      "name": "🚀 PLUS",
+      "tagline": "Allt det nödvändiga, plus djupare kontroll över förkontroll och inställningar i stegen.",
+      "perMonth": "per månad",
+      "cta": "Uppgradera till Plus",
+      "includes": "Allt gratis, plus:",
+      "features": {
+        "addonCondition": "Villkorlig tilläggslogik",
+        "actionCondition": "Regler för villkor per åtgärd",
+        "actionSettings": "Inställningar och åsidosättningar på åtgärdsnivå",
+        "noAds": "Reklamfri upplevelse"
+      }
+    },
+    "pro": {
+      "name": "🔹 PROFFS",
+      "tagline": "Automatiseringens fulla kraft – med integrationer, AI och prioriterad support.",
+      "perMonth": "per månad",
+      "cta": "Uppgradera till Pro",
+      "includes": "Allt i Plus, plus:",
+      "features": {
+        "sheets": "Google Sheets-integration",
+        "discord": "Discord-aviseringar",
+        "captcha": "Captcha-lösare (kommer snart)",
+        "vipSupport": "Prioriterad support via Discord",
+        "earlyAccess": "Tidig åtkomst till nya funktioner",
+        "prideAndJoy": "Supportermärke och erkännande från samhället"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google Kalkylark",
+    "hint": "Anslut ditt Google Sheets-konto för att enkelt exportera dina automatiseringar och loggar och hålla koll på din automatiseringshistorik på ett ställe.",
+    "useStable": {
+      "title": "Använd stabila versioner för Google Sheets-funktioner.",
+      "message": "För optimal prestanda och tillförlitlighet i Google Sheets rekommenderas det att använda <1>stabila</1> versioner av dess funktioner. Dessa versioner genomgår noggranna tester för att säkerställa sömlös funktionalitet och ge dig en pålitlig plattform för dina uppgifter. Genom att prioritera stabilitet kan du förbättra din produktivitet och minimera risken för att stöta på oväntade problem. Om du behöver hjälp eller vägledning om hur du använder Google Sheets effektivt är du välkommen att kontakta oss för support!"
+    },
+    "loginRequired": "Vänligen <1>Logga in</1> på ditt konto innan du ansluter till Google Sheets.",
+    "connect": "Anslut med Google Kalkylark",
+    "connected": "Ansluten till Google Sheets"
+  },
+  "sidebar": {
+    "search": "Söka",
+    "upgradePlan": "Uppgraderingsplan",
+    "login": "Inloggning",
+    "logout": "Utloggning",
+    "language": "Språk",
+    "learnMore": "Läs mer"
+  },
+  "automations": {
+    "title": "Mina automatiseringar",
+    "count": "Automatiseringar ({{count}})",
+    "search": "Sök efter din automatisering...",
+    "add": "Ny",
+    "reorder": "Omordna",
+    "reorderByName": "Ordna om efter namn",
+    "selected": "vald",
+    "selected_one": "1 automatisering vald",
+    "selected_other": "{{count}} automatiseringar valda",
+    "selectAll": "Markera alla",
+    "exportSelected": "Exportera valda",
+    "deleteSelected": "Ta bort markerade",
+    "cancelSelection": "Avbryt val",
+    "automationsWithinExtension": "automatiseringar inom tillägg",
+    "selectAutomations": "Välj automatiseringar att exportera eller ta bort",
+    "select": "Välja",
+    "import": "Importera",
+    "toast": {
+      "header": "Automatiseringar",
+      "remove": "Automatiseringar har tagits bort",
+      "remove_one": "Automatiseringen har tagits bort",
+      "remove_other": "{{count}} Automatiseringar har tagits bort",
+      "export": "Automatiseringarna har exporterats",
+      "export_one": "1 automatisering har exporterats",
+      "export_other": "{{count}} automatiseringar har exporterats",
+      "import": "Automatiseringarna har importerats",
+      "import_one": "1 automatisering har importerats",
+      "import_other": "{{count}} automatiseringar har importerats",
+      "reorder": "Automatiseringarna har omordnats"
+    }
+  },
+  "automation": {
+    "title": "Automatisering",
+    "remove": "Ta bort",
+    "duplicate": "Duplicera",
+    "enable": "Aktivera",
+    "disable": "Inaktivera",
+    "disabled": "Funktionshindrad",
+    "edit": "Redigera",
+    "export": "Exportera",
+    "import": "Importera",
+    "schedule": "Schema",
+    "batch": "Loopinställningar",
+    "watch": "Monitorinställningar",
+    "url": "URL",
+    "name": "Namn",
+    "initWait": "Vänta innan start",
+    "startTime": "Schemalagd starttid",
+    "noConfig": "Ingen automatisering hittades, vänligen förfina din sökning.",
+    "confirm": {
+      "title": "Ta bort automatisering",
+      "message": "Är du säker på att du vill ta bort automatiseringen för [{{name}}]?"
+    },
+    "toast": {
+      "header": "Automatisering",
+      "body": "Automatiseringen har sparats!",
+      "schedule": "Automatiseringsschemat har sparats!",
+      "settings": "Automatiseringsinställningarna har sparats!",
+      "add": "Automatisering har lagts till",
+      "duplicate": "Automatiseringen har duplicerats"
+    }
+  },
+  "automationSettings": {
+    "title": "Automatiseringsinställningar",
+    "startType": "Körläge",
+    "hotkey": "Snabbtangent",
+    "auto": "Automatisk",
+    "autoHint": "<b>Automatisk</b> — körs av sig själv varje gång sidan laddas. Ingen åtgärd krävs från din sida.",
+    "manual": "Manuell (snabbtangent)",
+    "manualHint": "<b>Manuellt</b> — körs bara när du trycker på ditt definierade tangentbordsgenväg.",
+    "loadType": "Sidladdningstid",
+    "window": "Efter full belastning",
+    "windowHint": "<b>Efter full laddning</b> (rekommenderas) – automatiseringen startar efter att hela sidan inklusive bilder och skript har laddats klart.",
+    "document": "När sidan laddas",
+    "documentHint": "<b>När sidan laddas</b> – automatiseringen startar så snart sidstrukturen är klar, innan bilder och skript har laddats. Snabbare men kan vara instabilt på vissa sidor.",
+    "triggerUrlChange": "Kör på sidnavigering",
+    "triggerUrlChangeHint": "<b>Kör vid sidnavigering</b> – kör automatiseringen igen när sidadressen ändras utan att den laddas om helt. Användbart för Gmail, Twitter och andra moderna appar.",
+    "urlMatch": "URL-matchningstyp",
+    "regex": "Mönstermatchning",
+    "exact": "Exakt URL",
+    "startTime": "Starttid (för automatiseringar)",
+    "googleSheetsId": "Google Sheets-ID",
+    "bypass": {
+      "title": "Kringgå webbläsarens standardbeteende för snabbtangenter",
+      "alert": "Varna",
+      "confirm": "Bekräfta",
+      "prompt": "Prompt"
+    }
+  },
+  "loop": {
+    "title": "Slinga",
+    "repeat": "Upprepa",
+    "repeatHint": "<b>Upprepa omvandlingen</b> gör om alla steg utan att sidan laddas om med det angivna intervallet.",
+    "repeatInterval": "Intervall mellan loopar",
+    "refresh": "Uppdatera",
+    "refreshHint": "<b>Uppdatera</b> laddar sidan om när alla steg är slutförda.",
+    "toast": {
+      "header": "Loopinställningar",
+      "body": "Loopinställningarna har sparats!"
+    }
+  },
+  "error": {
+    "required": "Detta fält är obligatoriskt",
+    "number": "Ange ett giltigt nummer",
+    "interval": "Ange ett giltigt nummer",
+    "url": "Ange en webbplatsadress för att fortsätta",
+    "initWait": "Ange ett giltigt nummer",
+    "scheduleDate": "Ange ett giltigt datum i detta format: 2025-12-01",
+    "scheduleTime": "Ange en giltig tid i detta format: 23:59:59.000",
+    "scheduleRepeat": "Ange ett giltigt antal gånger som ska upprepas",
+    "startTime": "Ange en giltig starttid i detta format: 12:12:12:000",
+    "json": "Den valda filen är inte en giltig JSON — kontrollera och försök igen",
+    "hotKey": "Använd en bokstav kombinerad med Ctrl, Alt eller Shift (t.ex. Ctrl + A)",
+    "valueExtractor": "Mönstret du angav är inte giltigt – kontrollera och försök igen",
+    "value": "Ange ett värde för att fortsätta",
+    "condition": "Välj ett villkor för att fortsätta",
+    "elementFinder": "Ange hur du hittar objektet på sidan",
+    "spreadsheetId": "Ange ett giltigt Google Sheets-ID (44 tecken, t.ex. 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Steg",
+    "plural": "Steg",
+    "add": "Lägg till steg",
+    "addBefore": "Lägg till steg ovan",
+    "addAfter": "Lägg till steg nedan",
+    "remove": "Ta bort steg",
+    "disable": "Inaktivera steg",
+    "enable": "Aktivera steg",
+    "initWait": "Dröjsmål",
+    "name": "Namn",
+    "elementFinder": "Mål",
+    "value": "Värde",
+    "repeat": "Upprepa",
+    "repeatInterval": "Intervall",
+    "confirm": {
+      "remove": {
+        "title": "Ta bort steg",
+        "message": "Är du säker på att du vill ta bort steget [{{name}}]?"
+      }
+    },
+    "toast": {
+      "header": "Steg",
+      "body": "Steget har sparats!",
+      "remove": "Steget har tagits bort!",
+      "reorder": "Stegen har omordnats!"
+    }
+  },
+  "userscript": {
+    "add": "Lägg till användarskript",
+    "confirm": {
+      "remove": {
+        "title": "Ta bort användarskript",
+        "message": "Är du säker på att du vill ta bort användarskriptet [{{name}}]?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Exempel"
+    },
+    "startTime": {
+      "content": "Testa &lt;1&gt;Schemalägg URL</1> vårt nya webbläsartillägg.<br /> Det används för att schemalägga webbsidor/URL:er vid en viss dag och tidpunkt"
+    },
+    "hotkey": {
+      "title": "Snabbtangent",
+      "content": "Tryck på snabbtangenten på tangentbordet för att skriva automatiskt i fältet",
+      "hint": "En enskild bokstav utan <kbd>Ctrl</kbd> , <kbd>Alt</kbd> eller <kbd>Shift</kbd> är inte giltig"
+    }
+  },
+  "common": {
+    "appName": "Autoklickare - Autofyll",
+    "file": "Fil",
+    "error": "Fel",
+    "save": "Spara",
+    "clear": "Rensa",
+    "close": "Nära",
+    "download": "Ladda ner",
+    "disabled": "Funktionshindrad",
+    "sec": "sek",
+    "min": "min",
+    "no": "Inga",
+    "yes": "Ja",
+    "local": "LOKAL",
+    "dev": "Utvecklare",
+    "stable": "STABIL",
+    "examples": "Exempel",
+    "add": "Tillägga"
+  },
+  "languages": {
+    "title": "Språk",
+    "en": "Engelska",
+    "fr": "franska",
+    "ko": "Koreanska",
+    "ca": "Kanada",
+    "hi": "Hindi",
+    "zh_CN": "Kinesiska (förenklad)",
+    "zh_TW": "Kinesiska (traditionell)",
+    "sv": "Svenska",
+    "pt": "Portugisiska",
+    "ja": "japanska",
+    "nl": "holländska",
+    "de": "Tyska",
+    "es": "Spanska",
+    "vi": "Vietnamesiska",
+    "fi": "finska",
+    "ar": "Arabiska",
+    "it": "Italienska",
+    "ru": "Ryska",
+    "id": "Indonesiska"
+  },
+  "monitor": {
+    "title": "Övervaka",
+    "enabled": "Aktivera övervakning",
+    "enabledHint": "Kör automatiskt om åtgärder när nya matchande element läggs till på sidan (t.ex. för oändlig rullning, asynkront innehåll)",
+    "rootSelector": "Övervakningsrot",
+    "rootSelectorPlaceholder": "kropp",
+    "rootSelectorHint": "CSS-väljare för behållare att observera",
+    "watchAttributes": "Övervakningsattribut",
+    "attributesPlaceholder": "stil, klass, dold",
+    "attributesHint": "Kommaavgränsad lista över attribut att observera för ändringar",
+    "debounce": "Avbounce",
+    "debounceHint": "Fördröjning innan nya element bearbetas (1–5 sekunder)",
+    "timeout": "Timeout",
+    "timeoutHint": "Autostopp efter N minuter (1–180)",
+    "urlChange": "Stoppa vid URL-ändring",
+    "urlChangeHint": "Stoppa automatiskt visning när sidans URL ändras",
+    "toast": {
+      "header": "Övervaka",
+      "body": "Monitorn har sparats!"
+    }
+  },
+  "home": {
+    "title": "Välkommen till Auto Clicker - Autofyll",
+    "subtitle": "Automatisera klick och formulärifyllningar på vilken webbplats som helst genom att definiera mål och åtgärder.",
+    "quickStart": {
+      "title": "Snabbstartsguide",
+      "step1": {
+        "title": "1. Installera tillägget",
+        "desc": "Ladda ner och installera tillägget från Chrome Web Store eller Edge-tillägg.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Konfigurera en målsida",
+        "desc": "Öppna en webbsida, högerklicka på valfritt element och välj Autoklickare - Autofyll → Konfigurera för det här fältet.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Spara och kör",
+        "desc": "Spara din konfiguration och ladda om målsidan. Automatiseringen körs automatiskt.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Användbara tips",
+      "tip1": {
+        "title": "Testa på testsidan",
+        "desc": "Öppna test.getautoclicker.com, lägg till två åtgärder – en för att fylla i ett användarnamnsfält och en för att klicka på en knapp – spara sedan och kör.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Rikta in objekt exakt",
+        "desc": "Använd elementsökvägar för att rikta in dig på specifika objekt på en sida, som //input[@name=\"username\"], för mer tillförlitlig automatisering.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Hantera långsamma sidladdningar",
+        "desc": "Ställ in en Vänta före start på din automatisering om sidan laddas långsamt innan dina steg körs.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Globala inställningar och snabbtangenter",
+        "desc": "Konfigurera startläge, definiera en kortkommando och justera statusfältets position i Globala inställningar.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Högerklicka för att automatiskt fånga",
+        "desc": "Högerklicka på valfri inmatningsknapp eller knapp på en sida och välj Konfigurera för det här fältet för att automatiskt fylla i URL:en och elementsökaren.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Videoguider",
+      "video1": {
+        "title": "Komma igång med Auto Clicker Autofyll"
+      },
+      "video2": {
+        "title": "Fyll i formulär automatiskt"
+      },
+      "video3": {
+        "title": "Klicka på knappar automatiskt"
+      },
+      "video4": {
+        "title": "Avancerade konfigurationstips"
+      }
+    }
+  }
+}

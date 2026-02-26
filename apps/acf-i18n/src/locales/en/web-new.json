@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "Auto Clicker - AutoFill",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Connecting..."
+  },
+  "links": {
+    "docs": "Docs",
+    "blog": "Blog",
+    "configuration": "Configuration",
+    "issues": "Issues",
+    "discussion": "Discussion",
+    "test": "Practice Form",
+    "contact": "Contact",
+    "chat": "Chat",
+    "connect": "Connect",
+    "privacy": "Privacy & Policy",
+    "googleGroup": "Google Group"
+  },
+  "about": "About",
+  "social": "Social",
+  "theme": {
+    "title": "Theme",
+    "switchLight": "Switch to the light theme",
+    "switchDark": "Switch to the dark theme",
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "Auto"
+  },
+  "loading": "Loading...",
+  "learnMore": "Learn More",
+  "login": "Login",
+  "logout": "Logout",
+  "connect": "Connect",
+  "disconnect": "Disconnect",
+  "resources": "Resources",
+  "settings": {
+    "title": "Global Settings",
+    "additional": "Additional Settings"
+  },
+  "notification": {
+    "title": "Show Notification",
+    "error": "On Error occurred",
+    "step": "On Step completion",
+    "loop": "On Loop completion",
+    "automation": "On Automation completion",
+    "sound": "Notification Sound"
+  },
+  "discord": {
+    "title": "Notification on Discord",
+    "loginRequired": "Please <1>Login</1> to your account before connecting with Discord."
+  },
+  "checkIFrames": {
+    "title": "Search Inside Embedded Pages",
+    "hint": "Also look for items inside embedded sections of the page"
+  },
+  "reloadOnError": {
+    "title": "Refresh Page on Error",
+    "hint": "Automatically reload the page if something goes wrong",
+    "contextInvalidated": "Extension context invalidated."
+  },
+  "statusBar": {
+    "title": "Status Bar",
+    "hint": "Show status bar at bottom of the page",
+    "hide": "Hide",
+    "topLeft": "Top Left",
+    "topRight": "Top Right",
+    "bottomLeft": "Bottom Left",
+    "bottomRight": "Bottom Right",
+    "positions": {
+      "hide": "Hide",
+      "top-left": "Top Left",
+      "top-right": "Top Right",
+      "bottom-left": "Bottom Left",
+      "bottom-right": "Bottom Right"
+    }
+  },
+  "retry": {
+    "title": "Retry Attempts",
+    "interval": "Wait Between Retries",
+    "stop": "Stop Automation",
+    "skip": "Skip This Step",
+    "refresh": "Refresh & Retry",
+    "hint": "What should happen if the item is not found on the page?"
+  },
+  "backup": {
+    "title": "Backup",
+    "lastBackup": "Last Backup:",
+    "backup": "Backup to Cloud",
+    "restore": "Restore from Cloud",
+    "now": "Backup Now",
+    "autoBackup": "Auto Backup",
+    "auto-backup": "Auto Backup",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "off": "Off",
+    "loginRequired": "Please <1>Login</1> to your account before connecting with Google Drive.",
+    "checkingAccess": "Checking Google Drive access...",
+    "connect": "Connect with Google Drive",
+    "connected": "Google Drive Backup",
+    "loadingFiles": "Loading your files...",
+    "restoreAction": "Restore",
+    "delete": "Delete",
+    "noBackup": "No Backup found",
+    "confirm": {
+      "restore": {
+        "title": "Restore Automations from cloud",
+        "message": "Are you sure you want to restore automations from cloud? This will replace all your automations and cannot be undone."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Reorder Automations",
+    "hint": "Please save all automations before reordering"
+  },
+  "extensionNotFound": {
+    "title": "Extension Not Installed",
+    "subTitle": "This page works with the <b>Auto Clicker - AutoFill</b> extension for Chrome & Edge.",
+    "hint": "Please install the extension first to get started."
+  },
+  "stepSettings": {
+    "title": "Step Settings",
+    "info": "These settings apply only to this step and its pre-check, and will take priority over your Global Settings.",
+    "iframeFirst": "Search Embedded Pages First",
+    "iframeFirstHint": "Look inside any embedded content on the page before searching the main page",
+    "retry": {
+      "title": "If Item Not Found",
+      "hint": "Choose what should happen if the item cannot be found, even after retrying.",
+      "retry": "Retry Attempts",
+      "interval": "Wait Between Retries",
+      "stop": "Stop Automation",
+      "skip": "Skip This Step",
+      "goto": "Go to Step",
+      "refresh": "Refresh & Retry"
+    },
+    "toast": {
+      "header": "Step Settings",
+      "body": "Step settings saved successfully!"
+    }
+  },
+  "stateGuard": {
+    "action": "Previous Step",
+    "status": "Result",
+    "title": "State Guard",
+    "add": "Add Condition",
+    "info": "Set a rule to control whether this step should run, based on what happened in the previous steps.",
+    "stop": "Stop Automation",
+    "skip": "Skip This Step",
+    "refresh": "Refresh & Retry",
+    "goto": "Go to Step",
+    "proceed": "Run This Step Anyway",
+    "hint": "What should happen if the rule is not met?",
+    "toast": {
+      "header": "State Guard",
+      "body": "State guard saved successfully!"
+    }
+  },
+  "pageGuard": {
+    "title": "Page Guard",
+    "info": "Only run this step if a value on the page meets your condition.",
+    "elementFinder": "Find Item on Page",
+    "condition": "Compare",
+    "value": "Compare With",
+    "valueExtractor": "Extract Number or Text",
+    "valueExtractorHint": "Use a pattern to pull out a specific part of the value. For example, extract 24.00 from $24.00, or 10 from 10 automations.",
+    "recheck": {
+      "title": "If Condition Not Met",
+      "hint": "Choose what should happen if the filter condition is not met.",
+      "recheck": "Check Again",
+      "interval": "Wait Before Checking Again",
+      "stop": "Stop Automation",
+      "skip": "Skip This Step",
+      "refresh": "Refresh & Retry",
+      "goto": "Go to Step"
+    },
+    "toast": {
+      "header": "Page Guard",
+      "body": "Page guard saved successfully!"
+    }
+  },
+  "schedule": {
+    "title": "Schedule Automation",
+    "info": "Run this automation on a specific date and time",
+    "date": "Date",
+    "time": "Time",
+    "repeat": "Repeat in minutes"
+  },
+  "upgradePlan": {
+    "title": "Upgrade Plan",
+    "subtitle": "Unlock advanced features and get the most out of Auto Clicker AutoFill.",
+    "currentPlan": "Your Current Plan",
+    "free": {
+      "name": "🆓 FREE",
+      "tagline": "Powerful automation for everyone — no account required.",
+      "perMonth": "forever",
+      "cta": "Current Plan",
+      "includes": "What's included:",
+      "features": {
+        "unlimitedAutomations": "Unlimited automations",
+        "unlimitedSteps": "Unlimited steps per automation",
+        "loopSteps": "Repeat steps in a loop",
+        "recording": "Visual step recorder",
+        "allValues": "All value types — no API required"
+      }
+    },
+    "plus": {
+      "name": "🚀 PLUS",
+      "tagline": "All the essentials, plus deeper control over pre-check and settings within steps.",
+      "perMonth": "per month",
+      "cta": "Upgrade to Plus",
+      "includes": "Everything in Free, plus:",
+      "features": {
+        "addonCondition": "Conditional addon logic",
+        "actionCondition": "Per-action condition rules",
+        "actionSettings": "Action-level settings & overrides",
+        "noAds": "Ad-free experience"
+      }
+    },
+    "pro": {
+      "name": "🔹 PRO",
+      "tagline": "The full power of automation — with integrations, AI, and priority support.",
+      "perMonth": "per month",
+      "cta": "Upgrade to Pro",
+      "includes": "Everything in Plus, plus:",
+      "features": {
+        "sheets": "Google Sheets integration",
+        "discord": "Discord notifications",
+        "captcha": "Captcha resolver (coming soon)",
+        "vipSupport": "Priority support via Discord",
+        "earlyAccess": "Early access to new features",
+        "prideAndJoy": "Supporter badge & community recognition"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google Sheets",
+    "hint": "Connect your Google Sheets account to easily export your automations and logs, and keep track of your automation history in one place.",
+    "useStable": {
+      "title": "Use Stable Versions for Google Sheets Features.",
+      "message": "For optimal performance and reliability in Google Sheets, it's recommended to utilize <1>stable</1> versions of its features. These versions undergo thorough testing to ensure seamless functionality, providing you with a dependable platform for your tasks. By prioritizing stability, you can enhance your productivity and minimize the risk of encountering unexpected issues. If you need assistance or guidance on leveraging Google Sheets effectively, feel free to reach out for support!."
+    },
+    "loginRequired": "Please <1>Login</1> to your account before connecting with Google Sheets.",
+    "connect": "Connect with Google Sheets",
+    "connected": "Connected with Google Sheets"
+  },
+  "sidebar": {
+    "search": "Search",
+    "upgradePlan": "Upgrade Plan",
+    "login": "Login",
+    "logout": "Logout",
+    "language": "Language",
+    "learnMore": "Learn More"
+  },
+  "automations": {
+    "title": "My Automations",
+    "count": "Automations ({{count}})",
+    "search": "Search your automation...",
+    "add": "New",
+    "reorder": "Reorder",
+    "reorderByName": "Reorder by Name",
+    "selected": "selected",
+    "selected_one": "1 automation selected",
+    "selected_other": "{{count}} automations selected",
+    "selectAll": "Select all",
+    "exportSelected": "Export selected",
+    "deleteSelected": "Delete selected",
+    "cancelSelection": "Cancel selection",
+    "automationsWithinExtension": "automations within extension",
+    "selectAutomations": "Select automations to export or delete",
+    "select": "Select",
+    "import": "Import",
+    "toast": {
+      "header": "Automations",
+      "remove": "Automations removed successfully",
+      "remove_one": "Automation removed successfully",
+      "remove_other": "{{count}} Automations removed successfully",
+      "export": "Automations exported successfully",
+      "export_one": "1 automation exported successfully",
+      "export_other": "{{count}} automations exported successfully",
+      "import": "Automations imported successfully",
+      "import_one": "1 automation imported successfully",
+      "import_other": "{{count}} automations imported successfully",
+      "reorder": "Automations reordered successfully"
+    }
+  },
+  "automation": {
+    "title": "Automation",
+    "remove": "Remove",
+    "duplicate": "Duplicate",
+    "enable": "Enable",
+    "disable": "Disable",
+    "disabled": "Disabled",
+    "edit": "Edit",
+    "export": "Export",
+    "import": "Import",
+    "schedule": "Schedule",
+    "batch": "Loop Settings",
+    "watch": "Monitor Settings",
+    "url": "URL",
+    "name": "Name",
+    "initWait": "Wait Before Start",
+    "startTime": "Scheduled Start Time",
+    "noConfig": "No Automation Found, Please refine your search.",
+    "confirm": {
+      "title": "Remove Automation",
+      "message": "Are you sure you want to remove [{{name}}] automation?"
+    },
+    "toast": {
+      "header": "Automation",
+      "body": "Automation saved successfully!",
+      "schedule": "Automation schedule saved successfully!",
+      "settings": "Automation settings saved successfully!",
+      "add": "Automation added successfully",
+      "duplicate": "Automation duplicated successfully"
+    }
+  },
+  "automationSettings": {
+    "title": "Automation Settings",
+    "startType": "Run Mode",
+    "hotkey": "Hotkey",
+    "auto": "Automatic",
+    "autoHint": "<b>Automatic</b> — runs by itself every time the page loads. No action needed from you.",
+    "manual": "Manual (Hotkey)",
+    "manualHint": "<b>Manual</b> — only runs when you press your defined keyboard shortcut.",
+    "loadType": "Page Load Timing",
+    "window": "After Full Load",
+    "windowHint": "<b>After Full Load</b> (Recommended) — automation starts after the entire page including images and scripts has finished loading.",
+    "document": "As Page Loads",
+    "documentHint": "<b>As Page Loads</b> — automation starts as soon as the page structure is ready, before images and scripts finish loading. Faster but may be unstable on some pages.",
+    "triggerUrlChange": "Run on Page Navigation",
+    "triggerUrlChangeHint": "<b>Run on Page Navigation</b> — re-runs the automation when the page address changes without a full reload. Useful for Gmail, Twitter, and other modern apps.",
+    "urlMatch": "URL Match Type",
+    "regex": "Pattern Match",
+    "exact": "Exact URL",
+    "startTime": "Start Time (For Automations)",
+    "googleSheetsId": "Google Sheets ID",
+    "bypass": {
+      "title": "Bypass Browser Default Behavior for Hotkeys",
+      "alert": "Alert",
+      "confirm": "Confirm",
+      "prompt": "Prompt"
+    }
+  },
+  "loop": {
+    "title": "Loop",
+    "repeat": "Repeat",
+    "repeatHint": "<b>Repeat</b> will re run all steps without reloading page with the interval given.",
+    "repeatInterval": "Interval Between Loops",
+    "refresh": "Refresh",
+    "refreshHint": "<b>Refresh</b> will reload the page once all steps are completed.",
+    "toast": {
+      "header": "Loop Settings",
+      "body": "Loop settings saved successfully!"
+    }
+  },
+  "error": {
+    "required": "This field is required",
+    "number": "Please enter a valid number",
+    "interval": "Please enter a valid number",
+    "url": "Please enter a website URL to continue",
+    "initWait": "Please enter a valid number",
+    "scheduleDate": "Please enter a valid date in this format: 2025-12-01",
+    "scheduleTime": "Please enter a valid time in this format: 23:59:59.000",
+    "scheduleRepeat": "Please enter a valid number for how many times to repeat",
+    "startTime": "Please enter a valid start time in this format: 12:12:12:000",
+    "json": "The selected file is not a valid JSON — please check and try again",
+    "hotKey": "Please use a letter combined with Ctrl, Alt, or Shift (e.g. Ctrl + A)",
+    "valueExtractor": "The pattern you entered is not valid — please check and try again",
+    "value": "Please enter a value to continue",
+    "condition": "Please select a condition to continue",
+    "elementFinder": "Please enter how to find the item on the page",
+    "spreadsheetId": "Please enter a valid Google Sheets ID (44 characters, e.g. 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Step",
+    "plural": "Steps",
+    "add": "Add Step",
+    "addBefore": "Add Step Above",
+    "addAfter": "Add Step Below",
+    "remove": "Remove Step",
+    "disable": "Disable Step",
+    "enable": "Enable Step",
+    "initWait": "Delay",
+    "name": "Name",
+    "elementFinder": "Target",
+    "value": "Value",
+    "repeat": "Repeat",
+    "repeatInterval": "Interval",
+    "confirm": {
+      "remove": {
+        "title": "Remove Step",
+        "message": "Are you sure to remove [{{name}}] Step?"
+      }
+    },
+    "toast": {
+      "header": "Step",
+      "body": "Step saved successfully!",
+      "remove": "Step removed successfully!",
+      "reorder": "Steps reordered successfully!"
+    }
+  },
+  "userscript": {
+    "add": "Add User Script",
+    "confirm": {
+      "remove": {
+        "title": "Remove User Script",
+        "message": "Are you sure to remove [{{name}}] User Script?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Examples"
+    },
+    "startTime": {
+      "content": "Try <1>Schedule URL</1> our new browser extension. <br /> it's used to schedule webpage / URL at particular day and time"
+    },
+    "hotkey": {
+      "title": "Hotkey",
+      "content": "Press hotkey on keyboard to auto type in field",
+      "hint": "Single letter without <kbd>Ctrl</kbd>, <kbd>Alt</kbd> or <kbd>Shift</kbd> is not valid"
+    }
+  },
+  "common": {
+    "appName": "Auto Clicker - AutoFill",
+    "file": "File",
+    "error": "Error",
+    "save": "Save",
+    "clear": "Clear",
+    "close": "Close",
+    "download": "Download",
+    "disabled": "Disabled",
+    "sec": "sec",
+    "min": "min",
+    "no": "No",
+    "yes": "Yes",
+    "local": "LOCAL",
+    "dev": "DEV",
+    "stable": "STABLE",
+    "examples": "Examples",
+    "add": "Add"
+  },
+  "languages": {
+    "title": "Language",
+    "en": "English",
+    "fr": "French",
+    "ko": "Korean",
+    "ca": "Canada",
+    "hi": "Hindi",
+    "zh_CN": "Chinese (Simplified)",
+    "zh_TW": "Chinese (Traditional)",
+    "sv": "Swedish",
+    "pt": "Portuguese",
+    "ja": "Japanese",
+    "nl": "Dutch",
+    "de": "German",
+    "es": "Spanish",
+    "vi": "Vietnamese",
+    "fi": "Finnish",
+    "ar": "Arabic",
+    "it": "Italian",
+    "ru": "Russian",
+    "id": "Indonesian"
+  },
+  "monitor": {
+    "title": "Monitor",
+    "enabled": "Enable Monitoring",
+    "enabledHint": "Automatically re-run actions when new matching elements are added to the page (e.g., for infinite scrolling, async content)",
+    "rootSelector": "Monitor Root",
+    "rootSelectorPlaceholder": "body",
+    "rootSelectorHint": "CSS selector for container to observe",
+    "watchAttributes": "Monitor Attributes",
+    "attributesPlaceholder": "style, class, hidden",
+    "attributesHint": "Comma-separated list of attributes to observe for changes",
+    "debounce": "Debounce",
+    "debounceHint": "Delay before processing new elements (1-5 seconds)",
+    "timeout": "Timeout",
+    "timeoutHint": "Auto-stop after N minutes (1-180)",
+    "urlChange": "Stop on URL Change",
+    "urlChangeHint": "Automatically stop watching when page URL changes",
+    "toast": {
+      "header": "Monitor",
+      "body": "Monitor saved successfully!"
+    }
+  },
+  "home": {
+    "title": "Welcome to Auto Clicker - AutoFill",
+    "subtitle": "Automate clicks and form fills on any website by defining targets and actions.",
+    "quickStart": {
+      "title": "Quick Start Guide",
+      "step1": {
+        "title": "1. Install the Extension",
+        "desc": "Download and install the extension from the Chrome Web Store or Edge Add-ons.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Configure a Target Page",
+        "desc": "Open a web page, right-click any element and choose Auto Clicker - AutoFill → Configure for this Field.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Save & Run",
+        "desc": "Save your configuration and reload the target page. The automation runs automatically.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Helpful Tips",
+      "tip1": {
+        "title": "Try on the Test Page",
+        "desc": "Open test.getautoclicker.com, add two actions — one to fill a username field and one to click a button — then save and run.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Target Items Precisely",
+        "desc": "Use element paths to target specific items on a page, like //input[@name=\"username\"], for more reliable automation.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Handle Slow Page Loads",
+        "desc": "Set a Wait Before Start on your automation if the page loads slowly before your steps run.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Global Settings & Hotkeys",
+        "desc": "Configure start mode, define a keyboard shortcut, and adjust the status bar position in Global Settings.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Right-click to Auto-Capture",
+        "desc": "Right-click any input or button on a page and select Configure for this Field to auto-fill the URL and Element Finder.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Video Guides",
+      "video1": {
+        "title": "Getting Started with Auto Clicker AutoFill"
+      },
+      "video2": {
+        "title": "AutoFill Forms Automatically"
+      },
+      "video3": {
+        "title": "Click Buttons Automatically"
+      },
+      "video4": {
+        "title": "Advanced Configuration Tips"
+      }
+    }
+  }
+}

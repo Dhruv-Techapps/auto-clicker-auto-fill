@@ -1,26 +1,32 @@
 import { IActionStatement } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ConfigStore } from '../../config.slice';
 
-export const actionStatementActions = {
-  syncActionStatement: (state: ConfigStore, action: PayloadAction<IActionStatement | undefined>) => {
-    const { configs, selectedActionId, selectedConfigId } = state;
+export interface SyncActionStatementPayload {
+  statement?: IActionStatement;
+  actionId: TRandomUUID;
+  configId: TRandomUUID;
+}
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+export const actionStatementActions = {
+  syncActionStatement: (state: ConfigStore, action: PayloadAction<SyncActionStatementPayload>) => {
+    const { actionId, configId, statement } = action.payload;
+    const { configs } = state;
+
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
-
       return;
     }
-    const selectedAction = selectedConfig.actions.find((action) => action.id === selectedActionId);
+    const selectedAction = selectedConfig.actions.find((action) => action.id === actionId);
     if (!selectedAction) {
       state.error = 'Invalid Action';
-
       return;
     }
 
-    if (action.payload) {
-      selectedAction.statement = action.payload;
+    if (statement) {
+      selectedAction.statement = statement;
     } else {
       delete selectedAction.statement;
     }

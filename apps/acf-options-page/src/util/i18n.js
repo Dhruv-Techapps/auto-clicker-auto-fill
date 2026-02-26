@@ -23,9 +23,9 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     fallbackLng: 'en',
-    ns: 'web',
-    debug: false,
-    defaultNS: 'web',
+    ns: 'web-new',
+    debug: true,
+    defaultNS: 'web-new',
     lng,
     backend: {
       loadPath: `${import.meta.env.VITE_PUBLIC_I18N}/{{lng}}/{{ns}}.json`,

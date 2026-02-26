@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import useAdRotator from '../hooks/useAdRotator';
+import useAdRotator from '../_hooks/useAdRotator';
 
 interface GoogleAdsProps {
   readonly client?: string;

@@ -1,23 +1,21 @@
 import { CONFIGURATIONS } from '@acf-options-page/data/configurations';
-import { EConfigSource, EStartTypes, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { EConfigSource, IConfiguration, getDefaultConfig } from '@dhruv-techapps/acf-common';
 import { TRandomUUID } from '@dhruv-techapps/core-common';
-import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LocalStorage } from '../../_helpers';
 import { RootState } from '../store';
-import { actionActions, openActionAddonModalAPI, openActionSettingsModalAPI, openActionStatementModalAPI } from './action';
+import { actionActions } from './action';
 import { batchActions } from './batch';
 import { configGetAllAPI } from './config.api';
-import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
+import { updateConfigIds } from './config.slice.util';
 import { scheduleActions } from './schedule';
-import { openWatchModalAPI, watchActions } from './watch';
+import { watchActions } from './watch';
 
 const HIDDEN_DETAIL_KEY = 'config-detail-visibility';
 const defaultDetailVisibility = { name: true, url: true };
 
 export interface ConfigStore {
   loading: boolean;
-  selectedConfigId: TRandomUUID;
-  selectedActionId: TRandomUUID;
   error?: string;
   configs: Array<IConfiguration>;
   message?: string;
@@ -25,16 +23,11 @@ export interface ConfigStore {
   detailVisibility: { name: boolean; url: boolean };
 }
 
-interface ConfigAction {
-  name: string;
-  value: any;
-}
+type ConfigSettingsAction = { configId: TRandomUUID } & Partial<Omit<IConfiguration, 'id' | 'configId' | 'actions'>>;
 
 const initialState: ConfigStore = {
   loading: true,
   configs: CONFIGURATIONS,
-  selectedConfigId: CONFIGURATIONS[0].id,
-  selectedActionId: CONFIGURATIONS[0].actions[0].id,
   detailVisibility: LocalStorage.getItem(HIDDEN_DETAIL_KEY, defaultDetailVisibility)
 };
 
@@ -44,7 +37,6 @@ const slice = createSlice({
   reducers: {
     setConfigError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-
       state.message = undefined;
     },
     setConfigMessage: (state, action: PayloadAction<string | undefined>) => {
@@ -57,89 +49,50 @@ const slice = createSlice({
     addConfig: {
       reducer: (state, action: PayloadAction<IConfiguration>) => {
         state.configs.unshift(action.payload);
-        state.selectedConfigId = action.payload.id;
       },
       prepare: () => {
         const config = getDefaultConfig(EConfigSource.WEB);
         return { payload: config };
       }
     },
-    updateConfig: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value } = action.payload;
-      const { configs, selectedConfigId } = state;
-
-      const selectedConfig = configs.find((config) => config.id === selectedConfigId);
-      if (!selectedConfig) {
-        state.error = 'Invalid Configuration';
-
-        return;
-      }
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      selectedConfig[name] = value;
-      selectedConfig['updated'] = true;
-      if (name === 'url' && !selectedConfig.name) {
-        selectedConfig.name = getConfigName(value);
-      }
-    },
-    updateConfigSettings: (state, action: PayloadAction<ConfigAction>) => {
-      const { name, value } = action.payload;
-      const { configs, selectedConfigId } = state;
-
-      const selectedConfig = configs.find((config) => config.id === selectedConfigId);
-      if (!selectedConfig) {
-        state.error = 'Invalid Configuration';
-
-        return;
-      }
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      selectedConfig[name] = value;
-      selectedConfig['updated'] = true;
-      if (name === 'startType' && value === EStartTypes.AUTO) {
-        delete selectedConfig.hotkey;
-      }
-    },
-    removeConfig: (state, action: PayloadAction<TRandomUUID>) => {
+    updateConfig: (state, action: PayloadAction<ConfigSettingsAction>) => {
+      const { configId, ...settings } = action.payload;
       const { configs } = state;
-      const selectConfigIndex = configs.findIndex((config) => config.id === action.payload);
-      if (selectConfigIndex === -1) {
+      const selectedConfig = configs.find((config) => config.id === configId);
+      if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-
         return;
       }
-      configs.splice(selectConfigIndex, 1);
-      if (configs.length !== 0) {
-        state.selectedConfigId = configs[0].id;
-      }
+      Object.assign(selectedConfig, settings);
+      selectedConfig.updated = true;
+    },
+    removeConfigs: (state, action: PayloadAction<Array<TRandomUUID>>) => {
+      const selectedConfigs = action.payload;
+      const { configs } = state;
+      const remainingConfigs = configs.filter((config) => !selectedConfigs.includes(config.id));
+      state.configs = remainingConfigs;
     },
     setConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs = updateConfigIds(action.payload);
-      state.selectedConfigId = state.configs[0].id;
     },
-    importAll: (state, action: PayloadAction<Array<IConfiguration>>) => {
+    reorderConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
+      state.configs = action.payload;
+    },
+    importConfigs: (state, action: PayloadAction<Array<IConfiguration>>) => {
       state.configs.push(...updateConfigIds(action.payload));
-      state.selectedConfigId = state.configs[0].id;
     },
-    importConfig: (state, action: PayloadAction<IConfiguration>) => {
-      const config = updateConfigId(action.payload);
-      state.configs.push(config);
-      state.selectedConfigId = config.id;
-    },
-    duplicateConfig: (state) => {
-      const { configs, selectedConfigId } = state;
+    duplicateConfig: (state, action: PayloadAction<TRandomUUID>) => {
+      const configId = action.payload;
+      const { configs } = state;
       const id = crypto.randomUUID();
-      const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+      const selectedConfig = configs.find((config) => config.id === configId);
       if (!selectedConfig) {
         state.error = 'Invalid Configuration';
-
         return;
       }
       const name = '(Duplicate) ' + (selectedConfig.name || selectedConfig.url || 'Configuration');
       const actions = selectedConfig.actions.map((action) => ({ ...action, id: crypto.randomUUID() }));
       state.configs.push({ ...selectedConfig, name, id, actions });
-      state.selectedConfigId = id;
-    },
-    selectConfig: (state, action: PayloadAction<TRandomUUID>) => {
-      state.selectedConfigId = action.payload;
     },
     setDetailVisibility: (state, action: PayloadAction<string>) => {
       // @ts-expect-error "making is generic function difficult for TypeScript"
@@ -154,10 +107,9 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(configGetAllAPI.fulfilled, (state, action) => {
       if (action.payload) {
-        const { configurations, selectedConfigId } = action.payload;
+        const { configurations } = action.payload;
         if (configurations.length !== 0) {
           state.configs = configurations;
-          state.selectedConfigId = selectedConfigId || configurations[0].id;
         }
       }
       state.loading = false;
@@ -167,27 +119,6 @@ const slice = createSlice({
 
       state.loading = false;
     });
-    builder.addCase(openActionAddonModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionAddonModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionSettingsModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(openWatchModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(openActionStatementModalAPI.fulfilled, (state, action) => {
-      state.selectedActionId = action.payload.selectedActionId;
-    });
-    builder.addCase(openActionStatementModalAPI.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
   }
 });
 
@@ -196,17 +127,15 @@ export const {
   setConfigError,
   addConfig,
   setConfigs,
-  selectConfig,
   updateConfig,
-  updateConfigSettings,
-  removeConfig,
+  removeConfigs,
   duplicateConfig,
-  importAll,
-  importConfig,
-  updateBatch,
+  importConfigs,
+  syncBatch,
   addAction,
   addUserscript,
   reorderActions,
+  reorderConfigs,
   removeAction,
   updateAction,
   syncActionAddon,
@@ -221,39 +150,14 @@ export const {
 //Config Selectors
 export const configSelector = (state: RootState) => state.configuration;
 
-const searchSelector = (state: RootState) => state.configuration.search;
-export const filteredConfigsSelector = createSelector(
-  (state: RootState) => state.configuration.configs,
-  searchSelector,
-  (configs, search) => {
-    return configs.filter((config) => {
-      if (!search) {
-        return true;
-      }
-      const name = config.name ? config.name.toLowerCase() : '';
-      const url = config.url ? config.url.toLowerCase() : '';
-      return name.includes(search.toLowerCase()) || url.includes(search.toLowerCase());
-    });
-  }
-);
-const selectedConfigIdSelector = (state: RootState) => state.configuration.selectedConfigId;
-const selectedActionIdSelector = (state: RootState) => state.configuration.selectedActionId;
-
-export const selectedConfigSelector = createSelector(filteredConfigsSelector, selectedConfigIdSelector, (configs, selectedConfigId) => configs.find((config) => config.id === selectedConfigId));
-
-//Action Selectors
-export const selectedActionSelector = createSelector(selectedConfigSelector, selectedActionIdSelector, (config, selectedActionId) => config?.actions.find((action) => action.id === selectedActionId));
-
-//Action Settings Selectors
-export const selectedActionSettingsSelector = createSelector(selectedActionSelector, (action) => action?.settings);
-
-//Action Statement Selectors
-export const selectedActionStatementSelector = createSelector(selectedActionSelector, (action) => action?.statement);
-
-// Action Addon Selectors
-export const selectedActionAddonSelector = createSelector(selectedActionSelector, (action) => action?.addon);
-
-// Action Statement Conditions Selectors
-export const selectedActionStatementConditionsSelector = createSelector(selectedActionSelector, (action) => action?.statement?.conditions);
-
 export const configReducer = slice.reducer;
+
+export const configByIdSelector = (state: RootState, configId: TRandomUUID) => state.configuration.configs.find((config) => config.id === configId);
+
+export const actionByIdSelector = (state: RootState, configId: TRandomUUID, actionId: TRandomUUID) => {
+  const config = state.configuration.configs.find((config) => config.id === configId);
+  if (!config) {
+    return undefined;
+  }
+  return config.actions.find((action) => action.id === actionId);
+};

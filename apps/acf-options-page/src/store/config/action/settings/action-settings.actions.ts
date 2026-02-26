@@ -2,25 +2,32 @@ import { IActionSettings } from '@dhruv-techapps/acf-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ConfigStore } from '../../config.slice';
 
-export const actionSettingsActions = {
-  syncActionSettings: (state: ConfigStore, action: PayloadAction<IActionSettings | undefined>) => {
-    const { configs, selectedActionId, selectedConfigId } = state;
+export interface SyncActionSettingsPayload {
+  settings?: IActionSettings;
+  actionId: string;
+  configId: string;
+}
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+export const actionSettingsActions = {
+  syncActionSettings: (state: ConfigStore, action: PayloadAction<SyncActionSettingsPayload>) => {
+    const { settings, actionId, configId } = action.payload;
+    const { configs } = state;
+
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
       return;
     }
-    const selectedAction = selectedConfig.actions.find((action) => action.id === selectedActionId);
+    const selectedAction = selectedConfig.actions.find((action) => action.id === actionId);
     if (!selectedAction) {
       state.error = 'Invalid Action';
 
       return;
     }
 
-    if (action.payload) {
-      selectedAction.settings = action.payload;
+    if (settings) {
+      selectedAction.settings = settings;
     } else {
       delete selectedAction.settings;
     }

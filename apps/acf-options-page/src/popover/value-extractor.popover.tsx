@@ -4,7 +4,7 @@ export function ValueExtractorPopover() {
   return (
     <OverlayTrigger
       trigger='click'
-      placement='right'
+      placement='left'
       rootClose
       overlay={
         <Popover id='popover-basic'>
