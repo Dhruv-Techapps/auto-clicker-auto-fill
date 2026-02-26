@@ -17,17 +17,17 @@ function compareVersions(a: string, b: string): number {
 export const VersionAlert = () => {
   const { manifest } = useAppSelector(appSelector);
 
+  if (!manifest?.version) return null;
+
+  if (compareVersions(manifest.version, '4.1.9') >= 0) return null;
+
   return (
-    <>
-      {manifest?.version && compareVersions(manifest.version, '4.1.9') < 0 && (
-        <Alert variant='warning' className='mb-0 text-center p-1 rounded-0'>
-          <strong>Security Update Required:</strong> A newer version of <strong>Auto Clicker & Auto Fill</strong> is available and includes fixes for recently identified security vulnerabilities.
-          <a href='https://github.com/advisories/GHSA-wphj-fx3q-84ch' target='_blank' rel='noopener noreferrer' className='alert-link ms-1'>
-            Learn more
-          </a>
-          .<span className='d-inline-block ms-1'>Please update to the latest version to stay protected.</span>
-        </Alert>
-      )}
-    </>
+    <Alert variant='warning' className='mb-0 text-center p-1 rounded-0'>
+      <strong>Security Update Required:</strong> A newer version of <strong>Auto Clicker & Auto Fill</strong> is available and includes fixes for recently identified security vulnerabilities.
+      <a href='https://github.com/advisories/GHSA-wphj-fx3q-84ch' target='_blank' rel='noopener noreferrer' className='alert-link ms-1'>
+        Learn more
+      </a>
+      .<span className='d-inline-block ms-1'>Please update to the latest version to stay protected.</span>
+    </Alert>
   );
 };

@@ -2,7 +2,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 interface ValueFieldTypeTooltipProps {
   id: string;
-  valueFieldType: 'input' | 'textarea' | 'script';
+  valueFieldType: 'input' | 'text' | 'textarea' | 'script';
   children: React.ReactElement;
 }
 

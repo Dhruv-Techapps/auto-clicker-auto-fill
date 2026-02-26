@@ -7,7 +7,16 @@ import { ColumnDef } from '@tanstack/react-table';
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
-export const defaultColumn: Partial<ColumnDef<IAction | IUserScript, { width: string }>> = {
+interface IMetaProps {
+  ariaLabel?: string;
+  type?: string;
+  as?: 'input' | 'text' | 'textarea';
+  pattern?: string;
+  required?: boolean;
+  list?: string;
+}
+
+export const defaultColumn: Partial<ColumnDef<IAction | IUserScript, IMetaProps>> = {
   cell: Cell
 };
 
@@ -16,14 +25,21 @@ interface InputProps {
   placeholder?: string;
 }
 
-function Cell({ getValue, row: { original }, column: { id, columnDef }, table }: any) {
+interface CellProps {
+  getValue: () => any;
+  row: { original: IAction | IUserScript };
+  column: { id: string; columnDef: ColumnDef<IAction | IUserScript, IMetaProps> };
+  table: any;
+}
+
+function Cell({ getValue, row: { original }, column: { id, columnDef }, table }: CellProps) {
   const { theme } = useContext(ThemeContext);
-  const { meta } = columnDef;
+  const { meta } = columnDef as { meta?: IMetaProps };
   const initialValue = getValue();
   const [value, setValue] = useState(initialValue);
-  const [isInvalid, setIsInvalid] = useState(false);
+  const [isInvalid, setIsInvalid] = useState<boolean | undefined>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [valueFieldType, setValueFieldType] = useState<'input' | 'textarea' | 'script'>(original.valueFieldType || 'input');
+  const [valueFieldType, setValueFieldType] = useState<'input' | 'text' | 'textarea' | 'script'>(original.valueFieldType || 'input');
 
   useEffect(() => {
     setValueFieldType(original.valueFieldType || 'input');
@@ -75,7 +91,7 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
     setValue(initialValue);
   }, [initialValue, id, original.error]);
 
-  const getInput = (as: 'input' | 'textarea', rest: InputProps = {}) => (
+  const getInput = (as: 'input' | 'text' | 'textarea' | undefined, rest: InputProps = {}) => (
     <Form.Control
       ref={inputRef}
       aria-label={meta?.ariaLabel}

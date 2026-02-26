@@ -12,19 +12,19 @@ export function useAdRotator(slotIds: string[] = [], options: UseAdRotatorOption
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef<number | null>(null);
 
-  const start = useCallback(() => {
-    stop();
-    timerRef.current = window.setInterval(() => {
-      setActiveIndex((i) => (i + 1) % slotIds.length);
-    }, intervalMs) as unknown as number;
-  }, [intervalMs, slotIds.length]);
-
   const stop = useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
   }, []);
+
+  const start = useCallback(() => {
+    stop();
+    timerRef.current = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % slotIds.length);
+    }, intervalMs) as unknown as number;
+  }, [intervalMs, slotIds.length, stop]);
 
   const handleVisibilityChange = useCallback(() => {
     if (!pauseOnHidden) return;

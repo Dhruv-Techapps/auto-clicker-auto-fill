@@ -5,20 +5,19 @@ import { Alert } from 'react-bootstrap';
 
 export const ExtensionNotFoundAlert = () => {
   const { error, errorButton } = useAppSelector(appSelector);
+
+  if (!error) return null;
+
   return (
-    <>
-      {error && (
-        <Alert variant='danger' className='mb-0 text-center p-1 rounded-0'>
-          <p className='m-0'>
-            {error}
-            {errorButton && (
-              <Alert.Link href={`${CHROME_WEB_STORE}${import.meta.env.VITE_PUBLIC_CHROME_EXTENSION_ID}`} target='_blank' className='ms-2'>
-                download
-              </Alert.Link>
-            )}
-          </p>
-        </Alert>
-      )}
-    </>
+    <Alert variant='danger' className='mb-0 text-center p-1 rounded-0'>
+      <p className='m-0'>
+        {error}
+        {errorButton && (
+          <Alert.Link href={`${CHROME_WEB_STORE}${import.meta.env.VITE_PUBLIC_CHROME_EXTENSION_ID}`} target='_blank' className='ms-2'>
+            download
+          </Alert.Link>
+        )}
+      </p>
+    </Alert>
   );
 };
