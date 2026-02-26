@@ -18,7 +18,11 @@ const arrayMove = (arr: Array<IAction | undefined>, oldIndex: number, newIndex: 
   return arr; // for testing
 };
 
-interface AddActionPayload { actionId?: TRandomUUID; position?: 1 | 0; configId: TRandomUUID }
+interface AddActionPayload {
+  actionId?: TRandomUUID;
+  position?: 1 | 0;
+  configId: TRandomUUID;
+}
 
 export const actionActions = {
   reorderActions: (state: ConfigStore, action: PayloadAction<{ oldIndex: number; newIndex: number; configId: TRandomUUID }>) => {

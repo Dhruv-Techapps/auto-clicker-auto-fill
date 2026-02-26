@@ -28,7 +28,11 @@ export function useAdRotator(slotIds: string[] = [], options: UseAdRotatorOption
 
   const handleVisibilityChange = useCallback(() => {
     if (!pauseOnHidden) return;
-    document.hidden ? stop() : start();
+    if (document.hidden) {
+      stop();
+    } else {
+      start();
+    }
   }, [pauseOnHidden, start, stop]);
 
   useEffect(() => {
