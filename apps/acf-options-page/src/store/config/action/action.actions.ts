@@ -18,7 +18,7 @@ const arrayMove = (arr: Array<IAction | undefined>, oldIndex: number, newIndex: 
   return arr; // for testing
 };
 
-interface AddActionPayload {
+export interface AddActionPayload {
   actionId?: TRandomUUID;
   position?: 1 | 0;
   configId: TRandomUUID;
