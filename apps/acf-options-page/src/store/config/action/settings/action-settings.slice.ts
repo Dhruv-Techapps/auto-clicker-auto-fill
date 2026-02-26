@@ -1,7 +1,6 @@
 import { defaultActionSettings, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
-import { openActionSettingsModalAPI } from './action-settings.api';
 
 export interface IActionSettingsStore {
   visible: boolean;
@@ -45,12 +44,6 @@ const slice = createSlice({
     updateActionSettingsGoto: (state, action: PayloadAction<TGoto>) => {
       state.settings.retryGoto = action.payload;
     }
-  },
-  extraReducers(builder) {
-    builder.addCase(openActionSettingsModalAPI.fulfilled, (state, action) => {
-      state.settings = action.payload.settings ? { ...action.payload.settings, retryGoto: action.payload.retryGoto } : { ...defaultActionSettings };
-      state.visible = !state.visible;
-    });
   }
 });
 

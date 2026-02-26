@@ -1,20 +1,27 @@
 import { ISchedule } from '@dhruv-techapps/acf-common';
+import { TRandomUUID } from '@dhruv-techapps/core-common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ConfigStore } from '../config.slice';
 
-export const scheduleActions = {
-  syncSchedule: (state: ConfigStore, action: PayloadAction<ISchedule | undefined>) => {
-    const { configs, selectedConfigId } = state;
+export interface SyncSchedulePayload {
+  configId: TRandomUUID;
+  schedule?: ISchedule;
+}
 
-    const selectedConfig = configs.find((config) => config.id === selectedConfigId);
+export const scheduleActions = {
+  syncSchedule: (state: ConfigStore, action: PayloadAction<SyncSchedulePayload>) => {
+    const { configId, schedule } = action.payload;
+    const { configs } = state;
+
+    const selectedConfig = configs.find((config) => config.id === configId);
     if (!selectedConfig) {
       state.error = 'Invalid Configuration';
 
       return;
     }
 
-    if (action.payload) {
-      selectedConfig.schedule = action.payload;
+    if (schedule) {
+      selectedConfig.schedule = schedule;
     } else {
       delete selectedConfig.schedule;
     }

@@ -44,7 +44,8 @@ describe('DOM Watcher Configuration Settings', () => {
   it('should merge watch settings with defaults', () => {
     const customSettings: IWatchSettings = {
       watchEnabled: true,
-      debounce: 0.5
+      debounce: 0.5,
+      watchRootSelector: 'body' // same as default, but explicitly set
     };
 
     const mergedSettings = {

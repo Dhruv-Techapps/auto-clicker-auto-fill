@@ -1,0 +1,42 @@
+/* ── Loading strip ── */
+#loading-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  z-index: 9999;
+  overflow: hidden;
+}
+#loading-strip .bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #d616d0, var(--accent));
+  background-size: 200% 100%;
+  animation:
+    load 2.2s ease-in-out forwards,
+    shimmer 1s linear infinite;
+  border-radius: 0 2px 2px 0;
+}
+@keyframes load {
+  0% {
+    width: 0%;
+  }
+  60% {
+    width: 75%;
+  }
+  90% {
+    width: 92%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

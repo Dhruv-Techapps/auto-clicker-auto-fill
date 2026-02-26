@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import appReducer from './app.slice';
+import { appReducer } from './app';
 import { blogReducer } from './blog';
 import { configReducers, configsListenerMiddleware, configsToastListenerMiddleware } from './config';
 import { firebaseReducer } from './firebase';

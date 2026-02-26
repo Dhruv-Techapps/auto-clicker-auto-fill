@@ -1,7 +1,6 @@
 import { RootState } from '@acf-options-page/store';
 import { IAddon, TGoto, defaultAddon } from '@dhruv-techapps/acf-common';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { openActionAddonModalAPI } from './addon.api';
 
 export interface IActionAddonStore {
   visible: boolean;
@@ -37,16 +36,6 @@ const slice = createSlice({
 
       state.message = undefined;
     }
-  },
-  extraReducers(builder) {
-    builder.addCase(openActionAddonModalAPI.fulfilled, (state, action) => {
-      if (action.payload.addon) {
-        state.addon = { ...action.payload.addon, recheckGoto: action.payload.recheckGoto };
-      } else {
-        state.addon = { ...defaultAddon };
-      }
-      state.visible = !state.visible;
-    });
   }
 });
 

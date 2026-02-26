@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "オートクリッカー - オートフィル",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "接続中..."
+  },
+  "links": {
+    "docs": "ドキュメント",
+    "blog": "ブログ",
+    "configuration": "構成",
+    "issues": "問題",
+    "discussion": "議論",
+    "test": "練習フォーム",
+    "contact": "接触",
+    "chat": "チャット",
+    "connect": "接続する",
+    "privacy": "プライバシーポリシー",
+    "googleGroup": "Googleグループ"
+  },
+  "about": "について",
+  "social": "社交",
+  "theme": {
+    "title": "テーマ",
+    "switchLight": "ライトテーマに切り替える",
+    "switchDark": "ダークテーマに切り替える",
+    "light": "ライト",
+    "dark": "暗い",
+    "auto": "オート"
+  },
+  "loading": "読み込み中...",
+  "learnMore": "もっと詳しく知る",
+  "login": "ログイン",
+  "logout": "ログアウト",
+  "connect": "接続する",
+  "disconnect": "切断",
+  "resources": "リソース",
+  "settings": {
+    "title": "グローバル設定",
+    "additional": "追加設定"
+  },
+  "notification": {
+    "title": "通知を表示",
+    "error": "エラーが発生した場合",
+    "step": "ステップ完了時",
+    "loop": "ループ完了時",
+    "automation": "自動化の完了時",
+    "sound": "通知音"
+  },
+  "discord": {
+    "title": "Discordでの通知",
+    "loginRequired": "Discord に接続する前に、アカウントに <1>ログイン</1> してください。"
+  },
+  "checkIFrames": {
+    "title": "埋め込みページ内を検索",
+    "hint": "ページの埋め込みセクション内のアイテムも探す"
+  },
+  "reloadOnError": {
+    "title": "エラー時にページを更新する",
+    "hint": "何か問題が発生した場合、ページを自動的にリロードします",
+    "contextInvalidated": "拡張コンテキストが無効になりました。"
+  },
+  "statusBar": {
+    "title": "ステータスバー",
+    "hint": "ページの下部にステータスバーを表示する",
+    "hide": "隠れる",
+    "topLeft": "左上",
+    "topRight": "右上",
+    "bottomLeft": "左下",
+    "bottomRight": "右下",
+    "positions": {
+      "hide": "隠れる",
+      "top-left": "左上",
+      "top-right": "右上",
+      "bottom-left": "左下",
+      "bottom-right": "右下"
+    }
+  },
+  "retry": {
+    "title": "再試行回数",
+    "interval": "再試行間の待機",
+    "stop": "自動化を停止",
+    "skip": "このステップをスキップ",
+    "refresh": "更新して再試行",
+    "hint": "ページでアイテムが見つからない場合はどうなりますか?"
+  },
+  "backup": {
+    "title": "バックアップ",
+    "lastBackup": "最終バックアップ:",
+    "backup": "クラウドへのバックアップ",
+    "restore": "クラウドからの復元",
+    "now": "今すぐバックアップ",
+    "autoBackup": "自動バックアップ",
+    "auto-backup": "自動バックアップ",
+    "daily": "毎日",
+    "weekly": "週刊",
+    "monthly": "毎月",
+    "off": "オフ",
+    "loginRequired": "Google ドライブに接続する前に、アカウントに <1>ログイン</1> してください。",
+    "checkingAccess": "Google ドライブへのアクセスを確認しています...",
+    "connect": "Googleドライブに接続",
+    "connected": "Googleドライブのバックアップ",
+    "loadingFiles": "ファイルを読み込んでいます...",
+    "restoreAction": "復元する",
+    "delete": "消去",
+    "noBackup": "バックアップが見つかりません",
+    "confirm": {
+      "restore": {
+        "title": "クラウドから自動化を復元する",
+        "message": "クラウドから自動化を復元してもよろしいですか？これによりすべての自動化が置き換えられ、元に戻すことはできません。"
+      }
+    }
+  },
+  "reorder": {
+    "title": "並べ替えの自動化",
+    "hint": "並べ替える前にすべての自動化を保存してください"
+  },
+  "extensionNotFound": {
+    "title": "拡張機能がインストールされていません",
+    "subTitle": "このページは、Chrome および Edge の<b>Auto Clicker - AutoFill</b>拡張機能で動作します。",
+    "hint": "開始するには、まず拡張機能をインストールしてください。"
+  },
+  "stepSettings": {
+    "title": "ステップ設定",
+    "info": "これらの設定はこのステップとその事前チェックにのみ適用され、グローバル設定よりも優先されます。",
+    "iframeFirst": "埋め込みページを最初に検索",
+    "iframeFirstHint": "メインページを検索する前に、ページに埋め込まれたコンテンツを調べてください",
+    "retry": {
+      "title": "アイテムが見つからない場合",
+      "hint": "再試行してもアイテムが見つからない場合に何が起こるかを選択します。",
+      "retry": "再試行回数",
+      "interval": "再試行間の待機",
+      "stop": "自動化を停止",
+      "skip": "このステップをスキップ",
+      "goto": "ステップへ進む",
+      "refresh": "更新して再試行"
+    },
+    "toast": {
+      "header": "ステップ設定",
+      "body": "ステップ設定が正常に保存されました。"
+    }
+  },
+  "stateGuard": {
+    "action": "前のステップ",
+    "status": "結果",
+    "title": "州警備隊",
+    "add": "条件を追加",
+    "info": "前のステップで何が起こったかに基づいて、このステップを実行するかどうかを制御するルールを設定します。",
+    "stop": "自動化を停止",
+    "skip": "このステップをスキップ",
+    "refresh": "更新して再試行",
+    "goto": "ステップへ進む",
+    "proceed": "このステップをとにかく実行する",
+    "hint": "ルールが満たされない場合はどうなるのでしょうか?",
+    "toast": {
+      "header": "州警備隊",
+      "body": "州兵の救出に成功しました！"
+    }
+  },
+  "pageGuard": {
+    "title": "ページガード",
+    "info": "ページの値が条件を満たす場合にのみ、このステップを実行します。",
+    "elementFinder": "ページ上のアイテムを検索",
+    "condition": "比較する",
+    "value": "比較対象",
+    "valueExtractor": "数値またはテキストの抽出",
+    "valueExtractorHint": "パターンを使用して、値の特定の部分を抽出します。例えば、$24.00から24.00を抽出したり、10個の自動化から10を抽出したりできます。",
+    "recheck": {
+      "title": "条件が満たされない場合",
+      "hint": "フィルター条件が満たされなかった場合に何が起こるかを選択します。",
+      "recheck": "もう一度確認",
+      "interval": "再度確認する前に待つ",
+      "stop": "自動化を停止",
+      "skip": "このステップをスキップ",
+      "refresh": "更新して再試行",
+      "goto": "ステップへ進む"
+    },
+    "toast": {
+      "header": "ページガード",
+      "body": "ページガードが正常に保存されました。"
+    }
+  },
+  "schedule": {
+    "title": "スケジュールの自動化",
+    "info": "特定の日時にこの自動化を実行する",
+    "date": "日付",
+    "time": "時間",
+    "repeat": "数分で繰り返す"
+  },
+  "upgradePlan": {
+    "title": "アップグレードプラン",
+    "subtitle": "高度な機能のロックを解除し、Auto Clicker AutoFill を最大限に活用しましょう。",
+    "currentPlan": "現在のプラン",
+    "free": {
+      "name": "🆓 無料",
+      "tagline": "誰でも利用できる強力な自動化 — アカウントは必要ありません。",
+      "perMonth": "永遠に",
+      "cta": "現在の計画",
+      "includes": "含まれるもの:",
+      "features": {
+        "unlimitedAutomations": "無制限の自動化",
+        "unlimitedSteps": "自動化ごとに無制限のステップ",
+        "loopSteps": "ループ内のステップを繰り返す",
+        "recording": "ビジュアルステップレコーダー",
+        "allValues": "すべての値型 — API は不要"
+      }
+    },
+    "plus": {
+      "name": "🚀プラス",
+      "tagline": "すべての基本機能に加え、事前チェックと設定をステップごとに細かく制御できます。",
+      "perMonth": "月額",
+      "cta": "プラスにアップグレード",
+      "includes": "Free に含まれるすべての機能に加え、次の機能もご利用いただけます:",
+      "features": {
+        "addonCondition": "条件付きアドオンロジック",
+        "actionCondition": "アクションごとの条件ルール",
+        "actionSettings": "アクションレベルの設定とオーバーライド",
+        "noAds": "広告なしの体験"
+      }
+    },
+    "pro": {
+      "name": "🔹 プロ",
+      "tagline": "統合、AI、優先サポートによる自動化のフルパワー。",
+      "perMonth": "月額",
+      "cta": "プロにアップグレード",
+      "includes": "Plus のすべてに加えて:",
+      "features": {
+        "sheets": "Googleスプレッドシートとの統合",
+        "discord": "Discord通知",
+        "captcha": "キャプチャリゾルバー（近日公開予定）",
+        "vipSupport": "Discord経由の優先サポート",
+        "earlyAccess": "新機能への早期アクセス",
+        "prideAndJoy": "サポーターバッジとコミュニティの認知"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Googleスプレッドシート",
+    "hint": "Google Sheets アカウントを接続すると、自動化とログを簡単にエクスポートし、自動化の履歴を 1 か所で追跡できます。",
+    "useStable": {
+      "title": "Google スプレッドシートの機能には安定バージョンを使用してください。",
+      "message": "Google スプレッドシートを最適なパフォーマンスと信頼性でご利用いただくには、<1>安定版</1>の機能をご利用いただくことをおすすめします。これらのバージョンは、シームレスな機能性を保証するために徹底的なテストを実施しており、お客様のタスクに最適なプラットフォームを提供します。安定性を優先することで、生産性を向上させ、予期せぬ問題が発生するリスクを最小限に抑えることができます。Google スプレッドシートを効果的に活用するためのサポートやガイダンスが必要な場合は、お気軽にサポートまでお問い合わせください。"
+    },
+    "loginRequired": "Google Sheets に接続する前に、アカウントに <1>ログイン</1> してください。",
+    "connect": "Googleスプレッドシートに接続する",
+    "connected": "Googleスプレッドシートに接続"
+  },
+  "sidebar": {
+    "search": "検索",
+    "upgradePlan": "アップグレードプラン",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "language": "言語",
+    "learnMore": "もっと詳しく知る"
+  },
+  "automations": {
+    "title": "私の自動化",
+    "count": "自動化（{{count}}）",
+    "search": "自動化を検索...",
+    "add": "新しい",
+    "reorder": "再注文",
+    "reorderByName": "名前で並べ替え",
+    "selected": "選択された",
+    "selected_one": "1 つの自動化が選択されました",
+    "selected_other": "{{count}} 件の自動化が選択されました",
+    "selectAll": "すべて選択",
+    "exportSelected": "選択した項目をエクスポート",
+    "deleteSelected": "選択した項目を削除",
+    "cancelSelection": "選択をキャンセル",
+    "automationsWithinExtension": "拡張機能内の自動化",
+    "selectAutomations": "エクスポートまたは削除する自動化を選択",
+    "select": "選択",
+    "import": "輸入",
+    "toast": {
+      "header": "自動化",
+      "remove": "自動化が正常に削除されました",
+      "remove_one": "自動化が正常に削除されました",
+      "remove_other": "{{count}} 個の自動化が正常に削除されました",
+      "export": "自動化が正常にエクスポートされました",
+      "export_one": "1 個のオートメーションが正常にエクスポートされました",
+      "export_other": "{{count}} 件の自動化が正常にエクスポートされました",
+      "import": "自動化が正常にインポートされました",
+      "import_one": "1 個の自動化が正常にインポートされました",
+      "import_other": "{{count}} 個の自動化が正常にインポートされました",
+      "reorder": "自動化が正常に並べ替えられました"
+    }
+  },
+  "automation": {
+    "title": "オートメーション",
+    "remove": "取り除く",
+    "duplicate": "重複",
+    "enable": "有効にする",
+    "disable": "無効にする",
+    "disabled": "無効",
+    "edit": "編集",
+    "export": "輸出",
+    "import": "輸入",
+    "schedule": "スケジュール",
+    "batch": "ループ設定",
+    "watch": "モニター設定",
+    "url": "URL",
+    "name": "名前",
+    "initWait": "開始前に待つ",
+    "startTime": "予定開始時刻",
+    "noConfig": "オートメーションが見つかりません。検索を絞り込んでください。",
+    "confirm": {
+      "title": "自動化を削除",
+      "message": "[{{name}}] の自動化を削除してもよろしいですか?"
+    },
+    "toast": {
+      "header": "オートメーション",
+      "body": "自動化が正常に保存されました。",
+      "schedule": "自動化スケジュールが正常に保存されました。",
+      "settings": "自動化設定が正常に保存されました。",
+      "add": "自動化が正常に追加されました",
+      "duplicate": "自動化が正常に複製されました"
+    }
+  },
+  "automationSettings": {
+    "title": "自動化設定",
+    "startType": "実行モード",
+    "hotkey": "ホットキー",
+    "auto": "自動",
+    "autoHint": "<b>自動</b>— ページが読み込まれるたびに自動的に実行されます。ユーザーによる操作は必要ありません。",
+    "manual": "手動（ホットキー）",
+    "manualHint": "<b>手動</b>- 定義したキーボード ショートカットを押したときにのみ実行されます。",
+    "loadType": "ページ読み込みタイミング",
+    "window": "フルロード後",
+    "windowHint": "<b>完全ロード後</b>（推奨） - 画像やスクリプトを含むページ全体の読み込みが完了した後に自動化が開始されます。",
+    "document": "ページが読み込まれると",
+    "documentHint": "<b>ページ読み込み時</b>— ページ構造の準備が整うとすぐに、画像やスクリプトの読み込みが完了する前に自動化が開始されます。高速ですが、一部のページでは動作が不安定になる場合があります。",
+    "triggerUrlChange": "ページナビゲーションで実行",
+    "triggerUrlChangeHint": "<b>ページナビゲーション時に実行</b>— ページアドレスが変更された際に、ページ全体をリロードせずに自動化を再実行します。Gmail、Twitter、その他の最新アプリで役立ちます。",
+    "urlMatch": "URL一致タイプ",
+    "regex": "パターンマッチ",
+    "exact": "正確なURL",
+    "startTime": "開始時間（自動化の場合）",
+    "googleSheetsId": "Google スプレッドシート ID",
+    "bypass": {
+      "title": "ブラウザのデフォルトのホットキーの動作をバイパスする",
+      "alert": "警告",
+      "confirm": "確認する",
+      "prompt": "プロンプト"
+    }
+  },
+  "loop": {
+    "title": "ループ",
+    "repeat": "繰り返す",
+    "repeatHint": "<b>「繰り返し」は</b>、指定された間隔でページを再読み込みせずにすべてのステップを再実行します。",
+    "repeatInterval": "ループ間の間隔",
+    "refresh": "リフレッシュ",
+    "refreshHint": "すべての手順が完了すると、<b>更新により</b>ページが再読み込みされます。",
+    "toast": {
+      "header": "ループ設定",
+      "body": "ループ設定が正常に保存されました。"
+    }
+  },
+  "error": {
+    "required": "この項目は必須です",
+    "number": "有効な番号を入力してください",
+    "interval": "有効な番号を入力してください",
+    "url": "続行するにはウェブサイトのURLを入力してください",
+    "initWait": "有効な番号を入力してください",
+    "scheduleDate": "有効な日付を次の形式で入力してください: 2025-12-01",
+    "scheduleTime": "有効な時刻を次の形式で入力してください: 23:59:59.000",
+    "scheduleRepeat": "繰り返す回数として有効な数値を入力してください",
+    "startTime": "有効な開始時刻を次の形式で入力してください: 12:12:12:000",
+    "json": "選択したファイルは有効なJSONではありません。確認してもう一度お試しください。",
+    "hotKey": "Ctrl、Alt、またはShiftキーと組み合わせた文字を使用してください（例：Ctrl + A）",
+    "valueExtractor": "入力したパターンは無効です。確認してもう一度お試しください。",
+    "value": "続行するには値を入力してください",
+    "condition": "続行するには条件を選択してください",
+    "elementFinder": "ページ上のアイテムを見つける方法を入力してください",
+    "spreadsheetId": "有効な Google スプレッドシート ID を入力してください（44 文字、例: 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA）"
+  },
+  "step": {
+    "title": "ステップ",
+    "plural": "手順",
+    "add": "ステップを追加",
+    "addBefore": "上記のステップを追加",
+    "addAfter": "下のステップを追加",
+    "remove": "ステップを削除",
+    "disable": "無効化ステップ",
+    "enable": "ステップを有効にする",
+    "initWait": "遅れ",
+    "name": "名前",
+    "elementFinder": "ターゲット",
+    "value": "価値",
+    "repeat": "繰り返す",
+    "repeatInterval": "間隔",
+    "confirm": {
+      "remove": {
+        "title": "ステップを削除",
+        "message": "[{{name}}] ステップを削除してもよろしいですか?"
+      }
+    },
+    "toast": {
+      "header": "ステップ",
+      "body": "ステップが正常に保存されました。",
+      "remove": "ステップが正常に削除されました。",
+      "reorder": "ステップの順序変更が正常に完了しました。"
+    }
+  },
+  "userscript": {
+    "add": "ユーザースクリプトの追加",
+    "confirm": {
+      "remove": {
+        "title": "ユーザースクリプトの削除",
+        "message": "[{{name}}] ユーザースクリプトを削除してもよろしいですか?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "例"
+    },
+    "startTime": {
+      "content": "&lt;1&gt;スケジュールURLを試す</1>新しいブラウザ拡張機能。<br />特定の日時にウェブページ/URLをスケジュールするために使用されます"
+    },
+    "hotkey": {
+      "title": "ホットキー",
+      "content": "キーボードのホットキーを押してフィールドに自動入力する",
+      "hint": "<kbd>Ctrl</kbd> 、 <kbd>Alt</kbd> 、 <kbd>Shiftキー</kbd>なしの単一文字は無効です"
+    }
+  },
+  "common": {
+    "appName": "オートクリッカー - オートフィル",
+    "file": "ファイル",
+    "error": "エラー",
+    "save": "保存",
+    "clear": "クリア",
+    "close": "近い",
+    "download": "ダウンロード",
+    "disabled": "無効",
+    "sec": "秒",
+    "min": "分",
+    "no": "いいえ",
+    "yes": "はい",
+    "local": "地元",
+    "dev": "開発",
+    "stable": "安定した",
+    "examples": "例",
+    "add": "追加"
+  },
+  "languages": {
+    "title": "言語",
+    "en": "英語",
+    "fr": "フランス語",
+    "ko": "韓国語",
+    "ca": "カナダ",
+    "hi": "ヒンディー語",
+    "zh_CN": "中国語（簡体字）",
+    "zh_TW": "中国語（繁体字）",
+    "sv": "スウェーデン語",
+    "pt": "ポルトガル語",
+    "ja": "日本語",
+    "nl": "オランダ語",
+    "de": "ドイツ語",
+    "es": "スペイン語",
+    "vi": "ベトナム語",
+    "fi": "フィンランド語",
+    "ar": "アラビア語",
+    "it": "イタリア語",
+    "ru": "ロシア",
+    "id": "インドネシア語"
+  },
+  "monitor": {
+    "title": "モニター",
+    "enabled": "監視を有効にする",
+    "enabledHint": "ページに新しい一致する要素が追加されたときにアクションを自動的に再実行する（例：無限スクロール、非同期コンテンツ）",
+    "rootSelector": "ルートを監視する",
+    "rootSelectorPlaceholder": "体",
+    "rootSelectorHint": "監視するコンテナのCSSセレクタ",
+    "watchAttributes": "モニター属性",
+    "attributesPlaceholder": "スタイル、クラス、隠れた",
+    "attributesHint": "変更を監視する属性のカンマ区切りリスト",
+    "debounce": "デバウンス",
+    "debounceHint": "新しい要素を処理する前の遅延（1～5秒）",
+    "timeout": "タイムアウト",
+    "timeoutHint": "N分後に自動停止（1～180）",
+    "urlChange": "URLの変更時に停止",
+    "urlChangeHint": "ページのURLが変更されたら自動的に監視を停止する",
+    "toast": {
+      "header": "モニター",
+      "body": "モニターが正常に保存されました。"
+    }
+  },
+  "home": {
+    "title": "オートクリッカーへようこそ - オートフィル",
+    "subtitle": "ターゲットとアクションを定義して、あらゆる Web サイトでのクリックとフォームの入力を自動化します。",
+    "quickStart": {
+      "title": "クイックスタートガイド",
+      "step1": {
+        "title": "1. 拡張機能をインストールする",
+        "desc": "Chrome ウェブストアまたは Edge アドオンから拡張機能をダウンロードしてインストールします。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. ターゲットページを設定する",
+        "desc": "Web ページを開き、任意の要素を右クリックして、「オートクリッカー - オートフィル」→「このフィールドの構成」を選択します。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#クイックスタート"
+      },
+      "step3": {
+        "title": "3. 保存して実行",
+        "desc": "設定を保存し、対象ページをリロードします。自動化は自動的に実行されます。",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "役立つヒント",
+      "tip1": {
+        "title": "テストページで試す",
+        "desc": "test.getautoclicker.com を開き、ユーザー名フィールドに入力するアクションとボタンをクリックするアクションの 2 つのアクションを追加して、保存して実行します。",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "正確にターゲットアイテム",
+        "desc": "より信頼性の高い自動化を実現するには、//input[@name=\"username\"] のように要素パスを使用してページ上の特定の項目をターゲットにします。",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "遅いページの読み込みを処理する",
+        "desc": "ステップが実行される前にページの読み込みが遅い場合は、自動化に「開始前に待機」を設定します。",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "グローバル設定とホットキー",
+        "desc": "グローバル設定でスタートモードを構成し、キーボードショートカットを定義し、ステータスバーの位置を調整します。",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "右クリックして自動キャプチャ",
+        "desc": "ページ上の任意の入力またはボタンを右クリックし、「このフィールドの構成」を選択すると、URL と要素ファインダーが自動入力されます。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#クイックスタート"
+      }
+    },
+    "videos": {
+      "title": "ビデオガイド",
+      "video1": {
+        "title": "オートクリッカーのオートフィルを使い始める"
+      },
+      "video2": {
+        "title": "フォームを自動入力する"
+      },
+      "video3": {
+        "title": "ボタンを自動的にクリックする"
+      },
+      "video4": {
+        "title": "高度な設定のヒント"
+      }
+    }
+  }
+}

@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "Phần mềm tự động nhấp chuột - Tự động điền",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Đang kết nối..."
+  },
+  "links": {
+    "docs": "Bác sĩ",
+    "blog": "Blog",
+    "configuration": "Cấu hình",
+    "issues": "Vấn đề",
+    "discussion": "Cuộc thảo luận",
+    "test": "Mẫu thực hành",
+    "contact": "Liên hệ",
+    "chat": "Trò chuyện",
+    "connect": "Kết nối",
+    "privacy": "Chính sách bảo mật",
+    "googleGroup": "Tập đoàn Google"
+  },
+  "about": "Về",
+  "social": "Xã hội",
+  "theme": {
+    "title": "Chủ đề",
+    "switchLight": "Chuyển sang chủ đề sáng",
+    "switchDark": "Chuyển sang chủ đề tối",
+    "light": "Ánh sáng",
+    "dark": "Tối tăm",
+    "auto": "Tự động"
+  },
+  "loading": "Đang tải...",
+  "learnMore": "Tìm hiểu thêm",
+  "login": "Đăng nhập",
+  "logout": "Đăng xuất",
+  "connect": "Kết nối",
+  "disconnect": "Ngắt kết nối",
+  "resources": "Tài nguyên",
+  "settings": {
+    "title": "Cài đặt toàn cầu",
+    "additional": "Cài đặt bổ sung"
+  },
+  "notification": {
+    "title": "Hiển thị thông báo",
+    "error": "Lỗi đã xảy ra",
+    "step": "Khi hoàn thành bước",
+    "loop": "Khi vòng lặp hoàn tất",
+    "automation": "Khi hoàn thành tự động hóa",
+    "sound": "Âm thanh thông báo"
+  },
+  "discord": {
+    "title": "Thông báo trên Discord",
+    "loginRequired": "Vui lòng <1>Đăng nhập</1> vào tài khoản của bạn trước khi kết nối với Discord."
+  },
+  "checkIFrames": {
+    "title": "Tìm kiếm bên trong các trang được nhúng",
+    "hint": "Hãy tìm kiếm cả các mục bên trong các phần được nhúng của trang."
+  },
+  "reloadOnError": {
+    "title": "Làm mới trang khi có lỗi",
+    "hint": "Tự động tải lại trang nếu có lỗi xảy ra.",
+    "contextInvalidated": "Ngữ cảnh mở rộng đã bị vô hiệu hóa."
+  },
+  "statusBar": {
+    "title": "Thanh trạng thái",
+    "hint": "Hiển thị thanh trạng thái ở cuối trang",
+    "hide": "Trốn",
+    "topLeft": "Góc trên bên trái",
+    "topRight": "Góc trên bên phải",
+    "bottomLeft": "Góc dưới bên trái",
+    "bottomRight": "Góc dưới bên phải",
+    "positions": {
+      "hide": "Trốn",
+      "top-left": "Góc trên bên trái",
+      "top-right": "Góc trên bên phải",
+      "bottom-left": "Góc dưới bên trái",
+      "bottom-right": "Góc dưới bên phải"
+    }
+  },
+  "retry": {
+    "title": "Số lần thử lại",
+    "interval": "Chờ giữa các lần thử lại",
+    "stop": "Dừng tự động hóa",
+    "skip": "Bỏ qua bước này",
+    "refresh": "Làm mới và thử lại",
+    "hint": "Điều gì sẽ xảy ra nếu không tìm thấy mặt hàng đó trên trang?"
+  },
+  "backup": {
+    "title": "Hỗ trợ",
+    "lastBackup": "Lần sao lưu cuối cùng:",
+    "backup": "Sao lưu lên đám mây",
+    "restore": "Khôi phục từ đám mây",
+    "now": "Sao lưu ngay",
+    "autoBackup": "Sao lưu tự động",
+    "auto-backup": "Sao lưu tự động",
+    "daily": "Hằng ngày",
+    "weekly": "Hàng tuần",
+    "monthly": "Hàng tháng",
+    "off": "Tắt",
+    "loginRequired": "Vui lòng <1>Đăng nhập</1> vào tài khoản của bạn trước khi kết nối với Google Drive.",
+    "checkingAccess": "Kiểm tra quyền truy cập Google Drive...",
+    "connect": "Kết nối với Google Drive",
+    "connected": "Sao lưu Google Drive",
+    "loadingFiles": "Đang tải tập tin của bạn...",
+    "restoreAction": "Khôi phục",
+    "delete": "Xóa bỏ",
+    "noBackup": "Không tìm thấy bản sao lưu nào.",
+    "confirm": {
+      "restore": {
+        "title": "Khôi phục các quy trình tự động hóa từ đám mây",
+        "message": "Bạn có chắc chắn muốn khôi phục các quy trình tự động hóa từ đám mây không? Thao tác này sẽ thay thế tất cả các quy trình tự động hóa của bạn và không thể hoàn tác."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Tự động hóa sắp xếp lại",
+    "hint": "Vui lòng lưu tất cả các thiết lập tự động trước khi sắp xếp lại đơn hàng."
+  },
+  "extensionNotFound": {
+    "title": "Tiện ích mở rộng chưa được cài đặt",
+    "subTitle": "Trang này hoạt động với tiện ích mở rộng <b>Auto Clicker - AutoFill</b> dành cho Chrome và Edge.",
+    "hint": "Vui lòng cài đặt tiện ích mở rộng trước để bắt đầu."
+  },
+  "stepSettings": {
+    "title": "Cài đặt bước",
+    "info": "Các thiết lập này chỉ áp dụng cho bước này và bước kiểm tra trước đó, và sẽ được ưu tiên hơn so với Cài đặt Toàn cầu của bạn.",
+    "iframeFirst": "Tìm kiếm các trang nhúng trước tiên",
+    "iframeFirstHint": "Hãy xem nội dung nhúng bên trong trang trước khi tìm kiếm trên trang chính.",
+    "retry": {
+      "title": "Nếu không tìm thấy mục",
+      "hint": "Hãy chọn điều gì sẽ xảy ra nếu không tìm thấy mục đó, ngay cả sau khi đã thử lại.",
+      "retry": "Số lần thử lại",
+      "interval": "Chờ giữa các lần thử lại",
+      "stop": "Dừng tự động hóa",
+      "skip": "Bỏ qua bước này",
+      "goto": "Chuyển đến Bước",
+      "refresh": "Làm mới và thử lại"
+    },
+    "toast": {
+      "header": "Cài đặt bước",
+      "body": "Cài đặt bước đã được lưu thành công!"
+    }
+  },
+  "stateGuard": {
+    "action": "Bước trước đó",
+    "status": "Kết quả",
+    "title": "Vệ binh Nhà nước",
+    "add": "Thêm điều kiện",
+    "info": "Đặt ra một quy tắc để kiểm soát xem bước này có nên được thực hiện hay không, dựa trên những gì đã xảy ra ở các bước trước đó.",
+    "stop": "Dừng tự động hóa",
+    "skip": "Bỏ qua bước này",
+    "refresh": "Làm mới và thử lại",
+    "goto": "Chuyển đến Bước",
+    "proceed": "Dù sao thì vẫn thực hiện bước này.",
+    "hint": "Điều gì sẽ xảy ra nếu quy tắc này không được tuân thủ?",
+    "toast": {
+      "header": "Vệ binh Nhà nước",
+      "body": "Lực lượng bảo vệ nhà nước đã được giải cứu thành công!"
+    }
+  },
+  "pageGuard": {
+    "title": "Người bảo vệ trang",
+    "info": "Chỉ thực hiện bước này nếu giá trị trên trang đáp ứng điều kiện của bạn.",
+    "elementFinder": "Tìm mục trên trang",
+    "condition": "So sánh",
+    "value": "So sánh với",
+    "valueExtractor": "Trích xuất số hoặc văn bản",
+    "valueExtractorHint": "Sử dụng một mẫu để trích xuất một phần cụ thể của giá trị. Ví dụ: trích xuất 24.00 từ $24.00, hoặc 10 từ 10 automations.",
+    "recheck": {
+      "title": "Nếu điều kiện không được đáp ứng",
+      "hint": "Hãy chọn điều gì sẽ xảy ra nếu điều kiện lọc không được đáp ứng.",
+      "recheck": "Kiểm tra lại",
+      "interval": "Chờ một lát trước khi kiểm tra lại.",
+      "stop": "Dừng tự động hóa",
+      "skip": "Bỏ qua bước này",
+      "refresh": "Làm mới và thử lại",
+      "goto": "Chuyển đến Bước"
+    },
+    "toast": {
+      "header": "Người bảo vệ trang",
+      "body": "Lưu trang thành công!"
+    }
+  },
+  "schedule": {
+    "title": "Tự động hóa lập lịch",
+    "info": "Chạy tự động hóa này vào một ngày và giờ cụ thể.",
+    "date": "Ngày",
+    "time": "Thời gian",
+    "repeat": "Lặp lại sau vài phút"
+  },
+  "upgradePlan": {
+    "title": "Kế hoạch nâng cấp",
+    "subtitle": "Mở khóa các tính năng nâng cao và tận dụng tối đa Auto Clicker AutoFill.",
+    "currentPlan": "Kế hoạch hiện tại của bạn",
+    "free": {
+      "name": "🆓 MIỄN PHÍ",
+      "tagline": "Công nghệ tự động hóa mạnh mẽ dành cho tất cả mọi người — không cần tài khoản.",
+      "perMonth": "mãi mãi",
+      "cta": "Kế hoạch hiện tại",
+      "includes": "Bao gồm những gì:",
+      "features": {
+        "unlimitedAutomations": "Tự động hóa không giới hạn",
+        "unlimitedSteps": "Số bước không giới hạn cho mỗi lần tự động hóa",
+        "loopSteps": "Lặp lại các bước trong một vòng lặp.",
+        "recording": "Máy ghi bước chân trực quan",
+        "allValues": "Tất cả các loại giá trị — không cần API."
+      }
+    },
+    "plus": {
+      "name": "🚀 THÊM",
+      "tagline": "Tất cả những tính năng cần thiết, cùng với khả năng kiểm soát sâu hơn đối với các bước kiểm tra trước và cài đặt.",
+      "perMonth": "mỗi tháng",
+      "cta": "Nâng cấp lên Plus",
+      "includes": "Tất cả mọi thứ đều có trong phiên bản miễn phí, cộng thêm:",
+      "features": {
+        "addonCondition": "Logic bổ sung có điều kiện",
+        "actionCondition": "Quy tắc điều kiện mỗi hành động",
+        "actionSettings": "Cài đặt và ghi đè ở cấp độ hành động",
+        "noAds": "Trải nghiệm không có quảng cáo"
+      }
+    },
+    "pro": {
+      "name": "🔹 CHUYÊN NGHIỆP",
+      "tagline": "Sức mạnh toàn diện của tự động hóa — với khả năng tích hợp, trí tuệ nhân tạo và hỗ trợ ưu tiên.",
+      "perMonth": "mỗi tháng",
+      "cta": "Nâng cấp lên phiên bản Pro",
+      "includes": "Tất cả mọi thứ trong Plus, cộng thêm:",
+      "features": {
+        "sheets": "Tích hợp Google Sheets",
+        "discord": "Thông báo Discord",
+        "captcha": "Công cụ giải mã Captcha (sắp ra mắt)",
+        "vipSupport": "Hỗ trợ ưu tiên qua Discord",
+        "earlyAccess": "Được trải nghiệm sớm các tính năng mới",
+        "prideAndJoy": "Huy hiệu người ủng hộ & sự ghi nhận của cộng đồng"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google Sheets",
+    "hint": "Kết nối tài khoản Google Sheets của bạn để dễ dàng xuất các quy trình tự động hóa và nhật ký, đồng thời theo dõi lịch sử tự động hóa của bạn ở một nơi duy nhất.",
+    "useStable": {
+      "title": "Hãy sử dụng các phiên bản ổn định để có trải nghiệm tốt nhất với các tính năng của Google Sheets.",
+      "message": "Để có hiệu suất và độ tin cậy tối ưu trong Google Sheets, bạn nên sử dụng các phiên bản <1>ổn định</1> của các tính năng. Các phiên bản này được kiểm tra kỹ lưỡng để đảm bảo hoạt động trơn tru, cung cấp cho bạn một nền tảng đáng tin cậy cho công việc của mình. Bằng cách ưu tiên tính ổn định, bạn có thể nâng cao năng suất và giảm thiểu rủi ro gặp phải các sự cố không mong muốn. Nếu bạn cần hỗ trợ hoặc hướng dẫn về cách sử dụng Google Sheets hiệu quả, đừng ngần ngại liên hệ với bộ phận hỗ trợ!"
+    },
+    "loginRequired": "Vui lòng <1>Đăng nhập</1> vào tài khoản của bạn trước khi kết nối với Google Sheets.",
+    "connect": "Kết nối với Google Sheets",
+    "connected": "Đã kết nối với Google Sheets"
+  },
+  "sidebar": {
+    "search": "Tìm kiếm",
+    "upgradePlan": "Kế hoạch nâng cấp",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "language": "Ngôn ngữ",
+    "learnMore": "Tìm hiểu thêm"
+  },
+  "automations": {
+    "title": "Tự động hóa của tôi",
+    "count": "Tự động hóa ({{count}})",
+    "search": "Tìm kiếm tự động hóa của bạn...",
+    "add": "Mới",
+    "reorder": "Sắp xếp lại",
+    "reorderByName": "Sắp xếp lại theo tên",
+    "selected": "được chọn",
+    "selected_one": "1 tùy chọn tự động hóa đã được chọn",
+    "selected_other": "{{count}} tự động hóa đã được chọn",
+    "selectAll": "Chọn tất cả",
+    "exportSelected": "Xuất các mục đã chọn",
+    "deleteSelected": "Xóa mục đã chọn",
+    "cancelSelection": "Hủy bỏ lựa chọn",
+    "automationsWithinExtension": "tự động hóa trong tiện ích mở rộng",
+    "selectAutomations": "Chọn các quy trình tự động hóa để xuất hoặc xóa.",
+    "select": "Lựa chọn",
+    "import": "Nhập khẩu",
+    "toast": {
+      "header": "Tự động hóa",
+      "remove": "Đã gỡ bỏ thành công các quy trình tự động hóa",
+      "remove_one": "Tự động hóa đã được gỡ bỏ thành công.",
+      "remove_other": "{{count}} Tự động hóa đã được xóa thành công",
+      "export": "Quá trình tự động hóa đã được xuất khẩu thành công.",
+      "export_one": "1. Tự động hóa đã được xuất khẩu thành công.",
+      "export_other": "{{count}} quy trình tự động hóa đã được xuất khẩu thành công",
+      "import": "Quá trình nhập tự động hóa thành công.",
+      "import_one": "1 quy trình tự động hóa đã được nhập khẩu thành công.",
+      "import_other": "{{count}} tự động hóa đã được nhập thành công",
+      "reorder": "Các quy trình tự động hóa đã được sắp xếp lại thành công."
+    }
+  },
+  "automation": {
+    "title": "Tự động hóa",
+    "remove": "Di dời",
+    "duplicate": "Nhân bản",
+    "enable": "Cho phép",
+    "disable": "Vô hiệu hóa",
+    "disabled": "Tàn tật",
+    "edit": "Biên tập",
+    "export": "Xuất khẩu",
+    "import": "Nhập khẩu",
+    "schedule": "Lịch trình",
+    "batch": "Cài đặt vòng lặp",
+    "watch": "Cài đặt màn hình",
+    "url": "URL",
+    "name": "Tên",
+    "initWait": "Chờ trước khi bắt đầu",
+    "startTime": "Thời gian bắt đầu dự kiến",
+    "noConfig": "Không tìm thấy công cụ tự động hóa nào, vui lòng tinh chỉnh tìm kiếm của bạn.",
+    "confirm": {
+      "title": "Loại bỏ tự động hóa",
+      "message": "Bạn có chắc chắn muốn xóa tính năng tự động hóa [{{name}}] không?"
+    },
+    "toast": {
+      "header": "Tự động hóa",
+      "body": "Tự động hóa đã được lưu thành công!",
+      "schedule": "Lịch trình tự động hóa đã được lưu thành công!",
+      "settings": "Cài đặt tự động hóa đã được lưu thành công!",
+      "add": "Tự động hóa đã được thêm thành công.",
+      "duplicate": "Tự động hóa được sao chép thành công"
+    }
+  },
+  "automationSettings": {
+    "title": "Cài đặt tự động hóa",
+    "startType": "Chế độ chạy",
+    "hotkey": "Phím tắt",
+    "auto": "Tự động",
+    "autoHint": "<b>Tự động</b> — tự chạy mỗi khi trang tải xong. Bạn không cần thực hiện bất kỳ thao tác nào.",
+    "manual": "Hướng dẫn sử dụng (Phím tắt)",
+    "manualHint": "<b>Chế độ thủ công</b> — chỉ chạy khi bạn nhấn phím tắt đã được thiết lập.",
+    "loadType": "Thời gian tải trang",
+    "window": "Sau khi đạt tải trọng tối đa",
+    "windowHint": "<b>Sau khi tải xong hoàn toàn</b> (Khuyến nghị) — quá trình tự động hóa bắt đầu sau khi toàn bộ trang, bao gồm cả hình ảnh và tập lệnh, đã tải xong.",
+    "document": "Khi trang tải",
+    "documentHint": "Tự động hóa &quot; <b>Khi trang tải xong</b> &quot; bắt đầu ngay khi cấu trúc trang đã sẵn sàng, trước khi hình ảnh và các tập lệnh tải xong. Phương pháp này nhanh hơn nhưng có thể không ổn định trên một số trang.",
+    "triggerUrlChange": "Chạy khi điều hướng trang",
+    "triggerUrlChangeHint": "<b>Chạy khi điều hướng trang</b> — tự động chạy lại quy trình khi địa chỉ trang thay đổi mà không cần tải lại toàn bộ trang. Hữu ích cho Gmail, Twitter và các ứng dụng hiện đại khác.",
+    "urlMatch": "Loại khớp URL",
+    "regex": "Khớp mẫu",
+    "exact": "URL chính xác",
+    "startTime": "Thời gian bắt đầu (Đối với các quy trình tự động hóa)",
+    "googleSheetsId": "ID Google Sheets",
+    "bypass": {
+      "title": "Vượt qua quy tắc mặc định của trình duyệt đối với phím tắt",
+      "alert": "Báo động",
+      "confirm": "Xác nhận",
+      "prompt": "Lời nhắc"
+    }
+  },
+  "loop": {
+    "title": "Vòng lặp",
+    "repeat": "Lặp lại",
+    "repeatHint": "<b>Chức năng &quot;Lặp lại&quot;</b> sẽ chạy lại tất cả các bước mà không cần tải lại trang, với khoảng thời gian đã định.",
+    "repeatInterval": "Khoảng thời gian giữa các vòng lặp",
+    "refresh": "Làm cho khỏe lại",
+    "refreshHint": "<b>Làm mới trang</b> sẽ tải lại trang sau khi hoàn tất tất cả các bước.",
+    "toast": {
+      "header": "Cài đặt vòng lặp",
+      "body": "Cài đặt vòng lặp đã được lưu thành công!"
+    }
+  },
+  "error": {
+    "required": "Trường này là bắt buộc",
+    "number": "Vui lòng nhập số hợp lệ.",
+    "interval": "Vui lòng nhập số hợp lệ.",
+    "url": "Vui lòng nhập URL trang web để tiếp tục.",
+    "initWait": "Vui lòng nhập số hợp lệ.",
+    "scheduleDate": "Vui lòng nhập ngày tháng hợp lệ theo định dạng sau: 2025-12-01",
+    "scheduleTime": "Vui lòng nhập thời gian hợp lệ theo định dạng sau: 23:59:59.000",
+    "scheduleRepeat": "Vui lòng nhập một số hợp lệ để chỉ định số lần lặp lại.",
+    "startTime": "Vui lòng nhập thời gian bắt đầu hợp lệ theo định dạng sau: 12:12:12:000",
+    "json": "Tệp đã chọn không phải là định dạng JSON hợp lệ — vui lòng kiểm tra lại và thử lại.",
+    "hotKey": "Vui lòng sử dụng một chữ cái kết hợp với Ctrl, Alt hoặc Shift (ví dụ: Ctrl + A)",
+    "valueExtractor": "Mẫu bạn nhập không hợp lệ — vui lòng kiểm tra lại và thử lại.",
+    "value": "Vui lòng nhập giá trị để tiếp tục",
+    "condition": "Vui lòng chọn một điều kiện để tiếp tục.",
+    "elementFinder": "Vui lòng nhập cách tìm kiếm mặt hàng trên trang.",
+    "spreadsheetId": "Vui lòng nhập ID Google Sheets hợp lệ (44 ký tự, ví dụ: 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Bước chân",
+    "plural": "Các bước",
+    "add": "Thêm bước",
+    "addBefore": "Thêm bước trên",
+    "addAfter": "Thêm bước bên dưới",
+    "remove": "Xóa bước",
+    "disable": "Vô hiệu hóa bước",
+    "enable": "Kích hoạt bước",
+    "initWait": "Trì hoãn",
+    "name": "Tên",
+    "elementFinder": "Mục tiêu",
+    "value": "Giá trị",
+    "repeat": "Lặp lại",
+    "repeatInterval": "Khoảng thời gian",
+    "confirm": {
+      "remove": {
+        "title": "Xóa bước",
+        "message": "Bạn có chắc chắn muốn xóa Bước [{{name}}] không?"
+      }
+    },
+    "toast": {
+      "header": "Bước chân",
+      "body": "Bước này đã được lưu thành công!",
+      "remove": "Bước này đã được loại bỏ thành công!",
+      "reorder": "Các bước đã được sắp xếp lại thành công!"
+    }
+  },
+  "userscript": {
+    "add": "Thêm tập lệnh người dùng",
+    "confirm": {
+      "remove": {
+        "title": "Xóa tập lệnh người dùng",
+        "message": "Bạn có chắc chắn muốn xóa Tập lệnh người dùng [{{name}}] không?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Ví dụ"
+    },
+    "startTime": {
+      "content": "Thử &lt;1&gt;Lên lịch URL</1> Tiện ích mở rộng trình duyệt mới của chúng tôi.<br /> Nó được dùng để lên lịch hiển thị trang web/URL vào một ngày và giờ cụ thể."
+    },
+    "hotkey": {
+      "title": "Phím tắt",
+      "content": "Nhấn phím tắt trên bàn phím để tự động nhập liệu vào trường",
+      "hint": "Chữ cái đơn lẻ không kèm <kbd>Ctrl</kbd> , <kbd>Alt</kbd> hoặc <kbd>Shift</kbd> là không hợp lệ."
+    }
+  },
+  "common": {
+    "appName": "Phần mềm tự động nhấp chuột - Tự động điền",
+    "file": "Tài liệu",
+    "error": "Lỗi",
+    "save": "Cứu",
+    "clear": "Thông thoáng",
+    "close": "Đóng",
+    "download": "Tải xuống",
+    "disabled": "Tàn tật",
+    "sec": "giây",
+    "min": "phút",
+    "no": "KHÔNG",
+    "yes": "Đúng",
+    "local": "ĐỊA PHƯƠNG",
+    "dev": "PHÁT TRIỂN",
+    "stable": "ỔN ĐỊNH",
+    "examples": "Ví dụ",
+    "add": "Thêm vào"
+  },
+  "languages": {
+    "title": "Ngôn ngữ",
+    "en": "Tiếng Anh",
+    "fr": "tiếng Pháp",
+    "ko": "tiếng Hàn",
+    "ca": "Canada",
+    "hi": "Tiếng Hindi",
+    "zh_CN": "Tiếng Trung (Giản thể)",
+    "zh_TW": "Tiếng Trung (Truyền thống)",
+    "sv": "Thụy Điển",
+    "pt": "tiếng Bồ Đào Nha",
+    "ja": "Tiếng Nhật",
+    "nl": "Tiếng Hà Lan",
+    "de": "tiếng Đức",
+    "es": "tiếng Tây Ban Nha",
+    "vi": "Tiếng Việt",
+    "fi": "Phần Lan",
+    "ar": "tiếng Ả Rập",
+    "it": "Ý",
+    "ru": "Tiếng Nga",
+    "id": "Tiếng Indonesia"
+  },
+  "monitor": {
+    "title": "Màn hình",
+    "enabled": "Bật tính năng giám sát",
+    "enabledHint": "Tự động chạy lại các thao tác khi các phần tử phù hợp mới được thêm vào trang (ví dụ: để cuộn vô hạn, nội dung không đồng bộ).",
+    "rootSelector": "Giám sát Root",
+    "rootSelectorPlaceholder": "thân hình",
+    "rootSelectorHint": "Bộ chọn CSS cho vùng chứa cần quan sát",
+    "watchAttributes": "Thuộc tính giám sát",
+    "attributesPlaceholder": "phong cách, đẳng cấp, ẩn giấu",
+    "attributesHint": "Danh sách các thuộc tính cần theo dõi sự thay đổi, được phân tách bằng dấu phẩy.",
+    "debounce": "Debounce",
+    "debounceHint": "Chờ một chút trước khi xử lý các phần tử mới (1-5 giây)",
+    "timeout": "Hết giờ",
+    "timeoutHint": "Tự động dừng sau N phút (1-180)",
+    "urlChange": "Dừng lại khi thay đổi URL",
+    "urlChangeHint": "Tự động dừng theo dõi khi URL trang thay đổi.",
+    "toast": {
+      "header": "Màn hình",
+      "body": "Màn hình đã được lưu thành công!"
+    }
+  },
+  "home": {
+    "title": "Chào mừng bạn đến với Auto Clicker - AutoFill",
+    "subtitle": "Tự động hóa các cú nhấp chuột và điền biểu mẫu trên bất kỳ trang web nào bằng cách xác định mục tiêu và hành động.",
+    "quickStart": {
+      "title": "Hướng dẫn bắt đầu nhanh",
+      "step1": {
+        "title": "1. Cài đặt tiện ích mở rộng",
+        "desc": "Tải xuống và cài đặt tiện ích mở rộng từ Chrome Web Store hoặc Edge Add-ons.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Cấu hình trang đích",
+        "desc": "Mở một trang web, nhấp chuột phải vào bất kỳ phần tử nào và chọn Auto Clicker - AutoFill → Configure for this Field.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Lưu & Chạy",
+        "desc": "Lưu cấu hình của bạn và tải lại trang đích. Quá trình tự động hóa sẽ chạy.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Mẹo hữu ích",
+      "tip1": {
+        "title": "Hãy thử trên trang thử nghiệm",
+        "desc": "Mở test.getautoclicker.com, thêm hai thao tác — một thao tác điền vào trường tên người dùng và một thao tác nhấp vào nút — sau đó lưu và chạy.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Mục tiêu chính xác",
+        "desc": "Sử dụng đường dẫn phần tử để nhắm mục tiêu vào các mục cụ thể trên trang, ví dụ như //input[@name=\"username\"], để tự động hóa đáng tin cậy hơn.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Xử lý tình trạng tải trang chậm",
+        "desc": "Hãy thiết lập tùy chọn \"Chờ trước khi bắt đầu\" cho quy trình tự động hóa của bạn nếu trang tải chậm trước khi các bước thực thi diễn ra.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Cài đặt toàn cầu & Phím tắt",
+        "desc": "Cấu hình chế độ khởi động, thiết lập phím tắt và điều chỉnh vị trí thanh trạng thái trong Cài đặt chung.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Nhấp chuột phải để tự động chụp ảnh",
+        "desc": "Nhấp chuột phải vào bất kỳ ô nhập liệu hoặc nút nào trên trang và chọn \"Cấu hình cho trường này\" để tự động điền URL và Trình tìm phần tử.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Hướng dẫn bằng video",
+      "video1": {
+        "title": "Hướng dẫn bắt đầu sử dụng Auto Clicker AutoFill"
+      },
+      "video2": {
+        "title": "Tự động điền biểu mẫu"
+      },
+      "video3": {
+        "title": "Tự động nhấp vào các nút"
+      },
+      "video4": {
+        "title": "Mẹo cấu hình nâng cao"
+      }
+    }
+  }
+}

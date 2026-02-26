@@ -3,7 +3,7 @@ import { RootState } from '@acf-options-page/store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const HIDDEN_COLUMN_KEY = 'columnVisibility';
-const defaultColumnVisibility = { name: true, initWait: false, repeat: false, repeatInterval: false };
+const defaultColumnVisibility = { name: true, initWait: true, repeat: true, repeatInterval: true };
 
 export interface IActionStore {
   error?: string;
@@ -30,7 +30,6 @@ const slice = createSlice({
     },
     setActionError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-
       state.message = undefined;
     }
   }
