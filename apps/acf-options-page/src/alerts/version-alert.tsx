@@ -1,22 +1,21 @@
-import { appSelector } from '@acf-options-page/store';
-import { useAppSelector } from '@acf-options-page/store/hooks';
+import { appSelector, useAppSelector } from '@acf-options-page/store';
 import { Alert } from 'react-bootstrap';
+
+function compareVersions(a: string, b: string): number {
+  const pa = a.split('.').map((n) => Number.parseInt(n, 10) || 0);
+  const pb = b.split('.').map((n) => Number.parseInt(n, 10) || 0);
+  const len = Math.max(pa.length, pb.length);
+  for (let i = 0; i < len; i++) {
+    const da = pa[i] ?? 0;
+    const db = pb[i] ?? 0;
+    if (da > db) return 1;
+    if (da < db) return -1;
+  }
+  return 0;
+}
 
 export const VersionAlert = () => {
   const { manifest } = useAppSelector(appSelector);
-
-  function compareVersions(a: string, b: string): number {
-    const pa = a.split('.').map((n) => parseInt(n, 10) || 0);
-    const pb = b.split('.').map((n) => parseInt(n, 10) || 0);
-    const len = Math.max(pa.length, pb.length);
-    for (let i = 0; i < len; i++) {
-      const da = pa[i] ?? 0;
-      const db = pb[i] ?? 0;
-      if (da > db) return 1;
-      if (da < db) return -1;
-    }
-    return 0;
-  }
 
   return (
     <>

@@ -37,7 +37,7 @@ export const AutomationsImport = () => {
     if (file) {
       fr.readAsText(file);
     }
-    return false;
+    return;
   };
 
   return (

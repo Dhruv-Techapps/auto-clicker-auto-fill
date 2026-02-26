@@ -26,7 +26,7 @@ function Step() {
   };
 
   const onColumnChange = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement | HTMLAnchorElement>) => {
-    const column = e.currentTarget.getAttribute('data-column');
+    const { column } = e.currentTarget.dataset;
     if (!column) {
       return;
     }

@@ -1,7 +1,7 @@
 import { configSelector, useAppSelector } from '@acf-options-page/store';
 import { ROUTES } from '@acf-options-page/util';
 import { useState } from 'react';
-import { Form, Nav } from 'react-bootstrap';
+import { Button, Form, Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
 export const SidebarConfigList = () => {
@@ -19,7 +19,9 @@ export const SidebarConfigList = () => {
       {!searchMode ? (
         <div className='ms-3 me-2 py-2 d-flex align-items-center justify-content-between'>
           <small className='text-body-tertiary'>{t('automations.count', { count: configs.length })}</small>
-          <i className='bi bi-search' onClick={toggleSearchMode} />
+          <Button variant='link' size='sm' className='p-0' onClick={toggleSearchMode} aria-label='Search Automations'>
+            <i className='bi bi-search' />
+          </Button>
         </div>
       ) : (
         <Form.Control

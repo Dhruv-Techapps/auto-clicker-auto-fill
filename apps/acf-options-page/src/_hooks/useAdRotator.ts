@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface UseAdRotatorOptions {
   intervalMs?: number;
@@ -12,27 +12,27 @@ export function useAdRotator(slotIds: string[] = [], options: UseAdRotatorOption
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef<number | null>(null);
 
+  const start = useCallback(() => {
+    stop();
+    timerRef.current = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % slotIds.length);
+    }, intervalMs) as unknown as number;
+  }, [intervalMs, slotIds.length]);
+
+  const stop = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
+  const handleVisibilityChange = useCallback(() => {
+    if (!pauseOnHidden) return;
+    document.hidden ? stop() : start();
+  }, [pauseOnHidden, start, stop]);
+
   useEffect(() => {
     if (!enabled || slotIds.length <= 1) return;
-
-    const start = () => {
-      stop();
-      timerRef.current = window.setInterval(() => {
-        setActiveIndex((i) => (i + 1) % slotIds.length);
-      }, intervalMs) as unknown as number;
-    };
-
-    const stop = () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-
-    const handleVisibilityChange = () => {
-      if (!pauseOnHidden) return;
-      document.hidden ? stop() : start();
-    };
 
     start();
 
@@ -46,7 +46,7 @@ export function useAdRotator(slotIds: string[] = [], options: UseAdRotatorOption
         document.removeEventListener('visibilitychange', handleVisibilityChange);
       }
     };
-  }, [slotIds.length, intervalMs, enabled, pauseOnHidden]);
+  }, [slotIds.length, intervalMs, enabled, pauseOnHidden, start, stop, handleVisibilityChange]);
 
   return {
     activeSlotId: slotIds[activeIndex],

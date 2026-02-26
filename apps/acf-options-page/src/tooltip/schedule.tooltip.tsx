@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 export function ScheduleTooltip({ config }: { config: IConfiguration }) {
   const { t } = useTranslation();
-  if (!config.schedule || !config.schedule.date) {
+  if (!config.schedule?.date) {
     return null;
   }
   return (

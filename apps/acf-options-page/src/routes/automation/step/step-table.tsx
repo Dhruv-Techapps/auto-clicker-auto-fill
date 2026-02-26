@@ -21,15 +21,6 @@ interface IStepTableMeta {
   required?: boolean;
   width?: string;
 }
-declare module '@tanstack/react-table' {
-  interface ColumnMeta<TData, TValue> {
-    dataType?: string;
-    list?: string;
-    pattern?: string;
-    required?: boolean;
-    width?: string;
-  }
-}
 
 interface IStepTableProps {
   actions: Array<IAction | IUserScript>;

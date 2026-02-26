@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 export function WatchTooltip({ config }: { config: IConfiguration }) {
   const { t } = useTranslation();
-  if (!config.watch || !config.watch.watchEnabled) {
+  if (!config.watch?.watchEnabled) {
     return null;
   }
   return (

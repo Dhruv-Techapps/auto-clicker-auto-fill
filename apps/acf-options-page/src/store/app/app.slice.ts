@@ -47,7 +47,6 @@ const slice = createSlice({
       const error = action.error.message;
       if (error) {
         state.error = error;
-
         if (NO_EXTENSION_ERROR.includes(error)) {
           state.error = "Kindly download the extension first. If it's already installed, please refresh the page to proceed.";
           state.errorButton = true;
