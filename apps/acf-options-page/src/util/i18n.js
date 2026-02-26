@@ -10,7 +10,7 @@ if (!APP_LANGUAGES.includes(lng)) {
   window.localStorage.setItem('language', lng);
 }
 
-await i18n
+i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
   // learn more: https://github.com/i18next/i18next-http-backend
   // want your translations to be loaded from a professional CDN? => https://github.com/locize/react-tutorial#step-2---use-the-locize-cdn
