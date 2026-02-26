@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "Auto Clicker - Preenchimento Automático",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Conectando..."
+  },
+  "links": {
+    "docs": "Documentos",
+    "blog": "Blog",
+    "configuration": "Configuração",
+    "issues": "Problemas",
+    "discussion": "Discussão",
+    "test": "Formulário de prática",
+    "contact": "Contato",
+    "chat": "Bater papo",
+    "connect": "Conectar",
+    "privacy": "Política de Privacidade",
+    "googleGroup": "Grupo do Google"
+  },
+  "about": "Sobre",
+  "social": "Social",
+  "theme": {
+    "title": "Tema",
+    "switchLight": "Mude para o tema claro.",
+    "switchDark": "Mude para o tema escuro.",
+    "light": "Luz",
+    "dark": "Escuro",
+    "auto": "Auto"
+  },
+  "loading": "Carregando...",
+  "learnMore": "Saber mais",
+  "login": "Conecte-se",
+  "logout": "Sair",
+  "connect": "Conectar",
+  "disconnect": "Desconectar",
+  "resources": "Recursos",
+  "settings": {
+    "title": "Configurações globais",
+    "additional": "Configurações adicionais"
+  },
+  "notification": {
+    "title": "Mostrar notificação",
+    "error": "Ocorreu um erro.",
+    "step": "Ao concluir a etapa",
+    "loop": "Ao concluir o loop",
+    "automation": "Após a conclusão da automação",
+    "sound": "Som de notificação"
+  },
+  "discord": {
+    "title": "Notificação no Discord",
+    "loginRequired": "Por favor, faça <1>login</1> na sua conta antes de se conectar ao Discord."
+  },
+  "checkIFrames": {
+    "title": "Pesquisar em páginas incorporadas",
+    "hint": "Procure também por itens dentro de seções incorporadas da página."
+  },
+  "reloadOnError": {
+    "title": "Atualizar página em caso de erro",
+    "hint": "Recarregar a página automaticamente se algo der errado.",
+    "contextInvalidated": "Contexto de extensão invalidado."
+  },
+  "statusBar": {
+    "title": "Barra de status",
+    "hint": "Exibir a barra de status na parte inferior da página.",
+    "hide": "Esconder",
+    "topLeft": "Canto superior esquerdo",
+    "topRight": "Canto superior direito",
+    "bottomLeft": "Canto inferior esquerdo",
+    "bottomRight": "Canto inferior direito",
+    "positions": {
+      "hide": "Esconder",
+      "top-left": "Canto superior esquerdo",
+      "top-right": "Canto superior direito",
+      "bottom-left": "Canto inferior esquerdo",
+      "bottom-right": "Canto inferior direito"
+    }
+  },
+  "retry": {
+    "title": "Tentativas de repetição",
+    "interval": "Aguarde entre as tentativas",
+    "stop": "Pare a automação",
+    "skip": "Pule esta etapa",
+    "refresh": "Atualize e tente novamente",
+    "hint": "O que deve acontecer se o item não for encontrado na página?"
+  },
+  "backup": {
+    "title": "Backup",
+    "lastBackup": "Último backup:",
+    "backup": "Backup na nuvem",
+    "restore": "Restaurar da nuvem",
+    "now": "Faça backup agora",
+    "autoBackup": "Backup automático",
+    "auto-backup": "Backup automático",
+    "daily": "Diário",
+    "weekly": "Semanalmente",
+    "monthly": "Mensal",
+    "off": "Desligado",
+    "loginRequired": "Por favor, faça <1>login</1> na sua conta antes de se conectar com o Google Drive.",
+    "checkingAccess": "Verificando o acesso ao Google Drive...",
+    "connect": "Conecte-se ao Google Drive",
+    "connected": "Backup do Google Drive",
+    "loadingFiles": "Carregando seus arquivos...",
+    "restoreAction": "Restaurar",
+    "delete": "Excluir",
+    "noBackup": "Nenhum backup encontrado",
+    "confirm": {
+      "restore": {
+        "title": "Restaurar automações da nuvem",
+        "message": "Tem certeza de que deseja restaurar as automações da nuvem? Isso substituirá todas as suas automações e não poderá ser desfeito."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Reordenar Automações",
+    "hint": "Por favor, salve todas as automações antes de reordená-las."
+  },
+  "extensionNotFound": {
+    "title": "Extensão não instalada",
+    "subTitle": "Esta página funciona com a extensão <b>Auto Clicker - AutoFill</b> para Chrome e Edge.",
+    "hint": "Instale a extensão primeiro para começar."
+  },
+  "stepSettings": {
+    "title": "Configurações de etapa",
+    "info": "Essas configurações se aplicam somente a esta etapa e à sua verificação prévia, e terão prioridade sobre suas Configurações Globais.",
+    "iframeFirst": "Pesquisar primeiro as páginas incorporadas",
+    "iframeFirstHint": "Antes de pesquisar na página principal, examine qualquer conteúdo incorporado na página.",
+    "retry": {
+      "title": "Se o item não for encontrado",
+      "hint": "Escolha o que deve acontecer se o item não for encontrado, mesmo após novas tentativas.",
+      "retry": "Tentativas de repetição",
+      "interval": "Aguarde entre as tentativas",
+      "stop": "Pare a automação",
+      "skip": "Pule esta etapa",
+      "goto": "Vá para a etapa",
+      "refresh": "Atualize e tente novamente"
+    },
+    "toast": {
+      "header": "Configurações de etapa",
+      "body": "Configurações de passos salvas com sucesso!"
+    }
+  },
+  "stateGuard": {
+    "action": "Etapa anterior",
+    "status": "Resultado",
+    "title": "Guarda Estadual",
+    "add": "Adicionar condição",
+    "info": "Defina uma regra para controlar se esta etapa deve ser executada, com base no que aconteceu nas etapas anteriores.",
+    "stop": "Pare a automação",
+    "skip": "Pule esta etapa",
+    "refresh": "Atualize e tente novamente",
+    "goto": "Vá para a etapa",
+    "proceed": "Execute esta etapa mesmo assim",
+    "hint": "O que deve acontecer se a regra não for cumprida?",
+    "toast": {
+      "header": "Guarda Estadual",
+      "body": "Guarda estadual salvou o local com sucesso!"
+    }
+  },
+  "pageGuard": {
+    "title": "Guarda de Páginas",
+    "info": "Execute esta etapa somente se um valor na página atender à sua condição.",
+    "elementFinder": "Encontre o item na página",
+    "condition": "Comparar",
+    "value": "Comparar com",
+    "valueExtractor": "Extrair número ou texto",
+    "valueExtractorHint": "Use um padrão para extrair uma parte específica do valor. Por exemplo, extraia 24,00 de $24,00 ou 10 de 10 automações.",
+    "recheck": {
+      "title": "Se a condição não for atendida",
+      "hint": "Escolha o que deve acontecer se a condição do filtro não for atendida.",
+      "recheck": "Verifique novamente",
+      "interval": "Aguarde antes de verificar novamente.",
+      "stop": "Pare a automação",
+      "skip": "Pule esta etapa",
+      "refresh": "Atualize e tente novamente",
+      "goto": "Vá para a etapa"
+    },
+    "toast": {
+      "header": "Guarda de Páginas",
+      "body": "Proteção de página salva com sucesso!"
+    }
+  },
+  "schedule": {
+    "title": "Automação de agendamento",
+    "info": "Execute esta automação em uma data e hora específicas.",
+    "date": "Data",
+    "time": "Tempo",
+    "repeat": "Repita em minutos"
+  },
+  "upgradePlan": {
+    "title": "Plano de atualização",
+    "subtitle": "Desbloqueie recursos avançados e aproveite ao máximo o Auto Clicker AutoFill.",
+    "currentPlan": "Seu plano atual",
+    "free": {
+      "name": "🆓 GRÁTIS",
+      "tagline": "Automação poderosa para todos — sem necessidade de conta.",
+      "perMonth": "para sempre",
+      "cta": "Plano atual",
+      "includes": "O que está incluído:",
+      "features": {
+        "unlimitedAutomations": "Automações ilimitadas",
+        "unlimitedSteps": "Número ilimitado de etapas por automação",
+        "loopSteps": "Repita os passos em um loop.",
+        "recording": "Registrador visual de passos",
+        "allValues": "Todos os tipos de valores — sem necessidade de API"
+      }
+    },
+    "plus": {
+      "name": "🚀 MAIS",
+      "tagline": "Todos os recursos essenciais, além de um controle mais aprofundado sobre a pré-verificação e as configurações em poucos passos.",
+      "perMonth": "por mês",
+      "cta": "Faça upgrade para o Plus",
+      "includes": "Tudo incluído no pacote gratuito, mais:",
+      "features": {
+        "addonCondition": "lógica de complemento condicional",
+        "actionCondition": "Regras de condição por ação",
+        "actionSettings": "Configurações e substituições de nível de ação",
+        "noAds": "Experiência sem anúncios"
+      }
+    },
+    "pro": {
+      "name": "🔹 PRO",
+      "tagline": "Todo o poder da automação — com integrações, IA e suporte prioritário.",
+      "perMonth": "por mês",
+      "cta": "Faça o upgrade para a versão Pro.",
+      "includes": "Tudo em Plus, mais:",
+      "features": {
+        "sheets": "Integração com o Google Sheets",
+        "discord": "Notificações do Discord",
+        "captcha": "Resolvedor de Captcha (em breve)",
+        "vipSupport": "Suporte prioritário via Discord",
+        "earlyAccess": "Acesso antecipado a novas funcionalidades",
+        "prideAndJoy": "Distintivo de apoiador e reconhecimento da comunidade"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Planilhas Google",
+    "hint": "Conecte sua conta do Google Sheets para exportar facilmente suas automações e registros, e mantenha o histórico de suas automações em um só lugar.",
+    "useStable": {
+      "title": "Use as versões estáveis para aproveitar os recursos do Google Sheets.",
+      "message": "Para obter o melhor desempenho e confiabilidade no Google Sheets, recomenda-se utilizar as versões <1>estáveis</1> de seus recursos. Essas versões passam por testes rigorosos para garantir o funcionamento perfeito, proporcionando uma plataforma confiável para suas tarefas. Ao priorizar a estabilidade, você pode aumentar sua produtividade e minimizar o risco de encontrar problemas inesperados. Se precisar de ajuda ou orientação para usar o Google Sheets de forma eficaz, entre em contato com o suporte!"
+    },
+    "loginRequired": "Por favor, faça <1>login</1> na sua conta antes de se conectar com o Google Sheets.",
+    "connect": "Conecte-se com o Google Sheets",
+    "connected": "Conectado com o Google Sheets"
+  },
+  "sidebar": {
+    "search": "Procurar",
+    "upgradePlan": "Plano de atualização",
+    "login": "Conecte-se",
+    "logout": "Sair",
+    "language": "Linguagem",
+    "learnMore": "Saber mais"
+  },
+  "automations": {
+    "title": "Minhas Automações",
+    "count": "Automações ({{count}})",
+    "search": "Pesquise sua automação...",
+    "add": "Novo",
+    "reorder": "Reordenar",
+    "reorderByName": "Reordenar por nome",
+    "selected": "selecionado",
+    "selected_one": "1 automação selecionada",
+    "selected_other": "{{count}} automações selecionadas",
+    "selectAll": "Selecionar tudo",
+    "exportSelected": "Exportar selecionado",
+    "deleteSelected": "Excluir selecionados",
+    "cancelSelection": "Cancelar seleção",
+    "automationsWithinExtension": "automações dentro da extensão",
+    "selectAutomations": "Selecione as automações que deseja exportar ou excluir.",
+    "select": "Selecione",
+    "import": "Importar",
+    "toast": {
+      "header": "Automações",
+      "remove": "Automações removidas com sucesso",
+      "remove_one": "Automação removida com sucesso",
+      "remove_other": "{{count}} Automações removidas com sucesso",
+      "export": "Automações exportadas com sucesso",
+      "export_one": "1 automação exportada com sucesso",
+      "export_other": "{{count}} automações exportadas com sucesso",
+      "import": "Automações importadas com sucesso",
+      "import_one": "1 automação importada com sucesso",
+      "import_other": "{{count}} automações importadas com sucesso",
+      "reorder": "Automações reordenadas com sucesso"
+    }
+  },
+  "automation": {
+    "title": "Automação",
+    "remove": "Remover",
+    "duplicate": "Duplicado",
+    "enable": "Habilitar",
+    "disable": "Desativar",
+    "disabled": "Desabilitado",
+    "edit": "Editar",
+    "export": "Exportar",
+    "import": "Importar",
+    "schedule": "Agendar",
+    "batch": "Configurações de loop",
+    "watch": "Configurações do monitor",
+    "url": "URL",
+    "name": "Nome",
+    "initWait": "Aguarde antes de começar",
+    "startTime": "Horário de início programado",
+    "noConfig": "Nenhuma automação encontrada. Por favor, refine sua busca.",
+    "confirm": {
+      "title": "Remover a automação",
+      "message": "Tem certeza de que deseja remover a automação [{{name}}]?"
+    },
+    "toast": {
+      "header": "Automação",
+      "body": "Automação salva com sucesso!",
+      "schedule": "Agendamento de automação salvo com sucesso!",
+      "settings": "Configurações de automação salvas com sucesso!",
+      "add": "Automação adicionada com sucesso",
+      "duplicate": "Automação duplicada com sucesso"
+    }
+  },
+  "automationSettings": {
+    "title": "Configurações de automação",
+    "startType": "Modo de execução",
+    "hotkey": "Tecla de atalho",
+    "auto": "Automático",
+    "autoHint": "<b>Automático</b> — executa-se sozinho sempre que a página é carregada. Não é necessária nenhuma ação da sua parte.",
+    "manual": "Manual (Tecla de atalho)",
+    "manualHint": "<b>Manual</b> — só funciona quando você pressiona o atalho de teclado definido.",
+    "loadType": "Tempo de carregamento da página",
+    "window": "Após carga completa",
+    "windowHint": "<b>Após o carregamento completo</b> (recomendado) — a automação inicia depois que toda a página, incluindo imagens e scripts, terminar de carregar.",
+    "document": "À medida que a página carrega",
+    "documentHint": "<b>Assim que a página carrega</b> — a automação inicia assim que a estrutura da página estiver pronta, antes que as imagens e os scripts terminem de carregar. Mais rápido, mas pode ser instável em algumas páginas.",
+    "triggerUrlChange": "Executar na navegação da página",
+    "triggerUrlChangeHint": "<b>Executar na navegação da página</b> — executa novamente a automação quando o endereço da página muda, sem recarregar a página completamente. Útil para Gmail, Twitter e outros aplicativos modernos.",
+    "urlMatch": "Tipo de correspondência de URL",
+    "regex": "Combinação de padrões",
+    "exact": "URL exata",
+    "startTime": "Hora de início (para automações)",
+    "googleSheetsId": "ID do Google Sheets",
+    "bypass": {
+      "title": "Ignorar o comportamento padrão do navegador para teclas de atalho",
+      "alert": "Alerta",
+      "confirm": "Confirmar",
+      "prompt": "Incitar"
+    }
+  },
+  "loop": {
+    "title": "Laço",
+    "repeat": "Repita",
+    "repeatHint": "<b>Repetir</b> executará novamente todas as etapas sem recarregar a página, no intervalo especificado.",
+    "repeatInterval": "Intervalo entre loops",
+    "refresh": "Atualizar",
+    "refreshHint": "<b>Atualizar</b> recarregará a página assim que todas as etapas forem concluídas.",
+    "toast": {
+      "header": "Configurações de loop",
+      "body": "Configurações do loop salvas com sucesso!"
+    }
+  },
+  "error": {
+    "required": "Este campo é obrigatório",
+    "number": "Por favor, insira um número válido.",
+    "interval": "Por favor, insira um número válido.",
+    "url": "Por favor, insira o endereço de um site para continuar.",
+    "initWait": "Por favor, insira um número válido.",
+    "scheduleDate": "Por favor, insira uma data válida neste formato: 2025-12-01",
+    "scheduleTime": "Por favor, insira um horário válido neste formato: 23:59:59.000",
+    "scheduleRepeat": "Por favor, insira um número válido para quantas vezes a repetição deve ocorrer.",
+    "startTime": "Por favor, insira um horário de início válido neste formato: 12:12:12:000",
+    "json": "O arquivo selecionado não é um JSON válido — verifique e tente novamente.",
+    "hotKey": "Por favor, utilize uma letra combinada com Ctrl, Alt ou Shift (ex.: Ctrl + A)",
+    "valueExtractor": "O padrão que você inseriu não é válido — verifique novamente e tente outra vez.",
+    "value": "Por favor, insira um valor para continuar.",
+    "condition": "Por favor, selecione uma condição para continuar.",
+    "elementFinder": "Por favor, indique como encontrar o item na página.",
+    "spreadsheetId": "Por favor, insira um ID válido do Google Sheets (44 caracteres, por exemplo, 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Etapa",
+    "plural": "Passos",
+    "add": "Adicionar etapa",
+    "addBefore": "Adicionar etapa acima",
+    "addAfter": "Adicione a etapa abaixo.",
+    "remove": "Remover etapa",
+    "disable": "Desativar etapa",
+    "enable": "Ativar etapa",
+    "initWait": "Atraso",
+    "name": "Nome",
+    "elementFinder": "Alvo",
+    "value": "Valor",
+    "repeat": "Repita",
+    "repeatInterval": "Intervalo",
+    "confirm": {
+      "remove": {
+        "title": "Remover etapa",
+        "message": "Tem certeza de que deseja remover a etapa [{{name}}]?"
+      }
+    },
+    "toast": {
+      "header": "Etapa",
+      "body": "Etapa salva com sucesso!",
+      "remove": "Etapa removida com sucesso!",
+      "reorder": "Etapas reordenadas com sucesso!"
+    }
+  },
+  "userscript": {
+    "add": "Adicionar script de usuário",
+    "confirm": {
+      "remove": {
+        "title": "Remover script do usuário",
+        "message": "Tem certeza de que deseja remover o script de usuário [{{name}}]?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Exemplos"
+    },
+    "startTime": {
+      "content": "Experimente &lt;1&gt;URL de agendamento</1> Nossa nova extensão para navegador.<br /> É usado para agendar o carregamento de uma página da web/URL em um dia e horário específicos."
+    },
+    "hotkey": {
+      "title": "Tecla de atalho",
+      "content": "Pressione a tecla de atalho no teclado para digitar automaticamente no campo.",
+      "hint": "Uma única letra sem <kbd>Ctrl</kbd> , <kbd>Alt</kbd> ou <kbd>Shift</kbd> não é válida."
+    }
+  },
+  "common": {
+    "appName": "Auto Clicker - Preenchimento Automático",
+    "file": "Arquivo",
+    "error": "Erro",
+    "save": "Salvar",
+    "clear": "Claro",
+    "close": "Fechar",
+    "download": "Download",
+    "disabled": "Desabilitado",
+    "sec": "seg",
+    "min": "min",
+    "no": "Não",
+    "yes": "Sim",
+    "local": "LOCAL",
+    "dev": "DESENVOLVIMENTO",
+    "stable": "ESTÁVEL",
+    "examples": "Exemplos",
+    "add": "Adicionar"
+  },
+  "languages": {
+    "title": "Linguagem",
+    "en": "Inglês",
+    "fr": "Francês",
+    "ko": "coreano",
+    "ca": "Canadá",
+    "hi": "hindi",
+    "zh_CN": "Chinês (Simplificado)",
+    "zh_TW": "Chinês (Tradicional)",
+    "sv": "sueco",
+    "pt": "Português",
+    "ja": "japonês",
+    "nl": "Holandês",
+    "de": "Alemão",
+    "es": "Espanhol",
+    "vi": "vietnamita",
+    "fi": "finlandês",
+    "ar": "árabe",
+    "it": "italiano",
+    "ru": "russo",
+    "id": "indonésio"
+  },
+  "monitor": {
+    "title": "Monitor",
+    "enabled": "Ativar monitoramento",
+    "enabledHint": "Executar automaticamente as mesmas ações quando novos elementos correspondentes forem adicionados à página (por exemplo, para rolagem infinita, conteúdo assíncrono).",
+    "rootSelector": "Monitorar raiz",
+    "rootSelectorPlaceholder": "corpo",
+    "rootSelectorHint": "Seletor CSS para o contêiner a ser observado.",
+    "watchAttributes": "Atributos do monitor",
+    "attributesPlaceholder": "estilo, classe, oculto",
+    "attributesHint": "Lista de atributos a serem observados para detectar alterações, separados por vírgulas.",
+    "debounce": "Debounce",
+    "debounceHint": "Atraso antes do processamento de novos elementos (1-5 segundos)",
+    "timeout": "Tempo esgotado",
+    "timeoutHint": "Parada automática após N minutos (1-180)",
+    "urlChange": "Parar ao alterar o URL",
+    "urlChangeHint": "Interromper automaticamente o monitoramento quando o URL da página for alterado.",
+    "toast": {
+      "header": "Monitor",
+      "body": "Monitoramento salvo com sucesso!"
+    }
+  },
+  "home": {
+    "title": "Bem-vindo ao Auto Clicker - Preenchimento Automático",
+    "subtitle": "Automatize cliques e preenchimentos de formulários em qualquer site, definindo metas e ações.",
+    "quickStart": {
+      "title": "Guia de Início Rápido",
+      "step1": {
+        "title": "1. Instale a extensão",
+        "desc": "Baixe e instale a extensão na Chrome Web Store ou nos complementos do Edge.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Configurar uma página de destino",
+        "desc": "Abra uma página da web, clique com o botão direito em qualquer elemento e escolha Auto Clicker - Preenchimento automático → Configurar para este campo.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Salvar e Executar",
+        "desc": "Salve sua configuração e recarregue a página de destino. A automação será executada automaticamente.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Dicas úteis",
+      "tip1": {
+        "title": "Experimente na página de teste.",
+        "desc": "Acesse test.getautoclicker.com, adicione duas ações — uma para preencher um campo de nome de usuário e outra para clicar em um botão — depois salve e execute.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Selecione os itens com precisão.",
+        "desc": "Use caminhos de elementos para direcionar itens específicos em uma página, como //input[@name=\"username\"], para uma automação mais confiável.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Lidar com carregamento lento de páginas",
+        "desc": "Configure uma ação \"Aguardar antes de iniciar\" na sua automação caso a página carregue lentamente antes da execução das etapas.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Configurações globais e teclas de atalho",
+        "desc": "Configure o modo de inicialização, defina um atalho de teclado e ajuste a posição da barra de status nas Configurações Globais.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Clique com o botão direito para Capturar automaticamente.",
+        "desc": "Clique com o botão direito do mouse em qualquer campo de entrada ou botão em uma página e selecione \"Configurar para este campo\" para preencher automaticamente o URL e o Localizador de Elementos.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Guias em vídeo",
+      "video1": {
+        "title": "Primeiros passos com o Auto Clicker AutoFill"
+      },
+      "video2": {
+        "title": "Preenchimento automático de formulários"
+      },
+      "video3": {
+        "title": "Clicar em botões automaticamente"
+      },
+      "video4": {
+        "title": "Dicas de configuração avançada"
+      }
+    }
+  }
+}

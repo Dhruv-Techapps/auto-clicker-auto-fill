@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "Automaattinen napsauttaja - Automaattinen täyttö",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Yhdistetään..."
+  },
+  "links": {
+    "docs": "Dokumentit",
+    "blog": "Blogi",
+    "configuration": "Kokoonpano",
+    "issues": "Ongelmat",
+    "discussion": "Keskustelu",
+    "test": "Harjoituslomake",
+    "contact": "Yhteystiedot",
+    "chat": "Chat",
+    "connect": "Yhdistä",
+    "privacy": "Tietosuoja ja käytäntö",
+    "googleGroup": "Google-ryhmä"
+  },
+  "about": "Noin",
+  "social": "Sosiaalinen",
+  "theme": {
+    "title": "Teema",
+    "switchLight": "Vaihda vaaleaan teemaan",
+    "switchDark": "Vaihda tummaan teemaan",
+    "light": "Valo",
+    "dark": "Tumma",
+    "auto": "Auto"
+  },
+  "loading": "Ladataan...",
+  "learnMore": "Lue lisää",
+  "login": "Kirjaudu sisään",
+  "logout": "Kirjaudu ulos",
+  "connect": "Yhdistä",
+  "disconnect": "Katkaise yhteys",
+  "resources": "Resurssit",
+  "settings": {
+    "title": "Globaalit asetukset",
+    "additional": "Lisäasetukset"
+  },
+  "notification": {
+    "title": "Näytä ilmoitus",
+    "error": "Virhe tapahtui",
+    "step": "Vaiheen valmistuttua",
+    "loop": "Silmukan valmistuttua",
+    "automation": "Automaation valmistuttua",
+    "sound": "Ilmoitusääni"
+  },
+  "discord": {
+    "title": "Ilmoitus Discordissa",
+    "loginRequired": "<1>Kirjaudu</1> tilillesi ennen kuin muodostat yhteyden Discordilla."
+  },
+  "checkIFrames": {
+    "title": "Hae upotettujen sivujen sisältä",
+    "hint": "Etsi myös sivun upotettujen osien sisältämiä kohteita."
+  },
+  "reloadOnError": {
+    "title": "Päivitä sivu virhetilanteessa",
+    "hint": "Lataa sivu automaattisesti uudelleen, jos jokin menee pieleen",
+    "contextInvalidated": "Laajennuskonteksti mitätöity."
+  },
+  "statusBar": {
+    "title": "Tilarivi",
+    "hint": "Näytä tilarivi sivun alareunassa",
+    "hide": "Piilottaa",
+    "topLeft": "Vasen yläkulma",
+    "topRight": "Ylhäällä oikealla",
+    "bottomLeft": "Vasen alakulma",
+    "bottomRight": "Oikea alhaalla",
+    "positions": {
+      "hide": "Piilottaa",
+      "top-left": "Vasen yläkulma",
+      "top-right": "Ylhäällä oikealla",
+      "bottom-left": "Vasen alakulma",
+      "bottom-right": "Oikea alhaalla"
+    }
+  },
+  "retry": {
+    "title": "Uudelleenyritykset",
+    "interval": "Odota uudelleenyritysten välillä",
+    "stop": "Lopeta automaatio",
+    "skip": "Ohita tämä vaihe",
+    "refresh": "Päivitä ja yritä uudelleen",
+    "hint": "Mitä pitäisi tapahtua, jos kohdetta ei löydy sivulta?"
+  },
+  "backup": {
+    "title": "Varmuuskopio",
+    "lastBackup": "Viimeisin varmuuskopio:",
+    "backup": "Varmuuskopiointi pilveen",
+    "restore": "Palauta pilvestä",
+    "now": "Varmuuskopioi nyt",
+    "autoBackup": "Automaattinen varmuuskopiointi",
+    "auto-backup": "Automaattinen varmuuskopiointi",
+    "daily": "Päivittäin",
+    "weekly": "Viikoittain",
+    "monthly": "Kuukausittain",
+    "off": "Pois",
+    "loginRequired": "<1>Kirjaudu</1> tilillesi ennen kuin muodostat yhteyden Google Driveen.",
+    "checkingAccess": "Tarkistetaan Google Driven käyttöoikeuksia...",
+    "connect": "Yhdistä Google Driveen",
+    "connected": "Google Driven varmuuskopiointi",
+    "loadingFiles": "Tiedostoja ladataan...",
+    "restoreAction": "Palauttaa",
+    "delete": "Poistaa",
+    "noBackup": "Varmuuskopiota ei löytynyt",
+    "confirm": {
+      "restore": {
+        "title": "Palauta automaatiot pilvestä",
+        "message": "Haluatko varmasti palauttaa automaatiot pilvestä? Tämä korvaa kaikki automaatiosi, eikä sitä voi perua."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Järjestä automaatiot uudelleen",
+    "hint": "Tallenna kaikki automaatiot ennen uudelleenjärjestelyä"
+  },
+  "extensionNotFound": {
+    "title": "Laajennusta ei ole asennettu",
+    "subTitle": "Tämä sivu toimii <b>Auto Clicker - AutoFill</b> -laajennuksen kanssa Chromelle ja Edgelle.",
+    "hint": "Asenna laajennus ensin aloittaaksesi."
+  },
+  "stepSettings": {
+    "title": "Vaiheen asetukset",
+    "info": "Nämä asetukset koskevat vain tätä vaihetta ja sen esitarkistusta, ja ne ovat etusijalla yleisiin asetuksiin nähden.",
+    "iframeFirst": "Hae ensin upotetuista sivuista",
+    "iframeFirstHint": "Katso sivulle upotettua sisältöä ennen kuin haet pääsivulta.",
+    "retry": {
+      "title": "Jos kohdetta ei löydy",
+      "hint": "Valitse, mitä tapahtuu, jos kohdetta ei löydy uudelleenyrityksen jälkeen.",
+      "retry": "Uudelleenyritykset",
+      "interval": "Odota uudelleenyritysten välillä",
+      "stop": "Lopeta automaatio",
+      "skip": "Ohita tämä vaihe",
+      "goto": "Siirry vaiheeseen",
+      "refresh": "Päivitä ja yritä uudelleen"
+    },
+    "toast": {
+      "header": "Vaiheen asetukset",
+      "body": "Vaiheasetukset tallennettu onnistuneesti!"
+    }
+  },
+  "stateGuard": {
+    "action": "Edellinen vaihe",
+    "status": "Tulos",
+    "title": "Valtion kaarti",
+    "add": "Lisää ehto",
+    "info": "Aseta sääntö, joka hallitsee tämän vaiheen suorittamista edellisten vaiheiden tapahtumien perusteella.",
+    "stop": "Lopeta automaatio",
+    "skip": "Ohita tämä vaihe",
+    "refresh": "Päivitä ja yritä uudelleen",
+    "goto": "Siirry vaiheeseen",
+    "proceed": "Suorita tämä vaihe joka tapauksessa",
+    "hint": "Mitä pitäisi tapahtua, jos sääntöä ei noudateta?",
+    "toast": {
+      "header": "Valtion kaarti",
+      "body": "Valtion vartija pelastettu onnistuneesti!"
+    }
+  },
+  "pageGuard": {
+    "title": "Sivun suojaus",
+    "info": "Suorita tämä vaihe vain, jos sivulla oleva arvo täyttää ehtosi.",
+    "elementFinder": "Etsi kohde sivulta",
+    "condition": "Vertaa",
+    "value": "Vertaa",
+    "valueExtractor": "Poimi numero tai teksti",
+    "valueExtractorHint": "Käytä kuviota hakeaksesi tietyn osan arvosta. Poimi esimerkiksi 24,00 joukosta $24.00 tai 10 kymmenestä automaatiosta.",
+    "recheck": {
+      "title": "Jos ehtoa ei täytetä",
+      "hint": "Valitse, mitä tapahtuu, jos suodatusehto ei täyty.",
+      "recheck": "Tarkista uudelleen",
+      "interval": "Odota ennen uudelleentarkistusta",
+      "stop": "Lopeta automaatio",
+      "skip": "Ohita tämä vaihe",
+      "refresh": "Päivitä ja yritä uudelleen",
+      "goto": "Siirry vaiheeseen"
+    },
+    "toast": {
+      "header": "Sivun suojaus",
+      "body": "Sivun suojaus tallennettu onnistuneesti!"
+    }
+  },
+  "schedule": {
+    "title": "Aikatauluautomaatio",
+    "info": "Suorita tämä automaatio tiettynä päivänä ja kellonaikana",
+    "date": "Päivämäärä",
+    "time": "Aika",
+    "repeat": "Toista minuuteissa"
+  },
+  "upgradePlan": {
+    "title": "Päivityssuunnitelma",
+    "subtitle": "Avaa lisäominaisuudet ja hyödynnä Auto Clicker AutoFill -sovellus parhaalla mahdollisella tavalla.",
+    "currentPlan": "Nykyinen sopimuksesi",
+    "free": {
+      "name": "🆓 ILMAINEN",
+      "tagline": "Tehokasta automaatiota kaikille – ei vaadi tiliä.",
+      "perMonth": "ikuisesti",
+      "cta": "Nykyinen suunnitelma",
+      "includes": "Sisältyy hintaan:",
+      "features": {
+        "unlimitedAutomations": "Rajattomat automaatiot",
+        "unlimitedSteps": "Rajoittamaton määrä askeleita automaatiota kohden",
+        "loopSteps": "Toista vaiheita silmukassa",
+        "recording": "Visuaalinen askelten tallennin",
+        "allValues": "Kaikki arvotyypit — API:a ei tarvita"
+      }
+    },
+    "plus": {
+      "name": "🚀 LISÄÄ",
+      "tagline": "Kaikki olennaiset ominaisuudet sekä tarkempi hallinta esitarkistuksessa ja asetuksissa vaihe vaiheelta.",
+      "perMonth": "kuukaudessa",
+      "cta": "Päivitä Plus-tilaukseen",
+      "includes": "Kaikki ilmaiseksi, plus:",
+      "features": {
+        "addonCondition": "Ehdollinen lisäosan logiikka",
+        "actionCondition": "Toimintokohtaiset ehtosäännöt",
+        "actionSettings": "Toimintotason asetukset ja ohitukset",
+        "noAds": "Mainokseton kokemus"
+      }
+    },
+    "pro": {
+      "name": "🔹 AMMATTILAINEN",
+      "tagline": "Automaation täysi teho – integraatioilla, tekoälyllä ja priorisoidulla tuella.",
+      "perMonth": "kuukaudessa",
+      "cta": "Päivitä Pro-tasolle",
+      "includes": "Kaikki Plus-palvelussa, plus:",
+      "features": {
+        "sheets": "Google Sheetsin integrointi",
+        "discord": "Discord-ilmoitukset",
+        "captcha": "Captcha-ratkaisija (tulossa pian)",
+        "vipSupport": "Prioriteettituki Discordin kautta",
+        "earlyAccess": "Uusien ominaisuuksien ennakkokäyttöoikeus",
+        "prideAndJoy": "Kannattajamerkki ja yhteisön tunnustus"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google-taulukot",
+    "hint": "Yhdistä Google Sheets -tilisi viedäksesi automaatiosi ja lokisi helposti ja seurataksesi automaatiohistoriaasi yhdessä paikassa.",
+    "useStable": {
+      "title": "Käytä Google Sheetsin ominaisuuksille vakaita versioita.",
+      "message": "Google Sheetsin optimaalisen suorituskyvyn ja luotettavuuden takaamiseksi on suositeltavaa käyttää sen ominaisuuksien <1>vakaita</1> versioita. Nämä versiot testataan perusteellisesti saumattoman toimivuuden varmistamiseksi, mikä tarjoaa sinulle luotettavan alustan tehtävillesi. Priorisoimalla vakautta voit parantaa tuottavuuttasi ja minimoida odottamattomien ongelmien riskin. Jos tarvitset apua tai ohjausta Google Sheetsin tehokkaaseen hyödyntämiseen, ota rohkeasti yhteyttä tukeen!"
+    },
+    "loginRequired": "<1>Kirjaudu</1> tilillesi ennen kuin muodostat yhteyden Google Sheetsiin.",
+    "connect": "Yhdistä Google Sheetsin avulla",
+    "connected": "Yhdistetty Google Sheetsiin"
+  },
+  "sidebar": {
+    "search": "Haku",
+    "upgradePlan": "Päivityssuunnitelma",
+    "login": "Kirjaudu sisään",
+    "logout": "Kirjaudu ulos",
+    "language": "Kieli",
+    "learnMore": "Lue lisää"
+  },
+  "automations": {
+    "title": "Omat automaatiot",
+    "count": "Automaatiot ({{count}})",
+    "search": "Hae automaatiotasi...",
+    "add": "Uusi",
+    "reorder": "Järjestä uudelleen",
+    "reorderByName": "Järjestä uudelleen nimen mukaan",
+    "selected": "valittu",
+    "selected_one": "1 automaatio valittu",
+    "selected_other": "{{count}} automaatiota valittu",
+    "selectAll": "Valitse kaikki",
+    "exportSelected": "Vie valitut",
+    "deleteSelected": "Poista valitut",
+    "cancelSelection": "Peruuta valinta",
+    "automationsWithinExtension": "automaatiot laajennuksen sisällä",
+    "selectAutomations": "Valitse vietävät tai poistettavat automaatiot",
+    "select": "Valitse",
+    "import": "Tuoda",
+    "toast": {
+      "header": "Automaatiot",
+      "remove": "Automaatiot poistettu onnistuneesti",
+      "remove_one": "Automaatio poistettu onnistuneesti",
+      "remove_other": "{{count}} automaatiota poistettu onnistuneesti",
+      "export": "Automaatioiden vienti onnistui",
+      "export_one": "1 automaatio viety onnistuneesti",
+      "export_other": "{{count}} automaatiota viety onnistuneesti",
+      "import": "Automaatioiden tuonti onnistui",
+      "import_one": "1 automaatio tuotu onnistuneesti",
+      "import_other": "{{count}} automaatiota tuotu onnistuneesti",
+      "reorder": "Automaatioiden uudelleenjärjestely onnistui"
+    }
+  },
+  "automation": {
+    "title": "Automaatio",
+    "remove": "Poistaa",
+    "duplicate": "Kopio",
+    "enable": "Ota käyttöön",
+    "disable": "Poista käytöstä",
+    "disabled": "Liikuntarajoitteinen",
+    "edit": "Muokata",
+    "export": "Viedä",
+    "import": "Tuoda",
+    "schedule": "Ajoittaa",
+    "batch": "Silmukka-asetukset",
+    "watch": "Näytön asetukset",
+    "url": "URL-osoite",
+    "name": "Nimi",
+    "initWait": "Odota ennen aloitusta",
+    "startTime": "Aikataulutettu aloitusaika",
+    "noConfig": "Automaatiota ei löytynyt, ole hyvä ja tarkenna hakuasi.",
+    "confirm": {
+      "title": "Poista automaatio",
+      "message": "Haluatko varmasti poistaa [{{name}}] -automaation?"
+    },
+    "toast": {
+      "header": "Automaatio",
+      "body": "Automaatio tallennettu onnistuneesti!",
+      "schedule": "Automaatioaikataulu tallennettu onnistuneesti!",
+      "settings": "Automaatioasetukset tallennettu onnistuneesti!",
+      "add": "Automaatio lisätty onnistuneesti",
+      "duplicate": "Automaatio kopioitu onnistuneesti"
+    }
+  },
+  "automationSettings": {
+    "title": "Automaatioasetukset",
+    "startType": "Suoritustila",
+    "hotkey": "Pikanäppäin",
+    "auto": "Automaattinen",
+    "autoHint": "<b>Automaattinen</b> — toimii itsestään aina sivun latautuessa. Sinulta ei vaadita toimia.",
+    "manual": "Manuaalinen (pikanäppäin)",
+    "manualHint": "<b>Manuaalinen</b> — käynnistyy vain, kun painat määritettyä pikanäppäintä.",
+    "loadType": "Sivun latausaika",
+    "window": "Täyden kuorman jälkeen",
+    "windowHint": "<b>Täyden latauksen jälkeen</b> (suositus) — automaatio alkaa, kun koko sivu, kuvat ja skriptit mukaan lukien, on latautunut.",
+    "document": "Sivun latautuessa",
+    "documentHint": "<b>Sivun latautuessa</b> — automaatio alkaa heti, kun sivun rakenne on valmis, ennen kuin kuvat ja skriptit ovat latautuneet. Nopeampi, mutta voi olla epävakaa joillakin sivuilla.",
+    "triggerUrlChange": "Suorita sivun navigoinnissa",
+    "triggerUrlChangeHint": "<b>Suorita sivun navigoinnissa</b> — suorittaa automaation uudelleen, kun sivun osoite muuttuu ilman täyttä uudelleenlatausta. Hyödyllinen Gmailille, Twitterille ja muille moderneille sovelluksille.",
+    "urlMatch": "URL-osoitteen hakutyyppi",
+    "regex": "Kuvioiden yhteensopivuus",
+    "exact": "Tarkka URL-osoite",
+    "startTime": "Aloitusaika (automaatioille)",
+    "googleSheetsId": "Google Sheetsin tunnus",
+    "bypass": {
+      "title": "Ohita selaimen oletustoiminta pikanäppäimillä",
+      "alert": "Hälytys",
+      "confirm": "Vahvistaa",
+      "prompt": "Kehote"
+    }
+  },
+  "loop": {
+    "title": "Silmukka",
+    "repeat": "Toistaa",
+    "repeatHint": "<b>Toista</b> suorittaa kaikki vaiheet uudelleen lataamatta sivua uudelleen annetulla aikavälillä.",
+    "repeatInterval": "Silmukoiden välinen aika",
+    "refresh": "Päivitä",
+    "refreshHint": "<b>Päivitä-painike</b> lataa sivun uudelleen, kun kaikki vaiheet on suoritettu.",
+    "toast": {
+      "header": "Silmukka-asetukset",
+      "body": "Silmukan asetukset tallennettu onnistuneesti!"
+    }
+  },
+  "error": {
+    "required": "Tämä kenttä on pakollinen",
+    "number": "Anna kelvollinen numero",
+    "interval": "Anna kelvollinen numero",
+    "url": "Anna verkkosivuston URL-osoite jatkaaksesi",
+    "initWait": "Anna kelvollinen numero",
+    "scheduleDate": "Anna kelvollinen päivämäärä tässä muodossa: 2025-12-01",
+    "scheduleTime": "Anna kelvollinen aika tässä muodossa: 23:59:59.000",
+    "scheduleRepeat": "Anna kelvollinen numero toistokertojen määräksi",
+    "startTime": "Anna kelvollinen aloitusaika tässä muodossa: 12:12:12:000",
+    "json": "Valittu tiedosto ei ole kelvollinen JSON — tarkista ja yritä uudelleen",
+    "hotKey": "Käytä kirjainta yhdistettynä Ctrl-, Alt- tai Shift-näppäimeen (esim. Ctrl + A)",
+    "valueExtractor": "Antamasi kuvio ei ole kelvollinen — tarkista ja yritä uudelleen",
+    "value": "Anna arvo jatkaaksesi",
+    "condition": "Valitse ehto jatkaaksesi",
+    "elementFinder": "Anna, miten löydät kohteen sivulta",
+    "spreadsheetId": "Anna kelvollinen Google Sheets -tunnus (44 merkkiä, esim. 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Vaihe",
+    "plural": "Askeleet",
+    "add": "Lisää vaihe",
+    "addBefore": "Lisää vaihe yläpuolelle",
+    "addAfter": "Lisää vaihe alla",
+    "remove": "Poista vaihe",
+    "disable": "Poista vaihe käytöstä",
+    "enable": "Ota vaihe käyttöön",
+    "initWait": "Viive",
+    "name": "Nimi",
+    "elementFinder": "Kohde",
+    "value": "Arvo",
+    "repeat": "Toistaa",
+    "repeatInterval": "Väli",
+    "confirm": {
+      "remove": {
+        "title": "Poista vaihe",
+        "message": "Oletko varma, että haluat poistaa [{{name}}] -vaiheen?"
+      }
+    },
+    "toast": {
+      "header": "Vaihe",
+      "body": "Vaihe tallennettu onnistuneesti!",
+      "remove": "Vaihe poistettu onnistuneesti!",
+      "reorder": "Vaiheet järjestetty uudelleen onnistuneesti!"
+    }
+  },
+  "userscript": {
+    "add": "Lisää käyttäjäskripti",
+    "confirm": {
+      "remove": {
+        "title": "Poista käyttäjäskripti",
+        "message": "Haluatko varmasti poistaa [{{name}}] käyttäjäskriptin?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Esimerkkejä"
+    },
+    "startTime": {
+      "content": "Kokeile &lt;1&gt;Aikataulun URL-osoitetta</1> uusi selainlaajennuksemme.<br /> sitä käytetään verkkosivun/URL-osoitteen ajoittamiseen tiettynä päivänä ja kellonaikana"
+    },
+    "hotkey": {
+      "title": "Pikanäppäin",
+      "content": "Paina näppäimistön pikanäppäintä kirjoittaaksesi kenttään automaattisesti",
+      "hint": "Yksi kirjain ilman <kbd>Ctrl-</kbd> , <kbd>Alt-</kbd> tai <kbd>Shift-näppäimiä</kbd> ei kelpaa"
+    }
+  },
+  "common": {
+    "appName": "Automaattinen napsauttaja - Automaattinen täyttö",
+    "file": "Tiedosto",
+    "error": "Virhe",
+    "save": "Tallentaa",
+    "clear": "Tyhjennä",
+    "close": "Lähellä",
+    "download": "Lataa",
+    "disabled": "Liikuntarajoitteinen",
+    "sec": "sek",
+    "min": "min",
+    "no": "Ei",
+    "yes": "Kyllä",
+    "local": "PAIKALLINEN",
+    "dev": "KEHITTÄÄ",
+    "stable": "VAKAA",
+    "examples": "Esimerkkejä",
+    "add": "Lisätä"
+  },
+  "languages": {
+    "title": "Kieli",
+    "en": "englanti",
+    "fr": "ranskalainen",
+    "ko": "Korealainen",
+    "ca": "Kanada",
+    "hi": "Hindi",
+    "zh_CN": "Kiina (yksinkertaistettu)",
+    "zh_TW": "Kiina (perinteinen)",
+    "sv": "Ruotsin",
+    "pt": "portugali",
+    "ja": "Japani",
+    "nl": "hollantilainen",
+    "de": "saksa",
+    "es": "espanjaa",
+    "vi": "vietnam",
+    "fi": "suomi",
+    "ar": "arabia",
+    "it": "italialainen",
+    "ru": "venäjä",
+    "id": "Indonesia"
+  },
+  "monitor": {
+    "title": "Näyttö",
+    "enabled": "Ota valvonta käyttöön",
+    "enabledHint": "Suorita toiminnot automaattisesti uudelleen, kun sivulle lisätään uusia vastaavia elementtejä (esim. ääretön vieritys, asynkroninen sisältö)",
+    "rootSelector": "Näytön juuri",
+    "rootSelectorPlaceholder": "ruumis",
+    "rootSelectorHint": "CSS-valitsin tarkkailtavalle säilölle",
+    "watchAttributes": "Näytön ominaisuudet",
+    "attributesPlaceholder": "tyyli, luokka, piilotettu",
+    "attributesHint": "Pilkuilla erotettu luettelo muutoksista, joita seurataan",
+    "debounce": "Debounce",
+    "debounceHint": "Viive ennen uusien elementtien käsittelyä (1–5 sekuntia)",
+    "timeout": "Aikakatkaisu",
+    "timeoutHint": "Automaattinen pysäytys N minuutin kuluttua (1–180)",
+    "urlChange": "Pysäytä URL-osoitteen muuttuessa",
+    "urlChangeHint": "Lopeta katselu automaattisesti, kun sivun URL-osoite muuttuu",
+    "toast": {
+      "header": "Näyttö",
+      "body": "Monitori tallennettu onnistuneesti!"
+    }
+  },
+  "home": {
+    "title": "Tervetuloa Auto Clickeriin - Automaattinen täyttö",
+    "subtitle": "Automatisoi klikkaukset ja lomakkeiden täytöt millä tahansa verkkosivustolla määrittämällä tavoitteita ja toimintoja.",
+    "quickStart": {
+      "title": "Pikaopas",
+      "step1": {
+        "title": "1. Asenna laajennus",
+        "desc": "Lataa ja asenna laajennus Chrome Web Storesta tai Edge Add-ons -sovelluksesta.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Kohdesivun määrittäminen",
+        "desc": "Avaa verkkosivu, napsauta hiiren kakkospainikkeella mitä tahansa elementtiä ja valitse Automaattinen napsauttaja - Automaattinen täyttö → Määritä tälle kentälle.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Tallenna ja suorita",
+        "desc": "Tallenna määrityksesi ja lataa kohdesivu uudelleen. Automaatio toimii automaattisesti.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Hyödyllisiä vinkkejä",
+      "tip1": {
+        "title": "Kokeile testisivulla",
+        "desc": "Avaa test.getautoclicker.com, lisää kaksi toimintoa – yksi käyttäjätunnuskentän täyttämiseen ja yksi painikkeen napsauttamiseen – ja tallenna ja suorita.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Kohdista kohteet tarkasti",
+        "desc": "Käytä elementtipolkuja kohdistaaksesi tiettyihin sivun kohteisiin, kuten //input[@nimi=\"käyttäjänimi\"], luotettavamman automaation saavuttamiseksi.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Hitaiden sivujen latausten käsittely",
+        "desc": "Aseta automaatiolle odotusaika ennen aloitusta, jos sivu latautuu hitaasti ennen vaiheiden suorittamista.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Yleiset asetukset ja pikanäppäimet",
+        "desc": "Määritä aloitustila, määritä pikanäppäin ja säädä tilarivin sijaintia yleisasetuksissa.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Napsauta hiiren kakkospainikkeella automaattiseen sieppaukseen",
+        "desc": "Napsauta hiiren kakkospainikkeella mitä tahansa syötettä tai painiketta sivulla ja valitse Määritä tälle kentälle täyttääksesi URL-osoitteen ja elementtihaun automaattisesti.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Videooppaat",
+      "video1": {
+        "title": "Automaattisen napsauttajan automaattisen täytön aloittaminen"
+      },
+      "video2": {
+        "title": "Täytä lomakkeet automaattisesti"
+      },
+      "video3": {
+        "title": "Napsauta painikkeita automaattisesti"
+      },
+      "video4": {
+        "title": "Edistyneet määritysvinkit"
+      }
+    }
+  }
+}

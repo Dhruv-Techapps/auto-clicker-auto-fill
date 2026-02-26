@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "Pengklik Otomatis - Isi Otomatis",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Menghubungkan..."
+  },
+  "links": {
+    "docs": "Dokumen",
+    "blog": "Blog",
+    "configuration": "Konfigurasi",
+    "issues": "Masalah",
+    "discussion": "Diskusi",
+    "test": "Formulir Latihan",
+    "contact": "Kontak",
+    "chat": "Mengobrol",
+    "connect": "Menghubungkan",
+    "privacy": "Kebijakan Privasi",
+    "googleGroup": "Grup Google"
+  },
+  "about": "Tentang",
+  "social": "Sosial",
+  "theme": {
+    "title": "Tema",
+    "switchLight": "Beralih ke tema terang",
+    "switchDark": "Beralih ke tema gelap",
+    "light": "Lampu",
+    "dark": "Gelap",
+    "auto": "Mobil"
+  },
+  "loading": "Memuat...",
+  "learnMore": "Pelajari Selengkapnya",
+  "login": "Login",
+  "logout": "Keluar",
+  "connect": "Menghubungkan",
+  "disconnect": "Memutuskan",
+  "resources": "Sumber daya",
+  "settings": {
+    "title": "Pengaturan Global",
+    "additional": "Pengaturan Tambahan"
+  },
+  "notification": {
+    "title": "Tampilkan Notifikasi",
+    "error": "Terjadi kesalahan",
+    "step": "Setelah penyelesaian langkah",
+    "loop": "Saat perulangan selesai",
+    "automation": "Setelah otomatisasi selesai",
+    "sound": "Suara Notifikasi"
+  },
+  "discord": {
+    "title": "Pemberitahuan di Discord",
+    "loginRequired": "Silakan <1>Masuk</1> ke akun Anda sebelum terhubung dengan Discord."
+  },
+  "checkIFrames": {
+    "title": "Cari di Dalam Halaman Tertanam",
+    "hint": "Periksa juga item-item di dalam bagian yang disematkan pada halaman."
+  },
+  "reloadOnError": {
+    "title": "Segarkan Halaman Jika Terjadi Kesalahan",
+    "hint": "Secara otomatis memuat ulang halaman jika terjadi kesalahan.",
+    "contextInvalidated": "Konteks ekstensi tidak valid."
+  },
+  "statusBar": {
+    "title": "Bilah Status",
+    "hint": "Tampilkan bilah status di bagian bawah halaman",
+    "hide": "Bersembunyi",
+    "topLeft": "Kiri Atas",
+    "topRight": "Kanan atas",
+    "bottomLeft": "Kiri Bawah",
+    "bottomRight": "Kanan Bawah",
+    "positions": {
+      "hide": "Bersembunyi",
+      "top-left": "Kiri Atas",
+      "top-right": "Kanan atas",
+      "bottom-left": "Kiri Bawah",
+      "bottom-right": "Kanan Bawah"
+    }
+  },
+  "retry": {
+    "title": "Upaya Mencoba Lagi",
+    "interval": "Tunggu di antara percobaan ulang",
+    "stop": "Hentikan Otomatisasi",
+    "skip": "Lewati Langkah Ini",
+    "refresh": "Segarkan & Coba Lagi",
+    "hint": "Apa yang harus terjadi jika item tersebut tidak ditemukan di halaman?"
+  },
+  "backup": {
+    "title": "Cadangan",
+    "lastBackup": "Cadangan Terakhir:",
+    "backup": "Cadangkan ke Cloud",
+    "restore": "Pulihkan dari Cloud",
+    "now": "Cadangkan Sekarang",
+    "autoBackup": "Pencadangan Otomatis",
+    "auto-backup": "Pencadangan Otomatis",
+    "daily": "Sehari-hari",
+    "weekly": "Mingguan",
+    "monthly": "Bulanan",
+    "off": "Mati",
+    "loginRequired": "Silakan <1>Masuk</1> ke akun Anda sebelum terhubung dengan Google Drive.",
+    "checkingAccess": "Memeriksa akses Google Drive...",
+    "connect": "Terhubung dengan Google Drive",
+    "connected": "Cadangan Google Drive",
+    "loadingFiles": "Sedang memuat file Anda...",
+    "restoreAction": "Memulihkan",
+    "delete": "Menghapus",
+    "noBackup": "Tidak ditemukan cadangan.",
+    "confirm": {
+      "restore": {
+        "title": "Pulihkan Otomatisasi dari cloud",
+        "message": "Apakah Anda yakin ingin memulihkan otomatisasi dari cloud? Ini akan mengganti semua otomatisasi Anda dan tidak dapat dibatalkan."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Otomatisasi Pemesanan Ulang",
+    "hint": "Harap simpan semua otomatisasi sebelum memesan ulang."
+  },
+  "extensionNotFound": {
+    "title": "Ekstensi Belum Terinstal",
+    "subTitle": "Halaman ini berfungsi dengan ekstensi <b>Auto Clicker - AutoFill</b> untuk Chrome &amp; Edge.",
+    "hint": "Silakan instal ekstensi terlebih dahulu untuk memulai."
+  },
+  "stepSettings": {
+    "title": "Pengaturan Langkah",
+    "info": "Pengaturan ini hanya berlaku untuk langkah ini dan pemeriksaan awalnya, dan akan diprioritaskan di atas Pengaturan Global Anda.",
+    "iframeFirst": "Cari Halaman Tertanam Terlebih Dahulu",
+    "iframeFirstHint": "Periksa isi konten yang disematkan di halaman tersebut sebelum mencari di halaman utama.",
+    "retry": {
+      "title": "Jika Barang Tidak Ditemukan",
+      "hint": "Pilih apa yang harus terjadi jika item tidak dapat ditemukan, bahkan setelah dicoba lagi.",
+      "retry": "Upaya Mencoba Lagi",
+      "interval": "Tunggu di antara percobaan ulang",
+      "stop": "Hentikan Otomatisasi",
+      "skip": "Lewati Langkah Ini",
+      "goto": "Lanjutkan ke Langkah",
+      "refresh": "Segarkan & Coba Lagi"
+    },
+    "toast": {
+      "header": "Pengaturan Langkah",
+      "body": "Pengaturan langkah berhasil disimpan!"
+    }
+  },
+  "stateGuard": {
+    "action": "Langkah Sebelumnya",
+    "status": "Hasil",
+    "title": "Garda Negara",
+    "add": "Tambahkan Kondisi",
+    "info": "Tetapkan aturan untuk mengontrol apakah langkah ini harus dijalankan, berdasarkan apa yang terjadi pada langkah-langkah sebelumnya.",
+    "stop": "Hentikan Otomatisasi",
+    "skip": "Lewati Langkah Ini",
+    "refresh": "Segarkan & Coba Lagi",
+    "goto": "Lanjutkan ke Langkah",
+    "proceed": "Tetap Lakukan Langkah Ini",
+    "hint": "Apa yang akan terjadi jika aturan tersebut tidak dipenuhi?",
+    "toast": {
+      "header": "Garda Negara",
+      "body": "Pasukan pengawal negara berhasil menyelamatkan!"
+    }
+  },
+  "pageGuard": {
+    "title": "Pelindung Halaman",
+    "info": "Jalankan langkah ini hanya jika nilai pada halaman tersebut memenuhi kondisi Anda.",
+    "elementFinder": "Temukan Item di Halaman",
+    "condition": "Membandingkan",
+    "value": "Bandingkan Dengan",
+    "valueExtractor": "Ekstrak Nomor atau Teks",
+    "valueExtractorHint": "Gunakan pola untuk mengambil bagian nilai tertentu. Misalnya, ekstrak 24,00 dari $24,00, atau 10 dari 10 otomatisasi.",
+    "recheck": {
+      "title": "Jika Syarat Tidak Terpenuhi",
+      "hint": "Pilih apa yang harus terjadi jika kondisi filter tidak terpenuhi.",
+      "recheck": "Periksa Lagi",
+      "interval": "Tunggu Sebelum Memeriksa Lagi",
+      "stop": "Hentikan Otomatisasi",
+      "skip": "Lewati Langkah Ini",
+      "refresh": "Segarkan & Coba Lagi",
+      "goto": "Lanjutkan ke Langkah"
+    },
+    "toast": {
+      "header": "Pelindung Halaman",
+      "body": "Page guard berhasil disimpan!"
+    }
+  },
+  "schedule": {
+    "title": "Otomatisasi Penjadwalan",
+    "info": "Jalankan otomatisasi ini pada tanggal dan waktu tertentu.",
+    "date": "Tanggal",
+    "time": "Waktu",
+    "repeat": "Ulangi dalam beberapa menit"
+  },
+  "upgradePlan": {
+    "title": "Rencana Peningkatan",
+    "subtitle": "Aktifkan fitur-fitur canggih dan dapatkan hasil maksimal dari Auto Clicker AutoFill.",
+    "currentPlan": "Paket Anda Saat Ini",
+    "free": {
+      "name": "🆓 GRATIS",
+      "tagline": "Otomatisasi canggih untuk semua orang — tanpa perlu akun.",
+      "perMonth": "selamanya",
+      "cta": "Rencana Saat Ini",
+      "includes": "Yang termasuk di dalamnya:",
+      "features": {
+        "unlimitedAutomations": "Otomatisasi tanpa batas",
+        "unlimitedSteps": "Langkah tak terbatas per otomatisasi",
+        "loopSteps": "Ulangi langkah-langkah dalam sebuah lingkaran.",
+        "recording": "Perekam langkah visual",
+        "allValues": "Semua tipe nilai — tidak memerlukan API."
+      }
+    },
+    "plus": {
+      "name": "🚀 PLUS",
+      "tagline": "Semua hal penting, ditambah kontrol yang lebih mendalam atas pra-pemeriksaan dan pengaturan dalam beberapa langkah.",
+      "perMonth": "per bulan",
+      "cta": "Tingkatkan ke Plus",
+      "includes": "Semuanya gratis, ditambah:",
+      "features": {
+        "addonCondition": "Logika tambahan bersyarat",
+        "actionCondition": "Aturan kondisi per tindakan",
+        "actionSettings": "Pengaturan dan penggantian tingkat tindakan",
+        "noAds": "Pengalaman tanpa iklan"
+      }
+    },
+    "pro": {
+      "name": "🔹 PRO",
+      "tagline": "Kekuatan penuh otomatisasi — dengan integrasi, AI, dan dukungan prioritas.",
+      "perMonth": "per bulan",
+      "cta": "Tingkatkan ke Pro",
+      "includes": "Semua yang ada di Plus, plus:",
+      "features": {
+        "sheets": "Integrasi Google Sheets",
+        "discord": "Notifikasi Discord",
+        "captcha": "Pemecah Captcha (segera hadir)",
+        "vipSupport": "Dukungan prioritas melalui Discord",
+        "earlyAccess": "Akses awal ke fitur-fitur baru",
+        "prideAndJoy": "Lencana pendukung & pengakuan komunitas"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google Sheets",
+    "hint": "Hubungkan akun Google Sheets Anda untuk mengekspor otomatisasi dan log dengan mudah, serta melacak riwayat otomatisasi Anda di satu tempat.",
+    "useStable": {
+      "title": "Gunakan Versi Stabil untuk Fitur Google Sheets.",
+      "message": "Untuk performa dan keandalan optimal di Google Sheets, disarankan untuk menggunakan versi <1>stabil</1> dari fitur-fiturnya. Versi-versi ini menjalani pengujian menyeluruh untuk memastikan fungsionalitas yang lancar, sehingga Anda mendapatkan platform yang dapat diandalkan untuk tugas-tugas Anda. Dengan memprioritaskan stabilitas, Anda dapat meningkatkan produktivitas dan meminimalkan risiko menghadapi masalah yang tidak terduga. Jika Anda membutuhkan bantuan atau panduan tentang cara memanfaatkan Google Sheets secara efektif, jangan ragu untuk menghubungi dukungan kami!"
+    },
+    "loginRequired": "Silakan <1>Masuk</1> ke akun Anda sebelum terhubung dengan Google Sheets.",
+    "connect": "Terhubung dengan Google Sheets",
+    "connected": "Terhubung dengan Google Sheets"
+  },
+  "sidebar": {
+    "search": "Mencari",
+    "upgradePlan": "Rencana Peningkatan",
+    "login": "Login",
+    "logout": "Keluar",
+    "language": "Bahasa",
+    "learnMore": "Pelajari Selengkapnya"
+  },
+  "automations": {
+    "title": "Otomatisasi Saya",
+    "count": "Otomatisasi ({{count}})",
+    "search": "Cari otomatisasi Anda...",
+    "add": "Baru",
+    "reorder": "Susun ulang",
+    "reorderByName": "Urutkan berdasarkan Nama",
+    "selected": "terpilih",
+    "selected_one": "1 otomatisasi dipilih",
+    "selected_other": "{{count}} otomatisasi dipilih",
+    "selectAll": "Pilih semua",
+    "exportSelected": "Ekspor yang dipilih",
+    "deleteSelected": "Hapus yang dipilih",
+    "cancelSelection": "Batalkan pilihan",
+    "automationsWithinExtension": "otomatisasi dalam ekstensi",
+    "selectAutomations": "Pilih otomatisasi yang ingin diekspor atau dihapus.",
+    "select": "Memilih",
+    "import": "Impor",
+    "toast": {
+      "header": "Otomatisasi",
+      "remove": "Otomatisasi berhasil dihapus.",
+      "remove_one": "Otomatisasi berhasil dihapus.",
+      "remove_other": "{{count}} Otomatisasi berhasil dihapus",
+      "export": "Otomatisasi berhasil diekspor.",
+      "export_one": "1 otomatisasi berhasil diekspor",
+      "export_other": "{{count}} otomatisasi berhasil diekspor",
+      "import": "Otomatisasi berhasil diimpor.",
+      "import_one": "1 otomatisasi berhasil diimpor",
+      "import_other": "{{count}} otomatisasi berhasil diimpor",
+      "reorder": "Otomatisasi berhasil diurutkan ulang."
+    }
+  },
+  "automation": {
+    "title": "Otomatisasi",
+    "remove": "Menghapus",
+    "duplicate": "Duplikat",
+    "enable": "Memungkinkan",
+    "disable": "Cacat",
+    "disabled": "Dengan disabilitas",
+    "edit": "Edit",
+    "export": "Ekspor",
+    "import": "Impor",
+    "schedule": "Jadwal",
+    "batch": "Pengaturan Perulangan",
+    "watch": "Pengaturan Monitor",
+    "url": "URL",
+    "name": "Nama",
+    "initWait": "Tunggu Sebelum Memulai",
+    "startTime": "Waktu Mulai yang Dijadwalkan",
+    "noConfig": "Tidak ditemukan otomatisasi, harap perbaiki pencarian Anda.",
+    "confirm": {
+      "title": "Hapus Otomatisasi",
+      "message": "Apakah Anda yakin ingin menghapus otomatisasi [{{name}}]?"
+    },
+    "toast": {
+      "header": "Otomatisasi",
+      "body": "Otomatisasi berhasil disimpan!",
+      "schedule": "Jadwal otomatisasi berhasil disimpan!",
+      "settings": "Pengaturan otomatisasi berhasil disimpan!",
+      "add": "Otomatisasi berhasil ditambahkan.",
+      "duplicate": "Otomatisasi berhasil diduplikasi"
+    }
+  },
+  "automationSettings": {
+    "title": "Pengaturan Otomatisasi",
+    "startType": "Mode Operasi",
+    "hotkey": "Tombol pintas",
+    "auto": "Otomatis",
+    "autoHint": "<b>Otomatis</b> — berjalan dengan sendirinya setiap kali halaman dimuat. Anda tidak perlu melakukan tindakan apa pun.",
+    "manual": "Manual (Tombol Pintas)",
+    "manualHint": "<b>Manual</b> — hanya berjalan saat Anda menekan pintasan keyboard yang telah Anda tentukan.",
+    "loadType": "Waktu Pemuatan Halaman",
+    "window": "Setelah Beban Penuh",
+    "windowHint": "<b>Setelah Pemuatan Penuh</b> (Disarankan) — otomatisasi dimulai setelah seluruh halaman termasuk gambar dan skrip selesai dimuat.",
+    "document": "Saat Halaman Dimuat",
+    "documentHint": "<b>Saat Halaman Dimuat</b> — otomatisasi dimulai segera setelah struktur halaman siap, sebelum gambar dan skrip selesai dimuat. Lebih cepat tetapi mungkin tidak stabil di beberapa halaman.",
+    "triggerUrlChange": "Jalankan Navigasi Halaman",
+    "triggerUrlChangeHint": "<b>Jalankan Saat Navigasi Halaman</b> — menjalankan ulang otomatisasi saat alamat halaman berubah tanpa memuat ulang sepenuhnya. Berguna untuk Gmail, Twitter, dan aplikasi modern lainnya.",
+    "urlMatch": "Jenis Pencocokan URL",
+    "regex": "Pencocokan Pola",
+    "exact": "URL Tepat",
+    "startTime": "Waktu Mulai (Untuk Otomatisasi)",
+    "googleSheetsId": "ID Google Sheets",
+    "bypass": {
+      "title": "Melewati Perilaku Default Browser untuk Tombol Pintas",
+      "alert": "Peringatan",
+      "confirm": "Mengonfirmasi",
+      "prompt": "Mengingatkan"
+    }
+  },
+  "loop": {
+    "title": "Lingkaran",
+    "repeat": "Mengulang",
+    "repeatHint": "<b>Fungsi Repeat</b> akan menjalankan kembali semua langkah tanpa memuat ulang halaman dengan interval yang diberikan.",
+    "repeatInterval": "Interval Antar Putaran",
+    "refresh": "Menyegarkan",
+    "refreshHint": "<b>Refresh</b> akan memuat ulang halaman setelah semua langkah selesai.",
+    "toast": {
+      "header": "Pengaturan Perulangan",
+      "body": "Pengaturan loop berhasil disimpan!"
+    }
+  },
+  "error": {
+    "required": "Kolom ini wajib diisi.",
+    "number": "Silakan masukkan nomor yang valid.",
+    "interval": "Silakan masukkan nomor yang valid.",
+    "url": "Silakan masukkan URL situs web untuk melanjutkan.",
+    "initWait": "Silakan masukkan nomor yang valid.",
+    "scheduleDate": "Silakan masukkan tanggal yang valid dalam format ini: 2025-12-01",
+    "scheduleTime": "Silakan masukkan waktu yang valid dalam format ini: 23:59:59.000",
+    "scheduleRepeat": "Silakan masukkan angka yang valid untuk menentukan berapa kali pengulangan yang diinginkan.",
+    "startTime": "Silakan masukkan waktu mulai yang valid dalam format ini: 12:12:12:000",
+    "json": "File yang dipilih bukan JSON yang valid — harap periksa dan coba lagi.",
+    "hotKey": "Silakan gunakan kombinasi huruf dengan Ctrl, Alt, atau Shift (misalnya Ctrl + A).",
+    "valueExtractor": "Pola yang Anda masukkan tidak valid — harap periksa dan coba lagi.",
+    "value": "Silakan masukkan nilai untuk melanjutkan.",
+    "condition": "Silakan pilih kondisi untuk melanjutkan.",
+    "elementFinder": "Silakan masukkan cara menemukan item tersebut di halaman ini.",
+    "spreadsheetId": "Silakan masukkan ID Google Sheets yang valid (44 karakter, contoh: 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Melangkah",
+    "plural": "Tangga",
+    "add": "Tambahkan Langkah",
+    "addBefore": "Tambahkan Langkah di Atas",
+    "addAfter": "Tambahkan Langkah di Bawah Ini",
+    "remove": "Hapus Langkah",
+    "disable": "Nonaktifkan Langkah",
+    "enable": "Aktifkan Langkah",
+    "initWait": "Menunda",
+    "name": "Nama",
+    "elementFinder": "Target",
+    "value": "Nilai",
+    "repeat": "Mengulang",
+    "repeatInterval": "Selang",
+    "confirm": {
+      "remove": {
+        "title": "Hapus Langkah",
+        "message": "Apakah Anda yakin ingin menghapus Langkah [{{name}}]?"
+      }
+    },
+    "toast": {
+      "header": "Melangkah",
+      "body": "Langkah berhasil disimpan!",
+      "remove": "Langkah berhasil dihilangkan!",
+      "reorder": "Langkah-langkah berhasil diurutkan ulang!"
+    }
+  },
+  "userscript": {
+    "add": "Tambahkan Skrip Pengguna",
+    "confirm": {
+      "remove": {
+        "title": "Hapus Skrip Pengguna",
+        "message": "Apakah Anda yakin ingin menghapus Skrip Pengguna [{{name}}]?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Contoh"
+    },
+    "startTime": {
+      "content": "Coba &lt;1&gt;Jadwalkan URL</1> ekstensi browser baru kami.<br /> Ini digunakan untuk menjadwalkan halaman web/URL pada hari dan waktu tertentu."
+    },
+    "hotkey": {
+      "title": "Tombol pintas",
+      "content": "Tekan tombol pintas pada keyboard untuk mengetik otomatis di kolom.",
+      "hint": "Huruf tunggal tanpa <kbd>Ctrl</kbd> , <kbd>Alt</kbd> , atau <kbd>Shift</kbd> tidak valid."
+    }
+  },
+  "common": {
+    "appName": "Klik Otomatis - Isi Otomatis",
+    "file": "Mengajukan",
+    "error": "Kesalahan",
+    "save": "Menyimpan",
+    "clear": "Jernih",
+    "close": "Menutup",
+    "download": "Unduh",
+    "disabled": "Dengan disabilitas",
+    "sec": "detik",
+    "min": "menit",
+    "no": "TIDAK",
+    "yes": "Ya",
+    "local": "LOKAL",
+    "dev": "PENGEMBANG",
+    "stable": "STABIL",
+    "examples": "Contoh",
+    "add": "Menambahkan"
+  },
+  "languages": {
+    "title": "Bahasa",
+    "en": "Bahasa inggris",
+    "fr": "Perancis",
+    "ko": "Korea",
+    "ca": "Kanada",
+    "hi": "Hindi",
+    "zh_CN": "Bahasa Mandarin (Sederhana)",
+    "zh_TW": "Bahasa Mandarin (Tradisional)",
+    "sv": "Swedia",
+    "pt": "Portugis",
+    "ja": "Jepang",
+    "nl": "Belanda",
+    "de": "Jerman",
+    "es": "Spanyol",
+    "vi": "Vietnam",
+    "fi": "Finlandia",
+    "ar": "Arab",
+    "it": "Italia",
+    "ru": "Rusia",
+    "id": "Indonesia"
+  },
+  "monitor": {
+    "title": "Monitor",
+    "enabled": "Aktifkan Pemantauan",
+    "enabledHint": "Secara otomatis menjalankan kembali tindakan ketika elemen yang cocok baru ditambahkan ke halaman (misalnya, untuk pengguliran tak terbatas, konten asinkron).",
+    "rootSelector": "Monitor Akar",
+    "rootSelectorPlaceholder": "tubuh",
+    "rootSelectorHint": "Selektor CSS untuk kontainer yang akan diamati",
+    "watchAttributes": "Atribut Monitor",
+    "attributesPlaceholder": "gaya, kelas, tersembunyi",
+    "attributesHint": "Daftar atribut yang dipisahkan koma untuk diamati perubahannya.",
+    "debounce": "Debounce",
+    "debounceHint": "Penundaan sebelum memproses elemen baru (1-5 detik)",
+    "timeout": "Waktu habis",
+    "timeoutHint": "Berhenti otomatis setelah N menit (1-180)",
+    "urlChange": "Berhenti pada Perubahan URL",
+    "urlChangeHint": "Berhenti memantau secara otomatis saat URL halaman berubah.",
+    "toast": {
+      "header": "Monitor",
+      "body": "Monitor berhasil disimpan!"
+    }
+  },
+  "home": {
+    "title": "Selamat datang di Auto Clicker - AutoFill",
+    "subtitle": "Otomatiskan klik dan pengisian formulir di situs web mana pun dengan menentukan target dan tindakan.",
+    "quickStart": {
+      "title": "Panduan Memulai Cepat",
+      "step1": {
+        "title": "1. Instal Ekstensi",
+        "desc": "Unduh dan instal ekstensi dari Chrome Web Store atau Edge Add-ons.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Mengkonfigurasi Halaman Target",
+        "desc": "Buka halaman web, klik kanan elemen mana pun, lalu pilih Auto Clicker - AutoFill → Konfigurasi untuk Bidang Ini.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Simpan & Jalankan",
+        "desc": "Simpan konfigurasi Anda dan muat ulang halaman target. Otomatisasi akan berjalan secara otomatis.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Tips Bermanfaat",
+      "tip1": {
+        "title": "Cobalah di Halaman Uji Coba",
+        "desc": "Buka test.getautoclicker.com, tambahkan dua aksi — satu untuk mengisi kolom nama pengguna dan satu untuk mengklik tombol — lalu simpan dan jalankan.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Target Item Secara Tepat",
+        "desc": "Gunakan jalur elemen untuk menargetkan item tertentu pada halaman, seperti //input[@name=\"username\"], untuk otomatisasi yang lebih andal.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Mengatasi Pemuatan Halaman yang Lambat",
+        "desc": "Atur \"Tunggu Sebelum Mulai\" pada otomatisasi Anda jika halaman memuat lambat sebelum langkah-langkah Anda dijalankan.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Pengaturan Global & Tombol Pintas",
+        "desc": "Konfigurasikan mode mulai, tentukan pintasan keyboard, dan sesuaikan posisi bilah status di Pengaturan Global.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Klik kanan untuk mengambil gambar secara otomatis.",
+        "desc": "Klik kanan pada kolom input atau tombol apa pun di halaman dan pilih Konfigurasi untuk Bidang Ini untuk mengisi URL dan Pencari Elemen secara otomatis.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Panduan Video",
+      "video1": {
+        "title": "Memulai Menggunakan Auto Clicker AutoFill"
+      },
+      "video2": {
+        "title": "Isi Formulir Secara Otomatis"
+      },
+      "video3": {
+        "title": "Klik Tombol Secara Otomatis"
+      },
+      "video4": {
+        "title": "Tips Konfigurasi Lanjutan"
+      }
+    }
+  }
+}

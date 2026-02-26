@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "AutoClicker - AutoFill",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "Verbinden..."
+  },
+  "links": {
+    "docs": "Dokters",
+    "blog": "Blog",
+    "configuration": "Configuratie",
+    "issues": "Problemen",
+    "discussion": "Discussie",
+    "test": "Oefenformulier",
+    "contact": "Contact",
+    "chat": "Chat",
+    "connect": "Verbinden",
+    "privacy": "Privacy- en privacybeleid",
+    "googleGroup": "Google-groep"
+  },
+  "about": "Over",
+  "social": "Sociaal",
+  "theme": {
+    "title": "Thema",
+    "switchLight": "Schakel over naar het lichte thema",
+    "switchDark": "Schakel over naar het donkere thema",
+    "light": "Licht",
+    "dark": "Donker",
+    "auto": "Auto"
+  },
+  "loading": "Laden...",
+  "learnMore": "Meer informatie",
+  "login": "Login",
+  "logout": "Uitloggen",
+  "connect": "Verbinden",
+  "disconnect": "Verbinding verbreken",
+  "resources": "Bronnen",
+  "settings": {
+    "title": "Globale instellingen",
+    "additional": "Aanvullende instellingen"
+  },
+  "notification": {
+    "title": "Toon melding",
+    "error": "Er is een fout opgetreden",
+    "step": "Bij het voltooien van de stap",
+    "loop": "Bij voltooiing van de lus",
+    "automation": "Voltooiing van de automatisering",
+    "sound": "Meldingsgeluid"
+  },
+  "discord": {
+    "title": "Melding op Discord",
+    "loginRequired": "Log eerst in op je account voordat je verbinding maakt met Discord."
+  },
+  "checkIFrames": {
+    "title": "Zoeken binnen ingesloten pagina's",
+    "hint": "Zoek ook naar items in ingesloten gedeelten van de pagina."
+  },
+  "reloadOnError": {
+    "title": "Vernieuw de pagina bij een fout.",
+    "hint": "De pagina wordt automatisch opnieuw geladen als er iets misgaat.",
+    "contextInvalidated": "Uitbreidingscontext ongeldig verklaard."
+  },
+  "statusBar": {
+    "title": "Statusbalk",
+    "hint": "Toon de statusbalk onderaan de pagina.",
+    "hide": "Verbergen",
+    "topLeft": "Links boven",
+    "topRight": "Rechtsboven",
+    "bottomLeft": "Linksonder",
+    "bottomRight": "Rechtsonder",
+    "positions": {
+      "hide": "Verbergen",
+      "top-left": "Links boven",
+      "top-right": "Rechtsboven",
+      "bottom-left": "Linksonder",
+      "bottom-right": "Rechtsonder"
+    }
+  },
+  "retry": {
+    "title": "Herhaalpogingen",
+    "interval": "Wacht tussen herhaalpogingen",
+    "stop": "Stop Automatisering",
+    "skip": "Sla deze stap over.",
+    "refresh": "Vernieuwen en opnieuw proberen",
+    "hint": "Wat moet er gebeuren als het item niet op de pagina wordt gevonden?"
+  },
+  "backup": {
+    "title": "Back-up",
+    "lastBackup": "Laatste back-up:",
+    "backup": "Back-up naar de cloud",
+    "restore": "Herstellen vanuit de cloud",
+    "now": "Maak nu een back-up",
+    "autoBackup": "Automatische back-up",
+    "auto-backup": "Automatische back-up",
+    "daily": "Dagelijks",
+    "weekly": "Wekelijks",
+    "monthly": "Maandelijks",
+    "off": "Uit",
+    "loginRequired": "Log eerst in op uw account voordat u verbinding maakt met Google Drive.",
+    "checkingAccess": "Toegang tot Google Drive controleren...",
+    "connect": "Verbinden met Google Drive",
+    "connected": "Google Drive-back-up",
+    "loadingFiles": "Je bestanden worden geladen...",
+    "restoreAction": "Herstellen",
+    "delete": "Verwijderen",
+    "noBackup": "Geen back-up gevonden",
+    "confirm": {
+      "restore": {
+        "title": "Automatiseringen herstellen vanuit de cloud",
+        "message": "Weet je zeker dat je de automatiseringen vanuit de cloud wilt herstellen? Hiermee worden al je automatiseringen vervangen en dit kan niet ongedaan worden gemaakt."
+      }
+    }
+  },
+  "reorder": {
+    "title": "Automatiseringen voor het opnieuw bestellen",
+    "hint": "Sla alle automatiseringen op voordat u de volgorde wijzigt."
+  },
+  "extensionNotFound": {
+    "title": "Extensie niet geïnstalleerd",
+    "subTitle": "Deze pagina werkt met de <b>Auto Clicker - AutoFill-</b> extensie voor Chrome en Edge.",
+    "hint": "Installeer eerst de extensie om aan de slag te gaan."
+  },
+  "stepSettings": {
+    "title": "Stapinstellingen",
+    "info": "Deze instellingen gelden alleen voor deze stap en de bijbehorende controle, en hebben voorrang op uw algemene instellingen.",
+    "iframeFirst": "Zoek eerst in ingesloten pagina's.",
+    "iframeFirstHint": "Bekijk eerst de ingesloten inhoud op de pagina voordat u op de hoofdpagina zoekt.",
+    "retry": {
+      "title": "Als het artikel niet gevonden is",
+      "hint": "Kies wat er moet gebeuren als het item niet gevonden kan worden, zelfs na meerdere pogingen.",
+      "retry": "Herhaalpogingen",
+      "interval": "Wacht tussen herhaalpogingen",
+      "stop": "Stop Automatisering",
+      "skip": "Sla deze stap over.",
+      "goto": "Ga naar stap",
+      "refresh": "Vernieuwen en opnieuw proberen"
+    },
+    "toast": {
+      "header": "Stapinstellingen",
+      "body": "Stapinstellingen succesvol opgeslagen!"
+    }
+  },
+  "stateGuard": {
+    "action": "Vorige stap",
+    "status": "Resultaat",
+    "title": "Staatsgarde",
+    "add": "Voeg voorwaarde toe",
+    "info": "Stel een regel in om te bepalen of deze stap moet worden uitgevoerd, op basis van wat er in de voorgaande stappen is gebeurd.",
+    "stop": "Stop Automatisering",
+    "skip": "Sla deze stap over.",
+    "refresh": "Vernieuwen en opnieuw proberen",
+    "goto": "Ga naar stap",
+    "proceed": "Voer deze stap toch uit",
+    "hint": "Wat moet er gebeuren als niet aan de regel wordt voldaan?",
+    "toast": {
+      "header": "Staatsgarde",
+      "body": "Staatswacht succesvol gered!"
+    }
+  },
+  "pageGuard": {
+    "title": "Paginabeveiliging",
+    "info": "Voer deze stap alleen uit als een waarde op de pagina aan uw voorwaarde voldoet.",
+    "elementFinder": "Zoek item op pagina",
+    "condition": "Vergelijken",
+    "value": "Vergelijk met",
+    "valueExtractor": "Nummer of tekst extraheren",
+    "valueExtractorHint": "Gebruik een patroon om een specifiek deel van de waarde te extraheren. Extraheer bijvoorbeeld 24.00 uit $24.00, of 10 uit 10 automations.",
+    "recheck": {
+      "title": "Indien niet aan de voorwaarde voldaan is",
+      "hint": "Kies wat er moet gebeuren als niet aan de filtervoorwaarde wordt voldaan.",
+      "recheck": "Controleer het nogmaals",
+      "interval": "Wacht even voordat je het opnieuw controleert.",
+      "stop": "Stop Automatisering",
+      "skip": "Sla deze stap over.",
+      "refresh": "Vernieuwen en opnieuw proberen",
+      "goto": "Ga naar stap"
+    },
+    "toast": {
+      "header": "Paginabeveiliging",
+      "body": "Paginabeveiliging succesvol opgeslagen!"
+    }
+  },
+  "schedule": {
+    "title": "Planningautomatisering",
+    "info": "Voer deze automatisering uit op een specifieke datum en tijd.",
+    "date": "Datum",
+    "time": "Tijd",
+    "repeat": "Herhaal binnen enkele minuten"
+  },
+  "upgradePlan": {
+    "title": "Upgradeplan",
+    "subtitle": "Ontgrendel geavanceerde functies en haal het maximale uit Auto Clicker AutoFill.",
+    "currentPlan": "Uw huidige plan",
+    "free": {
+      "name": "🆓 GRATIS",
+      "tagline": "Krachtige automatisering voor iedereen — geen account nodig.",
+      "perMonth": "voor altijd",
+      "cta": "Huidig plan",
+      "includes": "Wat is inbegrepen:",
+      "features": {
+        "unlimitedAutomations": "Onbeperkte automatisering",
+        "unlimitedSteps": "Onbeperkt aantal stappen per automatisering",
+        "loopSteps": "Herhaal de stappen in een lus.",
+        "recording": "Visuele stappenteller",
+        "allValues": "Alle waardetypen — geen API vereist"
+      }
+    },
+    "plus": {
+      "name": "🚀 PLUS",
+      "tagline": "Alle essentiële functies, plus meer controle over de voorcontrole en instellingen in slechts enkele stappen.",
+      "perMonth": "per maand",
+      "cta": "Upgrade naar Plus",
+      "includes": "Alles wat in Free zit, plus:",
+      "features": {
+        "addonCondition": "Voorwaardelijke add-on-logica",
+        "actionCondition": "Voorwaarden per actie",
+        "actionSettings": "Instellingen en overschrijvingen op actieniveau",
+        "noAds": "Reclamevrije ervaring"
+      }
+    },
+    "pro": {
+      "name": "🔹 PRO",
+      "tagline": "De volledige kracht van automatisering — met integraties, AI en prioriteitsondersteuning.",
+      "perMonth": "per maand",
+      "cta": "Upgrade naar Pro",
+      "includes": "Alles in Plus, plus:",
+      "features": {
+        "sheets": "Integratie met Google Sheets",
+        "discord": "Discord-meldingen",
+        "captcha": "Captcha-oplosser (binnenkort beschikbaar)",
+        "vipSupport": "Prioritaire ondersteuning via Discord",
+        "earlyAccess": "Vroege toegang tot nieuwe functies",
+        "prideAndJoy": "Supportersbadge & erkenning vanuit de gemeenschap"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google Sheets",
+    "hint": "Koppel je Google Sheets-account om je automatiseringen en logboeken eenvoudig te exporteren en je automatiseringsgeschiedenis op één plek bij te houden.",
+    "useStable": {
+      "title": "Gebruik stabiele versies voor de functies van Google Sheets.",
+      "message": "Voor optimale prestaties en betrouwbaarheid in Google Sheets raden we aan om de stabiele versies van de functies te gebruiken. Deze versies worden grondig getest om een naadloze werking te garanderen, zodat u over een betrouwbaar platform voor uw taken beschikt. Door prioriteit te geven aan stabiliteit kunt u uw productiviteit verhogen en het risico op onverwachte problemen minimaliseren. Als u hulp of advies nodig hebt bij het effectief gebruiken van Google Sheets, neem dan gerust contact op met de supportafdeling!"
+    },
+    "loginRequired": "Log eerst in op uw account voordat u verbinding maakt met Google Sheets.",
+    "connect": "Verbinden met Google Sheets",
+    "connected": "Gekoppeld aan Google Sheets"
+  },
+  "sidebar": {
+    "search": "Zoekopdracht",
+    "upgradePlan": "Upgradeplan",
+    "login": "Login",
+    "logout": "Uitloggen",
+    "language": "Taal",
+    "learnMore": "Meer informatie"
+  },
+  "automations": {
+    "title": "Mijn automatiseringen",
+    "count": "Automatiseringen ({{count}})",
+    "search": "Doorzoek uw automatisering...",
+    "add": "Nieuw",
+    "reorder": "Opnieuw bestellen",
+    "reorderByName": "Sorteren op naam",
+    "selected": "gekozen",
+    "selected_one": "1 automatisering geselecteerd",
+    "selected_other": "{{count}} automatiseringen geselecteerd",
+    "selectAll": "Alles selecteren",
+    "exportSelected": "Geselecteerde export",
+    "deleteSelected": "Verwijder geselecteerde",
+    "cancelSelection": "Selectie annuleren",
+    "automationsWithinExtension": "automatiseringen binnen extensie",
+    "selectAutomations": "Selecteer automatiseringen die u wilt exporteren of verwijderen.",
+    "select": "Select",
+    "import": "Importeren",
+    "toast": {
+      "header": "Automatiseringen",
+      "remove": "Automatiseringen succesvol verwijderd",
+      "remove_one": "Automatisering succesvol verwijderd",
+      "remove_other": "{{count}} Automatiseringen succesvol verwijderd",
+      "export": "Automatiseringen succesvol geëxporteerd",
+      "export_one": "1 automatisering succesvol geëxporteerd",
+      "export_other": "{{count}} automatiseringen succesvol geëxporteerd",
+      "import": "Automatiseringen succesvol geïmporteerd",
+      "import_one": "1 automatisering succesvol geïmporteerd",
+      "import_other": "{{count}} automatiseringen succesvol geïmporteerd",
+      "reorder": "Automatiseringen succesvol opnieuw besteld"
+    }
+  },
+  "automation": {
+    "title": "Automatisering",
+    "remove": "Verwijderen",
+    "duplicate": "Duplicaat",
+    "enable": "Inschakelen",
+    "disable": "Uitzetten",
+    "disabled": "Gehandicapt",
+    "edit": "Bewerking",
+    "export": "Exporteren",
+    "import": "Importeren",
+    "schedule": "Schema",
+    "batch": "Lusinstellingen",
+    "watch": "Monitorinstellingen",
+    "url": "URL",
+    "name": "Naam",
+    "initWait": "Wacht voordat je begint",
+    "startTime": "Geplande starttijd",
+    "noConfig": "Geen automatisering gevonden. Verfijn uw zoekopdracht.",
+    "confirm": {
+      "title": "Automatisering verwijderen",
+      "message": "Weet je zeker dat je de automatisering van [{{name}}] wilt verwijderen?"
+    },
+    "toast": {
+      "header": "Automatisering",
+      "body": "Automatisering succesvol opgeslagen!",
+      "schedule": "Het automatiseringsschema is succesvol opgeslagen!",
+      "settings": "Automatiseringsinstellingen succesvol opgeslagen!",
+      "add": "Automatisering succesvol toegevoegd",
+      "duplicate": "Automatisering succesvol gedupliceerd"
+    }
+  },
+  "automationSettings": {
+    "title": "Automatiseringsinstellingen",
+    "startType": "Uitvoeringsmodus",
+    "hotkey": "Sneltoets",
+    "auto": "Automatisch",
+    "autoHint": "<b>Automatisch</b> — wordt elke keer dat de pagina wordt geladen automatisch uitgevoerd. U hoeft niets te doen.",
+    "manual": "Handleiding (Sneltoets)",
+    "manualHint": "<b>Handmatig</b> — wordt alleen uitgevoerd wanneer u de door u ingestelde sneltoets indrukt.",
+    "loadType": "Laadtijd van de pagina",
+    "window": "Na volledige belading",
+    "windowHint": "<b>Na volledige laadtijd</b> (aanbevolen) — de automatisering start nadat de hele pagina, inclusief afbeeldingen en scripts, volledig is geladen.",
+    "document": "Tijdens het laden van de pagina",
+    "documentHint": "<b>Zodra de pagina geladen is</b> , start de automatisering zodra de paginastructuur gereed is, nog voordat afbeeldingen en scripts volledig geladen zijn. Dit is sneller, maar kan op sommige pagina&#39;s instabiel zijn.",
+    "triggerUrlChange": "Uitvoeren op paginanavigatie",
+    "triggerUrlChangeHint": "<b>Uitvoeren bij paginanavigatie</b> — voert de automatisering opnieuw uit wanneer het paginaadres verandert, zonder dat de pagina volledig opnieuw geladen hoeft te worden. Handig voor Gmail, Twitter en andere moderne apps.",
+    "urlMatch": "URL-overeenkomsttype",
+    "regex": "Patroonovereenkomst",
+    "exact": "Exacte URL",
+    "startTime": "Starttijd (voor automatiseringen)",
+    "googleSheetsId": "Google Sheets ID",
+    "bypass": {
+      "title": "Omzeil het standaardgedrag van de browser voor sneltoetsen.",
+      "alert": "Waarschuwing",
+      "confirm": "Bevestigen",
+      "prompt": "Snel"
+    }
+  },
+  "loop": {
+    "title": "Lus",
+    "repeat": "Herhalen",
+    "repeatHint": "<b>Met de herhaalfunctie</b> worden alle stappen herhaald zonder de pagina opnieuw te laden, met het opgegeven interval.",
+    "repeatInterval": "Interval tussen lussen",
+    "refresh": "Vernieuwen",
+    "refreshHint": "De pagina wordt <b>opnieuw</b> geladen zodra alle stappen zijn voltooid.",
+    "toast": {
+      "header": "Lusinstellingen",
+      "body": "Lusinstellingen succesvol opgeslagen!"
+    }
+  },
+  "error": {
+    "required": "Dit veld is verplicht.",
+    "number": "Voer een geldig nummer in.",
+    "interval": "Voer een geldig nummer in.",
+    "url": "Voer een website-URL in om verder te gaan.",
+    "initWait": "Voer een geldig nummer in.",
+    "scheduleDate": "Voer een geldige datum in in dit formaat: 2025-12-01",
+    "scheduleTime": "Voer een geldige tijd in in dit formaat: 23:59:59.000",
+    "scheduleRepeat": "Voer een geldig getal in voor hoe vaak u dit wilt herhalen.",
+    "startTime": "Voer een geldige starttijd in in dit formaat: 12:12:12:000",
+    "json": "Het geselecteerde bestand is geen geldig JSON-bestand. Controleer het bestand en probeer het opnieuw.",
+    "hotKey": "Gebruik een letter in combinatie met Ctrl, Alt of Shift (bijv. Ctrl + A).",
+    "valueExtractor": "Het patroon dat u hebt ingevoerd is niet geldig. Controleer uw gegevens en probeer het opnieuw.",
+    "value": "Voer een waarde in om verder te gaan.",
+    "condition": "Selecteer een aandoening om verder te gaan.",
+    "elementFinder": "Geef aan hoe het artikel op de pagina te vinden is.",
+    "spreadsheetId": "Voer een geldige Google Sheets-ID in (maximaal 44 tekens, bijvoorbeeld 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA)"
+  },
+  "step": {
+    "title": "Stap",
+    "plural": "Stappen",
+    "add": "Voeg stap toe",
+    "addBefore": "Voeg de bovenstaande stap toe",
+    "addAfter": "Voeg de onderstaande stap toe",
+    "remove": "Verwijder stap",
+    "disable": "Stap uitschakelen",
+    "enable": "Schakel stap in",
+    "initWait": "Vertraging",
+    "name": "Naam",
+    "elementFinder": "Doel",
+    "value": "Waarde",
+    "repeat": "Herhalen",
+    "repeatInterval": "Interval",
+    "confirm": {
+      "remove": {
+        "title": "Verwijder stap",
+        "message": "Weet je zeker dat je stap [{{name}}] wilt verwijderen?"
+      }
+    },
+    "toast": {
+      "header": "Stap",
+      "body": "Stap succesvol opgeslagen!",
+      "remove": "Stap succesvol voltooid!",
+      "reorder": "Stappen succesvol opnieuw geordend!"
+    }
+  },
+  "userscript": {
+    "add": "Gebruikersscript toevoegen",
+    "confirm": {
+      "remove": {
+        "title": "Gebruikersscript verwijderen",
+        "message": "Weet je zeker dat je het gebruikersscript [{{name}}] wilt verwijderen?"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "Voorbeelden"
+    },
+    "startTime": {
+      "content": "Probeer &lt;1&gt;Plannings-URL</1> Onze nieuwe browserextensie.<br /> Het wordt gebruikt om een webpagina/URL op een bepaalde dag en tijd in te plannen."
+    },
+    "hotkey": {
+      "title": "Sneltoets",
+      "content": "Druk op de sneltoets op het toetsenbord om het veld automatisch in te vullen.",
+      "hint": "Een enkele letter zonder <kbd>Ctrl</kbd> , <kbd>Alt</kbd> of <kbd>Shift</kbd> is niet geldig."
+    }
+  },
+  "common": {
+    "appName": "AutoClicker - AutoFill",
+    "file": "Bestand",
+    "error": "Fout",
+    "save": "Redden",
+    "clear": "Duidelijk",
+    "close": "Dichtbij",
+    "download": "Download",
+    "disabled": "Gehandicapt",
+    "sec": "sec",
+    "min": "min",
+    "no": "Nee",
+    "yes": "Ja",
+    "local": "LOKAAL",
+    "dev": "ONTWIKKELAAR",
+    "stable": "STABIEL",
+    "examples": "Voorbeelden",
+    "add": "Toevoegen"
+  },
+  "languages": {
+    "title": "Taal",
+    "en": "Engels",
+    "fr": "Frans",
+    "ko": "Koreaans",
+    "ca": "Canada",
+    "hi": "Hindi",
+    "zh_CN": "Chinees (vereenvoudigd)",
+    "zh_TW": "Chinees (traditioneel)",
+    "sv": "Zweeds",
+    "pt": "Portugees",
+    "ja": "Japanse",
+    "nl": "Nederlands",
+    "de": "Duits",
+    "es": "Spaans",
+    "vi": "Vietnamees",
+    "fi": "Fins",
+    "ar": "Arabisch",
+    "it": "Italiaans",
+    "ru": "Russisch",
+    "id": "Indonesisch"
+  },
+  "monitor": {
+    "title": "Monitor",
+    "enabled": "Monitoring inschakelen",
+    "enabledHint": "Acties automatisch opnieuw uitvoeren wanneer nieuwe overeenkomende elementen aan de pagina worden toegevoegd (bijv. voor oneindig scrollen, asynchrone content).",
+    "rootSelector": "Monitor Root",
+    "rootSelectorPlaceholder": "lichaam",
+    "rootSelectorHint": "CSS-selector voor de container die geobserveerd moet worden",
+    "watchAttributes": "Monitorkenmerken",
+    "attributesPlaceholder": "stijl, klasse, verborgen",
+    "attributesHint": "Door komma's gescheiden lijst van kenmerken die op veranderingen moeten worden gecontroleerd.",
+    "debounce": "Debounce",
+    "debounceHint": "Vertraging bij het verwerken van nieuwe elementen (1-5 seconden)",
+    "timeout": "Time-out",
+    "timeoutHint": "Automatische stop na N minuten (1-180)",
+    "urlChange": "Stop bij URL-wijziging",
+    "urlChangeHint": "Automatisch stoppen met monitoren wanneer de pagina-URL verandert",
+    "toast": {
+      "header": "Monitor",
+      "body": "Monitor succesvol opgeslagen!"
+    }
+  },
+  "home": {
+    "title": "Welkom bij AutoClicker - AutoFill",
+    "subtitle": "Automatiseer klikken en het invullen van formulieren op elke website door doelen en acties te definiëren.",
+    "quickStart": {
+      "title": "Snelstartgids",
+      "step1": {
+        "title": "1. Installeer de extensie",
+        "desc": "Download en installeer de extensie vanuit de Chrome Web Store of Edge Add-ons.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. Een doelpagina configureren",
+        "desc": "Open een webpagina, klik met de rechtermuisknop op een willekeurig element en kies AutoClicker - AutoFill → Configureren voor dit veld.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. Opslaan en uitvoeren",
+        "desc": "Sla je configuratie op en vernieuw de doelpagina. De automatisering wordt automatisch uitgevoerd.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "Handige tips",
+      "tip1": {
+        "title": "Probeer het op de testpagina.",
+        "desc": "Open test.getautoclicker.com, voeg twee acties toe — één om een gebruikersnaamveld in te vullen en één om op een knop te klikken — sla het bestand op en voer het programma uit.",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "Doelstellingen nauwkeurig",
+        "desc": "Gebruik elementpaden om specifieke items op een pagina te selecteren, zoals //input[@name=\"username\"], voor betrouwbaardere automatisering.",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "Trage paginaladingen aanpakken",
+        "desc": "Voeg een 'Wacht voor start'-optie toe aan je automatisering als de pagina traag laadt voordat je stappen worden uitgevoerd.",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "Algemene instellingen en sneltoetsen",
+        "desc": "Configureer de opstartmodus, definieer een sneltoets en pas de positie van de statusbalk aan in de algemene instellingen.",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "Klik met de rechtermuisknop om automatisch een foto te maken.",
+        "desc": "Klik met de rechtermuisknop op een invoerveld of knop op een pagina en selecteer 'Configureren voor dit veld' om de URL en de Element Finder automatisch in te vullen.",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "Videohandleidingen",
+      "video1": {
+        "title": "Aan de slag met AutoClicker AutoFill"
+      },
+      "video2": {
+        "title": "Formulieren automatisch invullen"
+      },
+      "video3": {
+        "title": "Automatisch op knoppen klikken"
+      },
+      "video4": {
+        "title": "Geavanceerde configuratietips"
+      }
+    }
+  }
+}

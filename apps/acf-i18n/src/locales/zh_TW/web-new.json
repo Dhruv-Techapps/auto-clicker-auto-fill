@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "自動點擊器 - 自動填充",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "正在連接..."
+  },
+  "links": {
+    "docs": "文件",
+    "blog": "部落格",
+    "configuration": "配置",
+    "issues": "問題",
+    "discussion": "討論",
+    "test": "練習表格",
+    "contact": "接觸",
+    "chat": "聊天",
+    "connect": "連接",
+    "privacy": "隱私權政策",
+    "googleGroup": "Google 群組"
+  },
+  "about": "關於",
+  "social": "社會的",
+  "theme": {
+    "title": "主題",
+    "switchLight": "切換到淺色主題",
+    "switchDark": "切換到深色主題",
+    "light": "光",
+    "dark": "黑暗的",
+    "auto": "汽車"
+  },
+  "loading": "載入中...",
+  "learnMore": "了解更多",
+  "login": "登入",
+  "logout": "註銷",
+  "connect": "連接",
+  "disconnect": "斷開",
+  "resources": "資源",
+  "settings": {
+    "title": "全域設定",
+    "additional": "其他設定"
+  },
+  "notification": {
+    "title": "顯示通知",
+    "error": "發生錯誤",
+    "step": "步驟完成後",
+    "loop": "循環完成時",
+    "automation": "自動化完成",
+    "sound": "通知音"
+  },
+  "discord": {
+    "title": "Discord 通知",
+    "loginRequired": "請先<1>登入</1>您的帳戶，然後再連接到Discord。"
+  },
+  "checkIFrames": {
+    "title": "在嵌入式頁面內搜尋",
+    "hint": "也要找出頁面嵌入部分內的內容。"
+  },
+  "reloadOnError": {
+    "title": "出錯時重新整理頁面",
+    "hint": "如果出現問題，自動重新載入頁面。",
+    "contextInvalidated": "擴展上下文已失效。"
+  },
+  "statusBar": {
+    "title": "狀態列",
+    "hint": "在頁面底部顯示狀態列",
+    "hide": "隱藏",
+    "topLeft": "左上",
+    "topRight": "右上角",
+    "bottomLeft": "左下角",
+    "bottomRight": "右下角",
+    "positions": {
+      "hide": "隱藏",
+      "top-left": "左上",
+      "top-right": "右上角",
+      "bottom-left": "左下角",
+      "bottom-right": "右下角"
+    }
+  },
+  "retry": {
+    "title": "重試次數",
+    "interval": "重試間隔",
+    "stop": "停止自動化",
+    "skip": "跳過此步驟",
+    "refresh": "刷新並重試",
+    "hint": "如果頁面上找不到該商品，該怎麼辦？"
+  },
+  "backup": {
+    "title": "備份",
+    "lastBackup": "上次備份：",
+    "backup": "備份到雲端",
+    "restore": "從雲端恢復",
+    "now": "立即備份",
+    "autoBackup": "自動備份",
+    "auto-backup": "自動備份",
+    "daily": "日常的",
+    "weekly": "每週",
+    "monthly": "每月",
+    "off": "離開",
+    "loginRequired": "請先<1>登入</1>您的帳戶，然後再連接到 Google 雲端硬碟。",
+    "checkingAccess": "正在檢查 Google 雲端硬碟存取權限…",
+    "connect": "連接到 Google 雲端硬碟",
+    "connected": "Google 雲端硬碟備份",
+    "loadingFiles": "正在加載您的文件…",
+    "restoreAction": "恢復",
+    "delete": "刪除",
+    "noBackup": "未找到備份",
+    "confirm": {
+      "restore": {
+        "title": "從雲端恢復自動化",
+        "message": "您確定要從雲端恢復自動化設定嗎？這將替換您所有的自動化設置，且無法撤銷。"
+      }
+    }
+  },
+  "reorder": {
+    "title": "重新訂購自動化",
+    "hint": "請在重新訂購前儲存所有自動化設定。"
+  },
+  "extensionNotFound": {
+    "title": "擴充功能未安裝。",
+    "subTitle": "此頁面可與 Chrome 和 Edge 瀏覽器的<b>Auto Clicker - AutoFill</b>擴充功能搭配使用。",
+    "hint": "請先安裝擴充功能才能開始使用。"
+  },
+  "stepSettings": {
+    "title": "步驟設定",
+    "info": "這些設定僅適用於此步驟及其預檢查，並優先於您的全域設定。",
+    "iframeFirst": "首先搜尋嵌入式頁面",
+    "iframeFirstHint": "在搜尋主頁之前，請先查看頁面上的任何嵌入內容。",
+    "retry": {
+      "title": "如果未找到項目",
+      "hint": "選擇即使重試後仍然找不到該物品時應該發生的情況。",
+      "retry": "重試次數",
+      "interval": "重試間隔",
+      "stop": "停止自動化",
+      "skip": "跳過此步驟",
+      "goto": "轉到步驟",
+      "refresh": "刷新並重試"
+    },
+    "toast": {
+      "header": "步驟設定",
+      "body": "步驟設定已成功儲存！"
+    }
+  },
+  "stateGuard": {
+    "action": "上一步",
+    "status": "結果",
+    "title": "州衛隊",
+    "add": "新增條件",
+    "info": "根據前面步驟中發生的情況，設定一條規則來控制是否要執行此步驟。",
+    "stop": "停止自動化",
+    "skip": "跳過此步驟",
+    "refresh": "刷新並重試",
+    "goto": "轉到步驟",
+    "proceed": "仍然運行此步驟",
+    "hint": "如果規則不成立，該怎麼辦？",
+    "toast": {
+      "header": "州衛隊",
+      "body": "國家衛隊成功救援！"
+    }
+  },
+  "pageGuard": {
+    "title": "頁面保護",
+    "info": "只有當頁面上的值滿足您的條件時，才執行此步驟。",
+    "elementFinder": "在頁面上尋找項目",
+    "condition": "比較",
+    "value": "與…比較",
+    "valueExtractor": "提取號碼或文本",
+    "valueExtractorHint": "使用模式提取值中的特定部分。例如，從 $24.00 中提取 24.00，或從 10 個自動化中提取 10。",
+    "recheck": {
+      "title": "如果條件不滿足",
+      "hint": "選擇當篩選條件不滿足時應該執行的操作。",
+      "recheck": "再次檢查",
+      "interval": "請稍等片刻再檢查",
+      "stop": "停止自動化",
+      "skip": "跳過此步驟",
+      "refresh": "刷新並重試",
+      "goto": "轉到步驟"
+    },
+    "toast": {
+      "header": "頁面保護",
+      "body": "頁面保護已成功儲存！"
+    }
+  },
+  "schedule": {
+    "title": "行程自動化",
+    "info": "在指定日期和時間運行此自動化程序",
+    "date": "日期",
+    "time": "時間",
+    "repeat": "幾分鐘後重複。"
+  },
+  "upgradePlan": {
+    "title": "升級計劃",
+    "subtitle": "解鎖進階功能，充分發揮 Auto Clicker AutoFill 的效用。",
+    "currentPlan": "您目前的計劃",
+    "free": {
+      "name": "🆓 免費",
+      "tagline": "強大的自動化功能，人人可用－無需註冊帳號。",
+      "perMonth": "永遠",
+      "cta": "目前計劃",
+      "includes": "包含內容：",
+      "features": {
+        "unlimitedAutomations": "無限自動化",
+        "unlimitedSteps": "每個自動化步驟數不限",
+        "loopSteps": "循環重複這些步驟。",
+        "recording": "可視化步進記錄儀",
+        "allValues": "所有值類型—無需 API"
+      }
+    },
+    "plus": {
+      "name": "🚀 加",
+      "tagline": "所有基本功能，外加對預檢和逐步設定的更深層控制。",
+      "perMonth": "每月",
+      "cta": "升級到 Plus",
+      "includes": "免費內容全部，外加：",
+      "features": {
+        "addonCondition": "條件插件邏輯",
+        "actionCondition": "每個動作的條件規則",
+        "actionSettings": "操作等級設定和覆蓋",
+        "noAds": "無廣告體驗"
+      }
+    },
+    "pro": {
+      "name": "🔹 專業版",
+      "tagline": "充分發揮自動化的強大功能—整合、人工智慧和優先支援。",
+      "perMonth": "每月",
+      "cta": "升級到專業版",
+      "includes": "Plus 中的所有產品，以及：",
+      "features": {
+        "sheets": "Google Sheets 集成",
+        "discord": "Discord 通知",
+        "captcha": "驗證碼解析器（即將推出）",
+        "vipSupport": "透過 Discord 獲得優先支持",
+        "earlyAccess": "搶先體驗新功能",
+        "prideAndJoy": "支持者徽章和社區認可"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google 試算表",
+    "hint": "連接您的 Google Sheets 帳戶，即可輕鬆匯出您的自動化操作和日誌，並在一個地方追蹤您的自動化操作歷史記錄。",
+    "useStable": {
+      "title": "使用穩定版本以獲得最佳的 Google Sheets 功能。",
+      "message": "為了獲得最佳的 Google 試算表效能和可靠性，建議您使用其功能的<1>穩定版</1>。這些版本經過全面測試，確保功能流暢，為您提供可靠的平台來完成各項任務。優先考慮穩定性，可以提高您的工作效率，並將意外問題的風險降至最低。如果您在使用 Google 試算表時需要任何協助或指導，歡迎隨時與我們聯絡尋求支援！"
+    },
+    "loginRequired": "請先<1>登入</1>您的帳戶，然後再連接到 Google Sheets。",
+    "connect": "連接到 Google 表格",
+    "connected": "已連接到 Google Sheets"
+  },
+  "sidebar": {
+    "search": "搜尋",
+    "upgradePlan": "升級計劃",
+    "login": "登入",
+    "logout": "註銷",
+    "language": "語言",
+    "learnMore": "了解更多"
+  },
+  "automations": {
+    "title": "我的自動化",
+    "count": "自動化（{{count}}）",
+    "search": "搜尋您的自動化設定…",
+    "add": "新的",
+    "reorder": "重新訂購",
+    "reorderByName": "按名稱重新排序",
+    "selected": "選定",
+    "selected_one": "已選擇 1 項自動化操作",
+    "selected_other": "已選擇 {{count}} 個自動化",
+    "selectAll": "全選",
+    "exportSelected": "匯出所選內容",
+    "deleteSelected": "刪除所選內容",
+    "cancelSelection": "取消選擇",
+    "automationsWithinExtension": "擴充功能中的自動化",
+    "selectAutomations": "選擇要匯出或刪除的自動化流程",
+    "select": "選擇",
+    "import": "進口",
+    "toast": {
+      "header": "自動化",
+      "remove": "自動化操作已成功移除。",
+      "remove_one": "自動化操作已成功移除",
+      "remove_other": "{{count}} 自動化作業已成功移除",
+      "export": "自動化流程已成功匯出。",
+      "export_one": "1 個自動化流程已成功匯出",
+      "export_other": "{{count}} 個自動化流程已成功匯出",
+      "import": "自動化流程已成功導入。",
+      "import_one": "1 個自動化流程已成功匯入。",
+      "import_other": "{{count}} 個自動化流程已成功匯入",
+      "reorder": "自動化流程已成功重新排序"
+    }
+  },
+  "automation": {
+    "title": "自動化",
+    "remove": "消除",
+    "duplicate": "複製",
+    "enable": "使能夠",
+    "disable": "停用",
+    "disabled": "已停用",
+    "edit": "編輯",
+    "export": "出口",
+    "import": "進口",
+    "schedule": "行程",
+    "batch": "循環設定",
+    "watch": "顯示器設定",
+    "url": "URL",
+    "name": "姓名",
+    "initWait": "請稍候再開始",
+    "startTime": "預定開始時間",
+    "noConfig": "未找到自動化程序，請優化您的搜尋。",
+    "confirm": {
+      "title": "移除自動化",
+      "message": "您確定要移除 [{{name}}] 自動化流程嗎？"
+    },
+    "toast": {
+      "header": "自動化",
+      "body": "自動化流程保存成功！",
+      "schedule": "自動化日程已成功儲存！",
+      "settings": "自動化設定已成功儲存！",
+      "add": "自動化功能已成功添加",
+      "duplicate": "自動化複製成功"
+    }
+  },
+  "automationSettings": {
+    "title": "自動化設定",
+    "startType": "運作模式",
+    "hotkey": "快速鍵",
+    "auto": "自動的",
+    "autoHint": "<b>自動</b>運行－每次頁面載入時自動運行。無需您進行任何操作。",
+    "manual": "手動（快速鍵）",
+    "manualHint": "<b>手動模式</b>－僅在按下您定義的鍵盤快速鍵時運作。",
+    "loadType": "頁面載入時間",
+    "window": "滿載後",
+    "windowHint": "<b>完全載入後</b>（建議）－自動化操作在包括影像和腳本在內的整個頁面載入完成後開始。",
+    "document": "頁面載入時",
+    "documentHint": "<b>頁面載入完畢後</b>－自動化流程會在頁面結構準備好後立即啟動，甚至在圖片和腳本載入完成之前就開始。速度更快，但在某些頁面上可能不穩定。",
+    "triggerUrlChange": "在頁面導航上運行",
+    "triggerUrlChangeHint": "<b>頁面導覽時運行</b>— 當頁面位址變更時，無需完全重新載入頁面即可重新執行自動化流程。適用於 Gmail、Twitter 和其他現代應用程式。",
+    "urlMatch": "URL 比對類型",
+    "regex": "圖案匹配",
+    "exact": "確切網址",
+    "startTime": "開始時間（適用於自動化）",
+    "googleSheetsId": "Google Sheets ID",
+    "bypass": {
+      "title": "繞過瀏覽器熱鍵預設行為",
+      "alert": "警報",
+      "confirm": "確認",
+      "prompt": "迅速的"
+    }
+  },
+  "loop": {
+    "title": "環形",
+    "repeat": "重複",
+    "repeatHint": "<b>重複操作</b>將按照給定的時間間隔重新運行所有步驟，而無需重新載入頁面。",
+    "repeatInterval": "循環間隔",
+    "refresh": "重新整理",
+    "refreshHint": "所有步驟完成後，<b>重新整理</b>頁面即可重新載入。",
+    "toast": {
+      "header": "循環設定",
+      "body": "循環設定已成功儲存！"
+    }
+  },
+  "error": {
+    "required": "此欄位是必需的",
+    "number": "請輸入有效數字",
+    "interval": "請輸入有效數字",
+    "url": "請輸入網站網址以繼續",
+    "initWait": "請輸入有效數字",
+    "scheduleDate": "請按以下格式輸入有效日期：2025-12-01",
+    "scheduleTime": "請按以下格式輸入有效時間：23:59:59.000",
+    "scheduleRepeat": "請輸入有效的數字，表示重複次數。",
+    "startTime": "請按以下格式輸入有效的開始時間：12:12:12:000",
+    "json": "所選檔案不是有效的 JSON 檔案——請檢查並重試。",
+    "hotKey": "請使用字母與 Ctrl、Alt 或 Shift 鍵組合輸入（例如 Ctrl + A）。",
+    "valueExtractor": "您輸入的圖案無效—請檢查並重試。",
+    "value": "請輸入數值以繼續",
+    "condition": "請選擇一種條件以繼續",
+    "elementFinder": "請說明如何在頁面上找到該物品。",
+    "spreadsheetId": "請輸入有效的 Google Sheets ID（44 個字符，例如 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA）"
+  },
+  "step": {
+    "title": "步",
+    "plural": "步驟",
+    "add": "新增步驟",
+    "addBefore": "添加上一步",
+    "addAfter": "新增下方步驟",
+    "remove": "移除步驟",
+    "disable": "停用步驟",
+    "enable": "啟用步驟",
+    "initWait": "延遲",
+    "name": "姓名",
+    "elementFinder": "目標",
+    "value": "價值",
+    "repeat": "重複",
+    "repeatInterval": "間隔",
+    "confirm": {
+      "remove": {
+        "title": "移除步驟",
+        "message": "您確定要移除 [{{name}}] 步驟嗎？"
+      }
+    },
+    "toast": {
+      "header": "步",
+      "body": "步驟保存成功！",
+      "remove": "步驟已成功移除！",
+      "reorder": "步驟重新排序成功！"
+    }
+  },
+  "userscript": {
+    "add": "新增使用者腳本",
+    "confirm": {
+      "remove": {
+        "title": "移除使用者腳本",
+        "message": "您確定要刪除 [{{name}}] 使用者腳本嗎？"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "範例"
+    },
+    "startTime": {
+      "content": "嘗試 &lt;1&gt;計劃 URL</1>我們的全新瀏覽器擴充功能。<br />它用於安排網頁/URL在特定日期和時間的發佈時間。"
+    },
+    "hotkey": {
+      "title": "快速鍵",
+      "content": "按下鍵盤上的快捷鍵即可在欄位中自動輸入內容",
+      "hint": "單字母（不含<kbd>Ctrl</kbd> 、 <kbd>Alt</kbd>或<kbd>Shift 鍵）</kbd>無效"
+    }
+  },
+  "common": {
+    "appName": "自動點擊器 - 自動填充",
+    "file": "文件",
+    "error": "錯誤",
+    "save": "節省",
+    "clear": "清除",
+    "close": "關閉",
+    "download": "下載",
+    "disabled": "已停用",
+    "sec": "秒",
+    "min": "最小",
+    "no": "不",
+    "yes": "是的",
+    "local": "當地的",
+    "dev": "開發",
+    "stable": "穩定的",
+    "examples": "範例",
+    "add": "添加"
+  },
+  "languages": {
+    "title": "語言",
+    "en": "英語",
+    "fr": "法語",
+    "ko": "韓國人",
+    "ca": "加拿大",
+    "hi": "印地語",
+    "zh_CN": "中文（簡體）",
+    "zh_TW": "中文（繁體）",
+    "sv": "瑞典",
+    "pt": "葡萄牙語",
+    "ja": "日本人",
+    "nl": "荷蘭語",
+    "de": "德文",
+    "es": "西班牙語",
+    "vi": "越南語",
+    "fi": "芬蘭",
+    "ar": "阿拉伯",
+    "it": "義大利語",
+    "ru": "俄文",
+    "id": "印尼"
+  },
+  "monitor": {
+    "title": "監視器",
+    "enabled": "啟用監控",
+    "enabledHint": "當頁面中新增的匹配元素時，自動重新運行操作（例如，用於無限滾動、非同步內容）。",
+    "rootSelector": "監控根目錄",
+    "rootSelectorPlaceholder": "身體",
+    "rootSelectorHint": "要觀察的容器的 CSS 選擇器",
+    "watchAttributes": "監控屬性",
+    "attributesPlaceholder": "風格、階級、隱藏",
+    "attributesHint": "以逗號分隔的待觀察屬性列表，用於列出變化情況。",
+    "debounce": "防手震",
+    "debounceHint": "處理新元素前的延遲（1-5秒）",
+    "timeout": "暫停",
+    "timeoutHint": "N 分鐘後自動停止（1-180）",
+    "urlChange": "URL 更改時停止",
+    "urlChangeHint": "頁面 URL 變更時自動停止監視",
+    "toast": {
+      "header": "監視器",
+      "body": "監控保存成功！"
+    }
+  },
+  "home": {
+    "title": "歡迎使用自動點擊器 - 自動填充",
+    "subtitle": "透過定義目標和操作，自動執行任何網站上的點擊和表單填寫操作。",
+    "quickStart": {
+      "title": "快速入門指南",
+      "step1": {
+        "title": "1. 安裝擴充程式",
+        "desc": "從 Chrome 線上應用程式商店或 Edge 外掛程式下載並安裝該擴充功能。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. 配置目標頁面",
+        "desc": "開啟網頁，右鍵點選任意元素，選擇「自動點擊器 - 自動填入」→「為此欄位配置」。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. 儲存並運行",
+        "desc": "儲存配置並重新載入目標頁面。自動化流程將自動運作。",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "實用技巧",
+      "tip1": {
+        "title": "請在測試頁面上嘗試",
+        "desc": "打開 test.getautoclicker.com，新增兩個動作——一個用於填寫使用者名字段，一個用於點擊按鈕——然後儲存並運行。",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "精確定位目標物品",
+        "desc": "使用元素路徑來定位頁面上的特定項目，例如 //input[@name=\"username\"]，以實現更可靠的自動化。",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "處理頁面加載緩慢的問題",
+        "desc": "如果頁面載入速度慢，請在自動化腳本中設定「等待片刻」以阻止步驟執行。",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "全域設定和快速鍵",
+        "desc": "在全域設定中配置啟動模式、定義鍵盤快速鍵並調整狀態列位置。",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "右鍵單擊自動捕獲",
+        "desc": "右鍵單擊頁面上的任何輸入框或按鈕，然後選擇“配置此欄位”以自動填入 URL 和元素查找器。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "影片指南",
+      "video1": {
+        "title": "自動點擊器自動填入入門指南"
+      },
+      "video2": {
+        "title": "自動填寫表單"
+      },
+      "video3": {
+        "title": "自動點擊按鈕"
+      },
+      "video4": {
+        "title": "進階配置技巧"
+      }
+    }
+  }
+}

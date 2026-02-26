@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "appName": "自动点击器 - 自动填充",
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+  },
+  "status": {
+    "connecting": "正在连接..."
+  },
+  "links": {
+    "docs": "文档",
+    "blog": "博客",
+    "configuration": "配置",
+    "issues": "问题",
+    "discussion": "讨论",
+    "test": "练习表格",
+    "contact": "接触",
+    "chat": "聊天",
+    "connect": "连接",
+    "privacy": "隐私政策",
+    "googleGroup": "Google 群组"
+  },
+  "about": "关于",
+  "social": "社会的",
+  "theme": {
+    "title": "主题",
+    "switchLight": "切换到浅色主题",
+    "switchDark": "切换到深色主题",
+    "light": "光",
+    "dark": "黑暗的",
+    "auto": "汽车"
+  },
+  "loading": "加载中...",
+  "learnMore": "了解更多",
+  "login": "登录",
+  "logout": "注销",
+  "connect": "连接",
+  "disconnect": "断开",
+  "resources": "资源",
+  "settings": {
+    "title": "全局设置",
+    "additional": "其他设置"
+  },
+  "notification": {
+    "title": "显示通知",
+    "error": "发生错误",
+    "step": "步骤完成后",
+    "loop": "循环完成时",
+    "automation": "自动化完成",
+    "sound": "通知音"
+  },
+  "discord": {
+    "title": "Discord 通知",
+    "loginRequired": "请先<1>登录</1>您的帐户，然后再连接到Discord。"
+  },
+  "checkIFrames": {
+    "title": "在嵌入式页面内搜索",
+    "hint": "还要查找页面嵌入部分内的内容。"
+  },
+  "reloadOnError": {
+    "title": "出错时刷新页面",
+    "hint": "如果出现问题，自动重新加载页面。",
+    "contextInvalidated": "扩展上下文已失效。"
+  },
+  "statusBar": {
+    "title": "状态栏",
+    "hint": "在页面底部显示状态栏",
+    "hide": "隐藏",
+    "topLeft": "左上",
+    "topRight": "右上角",
+    "bottomLeft": "左下角",
+    "bottomRight": "右下角",
+    "positions": {
+      "hide": "隐藏",
+      "top-left": "左上",
+      "top-right": "右上角",
+      "bottom-left": "左下角",
+      "bottom-right": "右下角"
+    }
+  },
+  "retry": {
+    "title": "重试次数",
+    "interval": "重试间隔",
+    "stop": "停止自动化",
+    "skip": "跳过此步骤",
+    "refresh": "刷新并重试",
+    "hint": "如果页面上找不到该商品，应该怎么办？"
+  },
+  "backup": {
+    "title": "备份",
+    "lastBackup": "上次备份：",
+    "backup": "备份到云端",
+    "restore": "从云端恢复",
+    "now": "立即备份",
+    "autoBackup": "自动备份",
+    "auto-backup": "自动备份",
+    "daily": "日常的",
+    "weekly": "每周",
+    "monthly": "月度",
+    "off": "离开",
+    "loginRequired": "请先<1>登录</1>您的帐户，然后再连接到 Google 云端硬盘。",
+    "checkingAccess": "正在检查 Google 云端硬盘访问权限……",
+    "connect": "连接到 Google 云端硬盘",
+    "connected": "Google 云端硬盘备份",
+    "loadingFiles": "正在加载您的文件……",
+    "restoreAction": "恢复",
+    "delete": "删除",
+    "noBackup": "未找到备份",
+    "confirm": {
+      "restore": {
+        "title": "从云端恢复自动化",
+        "message": "您确定要从云端恢复自动化设置吗？这将替换您所有的自动化设置，且无法撤销。"
+      }
+    }
+  },
+  "reorder": {
+    "title": "重新订购自动化",
+    "hint": "请在重新订购前保存所有自动化设置。"
+  },
+  "extensionNotFound": {
+    "title": "扩展程序未安装。",
+    "subTitle": "此页面可与 Chrome 和 Edge 浏览器的<b>Auto Clicker - AutoFill</b>扩展程序配合使用。",
+    "hint": "请先安装扩展程序才能开始使用。"
+  },
+  "stepSettings": {
+    "title": "步骤设置",
+    "info": "这些设置仅适用于此步骤及其预检查，并且优先于您的全局设置。",
+    "iframeFirst": "首先搜索嵌入式页面",
+    "iframeFirstHint": "在搜索主页之前，请先查看页面上的任何嵌入内容。",
+    "retry": {
+      "title": "如果未找到项目",
+      "hint": "选择即使重试后仍然找不到该物品时应该发生的情况。",
+      "retry": "重试次数",
+      "interval": "重试间隔",
+      "stop": "停止自动化",
+      "skip": "跳过此步骤",
+      "goto": "转到步骤",
+      "refresh": "刷新并重试"
+    },
+    "toast": {
+      "header": "步骤设置",
+      "body": "步骤设置已成功保存！"
+    }
+  },
+  "stateGuard": {
+    "action": "上一步",
+    "status": "结果",
+    "title": "州卫队",
+    "add": "添加条件",
+    "info": "根据前面步骤中发生的情况，设定一条规则来控制是否运行此步骤。",
+    "stop": "停止自动化",
+    "skip": "跳过此步骤",
+    "refresh": "刷新并重试",
+    "goto": "转到步骤",
+    "proceed": "仍然运行此步骤",
+    "hint": "如果规则不成立，应该怎么办？",
+    "toast": {
+      "header": "州卫队",
+      "body": "国家卫队成功解救！"
+    }
+  },
+  "pageGuard": {
+    "title": "页面保护",
+    "info": "只有当页面上的值满足您的条件时，才执行此步骤。",
+    "elementFinder": "在页面上查找项目",
+    "condition": "比较",
+    "value": "与……比较",
+    "valueExtractor": "提取号码或文本",
+    "valueExtractorHint": "使用模式提取值中的特定部分。例如，从 $24.00 中提取 24.00，或者从 10 个自动化中提取 10。",
+    "recheck": {
+      "title": "如果条件不满足",
+      "hint": "选择当筛选条件不满足时应该执行的操作。",
+      "recheck": "再次检查",
+      "interval": "请稍等片刻再检查",
+      "stop": "停止自动化",
+      "skip": "跳过此步骤",
+      "refresh": "刷新并重试",
+      "goto": "转到步骤"
+    },
+    "toast": {
+      "header": "页面保护",
+      "body": "页面保护已成功保存！"
+    }
+  },
+  "schedule": {
+    "title": "日程自动化",
+    "info": "在指定日期和时间运行此自动化程序",
+    "date": "日期",
+    "time": "时间",
+    "repeat": "几分钟后重复。"
+  },
+  "upgradePlan": {
+    "title": "升级计划",
+    "subtitle": "解锁高级功能，充分发挥 Auto Clicker AutoFill 的效用。",
+    "currentPlan": "您当前的计划",
+    "free": {
+      "name": "🆓 免费",
+      "tagline": "强大的自动化功能，人人可用——无需注册账号。",
+      "perMonth": "永远",
+      "cta": "当前计划",
+      "includes": "包含内容：",
+      "features": {
+        "unlimitedAutomations": "无限自动化",
+        "unlimitedSteps": "每个自动化步骤数不限",
+        "loopSteps": "循环重复这些步骤。",
+        "recording": "可视化步进记录仪",
+        "allValues": "所有值类型——无需 API"
+      }
+    },
+    "plus": {
+      "name": "🚀 加",
+      "tagline": "所有基本功能，外加对预检和分步设置的更深层次控制。",
+      "perMonth": "每月",
+      "cta": "升级到 Plus",
+      "includes": "免费内容全部，外加：",
+      "features": {
+        "addonCondition": "条件插件逻辑",
+        "actionCondition": "每个动作的条件规则",
+        "actionSettings": "操作级别设置和覆盖",
+        "noAds": "无广告体验"
+      }
+    },
+    "pro": {
+      "name": "🔹 专业版",
+      "tagline": "充分发挥自动化的强大功能——集成、人工智能和优先支持。",
+      "perMonth": "每月",
+      "cta": "升级到专业版",
+      "includes": "Plus 中的所有产品，以及：",
+      "features": {
+        "sheets": "Google Sheets 集成",
+        "discord": "Discord 通知",
+        "captcha": "验证码解析器（即将推出）",
+        "vipSupport": "通过 Discord 获得优先支持",
+        "earlyAccess": "抢先体验新功能",
+        "prideAndJoy": "支持者徽章和社区认可"
+      }
+    }
+  },
+  "googleSheets": {
+    "title": "Google 表格",
+    "hint": "连接您的 Google Sheets 帐户，即可轻松导出您的自动化操作和日志，并在一个地方跟踪您的自动化操作历史记录。",
+    "useStable": {
+      "title": "使用稳定版本以获得最佳的 Google Sheets 功能。",
+      "message": "为了获得最佳的 Google 表格性能和可靠性，建议您使用其功能的<1>稳定版</1>。这些版本经过全面测试，确保功能流畅，为您提供可靠的平台来完成各项任务。优先考虑稳定性，可以提高您的工作效率，并将遇到意外问题的风险降至最低。如果您在使用 Google 表格时需要任何帮助或指导，欢迎随时联系我们寻求支持！"
+    },
+    "loginRequired": "请先<1>登录</1>您的帐户，然后再连接到 Google Sheets。",
+    "connect": "连接到 Google 表格",
+    "connected": "已连接到 Google Sheets"
+  },
+  "sidebar": {
+    "search": "搜索",
+    "upgradePlan": "升级计划",
+    "login": "登录",
+    "logout": "注销",
+    "language": "语言",
+    "learnMore": "了解更多"
+  },
+  "automations": {
+    "title": "我的自动化",
+    "count": "自动化（{{count}}）",
+    "search": "搜索您的自动化设置……",
+    "add": "新的",
+    "reorder": "重新订购",
+    "reorderByName": "按名称重新排序",
+    "selected": "选定",
+    "selected_one": "已选择 1 项自动化操作",
+    "selected_other": "已选择 {{count}} 个自动化",
+    "selectAll": "全选",
+    "exportSelected": "导出所选内容",
+    "deleteSelected": "删除所选内容",
+    "cancelSelection": "取消选择",
+    "automationsWithinExtension": "扩展程序中的自动化",
+    "selectAutomations": "选择要导出或删除的自动化流程",
+    "select": "选择",
+    "import": "进口",
+    "toast": {
+      "header": "自动化",
+      "remove": "自动化操作已成功移除。",
+      "remove_one": "自动化操作已成功移除",
+      "remove_other": "{{count}} 自动化操作已成功移除",
+      "export": "自动化流程已成功导出。",
+      "export_one": "1 个自动化流程已成功导出",
+      "export_other": "{{count}} 个自动化流程已成功导出",
+      "import": "自动化流程已成功导入。",
+      "import_one": "1 个自动化流程已成功导入。",
+      "import_other": "{{count}} 个自动化流程已成功导入",
+      "reorder": "自动化流程已成功重新排序"
+    }
+  },
+  "automation": {
+    "title": "自动化",
+    "remove": "消除",
+    "duplicate": "复制",
+    "enable": "使能够",
+    "disable": "禁用",
+    "disabled": "已禁用",
+    "edit": "编辑",
+    "export": "出口",
+    "import": "进口",
+    "schedule": "日程",
+    "batch": "循环设置",
+    "watch": "显示器设置",
+    "url": "URL",
+    "name": "姓名",
+    "initWait": "请稍候再开始",
+    "startTime": "预定开始时间",
+    "noConfig": "未找到自动化程序，请优化您的搜索。",
+    "confirm": {
+      "title": "移除自动化",
+      "message": "您确定要移除 [{{name}}] 自动化流程吗？"
+    },
+    "toast": {
+      "header": "自动化",
+      "body": "自动化流程保存成功！",
+      "schedule": "自动化日程已成功保存！",
+      "settings": "自动化设置已成功保存！",
+      "add": "自动化功能已成功添加",
+      "duplicate": "自动化复制成功"
+    }
+  },
+  "automationSettings": {
+    "title": "自动化设置",
+    "startType": "运行模式",
+    "hotkey": "快捷键",
+    "auto": "自动的",
+    "autoHint": "<b>自动</b>运行——每次页面加载时自动运行。无需您进行任何操作。",
+    "manual": "手动（快捷键）",
+    "manualHint": "<b>手动模式</b>——仅在按下您定义的键盘快捷键时运行。",
+    "loadType": "页面加载时间",
+    "window": "满载后",
+    "windowHint": "<b>完全加载后</b>（推荐）——自动化操作在包括图像和脚本在内的整个页面加载完成后开始。",
+    "document": "页面加载时",
+    "documentHint": "<b>页面加载完毕后</b>——自动化流程会在页面结构准备就绪后立即启动，甚至在图片和脚本加载完成之前就开始。速度更快，但在某些页面上可能不稳定。",
+    "triggerUrlChange": "在页面导航上运行",
+    "triggerUrlChangeHint": "<b>页面导航时运行</b>— 当页面地址更改时，无需完全重新加载页面即可重新运行自动化流程。适用于 Gmail、Twitter 和其他现代应用程序。",
+    "urlMatch": "URL 匹配类型",
+    "regex": "图案匹配",
+    "exact": "确切网址",
+    "startTime": "开始时间（适用于自动化）",
+    "googleSheetsId": "Google Sheets ID",
+    "bypass": {
+      "title": "绕过浏览器热键默认行为",
+      "alert": "警报",
+      "confirm": "确认",
+      "prompt": "迅速的"
+    }
+  },
+  "loop": {
+    "title": "环形",
+    "repeat": "重复",
+    "repeatHint": "<b>重复操作</b>将按照给定的时间间隔重新运行所有步骤，而无需重新加载页面。",
+    "repeatInterval": "循环间隔",
+    "refresh": "刷新",
+    "refreshHint": "所有步骤完成后，<b>刷新</b>页面即可重新加载。",
+    "toast": {
+      "header": "循环设置",
+      "body": "循环设置已成功保存！"
+    }
+  },
+  "error": {
+    "required": "此字段是必需的",
+    "number": "请输入有效数字",
+    "interval": "请输入有效数字",
+    "url": "请输入网站网址以继续",
+    "initWait": "请输入有效数字",
+    "scheduleDate": "请按以下格式输入有效日期：2025-12-01",
+    "scheduleTime": "请按以下格式输入有效时间：23:59:59.000",
+    "scheduleRepeat": "请输入一个有效的数字，表示重复次数。",
+    "startTime": "请按以下格式输入有效的开始时间：12:12:12:000",
+    "json": "所选文件不是有效的 JSON 文件——请检查并重试。",
+    "hotKey": "请使用字母与 Ctrl、Alt 或 Shift 键组合输入（例如 Ctrl + A）。",
+    "valueExtractor": "您输入的图案无效——请检查并重试。",
+    "value": "请输入数值以继续",
+    "condition": "请选择一种条件以继续",
+    "elementFinder": "请说明如何在页面上找到该物品。",
+    "spreadsheetId": "请输入有效的 Google Sheets ID（44 个字符，例如 1J2OcSNJsnYQCcQmA4K9Fhtv8yqvg0NouB--H4B0jsZA）"
+  },
+  "step": {
+    "title": "步",
+    "plural": "步骤",
+    "add": "添加步骤",
+    "addBefore": "添加上一步",
+    "addAfter": "添加下方步骤",
+    "remove": "移除步骤",
+    "disable": "禁用步骤",
+    "enable": "启用步骤",
+    "initWait": "延迟",
+    "name": "姓名",
+    "elementFinder": "目标",
+    "value": "价值",
+    "repeat": "重复",
+    "repeatInterval": "间隔",
+    "confirm": {
+      "remove": {
+        "title": "移除步骤",
+        "message": "您确定要移除 [{{name}}] 步骤吗？"
+      }
+    },
+    "toast": {
+      "header": "步",
+      "body": "步骤保存成功！",
+      "remove": "步骤已成功移除！",
+      "reorder": "步骤重新排序成功！"
+    }
+  },
+  "userscript": {
+    "add": "添加用户脚本",
+    "confirm": {
+      "remove": {
+        "title": "移除用户脚本",
+        "message": "您确定要删除 [{{name}}] 用户脚本吗？"
+      }
+    }
+  },
+  "popover": {
+    "valueExtractor": {
+      "title": "示例"
+    },
+    "startTime": {
+      "content": "尝试 &lt;1&gt;计划 URL</1>我们的全新浏览器扩展程序。<br />它用于安排网页/URL在特定日期和时间的发布时间。"
+    },
+    "hotkey": {
+      "title": "快捷键",
+      "content": "按下键盘上的快捷键即可在字段中自动输入内容",
+      "hint": "单个字母（不带<kbd>Ctrl</kbd> 、 <kbd>Alt</kbd>或<kbd>Shift 键）</kbd>无效"
+    }
+  },
+  "common": {
+    "appName": "自动点击器 - 自动填充",
+    "file": "文件",
+    "error": "错误",
+    "save": "节省",
+    "clear": "清除",
+    "close": "关闭",
+    "download": "下载",
+    "disabled": "已禁用",
+    "sec": "秒",
+    "min": "最小",
+    "no": "不",
+    "yes": "是的",
+    "local": "当地的",
+    "dev": "开发",
+    "stable": "稳定的",
+    "examples": "示例",
+    "add": "添加"
+  },
+  "languages": {
+    "title": "语言",
+    "en": "英语",
+    "fr": "法语",
+    "ko": "韩国人",
+    "ca": "加拿大",
+    "hi": "印地语",
+    "zh_CN": "中文（简体）",
+    "zh_TW": "中文（繁体）",
+    "sv": "瑞典",
+    "pt": "葡萄牙语",
+    "ja": "日本人",
+    "nl": "荷兰语",
+    "de": "德语",
+    "es": "西班牙语",
+    "vi": "越南语",
+    "fi": "芬兰",
+    "ar": "阿拉伯",
+    "it": "意大利语",
+    "ru": "俄语",
+    "id": "印度尼西亚"
+  },
+  "monitor": {
+    "title": "监视器",
+    "enabled": "启用监控",
+    "enabledHint": "当页面中添加新的匹配元素时，自动重新运行操作（例如，用于无限滚动、异步内容）。",
+    "rootSelector": "监控根目录",
+    "rootSelectorPlaceholder": "身体",
+    "rootSelectorHint": "要观察的容器的 CSS 选择器",
+    "watchAttributes": "监控属性",
+    "attributesPlaceholder": "风格、阶级、隐藏",
+    "attributesHint": "以逗号分隔的待观察属性列表，用于列出变化情况。",
+    "debounce": "防抖",
+    "debounceHint": "处理新元素前的延迟（1-5秒）",
+    "timeout": "暂停",
+    "timeoutHint": "N 分钟后自动停止（1-180）",
+    "urlChange": "URL 更改时停止",
+    "urlChangeHint": "页面 URL 更改时自动停止监视",
+    "toast": {
+      "header": "监视器",
+      "body": "监控保存成功！"
+    }
+  },
+  "home": {
+    "title": "欢迎使用自动点击器 - 自动填充",
+    "subtitle": "通过定义目标和操作，自动执行任何网站上的点击和表单填写操作。",
+    "quickStart": {
+      "title": "快速入门指南",
+      "step1": {
+        "title": "1. 安装扩展程序",
+        "desc": "从 Chrome 网上应用店或 Edge 插件下载并安装该扩展程序。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/download"
+      },
+      "step2": {
+        "title": "2. 配置目标页面",
+        "desc": "打开网页，右键单击任意元素，选择“自动点击器 - 自动填充”→“为此字段配置”。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      },
+      "step3": {
+        "title": "3. 保存并运行",
+        "desc": "保存配置并重新加载目标页面。自动化流程将自动运行。",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview"
+      }
+    },
+    "tips": {
+      "title": "实用技巧",
+      "tip1": {
+        "title": "请在测试页面上尝试",
+        "desc": "打开 test.getautoclicker.com，添加两个操作——一个用于填写用户名字段，一个用于点击按钮——然后保存并运行。",
+        "link": "https://test.getautoclicker.com/"
+      },
+      "tip2": {
+        "title": "精确定位目标物品",
+        "desc": "使用元素路径来定位页面上的特定项目，例如 //input[@name=\"username\"]，以实现更可靠的自动化。",
+        "link": "https://getautoclicker.com/docs/4.x/action/element-finder"
+      },
+      "tip3": {
+        "title": "处理页面加载缓慢的问题",
+        "desc": "如果页面加载速度慢，请在自动化脚本中设置“等待开始”选项，然后再执行后续步骤。",
+        "link": "https://getautoclicker.com/docs/4.x/configuration/overview#init-wait"
+      },
+      "tip4": {
+        "title": "全局设置和快捷键",
+        "desc": "在全局设置中配置启动模式、定义键盘快捷键并调整状态栏位置。",
+        "link": "https://getautoclicker.com/docs/4.x/settings/overview"
+      },
+      "tip5": {
+        "title": "右键单击自动捕获",
+        "desc": "右键单击页面上的任何输入框或按钮，然后选择“配置此字段”以自动填充 URL 和元素查找器。",
+        "link": "https://getautoclicker.com/docs/4.x/getting-started/introduction/#quick-start"
+      }
+    },
+    "videos": {
+      "title": "视频指南",
+      "video1": {
+        "title": "自动点击器自动填充入门指南"
+      },
+      "video2": {
+        "title": "自动填写表单"
+      },
+      "video3": {
+        "title": "自动点击按钮"
+      },
+      "video4": {
+        "title": "高级配置技巧"
+      }
+    }
+  }
+}
