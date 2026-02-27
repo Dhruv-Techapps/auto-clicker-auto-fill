@@ -2,15 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
 
-import {
-  actionAddonReducer,
-  IActionAddonStore,
-  setActionAddonError,
-  setActionAddonMessage,
-  switchActionAddonModal,
-  updateActionAddon,
-  updateActionAddonGoto
-} from './addon.slice';
+import { actionAddonReducer, IActionAddonStore, setActionAddonError, setActionAddonMessage, switchActionAddonModal, updateActionAddon, updateActionAddonGoto } from './addon.slice';
 import { defaultAddon } from '@dhruv-techapps/acf-common';
 
 const initialState: IActionAddonStore = { visible: false, addon: { ...defaultAddon } };

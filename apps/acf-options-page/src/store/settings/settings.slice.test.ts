@@ -6,16 +6,7 @@ Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
 // We need to mock the getI18n and StorageService but for pure reducer tests
 // we don't need these mocks since we're only testing the reducer directly
 
-import {
-  ISettingsStore,
-  settingsReducer,
-  setSettingsError,
-  setSettingsMessage,
-  switchSettingsModal,
-  updateSettings,
-  updateSettingsBackup,
-  updateSettingsNotification
-} from './settings.slice';
+import { ISettingsStore, settingsReducer, setSettingsError, setSettingsMessage, switchSettingsModal, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
 import { defaultSettings, defaultSettingsNotifications, EErrorOptions } from '@dhruv-techapps/acf-common';
 import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
 import { settingsGetAPI, discordGetAPI, discordLoginAPI, discordDeleteAPI } from './settings.api';
