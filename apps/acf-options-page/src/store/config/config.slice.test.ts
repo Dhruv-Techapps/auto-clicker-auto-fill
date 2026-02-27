@@ -1,5 +1,30 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { EConfigSource, IBatch, IConfiguration, ISchedule, IWatchSettings, getDefaultConfig, getDefaultAction } from '@dhruv-techapps/acf-common';
+import { EConfigSource, IBatch, IConfiguration, ISchedule, IWatchSettings, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  ConfigStore,
+  addAction,
+  addConfig,
+  configReducer,
+  duplicateConfig,
+  importConfigs,
+  removeAction,
+  removeConfigs,
+  reorderActions,
+  reorderConfigs,
+  setConfigError,
+  setConfigMessage,
+  setConfigs,
+  setDetailVisibility,
+  setSearch,
+  syncActionAddon,
+  syncActionSettings,
+  syncActionStatement,
+  syncBatch,
+  syncSchedule,
+  syncWatch,
+  updateAction,
+  updateConfig
+} from './config.slice';
 
 // Mock LocalStorage to avoid jsdom localStorage issues with the slice initializer
 vi.mock('@acf-options-page/_helpers', () => ({
@@ -13,32 +38,6 @@ vi.mock('@acf-options-page/_helpers', () => ({
 vi.mock('@acf-options-page/data/configurations', () => ({
   CONFIGURATIONS: []
 }));
-
-import {
-  addConfig,
-  configReducer,
-  duplicateConfig,
-  importConfigs,
-  removeConfigs,
-  reorderConfigs,
-  setConfigError,
-  setConfigMessage,
-  setConfigs,
-  setDetailVisibility,
-  setSearch,
-  syncBatch,
-  syncSchedule,
-  syncWatch,
-  updateConfig,
-  addAction,
-  updateAction,
-  removeAction,
-  reorderActions,
-  syncActionAddon,
-  syncActionSettings,
-  syncActionStatement
-} from './config.slice';
-import { ConfigStore } from './config.slice';
 
 function makeInitialState(configs: IConfiguration[] = []): ConfigStore {
   return {

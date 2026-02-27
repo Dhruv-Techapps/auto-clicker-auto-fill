@@ -1,6 +1,6 @@
+import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { describe, expect, it } from 'vitest';
 import { getConfigName, updateConfigId, updateConfigIds } from './config.slice.util';
-import { EConfigSource, IConfiguration } from '@dhruv-techapps/acf-common';
 
 describe('getConfigName', () => {
   it('returns undefined when url is undefined', () => {

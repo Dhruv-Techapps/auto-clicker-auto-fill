@@ -1,7 +1,5 @@
+import { defaultActionSettings } from '@dhruv-techapps/acf-common';
 import { describe, expect, it } from 'vitest';
-
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
-
 import {
   actionSettingsReducer,
   IActionSettingsStore,
@@ -11,8 +9,8 @@ import {
   updateActionSettings,
   updateActionSettingsGoto
 } from './action-settings.slice';
-import { defaultActionSettings } from '@dhruv-techapps/acf-common';
 
+Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
 const initialState: IActionSettingsStore = { visible: false, settings: { ...defaultActionSettings } };
 
 describe('actionSettings slice', () => {

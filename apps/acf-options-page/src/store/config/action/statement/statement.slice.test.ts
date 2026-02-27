@@ -1,7 +1,5 @@
+import { EActionConditionOperator, EActionStatus, EErrorOptions, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
 import { describe, expect, it } from 'vitest';
-
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
-
 import {
   actionStatementReducer,
   addActionStatementCondition,
@@ -14,8 +12,8 @@ import {
   updateActionStatementGoto,
   updateActionStatementOption
 } from './statement.slice';
-import { EActionConditionOperator, EActionStatus, EErrorOptions, getDefaultActionCondition } from '@dhruv-techapps/acf-common';
 
+Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
 const initialState: IActionStatementStore = { visible: false, statement: {} };
 
 describe('actionStatement slice', () => {

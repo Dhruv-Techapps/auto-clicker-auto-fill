@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-
+import { describe, expect, it, vi } from 'vitest';
+import { actionReducer, IActionStore, setActionError, setActionMessage, setColumnVisibility } from './action.slice';
 // Mock LocalStorage
 vi.mock('@acf-options-page/_helpers', () => ({
   LocalStorage: {
@@ -7,9 +7,6 @@ vi.mock('@acf-options-page/_helpers', () => ({
     setItem: vi.fn()
   }
 }));
-
-import { actionReducer, setActionError, setActionMessage, setColumnVisibility } from './action.slice';
-import { IActionStore } from './action.slice';
 
 const initialState: IActionStore = {
   columnVisibility: { name: true, initWait: true, repeat: true, repeatInterval: true }

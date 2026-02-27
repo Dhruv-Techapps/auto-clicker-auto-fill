@@ -1,16 +1,14 @@
-import { describe, expect, it, vi } from 'vitest';
-
-// Mock window.dataLayer
+import { describe, expect, it } from 'vitest';
+import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
+import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
+import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
+import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
+import { discordDeleteAPI, discordGetAPI, settingsGetAPI } from './settings.api';
+import { ISettingsStore, setSettingsError, setSettingsMessage, settingsReducer, switchSettingsModal, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
 Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
 
 // We need to mock the getI18n and StorageService but for pure reducer tests
 // we don't need these mocks since we're only testing the reducer directly
-
-import { ISettingsStore, settingsReducer, setSettingsError, setSettingsMessage, switchSettingsModal, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
-import { defaultSettings, defaultSettingsNotifications, EErrorOptions } from '@dhruv-techapps/acf-common';
-import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
-import { settingsGetAPI, discordGetAPI, discordLoginAPI, discordDeleteAPI } from './settings.api';
-
 const initialState: ISettingsStore = { visible: false, loading: true, settings: { ...defaultSettings } };
 
 describe('settings slice – modal', () => {
