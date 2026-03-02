@@ -1,8 +1,6 @@
+import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
+import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
 import { describe, expect, it } from 'vitest';
-import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
-import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
-import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
-import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
 import { discordDeleteAPI, discordGetAPI, settingsGetAPI } from './settings.api';
 import { ISettingsStore, setSettingsError, setSettingsMessage, settingsReducer, switchSettingsModal, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
 Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
