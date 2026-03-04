@@ -40,9 +40,10 @@ export class StatusBar {
     document.body.appendChild(this.statusBar);
   };
 
-  public enable(totalActions: number, totalBatches = 0): void {
+  public enable(totalActions: number, totalBatches: number | 'unlimited' = 0): void {
     this.totalActions = totalActions;
-    this.totalBatches = totalBatches > 0 ? totalBatches.toString() : '∞';
+    const isLimited = totalBatches !== 'unlimited' && totalBatches > 0;
+    this.totalBatches = isLimited ? totalBatches.toString() : '∞';
     LoggerService.debug(`Status ACTION:${totalActions} BATCH:${this.totalBatches}`);
     ActionService.setBadgeText({ text: '⚡' });
   }
@@ -52,59 +53,95 @@ export class StatusBar {
    * @param current
    * @returns
    */
-  public isLogAllowed(current: number): boolean {
-    return this.currentBatch === 1 && (current === 1 || current === -2);
+  public isLogAllowed(current: number | '∞'): boolean {
+    return this.currentBatch === 1 && current === 1;
   }
 
-  public async wait(text?: number | string, _type?: STATUS_BAR_TYPE | string, current = 0): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitConfig(time?: number, to?: number): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
+    if (!waitTime) return;
+    const timeInSeconds = waitTime / 1000;
+    const title = `⏳ ${timeInSeconds}s ▶️ Configuration.`;
+    await this.renderAndSleep({ title, waitTime, logMessage: title, current: 0 });
+  }
+
+  public async waitAction(time?: number, current = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time);
     if (!waitTime) {
-      if (_type === STATUS_BAR_TYPE.ACTION_WAIT) {
-        this.actionUpdate(current);
-      } else if (_type === STATUS_BAR_TYPE.BATCH_REPEAT) {
-        this.batchUpdate(current);
-      }
+      this.actionUpdate(current);
       return;
     }
-    const time = waitTime / 1000;
-    let title = '';
-    let issue = '';
-    let remaining = '';
-    const currentLabel = current > 0 ? current : '∞';
-    switch (_type) {
-      case STATUS_BAR_TYPE.CONFIG_WAIT:
-        title = `⏳ ${time}s ▶️ Configuration.`;
-        LoggerService.debug(title);
-        break;
-      case STATUS_BAR_TYPE.ACTION_WAIT:
-        title = `⏳ ${time}s ▶️ Action.`;
-        this.actionUpdate(current, title);
-        break;
-      case STATUS_BAR_TYPE.BATCH_REPEAT:
-        title = `⏳ ${time}s 📦 Batch.`;
-        this.batchUpdate(current, title);
-        break;
-      case STATUS_BAR_TYPE.ACTION_REPEAT:
-        title = `⏳ ${time}s 🔁 Action.`;
-        remaining = `${currentLabel} repeats left`;
-        if (this.isLogAllowed(current)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${remaining}`);
-        break;
-      case STATUS_BAR_TYPE.ADDON_RECHECK:
-        issue = '⚠️ Addon Condition not met.';
-        title = `⏳ ${time}s 🔁 Addon.`;
-        remaining = `${currentLabel} checks left`;
-        if (this.isLogAllowed(current)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`);
-        break;
-      default:
-        issue = '⚠️ Element not found.';
-        title = `⏳ ${time}s 🔁 Action.`;
-        remaining = `${currentLabel} retries left`;
-        if (this.isLogAllowed(current)) LoggerService.debug(this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`);
-        break;
+    const timeInSeconds = waitTime / 1000;
+    const title = `⏳ ${timeInSeconds}s ▶️ Action.`;
+    this.actionUpdate(current, title);
+    await this.renderAndSleep({ title, waitTime, logMessage: this.actionEle.textContent + ` ${title}`, current });
+  }
+
+  public async waitBatchRepeat(time?: number, to?: number, current = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
+    if (!waitTime) {
+      this.batchUpdate(current);
+      return;
     }
+    const timeInSeconds = waitTime / 1000;
+    const title = `⏳ ${timeInSeconds}s 📦 Batch.`;
+    this.batchUpdate(current, title);
+    await this.renderAndSleep({ title, waitTime, logMessage: this.batchEle.textContent + ` ${title}`, current });
+  }
+
+  public async waitActionRepeat(time?: number, to?: number, current: number | '∞' = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
+    if (!waitTime) return;
+    const timeInSeconds = waitTime / 1000;
+
+    const title = `⏳ ${timeInSeconds}s 🔁 Action.`;
+    const remaining = current === '∞' ? 'unlimited repeats' : `${current} repeats left`;
+    await this.renderAndSleep({ title, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${remaining}`, current });
+  }
+
+  public async waitAddonRecheck(time?: number, to?: number, current: number | '∞' = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
+    if (!waitTime) return;
+    const timeInSeconds = waitTime / 1000;
+    const issue = '⚠️ Addon Condition not met.';
+    const title = `⏳ ${timeInSeconds}s 🔁 Addon.`;
+    const remaining = current === '∞' ? 'unlimited checks' : `${current} checks left`;
+    await this.renderAndSleep({ title, issue, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`, current });
+  }
+
+  public async waitDefault(time?: number, to?: number, current: number | '∞' = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
+    if (!waitTime) return;
+    const timeInSeconds = waitTime / 1000;
+    const issue = '⚠️ Element not found.';
+    const title = `⏳ ${timeInSeconds}s 🔁 Action.`;
+    const remaining = current === '∞' ? 'unlimited retries' : `${current} retries left`;
+    await this.renderAndSleep({ title, issue, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`, current });
+  }
+
+  private logIfAllowed(message: string, current: number | '∞'): void {
+    if (this.isLogAllowed(current)) LoggerService.debug(message);
+  }
+
+  private async renderAndSleep({
+    title,
+    issue,
+    remaining,
+    waitTime,
+    logMessage,
+    current = 0
+  }: {
+    title: string;
+    issue?: string;
+    remaining?: string;
+    waitTime: number;
+    logMessage?: string;
+    current: number | '∞';
+  }): Promise<void> {
     this.textEle.textContent = title;
-    this.issueEle.textContent = issue;
-    this.remainingEle.textContent = remaining;
+    this.issueEle.textContent = issue || '';
+    this.remainingEle.textContent = remaining || '';
+    if (logMessage) this.logIfAllowed(logMessage, current);
     await Timer.sleep(waitTime);
   }
 

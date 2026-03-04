@@ -54,7 +54,7 @@ export const StepRow: React.FC<StepRowProps> = (props) => {
       {row.getVisibleCells().map((cell) => (
         <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
       ))}
-      <td align='right'>
+      <td align='right' data-column='menu'>
         {row.original.addon && (
           <Button onClick={() => navigate(ROUTES.PAGE_GUARD(row.original.id))} variant='link' className='p-0 ms-2' data-testid='config-addon'>
             <i className='bi bi-shield-check me-2' title={t('pageGuard.title')} />

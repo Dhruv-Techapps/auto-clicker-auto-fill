@@ -8,7 +8,6 @@ import { NotificationsService, SessionStorageService } from '@dhruv-techapps/cor
 import { DiscordMessagingColor, DiscordMessagingService } from '@dhruv-techapps/shared-discord-messaging/service';
 import { GoogleAnalyticsService, TEventSource } from '@dhruv-techapps/shared-google-analytics/service';
 import { GoogleSheetsContentScript } from '@dhruv-techapps/shared-google-sheets/content_script';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
 import BatchProcessor from './batch';
 import Common from './common';
@@ -158,7 +157,7 @@ const ConfigProcessor = (() => {
     if (config.startTime?.match(/^\d{2}:\d{2}:\d{2}:\d{3}$/)) {
       await schedule(config.startTime);
     } else {
-      await statusBar.wait(config.initWait, STATUS_BAR_TYPE.CONFIG_WAIT);
+      await statusBar.waitConfig(config.initWait, config.initWaitTo);
     }
   };
 

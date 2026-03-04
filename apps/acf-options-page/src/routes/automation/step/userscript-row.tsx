@@ -45,7 +45,7 @@ export const UserScriptRow: React.FC<UserScriptRowProps> = (props) => {
       <td className='align-middle' colSpan={row.getVisibleCells().length}>
         {getValueCell(row)}
       </td>
-      <td align='center'>
+      <td align='center' data-column='menu'>
         {row.original.value && (
           <StepOptionsDropdown
             index={index}

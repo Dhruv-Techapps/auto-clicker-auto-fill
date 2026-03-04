@@ -23,17 +23,18 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
 
   const action = config?.actions.find((a) => a.id === stepId);
 
+  const form = useForm<IAddon>({
+    mode: 'onChange',
+    defaultValues: action?.addon ?? { ...defaultAddon }
+  });
+
   const {
     register,
     handleSubmit,
     watch,
     setValue,
     formState: { errors, isDirty, isValid }
-  } = useForm<IAddon>({
-    mode: 'onChange',
-    defaultValues: action?.addon ?? { ...defaultAddon }
-  });
-
+  } = form;
   if (!config || !action) {
     return null;
   }
@@ -122,7 +123,7 @@ export const PageGuardOffcanvas = ({ show }: PageGuardOffcanvasProps) => {
               </Form.Group>
             </Col>
           </Row>
-          {elementFinder && condition && value && <PreCheckRecheck register={register} watch={watch} setValue={setValue} errors={errors} actions={config.actions} />}
+          {elementFinder && condition && value && <PreCheckRecheck form={form} actions={config.actions} />}
         </Offcanvas.Body>
         <div className='offcanvas-footer d-flex justify-content-between p-3 border-top'>
           <Button type='reset' variant='outline-primary' className='px-5' data-testid='config-addon-reset'>

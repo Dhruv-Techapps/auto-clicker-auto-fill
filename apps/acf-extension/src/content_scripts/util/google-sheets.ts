@@ -1,10 +1,11 @@
 import { BATCH_REPEAT, IConfiguration, isAction, SESSION_COUNT } from '@dhruv-techapps/acf-common';
+
 const GOOGLE_SHEETS_REGEX = /^googlesheets::/i;
 
 export default class GoogleSheets {
   static getSheets(config: IConfiguration) {
     const sheets = new Map<string, Set<string>>();
-    const batchHighestRepeat: number = config.batch?.repeat ?? 0;
+    const batchHighestRepeat: number = config.batch?.repeat === 'unlimited' ? 0 : (config.batch?.repeat ?? 0);
     config.actions
       .filter(isAction)
       .map(({ elementFinder, value, addon }) => {

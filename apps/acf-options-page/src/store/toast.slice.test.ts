@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import toastReducer, { addToast, hideToast } from './toast.slice';
+import toastReducer, { addToast, hideToast, ToastHandlerProps } from './toast.slice';
 
 describe('toast slice', () => {
-  const initialState = [];
+  const initialState: ToastHandlerProps[] | undefined = [];
 
   it('should return empty array as initial state', () => {
     expect(toastReducer(undefined, { type: '@@INIT' })).toEqual([]);

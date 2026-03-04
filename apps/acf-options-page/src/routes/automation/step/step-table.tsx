@@ -8,19 +8,13 @@ import { useMemo } from 'react';
 import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
-import { REGEX } from '../../../util';
 import { defaultColumn } from './editable-cell';
+import { RepeatCell } from './editable/editable-repeat-cell';
+import { RepeatIntervalCell } from './editable/editable-repeat-interval-cell';
+import { IStepTableMeta } from './editable/meta';
 import { StepRow } from './step-row';
 import './step-table.scss';
 import { UserScriptRow } from './userscript-row';
-
-interface IStepTableMeta {
-  dataType?: string;
-  list?: string;
-  pattern?: string;
-  required?: boolean;
-  width?: string;
-}
 
 interface IStepTableProps {
   actions: Array<IAction | IUserScript>;
@@ -38,19 +32,11 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
       {
         header: t('step.initWait'),
         accessorKey: 'initWait',
-        meta: {
-          width: '70',
-          dataType: 'number',
-          list: 'interval',
-          pattern: REGEX.INTERVAL.source
-        }
+        cell: RepeatIntervalCell
       },
       {
         header: t('step.name'),
-        accessorKey: 'name',
-        meta: {
-          width: '100'
-        }
+        accessorKey: 'name'
       },
       {
         header: () => (
@@ -78,23 +64,12 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
       {
         header: t('step.repeat'),
         accessorKey: 'repeat',
-        meta: {
-          width: '70',
-          dataType: 'number',
-          list: 'repeat',
-          type: 'number',
-          pattern: REGEX.NUMBER.source
-        }
+        cell: RepeatCell
       },
       {
         header: t('step.repeatInterval'),
         accessorKey: 'repeatInterval',
-        meta: {
-          width: '70',
-          dataType: 'number',
-          list: 'interval',
-          pattern: REGEX.INTERVAL.source
-        }
+        cell: RepeatIntervalCell
       }
     ],
     [t]
@@ -103,7 +78,9 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
   const table = useReactTable<IAction | IUserScript>({
     columns: columns,
     data: actions,
-    defaultColumn,
+    defaultColumn: {
+      cell: defaultColumn.cell
+    },
     state: { columnVisibility },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

@@ -8,3 +8,5 @@ export enum EErrorOptions {
 }
 
 export type TGoto = number | TRandomUUID;
+
+export type TBoundedValue = number | 'unlimited';
