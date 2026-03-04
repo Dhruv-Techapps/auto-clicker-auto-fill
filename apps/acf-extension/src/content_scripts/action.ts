@@ -1,19 +1,25 @@
-import { EActionStatus, IAction } from '@dhruv-techapps/acf-common';
+import { EActionStatus, IAction, TBoundedValue } from '@dhruv-techapps/acf-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Common from './common';
 import { statusBar } from './status-bar';
 import { ACFEvents } from './util/acf-events';
 import { ACFValue } from './util/acf-value';
 
 const ActionProcessor = (() => {
-  const repeatFunc = async (action: IAction, repeat?: number, repeatInterval?: number | string): Promise<EActionStatus.DONE> => {
+  const repeatFunc = async (action: IAction, repeat?: TBoundedValue, repeatInterval?: number | string): Promise<EActionStatus.DONE> => {
     if (repeat !== undefined) {
-      if (repeat > 0 || repeat < -1) {
-        await statusBar.wait(repeatInterval, STATUS_BAR_TYPE.ACTION_REPEAT, repeat);
+      if (typeof repeat === 'number' && repeat > 0) {
+        await statusBar.waitActionRepeat(repeatInterval, repeat);
         repeat -= 1;
         window.ext.__actionRepeat = window.ext.__actionRepeat + 1;
         OpenTelemetryService.addEvent(window.ext.__actionKey, `Action Repeat - ${window.ext.__actionRepeat}`);
+        await process(action);
+        return await repeatFunc(action, repeat, repeatInterval);
+      }
+
+      if (typeof repeat === 'string' && repeat.toLowerCase() === 'unlimited') {
+        await statusBar.waitActionRepeat(repeatInterval, '∞');
+        window.ext.__actionRepeat = window.ext.__actionRepeat + 1;
         await process(action);
         return await repeatFunc(action, repeat, repeatInterval);
       }

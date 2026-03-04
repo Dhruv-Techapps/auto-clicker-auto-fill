@@ -1,29 +1,50 @@
-import { ConfigStorage } from '@dhruv-techapps/acf-store';
+import { IConfiguration, ISettings } from '@dhruv-techapps/acf-common';
+import { ConfigStorage, SettingsStorage } from '@dhruv-techapps/acf-store';
+import { migrateConfigBoundedLegacy, migrateConfigInterval, migrateConfigThen } from '@dhruv-techapps/acf-util';
 
 export class StorageMigration {
   static async migrate(): Promise<void> {
-    await this.migrateThen();
+    // First handle legacy bounded values(-2) -> 'unlimited'
+    await this.migrateConfigs();
+    // Migrate persisted settings separately (retry)
+    await this.migrateSettingsBoundedLegacy();
   }
 
-  static async migrateThen(): Promise<void> {
-    const configs = await ConfigStorage.getConfigs();
-    const needsMigration = configs.some((config) => config.actions.some((action) => action.statement?.then !== undefined));
-    if (needsMigration) {
-      const updatedConfigs = configs.map((config) => {
-        const updatedActions = config.actions.map((action) => {
-          if (action.statement?.then !== undefined) {
-            const { then: thenOption, option, ...restStatement } = action.statement;
-            action.statement = {
-              ...restStatement,
-              option: option !== undefined ? option : thenOption
-            };
-          }
-          return action;
-        });
-        config.actions = updatedActions;
-        return config;
-      });
-      await ConfigStorage.setConfigs(updatedConfigs);
+  static async migrateConfigs() {
+    const configs: IConfiguration[] = await ConfigStorage.getConfigs();
+
+    configs.forEach((config) => {
+      migrateConfigBoundedLegacy(config);
+      migrateConfigThen(config);
+      migrateConfigInterval(config);
+    });
+
+    await ConfigStorage.setConfigs(configs);
+  }
+
+  /**
+   * Convert legacy sentinel -2 to 'unlimited' for persisted settings
+   * Targets: settings.retry
+   */
+  static async migrateSettingsBoundedLegacy(): Promise<void> {
+    try {
+      const settings: ISettings = await SettingsStorage.getSettings();
+      if (!settings) return;
+
+      const s: ISettings = JSON.parse(JSON.stringify(settings));
+      let changed = false;
+      if (s.retry === -2) {
+        s.retry = 'unlimited';
+        changed = true;
+      }
+
+      if (changed) {
+        await SettingsStorage.setSettings(s);
+      }
+    } catch (error) {
+      // non-fatal
+      // eslint-disable-next-line no-console
+      console.warn('settings migration failed', error);
     }
   }
 }

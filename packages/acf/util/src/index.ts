@@ -1,2 +1,3 @@
-export * from './lib/value';
+export * from './lib/migration';
 export * from './lib/session';
+export * from './lib/value';

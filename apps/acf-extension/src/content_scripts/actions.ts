@@ -3,7 +3,6 @@ import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError, generateUUID, isValidUUID } from '@dhruv-techapps/core-common';
 import { LoggerService, OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { NotificationsService } from '@dhruv-techapps/core-service';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import ActionProcessor from './action';
 import AddonProcessor from './addon';
 import Common from './common';
@@ -52,7 +51,7 @@ const Actions = (() => {
       try {
         window.ext.__actionHeaders = await OpenTelemetryService.startSpan(window.ext.__actionKey, `ACTION #${i + 1}`, { headers: window.ext.__batchHeaders });
         await checkStatement(actions, action);
-        await statusBar.wait(action.initWait, STATUS_BAR_TYPE.ACTION_WAIT, i + 1);
+        await statusBar.waitAction(action.initWait, i + 1);
         await AddonProcessor.check(action.addon, action.settings);
         if (action.type === 'userscript') {
           action.status = await UserScriptProcessor.start(action);

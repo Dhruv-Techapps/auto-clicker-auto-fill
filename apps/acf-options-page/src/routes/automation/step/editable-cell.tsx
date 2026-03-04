@@ -145,7 +145,7 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
     return (
       <InputGroup>
         <ValueFieldTypeTooltip id={id} valueFieldType={valueFieldType}>
-          <Button type='button' variant='outline-secondary' id='action-field-type' onClick={onValueFieldTypeChange} size='sm'>
+          <Button type='button' className='border' variant={valueFieldType === 'input' ? '' : 'secondary'} id='action-field-type' onClick={onValueFieldTypeChange} size='sm'>
             {valueFieldType === 'input' ? 'I' : 'T'}
           </Button>
         </ValueFieldTypeTooltip>
@@ -153,5 +153,6 @@ function Cell({ getValue, row: { original }, column: { id, columnDef }, table }:
       </InputGroup>
     );
   }
+
   return <>{getInput(meta?.as)}</>;
 }

@@ -2,7 +2,6 @@ import { EActionStatus, EAddonConditions, EErrorOptions, IActionSettings, IAddon
 import { ConfigError, generateUUID, SystemError } from '@dhruv-techapps/core-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { Sandbox } from '@dhruv-techapps/shared-sandbox';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import { RADIO_CHECKBOX_NODE_NAME } from '../common/constant';
 import Common from './common';
 import { I18N_COMMON, I18N_ERROR } from './i18n';
@@ -20,9 +19,14 @@ interface IAddonType extends IAddon {
 const AddonProcessor = (() => {
   const recheckFunc = async ({ nodeValue, elementFinder, value, condition, recheck, recheckOption, ...props }: IAddonType, settings?: IActionSettings): Promise<void> => {
     if (recheck !== undefined) {
-      if (recheck > 0 || recheck < -1) {
-        recheck -= 1;
-        await statusBar.wait(props.recheckInterval, STATUS_BAR_TYPE.ADDON_RECHECK, recheck + 1);
+      if (typeof recheck === 'number' && recheck > 0) {
+        const nextRecheck = recheck - 1;
+        await statusBar.waitAddonRecheck(props.recheckInterval, nextRecheck + 1);
+        return await start({ elementFinder, value, condition, recheck: nextRecheck, recheckOption, ...props }, settings);
+      }
+
+      if (typeof recheck === 'string' && recheck.toLowerCase() === 'unlimited') {
+        await statusBar.waitAddonRecheck(props.recheckInterval, '∞');
         return await start({ elementFinder, value, condition, recheck, recheckOption, ...props }, settings);
       }
     }
@@ -140,13 +144,13 @@ const AddonProcessor = (() => {
     }
     if (nodeValue !== undefined) {
       const result: boolean = compare(nodeValue, condition, value);
+      console.debug(
+        `${ADDON_I18N.TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`,
+        `${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${result ? I18N_COMMON.CONDITION_SATISFIED : I18N_COMMON.CONDITION_NOT_SATISFIED}`
+      );
       if (!result) {
         await recheckFunc({ nodeValue, elementFinder, value, condition, valueExtractor, valueExtractorFlags, ...props }, settings);
       }
-      console.debug(
-        `${ADDON_I18N.TITLE} #${window.ext.__currentAction} [${window.ext.__currentActionName}]`,
-        `${I18N_COMMON.COMPARE} '${nodeValue}' ${condition} '${value}'. ${I18N_COMMON.RESULT}: ${I18N_COMMON.CONDITION_SATISFIED}`
-      );
     }
   };
   const check = async (addon?: IAddon, actionSettings?: IActionSettings) => {

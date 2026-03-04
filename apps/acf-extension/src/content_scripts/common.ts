@@ -1,4 +1,4 @@
-import { EErrorOptions, IActionSettings, TGoto } from '@dhruv-techapps/acf-common';
+import { EErrorOptions, IActionSettings, TBoundedValue, TGoto } from '@dhruv-techapps/acf-common';
 import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { ConfigError } from '@dhruv-techapps/core-common';
 import { I18N_ERROR } from './i18n';
@@ -6,14 +6,16 @@ import { statusBar } from './status-bar';
 import DomWatchManager from './util/dom-watch-manager';
 
 const Common = (() => {
-  const retryFunc = async (retry?: number, retryInterval?: number | string) => {
-    if (retry !== undefined) {
-      if (retry > 0 || retry < -1) {
-        await statusBar.wait(retryInterval, undefined, retry);
-        return true;
-      }
+  const retryFunc = async (retry?: TBoundedValue, retryInterval?: number | string): Promise<TBoundedValue | undefined> => {
+    if (typeof retry === 'number' && retry > 0) {
+      await statusBar.waitDefault(retryInterval, retry);
+      return retry - 1;
     }
-    return false;
+    if (typeof retry === 'string' && retry.toLowerCase() === 'unlimited') {
+      await statusBar.waitDefault(retryInterval, '∞');
+      return retry;
+    }
+    return undefined;
   };
 
   const setElementProcessed = (elements: Array<HTMLElement>) => {
@@ -29,7 +31,7 @@ const Common = (() => {
     });
   };
 
-  const getElements = async (document: Document, elementFinder: string, retry: number, retryInterval: number | string): Promise<Array<HTMLElement> | undefined> => {
+  const getElements = async (document: Document, elementFinder: string, retry?: TBoundedValue, retryInterval?: number | string): Promise<Array<HTMLElement> | undefined> => {
     let elements: HTMLElement[] | undefined;
     try {
       if (/^(id::|#)/gi.test(elementFinder)) {
@@ -82,17 +84,17 @@ const Common = (() => {
     }
 
     if (!elements) {
-      const doRetry = await retryFunc(retry, retryInterval);
-      if (doRetry) {
-        elements = await getElements(document, elementFinder, retry - 1, retryInterval);
+      const nextRetry = await retryFunc(retry, retryInterval);
+      if (nextRetry !== undefined) {
+        elements = await getElements(document, elementFinder, nextRetry, retryInterval);
       }
     }
     return elements;
   };
 
-  const main = async (elementFinder: string, retry: number, retryInterval: number | string) => await getElements(document, elementFinder, retry, retryInterval);
+  const main = async (elementFinder: string, retry?: TBoundedValue, retryInterval?: number | string) => await getElements(document, elementFinder, retry, retryInterval);
 
-  const checkIframe = async (elementFinder: string, retry: number, retryInterval: number | string): Promise<HTMLElement[] | undefined> => {
+  const checkIframe = async (elementFinder: string, retry?: TBoundedValue, retryInterval?: number | string): Promise<HTMLElement[] | undefined> => {
     const iFrames = document.getElementsByTagName('iframe');
     let elements;
     for (const iFrame of iFrames) {

@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
 import { REGEX } from '../../../util';
 import { defaultColumn } from './editable-cell';
+import { RepeatCell } from './editable/editable-repeat-cell';
+import { RepeatIntervalCell } from './editable/editable-repeat-interval-cell';
 import { StepRow } from './step-row';
 import './step-table.scss';
 import { UserScriptRow } from './userscript-row';
@@ -79,22 +81,17 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
         header: t('step.repeat'),
         accessorKey: 'repeat',
         meta: {
-          width: '70',
-          dataType: 'number',
-          list: 'repeat',
-          type: 'number',
-          pattern: REGEX.NUMBER.source
-        }
+          width: '70'
+        },
+        cell: RepeatCell
       },
       {
         header: t('step.repeatInterval'),
         accessorKey: 'repeatInterval',
         meta: {
-          width: '70',
-          dataType: 'number',
-          list: 'interval',
-          pattern: REGEX.INTERVAL.source
-        }
+          width: '140'
+        },
+        cell: RepeatIntervalCell
       }
     ],
     [t]
@@ -103,7 +100,9 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
   const table = useReactTable<IAction | IUserScript>({
     columns: columns,
     data: actions,
-    defaultColumn,
+    defaultColumn: {
+      cell: defaultColumn.cell
+    },
     state: { columnVisibility },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

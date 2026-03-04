@@ -1,7 +1,10 @@
+import { TBoundedValue } from './ICommon';
+
 export interface IBatch {
   refresh?: boolean;
-  repeat?: number;
-  repeatInterval?: number | string;
+  repeat?: TBoundedValue;
+  repeatInterval?: number;
+  repeatIntervalTo?: number;
 }
 
 export const defaultBatch: IBatch = {};

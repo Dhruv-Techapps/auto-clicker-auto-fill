@@ -8,25 +8,13 @@ export function DataList() {
 
   return (
     <>
-      <datalist id='retry'>
-        <option value='-2'>&infin; Infinity</option>
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-      </datalist>
-      <datalist id='recheck'>
-        <option value='-2'>&infin; Infinity</option>
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-      </datalist>
-      <datalist id='repeat'>
-        <option value='-2'>&infin; Infinity</option>
+      <datalist id='bound'>
         <option value='1'>1</option>
         <option value='2'>2</option>
       </datalist>
       <datalist id='interval'>
         <option value='0.25'>0.25</option>
         <option value='1'>1</option>
-        <option value='1e5'>1e5</option>
       </datalist>
       <datalist id='start-time'>
         <option value='01:00:00:000'>at afternoon 1 AM</option>

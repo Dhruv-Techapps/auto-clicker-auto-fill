@@ -1,4 +1,4 @@
-import { EErrorOptions } from './ICommon';
+import { EErrorOptions, TBoundedValue } from './ICommon';
 
 export interface ISettingsNotifications {
   onAction: boolean;
@@ -28,8 +28,9 @@ export const defaultSettingsBackup = {
 };
 
 export interface ISettings {
-  retry: number;
-  retryInterval: number | string;
+  retry: TBoundedValue;
+  retryInterval?: number;
+  retryIntervalTo?: number;
   retryOption: EErrorOptions;
   checkiFrames: boolean;
   statusBar: 'hide' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';

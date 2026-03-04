@@ -10,4 +10,12 @@ export class SettingsStorage {
     }
     return defaultSettings;
   }
+
+  static async setSettings(settings: ISettings): Promise<void> {
+    try {
+      await chrome.storage.local.set({ [LOCAL_STORAGE_KEY.SETTINGS]: settings });
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 }

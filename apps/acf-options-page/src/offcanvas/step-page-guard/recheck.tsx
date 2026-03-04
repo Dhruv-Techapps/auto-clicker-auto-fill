@@ -1,20 +1,19 @@
+import { InputBounded } from '@acf-options-page/form/input-bounded';
+import { InputInterval } from '@acf-options-page/form/input-interval';
 import { EErrorOptions, IAction, IAddon, IUserScript } from '@dhruv-techapps/acf-common';
 import { useEffect } from 'react';
-import { Card, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
-import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { Card, Col, Form, Row } from 'react-bootstrap';
+import { UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { REGEX } from '../../util';
 
 interface PreCheckRecheckProps {
-  register: UseFormRegister<IAddon>;
-  watch: UseFormWatch<IAddon>;
-  setValue: UseFormSetValue<IAddon>;
-  errors?: FieldErrors<IAddon>;
+  form: UseFormReturn<IAddon>;
   actions: Array<IAction | IUserScript>;
 }
 
-export function PreCheckRecheck({ register, watch, setValue, actions, errors }: PreCheckRecheckProps) {
+export function PreCheckRecheck({ form, actions }: PreCheckRecheckProps) {
   const { t } = useTranslation();
+  const { register, watch, setValue } = form;
 
   const recheckOption = watch('recheckOption');
   const recheckGoto = watch('recheckGoto');
@@ -31,25 +30,10 @@ export function PreCheckRecheck({ register, watch, setValue, actions, errors }: 
         <Card.Body>
           <Row>
             <Col md={6} sm={12}>
-              <InputGroup>
-                <InputGroup.Text>{t('pageGuard.recheck.recheck')}</InputGroup.Text>
-                <FormControl placeholder='0' type='number' list='recheck' {...register('recheck', { pattern: { value: REGEX.NUMBER, message: t('error.number') } })} isInvalid={!!errors?.recheck} />
-                <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-              </InputGroup>
+              <InputBounded title={'pageGuard.recheck.recheck'} name='recheck' form={form} />
             </Col>
             <Col md={6} sm={12}>
-              <InputGroup>
-                <InputGroup.Text>
-                  {t('pageGuard.recheck.interval')}&nbsp;<small>({t('common.sec')})</small>
-                </InputGroup.Text>
-                <FormControl
-                  placeholder='0'
-                  list='interval'
-                  {...register('recheckInterval', { pattern: { value: REGEX.INTERVAL, message: t('error.number') } })}
-                  isInvalid={!!errors?.recheckInterval}
-                />
-                <Form.Control.Feedback type='invalid'>{t('error.number')}</Form.Control.Feedback>
-              </InputGroup>
+              <InputInterval title={'pageGuard.recheck.interval'} name='recheckInterval' rangeName='recheckIntervalTo' form={form} />
             </Col>
           </Row>
         </Card.Body>
