@@ -70,6 +70,13 @@
       }
     },
     {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e",
+        "ciTargetName": "e2e-ci"
+      }
+    },
+    {
       "plugin": "@nx/webpack/plugin",
       "options": {
         "buildTargetName": "build",

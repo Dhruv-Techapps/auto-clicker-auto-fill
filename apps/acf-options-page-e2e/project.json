@@ -1,0 +1,16 @@
+{
+  "name": "acf-options-page-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/acf-options-page-e2e/src",
+  "projectType": "application",
+  "tags": ["scope:e2e"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "apps/acf-options-page-e2e/playwright.config.ts",
+        "skipInstall": false
+      }
+    }
+  }
+}
