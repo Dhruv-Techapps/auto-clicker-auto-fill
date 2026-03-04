@@ -39,19 +39,7 @@ export function RepeatCell({ getValue, row: { original }, column: { id }, table 
 
   return (
     <InputGroup>
-      <Form.Control
-        type='number'
-        min={0}
-        value={value || ''}
-        name={id}
-        size='sm'
-        disabled={value === 'unlimited'}
-        onChange={onChange}
-        onBlur={onBlur}
-        list='repeat'
-        isInvalid={isInvalid}
-        autoComplete='off'
-      />
+      <Form.Control type='number' min={0} value={value || ''} name={id} size='sm' onChange={onChange} onBlur={onBlur} list='bound' isInvalid={isInvalid} autoComplete='off' />
     </InputGroup>
   );
 }

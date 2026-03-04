@@ -6,22 +6,15 @@ import { ACFEvents } from './util/acf-events';
 import { ACFValue } from './util/acf-value';
 
 const ActionProcessor = (() => {
-  const repeatFunc = async (action: IAction, repeat?: number, repeatInterval?: number): Promise<EActionStatus.DONE> => {
+  const repeatFunc = async (action: IAction, repeat?: number, repeatInterval?: number, repeatIntervalTo?: number): Promise<EActionStatus.DONE> => {
     if (repeat !== undefined) {
-      if (typeof repeat === 'number' && repeat > 0) {
-        await statusBar.waitActionRepeat(repeatInterval, repeat);
+      if (repeat > 0) {
+        await statusBar.waitActionRepeat(repeatInterval, repeatIntervalTo, repeat);
         repeat -= 1;
         window.ext.__actionRepeat = window.ext.__actionRepeat + 1;
         OpenTelemetryService.addEvent(window.ext.__actionKey, `Action Repeat - ${window.ext.__actionRepeat}`);
         await process(action);
-        return await repeatFunc(action, repeat, repeatInterval);
-      }
-
-      if (typeof repeat === 'string' && repeat.toLowerCase() === 'unlimited') {
-        await statusBar.waitActionRepeat(repeatInterval, '∞');
-        window.ext.__actionRepeat = window.ext.__actionRepeat + 1;
-        await process(action);
-        return await repeatFunc(action, repeat, repeatInterval);
+        return await repeatFunc(action, repeat, repeatInterval, repeatIntervalTo);
       }
     }
     return EActionStatus.DONE;
@@ -41,7 +34,7 @@ const ActionProcessor = (() => {
   const start = async (action: IAction) => {
     window.ext.__actionRepeat = 1;
     await process(action);
-    return await repeatFunc(action, action.repeat, action.repeatInterval);
+    return await repeatFunc(action, action.repeat, action.repeatInterval, action.repeatIntervalTo);
   };
 
   return { start };

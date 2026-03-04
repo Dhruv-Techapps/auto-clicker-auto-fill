@@ -45,7 +45,7 @@ export function InputInterval<TFieldValues extends FieldValues>(props: InputInte
 
   const transform = (v: string) => {
     const n = Number(v);
-    return isNaN(n) ? v : n;
+    return Number.isNaN(n) ? v : n;
   };
 
   const renderInput = ({ field, fieldState }: RenderInputProps<TFieldValues>) => {

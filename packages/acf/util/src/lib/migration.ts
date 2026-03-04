@@ -9,9 +9,9 @@ const splitIntervalRange = (value: unknown): { from: number; to: number } | unde
   if (typeof value !== 'string') return undefined;
   const eIndex = value.indexOf('e');
   if (eIndex === -1) return undefined;
-  const from = parseFloat(value.slice(0, eIndex));
-  const to = parseFloat(value.slice(eIndex + 1));
-  if (isNaN(from) || isNaN(to)) return undefined;
+  const from = Number.parseFloat(value.slice(0, eIndex));
+  const to = Number.parseFloat(value.slice(eIndex + 1));
+  if (Number.isNaN(from) || Number.isNaN(to)) return undefined;
   return { from, to };
 };
 
@@ -107,12 +107,22 @@ export const migrateConfigThen = (config: IConfiguration): void => {
  * of the form "aeb" (e.g. "1e4") to separate numeric from/to fields.
  *
  * Targets:
- *   - batch.repeatInterval       → batch.repeatInterval + batch.repeatIntervalTo
- *   - action.repeatInterval      → action.repeatInterval + action.repeatIntervalTo
+ *   - config.initWait               → config.initWait + config.initWaitTo
+ *   - batch.repeatInterval          → batch.repeatInterval + batch.repeatIntervalTo
+ *   - action.initWait               → action.initWait + action.initWaitTo
+ *   - action.repeatInterval         → action.repeatInterval + action.repeatIntervalTo
  *   - action.settings.retryInterval → action.settings.retryInterval + action.settings.retryIntervalTo
  *   - action.addon.recheckInterval  → action.addon.recheckInterval + action.addon.recheckIntervalTo
  */
 export const migrateConfigInterval = (config: IConfiguration): void => {
+  // config.initWait
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const configInitWaitSplit = splitIntervalRange((config as any).initWait);
+  if (configInitWaitSplit) {
+    config.initWait = configInitWaitSplit.from;
+    config.initWaitTo = configInitWaitSplit.to;
+  }
+
   // batch.repeatInterval
   if (config.batch) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -129,6 +139,14 @@ export const migrateConfigInterval = (config: IConfiguration): void => {
       if (action.type === 'userscript') return;
 
       const a = action as IAction;
+
+      // action.initWait
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const actionInitWaitSplit = splitIntervalRange((a as any).initWait);
+      if (actionInitWaitSplit) {
+        a.initWait = actionInitWaitSplit.from;
+        a.initWaitTo = actionInitWaitSplit.to;
+      }
 
       // repeatInterval
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

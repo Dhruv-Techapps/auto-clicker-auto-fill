@@ -206,6 +206,51 @@ describe('migrateConfigThen', () => {
 // ─── migrateConfigInterval ──────────────────────────────────────────────────
 
 describe('migrateConfigInterval', () => {
+  it('should split config.initWait "aeb" string into from and to', () => {
+    const config = makeConfig({ initWait: '1e5' });
+
+    migrateConfigInterval(config);
+
+    expect(config.initWait).toBe(1);
+    expect(config.initWaitTo).toBe(5);
+  });
+
+  it('should leave config.initWait unchanged when it is a number', () => {
+    const config = makeConfig({ initWait: 2 });
+
+    migrateConfigInterval(config);
+
+    expect(config.initWait).toBe(2);
+    expect(config.initWaitTo).toBeUndefined();
+  });
+
+  it('should split action.initWait "aeb" string into from and to', () => {
+    const config = makeConfig({ actions: [makeAction({ initWait: '0.5e3' })] });
+
+    migrateConfigInterval(config);
+
+    expect(config.actions[0].initWait).toBe(0.5);
+    expect(config.actions[0].initWaitTo).toBe(3);
+  });
+
+  it('should leave action.initWait unchanged when it is a number', () => {
+    const config = makeConfig({ actions: [makeAction({ initWait: 1 })] });
+
+    migrateConfigInterval(config);
+
+    expect(config.actions[0].initWait).toBe(1);
+    expect(config.actions[0].initWaitTo).toBeUndefined();
+  });
+
+  it('should skip initWait migration for userscript actions', () => {
+    const config = makeConfig({ actions: [makeUserScript({ initWait: '1e4' })] });
+
+    migrateConfigInterval(config);
+
+    expect(config.actions[0].initWait).toBe('1e4');
+    expect(config.actions[0].initWaitTo).toBeUndefined();
+  });
+
   it('should split batch.repeatInterval "aeb" string into from and to', () => {
     const config = makeConfig({ batch: { repeatInterval: '1e4' } });
 
@@ -298,9 +343,11 @@ describe('migrateConfigInterval', () => {
 
   it('should migrate all interval fields at once', () => {
     const config = makeConfig({
+      initWait: '0.5e2',
       batch: { repeatInterval: '1e3' },
       actions: [
         makeAction({
+          initWait: '1e4',
           repeatInterval: '2e4',
           settings: { retryInterval: '0.5e1' },
           addon: { recheckInterval: '3e6' }
@@ -310,8 +357,12 @@ describe('migrateConfigInterval', () => {
 
     migrateConfigInterval(config);
 
+    expect(config.initWait).toBe(0.5);
+    expect(config.initWaitTo).toBe(2);
     expect(config.batch.repeatInterval).toBe(1);
     expect(config.batch.repeatIntervalTo).toBe(3);
+    expect(config.actions[0].initWait).toBe(1);
+    expect(config.actions[0].initWaitTo).toBe(4);
     expect(config.actions[0].repeatInterval).toBe(2);
     expect(config.actions[0].repeatIntervalTo).toBe(4);
     expect(config.actions[0].settings.retryInterval).toBe(0.5);
@@ -326,9 +377,11 @@ describe('migrateConfigInterval', () => {
 describe('migrateConfig', () => {
   it('should run all three config migrations in order', () => {
     const config = makeConfig({
+      initWait: '2e8',
       batch: { repeat: -2, repeatInterval: '1e5' },
       actions: [
         makeAction({
+          initWait: '0.5e3',
           repeat: -2,
           repeatInterval: '2e6',
           settings: { retry: -2, retryInterval: '0.5e2' },
@@ -348,7 +401,12 @@ describe('migrateConfig', () => {
     // then → option
     expect(config.actions[0].statement.option).toBe(EErrorOptions.SKIP);
     expect(config.actions[0].statement.then).toBeUndefined();
-    // intervals
+    // initWait intervals
+    expect(config.initWait).toBe(2);
+    expect(config.initWaitTo).toBe(8);
+    expect(config.actions[0].initWait).toBe(0.5);
+    expect(config.actions[0].initWaitTo).toBe(3);
+    // other intervals
     expect(config.batch.repeatInterval).toBe(1);
     expect(config.batch.repeatIntervalTo).toBe(5);
     expect(config.actions[0].repeatInterval).toBe(2);

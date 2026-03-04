@@ -51,7 +51,7 @@ const BatchProcessor = (() => {
             attributes: { 'batch.count': batchCount, 'batch.repeat': batchRepeat }
           });
         } else {
-          await statusBar.waitBatchRepeat(batch?.repeatInterval, batchCount);
+          await statusBar.waitBatchRepeat(batch?.repeatInterval, batch?.repeatIntervalTo, batchCount);
         }
         await Actions.start(actions, batchCount);
         await notifyCompletion(batchCount);

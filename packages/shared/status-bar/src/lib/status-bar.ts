@@ -42,7 +42,8 @@ export class StatusBar {
 
   public enable(totalActions: number, totalBatches: number | 'unlimited' = 0): void {
     this.totalActions = totalActions;
-    this.totalBatches = totalBatches === 'unlimited' ? '∞' : totalBatches > 0 ? totalBatches.toString() : '∞';
+    const isLimited = totalBatches !== 'unlimited' && totalBatches > 0;
+    this.totalBatches = isLimited ? totalBatches.toString() : '∞';
     LoggerService.debug(`Status ACTION:${totalActions} BATCH:${this.totalBatches}`);
     ActionService.setBadgeText({ text: '⚡' });
   }
@@ -56,65 +57,64 @@ export class StatusBar {
     return this.currentBatch === 1 && current === 1;
   }
 
-  // New helper wait methods per type. Original `wait` is kept as backup.
-  public async waitConfig(text?: number): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitConfig(time?: number, to?: number): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
     if (!waitTime) return;
-    const time = waitTime / 1000;
-    const title = `⏳ ${time}s ▶️ Configuration.`;
+    const timeInSeconds = waitTime / 1000;
+    const title = `⏳ ${timeInSeconds}s ▶️ Configuration.`;
     await this.renderAndSleep({ title, waitTime, logMessage: title, current: 0 });
   }
 
-  public async waitAction(text?: number | string, current = 0): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitAction(time?: number, current = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time);
     if (!waitTime) {
       this.actionUpdate(current);
       return;
     }
-    const time = waitTime / 1000;
-    const title = `⏳ ${time}s ▶️ Action.`;
+    const timeInSeconds = waitTime / 1000;
+    const title = `⏳ ${timeInSeconds}s ▶️ Action.`;
     this.actionUpdate(current, title);
     await this.renderAndSleep({ title, waitTime, logMessage: this.actionEle.textContent + ` ${title}`, current });
   }
 
-  public async waitBatchRepeat(text?: number | string, current = 0): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitBatchRepeat(time?: number, to?: number, current = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
     if (!waitTime) {
       this.batchUpdate(current);
       return;
     }
-    const time = waitTime / 1000;
-    const title = `⏳ ${time}s 📦 Batch.`;
+    const timeInSeconds = waitTime / 1000;
+    const title = `⏳ ${timeInSeconds}s 📦 Batch.`;
     this.batchUpdate(current, title);
     await this.renderAndSleep({ title, waitTime, logMessage: this.batchEle.textContent + ` ${title}`, current });
   }
 
-  public async waitActionRepeat(text?: number | string, current: number | '∞' = 0): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitActionRepeat(time?: number, to?: number, current: number | '∞' = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
     if (!waitTime) return;
-    const time = waitTime / 1000;
+    const timeInSeconds = waitTime / 1000;
 
-    const title = `⏳ ${time}s 🔁 Action.`;
+    const title = `⏳ ${timeInSeconds}s 🔁 Action.`;
     const remaining = current === '∞' ? 'unlimited repeats' : `${current} repeats left`;
     await this.renderAndSleep({ title, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${remaining}`, current });
   }
 
-  public async waitAddonRecheck(text?: number | string, current: number | '∞' = 0): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitAddonRecheck(time?: number, to?: number, current: number | '∞' = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
     if (!waitTime) return;
-    const time = waitTime / 1000;
+    const timeInSeconds = waitTime / 1000;
     const issue = '⚠️ Addon Condition not met.';
-    const title = `⏳ ${time}s 🔁 Addon.`;
+    const title = `⏳ ${timeInSeconds}s 🔁 Addon.`;
     const remaining = current === '∞' ? 'unlimited checks' : `${current} checks left`;
     await this.renderAndSleep({ title, issue, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`, current });
   }
 
-  public async waitDefault(text?: number | string, current: number | '∞' = 0): Promise<void> {
-    const waitTime = Timer.getWaitTime(text);
+  public async waitDefault(time?: number, to?: number, current: number | '∞' = 0): Promise<void> {
+    const waitTime = Timer.getWaitTime(time, to);
     if (!waitTime) return;
-    const time = waitTime / 1000;
+    const timeInSeconds = waitTime / 1000;
     const issue = '⚠️ Element not found.';
-    const title = `⏳ ${time}s 🔁 Action.`;
+    const title = `⏳ ${timeInSeconds}s 🔁 Action.`;
     const remaining = current === '∞' ? 'unlimited retries' : `${current} retries left`;
     await this.renderAndSleep({ title, issue, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`, current });
   }

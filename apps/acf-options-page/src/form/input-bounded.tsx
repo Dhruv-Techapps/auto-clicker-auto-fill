@@ -21,7 +21,7 @@ export function InputBounded<TFieldValues extends FieldValues>(props: InputBound
   const transform = (v: unknown) => {
     if (v === 'unlimited') return 'unlimited';
     const n = Number(v);
-    return isNaN(n) ? v : n;
+    return Number.isNaN(n) ? v : n;
   };
 
   const renderInput = ({ field, fieldState }: RenderInputProps<TFieldValues>) => {
@@ -62,10 +62,9 @@ export function InputBounded<TFieldValues extends FieldValues>(props: InputBound
         rules={{
           validate: (v) => {
             if (v === undefined || v === 'unlimited') return true;
-            if (typeof v === 'number') {
-              if (!Number.isFinite(v) || v < 0) return t('error.positive');
-              if (!Number.isInteger(v)) return t('error.integer');
-            }
+            if (typeof v !== 'number') return t('error.integer');
+            if (!Number.isFinite(v) || v < 0) return t('error.positive');
+            if (!Number.isInteger(v)) return t('error.integer');
             return true;
           }
         }}

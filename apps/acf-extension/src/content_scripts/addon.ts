@@ -21,12 +21,12 @@ const AddonProcessor = (() => {
     if (recheck !== undefined) {
       if (typeof recheck === 'number' && recheck > 0) {
         const nextRecheck = recheck - 1;
-        await statusBar.waitAddonRecheck(props.recheckInterval, nextRecheck + 1);
+        await statusBar.waitAddonRecheck(props.recheckInterval, props.recheckIntervalTo, nextRecheck + 1);
         return await start({ elementFinder, value, condition, recheck: nextRecheck, recheckOption, ...props }, settings);
       }
 
       if (typeof recheck === 'string' && recheck.toLowerCase() === 'unlimited') {
-        await statusBar.waitAddonRecheck(props.recheckInterval, '∞');
+        await statusBar.waitAddonRecheck(props.recheckInterval, props.recheckIntervalTo, '∞');
         return await start({ elementFinder, value, condition, recheck, recheckOption, ...props }, settings);
       }
     }

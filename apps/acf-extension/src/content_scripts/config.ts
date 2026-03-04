@@ -157,7 +157,7 @@ const ConfigProcessor = (() => {
     if (config.startTime?.match(/^\d{2}:\d{2}:\d{2}:\d{3}$/)) {
       await schedule(config.startTime);
     } else {
-      await statusBar.waitConfig(config.initWait);
+      await statusBar.waitConfig(config.initWait, config.initWaitTo);
     }
   };
 

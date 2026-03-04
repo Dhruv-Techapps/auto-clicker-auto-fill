@@ -14,7 +14,7 @@ interface CellProps {
 
 const toNumber = (v: string): number | string => {
   const n = Number(v);
-  return isNaN(n) ? v : n;
+  return Number.isNaN(n) ? v : n;
 };
 
 export function RepeatIntervalCell({ getValue, row: { original }, column: { id }, table }: CellProps) {
