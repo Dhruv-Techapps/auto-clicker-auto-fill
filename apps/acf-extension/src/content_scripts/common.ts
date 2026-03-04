@@ -6,7 +6,7 @@ import { statusBar } from './status-bar';
 import DomWatchManager from './util/dom-watch-manager';
 
 const Common = (() => {
-  const retryFunc = async (retry?: TBoundedValue, retryInterval?: number | string): Promise<TBoundedValue | undefined> => {
+  const retryFunc = async (retry?: TBoundedValue, retryInterval?: number): Promise<TBoundedValue | undefined> => {
     if (typeof retry === 'number' && retry > 0) {
       await statusBar.waitDefault(retryInterval, retry);
       return retry - 1;
@@ -31,7 +31,7 @@ const Common = (() => {
     });
   };
 
-  const getElements = async (document: Document, elementFinder: string, retry?: TBoundedValue, retryInterval?: number | string): Promise<Array<HTMLElement> | undefined> => {
+  const getElements = async (document: Document, elementFinder: string, retry?: TBoundedValue, retryInterval?: number): Promise<Array<HTMLElement> | undefined> => {
     let elements: HTMLElement[] | undefined;
     try {
       if (/^(id::|#)/gi.test(elementFinder)) {
@@ -92,9 +92,9 @@ const Common = (() => {
     return elements;
   };
 
-  const main = async (elementFinder: string, retry?: TBoundedValue, retryInterval?: number | string) => await getElements(document, elementFinder, retry, retryInterval);
+  const main = async (elementFinder: string, retry?: TBoundedValue, retryInterval?: number) => await getElements(document, elementFinder, retry, retryInterval);
 
-  const checkIframe = async (elementFinder: string, retry?: TBoundedValue, retryInterval?: number | string): Promise<HTMLElement[] | undefined> => {
+  const checkIframe = async (elementFinder: string, retry?: TBoundedValue, retryInterval?: number): Promise<HTMLElement[] | undefined> => {
     const iFrames = document.getElementsByTagName('iframe');
     let elements;
     for (const iFrame of iFrames) {

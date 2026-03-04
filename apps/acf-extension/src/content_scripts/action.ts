@@ -1,4 +1,4 @@
-import { EActionStatus, IAction, TBoundedValue } from '@dhruv-techapps/acf-common';
+import { EActionStatus, IAction } from '@dhruv-techapps/acf-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import Common from './common';
 import { statusBar } from './status-bar';
@@ -6,7 +6,7 @@ import { ACFEvents } from './util/acf-events';
 import { ACFValue } from './util/acf-value';
 
 const ActionProcessor = (() => {
-  const repeatFunc = async (action: IAction, repeat?: TBoundedValue, repeatInterval?: number | string): Promise<EActionStatus.DONE> => {
+  const repeatFunc = async (action: IAction, repeat?: number, repeatInterval?: number): Promise<EActionStatus.DONE> => {
     if (repeat !== undefined) {
       if (typeof repeat === 'number' && repeat > 0) {
         await statusBar.waitActionRepeat(repeatInterval, repeat);
