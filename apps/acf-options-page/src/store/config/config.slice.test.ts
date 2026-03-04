@@ -11,6 +11,7 @@ import {
   getDefaultAction,
   getDefaultConfig
 } from '@dhruv-techapps/acf-common';
+import { generateUUID } from '@dhruv-techapps/core-common';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ConfigStore,
@@ -285,7 +286,7 @@ describe('config slice – syncBatch', () => {
 
   it('should set error for invalid configId', () => {
     const state = makeInitialState([makeConfig()]);
-    const nextState = configReducer(state, syncBatch({ configId: 'bad' as any, batch: { repeat: 1, repeatInterval: 0 } }));
+    const nextState = configReducer(state, syncBatch({ configId: generateUUID(), batch: { repeat: 1, repeatInterval: 0 } }));
     expect(nextState.error).toBe('Invalid Configuration');
   });
 });
