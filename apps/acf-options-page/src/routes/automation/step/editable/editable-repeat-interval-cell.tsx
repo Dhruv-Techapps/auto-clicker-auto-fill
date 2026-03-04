@@ -13,7 +13,7 @@ interface CellProps {
 }
 
 const toNumber = (v: string): number | string => {
-  const n = parseFloat(v);
+  const n = Number(v);
   return isNaN(n) ? v : n;
 };
 
