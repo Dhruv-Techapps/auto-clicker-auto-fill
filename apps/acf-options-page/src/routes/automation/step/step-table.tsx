@@ -12,17 +12,10 @@ import { REGEX } from '../../../util';
 import { defaultColumn } from './editable-cell';
 import { RepeatCell } from './editable/editable-repeat-cell';
 import { RepeatIntervalCell } from './editable/editable-repeat-interval-cell';
+import { IStepTableMeta } from './editable/meta';
 import { StepRow } from './step-row';
 import './step-table.scss';
 import { UserScriptRow } from './userscript-row';
-
-interface IStepTableMeta {
-  dataType?: string;
-  list?: string;
-  pattern?: string;
-  required?: boolean;
-  width?: string;
-}
 
 interface IStepTableProps {
   actions: Array<IAction | IUserScript>;

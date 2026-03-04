@@ -3,11 +3,12 @@ import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
 import { ColumnDef } from '@tanstack/react-table';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
+import { IStepTableMeta } from './meta';
 
 interface CellProps {
   getValue: () => any;
   row: { original: IAction | IUserScript };
-  column: { id: string; columnDef: ColumnDef<IAction | IUserScript, {}> };
+  column: { id: string; columnDef: ColumnDef<IAction | IUserScript, IStepTableMeta> };
   table: any;
 }
 

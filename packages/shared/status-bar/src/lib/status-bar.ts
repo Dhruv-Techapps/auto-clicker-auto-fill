@@ -95,7 +95,7 @@ export class StatusBar {
     const time = waitTime / 1000;
 
     const title = `⏳ ${time}s 🔁 Action.`;
-    const remaining = `${current} repeats left`;
+    const remaining = current === '∞' ? 'unlimited repeats' : `${current} repeats left`;
     await this.renderAndSleep({ title, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${remaining}`, current });
   }
 
@@ -105,7 +105,7 @@ export class StatusBar {
     const time = waitTime / 1000;
     const issue = '⚠️ Addon Condition not met.';
     const title = `⏳ ${time}s 🔁 Addon.`;
-    const remaining = `${current} checks left`;
+    const remaining = current === '∞' ? 'unlimited checks' : `${current} checks left`;
     await this.renderAndSleep({ title, issue, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`, current });
   }
 
@@ -115,7 +115,7 @@ export class StatusBar {
     const time = waitTime / 1000;
     const issue = '⚠️ Element not found.';
     const title = `⏳ ${time}s 🔁 Action.`;
-    const remaining = `${current} retries left`;
+    const remaining = current === '∞' ? 'unlimited retries' : `${current} retries left`;
     await this.renderAndSleep({ title, issue, remaining, waitTime, logMessage: this.actionEle.textContent + ` ${title} > ${issue} > ${remaining}`, current });
   }
 

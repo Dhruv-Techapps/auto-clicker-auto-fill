@@ -43,7 +43,7 @@ export class StorageMigration {
       }
     } catch (error) {
       // non-fatal
-      // eslint-disable-next-line no-console
+       
       console.warn('settings migration failed', error);
     }
   }

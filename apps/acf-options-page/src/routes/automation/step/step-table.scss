@@ -14,7 +14,10 @@
   th[data-column='repeatInterval'] {
     width: 10%;
   }
-  th[data-column='menu'] {
-    width: 105px;
+
+  th[data-column='menu'],
+  td[data-column='menu'] {
+    width: 1%;
+    white-space: nowrap;
   }
 }
