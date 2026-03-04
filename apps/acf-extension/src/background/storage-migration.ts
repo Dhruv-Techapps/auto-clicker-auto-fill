@@ -1,50 +1,36 @@
 import { IConfiguration, ISettings } from '@dhruv-techapps/acf-common';
 import { ConfigStorage, SettingsStorage } from '@dhruv-techapps/acf-store';
-import { migrateConfigBoundedLegacy, migrateConfigInterval, migrateConfigThen } from '@dhruv-techapps/acf-util';
+import { migrateConfig, migrateSettings } from '@dhruv-techapps/acf-util';
+import { handleError, Span, tracer } from '@dhruv-techapps/core-open-telemetry';
 
 export class StorageMigration {
   static async migrate(): Promise<void> {
-    // First handle legacy bounded values(-2) -> 'unlimited'
-    await this.migrateConfigs();
-    // Migrate persisted settings separately (retry)
-    await this.migrateSettingsBoundedLegacy();
-  }
-
-  static async migrateConfigs() {
-    const configs: IConfiguration[] = await ConfigStorage.getConfigs();
-
-    configs.forEach((config) => {
-      migrateConfigBoundedLegacy(config);
-      migrateConfigThen(config);
-      migrateConfigInterval(config);
+    tracer.startActiveSpan('StorageMigration.migrate', async (span) => {
+      await this.migrateConfigs(span);
+      await this.migrateSettings(span);
     });
-
-    await ConfigStorage.setConfigs(configs);
   }
 
-  /**
-   * Convert legacy sentinel -2 to 'unlimited' for persisted settings
-   * Targets: settings.retry
-   */
-  static async migrateSettingsBoundedLegacy(): Promise<void> {
+  static async migrateConfigs(span: Span) {
+    try {
+      const configs: IConfiguration[] = await ConfigStorage.getConfigs();
+      configs.forEach((config) => {
+        migrateConfig(config);
+      });
+      await ConfigStorage.setConfigs(configs);
+    } catch (error) {
+      handleError(span, error, 'Error in migrating configs');
+    }
+  }
+
+  static async migrateSettings(span: Span) {
     try {
       const settings: ISettings = await SettingsStorage.getSettings();
       if (!settings) return;
-
-      const s: ISettings = JSON.parse(JSON.stringify(settings));
-      let changed = false;
-      if (s.retry === -2) {
-        s.retry = 'unlimited';
-        changed = true;
-      }
-
-      if (changed) {
-        await SettingsStorage.setSettings(s);
-      }
+      migrateSettings(settings);
+      await SettingsStorage.setSettings(settings);
     } catch (error) {
-      // non-fatal
-       
-      console.warn('settings migration failed', error);
+      handleError(span, error, 'Error in migrating settings');
     }
   }
 }

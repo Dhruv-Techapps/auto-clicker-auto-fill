@@ -58,6 +58,7 @@ export interface IConfiguration {
   configId?: number;
   name?: string;
   initWait?: number;
+  initWaitTo?: number;
   startTime?: string;
   schedule?: ISchedule;
   spreadsheetId?: string;

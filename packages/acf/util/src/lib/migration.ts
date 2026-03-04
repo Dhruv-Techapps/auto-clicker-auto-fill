@@ -1,4 +1,4 @@
-import { IAction, IConfiguration, IUserScript } from '@dhruv-techapps/acf-common';
+import { IAction, IConfiguration, ISettings, IUserScript } from '@dhruv-techapps/acf-common';
 
 /**
  * Splits a legacy interval range string of the form "aeb" (e.g. "1e4") into its
@@ -44,7 +44,46 @@ export const migrateConfigBoundedLegacy = (config: IConfiguration): void => {
     });
   }
 };
+/**
+ * Runs all configuration migrations in order against a single config object.
+ * Mutates the config in-place.
+ */
+export const migrateConfig = (config: IConfiguration): void => {
+  migrateConfigBoundedLegacy(config);
+  migrateConfigThen(config);
+  migrateConfigInterval(config);
+};
 
+/**
+ * Mutates settings: converts legacy sentinel -2 to 'unlimited' for retry.
+ */
+export const migrateSettingsBoundedLegacy = (settings: ISettings): void => {
+  if ((settings.retry as unknown) === -2) {
+    settings.retry = 'unlimited';
+  }
+};
+
+/**
+ * Mutates settings: splits legacy "aeb" range strings into from/to fields.
+ * Targets: settings.retryInterval → settings.retryInterval + settings.retryIntervalTo
+ */
+export const migrateSettingsInterval = (settings: ISettings): void => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const split = splitIntervalRange((settings as any).retryInterval);
+  if (split) {
+    settings.retryInterval = split.from;
+    settings.retryIntervalTo = split.to;
+  }
+};
+
+/**
+ * Runs all settings migrations in order against a single settings object.
+ * Mutates the settings in-place.
+ */
+export const migrateSettings = (settings: ISettings): void => {
+  migrateSettingsBoundedLegacy(settings);
+  migrateSettingsInterval(settings);
+};
 /**
  * Mutates a single configuration's actions from the legacy `statement.then`
  * field to `statement.option`.

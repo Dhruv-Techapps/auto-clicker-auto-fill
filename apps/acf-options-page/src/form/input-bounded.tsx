@@ -62,8 +62,11 @@ export function InputBounded<TFieldValues extends FieldValues>(props: InputBound
         rules={{
           validate: (v) => {
             if (v === undefined || v === 'unlimited') return true;
-            if (typeof v === 'number' && v >= 0) return true;
-            return t('error.positive');
+            if (typeof v === 'number') {
+              if (!Number.isFinite(v) || v < 0) return t('error.positive');
+              if (!Number.isInteger(v)) return t('error.integer');
+            }
+            return true;
           }
         }}
         render={renderInput}

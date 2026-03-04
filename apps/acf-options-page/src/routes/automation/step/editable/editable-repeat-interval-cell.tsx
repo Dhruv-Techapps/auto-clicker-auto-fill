@@ -1,7 +1,7 @@
 import { IAction, IUserScript } from '@dhruv-techapps/acf-common';
 import { ColumnDef } from '@tanstack/react-table';
 import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IStepTableMeta } from './meta';
 
@@ -19,7 +19,8 @@ const toNumber = (v: string): number | string => {
 
 export function RepeatIntervalCell({ getValue, row: { original }, column: { id }, table }: CellProps) {
   const intervalValue = getValue();
-  const intervalToValue = (original as IAction).repeatIntervalTo;
+  const toKey = `${id}To` as keyof IAction;
+  const intervalToValue = (original as IAction)[toKey] as number | undefined;
 
   const [from, setFrom] = useState<string>(intervalValue !== undefined ? String(intervalValue) : '');
   const [to, setTo] = useState<string>(intervalToValue !== undefined ? String(intervalToValue) : '');
@@ -45,7 +46,7 @@ export function RepeatIntervalCell({ getValue, row: { original }, column: { id }
 
   const commitTo = (value: string) => {
     const converted = value === '' ? undefined : toNumber(value);
-    table.options.meta?.updateData(original.id, 'repeatIntervalTo', converted);
+    table.options.meta?.updateData(original.id, toKey, converted);
   };
 
   const onFromChange = (e: ChangeEvent<HTMLInputElement>) => setFrom(e.currentTarget.value);
@@ -59,7 +60,7 @@ export function RepeatIntervalCell({ getValue, row: { original }, column: { id }
     setRangeMode(next);
     if (!next) {
       setTo('');
-      table.options.meta?.updateData(original.id, 'repeatIntervalTo', undefined);
+      table.options.meta?.updateData(original.id, toKey, undefined);
     } else if (to === '') {
       const seedValue = from !== '' ? from : '';
       setTo(seedValue);
@@ -68,9 +69,11 @@ export function RepeatIntervalCell({ getValue, row: { original }, column: { id }
 
   return (
     <InputGroup size='sm'>
-      <Button variant={rangeMode ? 'secondary' : ''} className='border' size='sm' onClick={onToggleRange} title={t('retry.range-tooltip')} tabIndex={-1}>
-        <i className='bi bi-arrows-expand-vertical' />
-      </Button>
+      <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={<Tooltip id={`${id}-tooltip`}>{t('retry.range-tooltip')}</Tooltip>}>
+        <Button variant={rangeMode ? 'secondary' : ''} className='border' size='sm' onClick={onToggleRange} title={t('retry.range-tooltip')} tabIndex={-1}>
+          <i className='bi bi-arrows-expand-vertical' />
+        </Button>
+      </OverlayTrigger>
       <Form.Control
         type='number'
         min={0}
@@ -93,7 +96,7 @@ export function RepeatIntervalCell({ getValue, row: { original }, column: { id }
             min={0}
             step='0.001'
             value={to}
-            name='repeatIntervalTo'
+            name={toKey}
             size='sm'
             onChange={onToChange}
             onBlur={onToBlur}

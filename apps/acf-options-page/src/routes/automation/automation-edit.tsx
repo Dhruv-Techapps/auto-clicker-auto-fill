@@ -1,13 +1,13 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
+import { InputInterval } from '@acf-options-page/form/input-interval';
 import { updateConfig, useAppDispatch } from '@acf-options-page/store';
-import { REGEX } from '@acf-options-page/util';
 import { APP_LINK } from '@acf-options-page/util/constants';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { Button, Col, Container, Form, FormControl, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-type AutomationEditFormValues = Pick<IConfiguration, 'url' | 'initWait'>;
+type AutomationEditFormValues = Pick<IConfiguration, 'url' | 'initWait' | 'initWaitTo'>;
 
 interface AutomationEditProps {
   onDone: () => void;
@@ -18,17 +18,20 @@ export const AutomationEdit = ({ onDone }: AutomationEditProps) => {
   const dispatch = useAppDispatch();
   const config = useAutomation();
 
+  const form = useForm<AutomationEditFormValues>({
+    defaultValues: {
+      url: config?.url,
+      initWait: config?.initWait,
+      initWaitTo: config?.initWaitTo
+    },
+    mode: 'onChange'
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
-  } = useForm<AutomationEditFormValues>({
-    defaultValues: {
-      url: config?.url,
-      initWait: config?.initWait
-    },
-    mode: 'onChange'
-  });
+  } = form;
 
   if (!config) {
     return null;
@@ -44,18 +47,7 @@ export const AutomationEdit = ({ onDone }: AutomationEditProps) => {
       <Container fluid className='border-bottom p-2'>
         <Row className='align-items-end p-1'>
           <Col xs='auto'>
-            <Form.Label>
-              {t('automation.initWait')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
-            </Form.Label>
-            <FormControl
-              autoComplete='off'
-              list='interval'
-              size='sm'
-              placeholder='0'
-              isInvalid={!!errors.initWait}
-              {...register('initWait', { pattern: { value: REGEX.INTERVAL, message: t('error.initWait') } })}
-            />
-            <Form.Control.Feedback type='invalid'>{errors.initWait?.message}</Form.Control.Feedback>
+            <InputInterval title='automation.initWait' name='initWait' rangeName='initWaitTo' form={form} />
           </Col>
           <Col>
             <Form.Label>

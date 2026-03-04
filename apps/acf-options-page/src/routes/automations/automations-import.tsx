@@ -1,7 +1,7 @@
 import { importConfigs, useAppDispatch } from '@acf-options-page/store';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
-import { migrateConfigBoundedLegacy, migrateConfigThen } from '@dhruv-techapps/acf-util';
+import { migrateConfig } from '@dhruv-techapps/acf-util';
 import { ChangeEvent, createRef } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -26,13 +26,11 @@ export const AutomationsImport = () => {
           if (!Array.isArray(importedConfigs)) {
             importedConfigs = [importedConfigs];
           }
-          const migratedConfigs = importedConfigs.map((config) => {
-            migrateConfigBoundedLegacy(config);
-            migrateConfigThen(config);
-            return config;
+          importedConfigs.forEach((config) => {
+            migrateConfig(config);
           });
 
-          dispatch(importConfigs(migratedConfigs));
+          dispatch(importConfigs(importedConfigs));
         }
       } catch (error) {
         if (error instanceof Error) {

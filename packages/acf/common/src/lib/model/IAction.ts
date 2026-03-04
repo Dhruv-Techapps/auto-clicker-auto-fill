@@ -23,6 +23,7 @@ export interface IAction {
   actionId?: number;
   name?: string;
   initWait?: number;
+  initWaitTo?: number;
   value?: string;
   repeat?: number;
   repeatInterval?: number;

@@ -8,7 +8,6 @@ import { useMemo } from 'react';
 import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ElementFinderPopover, ValuePopover } from '../../../popover';
-import { REGEX } from '../../../util';
 import { defaultColumn } from './editable-cell';
 import { RepeatCell } from './editable/editable-repeat-cell';
 import { RepeatIntervalCell } from './editable/editable-repeat-interval-cell';
@@ -33,19 +32,11 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
       {
         header: t('step.initWait'),
         accessorKey: 'initWait',
-        meta: {
-          width: '70',
-          dataType: 'number',
-          list: 'interval',
-          pattern: REGEX.INTERVAL.source
-        }
+        cell: RepeatIntervalCell
       },
       {
         header: t('step.name'),
-        accessorKey: 'name',
-        meta: {
-          width: '100'
-        }
+        accessorKey: 'name'
       },
       {
         header: () => (
@@ -73,17 +64,11 @@ const StepTable = ({ actions, expand }: IStepTableProps) => {
       {
         header: t('step.repeat'),
         accessorKey: 'repeat',
-        meta: {
-          width: '70'
-        },
         cell: RepeatCell
       },
       {
         header: t('step.repeatInterval'),
         accessorKey: 'repeatInterval',
-        meta: {
-          width: '140'
-        },
         cell: RepeatIntervalCell
       }
     ],

@@ -11,7 +11,7 @@ const Common = (() => {
       await statusBar.waitDefault(retryInterval, retry);
       return retry - 1;
     }
-    if (typeof retry === 'string' && retry.toLowerCase() === 'unlimited') {
+    if (typeof retry === 'string' && retry === 'unlimited') {
       await statusBar.waitDefault(retryInterval, '∞');
       return retry;
     }
