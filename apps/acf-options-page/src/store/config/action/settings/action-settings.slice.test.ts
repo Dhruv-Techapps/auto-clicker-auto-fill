@@ -10,7 +10,7 @@ import {
   updateActionSettingsGoto
 } from './action-settings.slice';
 
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
+Object.defineProperty(globalThis, 'dataLayer', { value: [], writable: true });
 const initialState: IActionSettingsStore = { visible: false, settings: { ...defaultActionSettings } };
 
 describe('actionSettings slice', () => {

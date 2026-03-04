@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { configSettingsReducer, IConfigSettingsStore, setConfigSettingsError, setConfigSettingsMessage, switchConfigSettingsModal } from './config-settings.slice';
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
+Object.defineProperty(globalThis, 'dataLayer', { value: [], writable: true });
 
 const initialState: IConfigSettingsStore = { visible: false };
 

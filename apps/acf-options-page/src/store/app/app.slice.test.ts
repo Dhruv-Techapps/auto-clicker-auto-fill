@@ -1,8 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { getManifest } from './app.api';
 import { appReducer, setAppError, setManifest, switchExtensionNotFound } from './app.slice';
 // Mock window.dataLayer before any imports that reference it
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
+vi.stubGlobal('dataLayer', []);
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe('app slice', () => {
   const initialState = { loading: true, extensionNotFound: false };
