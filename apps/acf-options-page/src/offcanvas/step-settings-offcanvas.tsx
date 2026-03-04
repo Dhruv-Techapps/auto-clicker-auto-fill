@@ -1,12 +1,13 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
 import { useStepId } from '@acf-options-page/_hooks/useStepId';
+import { InputBounded } from '@acf-options-page/form/input-bounded';
+import { InputInterval } from '@acf-options-page/form/input-interval';
 import { syncActionSettings, useAppDispatch } from '@acf-options-page/store';
 import { EErrorOptions, IActionSettings } from '@dhruv-techapps/acf-common';
-import { Button, Card, Col, Form, FormControl, InputGroup, Offcanvas, Row } from 'react-bootstrap';
+import { Button, Card, Col, Form, Offcanvas, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { REGEX } from '../util';
 
 interface AutomationStepSettingsOffcanvasProps {
   show: boolean;
@@ -21,15 +22,17 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
 
   const action = config?.actions.find((a) => a.id === stepId);
 
+  const form = useForm<IActionSettings>({
+    defaultValues: action?.settings ?? {},
+    mode: 'onChange'
+  });
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isDirty, isValid }
-  } = useForm<IActionSettings>({
-    defaultValues: action?.settings ?? {},
-    mode: 'onChange'
-  });
+    formState: { isDirty, isValid }
+  } = form;
 
   if (!config || !action) {
     return null;
@@ -72,31 +75,10 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
             <Card.Body>
               <Row className='mb-2 mb-md-0'>
                 <Col md={6} sm={12}>
-                  <InputGroup>
-                    <InputGroup.Text>{t('stepSettings.retry.retry')}</InputGroup.Text>
-                    <FormControl
-                      placeholder={t('stepSettings.retry.retry')}
-                      type='number'
-                      isInvalid={!!errors.retry}
-                      list='retry'
-                      {...register('retry', { pattern: { value: REGEX.NUMBER, message: t('error.number') } })}
-                    />
-                    <Form.Control.Feedback type='invalid'>{errors.retry?.message}</Form.Control.Feedback>
-                  </InputGroup>
+                  <InputBounded title={'retry.title'} name='retry' form={form} />
                 </Col>
                 <Col md={6} sm={12}>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      {t('stepSettings.retry.interval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
-                    </InputGroup.Text>
-                    <FormControl
-                      placeholder={`${t('stepSettings.retry.interval')} (${t('common.sec')})`}
-                      list='interval'
-                      isInvalid={!!errors.retryInterval}
-                      {...register('retryInterval', { pattern: { value: REGEX.INTERVAL, message: t('error.number') } })}
-                    />
-                    <Form.Control.Feedback type='invalid'>{errors.retryInterval?.message}</Form.Control.Feedback>
-                  </InputGroup>
+                  <InputInterval title={'retry.intervalRange'} name='retryInterval' rangeName='retryIntervalTo' form={form} />
                 </Col>
               </Row>
             </Card.Body>
@@ -105,19 +87,19 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
             <Card.Body>
               <Row>
                 <Col xs={12} className='mb-2'>
-                  {t('stepSettings.retry.hint')}
+                  {t('retry.hint')}
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.STOP} label={t('stepSettings.retry.stop')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.STOP} label={t('retry.stop')} {...register('retryOption')} />
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('stepSettings.retry.skip')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('retry.skip')} {...register('retryOption')} />
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('stepSettings.retry.refresh')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('retry.refresh')} {...register('retryOption')} />
                 </Col>
                 <Col>
-                  <Form.Check type='radio' value={EErrorOptions.GOTO} label={t('stepSettings.retry.goto')} {...register('retryOption')} />
+                  <Form.Check type='radio' value={EErrorOptions.GOTO} label={t('retry.goto')} {...register('retryOption')} />
                 </Col>
                 {retryOption === EErrorOptions.GOTO && (
                   <Col xs={{ span: 3, offset: 9 }}>

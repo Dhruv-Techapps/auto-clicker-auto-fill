@@ -38,7 +38,11 @@
   "resources": "Resources",
   "settings": {
     "title": "Global Settings",
-    "additional": "Additional Settings"
+    "additional": "Additional Settings",
+    "toast": {
+      "header": "Settings",
+      "body": "Settings saved successfully!"
+    }
   },
   "notification": {
     "title": "Show Notification",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Retry Attempts",
     "interval": "Wait Between Retries",
+    "to": "to",
     "stop": "Stop Automation",
     "skip": "Skip This Step",
     "refresh": "Refresh & Retry",
-    "hint": "What should happen if the item is not found on the page?"
+    "goto": "Go to Step",
+    "hint": "What should happen if the item is not found on the page?",
+    "unlimited-tooltip": "Set to unlimited to keep retrying indefinitely until the item is found. Use with caution, as this may cause your browser to become unresponsive if the item never appears.",
+    "range-tooltip": "Set a range to increase the randomness of retry intervals and avoid detection. For example, setting 5 to 10 seconds will randomly choose a time between 5 and 10 seconds for each retry attempt."
   },
   "backup": {
     "title": "Backup",
@@ -126,16 +134,6 @@
     "info": "These settings apply only to this step and its pre-check, and will take priority over your Global Settings.",
     "iframeFirst": "Search Embedded Pages First",
     "iframeFirstHint": "Look inside any embedded content on the page before searching the main page",
-    "retry": {
-      "title": "If Item Not Found",
-      "hint": "Choose what should happen if the item cannot be found, even after retrying.",
-      "retry": "Retry Attempts",
-      "interval": "Wait Between Retries",
-      "stop": "Stop Automation",
-      "skip": "Skip This Step",
-      "goto": "Go to Step",
-      "refresh": "Refresh & Retry"
-    },
     "toast": {
       "header": "Step Settings",
       "body": "Step settings saved successfully!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "This field is required",
     "number": "Please enter a valid number",
-    "interval": "Please enter a valid number",
+    "integer": "Please enter a valid integer",
+    "positive": "Must be a positive number",
+    "min": "Please enter a value greater than or equal to {{min}}",
+    "max": "Please enter a value less than or equal to {{max}}",
     "url": "Please enter a website URL to continue",
     "initWait": "Please enter a valid number",
     "scheduleDate": "Please enter a valid date in this format: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Error",
     "save": "Save",
     "clear": "Clear",
+    "cancel": "Cancel",
     "close": "Close",
     "download": "Download",
     "disabled": "Disabled",

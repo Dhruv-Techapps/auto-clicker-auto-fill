@@ -1,5 +1,18 @@
-import { EConfigSource, IBatch, IConfiguration, ISchedule, IWatchSettings, getDefaultAction, getDefaultConfig } from '@dhruv-techapps/acf-common';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  EAddonConditions,
+  EConfigSource,
+  EErrorOptions,
+  IActionStatement,
+  IAddon,
+  IBatch,
+  IConfiguration,
+  ISchedule,
+  IWatchSettings,
+  getDefaultAction,
+  getDefaultConfig
+} from '@dhruv-techapps/acf-common';
+import { generateUUID } from '@dhruv-techapps/core-common';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ConfigStore,
   addAction,
@@ -38,6 +51,10 @@ vi.mock('@acf-options-page/_helpers', () => ({
 vi.mock('@acf-options-page/data/configurations', () => ({
   CONFIGURATIONS: []
 }));
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 function makeInitialState(configs: IConfiguration[] = []): ConfigStore {
   return {
@@ -261,7 +278,7 @@ describe('config slice – syncBatch', () => {
   it('should set batch on config', () => {
     const config = makeConfig();
     const state = makeInitialState([config]);
-    const batch: IBatch = { size: 5, delay: 1000 };
+    const batch: IBatch = { repeat: 5, repeatInterval: 1000 };
     const nextState = configReducer(state, syncBatch({ configId: config.id, batch }));
     expect(nextState.configs[0].batch).toEqual(batch);
     expect(nextState.configs[0].updated).toBe(true);
@@ -269,7 +286,7 @@ describe('config slice – syncBatch', () => {
 
   it('should set error for invalid configId', () => {
     const state = makeInitialState([makeConfig()]);
-    const nextState = configReducer(state, syncBatch({ configId: 'bad' as any, batch: { size: 1, delay: 0 } }));
+    const nextState = configReducer(state, syncBatch({ configId: generateUUID(), batch: { repeat: 1, repeatInterval: 0 } }));
     expect(nextState.error).toBe('Invalid Configuration');
   });
 });
@@ -297,14 +314,14 @@ describe('config slice – syncWatch', () => {
   it('should set watch on config', () => {
     const config = makeConfig();
     const state = makeInitialState([config]);
-    const watch: IWatchSettings = { element: '#status', value: 'done', wait: 500 };
+    const watch: IWatchSettings = { watchRootSelector: '#status', debounce: 300 };
     const nextState = configReducer(state, syncWatch({ configId: config.id, watch }));
     expect(nextState.configs[0].watch).toEqual(watch);
     expect(nextState.configs[0].updated).toBe(true);
   });
 
   it('should remove watch when not provided', () => {
-    const watch: IWatchSettings = { element: '#status', value: 'done', wait: 500 };
+    const watch: IWatchSettings = { watchRootSelector: '#status', debounce: 300 };
     const config = makeConfig({ watch });
     const state = makeInitialState([config]);
     const nextState = configReducer(state, syncWatch({ configId: config.id }));
@@ -317,7 +334,15 @@ describe('config slice – syncActionAddon', () => {
     const config = makeConfig();
     const actionId = config.actions[0].id;
     const state = makeInitialState([config]);
-    const addon = { recheck: 5, recheckInterval: 2, recheckGoto: undefined };
+    const addon: IAddon = {
+      elementFinder: '#element',
+      value: 'value',
+      condition: EAddonConditions['!= Not Equals'],
+      recheckOption: EErrorOptions.GOTO,
+      recheck: 5,
+      recheckInterval: 2,
+      recheckGoto: undefined
+    };
     const nextState = configReducer(state, syncActionAddon({ configId: config.id, actionId, addon }));
     expect((nextState.configs[0].actions[0] as any).addon).toEqual(addon);
     expect(nextState.configs[0].updated).toBe(true);
@@ -327,7 +352,15 @@ describe('config slice – syncActionAddon', () => {
     const config = makeConfig();
     const actionId = config.actions[0].id;
     const state = makeInitialState([config]);
-    const addon = { recheck: 5, recheckInterval: 2, recheckGoto: undefined };
+    const addon: IAddon = {
+      elementFinder: '#element',
+      value: 'value',
+      condition: EAddonConditions['!= Not Equals'],
+      recheckOption: EErrorOptions.GOTO,
+      recheck: 5,
+      recheckInterval: 2,
+      recheckGoto: undefined
+    };
     let nextState = configReducer(state, syncActionAddon({ configId: config.id, actionId, addon }));
     nextState = configReducer(nextState, syncActionAddon({ configId: config.id, actionId }));
     expect((nextState.configs[0].actions[0] as any).addon).toBeUndefined();
@@ -361,7 +394,7 @@ describe('config slice – syncActionStatement', () => {
     const config = makeConfig();
     const actionId = config.actions[0].id;
     const state = makeInitialState([config]);
-    const statement = { conditions: [], option: undefined, goto: undefined };
+    const statement: IActionStatement = { conditions: [], option: EErrorOptions.RELOAD, goto: undefined };
     const nextState = configReducer(state, syncActionStatement({ configId: config.id, actionId, statement }));
     expect((nextState.configs[0].actions[0] as any).statement).toEqual(statement);
     expect(nextState.configs[0].updated).toBe(true);
@@ -371,7 +404,7 @@ describe('config slice – syncActionStatement', () => {
     const config = makeConfig();
     const actionId = config.actions[0].id;
     const state = makeInitialState([config]);
-    const statement = { conditions: [] };
+    const statement: IActionStatement = { conditions: [], option: EErrorOptions.RELOAD, goto: undefined };
     let nextState = configReducer(state, syncActionStatement({ configId: config.id, actionId, statement }));
     nextState = configReducer(nextState, syncActionStatement({ configId: config.id, actionId }));
     expect((nextState.configs[0].actions[0] as any).statement).toBeUndefined();

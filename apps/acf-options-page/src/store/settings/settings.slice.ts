@@ -33,10 +33,8 @@ const slice = createSlice({
       state.message = action.payload;
       state.error = undefined;
     },
-    updateSettings: (state, action: PayloadAction<ISettingsAction>) => {
-      const { name, value } = action.payload;
-      // @ts-expect-error "making is generic function difficult for TypeScript"
-      state.settings[name] = value;
+    updateSettings: (state, action: PayloadAction<Partial<ISettings>>) => {
+      state.settings = { ...state.settings, ...action.payload };
     },
     updateSettingsNotification: (state, action: PayloadAction<ISettingsAction>) => {
       const { name, value } = action.payload;

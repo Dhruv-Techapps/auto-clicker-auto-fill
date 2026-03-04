@@ -1,13 +1,17 @@
 import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
 import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { discordDeleteAPI, discordGetAPI, settingsGetAPI } from './settings.api';
 import { ISettingsStore, setSettingsError, setSettingsMessage, settingsReducer, switchSettingsModal, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
+Object.defineProperty(globalThis, 'dataLayer', { value: [], writable: true });
 
 // We need to mock the getI18n and StorageService but for pure reducer tests
 // we don't need these mocks since we're only testing the reducer directly
 const initialState: ISettingsStore = { visible: false, loading: true, settings: { ...defaultSettings } };
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe('settings slice – modal', () => {
   it('should return initial state', () => {
@@ -27,17 +31,27 @@ describe('settings slice – modal', () => {
 
 describe('settings slice – updateSettings', () => {
   it('should update a top-level setting field', () => {
-    const state = settingsReducer(initialState, updateSettings({ name: 'retry', value: 10 }));
+    const state = settingsReducer(initialState, updateSettings({ retry: 10 }));
+
     expect(state.settings.retry).toBe(10);
   });
 
   it('should update checkiFrames setting', () => {
-    const state = settingsReducer(initialState, updateSettings({ name: 'checkiFrames', value: true }));
+    const state = settingsReducer(initialState, updateSettings({ checkiFrames: true }));
+
     expect(state.settings.checkiFrames).toBe(true);
   });
 
   it('should update reloadOnError setting', () => {
-    const state = settingsReducer(initialState, updateSettings({ name: 'reloadOnError', value: true }));
+    const state = settingsReducer(initialState, updateSettings({ reloadOnError: true }));
+
+    expect(state.settings.reloadOnError).toBe(true);
+  });
+
+  it('should update multiple fields at once', () => {
+    const state = settingsReducer(initialState, updateSettings({ checkiFrames: true, reloadOnError: true }));
+
+    expect(state.settings.checkiFrames).toBe(true);
     expect(state.settings.reloadOnError).toBe(true);
   });
 });

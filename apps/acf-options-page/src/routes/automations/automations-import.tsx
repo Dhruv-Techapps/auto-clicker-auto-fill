@@ -1,6 +1,7 @@
 import { importConfigs, useAppDispatch } from '@acf-options-page/store';
 import { addToast } from '@acf-options-page/store/toast.slice';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
+import { migrateConfig } from '@dhruv-techapps/acf-util';
 import { ChangeEvent, createRef } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -20,8 +21,16 @@ export const AutomationsImport = () => {
         if (target?.result === null) {
           dispatch(addToast({ header: t('common.file'), body: t('error.json'), variant: 'danger' }));
         } else {
-          const importedConfigs: Array<IConfiguration> | IConfiguration = JSON.parse(target?.result as string);
-          dispatch(importConfigs(!Array.isArray(importedConfigs) ? [importedConfigs] : importedConfigs));
+          let importedConfigs: Array<IConfiguration> | IConfiguration = JSON.parse(target?.result as string);
+
+          if (!Array.isArray(importedConfigs)) {
+            importedConfigs = [importedConfigs];
+          }
+          importedConfigs.forEach((config) => {
+            migrateConfig(config);
+          });
+
+          dispatch(importConfigs(importedConfigs));
         }
       } catch (error) {
         if (error instanceof Error) {

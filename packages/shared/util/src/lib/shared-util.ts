@@ -1,17 +1,11 @@
 import { getRandomValues } from '@dhruv-techapps/core-common';
 
 export const Timer = (function () {
-  const getWaitTime = (time?: number | string) => {
+  const getWaitTime = (time?: number, to?: number) => {
     let waitTime;
     if (time) {
-      if (typeof time === 'string') {
-        if (/^\d+(\.\d+)?e\d+(\.\d+)?$/.test(time)) {
-          const [start, end] = time
-            .toString()
-            .split('e')
-            .map((n) => Number(n));
-          waitTime = (Math.floor(getRandomValues() * (end - start)) + start) * 1000;
-        }
+      if (to !== undefined && time > 0 && to > 0) {
+        waitTime = (Math.floor(getRandomValues() * (to - time)) + time) * 1000;
       } else if (time > 0) {
         waitTime = Number(time) * 1000;
       }
@@ -27,8 +21,8 @@ export const Timer = (function () {
     }
   };
 
-  const getTimeAndSleep = async (time?: number | string) => {
-    const waitTime = getWaitTime(time);
+  const getTimeAndSleep = async (time?: number, to?: number) => {
+    const waitTime = getWaitTime(time, to);
     await sleep(waitTime);
   };
 

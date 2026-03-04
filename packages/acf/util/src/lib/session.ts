@@ -22,7 +22,7 @@ export class Session {
       sessionStorage.removeItem(this.SESSION_COUNT_KEY);
     }
     const sessionCount = urlParams.get(this.SESSION_COUNT_KEY);
-    if (sessionCount && !isNaN(Number(sessionCount))) {
+    if (sessionCount && !Number.isNaN(Number(sessionCount))) {
       sessionStorage.setItem(this.SESSION_COUNT_KEY, sessionCount);
     }
   };

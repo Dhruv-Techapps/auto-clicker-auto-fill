@@ -1,8 +1,9 @@
 import { useAutomation } from '@acf-options-page/_hooks/useAutomation';
+import { InputBounded } from '@acf-options-page/form/input-bounded';
+import { InputInterval } from '@acf-options-page/form/input-interval';
 import { syncBatch, useAppDispatch } from '@acf-options-page/store';
-import { REGEX } from '@acf-options-page/util';
 import { IBatch } from '@dhruv-techapps/acf-common';
-import { Button, Col, Form, FormControl, Offcanvas, Row } from 'react-bootstrap';
+import { Button, Col, Form, Offcanvas, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
@@ -17,15 +18,17 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
   const config = useAutomation();
   const navigate = useNavigate();
 
+  const form = useForm<IBatch>({
+    mode: 'onChange',
+    defaultValues: config?.batch
+  });
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isDirty, isValid }
-  } = useForm<IBatch>({
-    mode: 'onChange',
-    defaultValues: config?.batch
-  });
+    formState: { isDirty, isValid }
+  } = form;
 
   if (!config) {
     return null;
@@ -63,31 +66,10 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
               <>
                 <hr className='my-3' />
                 <Col md='6' sm='12'>
-                  <Form.Group controlId='batch-repeat'>
-                    <Form.Label>{t('loop.repeat')}</Form.Label>
-                    <FormControl
-                      type='number'
-                      autoComplete='off'
-                      placeholder='0'
-                      isInvalid={!!errors.repeat}
-                      {...register('repeat', { pattern: { value: REGEX.NUMBER, message: t('error.number') } })}
-                    />
-                    <Form.Control.Feedback type='invalid'>{errors.repeat?.message}</Form.Control.Feedback>
-                  </Form.Group>
+                  <InputBounded title={'loop.repeat'} name='repeat' form={form} />
                 </Col>
                 <Col md='6' sm='12'>
-                  <Form.Group controlId='batch-repeat-interval'>
-                    <Form.Label>
-                      {t('loop.repeatInterval')}&nbsp;<small className='text-muted'>({t('common.sec')})</small>
-                    </Form.Label>
-                    <FormControl
-                      autoComplete='off'
-                      placeholder='0'
-                      isInvalid={!!errors.repeatInterval}
-                      {...register('repeatInterval', { pattern: { value: REGEX.INTERVAL, message: t('error.number') } })}
-                    />
-                    <Form.Control.Feedback type='invalid'>{errors.repeatInterval?.message}</Form.Control.Feedback>
-                  </Form.Group>
+                  <InputInterval title={'loop.repeatIntervalRange'} name='repeatInterval' rangeName='repeatIntervalTo' form={form} />
                 </Col>
                 <Form.Text className='text-body-tertiary'>
                   <Trans i18nKey='loop.repeatHint' components={{ b: <b /> }} />

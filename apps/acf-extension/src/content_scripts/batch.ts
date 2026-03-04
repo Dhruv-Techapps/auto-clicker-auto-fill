@@ -3,7 +3,6 @@ import { SettingsStorage } from '@dhruv-techapps/acf-store';
 import { generateUUID } from '@dhruv-techapps/core-common';
 import { OpenTelemetryService } from '@dhruv-techapps/core-open-telemetry/content-script';
 import { NotificationsService } from '@dhruv-techapps/core-service';
-import { STATUS_BAR_TYPE } from '@dhruv-techapps/shared-status-bar';
 import Actions from './actions';
 import Common from './common';
 import { I18N_COMMON } from './i18n';
@@ -40,6 +39,7 @@ const BatchProcessor = (() => {
   const start = async (actions: Array<IAction | IUserScript>, batch?: IBatch) => {
     let batchCount = 1;
     const batchRepeat = batch?.repeat ?? 0;
+    const isUnlimited = batchRepeat === 'unlimited';
     do {
       const key = generateUUID();
       try {
@@ -51,7 +51,7 @@ const BatchProcessor = (() => {
             attributes: { 'batch.count': batchCount, 'batch.repeat': batchRepeat }
           });
         } else {
-          await statusBar.wait(batch?.repeatInterval, STATUS_BAR_TYPE.BATCH_REPEAT, batchCount);
+          await statusBar.waitBatchRepeat(batch?.repeatInterval, batch?.repeatIntervalTo, batchCount);
         }
         await Actions.start(actions, batchCount);
         await notifyCompletion(batchCount);
@@ -64,7 +64,7 @@ const BatchProcessor = (() => {
         window.ext.__batchHeaders = undefined;
         console.groupEnd();
       }
-    } while (batchRepeat < -1 || batchCount <= batchRepeat + 1);
+    } while (isUnlimited || (typeof batchRepeat === 'number' && batchCount <= batchRepeat + 1));
   };
 
   return { start };

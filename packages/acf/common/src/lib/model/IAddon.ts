@@ -1,4 +1,4 @@
-import { EErrorOptions, TGoto } from './ICommon';
+import { EErrorOptions, TBoundedValue, TGoto } from './ICommon';
 
 export enum EAddonConditions {
   '~~ Select Condition ~~' = '',
@@ -20,8 +20,9 @@ export interface IAddon {
   condition: EAddonConditions;
   valueExtractor?: string;
   valueExtractorFlags?: string;
-  recheck?: number;
-  recheckInterval?: number | string;
+  recheck?: TBoundedValue;
+  recheckInterval?: number;
+  recheckIntervalTo?: number;
   recheckOption: EErrorOptions;
   recheckGoto?: TGoto;
 }

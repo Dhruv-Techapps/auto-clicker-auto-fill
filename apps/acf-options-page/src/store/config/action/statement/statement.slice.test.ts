@@ -13,7 +13,7 @@ import {
   updateActionStatementOption
 } from './statement.slice';
 
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
+Object.defineProperty(globalThis, 'dataLayer', { value: [], writable: true });
 const initialState: IActionStatementStore = { visible: false, statement: {} };
 
 describe('actionStatement slice', () => {

@@ -1,13 +1,14 @@
 import { TRandomUUID, generateUUID } from '@dhruv-techapps/core-common';
 import { EActionStatus, IActionStatement } from './IActionStatement';
 import { IAddon } from './IAddon';
-import { EErrorOptions, TGoto } from './ICommon';
+import { EErrorOptions, TBoundedValue, TGoto } from './ICommon';
 
 // Action Setting
 export interface IActionSettings {
   iframeFirst?: boolean;
-  retry?: number;
-  retryInterval?: number | string;
+  retry?: TBoundedValue;
+  retryInterval?: number;
+  retryIntervalTo?: number;
   retryOption?: EErrorOptions;
   retryGoto?: TGoto;
 }
@@ -22,9 +23,11 @@ export interface IAction {
   actionId?: number;
   name?: string;
   initWait?: number;
+  initWaitTo?: number;
   value?: string;
   repeat?: number;
-  repeatInterval?: number | string;
+  repeatInterval?: number;
+  repeatIntervalTo?: number;
   addon?: IAddon;
   statement?: IActionStatement;
   settings?: IActionSettings;

@@ -1,7 +1,7 @@
 import { defaultAddon } from '@dhruv-techapps/acf-common';
 import { describe, expect, it } from 'vitest';
 import { actionAddonReducer, IActionAddonStore, setActionAddonError, setActionAddonMessage, switchActionAddonModal, updateActionAddon, updateActionAddonGoto } from './addon.slice';
-Object.defineProperty(window, 'dataLayer', { value: [], writable: true });
+Object.defineProperty(globalThis, 'dataLayer', { value: [], writable: true });
 
 const initialState: IActionAddonStore = { visible: false, addon: { ...defaultAddon } };
 

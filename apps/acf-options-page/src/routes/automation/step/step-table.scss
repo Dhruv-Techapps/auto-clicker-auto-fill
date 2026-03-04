@@ -3,7 +3,7 @@
     width: 2%;
   }
   th[data-column='initWait'] {
-    width: 6%;
+    width: 10%;
   }
   th[data-column='name'] {
     width: 9%;
@@ -12,9 +12,12 @@
     width: 6%;
   }
   th[data-column='repeatInterval'] {
-    width: 6%;
+    width: 10%;
   }
-  th[data-column='menu'] {
-    width: 105px;
+
+  th[data-column='menu'],
+  td[data-column='menu'] {
+    width: 1%;
+    white-space: nowrap;
   }
 }
