@@ -85,8 +85,7 @@ export function InputInterval<TFieldValues extends FieldValues>(props: InputInte
           name={name}
           rules={{
             min: { value: 0, message: t('error.min', { min: 0 }) },
-            max: rangeMode && rangeValue !== undefined ? { value: rangeValue, message: t('error.max', { max: rangeValue }) } : undefined,
-            required: t('error.required')
+            max: rangeMode && rangeValue !== undefined ? { value: rangeValue, message: t('error.max', { max: rangeValue }) } : undefined
           }}
           render={renderInput}
         />
@@ -97,8 +96,7 @@ export function InputInterval<TFieldValues extends FieldValues>(props: InputInte
               control={control}
               name={rangeName}
               rules={{
-                min: { value: nameValue, message: t('error.min', { min: nameValue }) },
-                required: t('error.required')
+                min: { value: nameValue, message: t('error.min', { min: nameValue }) }
               }}
               render={renderInput}
             />

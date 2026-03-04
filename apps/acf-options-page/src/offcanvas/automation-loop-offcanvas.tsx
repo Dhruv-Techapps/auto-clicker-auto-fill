@@ -27,8 +27,7 @@ export const AutomationLoopOffcanvas = ({ show }: AutomationLoopOffcanvasProps) 
     register,
     handleSubmit,
     watch,
-    control,
-    formState: { errors, isDirty, isValid }
+    formState: { isDirty, isValid }
   } = form;
 
   if (!config) {

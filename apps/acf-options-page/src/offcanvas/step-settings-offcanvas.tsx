@@ -31,8 +31,7 @@ export const AutomationStepSettingsOffcanvas = ({ show }: AutomationStepSettings
     register,
     handleSubmit,
     watch,
-    control,
-    formState: { isDirty, isValid, errors }
+    formState: { isDirty, isValid }
   } = form;
 
   if (!config || !action) {
