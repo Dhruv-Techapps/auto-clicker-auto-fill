@@ -5,9 +5,13 @@ import { handleError, Span, tracer } from '@dhruv-techapps/core-open-telemetry';
 
 export class StorageMigration {
   static async migrate(): Promise<void> {
-    tracer.startActiveSpan('StorageMigration.migrate', async (span) => {
-      await this.migrateConfigs(span);
-      await this.migrateSettings(span);
+    return await tracer.startActiveSpan('StorageMigration.migrate', async (span) => {
+      try {
+        await this.migrateConfigs(span);
+        await this.migrateSettings(span);
+      } finally {
+        span.end();
+      }
     });
   }
 
