@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "ステータスバー",
     "hint": "ページの下部にステータスバーを表示する",
-    "hide": "隠れる",
-    "topLeft": "左上",
-    "topRight": "右上",
-    "bottomLeft": "左下",
-    "bottomRight": "右下",
     "positions": {
       "hide": "隠れる",
       "top-left": "左上",
@@ -100,7 +95,6 @@
     "restore": "クラウドからの復元",
     "now": "今すぐバックアップ",
     "autoBackup": "自動バックアップ",
-    "auto-backup": "自動バックアップ",
     "daily": "毎日",
     "weekly": "週刊",
     "monthly": "毎月",
@@ -118,6 +112,10 @@
         "title": "クラウドから自動化を復元する",
         "message": "クラウドから自動化を復元してもよろしいですか？これによりすべての自動化が置き換えられ、元に戻すことはできません。"
       }
+    },
+    "toast": {
+      "header": "バックアップ",
+      "body": "バックアップが正常に保存されました。"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "特定の日時にこの自動化を実行する",
     "date": "日付",
     "time": "時間",
-    "repeat": "数分で繰り返す"
+    "repeat": "数分で繰り返す",
+    "toast": {
+      "header": "スケジュール",
+      "body": "スケジュールが正常に保存されました。"
+    }
   },
   "upgradePlan": {
     "title": "アップグレードプラン",
@@ -378,6 +380,8 @@
   "step": {
     "title": "ステップ",
     "plural": "手順",
+    "step_one": "1ステップ",
+    "step_other": "{{count}}歩",
     "add": "ステップを追加",
     "addBefore": "上記のステップを追加",
     "addAfter": "下のステップを追加",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "例"
     },
-    "startTime": {
-      "content": "&lt;1&gt;スケジュールURLを試す</1>新しいブラウザ拡張機能。<br />特定の日時にウェブページ/URLをスケジュールするために使用されます"
-    },
     "hotkey": {
       "title": "ホットキー",
       "content": "キーボードのホットキーを押してフィールドに自動入力する",
@@ -435,6 +436,11 @@
     "close": "近い",
     "download": "ダウンロード",
     "disabled": "無効",
+    "remove": "取り除く",
+    "edit": "編集",
+    "enable": "有効にする",
+    "disable": "無効にする",
+    "duplicate": "重複",
     "sec": "秒",
     "min": "分",
     "no": "いいえ",

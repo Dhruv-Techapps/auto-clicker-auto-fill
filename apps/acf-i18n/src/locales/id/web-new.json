@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Bilah Status",
     "hint": "Tampilkan bilah status di bagian bawah halaman",
-    "hide": "Bersembunyi",
-    "topLeft": "Kiri Atas",
-    "topRight": "Kanan atas",
-    "bottomLeft": "Kiri Bawah",
-    "bottomRight": "Kanan Bawah",
     "positions": {
       "hide": "Bersembunyi",
       "top-left": "Kiri Atas",
@@ -100,7 +95,6 @@
     "restore": "Pulihkan dari Cloud",
     "now": "Cadangkan Sekarang",
     "autoBackup": "Pencadangan Otomatis",
-    "auto-backup": "Pencadangan Otomatis",
     "daily": "Sehari-hari",
     "weekly": "Mingguan",
     "monthly": "Bulanan",
@@ -118,6 +112,10 @@
         "title": "Pulihkan Otomatisasi dari cloud",
         "message": "Apakah Anda yakin ingin memulihkan otomatisasi dari cloud? Ini akan mengganti semua otomatisasi Anda dan tidak dapat dibatalkan."
       }
+    },
+    "toast": {
+      "header": "Cadangan",
+      "body": "Pencadangan berhasil disimpan!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Jalankan otomatisasi ini pada tanggal dan waktu tertentu.",
     "date": "Tanggal",
     "time": "Waktu",
-    "repeat": "Ulangi dalam beberapa menit"
+    "repeat": "Ulangi dalam beberapa menit",
+    "toast": {
+      "header": "Jadwal",
+      "body": "Jadwal berhasil disimpan!"
+    }
   },
   "upgradePlan": {
     "title": "Rencana Peningkatan",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Melangkah",
     "plural": "Tangga",
+    "step_one": "Langkah 1",
+    "step_other": "{{count}} Langkah",
     "add": "Tambahkan Langkah",
     "addBefore": "Tambahkan Langkah di Atas",
     "addAfter": "Tambahkan Langkah di Bawah Ini",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Contoh"
     },
-    "startTime": {
-      "content": "Coba &lt;1&gt;Jadwalkan URL</1> ekstensi browser baru kami.<br /> Ini digunakan untuk menjadwalkan halaman web/URL pada hari dan waktu tertentu."
-    },
     "hotkey": {
       "title": "Tombol pintas",
       "content": "Tekan tombol pintas pada keyboard untuk mengetik otomatis di kolom.",
@@ -435,6 +436,11 @@
     "close": "Menutup",
     "download": "Unduh",
     "disabled": "Dengan disabilitas",
+    "remove": "Menghapus",
+    "edit": "Edit",
+    "enable": "Memungkinkan",
+    "disable": "Cacat",
+    "duplicate": "Duplikat",
     "sec": "detik",
     "min": "menit",
     "no": "TIDAK",

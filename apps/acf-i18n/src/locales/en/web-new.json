@@ -46,7 +46,7 @@
   },
   "notification": {
     "title": "Show Notification",
-    "error": "On Error occurred",
+    "error": "On Error",
     "step": "On Step completion",
     "loop": "On Loop completion",
     "automation": "On Automation completion",
@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Status Bar",
     "hint": "Show status bar at bottom of the page",
-    "hide": "Hide",
-    "topLeft": "Top Left",
-    "topRight": "Top Right",
-    "bottomLeft": "Bottom Left",
-    "bottomRight": "Bottom Right",
     "positions": {
       "hide": "Hide",
       "top-left": "Top Left",
@@ -100,7 +95,6 @@
     "restore": "Restore from Cloud",
     "now": "Backup Now",
     "autoBackup": "Auto Backup",
-    "auto-backup": "Auto Backup",
     "daily": "Daily",
     "weekly": "Weekly",
     "monthly": "Monthly",
@@ -115,9 +109,13 @@
     "noBackup": "No Backup found",
     "confirm": {
       "restore": {
-        "title": "Restore Automations from cloud",
+        "title": "Restore Automations from Cloud",
         "message": "Are you sure you want to restore automations from cloud? This will replace all your automations and cannot be undone."
       }
+    },
+    "toast": {
+      "header": "Backup",
+      "body": "Backup saved successfully!"
     }
   },
   "reorder": {
@@ -181,10 +179,14 @@
   },
   "schedule": {
     "title": "Schedule Automation",
-    "info": "Run this automation on a specific date and time",
+    "info": "Run this automation on a specific date and time.",
     "date": "Date",
     "time": "Time",
-    "repeat": "Repeat in minutes"
+    "repeat": "Repeat in minutes",
+    "toast": {
+      "header": "Schedule",
+      "body": "Schedule saved successfully!"
+    }
   },
   "upgradePlan": {
     "title": "Upgrade Plan",
@@ -238,7 +240,7 @@
     "hint": "Connect your Google Sheets account to easily export your automations and logs, and keep track of your automation history in one place.",
     "useStable": {
       "title": "Use Stable Versions for Google Sheets Features.",
-      "message": "For optimal performance and reliability in Google Sheets, it's recommended to utilize <1>stable</1> versions of its features. These versions undergo thorough testing to ensure seamless functionality, providing you with a dependable platform for your tasks. By prioritizing stability, you can enhance your productivity and minimize the risk of encountering unexpected issues. If you need assistance or guidance on leveraging Google Sheets effectively, feel free to reach out for support!."
+      "message": "For best results, use the <1>Stable</1> version of Google Sheets features. Stable versions are thoroughly tested to ensure reliable performance, helping you avoid unexpected issues. If you need help, feel free to reach out for support."
     },
     "loginRequired": "Please <1>Login</1> to your account before connecting with Google Sheets.",
     "connect": "Connect with Google Sheets",
@@ -255,7 +257,7 @@
   "automations": {
     "title": "My Automations",
     "count": "Automations ({{count}})",
-    "search": "Search your automation...",
+    "search": "Search your automations...",
     "add": "New",
     "reorder": "Reorder",
     "reorderByName": "Reorder by Name",
@@ -274,7 +276,7 @@
       "header": "Automations",
       "remove": "Automations removed successfully",
       "remove_one": "Automation removed successfully",
-      "remove_other": "{{count}} Automations removed successfully",
+      "remove_other": "{{count}} automations removed successfully",
       "export": "Automations exported successfully",
       "export_one": "1 automation exported successfully",
       "export_other": "{{count}} automations exported successfully",
@@ -301,7 +303,7 @@
     "name": "Name",
     "initWait": "Wait Before Start",
     "startTime": "Scheduled Start Time",
-    "noConfig": "No Automation Found, Please refine your search.",
+    "noConfig": "No automation found. Please refine your search.",
     "confirm": {
       "title": "Remove Automation",
       "message": "Are you sure you want to remove [{{name}}] automation?"
@@ -345,7 +347,7 @@
   "loop": {
     "title": "Loop",
     "repeat": "Repeat",
-    "repeatHint": "<b>Repeat</b> will re run all steps without reloading page with the interval given.",
+    "repeatHint": "<b>Repeat</b> will re-run all steps without reloading the page with the interval given.",
     "repeatInterval": "Interval Between Loops",
     "refresh": "Refresh",
     "refreshHint": "<b>Refresh</b> will reload the page once all steps are completed.",
@@ -366,7 +368,7 @@
     "scheduleDate": "Please enter a valid date in this format: 2025-12-01",
     "scheduleTime": "Please enter a valid time in this format: 23:59:59.000",
     "scheduleRepeat": "Please enter a valid number for how many times to repeat",
-    "startTime": "Please enter a valid start time in this format: 12:12:12:000",
+    "startTime": "Please enter a valid start time in this format: 12:12:12.000",
     "json": "The selected file is not a valid JSON — please check and try again",
     "hotKey": "Please use a letter combined with Ctrl, Alt, or Shift (e.g. Ctrl + A)",
     "valueExtractor": "The pattern you entered is not valid — please check and try again",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Step",
     "plural": "Steps",
+    "step_one": "1 Step",
+    "step_other": "{{count}} Steps",
     "add": "Add Step",
     "addBefore": "Add Step Above",
     "addAfter": "Add Step Below",
@@ -393,7 +397,7 @@
     "confirm": {
       "remove": {
         "title": "Remove Step",
-        "message": "Are you sure to remove [{{name}}] Step?"
+        "message": "Are you sure you want to remove [{{name}}] step?"
       }
     },
     "toast": {
@@ -408,16 +412,13 @@
     "confirm": {
       "remove": {
         "title": "Remove User Script",
-        "message": "Are you sure to remove [{{name}}] User Script?"
+        "message": "Are you sure you want to remove [{{name}}] User Script?"
       }
     }
   },
   "popover": {
     "valueExtractor": {
       "title": "Examples"
-    },
-    "startTime": {
-      "content": "Try <1>Schedule URL</1> our new browser extension. <br /> it's used to schedule webpage / URL at particular day and time"
     },
     "hotkey": {
       "title": "Hotkey",
@@ -435,6 +436,11 @@
     "close": "Close",
     "download": "Download",
     "disabled": "Disabled",
+    "remove": "Remove",
+    "edit": "Edit",
+    "enable": "Enable",
+    "disable": "Disable",
+    "duplicate": "Duplicate",
     "sec": "sec",
     "min": "min",
     "no": "No",
@@ -450,7 +456,7 @@
     "en": "English",
     "fr": "French",
     "ko": "Korean",
-    "ca": "Canada",
+    "ca": "Catalan",
     "hi": "Hindi",
     "zh_CN": "Chinese (Simplified)",
     "zh_TW": "Chinese (Traditional)",

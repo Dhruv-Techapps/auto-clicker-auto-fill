@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Statusbalk",
     "hint": "Toon de statusbalk onderaan de pagina.",
-    "hide": "Verbergen",
-    "topLeft": "Links boven",
-    "topRight": "Rechtsboven",
-    "bottomLeft": "Linksonder",
-    "bottomRight": "Rechtsonder",
     "positions": {
       "hide": "Verbergen",
       "top-left": "Links boven",
@@ -100,7 +95,6 @@
     "restore": "Herstellen vanuit de cloud",
     "now": "Maak nu een back-up",
     "autoBackup": "Automatische back-up",
-    "auto-backup": "Automatische back-up",
     "daily": "Dagelijks",
     "weekly": "Wekelijks",
     "monthly": "Maandelijks",
@@ -118,6 +112,10 @@
         "title": "Automatiseringen herstellen vanuit de cloud",
         "message": "Weet je zeker dat je de automatiseringen vanuit de cloud wilt herstellen? Hiermee worden al je automatiseringen vervangen en dit kan niet ongedaan worden gemaakt."
       }
+    },
+    "toast": {
+      "header": "Back-up",
+      "body": "Back-up succesvol opgeslagen!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Voer deze automatisering uit op een specifieke datum en tijd.",
     "date": "Datum",
     "time": "Tijd",
-    "repeat": "Herhaal binnen enkele minuten"
+    "repeat": "Herhaal binnen enkele minuten",
+    "toast": {
+      "header": "Schema",
+      "body": "Rooster succesvol opgeslagen!"
+    }
   },
   "upgradePlan": {
     "title": "Upgradeplan",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Stap",
     "plural": "Stappen",
+    "step_one": "Stap 1",
+    "step_other": "{{count}} Stappen",
     "add": "Voeg stap toe",
     "addBefore": "Voeg de bovenstaande stap toe",
     "addAfter": "Voeg de onderstaande stap toe",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Voorbeelden"
     },
-    "startTime": {
-      "content": "Probeer &lt;1&gt;Plannings-URL</1> Onze nieuwe browserextensie.<br /> Het wordt gebruikt om een webpagina/URL op een bepaalde dag en tijd in te plannen."
-    },
     "hotkey": {
       "title": "Sneltoets",
       "content": "Druk op de sneltoets op het toetsenbord om het veld automatisch in te vullen.",
@@ -435,6 +436,11 @@
     "close": "Dichtbij",
     "download": "Download",
     "disabled": "Gehandicapt",
+    "remove": "Verwijderen",
+    "edit": "Bewerking",
+    "enable": "Inschakelen",
+    "disable": "Uitzetten",
+    "duplicate": "Duplicaat",
     "sec": "sec",
     "min": "min",
     "no": "Nee",

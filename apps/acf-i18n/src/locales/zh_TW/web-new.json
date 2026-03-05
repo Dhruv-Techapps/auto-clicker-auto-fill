@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "狀態列",
     "hint": "在頁面底部顯示狀態列",
-    "hide": "隱藏",
-    "topLeft": "左上",
-    "topRight": "右上角",
-    "bottomLeft": "左下角",
-    "bottomRight": "右下角",
     "positions": {
       "hide": "隱藏",
       "top-left": "左上",
@@ -100,7 +95,6 @@
     "restore": "從雲端恢復",
     "now": "立即備份",
     "autoBackup": "自動備份",
-    "auto-backup": "自動備份",
     "daily": "日常的",
     "weekly": "每週",
     "monthly": "每月",
@@ -118,6 +112,10 @@
         "title": "從雲端恢復自動化",
         "message": "您確定要從雲端恢復自動化設定嗎？這將替換您所有的自動化設置，且無法撤銷。"
       }
+    },
+    "toast": {
+      "header": "備份",
+      "body": "備份保存成功！"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "在指定日期和時間運行此自動化程序",
     "date": "日期",
     "time": "時間",
-    "repeat": "幾分鐘後重複。"
+    "repeat": "幾分鐘後重複。",
+    "toast": {
+      "header": "行程",
+      "body": "日程已成功儲存！"
+    }
   },
   "upgradePlan": {
     "title": "升級計劃",
@@ -378,6 +380,8 @@
   "step": {
     "title": "步",
     "plural": "步驟",
+    "step_one": "第一步",
+    "step_other": "{{count}} 步",
     "add": "新增步驟",
     "addBefore": "添加上一步",
     "addAfter": "新增下方步驟",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "範例"
     },
-    "startTime": {
-      "content": "嘗試 &lt;1&gt;計劃 URL</1>我們的全新瀏覽器擴充功能。<br />它用於安排網頁/URL在特定日期和時間的發佈時間。"
-    },
     "hotkey": {
       "title": "快速鍵",
       "content": "按下鍵盤上的快捷鍵即可在欄位中自動輸入內容",
@@ -435,6 +436,11 @@
     "close": "關閉",
     "download": "下載",
     "disabled": "已停用",
+    "remove": "消除",
+    "edit": "編輯",
+    "enable": "使能夠",
+    "disable": "停用",
+    "duplicate": "複製",
     "sec": "秒",
     "min": "最小",
     "no": "不",

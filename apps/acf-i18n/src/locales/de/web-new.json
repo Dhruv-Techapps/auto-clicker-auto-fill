@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Statusleiste",
     "hint": "Statusleiste am unteren Seitenrand anzeigen",
-    "hide": "Verstecken",
-    "topLeft": "Oben links",
-    "topRight": "Oben rechts",
-    "bottomLeft": "Unten links",
-    "bottomRight": "Unten rechts",
     "positions": {
       "hide": "Verstecken",
       "top-left": "Oben links",
@@ -100,7 +95,6 @@
     "restore": "Wiederherstellung aus der Cloud",
     "now": "Jetzt sichern",
     "autoBackup": "Automatische Datensicherung",
-    "auto-backup": "Automatische Datensicherung",
     "daily": "Täglich",
     "weekly": "Wöchentlich",
     "monthly": "Monatlich",
@@ -118,6 +112,10 @@
         "title": "Automatisierungen aus der Cloud wiederherstellen",
         "message": "Sind Sie sicher, dass Sie die Automatisierungen aus der Cloud wiederherstellen möchten? Dadurch werden alle Ihre Automatisierungen ersetzt und dieser Vorgang kann nicht rückgängig gemacht werden."
       }
+    },
+    "toast": {
+      "header": "Backup",
+      "body": "Sicherung erfolgreich gespeichert!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Führen Sie diese Automatisierung an einem bestimmten Datum und zu einer bestimmten Uhrzeit aus.",
     "date": "Datum",
     "time": "Zeit",
-    "repeat": "In wenigen Minuten wiederholen"
+    "repeat": "In wenigen Minuten wiederholen",
+    "toast": {
+      "header": "Zeitplan",
+      "body": "Zeitplan erfolgreich gespeichert!"
+    }
   },
   "upgradePlan": {
     "title": "Upgrade-Plan",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Schritt",
     "plural": "Schritte",
+    "step_one": "1. Schritt",
+    "step_other": "{{count}} Schritte",
     "add": "Schritt hinzufügen",
     "addBefore": "Schritt oben hinzufügen",
     "addAfter": "Fügen Sie unten einen Schritt hinzu",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Beispiele"
     },
-    "startTime": {
-      "content": "Versuchen Sie &lt;1&gt;Zeitplan-URL</1> unsere neue Browsererweiterung.<br /> Es dient dazu, Webseiten/URLs für einen bestimmten Tag und eine bestimmte Uhrzeit zu planen."
-    },
     "hotkey": {
       "title": "Tastenkombination",
       "content": "Drücken Sie die Tastenkombination auf der Tastatur, um den Text automatisch in das Feld einzugeben.",
@@ -435,6 +436,11 @@
     "close": "Schließen",
     "download": "Herunterladen",
     "disabled": "Deaktiviert",
+    "remove": "Entfernen",
+    "edit": "Bearbeiten",
+    "enable": "Aktivieren",
+    "disable": "Deaktivieren",
+    "duplicate": "Duplikat",
     "sec": "Sekunde",
     "min": "min",
     "no": "NEIN",

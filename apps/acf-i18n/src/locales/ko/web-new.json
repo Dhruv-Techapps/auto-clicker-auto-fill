@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "상태 표시줄",
     "hint": "페이지 하단에 상태 표시줄을 표시합니다.",
-    "hide": "숨다",
-    "topLeft": "왼쪽 상단",
-    "topRight": "오른쪽 상단",
-    "bottomLeft": "왼쪽 하단",
-    "bottomRight": "오른쪽 하단",
     "positions": {
       "hide": "숨다",
       "top-left": "왼쪽 상단",
@@ -100,7 +95,6 @@
     "restore": "클라우드에서 복원",
     "now": "지금 백업하세요",
     "autoBackup": "자동 백업",
-    "auto-backup": "자동 백업",
     "daily": "일일",
     "weekly": "주간",
     "monthly": "월간 간행물",
@@ -118,6 +112,10 @@
         "title": "클라우드에서 자동화 복원",
         "message": "클라우드에서 자동화를 복원하시겠습니까? 이렇게 하면 모든 자동화가 덮어쓰여지며 되돌릴 수 없습니다."
       }
+    },
+    "toast": {
+      "header": "지원",
+      "body": "백업이 성공적으로 저장되었습니다!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "이 자동화 기능을 특정 날짜와 시간에 실행합니다.",
     "date": "날짜",
     "time": "시간",
-    "repeat": "몇 분 안에 반복됩니다"
+    "repeat": "몇 분 안에 반복됩니다",
+    "toast": {
+      "header": "일정",
+      "body": "일정이 성공적으로 저장되었습니다!"
+    }
   },
   "upgradePlan": {
     "title": "업그레이드 플랜",
@@ -378,6 +380,8 @@
   "step": {
     "title": "단계",
     "plural": "단계",
+    "step_one": "1단계",
+    "step_other": "{{count}} 단계",
     "add": "단계 추가",
     "addBefore": "위에 단계를 추가하세요",
     "addAfter": "아래에 단계를 추가하세요",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "예시"
     },
-    "startTime": {
-      "content": "&lt;1&gt;일정 URL을 시도해 보세요</1> 저희의 새로운 브라우저 확장 프로그램입니다.<br /> 웹페이지/URL을 특정 날짜와 시간에 예약하여 표시하는 데 사용됩니다."
-    },
     "hotkey": {
       "title": "단축키",
       "content": "키보드 단축키를 눌러 입력란을 자동으로 채우세요.",
@@ -435,6 +436,11 @@
     "close": "닫다",
     "download": "다운로드",
     "disabled": "장애가 있는",
+    "remove": "제거하다",
+    "edit": "편집하다",
+    "enable": "할 수 있게 하다",
+    "disable": "장애를 입히다",
+    "duplicate": "복제하다",
     "sec": "비서",
     "min": "최소",
     "no": "아니요",

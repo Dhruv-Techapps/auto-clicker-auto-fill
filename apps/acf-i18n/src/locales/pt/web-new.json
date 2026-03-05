@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Barra de status",
     "hint": "Exibir a barra de status na parte inferior da página.",
-    "hide": "Esconder",
-    "topLeft": "Canto superior esquerdo",
-    "topRight": "Canto superior direito",
-    "bottomLeft": "Canto inferior esquerdo",
-    "bottomRight": "Canto inferior direito",
     "positions": {
       "hide": "Esconder",
       "top-left": "Canto superior esquerdo",
@@ -100,7 +95,6 @@
     "restore": "Restaurar da nuvem",
     "now": "Faça backup agora",
     "autoBackup": "Backup automático",
-    "auto-backup": "Backup automático",
     "daily": "Diário",
     "weekly": "Semanalmente",
     "monthly": "Mensal",
@@ -118,6 +112,10 @@
         "title": "Restaurar automações da nuvem",
         "message": "Tem certeza de que deseja restaurar as automações da nuvem? Isso substituirá todas as suas automações e não poderá ser desfeito."
       }
+    },
+    "toast": {
+      "header": "Backup",
+      "body": "Cópia de segurança salva com sucesso!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Execute esta automação em uma data e hora específicas.",
     "date": "Data",
     "time": "Tempo",
-    "repeat": "Repita em minutos"
+    "repeat": "Repita em minutos",
+    "toast": {
+      "header": "Agendar",
+      "body": "Agendamento salvo com sucesso!"
+    }
   },
   "upgradePlan": {
     "title": "Plano de atualização",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Etapa",
     "plural": "Passos",
+    "step_one": "1 Passo",
+    "step_other": "{{count}} passos",
     "add": "Adicionar etapa",
     "addBefore": "Adicionar etapa acima",
     "addAfter": "Adicione a etapa abaixo.",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Exemplos"
     },
-    "startTime": {
-      "content": "Experimente &lt;1&gt;URL de agendamento</1> Nossa nova extensão para navegador.<br /> É usado para agendar o carregamento de uma página da web/URL em um dia e horário específicos."
-    },
     "hotkey": {
       "title": "Tecla de atalho",
       "content": "Pressione a tecla de atalho no teclado para digitar automaticamente no campo.",
@@ -435,6 +436,11 @@
     "close": "Fechar",
     "download": "Download",
     "disabled": "Desabilitado",
+    "remove": "Remover",
+    "edit": "Editar",
+    "enable": "Habilitar",
+    "disable": "Desativar",
+    "duplicate": "Duplicado",
     "sec": "seg",
     "min": "min",
     "no": "Não",

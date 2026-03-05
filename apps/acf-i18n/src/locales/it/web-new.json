@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Barra di stato",
     "hint": "Mostra la barra di stato in fondo alla pagina",
-    "hide": "Nascondere",
-    "topLeft": "In alto a sinistra",
-    "topRight": "In alto a destra",
-    "bottomLeft": "In basso a sinistra",
-    "bottomRight": "In basso a destra",
     "positions": {
       "hide": "Nascondere",
       "top-left": "In alto a sinistra",
@@ -100,7 +95,6 @@
     "restore": "Ripristina dal cloud",
     "now": "Esegui il backup ora",
     "autoBackup": "Backup automatico",
-    "auto-backup": "Backup automatico",
     "daily": "Quotidiano",
     "weekly": "Settimanale",
     "monthly": "Mensile",
@@ -118,6 +112,10 @@
         "title": "Ripristina le automazioni dal cloud",
         "message": "Vuoi davvero ripristinare le automazioni dal cloud? Questa operazione sostituirà tutte le tue automazioni e non potrà essere annullata."
       }
+    },
+    "toast": {
+      "header": "Backup",
+      "body": "Backup salvato con successo!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Esegui questa automazione in una data e ora specifiche",
     "date": "Data",
     "time": "Tempo",
-    "repeat": "Ripeti in minuti"
+    "repeat": "Ripeti in minuti",
+    "toast": {
+      "header": "Programma",
+      "body": "Programma salvato con successo!"
+    }
   },
   "upgradePlan": {
     "title": "Piano di aggiornamento",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Fare un passo",
     "plural": "Passi",
+    "step_one": "1 passo",
+    "step_other": "{{count}} passaggi",
     "add": "Aggiungi passaggio",
     "addBefore": "Aggiungi passaggio sopra",
     "addAfter": "Aggiungi passaggio qui sotto",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Esempi"
     },
-    "startTime": {
-      "content": "Prova &lt;1&gt;URL di pianificazione</1> la nostra nuova estensione del browser.<br /> viene utilizzato per pianificare una pagina web/URL in un giorno e un&#39;ora specifici"
-    },
     "hotkey": {
       "title": "Tasto di scelta rapida",
       "content": "Premere il tasto di scelta rapida sulla tastiera per digitare automaticamente nel campo",
@@ -435,6 +436,11 @@
     "close": "Vicino",
     "download": "Scaricamento",
     "disabled": "Disabili",
+    "remove": "Rimuovere",
+    "edit": "Modificare",
+    "enable": "Abilitare",
+    "disable": "Disabilitare",
+    "duplicate": "Duplicato",
     "sec": "secondo",
     "min": "minimo",
     "no": "NO",

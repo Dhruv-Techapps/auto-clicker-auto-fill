@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Tilarivi",
     "hint": "Näytä tilarivi sivun alareunassa",
-    "hide": "Piilottaa",
-    "topLeft": "Vasen yläkulma",
-    "topRight": "Ylhäällä oikealla",
-    "bottomLeft": "Vasen alakulma",
-    "bottomRight": "Oikea alhaalla",
     "positions": {
       "hide": "Piilottaa",
       "top-left": "Vasen yläkulma",
@@ -100,7 +95,6 @@
     "restore": "Palauta pilvestä",
     "now": "Varmuuskopioi nyt",
     "autoBackup": "Automaattinen varmuuskopiointi",
-    "auto-backup": "Automaattinen varmuuskopiointi",
     "daily": "Päivittäin",
     "weekly": "Viikoittain",
     "monthly": "Kuukausittain",
@@ -118,6 +112,10 @@
         "title": "Palauta automaatiot pilvestä",
         "message": "Haluatko varmasti palauttaa automaatiot pilvestä? Tämä korvaa kaikki automaatiosi, eikä sitä voi perua."
       }
+    },
+    "toast": {
+      "header": "Varmuuskopio",
+      "body": "Varmuuskopio tallennettu onnistuneesti!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Suorita tämä automaatio tiettynä päivänä ja kellonaikana",
     "date": "Päivämäärä",
     "time": "Aika",
-    "repeat": "Toista minuuteissa"
+    "repeat": "Toista minuuteissa",
+    "toast": {
+      "header": "Ajoittaa",
+      "body": "Aikataulu tallennettu onnistuneesti!"
+    }
   },
   "upgradePlan": {
     "title": "Päivityssuunnitelma",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Vaihe",
     "plural": "Askeleet",
+    "step_one": "1 askel",
+    "step_other": "{{count}} askelta",
     "add": "Lisää vaihe",
     "addBefore": "Lisää vaihe yläpuolelle",
     "addAfter": "Lisää vaihe alla",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Esimerkkejä"
     },
-    "startTime": {
-      "content": "Kokeile &lt;1&gt;Aikataulun URL-osoitetta</1> uusi selainlaajennuksemme.<br /> sitä käytetään verkkosivun/URL-osoitteen ajoittamiseen tiettynä päivänä ja kellonaikana"
-    },
     "hotkey": {
       "title": "Pikanäppäin",
       "content": "Paina näppäimistön pikanäppäintä kirjoittaaksesi kenttään automaattisesti",
@@ -435,6 +436,11 @@
     "close": "Lähellä",
     "download": "Lataa",
     "disabled": "Liikuntarajoitteinen",
+    "remove": "Poistaa",
+    "edit": "Muokata",
+    "enable": "Ota käyttöön",
+    "disable": "Poista käytöstä",
+    "duplicate": "Kopio",
     "sec": "sek",
     "min": "min",
     "no": "Ei",

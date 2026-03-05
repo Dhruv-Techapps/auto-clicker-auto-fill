@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Thanh trạng thái",
     "hint": "Hiển thị thanh trạng thái ở cuối trang",
-    "hide": "Trốn",
-    "topLeft": "Góc trên bên trái",
-    "topRight": "Góc trên bên phải",
-    "bottomLeft": "Góc dưới bên trái",
-    "bottomRight": "Góc dưới bên phải",
     "positions": {
       "hide": "Trốn",
       "top-left": "Góc trên bên trái",
@@ -100,7 +95,6 @@
     "restore": "Khôi phục từ đám mây",
     "now": "Sao lưu ngay",
     "autoBackup": "Sao lưu tự động",
-    "auto-backup": "Sao lưu tự động",
     "daily": "Hằng ngày",
     "weekly": "Hàng tuần",
     "monthly": "Hàng tháng",
@@ -118,6 +112,10 @@
         "title": "Khôi phục các quy trình tự động hóa từ đám mây",
         "message": "Bạn có chắc chắn muốn khôi phục các quy trình tự động hóa từ đám mây không? Thao tác này sẽ thay thế tất cả các quy trình tự động hóa của bạn và không thể hoàn tác."
       }
+    },
+    "toast": {
+      "header": "Hỗ trợ",
+      "body": "Quá trình sao lưu đã thành công!"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Chạy tự động hóa này vào một ngày và giờ cụ thể.",
     "date": "Ngày",
     "time": "Thời gian",
-    "repeat": "Lặp lại sau vài phút"
+    "repeat": "Lặp lại sau vài phút",
+    "toast": {
+      "header": "Lịch trình",
+      "body": "Lịch trình đã được lưu thành công!"
+    }
   },
   "upgradePlan": {
     "title": "Kế hoạch nâng cấp",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Bước chân",
     "plural": "Các bước",
+    "step_one": "Bước 1",
+    "step_other": "{{count}} Bước",
     "add": "Thêm bước",
     "addBefore": "Thêm bước trên",
     "addAfter": "Thêm bước bên dưới",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Ví dụ"
     },
-    "startTime": {
-      "content": "Thử &lt;1&gt;Lên lịch URL</1> Tiện ích mở rộng trình duyệt mới của chúng tôi.<br /> Nó được dùng để lên lịch hiển thị trang web/URL vào một ngày và giờ cụ thể."
-    },
     "hotkey": {
       "title": "Phím tắt",
       "content": "Nhấn phím tắt trên bàn phím để tự động nhập liệu vào trường",
@@ -435,6 +436,11 @@
     "close": "Đóng",
     "download": "Tải xuống",
     "disabled": "Tàn tật",
+    "remove": "Di dời",
+    "edit": "Biên tập",
+    "enable": "Cho phép",
+    "disable": "Vô hiệu hóa",
+    "duplicate": "Nhân bản",
     "sec": "giây",
     "min": "phút",
     "no": "KHÔNG",

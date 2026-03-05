@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "Barre d'état",
     "hint": "Afficher la barre d'état en bas de la page",
-    "hide": "Cacher",
-    "topLeft": "En haut à gauche",
-    "topRight": "En haut à droite",
-    "bottomLeft": "En bas à gauche",
-    "bottomRight": "En bas à droite",
     "positions": {
       "hide": "Cacher",
       "top-left": "En haut à gauche",
@@ -100,7 +95,6 @@
     "restore": "Restaurer à partir du cloud",
     "now": "Sauvegarder maintenant",
     "autoBackup": "Sauvegarde automatique",
-    "auto-backup": "Sauvegarde automatique",
     "daily": "Tous les jours",
     "weekly": "Hebdomadaire",
     "monthly": "Mensuel",
@@ -118,6 +112,10 @@
         "title": "Restaurez les automatisations depuis le cloud",
         "message": "Êtes-vous sûr de vouloir restaurer les automatisations depuis le cloud ? Cette opération remplacera toutes vos automatisations et sera irréversible."
       }
+    },
+    "toast": {
+      "header": "Sauvegarde",
+      "body": "Sauvegarde effectuée avec succès !"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "Exécutez cette automatisation à une date et une heure précises.",
     "date": "Date",
     "time": "Temps",
-    "repeat": "Répétez dans quelques minutes"
+    "repeat": "Répétez dans quelques minutes",
+    "toast": {
+      "header": "Calendrier",
+      "body": "Planification enregistrée avec succès !"
+    }
   },
   "upgradePlan": {
     "title": "Plan de mise à niveau",
@@ -378,6 +380,8 @@
   "step": {
     "title": "Étape",
     "plural": "Mesures",
+    "step_one": "1ère étape",
+    "step_other": "{{count}} Pas",
     "add": "Ajouter une étape",
     "addBefore": "Ajouter une étape ci-dessus",
     "addAfter": "Ajoutez l'étape ci-dessous",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "Exemples"
     },
-    "startTime": {
-      "content": "Essayez &lt;1&gt;URL de planification</1> Notre nouvelle extension de navigateur.<br /> Il sert à programmer l&#39;affichage d&#39;une page web / URL à une date et une heure précises."
-    },
     "hotkey": {
       "title": "Raccourci clavier",
       "content": "Appuyez sur la touche de raccourci du clavier pour saisir automatiquement dans le champ.",
@@ -435,6 +436,11 @@
     "close": "Fermer",
     "download": "Télécharger",
     "disabled": "Désactivé",
+    "remove": "Retirer",
+    "edit": "Modifier",
+    "enable": "Activer",
+    "disable": "Désactiver",
+    "duplicate": "Double",
     "sec": "seconde",
     "min": "min",
     "no": "Non",

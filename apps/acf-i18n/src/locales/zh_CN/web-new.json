@@ -68,11 +68,6 @@
   "statusBar": {
     "title": "状态栏",
     "hint": "在页面底部显示状态栏",
-    "hide": "隐藏",
-    "topLeft": "左上",
-    "topRight": "右上角",
-    "bottomLeft": "左下角",
-    "bottomRight": "右下角",
     "positions": {
       "hide": "隐藏",
       "top-left": "左上",
@@ -100,7 +95,6 @@
     "restore": "从云端恢复",
     "now": "立即备份",
     "autoBackup": "自动备份",
-    "auto-backup": "自动备份",
     "daily": "日常的",
     "weekly": "每周",
     "monthly": "月度",
@@ -118,6 +112,10 @@
         "title": "从云端恢复自动化",
         "message": "您确定要从云端恢复自动化设置吗？这将替换您所有的自动化设置，且无法撤销。"
       }
+    },
+    "toast": {
+      "header": "备份",
+      "body": "备份保存成功！"
     }
   },
   "reorder": {
@@ -184,7 +182,11 @@
     "info": "在指定日期和时间运行此自动化程序",
     "date": "日期",
     "time": "时间",
-    "repeat": "几分钟后重复。"
+    "repeat": "几分钟后重复。",
+    "toast": {
+      "header": "日程",
+      "body": "日程已成功保存！"
+    }
   },
   "upgradePlan": {
     "title": "升级计划",
@@ -378,6 +380,8 @@
   "step": {
     "title": "步",
     "plural": "步骤",
+    "step_one": "第一步",
+    "step_other": "{{count}} 步",
     "add": "添加步骤",
     "addBefore": "添加上一步",
     "addAfter": "添加下方步骤",
@@ -416,9 +420,6 @@
     "valueExtractor": {
       "title": "示例"
     },
-    "startTime": {
-      "content": "尝试 &lt;1&gt;计划 URL</1>我们的全新浏览器扩展程序。<br />它用于安排网页/URL在特定日期和时间的发布时间。"
-    },
     "hotkey": {
       "title": "快捷键",
       "content": "按下键盘上的快捷键即可在字段中自动输入内容",
@@ -435,6 +436,11 @@
     "close": "关闭",
     "download": "下载",
     "disabled": "已禁用",
+    "remove": "消除",
+    "edit": "编辑",
+    "enable": "使能够",
+    "disable": "禁用",
+    "duplicate": "复制",
     "sec": "秒",
     "min": "最小",
     "no": "不",
