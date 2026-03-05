@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "オートクリッカー - オートフィル",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "自動クリック自動入力ロゴ"
   },
   "status": {
     "connecting": "接続中..."
@@ -30,6 +31,10 @@
     "auto": "オート"
   },
   "loading": "読み込み中...",
+  "loginModal": {
+    "title": "サインインしてください",
+    "signingIn": "サインイン..."
+  },
   "learnMore": "もっと詳しく知る",
   "login": "ログイン",
   "logout": "ログアウト",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "再試行回数",
     "interval": "再試行間の待機",
+    "intervalRange": "再試行間の待機",
     "to": "に",
     "stop": "自動化を停止",
     "skip": "このステップをスキップ",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "拡張機能がインストールされていません",
     "subTitle": "このページは、Chrome および Edge の<b>Auto Clicker - AutoFill</b>拡張機能で動作します。",
-    "hint": "開始するには、まず拡張機能をインストールしてください。"
+    "hint": "開始するには、まず拡張機能をインストールしてください。",
+    "download": "ダウンロード"
+  },
+  "versionAlert": {
+    "securityUpdate": "セキュリティアップデートが必要です:",
+    "message": "<1>Auto Clicker & Auto Fill</1> の新しいバージョンが利用可能になり、最近確認されたセキュリティ上の脆弱性の修正が含まれています。",
+    "learnMore": "もっと詳しく知る",
+    "update": "保護を維持するには、最新バージョンに更新してください。"
   },
   "stepSettings": {
     "title": "ステップ設定",
@@ -219,6 +232,19 @@
         "noAds": "広告なしの体験"
       }
     },
+    "lite": {
+      "name": "⭐ ライト",
+      "tagline": "より高度な制御を望むパワーユーザーにとって必須の機能。",
+      "perMonth": "月額",
+      "cta": "ライトにアップグレード",
+      "includes": "Free に含まれるすべての機能に加え、次の機能もご利用いただけます:",
+      "features": {
+        "addonCondition": "条件付きアドオンロジック",
+        "actionCondition": "アクションごとの条件ルール",
+        "actionSettings": "アクションレベルの設定とオーバーライド",
+        "noAds": "広告なしの体験"
+      }
+    },
     "pro": {
       "name": "🔹 プロ",
       "tagline": "統合、AI、優先サポートによる自動化のフルパワー。",
@@ -252,7 +278,10 @@
     "login": "ログイン",
     "logout": "ログアウト",
     "language": "言語",
-    "learnMore": "もっと詳しく知る"
+    "learnMore": "もっと詳しく知る",
+    "guestInitial": "E",
+    "guestName": "エクスプローラ",
+    "freePlan": "無料"
   },
   "automations": {
     "title": "私の自動化",
@@ -350,6 +379,7 @@
     "repeat": "繰り返す",
     "repeatHint": "<b>「繰り返し」は</b>、指定された間隔でページを再読み込みせずにすべてのステップを再実行します。",
     "repeatInterval": "ループ間の間隔",
+    "repeatIntervalRange": "ループ間の間隔",
     "refresh": "リフレッシュ",
     "refreshHint": "すべての手順が完了すると、<b>更新により</b>ページが再読み込みされます。",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "価値",
     "repeat": "繰り返す",
     "repeatInterval": "間隔",
+    "defaultName": "アクションまたはユーザースクリプト",
     "confirm": {
       "remove": {
         "title": "ステップを削除",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "例"
+      "title": "例",
+      "attributeSelector": "属性セレクター",
+      "regex": "正規表現"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "要素ファインダー",
+      "count": "要素数"
+    },
+    "value": {
+      "plainText": "プレーンテキスト",
+      "more": "もっと"
+    },
+    "flags": {
+      "title": "旗",
+      "global": "最初の試合後は戻らない",
+      "multiLine": "^ と $ は行頭/行末に一致します",
+      "insensitive": "大文字と小文字を区別しない一致",
+      "extended": "空白を無視する",
+      "singleLine": "ドットは改行に一致します"
     },
     "hotkey": {
       "title": "ホットキー",
@@ -450,7 +500,8 @@
     "dev": "開発",
     "stable": "安定した",
     "examples": "例",
-    "add": "追加"
+    "add": "追加",
+    "confirm": "確認する"
   },
   "languages": {
     "title": "言語",

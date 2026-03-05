@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Autoklickare - Autofyll",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Autoklicka på Auto Fill-logotypen"
   },
   "status": {
     "connecting": "Ansluter..."
@@ -30,6 +31,10 @@
     "auto": "Bil"
   },
   "loading": "Belastning...",
+  "loginModal": {
+    "title": "Vänligen logga in",
+    "signingIn": "Logga in..."
+  },
   "learnMore": "Läs mer",
   "login": "Inloggning",
   "logout": "Utloggning",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Återförsök",
     "interval": "Vänta mellan försök",
+    "intervalRange": "Vänta mellan försök",
     "to": "till",
     "stop": "Stoppa automatiseringen",
     "skip": "Hoppa över detta steg",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Tillägget är inte installerat",
     "subTitle": "Den här sidan fungerar med tillägget <b>Auto Clicker - AutoFill</b> för Chrome och Edge.",
-    "hint": "Installera tillägget först för att komma igång."
+    "hint": "Installera tillägget först för att komma igång.",
+    "download": "ladda ner"
+  },
+  "versionAlert": {
+    "securityUpdate": "Säkerhetsuppdatering krävs:",
+    "message": "En nyare version av <1>Auto Clicker & Auto Fill</1> är tillgänglig och innehåller korrigeringar för nyligen identifierade säkerhetsbrister.",
+    "learnMore": "Läs mer",
+    "update": "Uppdatera till den senaste versionen för att förbli skyddad."
   },
   "stepSettings": {
     "title": "Steginställningar",
@@ -219,6 +232,19 @@
         "noAds": "Reklamfri upplevelse"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Viktiga funktioner för avancerade användare som vill ha mer kontroll.",
+      "perMonth": "per månad",
+      "cta": "Uppgradera till Lite",
+      "includes": "Allt gratis, plus:",
+      "features": {
+        "addonCondition": "Villkorlig tilläggslogik",
+        "actionCondition": "Regler för villkor per åtgärd",
+        "actionSettings": "Inställningar och åsidosättningar på åtgärdsnivå",
+        "noAds": "Reklamfri upplevelse"
+      }
+    },
     "pro": {
       "name": "🔹 PROFFS",
       "tagline": "Automatiseringens fulla kraft – med integrationer, AI och prioriterad support.",
@@ -252,7 +278,10 @@
     "login": "Inloggning",
     "logout": "Utloggning",
     "language": "Språk",
-    "learnMore": "Läs mer"
+    "learnMore": "Läs mer",
+    "guestInitial": "E",
+    "guestName": "Utforskare",
+    "freePlan": "GRATIS"
   },
   "automations": {
     "title": "Mina automatiseringar",
@@ -350,6 +379,7 @@
     "repeat": "Upprepa",
     "repeatHint": "<b>Upprepa omvandlingen</b> gör om alla steg utan att sidan laddas om med det angivna intervallet.",
     "repeatInterval": "Intervall mellan loopar",
+    "repeatIntervalRange": "Intervall mellan loopar",
     "refresh": "Uppdatera",
     "refreshHint": "<b>Uppdatera</b> laddar sidan om när alla steg är slutförda.",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "Värde",
     "repeat": "Upprepa",
     "repeatInterval": "Intervall",
+    "defaultName": "Åtgärd eller användarskript",
     "confirm": {
       "remove": {
         "title": "Ta bort steg",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Exempel"
+      "title": "Exempel",
+      "attributeSelector": "Attributväljare",
+      "regex": "Regex"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Elementsökare",
+      "count": "# element"
+    },
+    "value": {
+      "plainText": "Vanlig text",
+      "more": "mer"
+    },
+    "flags": {
+      "title": "flaggor",
+      "global": "Återvänd inte efter första matchen",
+      "multiLine": "^ och $ matchar början/slutet av raden",
+      "insensitive": "Skiftlägesobegränsad matchning",
+      "extended": "Ignorera blanksteg",
+      "singleLine": "Punkt matchar nyrad"
     },
     "hotkey": {
       "title": "Snabbtangent",
@@ -450,7 +500,8 @@
     "dev": "Utvecklare",
     "stable": "STABIL",
     "examples": "Exempel",
-    "add": "Tillägga"
+    "add": "Tillägga",
+    "confirm": "Bekräfta"
   },
   "languages": {
     "title": "Språk",

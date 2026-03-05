@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "AutoClicker - AutoFill",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Automatisch klikken en het logo automatisch invullen"
   },
   "status": {
     "connecting": "Verbinden..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Laden...",
+  "loginModal": {
+    "title": "Meld u aan",
+    "signingIn": "Inloggen..."
+  },
   "learnMore": "Meer informatie",
   "login": "Login",
   "logout": "Uitloggen",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Herhaalpogingen",
     "interval": "Wacht tussen herhaalpogingen",
+    "intervalRange": "Wacht tussen herhaalpogingen",
     "to": "naar",
     "stop": "Stop Automatisering",
     "skip": "Sla deze stap over.",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Extensie niet geïnstalleerd",
     "subTitle": "Deze pagina werkt met de <b>Auto Clicker - AutoFill-</b> extensie voor Chrome en Edge.",
-    "hint": "Installeer eerst de extensie om aan de slag te gaan."
+    "hint": "Installeer eerst de extensie om aan de slag te gaan.",
+    "download": "downloaden"
+  },
+  "versionAlert": {
+    "securityUpdate": "Beveiligingsupdate vereist:",
+    "message": "Een nieuwere versie van <1>Auto Clicker & Auto Fill</1> is beschikbaar en bevat oplossingen voor recent ontdekte beveiligingslekken.",
+    "learnMore": "Leer meer",
+    "update": "Update naar de nieuwste versie om beschermd te blijven."
   },
   "stepSettings": {
     "title": "Stapinstellingen",
@@ -219,6 +232,19 @@
         "noAds": "Reclamevrije ervaring"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Essentiële functies voor gevorderde gebruikers die meer controle willen.",
+      "perMonth": "per maand",
+      "cta": "Upgrade naar Lite",
+      "includes": "Alles wat in Free zit, plus:",
+      "features": {
+        "addonCondition": "Voorwaardelijke add-on-logica",
+        "actionCondition": "Voorwaarden per actie",
+        "actionSettings": "Instellingen en overschrijvingen op actieniveau",
+        "noAds": "Reclamevrije ervaring"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "De volledige kracht van automatisering — met integraties, AI en prioriteitsondersteuning.",
@@ -252,7 +278,10 @@
     "login": "Login",
     "logout": "Uitloggen",
     "language": "Taal",
-    "learnMore": "Meer informatie"
+    "learnMore": "Meer informatie",
+    "guestInitial": "E",
+    "guestName": "Ontdekkingsreiziger",
+    "freePlan": "VRIJ"
   },
   "automations": {
     "title": "Mijn automatiseringen",
@@ -350,6 +379,7 @@
     "repeat": "Herhalen",
     "repeatHint": "<b>Met de herhaalfunctie</b> worden alle stappen herhaald zonder de pagina opnieuw te laden, met het opgegeven interval.",
     "repeatInterval": "Interval tussen lussen",
+    "repeatIntervalRange": "Interval tussen lussen",
     "refresh": "Vernieuwen",
     "refreshHint": "De pagina wordt <b>opnieuw</b> geladen zodra alle stappen zijn voltooid.",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "Waarde",
     "repeat": "Herhalen",
     "repeatInterval": "Interval",
+    "defaultName": "Actie of gebruikersscript",
     "confirm": {
       "remove": {
         "title": "Verwijder stap",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Voorbeelden"
+      "title": "Voorbeelden",
+      "attributeSelector": "Attribuutkiezer",
+      "regex": "Reguliere expressie"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Elementzoeker",
+      "count": "# aantal elementen"
+    },
+    "value": {
+      "plainText": "Platte tekst",
+      "more": "meer"
+    },
+    "flags": {
+      "title": "vlaggen",
+      "global": "Ga na de eerste wedstrijd niet terug.",
+      "multiLine": "^ en $ komen overeen met het begin/einde van een regel.",
+      "insensitive": "Niet-hoofdlettergevoelige overeenkomst",
+      "extended": "Negeer witruimte",
+      "singleLine": "De punt komt overeen met een nieuwe regel."
     },
     "hotkey": {
       "title": "Sneltoets",
@@ -450,7 +500,8 @@
     "dev": "ONTWIKKELAAR",
     "stable": "STABIEL",
     "examples": "Voorbeelden",
-    "add": "Toevoegen"
+    "add": "Toevoegen",
+    "confirm": "Bevestigen"
   },
   "languages": {
     "title": "Taal",

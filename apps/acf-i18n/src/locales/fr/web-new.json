@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Clic automatique - Remplissage automatique",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Logo à clic automatique et à remplissage automatique"
   },
   "status": {
     "connecting": "De liaison..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Chargement...",
+  "loginModal": {
+    "title": "Veuillez vous connecter",
+    "signingIn": "Se connecter..."
+  },
   "learnMore": "Apprendre encore plus",
   "login": "Se connecter",
   "logout": "Déconnexion",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Tentatives de nouvelle tentative",
     "interval": "Attendre entre les tentatives",
+    "intervalRange": "Attendre entre les tentatives",
     "to": "à",
     "stop": "Arrêtez l'automatisation",
     "skip": "Ignorez cette étape",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Extension non installée",
     "subTitle": "Cette page fonctionne avec l&#39;extension <b>Auto Clicker - AutoFill</b> pour Chrome et Edge.",
-    "hint": "Veuillez d'abord installer l'extension pour commencer."
+    "hint": "Veuillez d'abord installer l'extension pour commencer.",
+    "download": "télécharger"
+  },
+  "versionAlert": {
+    "securityUpdate": "Mise à jour de sécurité requise :",
+    "message": "Une version plus récente de <1>Auto Clicker & Auto Fill</1> est disponible et comprend des correctifs pour les vulnérabilités de sécurité récemment identifiées.",
+    "learnMore": "Apprendre encore plus",
+    "update": "Veuillez effectuer la mise à jour vers la dernière version pour rester protégé."
   },
   "stepSettings": {
     "title": "Paramètres d'étape",
@@ -219,6 +232,19 @@
         "noAds": "Expérience sans publicité"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Des fonctionnalités essentielles pour les utilisateurs avancés qui souhaitent un contrôle accru.",
+      "perMonth": "par mois",
+      "cta": "Passez à la version Lite",
+      "includes": "Tout est gratuit, plus :",
+      "features": {
+        "addonCondition": "Logique des modules complémentaires conditionnels",
+        "actionCondition": "Règles de condition par action",
+        "actionSettings": "Paramètres et remplacements au niveau de l'action",
+        "noAds": "Expérience sans publicité"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "Toute la puissance de l'automatisation — avec intégrations, IA et assistance prioritaire.",
@@ -252,7 +278,10 @@
     "login": "Se connecter",
     "logout": "Déconnexion",
     "language": "Langue",
-    "learnMore": "Apprendre encore plus"
+    "learnMore": "Apprendre encore plus",
+    "guestInitial": "E",
+    "guestName": "Explorateur",
+    "freePlan": "GRATUIT"
   },
   "automations": {
     "title": "Mes automatisations",
@@ -350,6 +379,7 @@
     "repeat": "Répéter",
     "repeatHint": "<b>L&#39;option « Répéter »</b> exécutera à nouveau toutes les étapes sans recharger la page, à l&#39;intervalle indiqué.",
     "repeatInterval": "Intervalle entre les boucles",
+    "repeatIntervalRange": "Intervalle entre les boucles",
     "refresh": "Rafraîchir",
     "refreshHint": "<b>Actualiser</b> la page la rechargera une fois toutes les étapes terminées.",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "Valeur",
     "repeat": "Répéter",
     "repeatInterval": "Intervalle",
+    "defaultName": "Action ou script utilisateur",
     "confirm": {
       "remove": {
         "title": "Supprimer l'étape",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Exemples"
+      "title": "Exemples",
+      "attributeSelector": "Sélecteur d'attributs",
+      "regex": "Expression régulière"
+    },
+    "elementFinder": {
+      "getElementBy": "obtenirElementPar",
+      "elementFinder": "Recherche d'éléments",
+      "count": "nombre d'éléments"
+    },
+    "value": {
+      "plainText": "Texte brut",
+      "more": "plus"
+    },
+    "flags": {
+      "title": "drapeaux",
+      "global": "Ne revenez pas après le premier match",
+      "multiLine": "^ et $ correspondent au début/à la fin de la ligne",
+      "insensitive": "correspondance insensible à la casse",
+      "extended": "Ignorer les espaces blancs",
+      "singleLine": "Le point correspond à une nouvelle ligne"
     },
     "hotkey": {
       "title": "Raccourci clavier",
@@ -450,7 +500,8 @@
     "dev": "DÉVELOPPEMENT",
     "stable": "ÉCURIE",
     "examples": "Exemples",
-    "add": "Ajouter"
+    "add": "Ajouter",
+    "confirm": "Confirmer"
   },
   "languages": {
     "title": "Langue",

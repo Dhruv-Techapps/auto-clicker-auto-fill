@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Phần mềm tự động nhấp chuột - Tự động điền",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Tự động nhấp chuột, tự động điền logo"
   },
   "status": {
     "connecting": "Đang kết nối..."
@@ -30,6 +31,10 @@
     "auto": "Tự động"
   },
   "loading": "Đang tải...",
+  "loginModal": {
+    "title": "Vui lòng đăng nhập",
+    "signingIn": "Đăng nhập..."
+  },
   "learnMore": "Tìm hiểu thêm",
   "login": "Đăng nhập",
   "logout": "Đăng xuất",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Số lần thử lại",
     "interval": "Chờ giữa các lần thử lại",
+    "intervalRange": "Chờ giữa các lần thử lại",
     "to": "ĐẾN",
     "stop": "Dừng tự động hóa",
     "skip": "Bỏ qua bước này",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Tiện ích mở rộng chưa được cài đặt",
     "subTitle": "Trang này hoạt động với tiện ích mở rộng <b>Auto Clicker - AutoFill</b> dành cho Chrome và Edge.",
-    "hint": "Vui lòng cài đặt tiện ích mở rộng trước để bắt đầu."
+    "hint": "Vui lòng cài đặt tiện ích mở rộng trước để bắt đầu.",
+    "download": "tải xuống"
+  },
+  "versionAlert": {
+    "securityUpdate": "Cần cập nhật bảo mật:",
+    "message": "Phiên bản mới hơn của <1>Auto Clicker & Auto Fill</1> đã có sẵn và bao gồm các bản vá lỗi cho các lỗ hổng bảo mật được phát hiện gần đây.",
+    "learnMore": "Tìm hiểu thêm",
+    "update": "Vui lòng cập nhật lên phiên bản mới nhất để được bảo vệ."
   },
   "stepSettings": {
     "title": "Cài đặt bước",
@@ -219,6 +232,19 @@
         "noAds": "Trải nghiệm không có quảng cáo"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Các tính năng thiết yếu dành cho người dùng chuyên nghiệp muốn có nhiều quyền kiểm soát hơn.",
+      "perMonth": "mỗi tháng",
+      "cta": "Nâng cấp lên phiên bản Lite",
+      "includes": "Tất cả mọi thứ đều có trong phiên bản miễn phí, cộng thêm:",
+      "features": {
+        "addonCondition": "Logic bổ sung có điều kiện",
+        "actionCondition": "Quy tắc điều kiện mỗi hành động",
+        "actionSettings": "Cài đặt và ghi đè ở cấp độ hành động",
+        "noAds": "Trải nghiệm không có quảng cáo"
+      }
+    },
     "pro": {
       "name": "🔹 CHUYÊN NGHIỆP",
       "tagline": "Sức mạnh toàn diện của tự động hóa — với khả năng tích hợp, trí tuệ nhân tạo và hỗ trợ ưu tiên.",
@@ -252,7 +278,10 @@
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
     "language": "Ngôn ngữ",
-    "learnMore": "Tìm hiểu thêm"
+    "learnMore": "Tìm hiểu thêm",
+    "guestInitial": "E",
+    "guestName": "Nhà thám hiểm",
+    "freePlan": "MIỄN PHÍ"
   },
   "automations": {
     "title": "Tự động hóa của tôi",
@@ -350,6 +379,7 @@
     "repeat": "Lặp lại",
     "repeatHint": "<b>Chức năng &quot;Lặp lại&quot;</b> sẽ chạy lại tất cả các bước mà không cần tải lại trang, với khoảng thời gian đã định.",
     "repeatInterval": "Khoảng thời gian giữa các vòng lặp",
+    "repeatIntervalRange": "Khoảng thời gian giữa các vòng lặp",
     "refresh": "Làm cho khỏe lại",
     "refreshHint": "<b>Làm mới trang</b> sẽ tải lại trang sau khi hoàn tất tất cả các bước.",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "Giá trị",
     "repeat": "Lặp lại",
     "repeatInterval": "Khoảng thời gian",
+    "defaultName": "Hành động hoặc tập lệnh người dùng",
     "confirm": {
       "remove": {
         "title": "Xóa bước",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Ví dụ"
+      "title": "Ví dụ",
+      "attributeSelector": "Bộ chọn thuộc tính",
+      "regex": "Biểu thức chính quy"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Công cụ tìm phần tử",
+      "count": "# phần tử"
+    },
+    "value": {
+      "plainText": "Văn bản thuần túy",
+      "more": "hơn"
+    },
+    "flags": {
+      "title": "cờ",
+      "global": "Đừng quay lại sau trận đấu đầu tiên.",
+      "multiLine": "^ và $ khớp với đầu/cuối dòng",
+      "insensitive": "khớp không phân biệt chữ hoa chữ thường",
+      "extended": "Bỏ qua khoảng trắng",
+      "singleLine": "Dấu chấm khớp với ký tự xuống dòng"
     },
     "hotkey": {
       "title": "Phím tắt",
@@ -450,7 +500,8 @@
     "dev": "PHÁT TRIỂN",
     "stable": "ỔN ĐỊNH",
     "examples": "Ví dụ",
-    "add": "Thêm vào"
+    "add": "Thêm vào",
+    "confirm": "Xác nhận"
   },
   "languages": {
     "title": "Ngôn ngữ",

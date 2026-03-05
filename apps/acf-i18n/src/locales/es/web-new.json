@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Auto Clicker - Autocompletar",
-    "variantPlaceholder": "{{VITE_VARIANTE_PÚBLICA}}"
+    "variantPlaceholder": "{{VITE_VARIANTE_PÚBLICA}}",
+    "logoAlt": "Haga clic automáticamente en el logotipo de Autocompletar"
   },
   "status": {
     "connecting": "Conectando..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Cargando...",
+  "loginModal": {
+    "title": "Por favor, inicia sesión",
+    "signingIn": "Iniciar sesión..."
+  },
   "learnMore": "Más información",
   "login": "Acceso",
   "logout": "Cerrar sesión",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Intentos de reintento",
     "interval": "Esperar entre reintentos",
+    "intervalRange": "Esperar entre reintentos",
     "to": "a",
     "stop": "Detener la automatización",
     "skip": "Omitir este paso",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Extensión no instalada",
     "subTitle": "Esta página funciona con la extensión <b>Auto Clicker - AutoFill</b> para Chrome y Edge.",
-    "hint": "Primero instale la extensión para comenzar."
+    "hint": "Primero instale la extensión para comenzar.",
+    "download": "descargar"
+  },
+  "versionAlert": {
+    "securityUpdate": "Actualización de seguridad requerida:",
+    "message": "Está disponible una versión más nueva de <1>Auto Clicker & Auto Fill</1> que incluye correcciones para vulnerabilidades de seguridad identificadas recientemente.",
+    "learnMore": "Más información",
+    "update": "Actualice a la última versión para mantenerse protegido."
   },
   "stepSettings": {
     "title": "Configuración de pasos",
@@ -219,6 +232,19 @@
         "noAds": "Experiencia sin publicidad"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Funciones esenciales para usuarios avanzados que desean más control.",
+      "perMonth": "por mes",
+      "cta": "Actualizar a Lite",
+      "includes": "Todo gratis, más:",
+      "features": {
+        "addonCondition": "Lógica de complemento condicional",
+        "actionCondition": "Reglas de condición por acción",
+        "actionSettings": "Configuraciones y anulaciones a nivel de acción",
+        "noAds": "Experiencia sin publicidad"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "Todo el poder de la automatización: con integraciones, IA y soporte prioritario.",
@@ -252,7 +278,10 @@
     "login": "Acceso",
     "logout": "Cerrar sesión",
     "language": "Idioma",
-    "learnMore": "Más información"
+    "learnMore": "Más información",
+    "guestInitial": "mi",
+    "guestName": "Explorador",
+    "freePlan": "GRATIS"
   },
   "automations": {
     "title": "Mis automatizaciones",
@@ -350,6 +379,7 @@
     "repeat": "Repetir",
     "repeatHint": "<b>Repetir</b> volverá a ejecutar todos los pasos sin recargar la página con el intervalo indicado.",
     "repeatInterval": "Intervalo entre bucles",
+    "repeatIntervalRange": "Intervalo entre bucles",
     "refresh": "Refrescar",
     "refreshHint": "<b>Actualizar</b> volverá a cargar la página una vez que se hayan completado todos los pasos.",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "Valor",
     "repeat": "Repetir",
     "repeatInterval": "Intervalo",
+    "defaultName": "Acción o script de usuario",
     "confirm": {
       "remove": {
         "title": "Quitar paso",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Ejemplos"
+      "title": "Ejemplos",
+      "attributeSelector": "Selector de atributos",
+      "regex": "Expresión regular"
+    },
+    "elementFinder": {
+      "getElementBy": "obtenerElementoPor",
+      "elementFinder": "Buscador de elementos",
+      "count": "# de elementos"
+    },
+    "value": {
+      "plainText": "Texto sin formato",
+      "more": "más"
+    },
+    "flags": {
+      "title": "banderas",
+      "global": "No regreses después del primer partido",
+      "multiLine": "^ y $ coinciden con el inicio/final de la línea",
+      "insensitive": "Coincidencia sin distinción entre mayúsculas y minúsculas",
+      "extended": "Ignorar espacios en blanco",
+      "singleLine": "El punto coincide con la nueva línea"
     },
     "hotkey": {
       "title": "Tecla de acceso rápido",
@@ -450,7 +500,8 @@
     "dev": "DESARROLLO",
     "stable": "ESTABLE",
     "examples": "Ejemplos",
-    "add": "Agregar"
+    "add": "Agregar",
+    "confirm": "Confirmar"
   },
   "languages": {
     "title": "Idioma",

@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "自動點擊器 - 自動填充",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "自動點擊自動填滿徽標"
   },
   "status": {
     "connecting": "正在連接..."
@@ -30,6 +31,10 @@
     "auto": "汽車"
   },
   "loading": "載入中...",
+  "loginModal": {
+    "title": "請登入",
+    "signingIn": "登入..."
+  },
   "learnMore": "了解更多",
   "login": "登入",
   "logout": "註銷",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "重試次數",
     "interval": "重試間隔",
+    "intervalRange": "重試間隔",
     "to": "到",
     "stop": "停止自動化",
     "skip": "跳過此步驟",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "擴充功能未安裝。",
     "subTitle": "此頁面可與 Chrome 和 Edge 瀏覽器的<b>Auto Clicker - AutoFill</b>擴充功能搭配使用。",
-    "hint": "請先安裝擴充功能才能開始使用。"
+    "hint": "請先安裝擴充功能才能開始使用。",
+    "download": "下載"
+  },
+  "versionAlert": {
+    "securityUpdate": "需要安全性更新：",
+    "message": "<1>自動點擊器和自動填充器</1> 的新版本已發布，並修復了最近發現的安全漏洞。",
+    "learnMore": "了解更多",
+    "update": "請更新至最新版本以確保安全。"
   },
   "stepSettings": {
     "title": "步驟設定",
@@ -219,6 +232,19 @@
         "noAds": "無廣告體驗"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "為希望獲得更多控制權的高級用戶提供的必備功能。",
+      "perMonth": "每月",
+      "cta": "升級到精簡版",
+      "includes": "免費內容全部，外加：",
+      "features": {
+        "addonCondition": "條件插件邏輯",
+        "actionCondition": "每個動作的條件規則",
+        "actionSettings": "操作等級設定和覆蓋",
+        "noAds": "無廣告體驗"
+      }
+    },
     "pro": {
       "name": "🔹 專業版",
       "tagline": "充分發揮自動化的強大功能—整合、人工智慧和優先支援。",
@@ -252,7 +278,10 @@
     "login": "登入",
     "logout": "註銷",
     "language": "語言",
-    "learnMore": "了解更多"
+    "learnMore": "了解更多",
+    "guestInitial": "E",
+    "guestName": "探索者",
+    "freePlan": "自由的"
   },
   "automations": {
     "title": "我的自動化",
@@ -350,6 +379,7 @@
     "repeat": "重複",
     "repeatHint": "<b>重複操作</b>將按照給定的時間間隔重新運行所有步驟，而無需重新載入頁面。",
     "repeatInterval": "循環間隔",
+    "repeatIntervalRange": "循環間隔",
     "refresh": "重新整理",
     "refreshHint": "所有步驟完成後，<b>重新整理</b>頁面即可重新載入。",
     "toast": {
@@ -395,6 +425,7 @@
     "value": "價值",
     "repeat": "重複",
     "repeatInterval": "間隔",
+    "defaultName": "操作或使用者腳本",
     "confirm": {
       "remove": {
         "title": "移除步驟",
@@ -419,7 +450,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "範例"
+      "title": "範例",
+      "attributeSelector": "屬性選擇器",
+      "regex": "正規表示式"
+    },
+    "elementFinder": {
+      "getElementBy": "取得元素",
+      "elementFinder": "元素查找器",
+      "count": "元素數量"
+    },
+    "value": {
+      "plainText": "純文字",
+      "more": "更多的"
+    },
+    "flags": {
+      "title": "旗幟",
+      "global": "第一場比賽後不要再回來了",
+      "multiLine": "^ 和 $ 分別符合行的開頭和結尾",
+      "insensitive": "不區分大小寫的匹配",
+      "extended": "忽略空格",
+      "singleLine": "點匹配換行符"
     },
     "hotkey": {
       "title": "快速鍵",
@@ -450,7 +500,8 @@
     "dev": "開發",
     "stable": "穩定的",
     "examples": "範例",
-    "add": "添加"
+    "add": "添加",
+    "confirm": "確認"
   },
   "languages": {
     "title": "語言",
