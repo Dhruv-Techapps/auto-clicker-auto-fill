@@ -1,4 +1,4 @@
-import { BatchTooltip, DisableTooltip, ScheduleTooltip, WatchTooltip } from '@acf-options-page/tooltip';
+import { BatchTooltip, DisabledTooltip, ScheduleTooltip, WatchTooltip } from '@acf-options-page/tooltip';
 import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ export const AutomationsListItem = ({ config }: AutomationListItemProps) => {
     <div className='d-flex text-body-emphasis justify-content-between'>
       <div>
         <strong>
-          <DisableTooltip config={config} /> {config.name || config.id}
+          <DisabledTooltip config={config} /> {config.name || config.id}
         </strong>
         <small className='d-block text-body-secondary'>{config.url}</small>
       </div>

@@ -1,7 +1,9 @@
 import { OverlayTrigger, Popover, Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { APP_LINK } from '../util/constants';
 
 export function ElementFinderPopover() {
+  const { t } = useTranslation();
   return (
     <OverlayTrigger
       trigger='click'
@@ -13,9 +15,9 @@ export function ElementFinderPopover() {
             <Table bordered striped className='mt-3'>
               <thead>
                 <tr>
-                  <th>getElementBy</th>
-                  <th>Element Finder</th>
-                  <th># of elements</th>
+                  <th>{t('popover.elementFinder.getElementBy')}</th>
+                  <th>{t('popover.elementFinder.elementFinder')}</th>
+                  <th>{t('popover.elementFinder.count')}</th>
                 </tr>
               </thead>
               <tbody>

@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Pengklik Otomatis - Isi Otomatis",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Klik otomatis, isi otomatis logo"
   },
   "status": {
     "connecting": "Menghubungkan..."
@@ -30,6 +31,10 @@
     "auto": "Mobil"
   },
   "loading": "Memuat...",
+  "loginModal": {
+    "title": "Silakan masuk",
+    "signingIn": "Masuk..."
+  },
   "learnMore": "Pelajari Selengkapnya",
   "login": "Login",
   "logout": "Keluar",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Upaya Mencoba Lagi",
     "interval": "Tunggu di antara percobaan ulang",
+    "intervalRange": "Tunggu di antara percobaan ulang",
     "to": "ke",
     "stop": "Hentikan Otomatisasi",
     "skip": "Lewati Langkah Ini",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Ekstensi Belum Terinstal",
     "subTitle": "Halaman ini berfungsi dengan ekstensi <b>Auto Clicker - AutoFill</b> untuk Chrome &amp; Edge.",
-    "hint": "Silakan instal ekstensi terlebih dahulu untuk memulai."
+    "hint": "Silakan instal ekstensi terlebih dahulu untuk memulai.",
+    "download": "unduh"
+  },
+  "versionAlert": {
+    "securityUpdate": "Pembaruan Keamanan Diperlukan:",
+    "message": "Versi terbaru dari <1>Auto Clicker & Auto Fill</1> tersedia dan menyertakan perbaikan untuk kerentanan keamanan yang baru-baru ini teridentifikasi.",
+    "learnMore": "Pelajari selengkapnya",
+    "update": "Harap perbarui ke versi terbaru agar tetap terlindungi."
   },
   "stepSettings": {
     "title": "Pengaturan Langkah",
@@ -219,6 +232,19 @@
         "noAds": "Pengalaman tanpa iklan"
       }
     },
+    "lite": {
+      "name": "⭐ RINGAN",
+      "tagline": "Fitur-fitur penting untuk pengguna tingkat lanjut yang menginginkan kontrol lebih.",
+      "perMonth": "per bulan",
+      "cta": "Tingkatkan ke Versi Lite",
+      "includes": "Semuanya gratis, ditambah:",
+      "features": {
+        "addonCondition": "Logika tambahan bersyarat",
+        "actionCondition": "Aturan kondisi per tindakan",
+        "actionSettings": "Pengaturan dan penggantian tingkat tindakan",
+        "noAds": "Pengalaman tanpa iklan"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "Kekuatan penuh otomatisasi — dengan integrasi, AI, dan dukungan prioritas.",
@@ -252,7 +278,10 @@
     "login": "Login",
     "logout": "Keluar",
     "language": "Bahasa",
-    "learnMore": "Pelajari Selengkapnya"
+    "learnMore": "Pelajari Selengkapnya",
+    "guestInitial": "E",
+    "guestName": "Penjelajah",
+    "freePlan": "BEBAS"
   },
   "automations": {
     "title": "Otomatisasi Saya",
@@ -272,6 +301,11 @@
     "selectAutomations": "Pilih otomatisasi yang ingin diekspor atau dihapus.",
     "select": "Memilih",
     "import": "Impor",
+    "filter": {
+      "all": "Semua",
+      "enabled": "Diaktifkan",
+      "disabled": "Dengan disabilitas"
+    },
     "toast": {
       "header": "Otomatisasi",
       "remove": "Otomatisasi berhasil dihapus.",
@@ -315,7 +349,9 @@
       "settings": "Pengaturan otomatisasi berhasil disimpan!",
       "add": "Otomatisasi berhasil ditambahkan.",
       "duplicate": "Otomatisasi berhasil diduplikasi"
-    }
+    },
+    "disable-tooltip": "Nonaktifkan otomatisasi ini untuk mencegahnya berjalan tanpa menghapusnya. Anda dapat mengaktifkannya kembali nanti saat dibutuhkan.",
+    "enable-tooltip": "Aktifkan otomatisasi ini agar dapat berjalan. Anda dapat menonaktifkannya kembali nanti jika ingin menjeda tanpa menghapusnya."
   },
   "automationSettings": {
     "title": "Pengaturan Otomatisasi",
@@ -349,6 +385,7 @@
     "repeat": "Mengulang",
     "repeatHint": "<b>Fungsi Repeat</b> akan menjalankan kembali semua langkah tanpa memuat ulang halaman dengan interval yang diberikan.",
     "repeatInterval": "Interval Antar Putaran",
+    "repeatIntervalRange": "Interval Antar Putaran",
     "refresh": "Menyegarkan",
     "refreshHint": "<b>Refresh</b> akan memuat ulang halaman setelah semua langkah selesai.",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "Nilai",
     "repeat": "Mengulang",
     "repeatInterval": "Selang",
+    "defaultName": "Aksi atau Skrip Pengguna",
     "confirm": {
       "remove": {
         "title": "Hapus Langkah",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Contoh"
+      "title": "Contoh",
+      "attributeSelector": "Pemilih Atribut",
+      "regex": "Ekspresi reguler"
+    },
+    "elementFinder": {
+      "getElementBy": "mendapatkanElemenOleh",
+      "elementFinder": "Pencari Elemen",
+      "count": "jumlah elemen"
+    },
+    "value": {
+      "plainText": "Teks biasa",
+      "more": "lagi"
+    },
+    "flags": {
+      "title": "bendera",
+      "global": "Jangan kembali setelah pertandingan pertama",
+      "multiLine": "^ dan $ cocok dengan awal/akhir baris",
+      "insensitive": "Pencocokan tanpa memperhatikan huruf besar/kecil",
+      "extended": "Abaikan spasi kosong",
+      "singleLine": "Titik cocok dengan baris baru"
     },
     "hotkey": {
       "title": "Tombol pintas",
@@ -449,7 +506,8 @@
     "dev": "PENGEMBANG",
     "stable": "STABIL",
     "examples": "Contoh",
-    "add": "Menambahkan"
+    "add": "Menambahkan",
+    "confirm": "Mengonfirmasi"
   },
   "languages": {
     "title": "Bahasa",

@@ -1,7 +1,9 @@
 import { OverlayTrigger, Popover, Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { APP_LINK } from '../util/constants';
 
 export function ValuePopover() {
+  const { t } = useTranslation();
   return (
     <OverlayTrigger
       trigger='click'
@@ -153,7 +155,7 @@ export function ValuePopover() {
                   </td>
                 </tr>
                 <tr>
-                  <td>Plain text</td>
+                  <td>{t('popover.value.plainText')}</td>
                   <td>
                     <code>Hello World</code>
                   </td>
@@ -162,7 +164,7 @@ export function ValuePopover() {
             </Table>
             <div className='text-right'>
               <a href={`${APP_LINK.DOCS}action-value/overview`} target='_blank' rel='noopener noreferrer'>
-                more
+                {t('popover.value.more')}
               </a>
             </div>
           </Popover.Body>

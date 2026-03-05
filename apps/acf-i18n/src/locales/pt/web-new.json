@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Auto Clicker - Preenchimento Automático",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Clique automático Preenchimento automático do logotipo"
   },
   "status": {
     "connecting": "Conectando..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Carregando...",
+  "loginModal": {
+    "title": "Por favor, faça login.",
+    "signingIn": "Entrar..."
+  },
   "learnMore": "Saber mais",
   "login": "Conecte-se",
   "logout": "Sair",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Tentativas de repetição",
     "interval": "Aguarde entre as tentativas",
+    "intervalRange": "Aguarde entre as tentativas",
     "to": "para",
     "stop": "Pare a automação",
     "skip": "Pule esta etapa",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Extensão não instalada",
     "subTitle": "Esta página funciona com a extensão <b>Auto Clicker - AutoFill</b> para Chrome e Edge.",
-    "hint": "Instale a extensão primeiro para começar."
+    "hint": "Instale a extensão primeiro para começar.",
+    "download": "download"
+  },
+  "versionAlert": {
+    "securityUpdate": "Atualização de segurança necessária:",
+    "message": "Uma versão mais recente do <1>Auto Clicker & Auto Fill</1> está disponível e inclui correções para vulnerabilidades de segurança identificadas recentemente.",
+    "learnMore": "Saber mais",
+    "update": "Por favor, atualize para a versão mais recente para manter sua proteção."
   },
   "stepSettings": {
     "title": "Configurações de etapa",
@@ -219,6 +232,19 @@
         "noAds": "Experiência sem anúncios"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Funcionalidades essenciais para usuários avançados que desejam maior controle.",
+      "perMonth": "por mês",
+      "cta": "Atualize para a versão Lite.",
+      "includes": "Tudo incluído no pacote gratuito, mais:",
+      "features": {
+        "addonCondition": "lógica de complemento condicional",
+        "actionCondition": "Regras de condição por ação",
+        "actionSettings": "Configurações e substituições de nível de ação",
+        "noAds": "Experiência sem anúncios"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "Todo o poder da automação — com integrações, IA e suporte prioritário.",
@@ -252,7 +278,10 @@
     "login": "Conecte-se",
     "logout": "Sair",
     "language": "Linguagem",
-    "learnMore": "Saber mais"
+    "learnMore": "Saber mais",
+    "guestInitial": "E",
+    "guestName": "Explorador",
+    "freePlan": "LIVRE"
   },
   "automations": {
     "title": "Minhas Automações",
@@ -272,6 +301,11 @@
     "selectAutomations": "Selecione as automações que deseja exportar ou excluir.",
     "select": "Selecione",
     "import": "Importar",
+    "filter": {
+      "all": "Todos",
+      "enabled": "Habilitado",
+      "disabled": "Desabilitado"
+    },
     "toast": {
       "header": "Automações",
       "remove": "Automações removidas com sucesso",
@@ -315,7 +349,9 @@
       "settings": "Configurações de automação salvas com sucesso!",
       "add": "Automação adicionada com sucesso",
       "duplicate": "Automação duplicada com sucesso"
-    }
+    },
+    "disable-tooltip": "Desative esta automação para impedir que ela seja executada sem excluí-la. Você poderá ativá-la novamente mais tarde, quando precisar.",
+    "enable-tooltip": "Habilite esta automação para que ela seja executada. Você poderá desabilitá-la posteriormente, caso queira pausá-la sem excluí-la."
   },
   "automationSettings": {
     "title": "Configurações de automação",
@@ -349,6 +385,7 @@
     "repeat": "Repita",
     "repeatHint": "<b>Repetir</b> executará novamente todas as etapas sem recarregar a página, no intervalo especificado.",
     "repeatInterval": "Intervalo entre loops",
+    "repeatIntervalRange": "Intervalo entre loops",
     "refresh": "Atualizar",
     "refreshHint": "<b>Atualizar</b> recarregará a página assim que todas as etapas forem concluídas.",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "Valor",
     "repeat": "Repita",
     "repeatInterval": "Intervalo",
+    "defaultName": "Ação ou script de usuário",
     "confirm": {
       "remove": {
         "title": "Remover etapa",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Exemplos"
+      "title": "Exemplos",
+      "attributeSelector": "Seletor de Atributos",
+      "regex": "Expressão regular"
+    },
+    "elementFinder": {
+      "getElementBy": "obterElementoPor",
+      "elementFinder": "Localizador de Elementos",
+      "count": "número de elementos"
+    },
+    "value": {
+      "plainText": "Texto simples",
+      "more": "mais"
+    },
+    "flags": {
+      "title": "bandeiras",
+      "global": "Não volte após a primeira partida.",
+      "multiLine": "^ e $ correspondem ao início/fim da linha",
+      "insensitive": "correspondência sem distinção entre maiúsculas e minúsculas",
+      "extended": "Ignore os espaços em branco",
+      "singleLine": "O ponto corresponde à nova linha"
     },
     "hotkey": {
       "title": "Tecla de atalho",
@@ -449,7 +506,8 @@
     "dev": "DESENVOLVIMENTO",
     "stable": "ESTÁVEL",
     "examples": "Exemplos",
-    "add": "Adicionar"
+    "add": "Adicionar",
+    "confirm": "Confirmar"
   },
   "languages": {
     "title": "Linguagem",

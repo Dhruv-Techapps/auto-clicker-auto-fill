@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Auto Clicker - AutoFill",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Autoklick-Logo für automatisches Ausfüllen"
   },
   "status": {
     "connecting": "Verbindung wird hergestellt..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Laden...",
+  "loginModal": {
+    "title": "Bitte melden Sie sich an",
+    "signingIn": "Anmelden..."
+  },
   "learnMore": "Mehr erfahren",
   "login": "Login",
   "logout": "Abmelden",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Wiederholungsversuche",
     "interval": "Wartezeit zwischen den Wiederholungsversuchen",
+    "intervalRange": "Wartezeit zwischen den Wiederholungsversuchen",
     "to": "Zu",
     "stop": "Automatisierung stoppen",
     "skip": "Diesen Schritt überspringen",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Erweiterung nicht installiert",
     "subTitle": "Diese Seite funktioniert mit der <b>Auto Clicker - AutoFill-</b> Erweiterung für Chrome &amp; Edge.",
-    "hint": "Bitte installieren Sie zuerst die Erweiterung, um loszulegen."
+    "hint": "Bitte installieren Sie zuerst die Erweiterung, um loszulegen.",
+    "download": "herunterladen"
+  },
+  "versionAlert": {
+    "securityUpdate": "Sicherheitsupdate erforderlich:",
+    "message": "Eine neuere Version von <1>Auto Clicker & Auto Fill</1> ist verfügbar und enthält Korrekturen für kürzlich identifizierte Sicherheitslücken.",
+    "learnMore": "Mehr erfahren",
+    "update": "Bitte aktualisieren Sie auf die neueste Version, um weiterhin geschützt zu sein."
   },
   "stepSettings": {
     "title": "Schritteinstellungen",
@@ -219,6 +232,19 @@
         "noAds": "Werbefreies Erlebnis"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Essenzielle Funktionen für fortgeschrittene Benutzer, die mehr Kontrolle wünschen.",
+      "perMonth": "pro Monat",
+      "cta": "Upgrade auf Lite",
+      "includes": "Alles kostenlos, plus:",
+      "features": {
+        "addonCondition": "Bedingte Addon-Logik",
+        "actionCondition": "Bedingungen pro Aktion",
+        "actionSettings": "Einstellungen und Überschreibungen auf Aktionsebene",
+        "noAds": "Werbefreies Erlebnis"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "Die volle Leistungsfähigkeit der Automatisierung – mit Integrationen, KI und priorisiertem Support.",
@@ -252,7 +278,10 @@
     "login": "Login",
     "logout": "Abmelden",
     "language": "Sprache",
-    "learnMore": "Mehr erfahren"
+    "learnMore": "Mehr erfahren",
+    "guestInitial": "E",
+    "guestName": "Forscher",
+    "freePlan": "FREI"
   },
   "automations": {
     "title": "Meine Automatisierungen",
@@ -272,6 +301,11 @@
     "selectAutomations": "Wählen Sie die zu exportierenden oder zu löschenden Automatisierungen aus.",
     "select": "Wählen",
     "import": "Import",
+    "filter": {
+      "all": "Alle",
+      "enabled": "Ermöglicht",
+      "disabled": "Deaktiviert"
+    },
     "toast": {
       "header": "Automatisierungen",
       "remove": "Automatisierungen erfolgreich entfernt",
@@ -315,7 +349,9 @@
       "settings": "Automatisierungseinstellungen erfolgreich gespeichert!",
       "add": "Automatisierung erfolgreich hinzugefügt",
       "duplicate": "Automatisierung erfolgreich dupliziert"
-    }
+    },
+    "disable-tooltip": "Deaktivieren Sie diese Automatisierung, damit sie nicht ausgeführt wird, ohne sie zu löschen. Sie können sie später bei Bedarf wieder aktivieren.",
+    "enable-tooltip": "Aktivieren Sie diese Automatisierung, damit sie ausgeführt werden kann. Sie können sie später wieder deaktivieren, wenn Sie sie pausieren möchten, ohne sie zu löschen."
   },
   "automationSettings": {
     "title": "Automatisierungseinstellungen",
@@ -349,6 +385,7 @@
     "repeat": "Wiederholen",
     "repeatHint": "<b>Die Wiederholungsfunktion</b> führt alle Schritte im angegebenen Intervall erneut aus, ohne die Seite neu zu laden.",
     "repeatInterval": "Intervall zwischen den Schleifen",
+    "repeatIntervalRange": "Intervall zwischen den Schleifen",
     "refresh": "Aktualisieren",
     "refreshHint": "<b>Durch Klicken auf „Aktualisieren“</b> wird die Seite neu geladen, sobald alle Schritte abgeschlossen sind.",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "Wert",
     "repeat": "Wiederholen",
     "repeatInterval": "Intervall",
+    "defaultName": "Aktion oder Benutzerskript",
     "confirm": {
       "remove": {
         "title": "Schritt entfernen",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Beispiele"
+      "title": "Beispiele",
+      "attributeSelector": "Attributselektor",
+      "regex": "Regex"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Elementfinder",
+      "count": "Anzahl der Elemente"
+    },
+    "value": {
+      "plainText": "Klartext",
+      "more": "mehr"
+    },
+    "flags": {
+      "title": "Flaggen",
+      "global": "Kehre nach dem ersten Spiel nicht zurück.",
+      "multiLine": "^ und $ markieren den Zeilenanfang bzw. das Zeilenende.",
+      "insensitive": "Groß-/Kleinschreibung ignorierende Übereinstimmung",
+      "extended": "Leerzeichen ignorieren",
+      "singleLine": "Punkt entspricht Zeilenumbruch"
     },
     "hotkey": {
       "title": "Tastenkombination",
@@ -449,7 +506,8 @@
     "dev": "DEV",
     "stable": "STABIL",
     "examples": "Beispiele",
-    "add": "Hinzufügen"
+    "add": "Hinzufügen",
+    "confirm": "Bestätigen"
   },
   "languages": {
     "title": "Sprache",

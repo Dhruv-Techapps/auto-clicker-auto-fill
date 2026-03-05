@@ -61,7 +61,7 @@ export function PreCheckRecheck({ form, actions }: PreCheckRecheckProps) {
                 <Form.Select {...register('recheckGoto')}>
                   {actions.map((_action, index) => (
                     <option key={_action.id} value={_action.id}>
-                      {index + 1} . {_action.name ?? 'Action or Userscript'}
+                      {index + 1} . {_action.name ?? t('step.defaultName')}
                     </option>
                   ))}
                 </Form.Select>

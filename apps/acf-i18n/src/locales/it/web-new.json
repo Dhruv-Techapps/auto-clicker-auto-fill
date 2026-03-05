@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Auto Clicker - Riempimento automatico",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Clic automatico Riempimento automatico logo"
   },
   "status": {
     "connecting": "Connessione in corso..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Caricamento...",
+  "loginModal": {
+    "title": "Per favore effettua l'accesso",
+    "signingIn": "Registrazione..."
+  },
   "learnMore": "Saperne di più",
   "login": "Login",
   "logout": "Esci",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Tentativi di ripetizione",
     "interval": "Attendi tra i tentativi",
+    "intervalRange": "Attendi tra i tentativi",
     "to": "A",
     "stop": "Arresta l'automazione",
     "skip": "Salta questo passaggio",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Estensione non installata",
     "subTitle": "Questa pagina funziona con l&#39;estensione <b>Auto Clicker - AutoFill</b> per Chrome e Edge.",
-    "hint": "Per iniziare, installa prima l'estensione."
+    "hint": "Per iniziare, installa prima l'estensione.",
+    "download": "scaricamento"
+  },
+  "versionAlert": {
+    "securityUpdate": "Aggiornamento di sicurezza richiesto:",
+    "message": "È disponibile una versione più recente di <1>Auto Clicker & Auto Fill</1>, che include correzioni per vulnerabilità di sicurezza identificate di recente.",
+    "learnMore": "Saperne di più",
+    "update": "Aggiorna alla versione più recente per rimanere protetto."
   },
   "stepSettings": {
     "title": "Impostazioni dei passaggi",
@@ -219,6 +232,19 @@
         "noAds": "Esperienza senza pubblicità"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Funzionalità essenziali per gli utenti esperti che desiderano un maggiore controllo.",
+      "perMonth": "al mese",
+      "cta": "Passa a Lite",
+      "includes": "Tutto ciò che è incluso nella versione gratuita, più:",
+      "features": {
+        "addonCondition": "Logica aggiuntiva condizionale",
+        "actionCondition": "Regole di condizione per azione",
+        "actionSettings": "Impostazioni e override a livello di azione",
+        "noAds": "Esperienza senza pubblicità"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "Tutta la potenza dell'automazione, con integrazioni, intelligenza artificiale e supporto prioritario.",
@@ -252,7 +278,10 @@
     "login": "Login",
     "logout": "Esci",
     "language": "Lingua",
-    "learnMore": "Saperne di più"
+    "learnMore": "Saperne di più",
+    "guestInitial": "E",
+    "guestName": "Esploratore",
+    "freePlan": "GRATUITO"
   },
   "automations": {
     "title": "Le mie automazioni",
@@ -272,6 +301,11 @@
     "selectAutomations": "Seleziona le automazioni da esportare o eliminare",
     "select": "Selezionare",
     "import": "Importare",
+    "filter": {
+      "all": "Tutto",
+      "enabled": "Abilitato",
+      "disabled": "Disabili"
+    },
     "toast": {
       "header": "Automazioni",
       "remove": "Automazioni rimosse correttamente",
@@ -315,7 +349,9 @@
       "settings": "Impostazioni di automazione salvate con successo!",
       "add": "Automazione aggiunta correttamente",
       "duplicate": "Automazione duplicata con successo"
-    }
+    },
+    "disable-tooltip": "Disattiva questa automazione per impedirne l'esecuzione senza eliminarla. Potrai riattivarla in seguito, quando ne avrai bisogno.",
+    "enable-tooltip": "Abilita questa automazione per consentirne l'esecuzione. Puoi disabilitarla in seguito se desideri metterla in pausa senza eliminarla."
   },
   "automationSettings": {
     "title": "Impostazioni di automazione",
@@ -349,6 +385,7 @@
     "repeat": "Ripetere",
     "repeatHint": "<b>Ripeti</b> eseguirà nuovamente tutti i passaggi senza ricaricare la pagina con l&#39;intervallo specificato.",
     "repeatInterval": "Intervallo tra i cicli",
+    "repeatIntervalRange": "Intervallo tra i cicli",
     "refresh": "Aggiorna",
     "refreshHint": "Una volta completati tutti i passaggi, la pagina verrà <b>ricaricata</b> .",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "Valore",
     "repeat": "Ripetere",
     "repeatInterval": "Intervallo",
+    "defaultName": "Azione o script utente",
     "confirm": {
       "remove": {
         "title": "Rimuovi passaggio",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Esempi"
+      "title": "Esempi",
+      "attributeSelector": "Selettore di attributi",
+      "regex": "Espressione regolare"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Ricerca di elementi",
+      "count": "# di elementi"
+    },
+    "value": {
+      "plainText": "Testo normale",
+      "more": "Di più"
+    },
+    "flags": {
+      "title": "bandiere",
+      "global": "Non tornare dopo la prima partita",
+      "multiLine": "^ e $ corrispondono all'inizio/fine della riga",
+      "insensitive": "Corrispondenza senza distinzione tra maiuscole e minuscole",
+      "extended": "Ignora gli spazi vuoti",
+      "singleLine": "Il punto corrisponde alla nuova riga"
     },
     "hotkey": {
       "title": "Tasto di scelta rapida",
@@ -449,7 +506,8 @@
     "dev": "SVILUPPO",
     "stable": "STABILE",
     "examples": "Esempi",
-    "add": "Aggiungere"
+    "add": "Aggiungere",
+    "confirm": "Confermare"
   },
   "languages": {
     "title": "Lingua",

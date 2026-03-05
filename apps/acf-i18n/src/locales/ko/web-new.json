@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "자동 클릭 - 자동 채우기",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "자동 클릭 자동 채우기 로고"
   },
   "status": {
     "connecting": "연결 중..."
@@ -30,6 +31,10 @@
     "auto": "자동"
   },
   "loading": "로딩 중...",
+  "loginModal": {
+    "title": "로그인해 주세요",
+    "signingIn": "로그인..."
+  },
   "learnMore": "더 알아보기",
   "login": "로그인",
   "logout": "로그아웃",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "재시도 횟수",
     "interval": "재시도 간 대기 시간",
+    "intervalRange": "재시도 간 대기 시간",
     "to": "에게",
     "stop": "자동화 중지",
     "skip": "이 단계를 건너뛰세요",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "확장 프로그램이 설치되지 않았습니다",
     "subTitle": "이 페이지는 Chrome 및 Edge용 <b>Auto Clicker - AutoFill</b> 확장 프로그램과 연동됩니다.",
-    "hint": "먼저 확장 프로그램을 설치해 주세요."
+    "hint": "먼저 확장 프로그램을 설치해 주세요.",
+    "download": "다운로드"
+  },
+  "versionAlert": {
+    "securityUpdate": "보안 업데이트 필요:",
+    "message": "<1>Auto Clicker & Auto Fill</1>의 최신 버전이 출시되었으며, 최근 발견된 보안 취약점에 대한 수정 사항이 포함되어 있습니다.",
+    "learnMore": "더 알아보기",
+    "update": "보안을 유지하려면 최신 버전으로 업데이트하십시오."
   },
   "stepSettings": {
     "title": "단계 설정",
@@ -219,6 +232,19 @@
         "noAds": "광고 없는 경험"
       }
     },
+    "lite": {
+      "name": "⭐ 라이트",
+      "tagline": "더 많은 제어 기능을 원하는 고급 사용자를 위한 필수 기능입니다.",
+      "perMonth": "월",
+      "cta": "라이트 버전으로 업그레이드하세요",
+      "includes": "무료 콘텐츠의 모든 기능에 더해 다음이 포함됩니다:",
+      "features": {
+        "addonCondition": "조건부 추가 기능 로직",
+        "actionCondition": "액션별 조건 규칙",
+        "actionSettings": "액션 레벨 설정 및 재정의",
+        "noAds": "광고 없는 경험"
+      }
+    },
     "pro": {
       "name": "🔹 프로",
       "tagline": "통합 기능, AI, 우선 지원 등 자동화의 모든 기능을 활용하세요.",
@@ -252,7 +278,10 @@
     "login": "로그인",
     "logout": "로그아웃",
     "language": "언어",
-    "learnMore": "더 알아보기"
+    "learnMore": "더 알아보기",
+    "guestInitial": "이자형",
+    "guestName": "탐침",
+    "freePlan": "무료"
   },
   "automations": {
     "title": "내 자동화",
@@ -272,6 +301,11 @@
     "selectAutomations": "내보낼 자동화 항목을 선택하거나 삭제하세요.",
     "select": "선택하다",
     "import": "수입",
+    "filter": {
+      "all": "모두",
+      "enabled": "활성화됨",
+      "disabled": "장애가 있는"
+    },
     "toast": {
       "header": "자동화",
       "remove": "자동화 기능이 성공적으로 제거되었습니다.",
@@ -315,7 +349,9 @@
       "settings": "자동화 설정이 성공적으로 저장되었습니다!",
       "add": "자동화 기능이 성공적으로 추가되었습니다.",
       "duplicate": "자동화 기능이 성공적으로 복제되었습니다."
-    }
+    },
+    "disable-tooltip": "이 자동화를 비활성화하면 삭제하지 않고는 실행되지 않습니다. 나중에 필요할 때 다시 활성화할 수 있습니다.",
+    "enable-tooltip": "이 자동화를 활성화하면 실행됩니다. 나중에 삭제하지 않고 일시 중지하려면 다시 비활성화할 수 있습니다."
   },
   "automationSettings": {
     "title": "자동화 설정",
@@ -349,6 +385,7 @@
     "repeat": "반복하다",
     "repeatHint": "<b>반복 기능을 사용하면</b> 지정된 간격으로 페이지를 새로 고침하지 않고 모든 단계를 다시 실행합니다.",
     "repeatInterval": "루프 간 간격",
+    "repeatIntervalRange": "루프 간 간격",
     "refresh": "새로 고치다",
     "refreshHint": "모든 단계가 완료되면 <b>새로 고침을 클릭하여</b> 페이지를 다시 로드합니다.",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "값",
     "repeat": "반복하다",
     "repeatInterval": "간격",
+    "defaultName": "액션 또는 사용자 스크립트",
     "confirm": {
       "remove": {
         "title": "제거 단계",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "예시"
+      "title": "예시",
+      "attributeSelector": "속성 선택기",
+      "regex": "정규 표현식"
+    },
+    "elementFinder": {
+      "getElementBy": "요소 가져오기",
+      "elementFinder": "요소 찾기",
+      "count": "요소 수"
+    },
+    "value": {
+      "plainText": "일반 텍스트",
+      "more": "더"
+    },
+    "flags": {
+      "title": "깃발",
+      "global": "첫 경기 후에는 돌아오지 마세요",
+      "multiLine": "^와 $는 줄의 시작/끝을 나타냅니다.",
+      "insensitive": "대소문자 구분 없이 일치",
+      "extended": "공백은 무시하세요",
+      "singleLine": "점은 줄바꿈과 일치합니다."
     },
     "hotkey": {
       "title": "단축키",
@@ -449,7 +506,8 @@
     "dev": "개발",
     "stable": "안정적인",
     "examples": "예시",
-    "add": "추가하다"
+    "add": "추가하다",
+    "confirm": "확인하다"
   },
   "languages": {
     "title": "언어",

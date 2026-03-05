@@ -1,5 +1,6 @@
 import { appSelector, useAppSelector } from '@acf-options-page/store';
 import { Alert } from 'react-bootstrap';
+import { Trans, useTranslation } from 'react-i18next';
 
 function compareVersions(a: string, b: string): number {
   const pa = a.split('.').map((n) => Number.parseInt(n, 10) || 0);
@@ -16,6 +17,7 @@ function compareVersions(a: string, b: string): number {
 
 export const VersionAlert = () => {
   const { manifest } = useAppSelector(appSelector);
+  const { t } = useTranslation();
 
   if (!manifest?.version) return null;
 
@@ -23,11 +25,11 @@ export const VersionAlert = () => {
 
   return (
     <Alert variant='warning' className='mb-0 text-center p-1 rounded-0'>
-      <strong>Security Update Required:</strong> A newer version of <strong>Auto Clicker & Auto Fill</strong> is available and includes fixes for recently identified security vulnerabilities.
+      <strong>{t('versionAlert.securityUpdate')}</strong> <Trans i18nKey='versionAlert.message' components={{ 1: <strong /> }} />
       <a href='https://github.com/advisories/GHSA-wphj-fx3q-84ch' target='_blank' rel='noopener noreferrer' className='alert-link ms-1'>
-        Learn more
+        {t('versionAlert.learnMore')}
       </a>
-      .<span className='d-inline-block ms-1'>Please update to the latest version to stay protected.</span>
+      .<span className='d-inline-block ms-1'>{t('versionAlert.update')}</span>
     </Alert>
   );
 };

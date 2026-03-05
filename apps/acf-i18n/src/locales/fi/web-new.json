@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Automaattinen napsauttaja - Automaattinen täyttö",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Automaattinen napsautus Automaattisen täytön logo"
   },
   "status": {
     "connecting": "Yhdistetään..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Ladataan...",
+  "loginModal": {
+    "title": "Kirjaudu sisään",
+    "signingIn": "Kirjaudu sisään..."
+  },
   "learnMore": "Lue lisää",
   "login": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Uudelleenyritykset",
     "interval": "Odota uudelleenyritysten välillä",
+    "intervalRange": "Odota uudelleenyritysten välillä",
     "to": "että",
     "stop": "Lopeta automaatio",
     "skip": "Ohita tämä vaihe",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Laajennusta ei ole asennettu",
     "subTitle": "Tämä sivu toimii <b>Auto Clicker - AutoFill</b> -laajennuksen kanssa Chromelle ja Edgelle.",
-    "hint": "Asenna laajennus ensin aloittaaksesi."
+    "hint": "Asenna laajennus ensin aloittaaksesi.",
+    "download": "lataa"
+  },
+  "versionAlert": {
+    "securityUpdate": "Vaadittu tietoturvapäivitys:",
+    "message": "Uudempi versio <1>Auto Clicker & Auto Fill</1> -sovelluksesta on saatavilla ja se sisältää korjauksia äskettäin havaittuihin tietoturva-aukkoihin.",
+    "learnMore": "Lue lisää",
+    "update": "Päivitä uusimpaan versioon suojauksen säilyttämiseksi."
   },
   "stepSettings": {
     "title": "Vaiheen asetukset",
@@ -219,6 +232,19 @@
         "noAds": "Mainokseton kokemus"
       }
     },
+    "lite": {
+      "name": "⭐ KEVYT",
+      "tagline": "Olennaisia ominaisuuksia tehokäyttäjille, jotka haluavat enemmän hallintaa.",
+      "perMonth": "kuukaudessa",
+      "cta": "Päivitä Lite-versioon",
+      "includes": "Kaikki ilmaiseksi, plus:",
+      "features": {
+        "addonCondition": "Ehdollinen lisäosan logiikka",
+        "actionCondition": "Toimintokohtaiset ehtosäännöt",
+        "actionSettings": "Toimintotason asetukset ja ohitukset",
+        "noAds": "Mainokseton kokemus"
+      }
+    },
     "pro": {
       "name": "🔹 AMMATTILAINEN",
       "tagline": "Automaation täysi teho – integraatioilla, tekoälyllä ja priorisoidulla tuella.",
@@ -252,7 +278,10 @@
     "login": "Kirjaudu sisään",
     "logout": "Kirjaudu ulos",
     "language": "Kieli",
-    "learnMore": "Lue lisää"
+    "learnMore": "Lue lisää",
+    "guestInitial": "E",
+    "guestName": "Tutkimusmatkailija",
+    "freePlan": "ILMAINEN"
   },
   "automations": {
     "title": "Omat automaatiot",
@@ -272,6 +301,11 @@
     "selectAutomations": "Valitse vietävät tai poistettavat automaatiot",
     "select": "Valitse",
     "import": "Tuoda",
+    "filter": {
+      "all": "Kaikki",
+      "enabled": "Käytössä",
+      "disabled": "Liikuntarajoitteinen"
+    },
     "toast": {
       "header": "Automaatiot",
       "remove": "Automaatiot poistettu onnistuneesti",
@@ -315,7 +349,9 @@
       "settings": "Automaatioasetukset tallennettu onnistuneesti!",
       "add": "Automaatio lisätty onnistuneesti",
       "duplicate": "Automaatio kopioitu onnistuneesti"
-    }
+    },
+    "disable-tooltip": "Poista tämä automaatio käytöstä estääksesi sen suorittamisen poistamatta sitä. Voit ottaa sen uudelleen käyttöön myöhemmin, kun tarvitset sitä.",
+    "enable-tooltip": "Ota tämä automaatio käyttöön, jotta se voi toimia. Voit poistaa sen käytöstä myöhemmin, jos haluat keskeyttää sen poistamatta sitä."
   },
   "automationSettings": {
     "title": "Automaatioasetukset",
@@ -349,6 +385,7 @@
     "repeat": "Toistaa",
     "repeatHint": "<b>Toista</b> suorittaa kaikki vaiheet uudelleen lataamatta sivua uudelleen annetulla aikavälillä.",
     "repeatInterval": "Silmukoiden välinen aika",
+    "repeatIntervalRange": "Silmukoiden välinen aika",
     "refresh": "Päivitä",
     "refreshHint": "<b>Päivitä-painike</b> lataa sivun uudelleen, kun kaikki vaiheet on suoritettu.",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "Arvo",
     "repeat": "Toistaa",
     "repeatInterval": "Väli",
+    "defaultName": "Toiminto tai käyttäjäskripti",
     "confirm": {
       "remove": {
         "title": "Poista vaihe",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Esimerkkejä"
+      "title": "Esimerkkejä",
+      "attributeSelector": "Ominaisuuden valitsin",
+      "regex": "Regex"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Elementtien etsijä",
+      "count": "elementtien lukumäärä"
+    },
+    "value": {
+      "plainText": "Pelkkä teksti",
+      "more": "lisää"
+    },
+    "flags": {
+      "title": "liput",
+      "global": "Älä palaa ensimmäisen ottelun jälkeen",
+      "multiLine": "^ ja $ vastaavat rivin alkua/loppua",
+      "insensitive": "Kirjainkoosta riippumaton osuma",
+      "extended": "Älä välilyöntejä",
+      "singleLine": "Piste vastaa rivinvaihtoa"
     },
     "hotkey": {
       "title": "Pikanäppäin",
@@ -449,7 +506,8 @@
     "dev": "KEHITTÄÄ",
     "stable": "VAKAA",
     "examples": "Esimerkkejä",
-    "add": "Lisätä"
+    "add": "Lisätä",
+    "confirm": "Vahvistaa"
   },
   "languages": {
     "title": "Kieli",

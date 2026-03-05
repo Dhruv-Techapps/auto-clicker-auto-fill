@@ -1,7 +1,8 @@
 {
   "meta": {
     "appName": "Auto Clicker - AutoFill",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}"
+    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
+    "logoAlt": "Auto click Auto Fill logo"
   },
   "status": {
     "connecting": "Connecting..."
@@ -30,6 +31,10 @@
     "auto": "Auto"
   },
   "loading": "Loading...",
+  "loginModal": {
+    "title": "Please sign in",
+    "signingIn": "Sign in..."
+  },
   "learnMore": "Learn More",
   "login": "Login",
   "logout": "Logout",
@@ -79,6 +84,7 @@
   "retry": {
     "title": "Retry Attempts",
     "interval": "Wait Between Retries",
+    "intervalRange": "Wait Between Retries",
     "to": "to",
     "stop": "Stop Automation",
     "skip": "Skip This Step",
@@ -125,7 +131,14 @@
   "extensionNotFound": {
     "title": "Extension Not Installed",
     "subTitle": "This page works with the <b>Auto Clicker - AutoFill</b> extension for Chrome & Edge.",
-    "hint": "Please install the extension first to get started."
+    "hint": "Please install the extension first to get started.",
+    "download": "download"
+  },
+  "versionAlert": {
+    "securityUpdate": "Security Update Required:",
+    "message": "A newer version of <1>Auto Clicker & Auto Fill</1> is available and includes fixes for recently identified security vulnerabilities.",
+    "learnMore": "Learn more",
+    "update": "Please update to the latest version to stay protected."
   },
   "stepSettings": {
     "title": "Step Settings",
@@ -219,6 +232,19 @@
         "noAds": "Ad-free experience"
       }
     },
+    "lite": {
+      "name": "⭐ LITE",
+      "tagline": "Essential features for power users who want more control.",
+      "perMonth": "per month",
+      "cta": "Upgrade to Lite",
+      "includes": "Everything in Free, plus:",
+      "features": {
+        "addonCondition": "Conditional addon logic",
+        "actionCondition": "Per-action condition rules",
+        "actionSettings": "Action-level settings & overrides",
+        "noAds": "Ad-free experience"
+      }
+    },
     "pro": {
       "name": "🔹 PRO",
       "tagline": "The full power of automation — with integrations, AI, and priority support.",
@@ -252,7 +278,10 @@
     "login": "Login",
     "logout": "Logout",
     "language": "Language",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "guestInitial": "E",
+    "guestName": "Explorer",
+    "freePlan": "FREE"
   },
   "automations": {
     "title": "My Automations",
@@ -272,6 +301,11 @@
     "selectAutomations": "Select automations to export or delete",
     "select": "Select",
     "import": "Import",
+    "filter": {
+      "all": "All",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
     "toast": {
       "header": "Automations",
       "remove": "Automations removed successfully",
@@ -315,7 +349,9 @@
       "settings": "Automation settings saved successfully!",
       "add": "Automation added successfully",
       "duplicate": "Automation duplicated successfully"
-    }
+    },
+    "disable-tooltip": "Disable this automation to prevent it from running without deleting it. You can enable it again later when you need it.",
+    "enable-tooltip": "Enable this automation to allow it to run. You can disable it again later if you want to pause it without deleting it."
   },
   "automationSettings": {
     "title": "Automation Settings",
@@ -349,6 +385,7 @@
     "repeat": "Repeat",
     "repeatHint": "<b>Repeat</b> will re-run all steps without reloading the page with the interval given.",
     "repeatInterval": "Interval Between Loops",
+    "repeatIntervalRange": "Interval Between Loops",
     "refresh": "Refresh",
     "refreshHint": "<b>Refresh</b> will reload the page once all steps are completed.",
     "toast": {
@@ -394,6 +431,7 @@
     "value": "Value",
     "repeat": "Repeat",
     "repeatInterval": "Interval",
+    "defaultName": "Action or Userscript",
     "confirm": {
       "remove": {
         "title": "Remove Step",
@@ -418,7 +456,26 @@
   },
   "popover": {
     "valueExtractor": {
-      "title": "Examples"
+      "title": "Examples",
+      "attributeSelector": "Attribute Selector",
+      "regex": "Regex"
+    },
+    "elementFinder": {
+      "getElementBy": "getElementBy",
+      "elementFinder": "Element Finder",
+      "count": "# of elements"
+    },
+    "value": {
+      "plainText": "Plain text",
+      "more": "more"
+    },
+    "flags": {
+      "title": "flags",
+      "global": "Don't return after first match",
+      "multiLine": "^ and $ match start/end of line",
+      "insensitive": "Case insensitive match",
+      "extended": "Ignore whitespace",
+      "singleLine": "Dot matches newline"
     },
     "hotkey": {
       "title": "Hotkey",
@@ -449,7 +506,8 @@
     "dev": "DEV",
     "stable": "STABLE",
     "examples": "Examples",
-    "add": "Add"
+    "add": "Add",
+    "confirm": "Confirm"
   },
   "languages": {
     "title": "Language",

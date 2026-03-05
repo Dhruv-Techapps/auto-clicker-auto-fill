@@ -1,6 +1,8 @@
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 export function ValueExtractorPopover() {
+  const { t } = useTranslation();
   return (
     <OverlayTrigger
       trigger='click'
@@ -9,7 +11,7 @@ export function ValueExtractorPopover() {
       overlay={
         <Popover id='popover-basic'>
           <Popover.Body>
-            <h6>Attribute Selector</h6>
+            <h6>{t('popover.valueExtractor.attributeSelector')}</h6>
             <ul>
               <li>
                 <code>@id</code> to extract id of element
@@ -21,7 +23,7 @@ export function ValueExtractorPopover() {
                 Similar or attribute can be extracted by appending with <code>@</code>
               </li>
             </ul>
-            <h6>Regex</h6>
+            <h6>{t('popover.valueExtractor.regex')}</h6>
             <ul>
               <li>
                 <code>\d+.\d*</code> float number extract $<span className='text-primary'>123.00</span> only
