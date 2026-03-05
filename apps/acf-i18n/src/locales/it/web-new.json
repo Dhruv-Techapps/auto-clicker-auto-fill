@@ -315,7 +315,8 @@
       "settings": "Impostazioni di automazione salvate con successo!",
       "add": "Automazione aggiunta correttamente",
       "duplicate": "Automazione duplicata con successo"
-    }
+    },
+    "disable-tooltip": "Disattiva questa automazione per impedirne l'esecuzione senza eliminarla. Potrai riattivarla in seguito, quando ne avrai bisogno."
   },
   "automationSettings": {
     "title": "Impostazioni di automazione",

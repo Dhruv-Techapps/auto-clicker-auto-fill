@@ -315,7 +315,8 @@
       "settings": "Automatisierungseinstellungen erfolgreich gespeichert!",
       "add": "Automatisierung erfolgreich hinzugefügt",
       "duplicate": "Automatisierung erfolgreich dupliziert"
-    }
+    },
+    "disable-tooltip": "Deaktivieren Sie diese Automatisierung, damit sie nicht ausgeführt wird, ohne sie zu löschen. Sie können sie später bei Bedarf wieder aktivieren."
   },
   "automationSettings": {
     "title": "Automatisierungseinstellungen",

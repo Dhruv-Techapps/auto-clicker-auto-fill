@@ -315,7 +315,8 @@
       "settings": "Pengaturan otomatisasi berhasil disimpan!",
       "add": "Otomatisasi berhasil ditambahkan.",
       "duplicate": "Otomatisasi berhasil diduplikasi"
-    }
+    },
+    "disable-tooltip": "Nonaktifkan otomatisasi ini untuk mencegahnya berjalan tanpa menghapusnya. Anda dapat mengaktifkannya kembali nanti saat dibutuhkan."
   },
   "automationSettings": {
     "title": "Pengaturan Otomatisasi",

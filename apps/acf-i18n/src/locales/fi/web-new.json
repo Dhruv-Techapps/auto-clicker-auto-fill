@@ -315,7 +315,8 @@
       "settings": "Automaatioasetukset tallennettu onnistuneesti!",
       "add": "Automaatio lisätty onnistuneesti",
       "duplicate": "Automaatio kopioitu onnistuneesti"
-    }
+    },
+    "disable-tooltip": "Poista tämä automaatio käytöstä estääksesi sen suorittamisen poistamatta sitä. Voit ottaa sen uudelleen käyttöön myöhemmin, kun tarvitset sitä."
   },
   "automationSettings": {
     "title": "Automaatioasetukset",

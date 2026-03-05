@@ -2,7 +2,7 @@ import { IConfiguration } from '@dhruv-techapps/acf-common';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-export function DisableTooltip({ config }: { config: IConfiguration }) {
+export function DisabledTooltip({ config }: { config: IConfiguration }) {
   const { t } = useTranslation();
   if (config.enable) {
     return null;

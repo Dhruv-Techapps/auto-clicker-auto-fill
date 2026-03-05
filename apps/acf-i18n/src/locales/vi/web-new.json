@@ -315,7 +315,8 @@
       "settings": "Cài đặt tự động hóa đã được lưu thành công!",
       "add": "Tự động hóa đã được thêm thành công.",
       "duplicate": "Tự động hóa được sao chép thành công"
-    }
+    },
+    "disable-tooltip": "Hãy tắt tính năng tự động hóa này để ngăn nó chạy mà không cần xóa tệp. Bạn có thể bật lại sau khi cần."
   },
   "automationSettings": {
     "title": "Cài đặt tự động hóa",

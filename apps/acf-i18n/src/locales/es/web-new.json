@@ -315,7 +315,8 @@
       "settings": "¡La configuración de automatización se guardó correctamente!",
       "add": "Automatización agregada exitosamente",
       "duplicate": "Automatización duplicada con éxito"
-    }
+    },
+    "disable-tooltip": "Desactiva esta automatización para evitar que se ejecute sin eliminarla. Puedes volver a activarla cuando la necesites."
   },
   "automationSettings": {
     "title": "Configuración de automatización",

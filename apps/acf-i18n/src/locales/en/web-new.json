@@ -315,7 +315,8 @@
       "settings": "Automation settings saved successfully!",
       "add": "Automation added successfully",
       "duplicate": "Automation duplicated successfully"
-    }
+    },
+    "disable-tooltip": "Disable this automation to prevent it from running without deleting it. You can enable it again later when you need it."
   },
   "automationSettings": {
     "title": "Automation Settings",

@@ -315,7 +315,8 @@
       "settings": "自動化設定已成功儲存！",
       "add": "自動化功能已成功添加",
       "duplicate": "自動化複製成功"
-    }
+    },
+    "disable-tooltip": "停用此自動化功能可防止其在未刪除的情況下運作。您可以在需要時再次啟用它。"
   },
   "automationSettings": {
     "title": "自動化設定",

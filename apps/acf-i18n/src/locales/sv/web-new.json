@@ -315,7 +315,8 @@
       "settings": "Automatiseringsinställningarna har sparats!",
       "add": "Automatisering har lagts till",
       "duplicate": "Automatiseringen har duplicerats"
-    }
+    },
+    "disable-tooltip": "Inaktivera den här automatiseringen för att förhindra att den körs utan att den tas bort. Du kan aktivera den igen senare när du behöver den."
   },
   "automationSettings": {
     "title": "Automatiseringsinställningar",
