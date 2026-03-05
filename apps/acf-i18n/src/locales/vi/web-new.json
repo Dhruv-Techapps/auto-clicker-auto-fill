@@ -350,7 +350,8 @@
       "add": "Tự động hóa đã được thêm thành công.",
       "duplicate": "Tự động hóa được sao chép thành công"
     },
-    "disable-tooltip": "Hãy tắt tính năng tự động hóa này để ngăn nó chạy mà không cần xóa tệp. Bạn có thể bật lại sau khi cần."
+    "disable-tooltip": "Hãy tắt tính năng tự động hóa này để ngăn nó chạy mà không cần xóa tệp. Bạn có thể bật lại sau khi cần.",
+    "enable-tooltip": "Kích hoạt tính năng tự động hóa này để cho phép nó chạy. Bạn có thể tắt nó đi sau nếu muốn tạm dừng mà không xóa nó."
   },
   "automationSettings": {
     "title": "Cài đặt tự động hóa",

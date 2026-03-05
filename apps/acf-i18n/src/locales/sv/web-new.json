@@ -350,7 +350,8 @@
       "add": "Automatisering har lagts till",
       "duplicate": "Automatiseringen har duplicerats"
     },
-    "disable-tooltip": "Inaktivera den här automatiseringen för att förhindra att den körs utan att den tas bort. Du kan aktivera den igen senare när du behöver den."
+    "disable-tooltip": "Inaktivera den här automatiseringen för att förhindra att den körs utan att den tas bort. Du kan aktivera den igen senare när du behöver den.",
+    "enable-tooltip": "Aktivera den här automatiseringen för att tillåta att den körs. Du kan inaktivera den igen senare om du vill pausa den utan att radera den."
   },
   "automationSettings": {
     "title": "Automatiseringsinställningar",

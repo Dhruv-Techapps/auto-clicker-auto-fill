@@ -34,7 +34,7 @@ export const AutomationActions = ({ onToggleEditMode }: AutomationActionsProps) 
       )}
       {config.schedule && (
         <OverlayTrigger placement='left' overlay={<Tooltip id='schedule-tooltip'>{t('schedule.title')}</Tooltip>}>
-          <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SCHEDULE)} title={t('schedule.title')}>
+          <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SCHEDULE)}>
             <i className='bi bi-stopwatch-fill me-2' />
           </Button>
         </OverlayTrigger>
@@ -53,10 +53,10 @@ export const AutomationActions = ({ onToggleEditMode }: AutomationActionsProps) 
           </Button>
         </OverlayTrigger>
       )}
-      <OverlayTrigger placement='left-start' overlay={<Tooltip id='edit-mode-tooltip'>{t('automation.disable-tooltip')}</Tooltip>}>
+      <OverlayTrigger placement='left-start' overlay={<Tooltip id='edit-mode-tooltip'>{t(`automation.${config.enable ? 'disable' : 'enable'}-tooltip`)}</Tooltip>}>
         <Form.Switch type='switch' id='edit-mode-switch' checked={config.enable} onChange={onToggleEnable} className='d-inline-block me-2' />
       </OverlayTrigger>
-      <OverlayTrigger placement='left' overlay={<Tooltip id='edit-mode-tooltip'>{t('automationSettings.title')}</Tooltip>}>
+      <OverlayTrigger placement='left' overlay={<Tooltip id='automation-settings-tooltip'>{t('automationSettings.title')}</Tooltip>}>
         <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SETTINGS)}>
           <i className='bi bi-gear' />
         </Button>

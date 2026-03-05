@@ -350,7 +350,8 @@
       "add": "Automation added successfully",
       "duplicate": "Automation duplicated successfully"
     },
-    "disable-tooltip": "Disable this automation to prevent it from running without deleting it. You can enable it again later when you need it."
+    "disable-tooltip": "Disable this automation to prevent it from running without deleting it. You can enable it again later when you need it.",
+    "enable-tooltip": "Enable this automation to allow it to run. You can disable it again later if you want to pause it without deleting it."
   },
   "automationSettings": {
     "title": "Automation Settings",

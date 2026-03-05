@@ -350,7 +350,8 @@
       "add": "Automatisierung erfolgreich hinzugefügt",
       "duplicate": "Automatisierung erfolgreich dupliziert"
     },
-    "disable-tooltip": "Deaktivieren Sie diese Automatisierung, damit sie nicht ausgeführt wird, ohne sie zu löschen. Sie können sie später bei Bedarf wieder aktivieren."
+    "disable-tooltip": "Deaktivieren Sie diese Automatisierung, damit sie nicht ausgeführt wird, ohne sie zu löschen. Sie können sie später bei Bedarf wieder aktivieren.",
+    "enable-tooltip": "Aktivieren Sie diese Automatisierung, damit sie ausgeführt werden kann. Sie können sie später wieder deaktivieren, wenn Sie sie pausieren möchten, ohne sie zu löschen."
   },
   "automationSettings": {
     "title": "Automatisierungseinstellungen",

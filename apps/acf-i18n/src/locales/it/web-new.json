@@ -350,7 +350,8 @@
       "add": "Automazione aggiunta correttamente",
       "duplicate": "Automazione duplicata con successo"
     },
-    "disable-tooltip": "Disattiva questa automazione per impedirne l'esecuzione senza eliminarla. Potrai riattivarla in seguito, quando ne avrai bisogno."
+    "disable-tooltip": "Disattiva questa automazione per impedirne l'esecuzione senza eliminarla. Potrai riattivarla in seguito, quando ne avrai bisogno.",
+    "enable-tooltip": "Abilita questa automazione per consentirne l'esecuzione. Puoi disabilitarla in seguito se desideri metterla in pausa senza eliminarla."
   },
   "automationSettings": {
     "title": "Impostazioni di automazione",

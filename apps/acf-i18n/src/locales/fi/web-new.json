@@ -350,7 +350,8 @@
       "add": "Automaatio lisätty onnistuneesti",
       "duplicate": "Automaatio kopioitu onnistuneesti"
     },
-    "disable-tooltip": "Poista tämä automaatio käytöstä estääksesi sen suorittamisen poistamatta sitä. Voit ottaa sen uudelleen käyttöön myöhemmin, kun tarvitset sitä."
+    "disable-tooltip": "Poista tämä automaatio käytöstä estääksesi sen suorittamisen poistamatta sitä. Voit ottaa sen uudelleen käyttöön myöhemmin, kun tarvitset sitä.",
+    "enable-tooltip": "Ota tämä automaatio käyttöön, jotta se voi toimia. Voit poistaa sen käytöstä myöhemmin, jos haluat keskeyttää sen poistamatta sitä."
   },
   "automationSettings": {
     "title": "Automaatioasetukset",

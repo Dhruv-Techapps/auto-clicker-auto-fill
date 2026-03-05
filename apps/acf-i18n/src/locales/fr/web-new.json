@@ -350,7 +350,8 @@
       "add": "L'automatisation a été ajoutée avec succès",
       "duplicate": "Automatisation dupliquée avec succès"
     },
-    "disable-tooltip": "Désactivez cette automatisation pour éviter qu'elle ne s'exécute sans l'avoir supprimée. Vous pourrez la réactiver ultérieurement si nécessaire."
+    "disable-tooltip": "Désactivez cette automatisation pour éviter qu'elle ne s'exécute sans l'avoir supprimée. Vous pourrez la réactiver ultérieurement si nécessaire.",
+    "enable-tooltip": "Activez cette automatisation pour qu'elle s'exécute. Vous pourrez la désactiver ultérieurement si vous souhaitez la suspendre sans la supprimer."
   },
   "automationSettings": {
     "title": "Paramètres d'automatisation",

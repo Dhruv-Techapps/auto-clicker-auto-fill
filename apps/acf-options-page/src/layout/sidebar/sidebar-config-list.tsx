@@ -66,7 +66,7 @@ export const SidebarConfigList = () => {
             .map((config) => (
               <Nav.Item key={config.id} className='w-100 px-2'>
                 <NavLink to={ROUTES.AUTOMATION(config.id)} className={({ isActive }) => (isActive ? 'active nav-link px-2 text-truncate' : 'text-body-secondary nav-link px-2 text-truncate')}>
-                  {config.enable === false && <i className='bi bi-slash-circle me-1' title={t('automations.disabled')} />}
+                  {config.enable === false && <i className='bi bi-slash-circle me-1' title={t('automation.disabled')} />}
                   {config.name || config.url || config.id}
                 </NavLink>
               </Nav.Item>

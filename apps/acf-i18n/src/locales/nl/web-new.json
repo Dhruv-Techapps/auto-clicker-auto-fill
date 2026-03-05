@@ -350,7 +350,8 @@
       "add": "Automatisering succesvol toegevoegd",
       "duplicate": "Automatisering succesvol gedupliceerd"
     },
-    "disable-tooltip": "Schakel deze automatisering uit om te voorkomen dat deze wordt uitgevoerd zonder deze te verwijderen. U kunt deze later weer inschakelen wanneer u deze nodig hebt."
+    "disable-tooltip": "Schakel deze automatisering uit om te voorkomen dat deze wordt uitgevoerd zonder deze te verwijderen. U kunt deze later weer inschakelen wanneer u deze nodig hebt.",
+    "enable-tooltip": "Schakel deze automatisering in om deze te laten draaien. Je kunt deze later weer uitschakelen als je de automatisering wilt pauzeren zonder deze te verwijderen."
   },
   "automationSettings": {
     "title": "Automatiseringsinstellingen",

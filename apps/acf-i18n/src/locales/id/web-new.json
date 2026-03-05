@@ -350,7 +350,8 @@
       "add": "Otomatisasi berhasil ditambahkan.",
       "duplicate": "Otomatisasi berhasil diduplikasi"
     },
-    "disable-tooltip": "Nonaktifkan otomatisasi ini untuk mencegahnya berjalan tanpa menghapusnya. Anda dapat mengaktifkannya kembali nanti saat dibutuhkan."
+    "disable-tooltip": "Nonaktifkan otomatisasi ini untuk mencegahnya berjalan tanpa menghapusnya. Anda dapat mengaktifkannya kembali nanti saat dibutuhkan.",
+    "enable-tooltip": "Aktifkan otomatisasi ini agar dapat berjalan. Anda dapat menonaktifkannya kembali nanti jika ingin menjeda tanpa menghapusnya."
   },
   "automationSettings": {
     "title": "Pengaturan Otomatisasi",
