@@ -301,6 +301,11 @@
     "selectAutomations": "내보낼 자동화 항목을 선택하거나 삭제하세요.",
     "select": "선택하다",
     "import": "수입",
+    "filter": {
+      "all": "모두",
+      "enabled": "활성화됨",
+      "disabled": "장애가 있는"
+    },
     "toast": {
       "header": "자동화",
       "remove": "자동화 기능이 성공적으로 제거되었습니다.",

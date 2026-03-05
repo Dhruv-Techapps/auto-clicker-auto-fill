@@ -301,6 +301,11 @@
     "selectAutomations": "Seleziona le automazioni da esportare o eliminare",
     "select": "Selezionare",
     "import": "Importare",
+    "filter": {
+      "all": "Tutto",
+      "enabled": "Abilitato",
+      "disabled": "Disabili"
+    },
     "toast": {
       "header": "Automazioni",
       "remove": "Automazioni rimosse correttamente",

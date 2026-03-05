@@ -301,6 +301,11 @@
     "selectAutomations": "Välj automatiseringar att exportera eller ta bort",
     "select": "Välja",
     "import": "Importera",
+    "filter": {
+      "all": "Alla",
+      "enabled": "Aktiverad",
+      "disabled": "Funktionshindrad"
+    },
     "toast": {
       "header": "Automatiseringar",
       "remove": "Automatiseringar har tagits bort",

@@ -301,6 +301,11 @@
     "selectAutomations": "Select automations to export or delete",
     "select": "Select",
     "import": "Import",
+    "filter": {
+      "all": "All",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
     "toast": {
       "header": "Automations",
       "remove": "Automations removed successfully",

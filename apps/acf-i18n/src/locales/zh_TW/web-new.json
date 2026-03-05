@@ -301,6 +301,11 @@
     "selectAutomations": "選擇要匯出或刪除的自動化流程",
     "select": "選擇",
     "import": "進口",
+    "filter": {
+      "all": "全部",
+      "enabled": "已啟用",
+      "disabled": "已停用"
+    },
     "toast": {
       "header": "自動化",
       "remove": "自動化操作已成功移除。",

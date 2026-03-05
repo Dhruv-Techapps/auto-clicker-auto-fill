@@ -301,6 +301,11 @@
     "selectAutomations": "Wählen Sie die zu exportierenden oder zu löschenden Automatisierungen aus.",
     "select": "Wählen",
     "import": "Import",
+    "filter": {
+      "all": "Alle",
+      "enabled": "Ermöglicht",
+      "disabled": "Deaktiviert"
+    },
     "toast": {
       "header": "Automatisierungen",
       "remove": "Automatisierungen erfolgreich entfernt",

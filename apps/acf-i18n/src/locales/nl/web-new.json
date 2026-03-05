@@ -301,6 +301,11 @@
     "selectAutomations": "Selecteer automatiseringen die u wilt exporteren of verwijderen.",
     "select": "Select",
     "import": "Importeren",
+    "filter": {
+      "all": "Alle",
+      "enabled": "Ingeschakeld",
+      "disabled": "Gehandicapt"
+    },
     "toast": {
       "header": "Automatiseringen",
       "remove": "Automatiseringen succesvol verwijderd",

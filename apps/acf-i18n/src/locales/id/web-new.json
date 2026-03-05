@@ -301,6 +301,11 @@
     "selectAutomations": "Pilih otomatisasi yang ingin diekspor atau dihapus.",
     "select": "Memilih",
     "import": "Impor",
+    "filter": {
+      "all": "Semua",
+      "enabled": "Diaktifkan",
+      "disabled": "Dengan disabilitas"
+    },
     "toast": {
       "header": "Otomatisasi",
       "remove": "Otomatisasi berhasil dihapus.",

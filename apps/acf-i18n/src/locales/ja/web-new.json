@@ -301,6 +301,11 @@
     "selectAutomations": "エクスポートまたは削除する自動化を選択",
     "select": "選択",
     "import": "輸入",
+    "filter": {
+      "all": "全て",
+      "enabled": "有効",
+      "disabled": "無効"
+    },
     "toast": {
       "header": "自動化",
       "remove": "自動化が正常に削除されました",

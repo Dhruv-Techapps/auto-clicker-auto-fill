@@ -301,6 +301,11 @@
     "selectAutomations": "Chọn các quy trình tự động hóa để xuất hoặc xóa.",
     "select": "Lựa chọn",
     "import": "Nhập khẩu",
+    "filter": {
+      "all": "Tất cả",
+      "enabled": "Đã bật",
+      "disabled": "Tàn tật"
+    },
     "toast": {
       "header": "Tự động hóa",
       "remove": "Đã gỡ bỏ thành công các quy trình tự động hóa",

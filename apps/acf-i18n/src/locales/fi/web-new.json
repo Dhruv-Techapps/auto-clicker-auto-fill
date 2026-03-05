@@ -301,6 +301,11 @@
     "selectAutomations": "Valitse vietävät tai poistettavat automaatiot",
     "select": "Valitse",
     "import": "Tuoda",
+    "filter": {
+      "all": "Kaikki",
+      "enabled": "Käytössä",
+      "disabled": "Liikuntarajoitteinen"
+    },
     "toast": {
       "header": "Automaatiot",
       "remove": "Automaatiot poistettu onnistuneesti",
