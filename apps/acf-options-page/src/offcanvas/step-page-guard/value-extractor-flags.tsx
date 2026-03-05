@@ -2,8 +2,9 @@ import { IAddon } from '@dhruv-techapps/acf-common';
 import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
-const FLAGS = [
+const FLAG_KEYS = [
   {
     value: 'g',
     label: () => (
@@ -11,7 +12,7 @@ const FLAGS = [
         <b className='text-danger'>g</b>lobal
       </>
     ),
-    sub: "Don't return after first match"
+    subKey: 'popover.flags.global'
   },
   {
     value: 'm',
@@ -20,7 +21,7 @@ const FLAGS = [
         <b className='text-danger'>m</b>ulti line
       </>
     ),
-    sub: '^ and $ match start/end of line'
+    subKey: 'popover.flags.multiLine'
   },
   {
     value: 'i',
@@ -29,7 +30,7 @@ const FLAGS = [
         <b className='text-danger'>i</b>nsensitive
       </>
     ),
-    sub: 'Case insensitive match'
+    subKey: 'popover.flags.insensitive'
   },
   {
     value: 'x',
@@ -38,7 +39,7 @@ const FLAGS = [
         e<b className='text-danger'>x</b>tended
       </>
     ),
-    sub: 'Ignore whitespace'
+    subKey: 'popover.flags.extended'
   },
   {
     value: 's',
@@ -47,7 +48,7 @@ const FLAGS = [
         <b className='text-danger'>s</b>ingle line
       </>
     ),
-    sub: 'Dot matches newline'
+    subKey: 'popover.flags.singleLine'
   }
 ];
 
@@ -61,6 +62,7 @@ interface PreCheckValueExtractorFlagsProps {
 }
 
 export function PreCheckValueExtractorFlags({ watch, setValue }: PreCheckValueExtractorFlagsProps) {
+  const { t } = useTranslation();
   const valueExtractor = watch('valueExtractor');
   const valueExtractorFlags = watch('valueExtractorFlags') || '';
 
@@ -90,11 +92,11 @@ export function PreCheckValueExtractorFlags({ watch, setValue }: PreCheckValueEx
   }
 
   return (
-    <DropdownButton variant='outline-secondary' title={title('flags')} data-testid='value-extractor-flags' id='value-extractor-flags' align='end'>
-      {FLAGS.map(({ value, label, sub }) => (
+    <DropdownButton variant='outline-secondary' title={title(t('popover.flags.title'))} data-testid='value-extractor-flags' id='value-extractor-flags' align='end'>
+      {FLAG_KEYS.map(({ value, label, subKey }) => (
         <Dropdown.Item href='#' key={value} active={flags[value]} onClick={onFlagsClick} data-flag={value}>
           {label()} <br />
-          <small className='fw-light'>{sub}</small>
+          <small className='fw-light'>{t(subKey)}</small>
         </Dropdown.Item>
       ))}
     </DropdownButton>

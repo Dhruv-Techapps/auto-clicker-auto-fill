@@ -25,12 +25,12 @@ export const SidebarFooter = (props: ISidebarFooterProps) => {
               {user?.displayName
                 ?.split(' ')
                 .map((name) => name.charAt(0).toUpperCase())
-                .join('') ?? 'E'}
+                .join('') ?? t('sidebar.guestInitial')}
             </div>
             {visible && (
               <div>
-                {user?.displayName ?? 'Explorer'}
-                <small className='d-block text-body-tertiary'>{role?.toUpperCase() ?? 'FREE'}</small>
+                {user?.displayName ?? t('sidebar.guestName')}
+                <small className='d-block text-body-tertiary'>{role?.toUpperCase() ?? t('sidebar.freePlan')}</small>
               </div>
             )}
           </div>

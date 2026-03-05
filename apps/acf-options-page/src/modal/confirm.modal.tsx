@@ -21,7 +21,7 @@ const ConfirmModal = ({ visible, message, title, headerClass, noClick, yesClick 
   return (
     <Modal show={visible} centered backdrop='static' keyboard={false} onShow={onShow} onHide={onHide} data-testid='confirm-modal'>
       <Modal.Body className='p-4 text-center'>
-        <h4 className={`my-3 fw-normal ${headerClass}`}>{title || 'Confirm'}</h4>
+        <h4 className={`my-3 fw-normal ${headerClass}`}>{title || t('common.confirm')}</h4>
         {message}
       </Modal.Body>
       <Modal.Footer className='flex-nowrap p-0'>

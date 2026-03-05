@@ -34,7 +34,7 @@ export const AutomationActions = ({ onToggleEditMode }: AutomationActionsProps) 
       )}
       {config.schedule && (
         <OverlayTrigger placement='left' overlay={<Tooltip id='schedule-tooltip'>{t('schedule.title')}</Tooltip>}>
-          <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SCHEDULE)} title={t('schedule')}>
+          <Button variant='link' onClick={() => navigate(ROUTES.AUTOMATION_SCHEDULE)} title={t('schedule.title')}>
             <i className='bi bi-stopwatch-fill me-2' />
           </Button>
         </OverlayTrigger>

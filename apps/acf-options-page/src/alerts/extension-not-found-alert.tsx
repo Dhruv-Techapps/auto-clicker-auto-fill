@@ -2,9 +2,11 @@ import { appSelector } from '@acf-options-page/store';
 import { useAppSelector } from '@acf-options-page/store/hooks';
 import { CHROME_WEB_STORE } from '@acf-options-page/util/constants';
 import { Alert } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 export const ExtensionNotFoundAlert = () => {
   const { error, errorButton } = useAppSelector(appSelector);
+  const { t } = useTranslation();
 
   if (!error) return null;
 
@@ -14,7 +16,7 @@ export const ExtensionNotFoundAlert = () => {
         {error}
         {errorButton && (
           <Alert.Link href={`${CHROME_WEB_STORE}${import.meta.env.VITE_PUBLIC_CHROME_EXTENSION_ID}`} target='_blank' className='ms-2'>
-            download
+            {t('extensionNotFound.download')}
           </Alert.Link>
         )}
       </p>
