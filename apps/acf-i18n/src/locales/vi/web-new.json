@@ -38,7 +38,11 @@
   "resources": "Tài nguyên",
   "settings": {
     "title": "Cài đặt toàn cầu",
-    "additional": "Cài đặt bổ sung"
+    "additional": "Cài đặt bổ sung",
+    "toast": {
+      "header": "Cài đặt",
+      "body": "Cài đặt đã được lưu thành công!"
+    }
   },
   "notification": {
     "title": "Hiển thị thông báo",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Số lần thử lại",
     "interval": "Chờ giữa các lần thử lại",
+    "to": "ĐẾN",
     "stop": "Dừng tự động hóa",
     "skip": "Bỏ qua bước này",
     "refresh": "Làm mới và thử lại",
-    "hint": "Điều gì sẽ xảy ra nếu không tìm thấy mặt hàng đó trên trang?"
+    "goto": "Chuyển đến Bước",
+    "hint": "Điều gì sẽ xảy ra nếu không tìm thấy mặt hàng đó trên trang?",
+    "unlimited-tooltip": "Đặt thành \"không giới hạn\" để tiếp tục thử lại vô thời hạn cho đến khi tìm thấy mục. Sử dụng cẩn thận, vì điều này có thể khiến trình duyệt của bạn bị treo nếu mục đó không bao giờ xuất hiện.",
+    "range-tooltip": "Đặt một khoảng thời gian để tăng tính ngẫu nhiên của các lần thử lại và tránh bị phát hiện. Ví dụ, đặt từ 5 đến 10 giây sẽ chọn ngẫu nhiên một thời điểm trong khoảng từ 5 đến 10 giây cho mỗi lần thử lại."
   },
   "backup": {
     "title": "Hỗ trợ",
@@ -126,16 +134,6 @@
     "info": "Các thiết lập này chỉ áp dụng cho bước này và bước kiểm tra trước đó, và sẽ được ưu tiên hơn so với Cài đặt Toàn cầu của bạn.",
     "iframeFirst": "Tìm kiếm các trang nhúng trước tiên",
     "iframeFirstHint": "Hãy xem nội dung nhúng bên trong trang trước khi tìm kiếm trên trang chính.",
-    "retry": {
-      "title": "Nếu không tìm thấy mục",
-      "hint": "Hãy chọn điều gì sẽ xảy ra nếu không tìm thấy mục đó, ngay cả sau khi đã thử lại.",
-      "retry": "Số lần thử lại",
-      "interval": "Chờ giữa các lần thử lại",
-      "stop": "Dừng tự động hóa",
-      "skip": "Bỏ qua bước này",
-      "goto": "Chuyển đến Bước",
-      "refresh": "Làm mới và thử lại"
-    },
     "toast": {
       "header": "Cài đặt bước",
       "body": "Cài đặt bước đã được lưu thành công!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Trường này là bắt buộc",
     "number": "Vui lòng nhập số hợp lệ.",
-    "interval": "Vui lòng nhập số hợp lệ.",
+    "integer": "Vui lòng nhập một số nguyên hợp lệ.",
+    "positive": "Phải là số dương",
+    "min": "Vui lòng nhập giá trị lớn hơn hoặc bằng {{min}}",
+    "max": "Vui lòng nhập giá trị nhỏ hơn hoặc bằng {{max}}",
     "url": "Vui lòng nhập URL trang web để tiếp tục.",
     "initWait": "Vui lòng nhập số hợp lệ.",
     "scheduleDate": "Vui lòng nhập ngày tháng hợp lệ theo định dạng sau: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Lỗi",
     "save": "Cứu",
     "clear": "Thông thoáng",
+    "cancel": "Hủy bỏ",
     "close": "Đóng",
     "download": "Tải xuống",
     "disabled": "Tàn tật",

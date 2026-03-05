@@ -38,7 +38,11 @@
   "resources": "Resurser",
   "settings": {
     "title": "Globala inställningar",
-    "additional": "Ytterligare inställningar"
+    "additional": "Ytterligare inställningar",
+    "toast": {
+      "header": "Inställningar",
+      "body": "Inställningarna har sparats!"
+    }
   },
   "notification": {
     "title": "Visa avisering",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Återförsök",
     "interval": "Vänta mellan försök",
+    "to": "till",
     "stop": "Stoppa automatiseringen",
     "skip": "Hoppa över detta steg",
     "refresh": "Uppdatera och försök igen",
-    "hint": "Vad ska hända om varan inte hittas på sidan?"
+    "goto": "Gå till steg",
+    "hint": "Vad ska hända om varan inte hittas på sidan?",
+    "unlimited-tooltip": "Ställ in på obegränsat för att fortsätta försöka på obestämd tid tills objektet hittas. Var försiktig, eftersom det kan göra att din webbläsare slutar svara om objektet aldrig visas.",
+    "range-tooltip": "Ange ett intervall för att öka slumpmässigheten för återförsöksintervall och undvika detektering. Om du till exempel ställer in 5 till 10 sekunder väljs slumpmässigt en tid mellan 5 och 10 sekunder för varje återförsök."
   },
   "backup": {
     "title": "Säkerhetskopiering",
@@ -126,16 +134,6 @@
     "info": "Dessa inställningar gäller endast för det här steget och dess förkontroll, och prioriteras framför dina globala inställningar.",
     "iframeFirst": "Sök först efter inbäddade sidor",
     "iframeFirstHint": "Titta in i allt inbäddat innehåll på sidan innan du söker på huvudsidan",
-    "retry": {
-      "title": "Om föremålet inte hittas",
-      "hint": "Välj vad som ska hända om objektet inte kan hittas, även efter ett nytt försök.",
-      "retry": "Återförsök",
-      "interval": "Vänta mellan försök",
-      "stop": "Stoppa automatiseringen",
-      "skip": "Hoppa över detta steg",
-      "goto": "Gå till steg",
-      "refresh": "Uppdatera och försök igen"
-    },
     "toast": {
       "header": "Steginställningar",
       "body": "Steginställningarna har sparats!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Detta fält är obligatoriskt",
     "number": "Ange ett giltigt nummer",
-    "interval": "Ange ett giltigt nummer",
+    "integer": "Ange ett giltigt heltal",
+    "positive": "Måste vara ett positivt tal",
+    "min": "Ange ett värde större än eller lika med {{min}}",
+    "max": "Ange ett värde som är mindre än eller lika med {{max}}",
     "url": "Ange en webbplatsadress för att fortsätta",
     "initWait": "Ange ett giltigt nummer",
     "scheduleDate": "Ange ett giltigt datum i detta format: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Fel",
     "save": "Spara",
     "clear": "Rensa",
+    "cancel": "Avboka",
     "close": "Nära",
     "download": "Ladda ner",
     "disabled": "Funktionshindrad",

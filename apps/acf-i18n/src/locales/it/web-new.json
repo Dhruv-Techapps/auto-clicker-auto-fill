@@ -38,7 +38,11 @@
   "resources": "Risorse",
   "settings": {
     "title": "Impostazioni globali",
-    "additional": "Impostazioni aggiuntive"
+    "additional": "Impostazioni aggiuntive",
+    "toast": {
+      "header": "Impostazioni",
+      "body": "Impostazioni salvate con successo!"
+    }
   },
   "notification": {
     "title": "Mostra notifica",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Tentativi di ripetizione",
     "interval": "Attendi tra i tentativi",
+    "to": "A",
     "stop": "Arresta l'automazione",
     "skip": "Salta questo passaggio",
     "refresh": "Aggiorna e riprova",
-    "hint": "Cosa succede se l'articolo non viene trovato nella pagina?"
+    "goto": "Vai al passaggio",
+    "hint": "Cosa succede se l'articolo non viene trovato nella pagina?",
+    "unlimited-tooltip": "Imposta su illimitato per continuare a riprovare all'infinito finché l'elemento non viene trovato. Usalo con cautela, poiché questa opzione potrebbe causare il blocco del browser se l'elemento non viene mai visualizzato.",
+    "range-tooltip": "Imposta un intervallo per aumentare la casualità degli intervalli di ripetizione ed evitare il rilevamento. Ad esempio, impostando un intervallo compreso tra 5 e 10 secondi, verrà scelto casualmente un intervallo di tempo compreso tra 5 e 10 secondi per ogni tentativo di ripetizione."
   },
   "backup": {
     "title": "Backup",
@@ -126,16 +134,6 @@
     "info": "Queste impostazioni si applicano solo a questo passaggio e al relativo controllo preliminare e avranno la priorità sulle Impostazioni globali.",
     "iframeFirst": "Cerca prima nelle pagine incorporate",
     "iframeFirstHint": "Guarda all'interno di qualsiasi contenuto incorporato nella pagina prima di cercare nella pagina principale",
-    "retry": {
-      "title": "Se l'articolo non è stato trovato",
-      "hint": "Scegli cosa fare se l'elemento non viene trovato, anche dopo un nuovo tentativo.",
-      "retry": "Tentativi di ripetizione",
-      "interval": "Attendi tra i tentativi",
-      "stop": "Arresta l'automazione",
-      "skip": "Salta questo passaggio",
-      "goto": "Vai al passaggio",
-      "refresh": "Aggiorna e riprova"
-    },
     "toast": {
       "header": "Impostazioni dei passaggi",
       "body": "Impostazioni dei passaggi salvate con successo!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Questo campo è obbligatorio",
     "number": "Inserisci un numero valido",
-    "interval": "Inserisci un numero valido",
+    "integer": "Inserisci un numero intero valido",
+    "positive": "Deve essere un numero positivo",
+    "min": "Inserisci un valore maggiore o uguale a {{min}}",
+    "max": "Inserisci un valore inferiore o uguale a {{max}}",
     "url": "Inserisci l'URL di un sito web per continuare",
     "initWait": "Inserisci un numero valido",
     "scheduleDate": "Inserisci una data valida in questo formato: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Errore",
     "save": "Salva",
     "clear": "Chiaro",
+    "cancel": "Cancellare",
     "close": "Vicino",
     "download": "Scaricamento",
     "disabled": "Disabili",

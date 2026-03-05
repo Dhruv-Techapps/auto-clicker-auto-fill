@@ -38,7 +38,11 @@
   "resources": "Recursos",
   "settings": {
     "title": "Configuración global",
-    "additional": "Ajustes adicionales"
+    "additional": "Ajustes adicionales",
+    "toast": {
+      "header": "Ajustes",
+      "body": "¡Configuración guardada exitosamente!"
+    }
   },
   "notification": {
     "title": "Mostrar notificación",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Intentos de reintento",
     "interval": "Esperar entre reintentos",
+    "to": "a",
     "stop": "Detener la automatización",
     "skip": "Omitir este paso",
     "refresh": "Actualizar y reintentar",
-    "hint": "¿Qué pasa si el artículo no se encuentra en la página?"
+    "goto": "Ir al paso",
+    "hint": "¿Qué pasa si el artículo no se encuentra en la página?",
+    "unlimited-tooltip": "Configurar como ilimitado para reintentar indefinidamente hasta encontrar el elemento. Usar con precaución, ya que esto podría provocar que el navegador deje de responder si el elemento nunca aparece.",
+    "range-tooltip": "Establezca un rango para aumentar la aleatoriedad de los intervalos de reintento y evitar la detección. Por ejemplo, si se establece entre 5 y 10 segundos, se seleccionará aleatoriamente un tiempo de entre 5 y 10 segundos para cada reintento."
   },
   "backup": {
     "title": "Respaldo",
@@ -126,16 +134,6 @@
     "info": "Estas configuraciones se aplican solo a este paso y su verificación previa, y tendrán prioridad sobre su Configuración global.",
     "iframeFirst": "Buscar primero en las páginas incrustadas",
     "iframeFirstHint": "Mire dentro de cualquier contenido incrustado en la página antes de buscar en la página principal",
-    "retry": {
-      "title": "Si no se encuentra el artículo",
-      "hint": "Elija qué debe suceder si no se puede encontrar el elemento, incluso después de volver a intentarlo.",
-      "retry": "Intentos de reintento",
-      "interval": "Esperar entre reintentos",
-      "stop": "Detener la automatización",
-      "skip": "Omitir este paso",
-      "goto": "Ir al paso",
-      "refresh": "Actualizar y reintentar"
-    },
     "toast": {
       "header": "Configuración de pasos",
       "body": "¡La configuración de pasos se guardó correctamente!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Este campo es obligatorio",
     "number": "Por favor, introduzca un número válido",
-    "interval": "Por favor, introduzca un número válido",
+    "integer": "Por favor, introduzca un número entero válido",
+    "positive": "Debe ser un número positivo",
+    "min": "Ingrese un valor mayor o igual a {{min}}",
+    "max": "Ingrese un valor menor o igual a {{max}}",
     "url": "Ingrese la URL de un sitio web para continuar",
     "initWait": "Por favor, introduzca un número válido",
     "scheduleDate": "Por favor, introduzca una fecha válida en este formato: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Error",
     "save": "Ahorrar",
     "clear": "Claro",
+    "cancel": "Cancelar",
     "close": "Cerca",
     "download": "Descargar",
     "disabled": "Desactivado",

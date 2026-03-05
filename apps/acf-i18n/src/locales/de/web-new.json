@@ -38,7 +38,11 @@
   "resources": "Ressourcen",
   "settings": {
     "title": "Globale Einstellungen",
-    "additional": "Zusätzliche Einstellungen"
+    "additional": "Zusätzliche Einstellungen",
+    "toast": {
+      "header": "Einstellungen",
+      "body": "Einstellungen erfolgreich gespeichert!"
+    }
   },
   "notification": {
     "title": "Benachrichtigung anzeigen",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Wiederholungsversuche",
     "interval": "Wartezeit zwischen den Wiederholungsversuchen",
+    "to": "Zu",
     "stop": "Automatisierung stoppen",
     "skip": "Diesen Schritt überspringen",
     "refresh": "Aktualisieren und erneut versuchen",
-    "hint": "Was soll geschehen, wenn der Artikel auf der Seite nicht gefunden wird?"
+    "goto": "Gehe zu Schritt",
+    "hint": "Was soll geschehen, wenn der Artikel auf der Seite nicht gefunden wird?",
+    "unlimited-tooltip": "Stellen Sie die Option auf „Unbegrenzt“, um die Suche so lange fortzusetzen, bis das Element gefunden wird. Gehen Sie dabei mit Vorsicht vor, da Ihr Browser möglicherweise nicht mehr reagiert, falls das Element nicht angezeigt wird.",
+    "range-tooltip": "Um die Zufälligkeit der Wiederholungsintervalle zu erhöhen und eine Erkennung zu vermeiden, legen Sie einen Bereich fest. Wenn Sie beispielsweise 5 bis 10 Sekunden einstellen, wird für jeden Wiederholungsversuch zufällig eine Zeit zwischen 5 und 10 Sekunden gewählt."
   },
   "backup": {
     "title": "Backup",
@@ -126,16 +134,6 @@
     "info": "Diese Einstellungen gelten nur für diesen Schritt und seine Vorprüfung und haben Vorrang vor Ihren globalen Einstellungen.",
     "iframeFirst": "Zuerst eingebettete Seiten durchsuchen",
     "iframeFirstHint": "Schauen Sie sich zunächst die eingebetteten Inhalte der Seite an, bevor Sie die Hauptseite durchsuchen.",
-    "retry": {
-      "title": "Falls der Artikel nicht gefunden wird",
-      "hint": "Wählen Sie aus, was geschehen soll, wenn das Element auch nach wiederholten Versuchen nicht gefunden werden kann.",
-      "retry": "Wiederholungsversuche",
-      "interval": "Wartezeit zwischen den Wiederholungsversuchen",
-      "stop": "Automatisierung stoppen",
-      "skip": "Diesen Schritt überspringen",
-      "goto": "Gehe zu Schritt",
-      "refresh": "Aktualisieren und erneut versuchen"
-    },
     "toast": {
       "header": "Schritteinstellungen",
       "body": "Schritteinstellungen erfolgreich gespeichert!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Dieses Feld ist erforderlich",
     "number": "Bitte geben Sie eine gültige Nummer ein.",
-    "interval": "Bitte geben Sie eine gültige Nummer ein.",
+    "integer": "Bitte geben Sie eine gültige ganze Zahl ein.",
+    "positive": "Muss eine positive Zahl sein",
+    "min": "Bitte geben Sie einen Wert größer oder gleich {{min}} ein.",
+    "max": "Bitte geben Sie einen Wert ein, der kleiner oder gleich {{max}} ist.",
     "url": "Bitte geben Sie eine Website-URL ein, um fortzufahren.",
     "initWait": "Bitte geben Sie eine gültige Nummer ein.",
     "scheduleDate": "Bitte geben Sie ein gültiges Datum in diesem Format ein: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Fehler",
     "save": "Speichern",
     "clear": "Klar",
+    "cancel": "Stornieren",
     "close": "Schließen",
     "download": "Herunterladen",
     "disabled": "Deaktiviert",

@@ -38,7 +38,11 @@
   "resources": "Ressources",
   "settings": {
     "title": "Paramètres globaux",
-    "additional": "Paramètres supplémentaires"
+    "additional": "Paramètres supplémentaires",
+    "toast": {
+      "header": "Paramètres",
+      "body": "Paramètres enregistrés avec succès !"
+    }
   },
   "notification": {
     "title": "Afficher la notification",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Tentatives de nouvelle tentative",
     "interval": "Attendre entre les tentatives",
+    "to": "à",
     "stop": "Arrêtez l'automatisation",
     "skip": "Ignorez cette étape",
     "refresh": "Actualiser et réessayer",
-    "hint": "Que se passe-t-il si l'élément est introuvable sur la page ?"
+    "goto": "Passez à l'étape suivante",
+    "hint": "Que se passe-t-il si l'élément est introuvable sur la page ?",
+    "unlimited-tooltip": "Définissez cette option sur illimité pour que les tentatives se poursuivent indéfiniment jusqu'à ce que l'élément soit trouvé. À utiliser avec précaution, car votre navigateur pourrait se bloquer si l'élément n'apparaît jamais.",
+    "range-tooltip": "Définissez une plage de valeurs pour augmenter l'aléatoire des intervalles de nouvelle tentative et éviter la détection. Par exemple, une plage de 5 à 10 secondes choisira aléatoirement un intervalle entre 5 et 10 secondes pour chaque nouvelle tentative."
   },
   "backup": {
     "title": "Sauvegarde",
@@ -126,16 +134,6 @@
     "info": "Ces paramètres s'appliquent uniquement à cette étape et à sa vérification préalable, et prévaudront sur vos paramètres globaux.",
     "iframeFirst": "Rechercher d'abord les pages intégrées",
     "iframeFirstHint": "Consultez le contenu intégré de la page avant de consulter la page principale.",
-    "retry": {
-      "title": "Si l'article est introuvable",
-      "hint": "Choisissez ce qui doit se produire si l'élément est introuvable, même après plusieurs tentatives.",
-      "retry": "Tentatives de nouvelle tentative",
-      "interval": "Attendre entre les tentatives",
-      "stop": "Arrêtez l'automatisation",
-      "skip": "Ignorez cette étape",
-      "goto": "Passez à l'étape suivante",
-      "refresh": "Actualiser et réessayer"
-    },
     "toast": {
       "header": "Paramètres d'étape",
       "body": "Paramètres des étapes enregistrés avec succès !"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Ce champ est obligatoire",
     "number": "Veuillez saisir un numéro valide",
-    "interval": "Veuillez saisir un numéro valide",
+    "integer": "Veuillez saisir un entier valide",
+    "positive": "Doit être un nombre positif",
+    "min": "Veuillez saisir une valeur supérieure ou égale à {{min}}",
+    "max": "Veuillez saisir une valeur inférieure ou égale à {{max}}",
     "url": "Veuillez saisir l'URL d'un site web pour continuer",
     "initWait": "Veuillez saisir un numéro valide",
     "scheduleDate": "Veuillez saisir une date valide au format suivant : 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Erreur",
     "save": "Sauvegarder",
     "clear": "Clair",
+    "cancel": "Annuler",
     "close": "Fermer",
     "download": "Télécharger",
     "disabled": "Désactivé",

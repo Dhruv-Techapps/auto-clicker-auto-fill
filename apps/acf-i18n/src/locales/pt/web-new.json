@@ -38,7 +38,11 @@
   "resources": "Recursos",
   "settings": {
     "title": "Configurações globais",
-    "additional": "Configurações adicionais"
+    "additional": "Configurações adicionais",
+    "toast": {
+      "header": "Configurações",
+      "body": "Configurações salvas com sucesso!"
+    }
   },
   "notification": {
     "title": "Mostrar notificação",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Tentativas de repetição",
     "interval": "Aguarde entre as tentativas",
+    "to": "para",
     "stop": "Pare a automação",
     "skip": "Pule esta etapa",
     "refresh": "Atualize e tente novamente",
-    "hint": "O que deve acontecer se o item não for encontrado na página?"
+    "goto": "Vá para a etapa",
+    "hint": "O que deve acontecer se o item não for encontrado na página?",
+    "unlimited-tooltip": "Defina como ilimitado para continuar tentando indefinidamente até que o item seja encontrado. Use com cautela, pois isso pode fazer com que seu navegador pare de responder se o item nunca aparecer.",
+    "range-tooltip": "Defina um intervalo para aumentar a aleatoriedade dos intervalos de repetição e evitar a detecção. Por exemplo, definir de 5 a 10 segundos escolherá aleatoriamente um tempo entre 5 e 10 segundos para cada tentativa de repetição."
   },
   "backup": {
     "title": "Backup",
@@ -126,16 +134,6 @@
     "info": "Essas configurações se aplicam somente a esta etapa e à sua verificação prévia, e terão prioridade sobre suas Configurações Globais.",
     "iframeFirst": "Pesquisar primeiro as páginas incorporadas",
     "iframeFirstHint": "Antes de pesquisar na página principal, examine qualquer conteúdo incorporado na página.",
-    "retry": {
-      "title": "Se o item não for encontrado",
-      "hint": "Escolha o que deve acontecer se o item não for encontrado, mesmo após novas tentativas.",
-      "retry": "Tentativas de repetição",
-      "interval": "Aguarde entre as tentativas",
-      "stop": "Pare a automação",
-      "skip": "Pule esta etapa",
-      "goto": "Vá para a etapa",
-      "refresh": "Atualize e tente novamente"
-    },
     "toast": {
       "header": "Configurações de etapa",
       "body": "Configurações de passos salvas com sucesso!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Este campo é obrigatório",
     "number": "Por favor, insira um número válido.",
-    "interval": "Por favor, insira um número válido.",
+    "integer": "Por favor, insira um número inteiro válido.",
+    "positive": "Deve ser um número positivo.",
+    "min": "Por favor, insira um valor maior ou igual a {{min}}",
+    "max": "Por favor, insira um valor menor ou igual a {{max}}",
     "url": "Por favor, insira o endereço de um site para continuar.",
     "initWait": "Por favor, insira um número válido.",
     "scheduleDate": "Por favor, insira uma data válida neste formato: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Erro",
     "save": "Salvar",
     "clear": "Claro",
+    "cancel": "Cancelar",
     "close": "Fechar",
     "download": "Download",
     "disabled": "Desabilitado",

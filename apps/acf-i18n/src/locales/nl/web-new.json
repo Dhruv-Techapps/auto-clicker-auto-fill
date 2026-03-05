@@ -38,7 +38,11 @@
   "resources": "Bronnen",
   "settings": {
     "title": "Globale instellingen",
-    "additional": "Aanvullende instellingen"
+    "additional": "Aanvullende instellingen",
+    "toast": {
+      "header": "Instellingen",
+      "body": "Instellingen succesvol opgeslagen!"
+    }
   },
   "notification": {
     "title": "Toon melding",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Herhaalpogingen",
     "interval": "Wacht tussen herhaalpogingen",
+    "to": "naar",
     "stop": "Stop Automatisering",
     "skip": "Sla deze stap over.",
     "refresh": "Vernieuwen en opnieuw proberen",
-    "hint": "Wat moet er gebeuren als het item niet op de pagina wordt gevonden?"
+    "goto": "Ga naar stap",
+    "hint": "Wat moet er gebeuren als het item niet op de pagina wordt gevonden?",
+    "unlimited-tooltip": "Stel dit in op 'onbeperkt' om oneindig door te blijven zoeken totdat het item is gevonden. Gebruik dit met voorzichtigheid, want dit kan ertoe leiden dat uw browser niet meer reageert als het item nooit verschijnt.",
+    "range-tooltip": "Stel een bereik in om de willekeurigheid van de herhaalpogingen te vergroten en detectie te voorkomen. Als u bijvoorbeeld 5 tot 10 seconden instelt, wordt er voor elke herhaalpoging willekeurig een tijd tussen 5 en 10 seconden gekozen."
   },
   "backup": {
     "title": "Back-up",
@@ -126,16 +134,6 @@
     "info": "Deze instellingen gelden alleen voor deze stap en de bijbehorende controle, en hebben voorrang op uw algemene instellingen.",
     "iframeFirst": "Zoek eerst in ingesloten pagina's.",
     "iframeFirstHint": "Bekijk eerst de ingesloten inhoud op de pagina voordat u op de hoofdpagina zoekt.",
-    "retry": {
-      "title": "Als het artikel niet gevonden is",
-      "hint": "Kies wat er moet gebeuren als het item niet gevonden kan worden, zelfs na meerdere pogingen.",
-      "retry": "Herhaalpogingen",
-      "interval": "Wacht tussen herhaalpogingen",
-      "stop": "Stop Automatisering",
-      "skip": "Sla deze stap over.",
-      "goto": "Ga naar stap",
-      "refresh": "Vernieuwen en opnieuw proberen"
-    },
     "toast": {
       "header": "Stapinstellingen",
       "body": "Stapinstellingen succesvol opgeslagen!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Dit veld is verplicht.",
     "number": "Voer een geldig nummer in.",
-    "interval": "Voer een geldig nummer in.",
+    "integer": "Voer een geldig geheel getal in",
+    "positive": "Moet een positief getal zijn",
+    "min": "Voer een waarde in die groter is dan of gelijk aan {{min}}",
+    "max": "Voer een waarde in die kleiner is dan of gelijk aan {{max}}",
     "url": "Voer een website-URL in om verder te gaan.",
     "initWait": "Voer een geldig nummer in.",
     "scheduleDate": "Voer een geldige datum in in dit formaat: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Fout",
     "save": "Redden",
     "clear": "Duidelijk",
+    "cancel": "Annuleren",
     "close": "Dichtbij",
     "download": "Download",
     "disabled": "Gehandicapt",

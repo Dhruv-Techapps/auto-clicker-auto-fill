@@ -38,7 +38,11 @@
   "resources": "Resurssit",
   "settings": {
     "title": "Globaalit asetukset",
-    "additional": "Lisäasetukset"
+    "additional": "Lisäasetukset",
+    "toast": {
+      "header": "Asetukset",
+      "body": "Asetukset tallennettu onnistuneesti!"
+    }
   },
   "notification": {
     "title": "Näytä ilmoitus",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Uudelleenyritykset",
     "interval": "Odota uudelleenyritysten välillä",
+    "to": "että",
     "stop": "Lopeta automaatio",
     "skip": "Ohita tämä vaihe",
     "refresh": "Päivitä ja yritä uudelleen",
-    "hint": "Mitä pitäisi tapahtua, jos kohdetta ei löydy sivulta?"
+    "goto": "Siirry vaiheeseen",
+    "hint": "Mitä pitäisi tapahtua, jos kohdetta ei löydy sivulta?",
+    "unlimited-tooltip": "Aseta arvoksi rajoittamaton, jos haluat yrittää uudelleen loputtomiin, kunnes kohde löytyy. Käytä varoen, sillä tämä voi aiheuttaa selaimesi jumiutumisen, jos kohde ei koskaan ilmesty.",
+    "range-tooltip": "Aseta alue lisätäksesi uudelleenyritysvälien satunnaisuutta ja välttääksesi havaitsemisen. Esimerkiksi 5–10 sekunnin asettaminen valitsee satunnaisesti ajan 5–10 sekunnin väliltä jokaiselle uudelleenyrityskerralle."
   },
   "backup": {
     "title": "Varmuuskopio",
@@ -126,16 +134,6 @@
     "info": "Nämä asetukset koskevat vain tätä vaihetta ja sen esitarkistusta, ja ne ovat etusijalla yleisiin asetuksiin nähden.",
     "iframeFirst": "Hae ensin upotetuista sivuista",
     "iframeFirstHint": "Katso sivulle upotettua sisältöä ennen kuin haet pääsivulta.",
-    "retry": {
-      "title": "Jos kohdetta ei löydy",
-      "hint": "Valitse, mitä tapahtuu, jos kohdetta ei löydy uudelleenyrityksen jälkeen.",
-      "retry": "Uudelleenyritykset",
-      "interval": "Odota uudelleenyritysten välillä",
-      "stop": "Lopeta automaatio",
-      "skip": "Ohita tämä vaihe",
-      "goto": "Siirry vaiheeseen",
-      "refresh": "Päivitä ja yritä uudelleen"
-    },
     "toast": {
       "header": "Vaiheen asetukset",
       "body": "Vaiheasetukset tallennettu onnistuneesti!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Tämä kenttä on pakollinen",
     "number": "Anna kelvollinen numero",
-    "interval": "Anna kelvollinen numero",
+    "integer": "Anna kelvollinen kokonaisluku",
+    "positive": "Täytyy olla positiivinen luku",
+    "min": "Anna arvo, joka on suurempi tai yhtä suuri kuin {{min}}",
+    "max": "Anna arvo, joka on pienempi tai yhtä suuri kuin {{max}}",
     "url": "Anna verkkosivuston URL-osoite jatkaaksesi",
     "initWait": "Anna kelvollinen numero",
     "scheduleDate": "Anna kelvollinen päivämäärä tässä muodossa: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Virhe",
     "save": "Tallentaa",
     "clear": "Tyhjennä",
+    "cancel": "Peruuttaa",
     "close": "Lähellä",
     "download": "Lataa",
     "disabled": "Liikuntarajoitteinen",

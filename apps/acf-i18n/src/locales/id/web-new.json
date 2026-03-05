@@ -38,7 +38,11 @@
   "resources": "Sumber daya",
   "settings": {
     "title": "Pengaturan Global",
-    "additional": "Pengaturan Tambahan"
+    "additional": "Pengaturan Tambahan",
+    "toast": {
+      "header": "Pengaturan",
+      "body": "Pengaturan berhasil disimpan!"
+    }
   },
   "notification": {
     "title": "Tampilkan Notifikasi",
@@ -80,10 +84,14 @@
   "retry": {
     "title": "Upaya Mencoba Lagi",
     "interval": "Tunggu di antara percobaan ulang",
+    "to": "ke",
     "stop": "Hentikan Otomatisasi",
     "skip": "Lewati Langkah Ini",
     "refresh": "Segarkan & Coba Lagi",
-    "hint": "Apa yang harus terjadi jika item tersebut tidak ditemukan di halaman?"
+    "goto": "Lanjutkan ke Langkah",
+    "hint": "Apa yang harus terjadi jika item tersebut tidak ditemukan di halaman?",
+    "unlimited-tooltip": "Atur ke \"tidak terbatas\" untuk terus mencoba tanpa henti hingga item ditemukan. Gunakan dengan hati-hati, karena ini dapat menyebabkan browser Anda menjadi tidak responsif jika item tersebut tidak pernah muncul.",
+    "range-tooltip": "Tetapkan rentang untuk meningkatkan keacakan interval percobaan ulang dan menghindari deteksi. Misalnya, menetapkan rentang 5 hingga 10 detik akan secara acak memilih waktu antara 5 dan 10 detik untuk setiap upaya percobaan ulang."
   },
   "backup": {
     "title": "Cadangan",
@@ -126,16 +134,6 @@
     "info": "Pengaturan ini hanya berlaku untuk langkah ini dan pemeriksaan awalnya, dan akan diprioritaskan di atas Pengaturan Global Anda.",
     "iframeFirst": "Cari Halaman Tertanam Terlebih Dahulu",
     "iframeFirstHint": "Periksa isi konten yang disematkan di halaman tersebut sebelum mencari di halaman utama.",
-    "retry": {
-      "title": "Jika Barang Tidak Ditemukan",
-      "hint": "Pilih apa yang harus terjadi jika item tidak dapat ditemukan, bahkan setelah dicoba lagi.",
-      "retry": "Upaya Mencoba Lagi",
-      "interval": "Tunggu di antara percobaan ulang",
-      "stop": "Hentikan Otomatisasi",
-      "skip": "Lewati Langkah Ini",
-      "goto": "Lanjutkan ke Langkah",
-      "refresh": "Segarkan & Coba Lagi"
-    },
     "toast": {
       "header": "Pengaturan Langkah",
       "body": "Pengaturan langkah berhasil disimpan!"
@@ -359,7 +357,10 @@
   "error": {
     "required": "Kolom ini wajib diisi.",
     "number": "Silakan masukkan nomor yang valid.",
-    "interval": "Silakan masukkan nomor yang valid.",
+    "integer": "Silakan masukkan bilangan bulat yang valid.",
+    "positive": "Harus berupa angka positif",
+    "min": "Silakan masukkan nilai yang lebih besar dari atau sama dengan {{min}}",
+    "max": "Silakan masukkan nilai kurang dari atau sama dengan {{max}}",
     "url": "Silakan masukkan URL situs web untuk melanjutkan.",
     "initWait": "Silakan masukkan nomor yang valid.",
     "scheduleDate": "Silakan masukkan tanggal yang valid dalam format ini: 2025-12-01",
@@ -430,6 +431,7 @@
     "error": "Kesalahan",
     "save": "Menyimpan",
     "clear": "Jernih",
+    "cancel": "Membatalkan",
     "close": "Menutup",
     "download": "Unduh",
     "disabled": "Dengan disabilitas",
