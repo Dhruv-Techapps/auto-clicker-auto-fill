@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "declaration": true,
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -9,10 +10,5 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.js",
-    "fixtures/**/*.ts",
-    "playwright.config.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.js", "fixtures/**/*.ts", "playwright.config.ts"]
 }
