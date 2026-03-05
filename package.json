@@ -30,7 +30,6 @@
     "@dhruv-techapps:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.28.5",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@monaco-editor/react": "^4.7.0",
@@ -40,11 +39,9 @@
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.6.1",
     "@tanstack/react-table": "^8.21.2",
-    "@vitest/coverage-istanbul": "4.0.9",
     "algoliasearch": "^5.23.3",
     "axios": "^1.13.5",
     "bootstrap": "^5.3.8",
-    "express": "^4.17.1",
     "firebase": "^12.1.0",
     "i18next": "^25.4.2",
     "i18next-http-backend": "^3.0.2",
@@ -62,7 +59,6 @@
     "react-router": "7.12.0",
     "react18-json-view": "^0.2.9",
     "search-insights": "^2.17.3",
-    "vite-plugin-svgr": "^4.3.0",
     "xhr-shim": "^0.1.3"
   },
   "devDependencies": {
@@ -71,6 +67,7 @@
     "@astrojs/mdx": "^4.3.4",
     "@astrojs/prism": "^3.3.0",
     "@astrojs/sitemap": "^3.4.2",
+    "@babel/preset-react": "^7.28.5",
     "@docsearch/js": "^3.9.0",
     "@eslint/js": "^9.31.0",
     "@google-cloud/translate": "^9.2.0",
@@ -105,6 +102,7 @@
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "^4.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitest/coverage-istanbul": "4.0.9",
     "@vitest/ui": "4.0.9",
     "astro": "^5.15.9",
     "astro-auto-import": "^0.4.4",
@@ -119,9 +117,10 @@
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
+    "express": "^4.17.1",
     "htmlparser2": "^10.0.0",
     "jiti": "2.5.1",
-    "jsdom": "~22.1.0",
+    "jsdom": "^28.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "npm-run-all": "^4.1.5",
     "nx": "22.5.4",
@@ -136,8 +135,9 @@
     "tslib": "^2.3.0",
     "typescript": "5.9.3",
     "typescript-eslint": "^8.40.0",
-    "verdaccio": "^6.2.9",
+    "verdaccio": "^6.1.6",
     "vite": "7.2.6",
+    "vite-plugin-svgr": "^4.3.0",
     "vitest": "4.0.9",
     "vnu-jar": "^26.2.26",
     "webpack-bundle-analyzer": "^5.1.0",
@@ -150,6 +150,9 @@
     "packages/core/*",
     "packages/shared/*"
   ],
+  "overrides": {
+    "koa": "^3.1.2"
+  },
   "nx": {
     "includedScripts": [],
     "targets": {
