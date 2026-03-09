@@ -35,12 +35,12 @@ export const AutomationNew = () => {
     <Container className='m-auto'>
       <Card>
         <Card.Body>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group controlId='config-url'>
+          <Form onSubmit={handleSubmit(onSubmit)} data-testid='automation-url-form'>
+            <Form.Group controlId='automation-url'>
               <Form.Label>
                 {t('automation.url')}&nbsp;<small className='text-danger'>*</small>
               </Form.Label>
-              <FormControl autoComplete='off' placeholder={APP_LINK.TEST} isInvalid={!!errors.url} {...register('url', { required: t('error.url') })} />
+              <FormControl autoComplete='off' placeholder={APP_LINK.TEST} isInvalid={!!errors.url} data-testid='automation-url-input' {...register('url', { required: t('error.url') })} />
               <Form.Control.Feedback type='invalid'>{errors.url?.message}</Form.Control.Feedback>
             </Form.Group>
           </Form>

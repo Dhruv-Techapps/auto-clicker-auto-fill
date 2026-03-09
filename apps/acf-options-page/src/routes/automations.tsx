@@ -22,7 +22,7 @@ export const Automations = () => {
   };
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const onAddConfig = () => {
+  const onAddAutomation = () => {
     const action = dispatch(addConfig());
     navigate(ROUTES.AUTOMATION(action.payload.id));
   };
@@ -48,7 +48,7 @@ export const Automations = () => {
     <Container className='p-4'>
       <h4 className='my-4 d-flex justify-content-between align-items-center'>
         {t('automations.title')}
-        <Button variant='primary' size='sm' className='ms-auto' onClick={onAddConfig}>
+        <Button variant='primary' size='sm' className='ms-auto' onClick={onAddAutomation} data-testid='automations-add-automation'>
           <i className='bi bi-plus-lg me-2 fs-6' /> {t('automations.add')}
         </Button>
         <AutomationsImport />
