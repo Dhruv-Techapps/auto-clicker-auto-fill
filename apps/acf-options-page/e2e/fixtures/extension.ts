@@ -9,14 +9,14 @@ export { expect };
 
 // Worker-scoped fixtures are shared across all tests in the same worker process.
 // Test-scoped fixtures are created fresh for each individual test.
-type WorkerFixtures = {
+interface WorkerFixtures {
   workerContext: BrowserContext;
   workerExtensionId: string;
-};
+}
 
-type TestFixtures = {
+interface TestFixtures {
   extensionId: string;
-};
+}
 
 export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Single browser instance shared across all tests in the worker

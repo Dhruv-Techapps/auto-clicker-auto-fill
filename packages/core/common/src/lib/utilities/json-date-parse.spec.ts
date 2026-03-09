@@ -1,4 +1,4 @@
-import { dateParser } from '../..';
+import { dateParser } from './json-date-parse';
 
 describe('dateParser', () => {
   test('works', () => {
