@@ -78,6 +78,8 @@ jobs:
       - name: Install Playwright OS dependencies only (cache hit)
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
+      - name: Build dependency packages
+        run: npx nx run-many -t build-deps -p acf-options-page acf-extension
       - name: Run E2E tests
         run: npx nx e2e acf-options-page
         env:
