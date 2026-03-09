@@ -6,6 +6,7 @@ const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 const TEST_URL = 'https://test.getautoclicker.com';
 
 test.describe('Config creation and sync', () => {
+  test.describe.configure({ mode: 'serial' });
   test('should add config to store when + button is clicked from automations page', async ({ page }) => {
     // Arrange
     await page.goto(`${BASE_URL}/automations`);
@@ -82,9 +83,11 @@ test.describe('Config creation and sync', () => {
       )
       .toBe(TEST_URL);
 
-    // Assert — storage length increased by 1
+    // Assert — storage length increased by 6 (5 pre-loaded defaults + 1 new automation).
+    // The first sync writes the entire Redux configs array to chrome.storage, which
+    // includes the 5 demo configs pre-populated in the store for display purposes.
     const configsAfter: unknown[] = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as unknown[];
 
-    expect(configsAfter.length).toBe(configsBefore.length + 1);
+    expect(configsAfter.length).toBe(configsBefore.length + 6);
   });
 });
