@@ -26,7 +26,7 @@ export default defineConfig({
   webServer: {
     command: 'npx nx run-many -t serve -p acf-extension acf-options-page acf-i18n',
     url: 'http://localhost:4200',
-    reuseExistingServer: true,
+    reuseExistingServer: !process.env['CI'],
     cwd: workspaceRoot
   },
   projects: [
