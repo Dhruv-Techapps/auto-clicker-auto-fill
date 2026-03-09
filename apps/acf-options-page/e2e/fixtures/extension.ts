@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { workspaceRoot } from '@nx/devkit';
 import { test as base, chromium, expect } from '@playwright/test';
 import * as path from 'path';

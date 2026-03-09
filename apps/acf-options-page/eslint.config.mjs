@@ -12,6 +12,6 @@ export default [
   },
   {
     ...playwright.configs['flat/recommended'],
-    files: ['e2e/**/*.ts', 'playwright.config.ts'],
+    files: ['e2e/**/*.ts', 'playwright.config.ts']
   }
 ];
