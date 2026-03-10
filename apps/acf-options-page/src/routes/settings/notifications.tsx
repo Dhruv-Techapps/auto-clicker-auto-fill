@@ -27,25 +27,25 @@ function SettingNotifications() {
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='notifications.onError'>
             <div className='fw-bold'>{t('notification.error')}</div>
           </Form.Label>
-          <Form.Check type='switch' name='onError' checked={notifications?.onError || false} onChange={onUpdate} id='notifications.onError' />
+          <Form.Check type='switch' name='onError' checked={notifications?.onError || false} onChange={onUpdate} id='notifications.onError' data-testid='settings-notification-onError' />
         </li>
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='notifications.onStep'>
             <div className='fw-bold'>{t('notification.step')}</div>
           </Form.Label>
-          <Form.Check type='switch' name='onAction' checked={notifications?.onAction || false} onChange={onUpdate} id='notifications.onStep' />
+          <Form.Check type='switch' name='onAction' checked={notifications?.onAction || false} onChange={onUpdate} id='notifications.onStep' data-testid='settings-notification-onAction' />
         </li>
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='notifications.onLoop'>
             <div className='fw-bold'>{t('notification.loop')}</div>
           </Form.Label>
-          <Form.Check type='switch' name='onBatch' checked={notifications?.onBatch || false} onChange={onUpdate} id='notifications.onLoop' />
+          <Form.Check type='switch' name='onBatch' checked={notifications?.onBatch || false} onChange={onUpdate} id='notifications.onLoop' data-testid='settings-notification-onBatch' />
         </li>
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 mt-2 me-auto' htmlFor='notifications.onAutomation'>
             <div className='fw-bold'>{t('notification.automation')}</div>
           </Form.Label>
-          <Form.Check type='switch' name='onConfig' checked={notifications?.onConfig || false} onChange={onUpdate} id='notifications.onAutomation' />
+          <Form.Check type='switch' name='onConfig' checked={notifications?.onConfig || false} onChange={onUpdate} id='notifications.onAutomation' data-testid='settings-notification-onConfig' />
         </li>
       </ol>
       <hr />
@@ -56,7 +56,7 @@ function SettingNotifications() {
               {t('notification.sound')} <span>{notifications?.sound ? <i className='bi bi-volume-up' /> : <i className='bi bi-volume-mute' />}</span>
             </div>
           </Form.Label>
-          <Form.Check type='switch' onChange={onUpdate} name='sound' checked={notifications?.sound || false} id='notifications.sound' />
+          <Form.Check type='switch' onChange={onUpdate} name='sound' checked={notifications?.sound || false} id='notifications.sound' data-testid='settings-notification-sound' />
         </li>
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <SettingDiscord onChange={onUpdate} checked={notifications?.discord || false} />
