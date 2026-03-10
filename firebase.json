@@ -23,6 +23,18 @@
       ]
     },
     {
+      "site": "auto-clicker-auto-fill-configs",
+      "public": "apps/acf-configs/dist",
+
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
       "site": "auto-clicker-auto-fill-beta",
       "public": "apps/acf-options-page/dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],

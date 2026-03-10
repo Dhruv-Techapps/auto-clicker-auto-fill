@@ -1,7 +1,6 @@
 import { IConfiguration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { URLS } from './fixtures/base-url';
 import { expect, test } from './fixtures/extension';
-
-const BASE_URL = 'http://localhost:4200';
 const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 const TEST_URL = 'https://test.getautoclicker.com';
 
@@ -9,7 +8,7 @@ test.describe('Config creation and sync', () => {
   test.describe.configure({ mode: 'serial' });
   test('should add config to store when + button is clicked from automations page', async ({ page }) => {
     // Arrange
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act
     await page.getByTestId('automations-add-automation').click();
@@ -25,7 +24,7 @@ test.describe('Config creation and sync', () => {
 
   test('should add config to store when + button is clicked from sidebar', async ({ page }) => {
     // Arrange
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act
     await page.getByTestId('sidebar-add-automation').click();
@@ -43,7 +42,7 @@ test.describe('Config creation and sync', () => {
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act — click + (dispatches addConfig only, no middleware sync)
     await page.getByTestId('automations-add-automation').click();
@@ -58,7 +57,7 @@ test.describe('Config creation and sync', () => {
   test('should sync config to extension storage when URL is entered and form submitted', async ({ context, page }) => {
     // Arrange
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
     await page.getByTestId('automations-add-automation').click();
     await page.waitForURL(UUID_REGEX);
 

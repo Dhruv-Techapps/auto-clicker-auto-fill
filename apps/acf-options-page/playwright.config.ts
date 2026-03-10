@@ -1,15 +1,7 @@
 import { workspaceRoot } from '@nx/devkit';
 import { nxE2EPreset } from '@nx/playwright/preset';
 import { defineConfig, devices } from '@playwright/test';
-
-// For CI, you may want to set BASE_URL to the deployed application.
-const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+import { BASE_URL } from './e2e/fixtures/base-url';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -19,14 +11,14 @@ export default defineConfig({
   retries: process.env['CI'] ? 2 : 0,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL,
+    baseURL: BASE_URL,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry'
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx run-many -t serve -p acf-extension acf-options-page acf-i18n',
-    url: 'http://localhost:4200',
+    command: '',
+    url: BASE_URL,
     reuseExistingServer: !process.env['CI'],
     cwd: workspaceRoot
   },
