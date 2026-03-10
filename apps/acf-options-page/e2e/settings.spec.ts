@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { ISettings, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { expect, test } from './fixtures/extension';
 
 const BASE_URL = 'http://localhost:4200';
@@ -76,12 +76,12 @@ test.describe('Global settings sync to extension', () => {
   test('should NOT sync settings to extension storage before any change', async ({ context, page }) => {
     // Arrange — record storage state before navigating
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
-    const settingsBefore = await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS);
+    const settingsBefore = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS)) as ISettings;
 
     await page.goto(`${BASE_URL}/settings/retry`);
 
     // Assert — chrome.storage.local[SETTINGS] unchanged after page load (no mutations)
-    const settingsAfter = await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS);
+    const settingsAfter = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS)) as ISettings;
     expect(JSON.stringify(settingsAfter)).toBe(JSON.stringify(settingsBefore));
   });
 
@@ -98,7 +98,7 @@ test.describe('Global settings sync to extension', () => {
     await expect
       .poll(
         async () => {
-          const settings = await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS);
+          const settings = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS)) as ISettings;
           return settings?.retryOption;
         },
         { timeout: 5000 }
@@ -118,7 +118,7 @@ test.describe('Global settings sync to extension', () => {
     await expect
       .poll(
         async () => {
-          const settings = await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS);
+          const settings = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS)) as ISettings;
           return settings?.notifications?.onError;
         },
         { timeout: 5000 }
