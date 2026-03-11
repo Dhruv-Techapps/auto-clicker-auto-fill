@@ -9,7 +9,7 @@ export const SidebarHeader = (props: ISidebarHeaderProps) => {
   const { visible, toggleSidebar } = props;
   const { t } = useTranslation();
 
-  let appName = t('meta.appName');
+  const appName = t('meta.appName');
   let imageURL = 'https://getautoclicker.com/favicons/favicon48.png';
 
   if (/(DEV|BETA)/.test(import.meta.env.VITE_PUBLIC_VARIANT ?? '')) {
