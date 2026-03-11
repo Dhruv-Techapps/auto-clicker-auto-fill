@@ -3,11 +3,13 @@ import { nxE2EPreset } from '@nx/playwright/preset';
 import { defineConfig, devices } from '@playwright/test';
 import { BASE_URL } from './e2e/fixtures/base-url';
 
+const config = nxE2EPreset(__filename, { testDir: './e2e' });
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  ...nxE2EPreset(__filename, { testDir: './e2e' }),
+  ...config,
   retries: process.env['CI'] ? 2 : 0,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -17,7 +19,7 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: '',
+    command: process.env['CI'] ? '' : 'npm run start',
     url: BASE_URL,
     reuseExistingServer: !process.env['CI'],
     cwd: workspaceRoot

@@ -1,4 +1,8 @@
-export const BASE_URL = process.env['VITE_PUBLIC_URL'] || 'http://localhost:4200';
+export const BASE_URL = process.env['VITE_PUBLIC_URL'];
+
+if (!BASE_URL) {
+  throw new Error('VITE_PUBLIC_URL is not defined in the environment variables');
+}
 
 export const URLS = {
   HOME: `${BASE_URL}/`,
