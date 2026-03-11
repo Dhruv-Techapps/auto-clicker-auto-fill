@@ -25,7 +25,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       const context = await chromium.launchPersistentContext('', {
         // headless must be false to allow extension loading.
         // In CI, pass --headless=new so Chrome runs without a display (Chrome 112+).
-        headless: false,
+        headless: true,
         args: [
           `--disable-extensions-except=${extensionPath}`,
           `--load-extension=${extensionPath}`,
