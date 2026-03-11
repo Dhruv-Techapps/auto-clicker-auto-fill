@@ -26,7 +26,18 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
         // headless must be false to allow extension loading.
         // In CI, pass --headless=new so Chrome runs without a display (Chrome 112+).
         headless: false,
-        args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, ...(process.env['CI'] ? ['--headless=new'] : [])]
+        args: [
+          `--disable-extensions-except=${extensionPath}`,
+          `--load-extension=${extensionPath}`,
+          ...(process.env['CI']
+            ? [
+                '--headless=new',
+                '--no-sandbox', // required in GitHub Actions containerised runners
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage' // prevents Chrome crashes due to limited /dev/shm in containers
+              ]
+            : [])
+        ]
       });
       await use(context);
       await context.close();

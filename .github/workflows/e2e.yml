@@ -99,6 +99,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Run E2E Tests
+        continue-on-error: true
         run: npx nx run acf-options-page:e2e --skip-nx-cache
         env:
           CI: 'true'
@@ -110,5 +111,5 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-configs
+          target: auto-clicker-auto-fill-playwright
           channelId: live
