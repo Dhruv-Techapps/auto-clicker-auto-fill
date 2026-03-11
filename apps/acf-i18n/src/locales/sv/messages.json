@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Autoklicker - Autofyll"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Autoklicker - Autofyll [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Autoklicker - Autofyll [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Autoklicker - Autofyll [LOKALT]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Autofyll"
-  },
   "EXT_DESCRIPTION": {
     "message": "Autofyll inmatningsfält eller autoklickknapp eller länka någonstans var som helst. Du kan konfigurera och kontrollera klickhastighetstest"
   },

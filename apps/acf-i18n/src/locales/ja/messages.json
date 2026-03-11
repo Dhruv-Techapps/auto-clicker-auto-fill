@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "オートクリッカー - オートフィル"
-  },
-  "EXT_NAME_DEV": {
-    "message": "オートクリッカー - オートフィル [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "オートクリッカー - オートフィル [ベータ版]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "オートクリッカー - オートフィル [ローカル]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "自動入力"
-  },
   "EXT_DESCRIPTION": {
     "message": "入力フィールドの自動入力やボタンの自動クリック、または任意の場所へのリンク。クリック速度テストを設定して確認できます。"
   },

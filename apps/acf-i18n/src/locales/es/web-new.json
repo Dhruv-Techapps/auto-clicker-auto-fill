@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Auto Clicker - Autocompletar",
-    "variantPlaceholder": "{{VITE_VARIANTE_PÚBLICA}}",
-    "logoAlt": "Haga clic automáticamente en el logotipo de Autocompletar"
-  },
   "status": {
     "connecting": "Conectando..."
   },

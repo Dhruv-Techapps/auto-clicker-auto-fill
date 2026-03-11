@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Clicker Otomatis - IsiOtomatis"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Clicker Otomatis - IsiOtomatis [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Pengklik Otomatis - IsiOtomatis [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Clicker Otomatis - IsiOtomatis [LOKAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Isi Otomatis"
-  },
   "EXT_DESCRIPTION": {
     "message": "Bidang masukan IsiOtomatis atau tombol klik otomatis atau tautkan apa saja di mana saja. Anda dapat mengonfigurasi dan memeriksa uji kecepatan klik"
   },

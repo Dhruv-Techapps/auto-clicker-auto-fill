@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "النقر التلقائي - التعبئة التلقائية",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "النقر التلقائي على الشعار، التعبئة التلقائية"
-  },
   "status": {
     "connecting": "جارٍ الاتصال..."
   },

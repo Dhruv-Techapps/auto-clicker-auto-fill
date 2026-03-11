@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "自动点击器 - 自动填充器"
-  },
-  "EXT_NAME_DEV": {
-    "message": "自动点击器 - 自动填充 [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "自动点击器 - 自动填充 [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "自动点击器 - 自动填充 [本地]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "自动填充"
-  },
   "EXT_DESCRIPTION": {
     "message": "自动填充输入字段或自动点击按钮或链接任何地方。您可以配置并检查点击速度测试"
   },

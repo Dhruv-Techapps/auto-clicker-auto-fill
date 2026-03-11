@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Clicker automático - Preenchimento automático"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Clicker automático - Preenchimento automático [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Clicker automático - Preenchimento automático [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Clicker automático - Preenchimento automático [LOCAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Preenchimento automático"
-  },
   "EXT_DESCRIPTION": {
     "message": "Campo de entrada de preenchimento automático ou botão de clique automático ou vincule qualquer coisa em qualquer lugar. Você pode configurar e verificar o teste de velocidade de clique"
   },

@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Clic automatique - Remplissage automatique",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Logo à clic automatique et à remplissage automatique"
-  },
   "status": {
     "connecting": "De liaison..."
   },

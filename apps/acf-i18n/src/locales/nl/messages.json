@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Automatische Clicker - Automatisch aanvullen"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Automatische klikker - Automatisch aanvullen [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Automatische clicker - Automatisch aanvullen [BÈTA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Automatische klikker - Automatisch aanvullen [LOKAAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Automatisch vullen"
-  },
   "EXT_DESCRIPTION": {
     "message": "Invoerveld automatisch aanvullen of automatische klikknop of iets waar dan ook koppelen. U kunt de kliksnelheidstest configureren en controleren"
   },

@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "AutoClicker - AutoFill",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Automatisch klikken en het logo automatisch invullen"
-  },
   "status": {
     "connecting": "Verbinden..."
   },

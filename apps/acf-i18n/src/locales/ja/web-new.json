@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "オートクリッカー - オートフィル",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "自動クリック自動入力ロゴ"
-  },
   "status": {
     "connecting": "接続中..."
   },

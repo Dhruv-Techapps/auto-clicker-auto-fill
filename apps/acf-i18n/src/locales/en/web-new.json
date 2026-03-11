@@ -1,7 +1,6 @@
 {
   "meta": {
     "appName": "Auto Clicker - AutoFill",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
     "logoAlt": "Auto click Auto Fill logo"
   },
   "status": {
