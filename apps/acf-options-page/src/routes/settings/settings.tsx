@@ -24,33 +24,33 @@ export const Settings = () => {
       <h3>{t('settings.title')}</h3>
       <Row>
         <Col xs={2}>
-          <Nav variant='pills' defaultActiveKey={ROUTES.SETTINGS_RETRY} className='flex-column'>
+          <Nav variant='pills' defaultActiveKey={ROUTES.SETTINGS_RETRY} className='flex-column' data-testid='settings-nav'>
             <Nav.Item>
-              <NavLink to={ROUTES.SETTINGS_RETRY} className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_RETRY} className='nav-link' data-testid='settings-nav-retry'>
                 <i className='bi bi-arrow-repeat me-2' />
                 {t('retry.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to={ROUTES.SETTINGS_NOTIFICATION} className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_NOTIFICATION} className='nav-link' data-testid='settings-nav-notification'>
                 <i className='bi bi-bell-fill me-2' />
                 {t('notification.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to={ROUTES.SETTINGS_BACKUP} className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_BACKUP} className='nav-link' data-testid='settings-nav-backup'>
                 <i className='bi bi-cloud-arrow-up-fill me-2' />
                 {t('backup.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to={ROUTES.SETTINGS_GOOGLE_SHEETS} className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_GOOGLE_SHEETS} className='nav-link' data-testid='settings-nav-google-sheets'>
                 <i className='bi bi-file-spreadsheet-fill me-2' />
                 {t('googleSheets.title')}
               </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to={ROUTES.SETTINGS_ADDITIONAL} className='nav-link'>
+              <NavLink to={ROUTES.SETTINGS_ADDITIONAL} className='nav-link' data-testid='settings-nav-additional'>
                 <i className='bi bi-cloud-fill me-2' />
                 {t('settings.additional')}
               </NavLink>

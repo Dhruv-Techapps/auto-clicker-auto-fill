@@ -52,7 +52,7 @@ function SettingRetry() {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} onReset={onCancel}>
+    <Form onSubmit={handleSubmit(onSubmit)} onReset={onCancel} data-testid='settings-retry-form'>
       <Card bg='warning-subtle' text='warning-emphasis'>
         <Card.Body className='d-flex gap-3'>
           <InputBounded title={'retry.title'} name='retry' form={form} />
@@ -63,17 +63,17 @@ function SettingRetry() {
         <Card.Body>
           <p>{t('retry.hint')}</p>
           <div className='d-flex justify-content-between mt-3'>
-            <Form.Check type='radio' value={EErrorOptions.STOP} label={t('retry.stop')} {...register('retryOption')} />
-            <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('retry.skip')} {...register('retryOption')} />
-            <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('retry.refresh')} {...register('retryOption')} />
+            <Form.Check type='radio' value={EErrorOptions.STOP} label={t('retry.stop')} data-testid='settings-retry-option-stop' {...register('retryOption')} />
+            <Form.Check type='radio' value={EErrorOptions.SKIP} label={t('retry.skip')} data-testid='settings-retry-option-skip' {...register('retryOption')} />
+            <Form.Check type='radio' value={EErrorOptions.RELOAD} label={t('retry.refresh')} data-testid='settings-retry-option-reload' {...register('retryOption')} />
           </div>
         </Card.Body>
       </Card>
       <div className='d-flex justify-content-end gap-2 mt-3'>
-        <Button variant='outline-secondary' type='reset'>
+        <Button variant='outline-secondary' type='reset' data-testid='settings-retry-cancel'>
           {t('common.cancel')}
         </Button>
-        <Button type='submit' variant='primary' disabled={!isDirty || !isValid}>
+        <Button type='submit' variant='primary' disabled={!isDirty || !isValid} data-testid='settings-retry-save'>
           {t('common.save')}
         </Button>
       </div>

@@ -1,8 +1,7 @@
 import type { Page } from '@playwright/test';
 
+import { URLS } from './fixtures/base-url';
 import { expect, test } from './fixtures/extension';
-
-const BASE_URL = 'http://localhost:4200';
 
 const openThemeMenu = async (page: Page) => {
   await page.locator('#user-dropdown').click();
@@ -20,7 +19,7 @@ test.describe('Language and Theme change', () => {
 
   test('should apply dark theme and persist after reload when dark theme is selected', async ({ page }) => {
     // Arrange
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act — open user dropdown, open theme submenu, select dark
     await openThemeMenu(page);
@@ -42,7 +41,7 @@ test.describe('Language and Theme change', () => {
 
   test('should apply light theme and persist after reload when light theme is selected', async ({ page }) => {
     // Arrange
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act — open user dropdown, open theme submenu, select light
     await openThemeMenu(page);
@@ -64,7 +63,7 @@ test.describe('Language and Theme change', () => {
 
   test('should store French language and persist after reload when French is selected', async ({ page }) => {
     // Arrange — ensure the UI starts in English for this test
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
     await page.evaluate(() => localStorage.setItem('language', 'en'));
     await page.reload();
 
@@ -86,7 +85,7 @@ test.describe('Language and Theme change', () => {
 
   test('should store English language and persist after reload when switching from French to English', async ({ page }) => {
     // Arrange — ensure the UI starts in French for this test
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
     await page.evaluate(() => localStorage.setItem('language', 'fr'));
     await page.reload();
 

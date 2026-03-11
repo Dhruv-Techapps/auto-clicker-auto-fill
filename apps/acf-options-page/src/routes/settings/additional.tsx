@@ -48,14 +48,14 @@ export const AdditionalSettings = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} onReset={onCancel}>
+    <Form onSubmit={handleSubmit(onSubmit)} onReset={onCancel} data-testid='settings-additional-form'>
       <ul>
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           <Form.Label className='ms-2 me-auto' htmlFor='settings-checkiFrames'>
             <div className='fw-bold'>{t('checkIFrames.title')}</div>
             <small className='text-body-tertiary'>{t('checkIFrames.hint')}</small>
           </Form.Label>
-          <Form.Check type='switch' id='settings-checkiFrames' {...register('checkiFrames')} />
+          <Form.Check type='switch' id='settings-checkiFrames' data-testid='settings-additional-checkiFrames' {...register('checkiFrames')} />
         </li>
         <hr />
         <li className='list-group-item d-flex justify-content-between align-items-center'>
@@ -64,7 +64,7 @@ export const AdditionalSettings = () => {
             <small className='text-body-tertiary'>{t('reloadOnError.hint')}</small> <br />
             <small className='text-danger-emphasis'>{t('reloadOnError.contextInvalidated')}</small>
           </Form.Label>
-          <Form.Check type='switch' id='settings-reloadOnError' {...register('reloadOnError')} />
+          <Form.Check type='switch' id='settings-reloadOnError' data-testid='settings-additional-reloadOnError' {...register('reloadOnError')} />
         </li>
         <hr />
         <li className='list-group-item d-flex justify-content-between align-items-center'>
@@ -73,15 +73,23 @@ export const AdditionalSettings = () => {
             <small className='text-body-tertiary'>{t('statusBar.hint')}</small>
           </Form.Label>
           {Object.values(STATUS_BAR_LOCATION_ENUM).map((location) => (
-            <Form.Check key={location} type='radio' value={location} id={`settings-statusBar-${location}`} label={t(`statusBar.positions.${location}`)} {...register('statusBar')} />
+            <Form.Check
+              key={location}
+              type='radio'
+              value={location}
+              id={`settings-statusBar-${location}`}
+              label={t(`statusBar.positions.${location}`)}
+              data-testid={`settings-additional-statusBar-${location}`}
+              {...register('statusBar')}
+            />
           ))}
         </li>
       </ul>
       <div className='d-flex justify-content-end gap-2 mt-3'>
-        <Button variant='outline-secondary' type='reset'>
+        <Button variant='outline-secondary' type='reset' data-testid='settings-additional-cancel'>
           {t('common.cancel')}
         </Button>
-        <Button type='submit' variant='primary' disabled={!isDirty}>
+        <Button type='submit' variant='primary' disabled={!isDirty} data-testid='settings-additional-save'>
           {t('common.save')}
         </Button>
       </div>

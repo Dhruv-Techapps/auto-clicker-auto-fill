@@ -1,7 +1,7 @@
 import { defaultSettings, defaultSettingsNotifications } from '@dhruv-techapps/acf-common';
 import { EAutoBackup } from '@dhruv-techapps/shared-google-drive/service';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { discordDeleteAPI, discordGetAPI, settingsGetAPI } from './settings.api';
+import { discordDeleteAPI, discordGetAPI, discordLoginAPI, settingsGetAPI } from './settings.api';
 import { ISettingsStore, setSettingsError, setSettingsMessage, settingsReducer, switchSettingsModal, updateSettings, updateSettingsBackup, updateSettingsNotification } from './settings.slice';
 Object.defineProperty(globalThis, 'dataLayer', { value: [], writable: true });
 
@@ -48,6 +48,24 @@ describe('settings slice – updateSettings', () => {
     expect(state.settings.reloadOnError).toBe(true);
   });
 
+  it('should update retryInterval setting', () => {
+    const state = settingsReducer(initialState, updateSettings({ retryInterval: 2 }));
+
+    expect(state.settings.retryInterval).toBe(2);
+  });
+
+  it('should update retryIntervalTo setting', () => {
+    const state = settingsReducer(initialState, updateSettings({ retryIntervalTo: 5 }));
+
+    expect(state.settings.retryIntervalTo).toBe(5);
+  });
+
+  it('should update statusBar setting', () => {
+    const state = settingsReducer(initialState, updateSettings({ statusBar: 'top-left' }));
+
+    expect(state.settings.statusBar).toBe('top-left');
+  });
+
   it('should update multiple fields at once', () => {
     const state = settingsReducer(initialState, updateSettings({ checkiFrames: true, reloadOnError: true }));
 
@@ -79,6 +97,21 @@ describe('settings slice – updateSettingsNotification', () => {
     const state = settingsReducer(initialState, updateSettingsNotification({ name: 'sound', value: true }));
     expect(state.settings.notifications!.sound).toBe(true);
   });
+
+  it('should update onBatch notification', () => {
+    const state = settingsReducer(initialState, updateSettingsNotification({ name: 'onBatch', value: true }));
+    expect(state.settings.notifications!.onBatch).toBe(true);
+  });
+
+  it('should update onConfig notification', () => {
+    const state = settingsReducer(initialState, updateSettingsNotification({ name: 'onConfig', value: true }));
+    expect(state.settings.notifications!.onConfig).toBe(true);
+  });
+
+  it('should update discord notification', () => {
+    const state = settingsReducer(initialState, updateSettingsNotification({ name: 'discord', value: true }));
+    expect(state.settings.notifications!.discord).toBe(true);
+  });
 });
 
 describe('settings slice – updateSettingsBackup', () => {
@@ -99,6 +132,23 @@ describe('settings slice – updateSettingsBackup', () => {
     const state = settingsReducer(withBackup, updateSettingsBackup(EAutoBackup.WEEKLY));
     expect(state.settings.backup!.autoBackup).toBe(EAutoBackup.WEEKLY);
   });
+
+  it('should update backup to MONTHLY', () => {
+    const state = settingsReducer(initialState, updateSettingsBackup(EAutoBackup.MONTHLY));
+    expect(state.settings.backup!.autoBackup).toBe(EAutoBackup.MONTHLY);
+  });
+
+  it('should update backup to OFF', () => {
+    const withBackup = {
+      ...initialState,
+      settings: {
+        ...initialState.settings,
+        backup: { autoBackup: EAutoBackup.DAILY as any }
+      }
+    };
+    const state = settingsReducer(withBackup, updateSettingsBackup(EAutoBackup.OFF));
+    expect(state.settings.backup!.autoBackup).toBe(EAutoBackup.OFF);
+  });
 });
 
 describe('settings slice – messages', () => {
@@ -109,10 +159,23 @@ describe('settings slice – messages', () => {
     expect(state.error).toBeUndefined();
   });
 
+  it('setSettingsMessage should clear message when undefined is passed', () => {
+    const withMessage = { ...initialState, message: 'saved' };
+    const state = settingsReducer(withMessage, setSettingsMessage(undefined));
+    expect(state.message).toBeUndefined();
+  });
+
   it('setSettingsError should set error and stop loading', () => {
     const state = settingsReducer(initialState, setSettingsError('failed to save'));
     expect(state.error).toBe('failed to save');
     expect(state.loading).toBe(false);
+  });
+
+  it('setSettingsError should clear message', () => {
+    const withMessage = { ...initialState, message: 'saved' };
+    const state = settingsReducer(withMessage, setSettingsError('failed'));
+    expect(state.error).toBe('failed');
+    expect(state.message).toBeUndefined();
   });
 });
 
@@ -154,10 +217,36 @@ describe('settings slice – async API', () => {
     expect(state.discordLoading).toBe(false);
   });
 
+  it('discordGetAPI.rejected should set error and stop discordLoading', () => {
+    const action = discordGetAPI.rejected(new Error('discord error'), 'requestId', undefined);
+    const state = settingsReducer({ ...initialState, discordLoading: true }, action);
+    expect(state.error).toBe('discord error');
+    expect(state.discordLoading).toBe(false);
+  });
+
+  it('discordLoginAPI.fulfilled should set discord data', () => {
+    const discord = { id: '456', username: 'LoginUser' } as any;
+    const action = discordLoginAPI.fulfilled(discord, 'requestId', undefined);
+    const state = settingsReducer(initialState, action);
+    expect(state.discord).toEqual(discord);
+  });
+
+  it('discordLoginAPI.rejected should set error', () => {
+    const action = discordLoginAPI.rejected(new Error('login failed'), 'requestId', undefined);
+    const state = settingsReducer(initialState, action);
+    expect(state.error).toBe('login failed');
+  });
+
   it('discordDeleteAPI.fulfilled should remove discord data', () => {
     const withDiscord = { ...initialState, discord: { id: '123' } as any };
     const action = discordDeleteAPI.fulfilled(undefined as any, 'requestId', undefined);
     const state = settingsReducer(withDiscord, action);
     expect(state.discord).toBeUndefined();
+  });
+
+  it('discordDeleteAPI.rejected should set error', () => {
+    const action = discordDeleteAPI.rejected(new Error('delete failed'), 'requestId', undefined);
+    const state = settingsReducer(initialState, action);
+    expect(state.error).toBe('delete failed');
   });
 });

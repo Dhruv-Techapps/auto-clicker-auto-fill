@@ -13,6 +13,16 @@
           "target": "serve"
         }
       ]
+    },
+    "e2e": {
+      "configurations": {
+        "development": {
+          "envFile": ".env.development"
+        },
+        "production": {
+          "envFile": ".env.production"
+        }
+      }
     }
   }
 }

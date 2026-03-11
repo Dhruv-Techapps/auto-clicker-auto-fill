@@ -1,7 +1,6 @@
-import { LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { IConfiguration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { URLS } from './fixtures/base-url';
 import { expect, test } from './fixtures/extension';
-
-const BASE_URL = 'http://localhost:4200';
 const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 const TEST_URL = 'https://test.getautoclicker.com';
 
@@ -9,7 +8,7 @@ test.describe('Config creation and sync', () => {
   test.describe.configure({ mode: 'serial' });
   test('should add config to store when + button is clicked from automations page', async ({ page }) => {
     // Arrange
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act
     await page.getByTestId('automations-add-automation').click();
@@ -25,7 +24,7 @@ test.describe('Config creation and sync', () => {
 
   test('should add config to store when + button is clicked from sidebar', async ({ page }) => {
     // Arrange
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act
     await page.getByTestId('sidebar-add-automation').click();
@@ -41,16 +40,16 @@ test.describe('Config creation and sync', () => {
   test('should NOT sync to extension storage immediately after addConfig', async ({ context, page }) => {
     // Arrange — record storage state before adding config
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
-    const configsBefore: unknown[] = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as unknown[];
+    const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
 
     // Act — click + (dispatches addConfig only, no middleware sync)
     await page.getByTestId('automations-add-automation').click();
     await page.waitForURL(UUID_REGEX);
 
     // Assert — chrome.storage unchanged (middleware does not watch addConfig)
-    const configsAfter: unknown[] = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as unknown[];
+    const configsAfter: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     expect(configsAfter.length).toBe(configsBefore.length);
   });
@@ -58,7 +57,7 @@ test.describe('Config creation and sync', () => {
   test('should sync config to extension storage when URL is entered and form submitted', async ({ context, page }) => {
     // Arrange
     const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
-    await page.goto(`${BASE_URL}/automations`);
+    await page.goto(URLS.AUTOMATIONS);
     await page.getByTestId('automations-add-automation').click();
     await page.waitForURL(UUID_REGEX);
 
@@ -66,7 +65,7 @@ test.describe('Config creation and sync', () => {
     const automationId = page.url().split('/').pop() as string;
 
     // Record storage length before submitting URL
-    const configsBefore: unknown[] = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as unknown[];
+    const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     // Act — fill URL and submit (dispatches updateConfig → middleware → chrome.storage)
     await page.getByTestId('automation-url-input').fill(TEST_URL);
@@ -76,7 +75,7 @@ test.describe('Config creation and sync', () => {
     await expect
       .poll(
         async () => {
-          const configs = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<{ id: string; url: string }>;
+          const configs = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
           return configs.find((c) => c.id === automationId)?.url;
         },
         { timeout: 5000 }
@@ -86,7 +85,7 @@ test.describe('Config creation and sync', () => {
     // Assert — storage length increased by 6 (5 pre-loaded defaults + 1 new automation).
     // The first sync writes the entire Redux configs array to chrome.storage, which
     // includes the 5 demo configs pre-populated in the store for display purposes.
-    const configsAfter: unknown[] = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as unknown[];
+    const configsAfter: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     expect(configsAfter.length).toBe(configsBefore.length + 6);
   });
