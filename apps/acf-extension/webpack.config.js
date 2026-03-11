@@ -3,6 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const { BannerPlugin } = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 //const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RELEASE_VERSION }) {
@@ -47,8 +48,9 @@ module.exports = composePlugins(
     if (config.module.rules) {
       config.module.rules.push({
         test: /\.scss$/,
-        use: [{ loader: 'file-loader', options: { publicPath: path.resolve(__dirname, 'dist'), outputPath: '/css', name: '[name].min.css' } }, 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       });
+      config.plugins.push(new MiniCssExtractPlugin({ filename: 'css/[name].min.css' }));
       config.module.rules[2].options.cacheDirectory = path.resolve(options.root, 'node_modules/.cache/babel-loader');
     }
 
@@ -83,10 +85,10 @@ module.exports = composePlugins(
       ...(VITE_PUBLIC_VARIANT === 'LOCAL'
         ? {}
         : {
-            usedExports: true,
-            minimize: true,
-            concatenateModules: true
-          })
+          usedExports: true,
+          minimize: true,
+          concatenateModules: true
+        })
     };
     return config;
   }
