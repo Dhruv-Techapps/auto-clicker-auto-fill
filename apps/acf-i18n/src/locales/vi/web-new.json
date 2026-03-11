@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Phần mềm tự động nhấp chuột - Tự động điền",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Tự động nhấp chuột, tự động điền logo"
-  },
   "status": {
     "connecting": "Đang kết nối..."
   },

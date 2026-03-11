@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "自動點擊器 - 自動填充",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "自動點擊自動填滿徽標"
-  },
   "status": {
     "connecting": "正在連接..."
   },

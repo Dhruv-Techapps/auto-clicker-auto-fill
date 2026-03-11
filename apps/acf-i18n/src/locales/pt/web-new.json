@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Auto Clicker - Preenchimento Automático",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Clique automático Preenchimento automático do logotipo"
-  },
   "status": {
     "connecting": "Conectando..."
   },

@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "자동 클릭 - 자동 채우기",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "자동 클릭 자동 채우기 로고"
-  },
   "status": {
     "connecting": "연결 중..."
   },

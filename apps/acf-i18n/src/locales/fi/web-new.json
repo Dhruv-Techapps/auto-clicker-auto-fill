@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Automaattinen napsauttaja - Automaattinen täyttö",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Automaattinen napsautus Automaattisen täytön logo"
-  },
   "status": {
     "connecting": "Yhdistetään..."
   },

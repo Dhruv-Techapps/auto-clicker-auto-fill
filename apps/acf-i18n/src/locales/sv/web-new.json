@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Autoklickare - Autofyll",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Autoklicka på Auto Fill-logotypen"
-  },
   "status": {
     "connecting": "Ansluter..."
   },

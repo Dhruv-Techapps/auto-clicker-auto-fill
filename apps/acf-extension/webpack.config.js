@@ -23,7 +23,9 @@ function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RE
 
 module.exports = composePlugins(
   // Default Nx composable plugin
-  withNx(),
+  // tsConfig scopes fork-ts-checker to the extension only, preventing it from
+  // picking up unrelated workspace files (site/src/libs, etc.) via tsconfig.base.json
+  withNx({ tsConfig: 'apps/acf-extension/tsconfig.app.json' }),
   // Custom composable plugin
   (config, { options }) => {
     // `config` is the Webpack configuration object
@@ -45,9 +47,14 @@ module.exports = composePlugins(
       side_panel: ['./src/side_panel/side_panel.tsx', './src/side_panel/side_panel.scss']
     };
     if (config.module.rules) {
+      // asset/resource is the webpack 5 equivalent of file-loader — it emits the
+      // compiled SCSS as a standalone CSS file without resolving runtime URL imports
+      // like @import url(/css/bootstrap.min.css) which only exist in the output folder.
       config.module.rules.push({
         test: /\.scss$/,
-        use: [{ loader: 'file-loader', options: { publicPath: path.resolve(__dirname, 'dist'), outputPath: '/css', name: '[name].min.css' } }, 'sass-loader']
+        type: 'asset/resource',
+        generator: { filename: 'css/[name].min.css' },
+        use: ['sass-loader']
       });
       config.module.rules[2].options.cacheDirectory = path.resolve(options.root, 'node_modules/.cache/babel-loader');
     }

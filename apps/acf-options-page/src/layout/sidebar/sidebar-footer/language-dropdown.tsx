@@ -6,6 +6,7 @@ export const LanguageDropdown = () => {
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
   };
 
   return (

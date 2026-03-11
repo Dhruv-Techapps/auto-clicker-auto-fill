@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Автокликер - Автозаполнение",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Логотип автозаполнения при нажатии"
-  },
   "status": {
     "connecting": "Подключение..."
   },
