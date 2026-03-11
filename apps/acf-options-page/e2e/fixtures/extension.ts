@@ -29,6 +29,7 @@ interface WorkerFixtures {
 
 interface TestFixtures {
   extensionId: string;
+  worker: Awaited<ReturnType<BrowserContext['serviceWorkers']>>[number];
 }
 
 export const test = base.extend<TestFixtures, WorkerFixtures>({
@@ -70,6 +71,19 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Expose the shared extension ID as the standard 'extensionId' fixture
   extensionId: async ({ workerExtensionId }, use) => {
     await use(workerExtensionId);
+  },
+
+  // Returns the extension service worker, waking it up if Chrome stopped it
+  worker: async ({ workerContext, workerExtensionId }, use) => {
+    let sw = workerContext.serviceWorkers()[0];
+    if (!sw) {
+      // Opening any extension page causes Chrome to restart the service worker
+      const wakePage = await workerContext.newPage();
+      await wakePage.goto(`chrome-extension://${workerExtensionId}/devtools.html`);
+      sw = workerContext.serviceWorkers()[0] ?? (await workerContext.waitForEvent('serviceworker'));
+      await wakePage.close();
+    }
+    await use(sw);
   },
 
   // Fresh page per test — closed automatically after each test

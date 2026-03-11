@@ -46,10 +46,18 @@ jobs:
           node-version: '${{ env.NODE }}'
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
-          cache: 'npm'
+
+      - name: Cache node_modules
+        id: npm-cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
-      - run: npm ci
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
       - run: npx nx report
 
       - name: Build Options Page

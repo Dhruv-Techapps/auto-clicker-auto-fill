@@ -24,8 +24,14 @@
     },
     {
       "site": "auto-clicker-auto-fill-playwright",
-      "public": "apps/acf-options-page/test-output/playwright/report",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+      "public": "apps/acf-options-page/test-output/playwright",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "report/index.html"
+        }
+      ]
     },
     {
       "site": "auto-clicker-auto-fill-beta",
