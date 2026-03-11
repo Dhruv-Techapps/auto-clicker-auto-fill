@@ -90,10 +90,10 @@ module.exports = composePlugins(
       ...(VITE_PUBLIC_VARIANT === 'LOCAL'
         ? {}
         : {
-          usedExports: true,
-          minimize: true,
-          concatenateModules: true
-        })
+            usedExports: true,
+            minimize: true,
+            concatenateModules: true
+          })
     };
     return config;
   }
