@@ -29,7 +29,7 @@ jobs:
     name: Build, Deploy & E2E
     environment:
       name: ${{ inputs.environment }}
-      url: 'https://auto-clicker-auto-fill-dev.web.app/'
+      url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     runs-on: ubuntu-latest
     permissions:
       contents: read

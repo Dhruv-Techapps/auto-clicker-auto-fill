@@ -1,9 +1,22 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { workspaceRoot } from '@nx/devkit';
 import { BrowserContext, test as base, chromium, expect } from '@playwright/test';
+import * as fs from 'fs';
 import * as path from 'path';
 
 const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
+
+const isCI = !!process.env['CI'];
+const extensionExists = fs.existsSync(extensionPath);
+console.log('[fixture] workspaceRoot     :', workspaceRoot);
+console.log('[fixture] extensionPath     :', extensionPath);
+console.log('[fixture] extensionExists   :', extensionExists);
+console.log('[fixture] CI flag           :', isCI);
+if (extensionExists) {
+  console.log('[fixture] dist contents     :', fs.readdirSync(extensionPath).join(', '));
+} else {
+  console.warn('[fixture] WARNING: extension dist folder not found — extension will NOT load');
+}
 
 export { expect };
 
@@ -22,22 +35,14 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Single browser instance shared across all tests in the worker
   workerContext: [
     async ({}, use) => {
+      const ciArgs = isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
+      const args = [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, ...ciArgs];
+      console.log('[fixture] chromium args     :', args);
       const context = await chromium.launchPersistentContext('', {
         // headless must be false to allow extension loading.
         // In CI, pass --headless=new so Chrome runs without a display (Chrome 112+).
         headless: true,
-        args: [
-          `--disable-extensions-except=${extensionPath}`,
-          `--load-extension=${extensionPath}`,
-          ...(process.env['CI']
-            ? [
-                '--headless=new',
-                '--no-sandbox', // required in GitHub Actions containerised runners
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage' // prevents Chrome crashes due to limited /dev/shm in containers
-              ]
-            : [])
-        ]
+        args
       });
       await use(context);
       await context.close();
