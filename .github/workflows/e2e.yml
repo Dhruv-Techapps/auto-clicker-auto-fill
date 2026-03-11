@@ -110,5 +110,5 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-configs
+          target: auto-clicker-auto-fill-playwright
           channelId: live

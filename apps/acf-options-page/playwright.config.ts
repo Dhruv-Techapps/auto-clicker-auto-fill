@@ -11,6 +11,7 @@ const config = nxE2EPreset(__filename, { testDir: './e2e' });
 export default defineConfig({
   ...config,
   retries: process.env['CI'] ? 2 : 0,
+  reporter: [['html', { open: 'never', outputFolder: 'test-output/playwright/report', host: 'auto-clicker-auto-fill-playwright.web.app' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: BASE_URL,
