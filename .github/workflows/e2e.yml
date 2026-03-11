@@ -19,7 +19,7 @@ jobs:
     name: Build, Deploy & E2E
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ steps.report.outputs.details_url }}
+      url: 'https://auto-clicker-auto-fill-dev.web.app/'
     runs-on: ubuntu-latest
     permissions:
       contents: read

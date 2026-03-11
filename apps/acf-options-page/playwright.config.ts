@@ -32,7 +32,7 @@ export default defineConfig({
   webServer: {
     command: CI ? '' : 'npm run start',
     url: BASE_URL,
-    reuseExistingServer: CI ? false : true,
+    reuseExistingServer: CI,
     cwd: workspaceRoot
   },
   projects: [
