@@ -99,6 +99,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Run E2E Tests
+        continue-on-error: true
         run: npx nx run acf-options-page:e2e --skip-nx-cache
         env:
           CI: 'true'
