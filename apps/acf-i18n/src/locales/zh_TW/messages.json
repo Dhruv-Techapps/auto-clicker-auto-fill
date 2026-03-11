@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Auto Clicker - AutoFill"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Auto Clicker - AutoFill [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Auto Clicker - AutoFill [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Auto Clicker - AutoFill [LOCAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Auto Clicker - AutoFill"
-  },
   "EXT_DESCRIPTION": {
     "message": "自動填寫輸入欄位或自動點擊按鈕或連結任何地方。您可以設定並檢查點擊速度測試"
   },

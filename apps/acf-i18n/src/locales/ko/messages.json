@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "자동 클릭커 - 자동 완성"
-  },
-  "EXT_NAME_DEV": {
-    "message": "자동 클릭커 - 자동 완성 [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "자동 클릭커 - 자동완성[베타]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "자동 클릭커 - 자동완성 [LOCAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "자동 채우기"
-  },
   "EXT_DESCRIPTION": {
     "message": "자동 입력 필드 또는 자동 클릭 버튼 또는 어디서나 링크. 클릭 속도 테스트를 구성하고 확인할 수 있습니다."
   },

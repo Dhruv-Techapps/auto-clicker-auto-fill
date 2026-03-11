@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Pengklik Otomatis - Isi Otomatis",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Klik otomatis, isi otomatis logo"
-  },
   "status": {
     "connecting": "Menghubungkan..."
   },

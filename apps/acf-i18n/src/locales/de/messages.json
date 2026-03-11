@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Auto Clicker - AutoFill"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Auto Clicker - AutoFill [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Auto Clicker - AutoFill [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Auto Clicker - AutoFill [LOKAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Automatisch ausfüllen"
-  },
   "EXT_DESCRIPTION": {
     "message": "Eingabefelder automatisch ausfüllen oder automatisch auf Schaltflächen klicken oder beliebige Links einfügen. Sie können den Klickgeschwindigkeitstest konfigurieren und überprüfen."
   },

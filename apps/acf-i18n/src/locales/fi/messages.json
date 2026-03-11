@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Auto Clicker - Automaattinen täyttö"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Auto Clicker - Automaattinen täyttö [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Automaattinen napsautuslaite – automaattinen täyttö [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Auto Clicker – automaattinen täyttö [PAIKALLINEN]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Automaattinen täyttö"
-  },
   "EXT_DESCRIPTION": {
     "message": "Automaattisen täytön syöttökenttä tai automaattinen napsautuspainike tai linkitä mihin tahansa. Voit määrittää ja tarkistaa napsautusnopeustestin"
   },

@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "appName": "Auto Clicker - Riempimento automatico",
-    "variantPlaceholder": "{{VITE_PUBLIC_VARIANT}}",
-    "logoAlt": "Clic automatico Riempimento automatico logo"
-  },
   "status": {
     "connecting": "Connessione in corso..."
   },

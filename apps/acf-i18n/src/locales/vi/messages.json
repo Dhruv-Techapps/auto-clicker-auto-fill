@@ -1,19 +1,4 @@
 {
-  "EXT_NAME": {
-    "message": "Trình nhấp chuột tự động - Tự động điền"
-  },
-  "EXT_NAME_DEV": {
-    "message": "Trình nhấp chuột tự động - Tự động điền [DEV]"
-  },
-  "EXT_NAME_BETA": {
-    "message": "Trình nhấp chuột tự động - Tự động điền [BETA]"
-  },
-  "EXT_NAME_LOCAL": {
-    "message": "Trình nhấp chuột tự động - Tự động điền [LOCAL]"
-  },
-  "EXT_SHORT_NAME": {
-    "message": "Tự động điền"
-  },
   "EXT_DESCRIPTION": {
     "message": "Trường nhập Tự động điền hoặc nút tự động nhấp hoặc liên kết bất kỳ thứ gì ở bất kỳ đâu. Bạn có thể định cấu hình và kiểm tra kiểm tra tốc độ nhấp chuột"
   },
