@@ -14,6 +14,11 @@ on:
         type: boolean
         default: false
         required: false
+      nx_cache:
+        description: 'Use NX cache'
+        type: boolean
+        default: true
+        required: false
 
 env:
   FORCE_COLOR: 2
@@ -50,7 +55,7 @@ jobs:
       - name: Build Options Page
         if: ${{ inputs.deploy_options_page }}
         run: |
-          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose ${{ !inputs.nx_cache && '--skip-nx-cache' || '' }}
         env:
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
@@ -68,7 +73,7 @@ jobs:
 
       - name: Build Extension
         run: |
-          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
+          npx nx run acf-extension:build --prod --verbose ${{ !inputs.nx_cache && '--skip-nx-cache' || '' }}
         env:
           VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
