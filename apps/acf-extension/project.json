@@ -13,16 +13,6 @@
         "args": ["--node-env=production", "--watch"]
       },
       "continuous": true
-    },
-    "build": {
-      "configurations": {
-        "development": {
-          "envFile": ".env.development"
-        },
-        "production": {
-          "envFile": ".env.production"
-        }
-      }
     }
   }
 }
