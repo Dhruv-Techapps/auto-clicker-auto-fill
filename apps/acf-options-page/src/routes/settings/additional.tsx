@@ -73,7 +73,15 @@ export const AdditionalSettings = () => {
             <small className='text-body-tertiary'>{t('statusBar.hint')}</small>
           </Form.Label>
           {Object.values(STATUS_BAR_LOCATION_ENUM).map((location) => (
-            <Form.Check key={location} type='radio' value={location} id={`settings-statusBar-${location}`} label={t(`statusBar.positions.${location}`)} data-testid={`settings-additional-statusBar-${location}`} {...register('statusBar')} />
+            <Form.Check
+              key={location}
+              type='radio'
+              value={location}
+              id={`settings-statusBar-${location}`}
+              label={t(`statusBar.positions.${location}`)}
+              data-testid={`settings-additional-statusBar-${location}`}
+              {...register('statusBar')}
+            />
           ))}
         </li>
       </ul>
