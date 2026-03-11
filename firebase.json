@@ -24,8 +24,7 @@
     },
     {
       "site": "auto-clicker-auto-fill-configs",
-      "public": "apps/acf-configs/dist",
-
+      "public": "apps/acf-options-page/test-output/playwright/report",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
