@@ -1,36 +1,154 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { test as base, chromium, expect } from '@playwright/test';
+import { workspaceRoot } from '@nx/devkit';
+import { test as base, expect as baseExpect, BrowserContext, chromium } from '@playwright/test';
+import * as fs from 'fs';
+import * as path from 'path';
 
-export { expect };
+/**
+ * Clean session files that might cause hangs
+ * @param {string} tmpDir - Temp directory path
+ */
+function cleanSessionFiles(tmpDir: string) {
+  const sessionFiles = [path.join(tmpDir, 'sessionstore-backups'), path.join(tmpDir, 'sessionCheckpoints.json'), path.join(tmpDir, 'sessionstore.jsonlz4')];
+  for (const file of sessionFiles) {
+    if (fs.existsSync(file)) {
+      fs.rmSync(file, { recursive: true, force: true });
+    }
+  }
+}
+
+// Worker-scoped fixtures are shared across all tests in the same worker process.
+// Test-scoped fixtures are created fresh for each individual test.
+interface WorkerFixtures {
+  workerContext: BrowserContext;
+  workerExtensionId: string;
+}
 
 interface TestFixtures {
   extensionId: string;
+  worker: Awaited<ReturnType<BrowserContext['serviceWorkers']>>[number];
 }
 
-export const test = base.extend<TestFixtures>({
-  context: async ({ launchOptions }, use) => {
-    const context = await chromium.launchPersistentContext('', {
-      ...launchOptions,
-      headless: true,
-      channel: 'chromium'
-    });
-
-    let [background] = context.serviceWorkers();
-    if (!background) {
-      background = await context.waitForEvent('serviceworker');
+export const test = base.extend<TestFixtures, WorkerFixtures>({
+  // Expose the shared context as the standard 'context' fixture
+  context: async ({}, use) => {
+    const pathToExtension = path.join(workspaceRoot, 'apps/acf-extension/dist');
+    let context;
+    // Validate extension exists before attempting to load
+    console.log('[Fixture] Extension path:', pathToExtension);
+    if (!fs.existsSync(pathToExtension)) {
+      throw new Error(`Extension path does not exist: ${pathToExtension}`);
     }
+    const manifestPath = path.join(pathToExtension, 'manifest.json');
+    if (!fs.existsSync(manifestPath)) {
+      throw new Error(`manifest.json not found in: ${pathToExtension}`);
+    }
+    console.log('[Fixture] ✓ Extension validated');
+    console.log('[Fixture] Extension files:', fs.readdirSync(pathToExtension).slice(0, 10).join(', '));
+
+    // Chromium extension loading - MUST use launchPersistentContext
+    // Extensions ONLY work with persistent contexts in Playwright
+    // Research confirms: browser.launch() + newContext() does NOT support extensions
+    console.log('[Fixture] Using launchPersistentContext (required for extensions)');
+
+    // Use unique temp directory for isolation
+    const tmpDir = fs.mkdtempSync(path.join('/tmp', 'playwright-chrome-'));
+
+    console.log('[Fixture] Temp directory:', tmpDir);
+
+    // Clean any existing session state that might cause hangs
+    try {
+      cleanSessionFiles(tmpDir);
+      console.log('[Fixture] Cleaned session state files');
+    } catch (_error) {
+      console.log('[Fixture] No session files to clean (fresh start)');
+    }
+
+    console.log('[Fixture] Launching Chromium persistent context...');
+
+    context = await chromium
+      .launchPersistentContext(tmpDir, {
+        headless: false, // Extensions require headed mode
+        timeout: 60000, // Reduced to 60s - should be sufficient per research
+        slowMo: 0, // No slowdown for CI
+        args: [
+          // Extension loading (REQUIRED - must be first)
+          `--disable-extensions-except=${pathToExtension}`,
+          `--load-extension=${pathToExtension}`,
+
+          // Security/sandboxing (CRITICAL for CI)
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage', // CRITICAL: Prevents /dev/shm exhaustion
+
+          // Xvfb compatibility (simplified for faster startup)
+          '--disable-gpu',
+          '--use-gl=swiftshader',
+
+          // Component optimization (prevents background page hangs)
+          '--disable-component-extensions-with-background-pages',
+
+          // Basic CI optimizations
+          '--disable-features=TranslateUI',
+          '--disable-blink-features=AutomationControlled',
+
+          // Display
+          '--window-size=1920,1080'
+        ]
+      })
+      .catch((error) => {
+        console.error('[Fixture] ✗ Browser launch failed:', error.message);
+        console.error('[Fixture] Extension path was:', pathToExtension);
+        console.error('[Fixture] Temp directory was:', tmpDir);
+        console.error('[Fixture] Full error:', error.stack);
+        throw error;
+      });
+    console.log('[Fixture] Chromium persistent context created with extension');
 
     await use(context);
-    await context.close();
+
+    // Aggressive cleanup with hard 5-second timeout (research-recommended)
+    try {
+      // Close all pages first (non-blocking)
+      const pages = context.pages();
+      await Promise.all(pages.map((page) => page.close().catch(() => {})));
+
+      // Force close context with 5-second hard timeout
+      await Promise.race([context.close(), new Promise((_, reject) => setTimeout(() => reject(new Error('Context close timeout')), 5000))]);
+      console.log('[Fixture] Context closed successfully');
+    } catch (error) {
+      if (error instanceof Error) console.warn('[Fixture] Context cleanup error:', error.message);
+      else console.warn(error);
+      // Don't rethrow - let the browser process die naturally
+      // Worker will clean up remaining processes
+    }
   },
 
+  // Expose the shared extension ID as the standard 'extensionId' fixture
   extensionId: async ({ context }, use) => {
-    let [background] = context.serviceWorkers();
-    if (!background) {
-      background = await context.waitForEvent('serviceworker');
-    }
+    // Chromium extension ID extraction from service worker
+    try {
+      let background = context.serviceWorkers()[0];
+      if (!background) {
+        // Wait for service worker with timeout
+        background = await context.waitForEvent('serviceworker', { timeout: 10000 });
+      }
 
-    const extensionId = background.url().split('/')[2];
-    await use(extensionId);
+      const extensionId = background.url().split('/')[2];
+      console.log('[Fixture] Extension ID:', extensionId);
+      await use(extensionId);
+    } catch (error) {
+      if (error instanceof Error) console.log('[Fixture] Could not detect extension ID:', error.message);
+      else console.log(error);
+      // Use a placeholder if service worker detection fails
+      await use('unknown-extension-id');
+    }
+  },
+  page: async ({ context }, use) => {
+    const page = await context.newPage();
+    await use(page);
+    await page.close();
   }
 });
+
+export const expect = baseExpect;

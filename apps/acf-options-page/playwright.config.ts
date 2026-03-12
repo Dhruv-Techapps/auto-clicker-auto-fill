@@ -5,7 +5,6 @@ import * as path from 'path';
 import { BASE_URL } from './e2e/fixtures/base-url';
 
 const config = nxE2EPreset(__filename, { testDir: './e2e' });
-
 const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
 const isCI = !!process.env['CI'];
 
@@ -15,7 +14,7 @@ const isCI = !!process.env['CI'];
 export default defineConfig({
   ...config,
   retries: isCI ? 2 : 0,
-workers:1,
+  workers: isCI ? 1 : undefined,
   reporter: [
     [
       'html',
@@ -26,10 +25,8 @@ workers:1,
       }
     ]
   ],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: BASE_URL,
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     screenshot: isCI ? 'on' : 'off'
   },
@@ -46,10 +43,9 @@ workers:1,
       use: {
         ...devices['Desktop Chrome'],
         channel: 'chromium',
-        // Chrome options for loading the unpacked extension
-        args: [
-          `--disable-extensions-except=${extensionPath}`,
-          `--load-extension=${extensionPath}`]
+        launchOptions: {
+          args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, '--no-sandbox', '--disable-setuid-sandbox']
+        }
       }
     }
   ]
