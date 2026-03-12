@@ -15,16 +15,7 @@ export default defineConfig({
   ...config,
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
-  reporter: [
-    [
-      'html',
-      {
-        ...(isCI
-          ? { open: 'never', outputFolder: 'test-output/playwright/report', host: 'auto-clicker-auto-fill-playwright.web.app' }
-          : { open: 'always', outputFolder: 'test-output/playwright/report' })
-      }
-    ]
-  ],
+  reporter: [['list'], ['html', { open: 'never', outputFolder: 'test-output/playwright/report', host: isCI ? 'auto-clicker-auto-fill-playwright.web.app' : 'localhost' }]],
   use: {
     baseURL: BASE_URL,
     trace: 'on-first-retry',

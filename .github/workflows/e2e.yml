@@ -23,7 +23,7 @@ on:
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
-        default: 'config'
+        default: 'test'
         required: false
 
 env:
