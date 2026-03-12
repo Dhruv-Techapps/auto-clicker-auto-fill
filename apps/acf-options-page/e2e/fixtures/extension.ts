@@ -40,7 +40,6 @@ export const test = base.extend<WorkerFixtures>({
     if (!fs.existsSync(manifestPath)) {
       throw new Error(`manifest.json not found in: ${pathToExtension}`);
     }
-    console.log('[Fixture] ✓ Extension manifest found', fs.readFileSync(manifestPath, 'utf-8'));
     console.log('[Fixture] ✓ Extension validated');
     console.log('[Fixture] Extension files:', fs.readdirSync(pathToExtension).slice(0, 10).join(', '));
 
