@@ -4,6 +4,8 @@ import { test as base, expect as baseExpect, BrowserContext, chromium } from '@p
 import * as fs from 'fs';
 import * as path from 'path';
 
+const isCI = !!process.env['CI'];
+
 /**
  * Clean session files that might cause hangs
  * @param {string} tmpDir - Temp directory path
@@ -68,7 +70,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
 
     context = await chromium
       .launchPersistentContext(tmpDir, {
-        headless: false, // Extensions require headed mode
+        headless: isCI, // Headless in CI (no X server), headed locally for debugging
         timeout: 60000, // Reduced to 60s - should be sufficient per research
         slowMo: 0, // No slowdown for CI
         args: [
