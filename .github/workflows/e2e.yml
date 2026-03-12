@@ -19,6 +19,10 @@ on:
         type: boolean
         default: true
         required: false
+      grep:
+        description: 'Filter tests by name (e.g. feat-a)'
+        type: string
+        required: false
 
 env:
   FORCE_COLOR: 2
@@ -131,7 +135,7 @@ jobs:
 
       - name: Run E2E Tests
         continue-on-error: true
-        run: npx nx run acf-options-page:e2e --skip-nx-cache
+        run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '' }}
         env:
           CI: 'true'
 

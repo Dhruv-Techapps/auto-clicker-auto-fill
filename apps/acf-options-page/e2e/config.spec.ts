@@ -37,9 +37,8 @@ test.describe('Config creation and sync', () => {
     await expect(page.getByTestId('automation-url-form')).toBeVisible();
   });
 
-  test('should NOT sync to extension storage immediately after addConfig', async ({ context, page }) => {
+  test('should NOT sync to extension storage immediately after addConfig', async ({ worker, page }) => {
     // Arrange — record storage state before adding config
-    const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     await page.goto(URLS.AUTOMATIONS);
@@ -54,9 +53,8 @@ test.describe('Config creation and sync', () => {
     expect(configsAfter.length).toBe(configsBefore.length);
   });
 
-  test('should sync config to extension storage when URL is entered and form submitted', async ({ context, page }) => {
+  test('should sync config to extension storage when URL is entered and form submitted', async ({ worker, page }) => {
     // Arrange
-    const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     await page.goto(URLS.AUTOMATIONS);
     await page.getByTestId('automations-add-automation').click();
     await page.waitForURL(UUID_REGEX);

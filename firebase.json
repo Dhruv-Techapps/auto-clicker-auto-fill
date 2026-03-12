@@ -23,13 +23,13 @@
       ]
     },
     {
-      "site": "auto-clicker-auto-fill-configs",
-      "public": "apps/acf-options-page/test-output/playwright/report",
+      "site": "auto-clicker-auto-fill-playwright",
+      "public": "apps/acf-options-page/test-output/playwright",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
           "source": "**",
-          "destination": "/index.html"
+          "destination": "report/index.html"
         }
       ]
     },
