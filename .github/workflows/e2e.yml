@@ -55,16 +55,8 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
 
-      - name: Cache node_modules
-        id: npm-cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
-
       - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - run: npx nx report
 
@@ -132,8 +124,7 @@ jobs:
           key: playwright-chromium-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Playwright Browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install chromium
 
       - name: Run E2E Tests
         continue-on-error: true

@@ -1,10 +1,10 @@
 import { IConfiguration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { expect, test } from './fixtures';
 import { URLS } from './fixtures/base-url';
-import { expect, test } from './fixtures/extension';
 const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 
-test.describe('Config creation and sync', () => {
-  test('extension loads without errors', async ({ context, extensionId }) => {
+test.describe('Test', () => {
+  test('Extension ID', async ({ context, extensionId }) => {
     expect(extensionId).toBeTruthy();
     expect(extensionId.length).toBeGreaterThan(0);
     console.log('[Test] Extension loaded with ID:', extensionId);
