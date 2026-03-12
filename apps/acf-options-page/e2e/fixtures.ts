@@ -1,7 +1,7 @@
 import { test as base, chromium, type BrowserContext } from '@playwright/test';
 import path from 'path';
 
-const pathToExtension = path.resolve('apps/acf-extension/dist');
+const pathToExtension = path.resolve(__dirname, '../../acf-extension/dist');
 
 export const test = base.extend<{
   context: BrowserContext;
@@ -42,6 +42,8 @@ export const test = base.extend<{
       background = await context.waitForEvent('serviceworker');
     }
     const extensionId = background.url().split('/')[2];
+    console.log('[Fixture] Detected extension ID:', extensionId);
+    console.log('[Fixture] Extension path used:', pathToExtension);
     await use(extensionId);
   }
 });
