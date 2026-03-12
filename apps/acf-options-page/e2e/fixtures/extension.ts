@@ -6,12 +6,11 @@ import * as path from 'path';
 
 const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
 
-const isCI = !!process.env['CI'];
 const extensionExists = fs.existsSync(extensionPath);
 console.log('[fixture] workspaceRoot     :', workspaceRoot);
 console.log('[fixture] extensionPath     :', extensionPath);
 console.log('[fixture] extensionExists   :', extensionExists);
-console.log('[fixture] CI flag           :', isCI);
+console.log('[fixture] CI flag           :', !!process.env['CI']);
 if (extensionExists) {
   console.log('[fixture] dist contents     :', fs.readdirSync(extensionPath).join(', '));
 } else {
@@ -35,15 +34,14 @@ interface TestFixtures {
 export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Single browser instance shared across all tests in the worker
   workerContext: [
-    async ({}, use) => {
-      const ciArgs = isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'] : [];
-      const args = [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, ...ciArgs];
-      console.log('[fixture] chromium args     :', args);
+    async ({ launchOptions }, use) => {
+      console.log('[fixture] chromium args     :', launchOptions.args);
       const context = await chromium.launchPersistentContext('', {
-        // Must be false so Playwright doesn't inject --headless (old mode) which blocks extension loading.
-        // CI passes --headless=new via args above, which is Chrome's native headless and supports extensions.
-        headless: false,
-        args
+        // Chrome must NOT start in Playwright's default headless mode, which blocks extension loading.
+        // CI passes --headless=new via args in playwright.config.ts (Chrome 112+).
+        ...launchOptions,
+        channel: 'chromium',
+        headless: false
       });
       await use(context);
       await context.close();

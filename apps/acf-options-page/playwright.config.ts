@@ -1,21 +1,25 @@
 import { workspaceRoot } from '@nx/devkit';
 import { nxE2EPreset } from '@nx/playwright/preset';
 import { defineConfig, devices } from '@playwright/test';
+import * as path from 'path';
 import { BASE_URL } from './e2e/fixtures/base-url';
 
 const config = nxE2EPreset(__filename, { testDir: './e2e' });
+
+const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
+const isCI = !!process.env['CI'];
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   ...config,
-  retries: process.env['CI'] ? 2 : 0,
+  retries: isCI ? 2 : 0,
   reporter: [
     [
       'html',
       {
-        ...(process.env['CI']
+        ...(isCI
           ? { open: 'never', outputFolder: 'test-output/playwright/report', host: 'auto-clicker-auto-fill-playwright.web.app' }
           : { open: 'always', outputFolder: 'test-output/playwright/report' })
       }
@@ -26,19 +30,29 @@ export default defineConfig({
     baseURL: BASE_URL,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    screenshot: process.env['CI'] ? 'on' : 'off'
+    screenshot: isCI ? 'on' : 'off'
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: process.env['CI'] ? '' : 'npm run start',
+    command: isCI ? '' : 'npm run start',
     url: BASE_URL,
-    reuseExistingServer: !!process.env['CI'],
+    reuseExistingServer: isCI,
     cwd: workspaceRoot
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], channel: 'chromium' }
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chromium',
+        // Chrome options for loading the unpacked extension
+        args: [
+          `--disable-extensions-except=${extensionPath}`,
+          `--load-extension=${extensionPath}`,
+          // Required flags for containerised GitHub Actions runners
+          ...(isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'] : [])
+        ]
+      }
     }
   ]
 });
