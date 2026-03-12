@@ -41,7 +41,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
         // CI passes --headless=new via args in playwright.config.ts (Chrome 112+).
         ...launchOptions,
         channel: 'chromium',
-        headless: false
+        headless: true
       });
       await use(context);
       await context.close();
