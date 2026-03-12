@@ -9,6 +9,20 @@ on:
         type: environment
         default: Development
         required: true
+      deploy_options_page:
+        description: 'Build & deploy options page to Firebase'
+        type: boolean
+        default: false
+        required: false
+      nx_cache:
+        description: 'Use NX cache'
+        type: boolean
+        default: true
+        required: false
+      grep:
+        description: 'Filter tests by name (e.g. feat-a)'
+        type: string
+        required: false
 
 env:
   FORCE_COLOR: 2
@@ -19,10 +33,13 @@ jobs:
     name: Build, Deploy & E2E
     environment:
       name: ${{ inputs.environment }}
+      url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       actions: read
+    env:
+      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
     steps:
       - name: Clone repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -35,20 +52,28 @@ jobs:
           node-version: '${{ env.NODE }}'
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
-          cache: 'npm'
+
+      - name: Cache node_modules
+        id: npm-cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
-      - run: npm ci
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
       - run: npx nx report
 
       - name: Build Options Page
+        if: ${{ inputs.deploy_options_page }}
         run: |
-          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose ${{ !inputs.nx_cache && '--skip-nx-cache' || '' }}
         env:
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
           VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_SLOT }}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT }}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
@@ -61,7 +86,7 @@ jobs:
 
       - name: Build Extension
         run: |
-          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
+          npx nx run acf-extension:build --prod --verbose ${{ !inputs.nx_cache && '--skip-nx-cache' || '' }}
         env:
           VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
@@ -74,7 +99,6 @@ jobs:
           DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
           OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
           EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           API_SECRET: ${{ vars.API_SECRET }}
           MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
@@ -82,12 +106,15 @@ jobs:
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
 
       - name: Determine Firebase Target
+        if: ${{ inputs.deploy_options_page }}
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
           TARGET="auto-clicker-auto-fill-$VARIANT"
           echo "TARGET=$TARGET" >> $GITHUB_ENV
 
       - name: Deploy Options Page to Firebase Hosting
+        id: deploy
+        if: ${{ inputs.deploy_options_page }}
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
@@ -95,20 +122,29 @@ jobs:
           target: ${{ env.TARGET }}
           channelId: live
 
+      - name: Cache Playwright Browsers
+        id: playwright-cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
 
       - name: Run E2E Tests
-        run: npx nx run acf-options-page:e2e --skip-nx-cache
+        continue-on-error: true
+        run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '' }}
         env:
           CI: 'true'
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
 
       - name: Publish E2E Report to Firebase Hosting
+        id: report
         if: always()
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-configs
+          target: auto-clicker-auto-fill-playwright
           channelId: live

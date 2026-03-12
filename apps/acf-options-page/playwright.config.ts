@@ -11,17 +11,28 @@ const config = nxE2EPreset(__filename, { testDir: './e2e' });
 export default defineConfig({
   ...config,
   retries: process.env['CI'] ? 2 : 0,
+  reporter: [
+    [
+      'html',
+      {
+        ...(process.env['CI']
+          ? { open: 'never', outputFolder: 'test-output/playwright/report', host: 'auto-clicker-auto-fill-playwright.web.app' }
+          : { open: 'always', outputFolder: 'test-output/playwright/report' })
+      }
+    ]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: BASE_URL,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    screenshot: process.env['CI'] ? 'on' : 'off'
   },
   /* Run your local dev server before starting the tests */
   webServer: {
     command: process.env['CI'] ? '' : 'npm run start',
     url: BASE_URL,
-    reuseExistingServer: !process.env['CI'],
+    reuseExistingServer: !!process.env['CI'],
     cwd: workspaceRoot
   },
   projects: [
