@@ -118,7 +118,7 @@ export const test = base.extend<WorkerFixtures>({
       let background = context.serviceWorkers()[0];
       if (!background) {
         // Wait for service worker with timeout
-        background = await context.waitForEvent('serviceworker', { timeout: 10000 });
+        background = await context.waitForEvent('serviceworker');
       }
 
       const extensionId = background.url().split('/')[2];
@@ -145,7 +145,7 @@ async function getExtensionId(context: BrowserContext) {
   // Navigate to chrome://extensions to find the ID
   let [background] = context.serviceWorkers();
   if (!background) {
-    background = await context.waitForEvent('serviceworker', { timeout: 10000 });
+    background = await context.waitForEvent('serviceworker');
   }
   const extensionId = background.url().split('/')[2];
   return extensionId;
