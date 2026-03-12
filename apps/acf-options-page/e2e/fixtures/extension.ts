@@ -36,7 +36,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Single browser instance shared across all tests in the worker
   workerContext: [
     async ({}, use) => {
-      const ciArgs = isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
+      const ciArgs = isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'] : [];
       const args = [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, ...ciArgs];
       console.log('[fixture] chromium args     :', args);
       const context = await chromium.launchPersistentContext('', {
@@ -54,11 +54,30 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Extension ID resolved once and shared across all tests
   workerExtensionId: [
     async ({ workerContext }, use) => {
+      // Register the listener immediately — before any async work — so we cannot miss
+      // the 'serviceworker' event that may fire during or right after context creation.
+      const swPromise = workerContext.waitForEvent('serviceworker', { timeout: 25000 }).catch(() => null);
+
       let worker = workerContext.serviceWorkers()[0];
       if (!worker) {
-        worker = await workerContext.waitForEvent('serviceworker');
+        // Opening a page nudges Chrome to finish registering the extension service worker
+        // in containerised CI environments where it may not start automatically.
+        const triggerPage = await workerContext.newPage();
+        try {
+          await triggerPage.goto('about:blank', { waitUntil: 'commit' }).catch(() => null);
+        } finally {
+          await triggerPage.close();
+        }
+        worker = workerContext.serviceWorkers()[0] ?? (await swPromise) ?? undefined;
       }
-      await use(worker.url().split('/')[2]);
+
+      if (!worker) {
+        throw new Error(`[fixture] Extension service worker did not start within timeout.\n` + `  extensionPath: ${extensionPath}\n` + `  extensionExists: ${extensionExists}`);
+      }
+
+      const extensionId = worker.url().split('/')[2];
+      console.log('[fixture] extensionId       :', extensionId);
+      await use(extensionId);
     },
     { scope: 'worker' }
   ],
