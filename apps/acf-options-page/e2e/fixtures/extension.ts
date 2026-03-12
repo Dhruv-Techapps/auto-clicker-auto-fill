@@ -64,20 +64,13 @@ export const test = base.extend<WorkerFixtures>({
     console.log('[Fixture] Launching Chromium persistent context...');
     console.log('headless:', isCI);
     context = await chromium
-      .launchPersistentContext(tmpDir, {
+      .launchPersistentContext('', {
         headless: false, // Headless in CI (no X server), headed locally for debugging
-        timeout: 60000, // Reduced to 60s - should be sufficient per research
         args: [
           '--headless=new', // Use new headless mode for better extension support
           // Extension loading (REQUIRED - must be first)
           `--disable-extensions-except=${pathToExtension}`,
           `--load-extension=${pathToExtension}`,
-
-          // Security/sandboxing (CRITICAL for CI)
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage', // CRITICAL: Prevents /dev/shm exhaustion
-
           '--no-first-run',
           '--disable-default-apps'
         ]

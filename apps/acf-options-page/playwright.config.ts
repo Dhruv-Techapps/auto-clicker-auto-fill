@@ -1,6 +1,6 @@
 import { workspaceRoot } from '@nx/devkit';
 import { nxE2EPreset } from '@nx/playwright/preset';
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 import * as path from 'path';
 import { BASE_URL } from './e2e/fixtures/base-url';
 
@@ -30,14 +30,7 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-        channel: 'chromium',
-        launchOptions: {
-          args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, '--no-sandbox', '--disable-setuid-sandbox']
-        }
-      }
+      name: 'chromium'
     }
   ]
 });
