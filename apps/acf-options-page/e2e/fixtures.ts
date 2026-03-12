@@ -1,5 +1,6 @@
 import { test as base, chromium, type BrowserContext } from '@playwright/test';
 import path from 'path';
+import fs from 'fs';
 
 const pathToExtension = path.resolve(__dirname, '../../acf-extension/dist');
 
@@ -9,16 +10,27 @@ export const test = base.extend<{
 }>({
   // eslint-disable-next-line no-empty-pattern
   context: async ({}, use) => {
+    console.log('[Fixture] Extension path:', pathToExtension);
+    console.log('[Fixture] Extension path exists:', fs.existsSync(pathToExtension));
+    if (fs.existsSync(pathToExtension)) {
+      console.log('[Fixture] Extension path contents:', fs.readdirSync(pathToExtension));
+    }
+
     const context = await chromium.launchPersistentContext('', {
       headless: false,
       args: ['--headless=new', `--disable-extensions-except=${pathToExtension}`, `--load-extension=${pathToExtension}`, '--no-first-run', '--disable-default-apps']
     });
 
+    console.log('[Fixture] Browser launched');
+
     // Wait for the extension service worker to start
     let [sw] = context.serviceWorkers();
+    console.log('[Fixture] Service workers at launch:', context.serviceWorkers().length);
     if (!sw) {
+      console.log('[Fixture] Waiting for serviceworker event...');
       sw = await context.waitForEvent('serviceworker');
     }
+    console.log('[Fixture] Service worker URL:', sw.url());
 
     // The extension opens welcome + options pages on first install.
     // Wait for them to appear, then close them all so tests start clean.
