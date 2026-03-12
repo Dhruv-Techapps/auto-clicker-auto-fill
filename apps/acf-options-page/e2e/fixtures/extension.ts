@@ -105,6 +105,7 @@ export const test = base.extend<WorkerFixtures>({
 
     // Set the server URL and notify background service worker
     const extensionId = await getExtensionId(context);
+    console.log('[Fixture] Detected extension ID:', extensionId);
     const setupPage = await context.newPage();
     await setupPage.goto(`chrome-extension://${extensionId}/options.html`);
     await setupPage.waitForTimeout(1000);
