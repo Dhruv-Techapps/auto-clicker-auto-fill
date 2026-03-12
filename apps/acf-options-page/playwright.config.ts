@@ -3,11 +3,12 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: 'e2e',
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   workers: 1, // Extensions require serial execution
   reporter: process.env.CI ? 'github' : 'html',
   timeout: 30_000,
   use: {
+    channel: 'chromium', // use full Chrome binary, not headless-shell (headless-shell does not support extensions)
     trace: 'on-first-retry',
     screenshot: 'only-on-failure'
   },
