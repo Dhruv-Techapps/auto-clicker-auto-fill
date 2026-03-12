@@ -134,10 +134,17 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Run E2E Tests
-        continue-on-error: true
         run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '' }}
         env:
           CI: 'true'
+
+      - name: Upload E2E Report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: apps/acf-options-page/test-output/playwright/report
+          retention-days: 30
 
       - name: Publish E2E Report to Firebase Hosting
         id: report
