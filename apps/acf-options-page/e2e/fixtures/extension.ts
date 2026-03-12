@@ -40,9 +40,9 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       const args = [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, ...ciArgs];
       console.log('[fixture] chromium args     :', args);
       const context = await chromium.launchPersistentContext('', {
-        // headless must be false to allow extension loading.
-        // In CI, pass --headless=new so Chrome runs without a display (Chrome 112+).
-        headless: true,
+        // Must be false so Playwright doesn't inject --headless (old mode) which blocks extension loading.
+        // CI passes --headless=new via args above, which is Chrome's native headless and supports extensions.
+        headless: false,
         args
       });
       await use(context);
