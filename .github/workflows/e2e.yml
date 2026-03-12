@@ -1,7 +1,8 @@
 name: E2E [Build, Deploy & Test]
-run-name: E2E Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+run-name: E2E Deploy to ${{ inputs.environment || 'Development' }} by @${{ github.actor }}
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       environment:
@@ -22,6 +23,7 @@ on:
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
+        default: 'config'
         required: false
 
 env:
@@ -32,7 +34,7 @@ jobs:
   main:
     name: Build, Deploy & E2E
     environment:
-      name: ${{ inputs.environment }}
+      name: ${{ inputs.environment || 'Development' }}
       url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     runs-on: ubuntu-latest
     permissions:
@@ -135,7 +137,7 @@ jobs:
 
       - name: Run E2E Tests
         continue-on-error: true
-        run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '' }}
+        run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '-- --grep="config"' }}
         env:
           CI: 'true'
 
