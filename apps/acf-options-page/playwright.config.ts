@@ -15,6 +15,7 @@ const isCI = !!process.env['CI'];
 export default defineConfig({
   ...config,
   retries: isCI ? 2 : 0,
+workers:1,
   reporter: [
     [
       'html',
@@ -48,10 +49,7 @@ export default defineConfig({
         // Chrome options for loading the unpacked extension
         args: [
           `--disable-extensions-except=${extensionPath}`,
-          `--load-extension=${extensionPath}`,
-          // Required flags for containerised GitHub Actions runners
-          ...(isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'] : [])
-        ]
+          `--load-extension=${extensionPath}`]
       }
     }
   ]
