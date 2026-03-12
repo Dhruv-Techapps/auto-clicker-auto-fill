@@ -78,7 +78,7 @@ jobs:
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
 
       - name: Install Playwright Browsers
-        run: npx playwright install chromium
+        run: npx playwright install chromium --with-deps
 
       - name: Run E2E Tests
         continue-on-error: true
