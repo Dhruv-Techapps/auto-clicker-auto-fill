@@ -67,7 +67,6 @@ export const test = base.extend<WorkerFixtures>({
       .launchPersistentContext(tmpDir, {
         headless: false, // Headless in CI (no X server), headed locally for debugging
         timeout: 60000, // Reduced to 60s - should be sufficient per research
-        slowMo: 0, // No slowdown for CI
         args: [
           '--headless=new', // Use new headless mode for better extension support
           // Extension loading (REQUIRED - must be first)
@@ -79,19 +78,8 @@ export const test = base.extend<WorkerFixtures>({
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage', // CRITICAL: Prevents /dev/shm exhaustion
 
-          // Xvfb compatibility (simplified for faster startup)
-          '--disable-gpu',
-          '--use-gl=swiftshader',
-
-          // Component optimization (prevents background page hangs)
-          '--disable-component-extensions-with-background-pages',
-
-          // Basic CI optimizations
-          '--disable-features=TranslateUI',
-          '--disable-blink-features=AutomationControlled',
-
-          // Display
-          '--window-size=1920,1080'
+          '--no-first-run',
+          '--disable-default-apps'
         ]
       })
       .catch((error) => {
@@ -164,7 +152,7 @@ async function getExtensionId(context: BrowserContext) {
   // Navigate to chrome://extensions to find the ID
   let [background] = context.serviceWorkers();
   if (!background) {
-    background = await context.waitForEvent('serviceworker');
+    background = await context.waitForEvent('serviceworker', { timeout: 10000 });
   }
   const extensionId = background.url().split('/')[2];
   return extensionId;
