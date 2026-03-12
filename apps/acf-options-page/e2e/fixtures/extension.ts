@@ -22,16 +22,11 @@ function cleanSessionFiles(tmpDir: string) {
 // Worker-scoped fixtures are shared across all tests in the same worker process.
 // Test-scoped fixtures are created fresh for each individual test.
 interface WorkerFixtures {
-  workerContext: BrowserContext;
-  workerExtensionId: string;
-}
-
-interface TestFixtures {
+  context: BrowserContext;
   extensionId: string;
-  worker: Awaited<ReturnType<BrowserContext['serviceWorkers']>>[number];
 }
 
-export const test = base.extend<TestFixtures, WorkerFixtures>({
+export const test = base.extend<WorkerFixtures>({
   // Expose the shared context as the standard 'context' fixture
   context: async ({}, use) => {
     const pathToExtension = path.join(workspaceRoot, 'apps/acf-extension/dist');
@@ -45,6 +40,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     if (!fs.existsSync(manifestPath)) {
       throw new Error(`manifest.json not found in: ${pathToExtension}`);
     }
+    console.log('[Fixture] ✓ Extension manifest found', fs.readFileSync(manifestPath, 'utf-8'));
     console.log('[Fixture] ✓ Extension validated');
     console.log('[Fixture] Extension files:', fs.readdirSync(pathToExtension).slice(0, 10).join(', '));
 
@@ -67,13 +63,14 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     }
 
     console.log('[Fixture] Launching Chromium persistent context...');
-
+    console.log('headless:', isCI);
     context = await chromium
       .launchPersistentContext(tmpDir, {
         headless: isCI, // Headless in CI (no X server), headed locally for debugging
         timeout: 60000, // Reduced to 60s - should be sufficient per research
         slowMo: 0, // No slowdown for CI
         args: [
+          '--headless=new', // Use new headless mode for better extension support
           // Extension loading (REQUIRED - must be first)
           `--disable-extensions-except=${pathToExtension}`,
           `--load-extension=${pathToExtension}`,
@@ -106,6 +103,13 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
         throw error;
       });
     console.log('[Fixture] Chromium persistent context created with extension');
+
+    // Set the server URL and notify background service worker
+    const extensionId = await getExtensionId(context);
+    const setupPage = await context.newPage();
+    await setupPage.goto(`chrome-extension://${extensionId}/options.html`);
+    await setupPage.waitForTimeout(1000);
+    await setupPage.close();
 
     await use(context);
 
@@ -140,8 +144,8 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       console.log('[Fixture] Extension ID:', extensionId);
       await use(extensionId);
     } catch (error) {
-      if (error instanceof Error) console.log('[Fixture] Could not detect extension ID:', error.message);
-      else console.log(error);
+      if (error instanceof Error) console.warn('[Fixture] Could not detect extension ID:', error.message);
+      else console.warn(error);
       // Use a placeholder if service worker detection fails
       await use('unknown-extension-id');
     }
@@ -152,5 +156,18 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     await page.close();
   }
 });
+
+/**
+ * Get the extension ID from a browser context with the extension loaded
+ */
+async function getExtensionId(context: BrowserContext) {
+  // Navigate to chrome://extensions to find the ID
+  let [background] = context.serviceWorkers();
+  if (!background) {
+    background = await context.waitForEvent('serviceworker');
+  }
+  const extensionId = background.url().split('/')[2];
+  return extensionId;
+}
 
 export const expect = baseExpect;
