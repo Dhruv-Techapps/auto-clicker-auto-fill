@@ -137,7 +137,7 @@ jobs:
 
       - name: Run E2E Tests
         continue-on-error: true
-        run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '-- --grep="config"' }}
+        run: npx nx run acf-options-page:e2e --skip-nx-cache ${{ inputs.grep && format('-- --grep="{0}"', inputs.grep) || '-- --grep="test"' }}
         env:
           CI: 'true'
 
