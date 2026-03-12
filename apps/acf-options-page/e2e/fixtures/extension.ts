@@ -65,7 +65,7 @@ export const test = base.extend<WorkerFixtures>({
     console.log('headless:', isCI);
     context = await chromium
       .launchPersistentContext(tmpDir, {
-        headless: isCI, // Headless in CI (no X server), headed locally for debugging
+        headless: false, // Headless in CI (no X server), headed locally for debugging
         timeout: 60000, // Reduced to 60s - should be sufficient per research
         slowMo: 0, // No slowdown for CI
         args: [
