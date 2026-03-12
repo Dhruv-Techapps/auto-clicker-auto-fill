@@ -17,8 +17,13 @@ export const test = base.extend<{
     }
 
     const context = await chromium.launchPersistentContext('', {
-      headless: false,
-      args: ['--headless=new', `--disable-extensions-except=${pathToExtension}`, `--load-extension=${pathToExtension}`, '--no-first-run', '--disable-default-apps']
+      headless: true,
+      args: [
+        `--disable-extensions-except=${pathToExtension}`,
+        `--load-extension=${pathToExtension}`,
+        '--no-first-run',
+        '--disable-default-apps'
+      ]
     });
 
     console.log('[Fixture] Browser launched');
@@ -34,7 +39,6 @@ export const test = base.extend<{
 
     // The extension opens welcome + options pages on first install.
     // Wait for them to appear, then close them all so tests start clean.
-    // Wait until we see at least 2 pages (the auto-opened ones) or timeout after 3s.
     const deadline = Date.now() + 3000;
     while (context.pages().length < 2 && Date.now() < deadline) {
       await new Promise((r) => setTimeout(r, 200));
