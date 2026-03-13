@@ -33,9 +33,17 @@ jobs:
       - run: npx nx affected --target=lint --parallel=3 --verbose --exclude=acf-configs
       - run: npx nx affected --target=test --parallel=3 --verbose --coverage --exclude=acf-configs
       - run: npx nx affected --target=typecheck --parallel=3 --verbose --exclude=acf-configs
+      - name: Check for coverage reports
+        id: coverage-check
+        run: |
+          if compgen -G 'packages/**/**/test-output/vitest/coverage/lcov.info' > /dev/null 2>&1; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+          fi
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 # v1.3.0
-        if: ${{  github.actor != 'dependabot[bot]' }}
+        if: ${{ github.actor != 'dependabot[bot]' && steps.coverage-check.outputs.found == 'true' }}
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           # or

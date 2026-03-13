@@ -32,43 +32,36 @@ describe('settings slice – modal', () => {
 describe('settings slice – updateSettings', () => {
   it('should update a top-level setting field', () => {
     const state = settingsReducer(initialState, updateSettings({ retry: 10 }));
-
     expect(state.settings.retry).toBe(10);
   });
 
   it('should update checkiFrames setting', () => {
     const state = settingsReducer(initialState, updateSettings({ checkiFrames: true }));
-
     expect(state.settings.checkiFrames).toBe(true);
   });
 
   it('should update reloadOnError setting', () => {
     const state = settingsReducer(initialState, updateSettings({ reloadOnError: true }));
-
     expect(state.settings.reloadOnError).toBe(true);
   });
 
   it('should update retryInterval setting', () => {
     const state = settingsReducer(initialState, updateSettings({ retryInterval: 2 }));
-
     expect(state.settings.retryInterval).toBe(2);
   });
 
   it('should update retryIntervalTo setting', () => {
     const state = settingsReducer(initialState, updateSettings({ retryIntervalTo: 5 }));
-
     expect(state.settings.retryIntervalTo).toBe(5);
   });
 
   it('should update statusBar setting', () => {
     const state = settingsReducer(initialState, updateSettings({ statusBar: 'top-left' }));
-
     expect(state.settings.statusBar).toBe('top-left');
   });
 
   it('should update multiple fields at once', () => {
     const state = settingsReducer(initialState, updateSettings({ checkiFrames: true, reloadOnError: true }));
-
     expect(state.settings.checkiFrames).toBe(true);
     expect(state.settings.reloadOnError).toBe(true);
   });

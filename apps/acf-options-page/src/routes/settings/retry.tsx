@@ -3,10 +3,10 @@ import { InputInterval } from '@acf-options-page/form/input-interval';
 import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { settingsSelector, updateSettings } from '@acf-options-page/store/settings/settings.slice';
 import { EErrorOptions, ISettings } from '@dhruv-techapps/acf-common';
-import { useEffect } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 type RetryFormValues = Pick<ISettings, 'retry' | 'retryInterval' | 'retryOption' | 'retryIntervalTo'>;
 
@@ -32,10 +32,10 @@ function SettingRetry() {
     reset({
       retry: settings.retry,
       retryInterval: settings.retryInterval,
-      retryOption: settings.retryOption,
-      retryIntervalTo: settings.retryIntervalTo
+      retryIntervalTo: settings.retryIntervalTo,
+      retryOption: settings.retryOption
     });
-  }, [settings, reset]);
+  }, [settings.retry, settings.retryInterval, settings.retryIntervalTo, settings.retryOption, reset]);
 
   const onSubmit = (data: RetryFormValues) => {
     dispatch(updateSettings(data));
@@ -55,8 +55,8 @@ function SettingRetry() {
     <Form onSubmit={handleSubmit(onSubmit)} onReset={onCancel} data-testid='settings-retry-form'>
       <Card bg='warning-subtle' text='warning-emphasis'>
         <Card.Body className='d-flex gap-3'>
-          <InputBounded title={'retry.title'} name='retry' form={form} />
-          <InputInterval title={'retry.interval'} name='retryInterval' rangeName='retryIntervalTo' form={form} />
+          <InputBounded title={'retry.title'} name='retry' form={form} dataTestId='settings-retry-retry' />
+          <InputInterval title={'retry.interval'} name='retryInterval' rangeName='retryIntervalTo' form={form} dataTestId='settings-retry-interval' />
         </Card.Body>
       </Card>
       <Card bg='danger-subtle' text='danger-emphasis' className='mt-3'>

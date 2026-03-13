@@ -2,11 +2,10 @@ import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
 import { settingsSelector, updateSettings } from '@acf-options-page/store/settings';
 import { ISettings } from '@dhruv-techapps/acf-common';
 import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/shared-status-bar/service';
-import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-
+import { useEffect } from 'react';
 type AdditionalFormValues = Pick<ISettings, 'checkiFrames' | 'reloadOnError' | 'statusBar'>;
 
 export const AdditionalSettings = () => {
@@ -17,22 +16,22 @@ export const AdditionalSettings = () => {
   const form = useForm<AdditionalFormValues>({
     defaultValues: {
       checkiFrames: settings.checkiFrames,
-      reloadOnError: settings.reloadOnError,
+      reloadOnError: settings.reloadOnError ?? false,
       statusBar: settings.statusBar
     },
     mode: 'onChange'
   });
 
   const { register, handleSubmit, reset, formState } = form;
-  const { isDirty } = formState;
+  const { isDirty, isValid } = formState;
 
   useEffect(() => {
     reset({
       checkiFrames: settings.checkiFrames,
-      reloadOnError: settings.reloadOnError,
+      reloadOnError: settings.reloadOnError ?? false,
       statusBar: settings.statusBar
     });
-  }, [settings, reset]);
+  }, [reset, settings.checkiFrames, settings.reloadOnError, settings.statusBar]);
 
   const onSubmit = (data: AdditionalFormValues) => {
     dispatch(updateSettings(data));
@@ -42,7 +41,7 @@ export const AdditionalSettings = () => {
   const onCancel = () => {
     reset({
       checkiFrames: settings.checkiFrames,
-      reloadOnError: settings.reloadOnError,
+      reloadOnError: settings.reloadOnError ?? false,
       statusBar: settings.statusBar
     });
   };
@@ -89,7 +88,7 @@ export const AdditionalSettings = () => {
         <Button variant='outline-secondary' type='reset' data-testid='settings-additional-cancel'>
           {t('common.cancel')}
         </Button>
-        <Button type='submit' variant='primary' disabled={!isDirty} data-testid='settings-additional-save'>
+        <Button type='submit' variant='primary' disabled={!isDirty || !isValid} data-testid='settings-additional-save'>
           {t('common.save')}
         </Button>
       </div>

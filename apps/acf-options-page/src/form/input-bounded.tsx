@@ -11,10 +11,11 @@ interface InputBoundedProps<TFieldValues extends FieldValues> {
   title: string;
   name: Path<TFieldValues>;
   form: UseFormReturn<TFieldValues>;
+  dataTestId?: string;
 }
 
 export function InputBounded<TFieldValues extends FieldValues>(props: InputBoundedProps<TFieldValues>) {
-  const { title, name, form } = props;
+  const { title, name, form, dataTestId } = props;
   const { control } = form;
   const { t } = useTranslation();
 
@@ -33,7 +34,7 @@ export function InputBounded<TFieldValues extends FieldValues>(props: InputBound
     return (
       <InputGroup>
         <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={<Tooltip id={`${name}-tooltip`}>{t('retry.unlimited-tooltip')}</Tooltip>}>
-          <Button variant={isUnlimited ? 'warning' : 'outline-warning'} onClick={onToggleUnlimited}>
+          <Button variant={isUnlimited ? 'warning' : 'outline-warning'} onClick={onToggleUnlimited} data-testid={dataTestId ? `${dataTestId}-unlimited` : undefined}>
             <i className='bi bi-infinity' />
           </Button>
         </OverlayTrigger>
@@ -44,7 +45,8 @@ export function InputBounded<TFieldValues extends FieldValues>(props: InputBound
           inputMode={isUnlimited ? undefined : 'numeric'}
           disabled={isUnlimited}
           isInvalid={!!fieldState.error}
-          list={isUnlimited ? undefined : 'bound'}
+          data-testid={dataTestId}
+          list={'bound'}
           value={field.value ?? ''}
           onChange={(e) => field.onChange(transform(e.target.value))}
         />

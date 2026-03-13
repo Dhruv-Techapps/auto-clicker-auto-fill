@@ -1,21 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { IConfiguration, ISettings, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
 import { workspaceRoot } from '@nx/devkit';
 import { test as base, BrowserContext, chromium, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
+import { ToastPage } from './toast.page';
 
 const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
 const isCI = !!process.env['CI'];
 
 // Worker-scoped fixtures are shared across all tests in the same worker process.
 // Test-scoped fixtures are created fresh for each individual test.
-interface WorkerFixtures {
+export interface WorkerFixtures {
   workerContext: BrowserContext;
   workerExtensionId: string;
 }
 
-interface TestFixtures {
+export interface TestFixtures {
   extensionId: string;
+  getSettings: () => Promise<ISettings>;
+  getAutomations: () => Promise<IConfiguration[]>;
+  toastPage: ToastPage;
   worker: Awaited<ReturnType<BrowserContext['serviceWorkers']>>[number];
 }
 
@@ -67,6 +72,18 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Expose the shared extension ID as the standard 'extensionId' fixture
   extensionId: async ({ workerExtensionId }, use) => {
     await use(workerExtensionId);
+  },
+
+  getSettings: async ({ worker }, use) => {
+    await use(() => worker.evaluate<ISettings, string>((key) => chrome.storage.local.get(key).then((r) => r[key] as ISettings), LOCAL_STORAGE_KEY.SETTINGS));
+  },
+
+  getAutomations: async ({ worker }, use) => {
+    await use(() => worker.evaluate<IConfiguration[], string>((key) => chrome.storage.local.get(key).then((r) => r[key] as IConfiguration[]), LOCAL_STORAGE_KEY.CONFIGS));
+  },
+
+  toastPage: async ({ page }, use) => {
+    await use(new ToastPage(page));
   },
 
   // Returns the extension service worker, waking it up if Chrome stopped it

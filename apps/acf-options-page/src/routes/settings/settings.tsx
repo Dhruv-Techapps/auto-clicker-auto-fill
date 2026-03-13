@@ -1,23 +1,15 @@
 import { ErrorAlert } from '@acf-options-page/components/error-alert.components';
 import { Loading } from '@acf-options-page/components/loading.components';
-import { useAppDispatch, useAppSelector } from '@acf-options-page/store/hooks';
-import { settingsGetAPI } from '@acf-options-page/store/settings/settings.api';
+import { useAppSelector } from '@acf-options-page/store/hooks';
 import { settingsSelector } from '@acf-options-page/store/settings/settings.slice';
 import { ROUTES } from '@acf-options-page/util';
-import { useEffect } from 'react';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet } from 'react-router';
 
 export const Settings = () => {
-  const dispatch = useAppDispatch();
   const { error, loading, message } = useAppSelector(settingsSelector);
   const { t } = useTranslation();
-  useEffect(() => {
-    if (window.chrome?.runtime) {
-      dispatch(settingsGetAPI());
-    }
-  }, [dispatch]);
 
   return (
     <Container className='my-5'>
@@ -59,8 +51,7 @@ export const Settings = () => {
         </Col>
         <Col>
           <ErrorAlert error={error} />
-          {loading && <Loading />}
-          <Outlet />
+          {loading ? <Loading /> : <Outlet />}
           {message && (
             <div className='mt-3 text-success' data-testid='settings-message'>
               {message}

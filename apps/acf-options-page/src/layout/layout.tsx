@@ -4,6 +4,7 @@ import { ExtensionNotFoundAlert, VersionAlert } from '@acf-options-page/alerts';
 import { DataList, LoadingBar, ToastHandler } from '@acf-options-page/components';
 import { LoginModal } from '@acf-options-page/modal';
 import { appSelector, configGetAllAPI, firebaseIsLoginAPI, getManifest, useAppDispatch, useAppSelector } from '@acf-options-page/store';
+import { settingsGetAPI } from '@acf-options-page/store/settings/settings.api';
 import { StorageService } from '@dhruv-techapps/core-service';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router';
@@ -22,6 +23,7 @@ export const Layout = () => {
   useEffect(() => {
     if (window.chrome?.runtime) {
       dispatch(configGetAllAPI());
+      dispatch(settingsGetAPI());
     }
   }, [dispatch]);
 
