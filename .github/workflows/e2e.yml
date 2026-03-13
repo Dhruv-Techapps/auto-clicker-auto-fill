@@ -48,29 +48,20 @@ jobs:
         run: npm ci
       - run: npx nx report
 
+      - name: Restore Extension Artifact
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        with:
+          key: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.ref_name }}
+          path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
+          fail-on-cache-miss: true
+
+      - name: Extract Extension
+        run: |
+          mkdir -p apps/acf-extension/dist
+          unzip -o acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
+
       - name: Install Playwright Browsers
         run: npx playwright install chromium
-
-      - name: Build Extension
-        run: |
-          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
-        env:
-          VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
-          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
-          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
-          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
-          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
-          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ github.ref_name }}
-          DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
-          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
-          EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
-          API_SECRET: ${{ vars.API_SECRET }}
-          MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
-          VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
 
       - name: Run E2E Tests
         continue-on-error: true
