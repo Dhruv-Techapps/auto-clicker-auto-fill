@@ -9,10 +9,11 @@ export const ToastHandler = () => {
 
   const darkColors: Array<string> = ['primary', 'secondary', 'success', 'danger', 'dark'];
   return (
-    <div className='toast-container position-fixed bottom-0 start-0 p-3'>
+    <div className='toast-container position-fixed bottom-0 start-0 p-3' data-testid='toast-container'>
       {toasts.map(({ body, header, variant = 'success', delay = 5000, autohide = true, show = true, onClose }, index) => (
         <Toast
           key={index}
+          data-testid='toast-item'
           onClose={() => {
             close(index);
             if (onClose) onClose();

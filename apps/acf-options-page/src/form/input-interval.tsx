@@ -8,6 +8,7 @@ interface InputIntervalProps<TFieldValues extends FieldValues> {
   name: Path<TFieldValues>;
   rangeName: Path<TFieldValues>;
   form: UseFormReturn<TFieldValues>;
+  dataTestId?: string;
 }
 
 interface RenderInputProps<TFieldValues extends FieldValues> {
@@ -16,7 +17,7 @@ interface RenderInputProps<TFieldValues extends FieldValues> {
 }
 
 export function InputInterval<TFieldValues extends FieldValues>(props: InputIntervalProps<TFieldValues>) {
-  const { title, name, rangeName, form } = props;
+  const { title, name, rangeName, form, dataTestId } = props;
   const { control, formState, watch, getValues, setValue, trigger } = form;
   const { errors } = formState;
   const { t } = useTranslation();
@@ -59,6 +60,7 @@ export function InputInterval<TFieldValues extends FieldValues>(props: InputInte
         {...rest}
         inputMode='decimal'
         id={rest.name}
+        data-testid={dataTestId ? `${dataTestId}-${rest.name}` : undefined}
         list='interval'
         onChange={(e) => {
           onChange(transform(e.target.value));
@@ -76,7 +78,7 @@ export function InputInterval<TFieldValues extends FieldValues>(props: InputInte
       </Form.Label>
       <InputGroup>
         <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={<Tooltip id={`${name}-tooltip`}>{t('retry.range-tooltip')}</Tooltip>}>
-          <Button variant={rangeMode ? 'warning' : 'outline-warning'} onClick={onToggleRange}>
+          <Button variant={rangeMode ? 'warning' : 'outline-warning'} onClick={onToggleRange} data-testid={dataTestId ? `${dataTestId}-range-button` : undefined}>
             <i className='bi bi-arrows-expand-vertical' />
           </Button>
         </OverlayTrigger>
