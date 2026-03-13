@@ -77,19 +77,30 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
 
-      - name: Download Extension Artifact
-        if: ${{ inputs.use_artifact }}
-        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4
+      - name: Upload Options Page Artifact
+        if: ${{ inputs.deploy_options_page }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
-          run-id: ${{ inputs.artifact_run_id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
+          path: apps/acf-options-page/dist
+          retention-days: 7
 
-      - name: Unzip Extension Artifact
-        if: ${{ inputs.use_artifact }}
+      - name: Determine Firebase Target
+        if: ${{ inputs.deploy_options_page }}
         run: |
-          mkdir -p apps/acf-extension/dist
-          unzip -o acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
+          VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
+          TARGET="auto-clicker-auto-fill-$VARIANT"
+          echo "TARGET=$TARGET" >> $GITHUB_ENV
+
+      - name: Deploy Options Page to Firebase Hosting
+        id: deploy
+        if: ${{ inputs.deploy_options_page }}
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: ${{ env.TARGET }}
+          channelId: live
 
       - name: Build Extension
         if: ${{ !inputs.use_artifact }}
@@ -115,37 +126,12 @@ jobs:
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
           KEY: ${{ secrets.KEY }}
 
-      - name: Upload Options Page Artifact
-        if: ${{ inputs.deploy_options_page }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: apps/acf-options-page/dist
-          retention-days: 7
-
       - name: Upload Extension Artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
           path: apps/acf-extension/dist
           retention-days: 7
-
-      - name: Determine Firebase Target
-        if: ${{ inputs.deploy_options_page }}
-        run: |
-          VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
-          TARGET="auto-clicker-auto-fill-$VARIANT"
-          echo "TARGET=$TARGET" >> $GITHUB_ENV
-
-      - name: Deploy Options Page to Firebase Hosting
-        id: deploy
-        if: ${{ inputs.deploy_options_page }}
-        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
-        with:
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: auto-clicker-autofill
-          target: ${{ env.TARGET }}
-          channelId: live
 
       - name: Cache Playwright Browsers
         id: playwright-cache
@@ -171,7 +157,7 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-autofill-playwright
+          target: auto-clicker-auto-fill-playwright
           channelId: live
 
       - name: Comment E2E Report on PR
