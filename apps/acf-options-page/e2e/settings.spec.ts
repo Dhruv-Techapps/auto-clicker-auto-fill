@@ -70,8 +70,6 @@ test.describe('Global settings navigation', () => {
 });
 
 test.describe('Global settings sync to extension', () => {
-  test.describe.configure({ mode: 'serial' });
-
   test('should NOT sync settings to extension storage before any change', async ({ page, worker }) => {
     // Arrange — record storage state before navigating
     const settingsBefore = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS)) as ISettings;

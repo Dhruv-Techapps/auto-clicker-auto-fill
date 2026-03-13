@@ -5,7 +5,6 @@ const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 const TEST_URL = 'https://test.getautoclicker.com';
 
 test.describe('Config creation and sync', () => {
-  test.describe.configure({ mode: 'serial' });
   test('should add config to store when + button is clicked from automations page', async ({ page }) => {
     // Arrange
     await page.goto(URLS.AUTOMATIONS);
