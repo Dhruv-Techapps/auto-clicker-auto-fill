@@ -10,6 +10,11 @@ on:
         type: environment
         default: Development
         required: true
+      deploy_options_page:
+        description: 'Build & deploy options page to Firebase'
+        type: boolean
+        default: false
+        required: false
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
@@ -48,17 +53,61 @@ jobs:
         run: npm ci
       - run: npx nx report
 
-      - name: Restore Extension Artifact
-        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
-        with:
-          key: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.ref_name }}
-          path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
-          fail-on-cache-miss: true
-
-      - name: Extract Extension
+      - name: Build Options Page
+        if: ${{ inputs.deploy_options_page }}
         run: |
-          mkdir -p apps/acf-extension/dist
-          unzip -o acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose  '--skip-nx-cache'
+        env:
+          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
+          VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
+          VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
+          VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_SLOT }}
+          VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT }}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ github.ref_name }}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
+
+      - name: Build Extension
+        run: |
+          npx nx run acf-extension:build --prod --verbose  '--skip-nx-cache'
+        env:
+          VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
+          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
+          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ github.ref_name }}
+          DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
+          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
+          EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
+          API_SECRET: ${{ vars.API_SECRET }}
+          MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
+          VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
+
+      - name: Determine Firebase Target
+        if: ${{ inputs.deploy_options_page }}
+        run: |
+          VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
+          TARGET="auto-clicker-auto-fill-$VARIANT"
+          echo "TARGET=$TARGET" >> $GITHUB_ENV
+
+      - name: Deploy Options Page to Firebase Hosting
+        id: deploy
+        if: ${{ inputs.deploy_options_page }}
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: ${{ env.TARGET }}
+          channelId: live
 
       - name: Cache Playwright Browsers
         id: playwright-cache

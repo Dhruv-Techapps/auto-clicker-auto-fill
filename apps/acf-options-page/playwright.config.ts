@@ -4,12 +4,11 @@ import { defineConfig } from '@playwright/test';
 import { BASE_URL } from './e2e/fixtures/base-url';
 
 const config = nxE2EPreset(__filename, { testDir: './e2e' });
-console.log('[Playwright Config] Base URL:', config);
+
 export default defineConfig({
-  testDir: 'e2e',
+  ...config,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: 1, // Extensions require serial execution
+  retries: process.env.CI ? 2 : 0,
   reporter: [
     ['dot'],
     ...(process.env['CI'] ? [['list'] as ['list']] : []),
