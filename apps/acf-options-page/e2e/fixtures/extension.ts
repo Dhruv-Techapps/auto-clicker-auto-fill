@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { test as base, expect as baseExpect, BrowserContext, chromium } from '@playwright/test';
+import { workspaceRoot } from '@nx/devkit';
+import { test as base, BrowserContext, chromium, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const extensionPath = path.resolve(__dirname, '../../../../apps/acf-extension/dist');
+const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
 const isCI = !!process.env['CI'];
 
 // Worker-scoped fixtures are shared across all tests in the same worker process.
@@ -88,4 +89,4 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   }
 });
 
-export const expect = baseExpect;
+export { expect };
