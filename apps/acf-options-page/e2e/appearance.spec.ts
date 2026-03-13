@@ -14,9 +14,6 @@ const openLanguageMenu = async (page: Page) => {
 };
 
 test.describe('Language and Theme change', () => {
-  // Serial mode because tests share browser localStorage via the persistent worker context.
-  test.describe.configure({ mode: 'serial' });
-
   test('should apply dark theme and persist after reload when dark theme is selected', async ({ page }) => {
     // Arrange
     await page.goto(URLS.AUTOMATIONS);

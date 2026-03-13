@@ -5,7 +5,6 @@ const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 const TEST_URL = 'https://test.getautoclicker.com';
 
 test.describe('Config creation and sync', () => {
-  test.describe.configure({ mode: 'serial' });
   test('should add config to store when + button is clicked from automations page', async ({ page }) => {
     // Arrange
     await page.goto(URLS.AUTOMATIONS);
@@ -37,7 +36,7 @@ test.describe('Config creation and sync', () => {
     await expect(page.getByTestId('automation-url-form')).toBeVisible();
   });
 
-  test('should NOT sync to extension storage immediately after addConfig', async ({ worker, page }) => {
+  test('should NOT sync to extension storage immediately after addConfig', async ({ page, worker }) => {
     // Arrange — record storage state before adding config
     const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
@@ -53,7 +52,7 @@ test.describe('Config creation and sync', () => {
     expect(configsAfter.length).toBe(configsBefore.length);
   });
 
-  test('should sync config to extension storage when URL is entered and form submitted', async ({ worker, page }) => {
+  test('should sync config to extension storage when URL is entered and form submitted', async ({ page, worker }) => {
     // Arrange
     await page.goto(URLS.AUTOMATIONS);
     await page.getByTestId('automations-add-automation').click();

@@ -70,11 +70,8 @@ test.describe('Global settings navigation', () => {
 });
 
 test.describe('Global settings sync to extension', () => {
-  test.describe.configure({ mode: 'serial' });
-
-  test('should NOT sync settings to extension storage before any change', async ({ context, page }) => {
+  test('should NOT sync settings to extension storage before any change', async ({ page, worker }) => {
     // Arrange — record storage state before navigating
-    const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     const settingsBefore = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key]), LOCAL_STORAGE_KEY.SETTINGS)) as ISettings;
 
     await page.goto(URLS.SETTINGS_RETRY);
@@ -84,9 +81,8 @@ test.describe('Global settings sync to extension', () => {
     expect(settingsAfter).toEqual(settingsBefore);
   });
 
-  test('should sync retry settings to extension storage when saved', async ({ context, page }) => {
+  test('should sync retry settings to extension storage when saved', async ({ page, worker }) => {
     // Arrange
-    const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     await page.goto(URLS.SETTINGS_RETRY);
 
     // Act — select SKIP retry option and save
@@ -105,9 +101,8 @@ test.describe('Global settings sync to extension', () => {
       .toBe('skip');
   });
 
-  test('should sync notification settings to extension storage when toggled', async ({ context, page }) => {
+  test('should sync notification settings to extension storage when toggled', async ({ page, worker }) => {
     // Arrange
-    const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
     await page.goto(URLS.SETTINGS_NOTIFICATION);
 
     // Act — toggle onError notification
