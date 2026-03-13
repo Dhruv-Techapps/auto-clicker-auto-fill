@@ -110,6 +110,12 @@ jobs:
           cd apps/acf-extension/dist
           zip -r ../../../acf-extension-${{vars.VITE_PUBLIC_VARIANT}}.zip .
           cd ../../../
+      - name: Upload Extension Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: acf-extension-${{vars.VITE_PUBLIC_VARIANT}}
+          path: acf-extension-${{vars.VITE_PUBLIC_VARIANT}}.zip
+          retention-days: 30
       - name: Extension to Chrome Webstore
         if: ${{ inputs.upload_extension }}
         uses: mnao305/chrome-extension-upload@4008e29e13c144d0f6725462cbd49b7c291b4928 # v5.0.0

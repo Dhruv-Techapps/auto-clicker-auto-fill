@@ -15,11 +15,6 @@ on:
         type: boolean
         default: false
         required: false
-      nx_cache:
-        description: 'Use NX cache'
-        type: boolean
-        default: true
-        required: false
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
@@ -56,26 +51,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Extension
+      - name: Download Extension Artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
+          path: acf-extension-artifact
+
+      - name: Extract Extension
         run: |
-          npx nx run acf-extension:build --prod --verbose ${{ !inputs.nx_cache && '--skip-nx-cache' || '' }}
-        env:
-          VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
-          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
-          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
-          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
-          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
-          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ github.ref_name }}
-          DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
-          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
-          EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
-          API_SECRET: ${{ vars.API_SECRET }}
-          MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
-          VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
+          mkdir -p apps/acf-extension/dist
+          unzip -o acf-extension-artifact/acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
 
       - name: Install Playwright Browsers
         run: npx playwright install chromium --with-deps
