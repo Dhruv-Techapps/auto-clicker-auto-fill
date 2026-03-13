@@ -43,8 +43,10 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
 
+      - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
       - name: Install dependencies
         run: npm ci
+      - run: npx nx report
 
       - name: Restore Extension Artifact
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
