@@ -10,25 +10,15 @@ on:
         type: environment
         default: Development
         required: true
-      deploy_options_page:
-        description: 'Build & deploy options page to Firebase'
-        type: boolean
-        default: false
-        required: false
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
         default: 'test'
         required: false
-      branch:
-        description: 'Branch the extension artifact was built from'
-        type: string
-        default: 'main'
-        required: false
 
 env:
   FORCE_COLOR: 2
-  NODE: 22
+  NODE: 24
 
 jobs:
   main:
@@ -59,7 +49,7 @@ jobs:
       - name: Restore Extension Artifact
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
-          key: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}-${{ inputs.branch || github.ref_name }}
+          key: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.ref_name }}
           path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
           fail-on-cache-miss: true
 
