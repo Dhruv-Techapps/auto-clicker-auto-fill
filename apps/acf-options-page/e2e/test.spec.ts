@@ -1,4 +1,4 @@
-import { expect, test } from './fixtures';
+import { expect, test } from './fixtures/extension';
 
 test.describe('Test', () => {
   test('Extension ID', async ({ context, extensionId }) => {
