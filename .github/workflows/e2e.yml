@@ -20,6 +20,11 @@ on:
         type: string
         default: 'test'
         required: false
+      version:
+        description: 'Version (v4.0.0.0)'
+        type: string
+        default: '5.0.0.1'
+        required: false
 
 env:
   FORCE_COLOR: 2
