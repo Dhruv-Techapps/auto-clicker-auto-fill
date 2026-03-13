@@ -31,11 +31,9 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
         throw new Error(`manifest.json not found in: ${extensionPath}`);
       }
       console.log('[Fixture] ✓ Extension validated');
-      console.log('[Fixture] Extension files:', fs.readdirSync(extensionPath).slice(0, 10).join(', '));
-
       const ciArgs = isCI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
       const args = ['--headless=new', `--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, '--no-first-run', '--disable-default-apps', ...ciArgs];
-      console.log('[Fixture] chromium args:', args);
+
       const context = await chromium.launchPersistentContext('', {
         headless: false,
         args
@@ -53,7 +51,9 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       if (!worker) {
         worker = await workerContext.waitForEvent('serviceworker');
       }
-      await use(worker.url().split('/')[2]);
+      const extensionId = worker.url().split('/')[2];
+      console.log('[Fixture] Extension ID:', extensionId);
+      await use(extensionId);
     },
     { scope: 'worker' }
   ],
