@@ -5,7 +5,7 @@ import { STATUS_BAR_LOCATION_ENUM } from '@dhruv-techapps/shared-status-bar/serv
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-
+import { useEffect } from 'react';
 type AdditionalFormValues = Pick<ISettings, 'checkiFrames' | 'reloadOnError' | 'statusBar'>;
 
 export const AdditionalSettings = () => {
@@ -24,6 +24,14 @@ export const AdditionalSettings = () => {
 
   const { register, handleSubmit, reset, formState } = form;
   const { isDirty, isValid } = formState;
+
+  useEffect(() => {
+    reset({
+      checkiFrames: settings.checkiFrames,
+      reloadOnError: settings.reloadOnError ?? false,
+      statusBar: settings.statusBar
+    });
+  }, [reset, settings.checkiFrames, settings.reloadOnError, settings.statusBar]);
 
   const onSubmit = (data: AdditionalFormValues) => {
     dispatch(updateSettings(data));
