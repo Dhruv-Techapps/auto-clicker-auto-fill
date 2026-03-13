@@ -173,3 +173,49 @@ jobs:
           projectId: auto-clicker-autofill
           target: auto-clicker-autofill-playwright
           channelId: live
+
+      - name: Comment E2E Report on PR
+        if: always() && steps.report.outputs.details_url != ''
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+        with:
+          script: |
+            const reportUrl = '${{ steps.report.outputs.details_url }}';
+            if (!reportUrl) return;
+
+            let prNumber;
+            if (context.eventName === 'pull_request') {
+              prNumber = context.issue.number;
+            } else {
+              const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: context.sha,
+              });
+              if (prs.length > 0) prNumber = prs[0].number;
+            }
+
+            if (!prNumber) return;
+
+            const marker = '<!-- e2e-report -->';
+            const body = `${marker}\n## E2E Test Report\n\n📊 [View Playwright Report](${reportUrl})`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            const existing = comments.find(c => c.user.login === 'github-actions[bot]' && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
