@@ -3,7 +3,7 @@ import { BrowserContext, test as base, chromium, expect } from '@playwright/test
 import * as fs from 'fs';
 import * as path from 'path';
 
-const extensionPath = path.resolve(__dirname, '../../../acf-extension/dist');
+const extensionPath = path.resolve(__dirname, '../../../apps/acf-extension/dist');
 
 const isCI = !!process.env['CI'];
 const extensionExists = fs.existsSync(extensionPath);
