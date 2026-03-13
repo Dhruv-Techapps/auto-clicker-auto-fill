@@ -48,6 +48,9 @@ jobs:
         run: npm ci
       - run: npx nx report
 
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium
+
       - name: Build Extension
         run: |
           npx nx run acf-extension:build --prod --verbose --skip-nx-cache
@@ -68,9 +71,6 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
-
-      - name: Install Playwright Browsers
-        run: npx playwright install chromium --with-deps
 
       - name: Run E2E Tests
         continue-on-error: true
