@@ -5,30 +5,30 @@ import { BASE_URL } from './e2e/fixtures/base-url';
 
 const config = nxE2EPreset(__filename, { testDir: './e2e' });
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
   ...config,
-  retries: process.env['CI'] ? 2 : 0,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
   reporter: [
+    ['dot'],
+    ['list'],
+    ...(process.env['CI'] ? [['github'] as ['github']] : []),
     [
       'html',
       {
-        ...(process.env['CI']
-          ? { open: 'never', outputFolder: 'test-output/playwright/report', host: 'auto-clicker-auto-fill-playwright.web.app' }
-          : { open: 'always', outputFolder: 'test-output/playwright/report' })
+        open: 'never',
+        outputFolder: 'test-output/playwright/report',
+        host: process.env['CI'] ? 'auto-clicker-auto-fill-playwright.web.app' : 'localhost'
       }
     ]
   ],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 30_000,
   use: {
     baseURL: BASE_URL,
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    channel: 'chromium', // use full Chrome binary, not headless-shell (headless-shell does not support extensions)
     trace: 'on-first-retry',
     screenshot: process.env['CI'] ? 'on' : 'off'
   },
-  /* Run your local dev server before starting the tests */
   webServer: {
     command: process.env['CI'] ? '' : 'npm run start',
     url: BASE_URL,
@@ -38,7 +38,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], channel: 'chromium' }
+      use: { ...devices['Desktop Chrome'] }
     }
   ]
 });

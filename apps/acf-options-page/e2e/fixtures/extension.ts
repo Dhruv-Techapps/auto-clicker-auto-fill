@@ -1,24 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { workspaceRoot } from '@nx/devkit';
-import { BrowserContext, test as base, chromium, expect } from '@playwright/test';
+import { test as base, BrowserContext, chromium, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 
 const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
-
 const isCI = !!process.env['CI'];
-const extensionExists = fs.existsSync(extensionPath);
-console.log('[fixture] workspaceRoot     :', workspaceRoot);
-console.log('[fixture] extensionPath     :', extensionPath);
-console.log('[fixture] extensionExists   :', extensionExists);
-console.log('[fixture] CI flag           :', isCI);
-if (extensionExists) {
-  console.log('[fixture] dist contents     :', fs.readdirSync(extensionPath).join(', '));
-} else {
-  console.warn('[fixture] WARNING: extension dist folder not found — extension will NOT load');
-}
-
-export { expect };
 
 // Worker-scoped fixtures are shared across all tests in the same worker process.
 // Test-scoped fixtures are created fresh for each individual test.
@@ -36,12 +23,19 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Single browser instance shared across all tests in the worker
   workerContext: [
     async ({}, use) => {
-      const ciArgs = isCI ? ['--headless=new', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
-      const args = [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, ...ciArgs];
-      console.log('[fixture] chromium args     :', args);
+      console.log('[Fixture] Extension path:', extensionPath);
+      if (!fs.existsSync(extensionPath)) {
+        throw new Error(`Extension path does not exist: ${extensionPath}`);
+      }
+      const manifestPath = path.join(extensionPath, 'manifest.json');
+      if (!fs.existsSync(manifestPath)) {
+        throw new Error(`manifest.json not found in: ${extensionPath}`);
+      }
+      console.log('[Fixture] ✓ Extension validated');
+      const ciArgs = isCI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
+      const args = ['--headless=new', `--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, '--no-first-run', '--disable-default-apps', ...ciArgs];
+
       const context = await chromium.launchPersistentContext('', {
-        // headless must be false to allow extension loading.
-        // In CI, pass --headless=new so Chrome runs without a display (Chrome 112+).
         headless: false,
         args
       });
@@ -58,7 +52,9 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       if (!worker) {
         worker = await workerContext.waitForEvent('serviceworker');
       }
-      await use(worker.url().split('/')[2]);
+      const extensionId = worker.url().split('/')[2];
+      console.log('[Fixture] Extension ID:', extensionId);
+      await use(extensionId);
     },
     { scope: 'worker' }
   ],
@@ -77,7 +73,6 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   worker: async ({ workerContext, workerExtensionId }, use) => {
     let sw = workerContext.serviceWorkers()[0];
     if (!sw) {
-      // Opening any extension page causes Chrome to restart the service worker
       const wakePage = await workerContext.newPage();
       await wakePage.goto(`chrome-extension://${workerExtensionId}/devtools.html`);
       sw = workerContext.serviceWorkers()[0] ?? (await workerContext.waitForEvent('serviceworker'));
@@ -93,3 +88,5 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     await page.close();
   }
 });
+
+export { expect };

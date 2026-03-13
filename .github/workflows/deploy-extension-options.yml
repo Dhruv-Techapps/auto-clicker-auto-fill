@@ -38,6 +38,8 @@ jobs:
       contents: write
       actions: read
       discussions: write
+    env:
+      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
     steps:
       - name: Clone repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
