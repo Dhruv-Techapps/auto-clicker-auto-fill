@@ -19,6 +19,15 @@ on:
         type: boolean
         default: true
         required: false
+      use_artifact:
+        description: 'Download extension from deploy workflow artifact (skip build)'
+        type: boolean
+        default: false
+        required: false
+      artifact_run_id:
+        description: 'Run ID of the deploy workflow to download artifact from'
+        type: string
+        required: false
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
@@ -84,7 +93,22 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
 
+      - name: Download Extension Artifact
+        if: ${{ inputs.use_artifact }}
+        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4
+        with:
+          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
+          run-id: ${{ inputs.artifact_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Unzip Extension Artifact
+        if: ${{ inputs.use_artifact }}
+        run: |
+          mkdir -p apps/acf-extension/dist
+          unzip -o acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
+
       - name: Build Extension
+        if: ${{ !inputs.use_artifact }}
         run: |
           npx nx run acf-extension:build --prod --verbose ${{ !inputs.nx_cache && '--skip-nx-cache' || '' }}
         env:
@@ -146,5 +170,5 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-playwright
+          target: auto-clicker-autofill-playwright
           channelId: live
