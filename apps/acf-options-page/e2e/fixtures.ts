@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { workspaceRoot } from '@nx/devkit';
 import { BrowserContext, test as base, chromium, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
+const extensionPath = path.resolve(__dirname, '../../../acf-extension/dist');
 
 const isCI = !!process.env['CI'];
 const extensionExists = fs.existsSync(extensionPath);
-console.log('[fixture] workspaceRoot     :', workspaceRoot);
 console.log('[fixture] extensionPath     :', extensionPath);
 console.log('[fixture] extensionExists   :', extensionExists);
 console.log('[fixture] CI flag           :', isCI);

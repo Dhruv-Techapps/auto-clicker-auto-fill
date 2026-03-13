@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { workspaceRoot } from '@nx/devkit';
 import { test as base, expect as baseExpect, BrowserContext, chromium } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -29,7 +28,7 @@ interface WorkerFixtures {
 export const test = base.extend<WorkerFixtures>({
   // Expose the shared context as the standard 'context' fixture
   context: async ({}, use) => {
-    const pathToExtension = path.join(workspaceRoot, 'apps/acf-extension/dist');
+    const pathToExtension = path.resolve(__dirname, '../../../../apps/acf-extension/dist');
     let context;
     // Validate extension exists before attempting to load
     console.log('[Fixture] Extension path:', pathToExtension);
