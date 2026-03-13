@@ -6,6 +6,7 @@ import { EErrorOptions, ISettings } from '@dhruv-techapps/acf-common';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 type RetryFormValues = Pick<ISettings, 'retry' | 'retryInterval' | 'retryOption' | 'retryIntervalTo'>;
 
@@ -26,6 +27,15 @@ function SettingRetry() {
 
   const { register, handleSubmit, reset, formState } = form;
   const { isValid, isDirty } = formState;
+
+  useEffect(() => {
+    reset({
+      retry: settings.retry,
+      retryInterval: settings.retryInterval,
+      retryIntervalTo: settings.retryIntervalTo,
+      retryOption: settings.retryOption
+    });
+  }, [settings.retry, settings.retryInterval, settings.retryIntervalTo, settings.retryOption, reset]);
 
   const onSubmit = (data: RetryFormValues) => {
     dispatch(updateSettings(data));
