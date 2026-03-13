@@ -11,7 +11,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: [
     ['dot'],
-    ...(process.env['CI'] ? [['list'] as ['list']] : []),
+    ['list'],
     ...(process.env['CI'] ? [['github'] as ['github']] : []),
     [
       'html',

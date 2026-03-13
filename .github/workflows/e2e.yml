@@ -92,6 +92,21 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
 
+      - name: Upload Options Page Artifact
+        if: ${{ inputs.deploy_options_page }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
+          path: apps/acf-options-page/dist
+          retention-days: 7
+
+      - name: Upload Extension Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
+          path: apps/acf-extension/dist
+          retention-days: 7
+
       - name: Determine Firebase Target
         if: ${{ inputs.deploy_options_page }}
         run: |

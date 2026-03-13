@@ -24,12 +24,12 @@
     },
     {
       "site": "auto-clicker-auto-fill-playwright",
-      "public": "apps/acf-options-page/test-output/playwright",
+      "public": "apps/acf-options-page/test-output/playwright/report",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
           "source": "**",
-          "destination": "report/index.html"
+          "destination": "/index.html"
         }
       ]
     },
