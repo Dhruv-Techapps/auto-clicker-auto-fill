@@ -20,6 +20,11 @@ on:
         type: string
         default: 'test'
         required: false
+      branch:
+        description: 'Branch the extension artifact was built from'
+        type: string
+        default: 'main'
+        required: false
 
 env:
   FORCE_COLOR: 2
@@ -44,22 +49,24 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '${{ env.NODE }}'
+          cache: 'npm'
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Download Extension Artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Restore Extension Artifact
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
-          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: acf-extension-artifact
+          key: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}-${{ inputs.branch || github.ref_name }}
+          path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
+          fail-on-cache-miss: true
 
       - name: Extract Extension
         run: |
           mkdir -p apps/acf-extension/dist
-          unzip -o acf-extension-artifact/acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
+          unzip -o acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
 
       - name: Install Playwright Browsers
         run: npx playwright install chromium --with-deps
