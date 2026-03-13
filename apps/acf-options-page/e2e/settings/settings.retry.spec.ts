@@ -74,7 +74,7 @@ test.describe('Settings — Retry', () => {
     await retryPage.toggleRange();
 
     await expect(retryPage.intervalInput).toBeVisible();
-    await expect(retryPage.intervalInputRange).not.toBeVisible();
+    await expect(retryPage.intervalInputRange).toBeHidden();
   });
 
   test('should NOT sync settings to extension storage before any change', async ({ page, getSettings }) => {

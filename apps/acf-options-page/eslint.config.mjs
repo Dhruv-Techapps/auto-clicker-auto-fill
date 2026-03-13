@@ -13,5 +13,11 @@ export default [
   {
     ...playwright.configs['flat/recommended'],
     files: ['e2e/**/*.ts', 'playwright.config.ts']
+  },
+  {
+    files: ['e2e/**/*.spec.ts'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'off'
+    }
   }
 ];
