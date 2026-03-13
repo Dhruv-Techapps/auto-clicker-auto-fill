@@ -161,12 +161,11 @@ jobs:
           channelId: live
 
       - name: Comment E2E Report on PR
-        if: always() && steps.report.outputs.details_url != ''
+        if: always()
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
         with:
           script: |
-            const reportUrl = '${{ steps.report.outputs.details_url }}';
-            if (!reportUrl) return;
+            const reportUrl = 'https://auto-clicker-auto-fill-playwright.web.app/';
 
             let prNumber;
             if (context.eventName === 'pull_request') {
