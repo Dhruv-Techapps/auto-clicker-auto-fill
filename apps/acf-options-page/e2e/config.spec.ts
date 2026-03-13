@@ -37,11 +37,9 @@ test.describe('Config creation and sync', () => {
     await expect(page.getByTestId('automation-url-form')).toBeVisible();
   });
 
-  test('should NOT sync to extension storage immediately after addConfig', async ({ context, page }) => {
+  test('should NOT sync to extension storage immediately after addConfig', async ({ page, worker }) => {
     // Arrange — record storage state before adding config
-    const [sw] = context.serviceWorkers();
-    if (!sw) throw new Error('Extension service worker not available');
-    const configsBefore: Array<IConfiguration> = (await sw.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
+    const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     await page.goto(URLS.AUTOMATIONS);
 
@@ -50,15 +48,13 @@ test.describe('Config creation and sync', () => {
     await page.waitForURL(UUID_REGEX);
 
     // Assert — chrome.storage unchanged (middleware does not watch addConfig)
-    const configsAfter: Array<IConfiguration> = (await sw.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
+    const configsAfter: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     expect(configsAfter.length).toBe(configsBefore.length);
   });
 
-  test('should sync config to extension storage when URL is entered and form submitted', async ({ context, page }) => {
+  test('should sync config to extension storage when URL is entered and form submitted', async ({ page, worker }) => {
     // Arrange
-    const [sw] = context.serviceWorkers();
-    if (!sw) throw new Error('Extension service worker not available');
     await page.goto(URLS.AUTOMATIONS);
     await page.getByTestId('automations-add-automation').click();
     await page.waitForURL(UUID_REGEX);
@@ -67,7 +63,7 @@ test.describe('Config creation and sync', () => {
     const automationId = page.url().split('/').pop() as string;
 
     // Record storage length before submitting URL
-    const configsBefore: Array<IConfiguration> = (await sw.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
+    const configsBefore: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     // Act — fill URL and submit (dispatches updateConfig → middleware → chrome.storage)
     await page.getByTestId('automation-url-input').fill(TEST_URL);
@@ -77,7 +73,7 @@ test.describe('Config creation and sync', () => {
     await expect
       .poll(
         async () => {
-          const configs = (await sw.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
+          const configs = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
           return configs.find((c) => c.id === automationId)?.url;
         },
         { timeout: 5000 }
@@ -87,7 +83,7 @@ test.describe('Config creation and sync', () => {
     // Assert — storage length increased by 6 (5 pre-loaded defaults + 1 new automation).
     // The first sync writes the entire Redux configs array to chrome.storage, which
     // includes the 5 demo configs pre-populated in the store for display purposes.
-    const configsAfter: Array<IConfiguration> = (await sw.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
+    const configsAfter: Array<IConfiguration> = (await worker.evaluate((key: string) => chrome.storage.local.get(key).then((r) => r[key] ?? []), LOCAL_STORAGE_KEY.CONFIGS)) as Array<IConfiguration>;
 
     expect(configsAfter.length).toBe(configsBefore.length + 6);
   });
