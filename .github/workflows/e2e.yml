@@ -60,9 +60,6 @@ jobs:
           mkdir -p apps/acf-extension/dist
           unzip -o acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
 
-      - name: Install Playwright Browsers
-        run: npx playwright install chromium
-
       - name: Cache Playwright Browsers
         id: playwright-cache
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
