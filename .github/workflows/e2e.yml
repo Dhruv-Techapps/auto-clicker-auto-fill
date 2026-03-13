@@ -21,9 +21,9 @@ on:
         default: 'test'
         required: false
       version:
-        description: 'Version (v4.0.0.0)'
+        description: 'Version (v5.0.0.0)'
         type: string
-        default: '5.0.0.1'
+        default: 'v5.0.0.0'
         required: false
 
 env:
@@ -73,7 +73,7 @@ jobs:
           VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || github.ref_name }}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0' }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
 
@@ -88,7 +88,7 @@ jobs:
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
           VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || github.ref_name }}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0'}}
           DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
           OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
           EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
