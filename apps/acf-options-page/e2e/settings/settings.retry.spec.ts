@@ -77,8 +77,12 @@ test.describe('Settings — Retry', () => {
     await expect(retryPage.intervalInputRange).not.toBeVisible();
   });
 
-  test('should NOT sync settings to extension storage before any change', async ({ getSettings }) => {
+  test('should NOT sync settings to extension storage before any change', async ({ page, getSettings }) => {
     const settingsBefore = await getSettings();
+
+    const retryPage = new SettingsRetryPage(page);
+    await retryPage.goto();
+
     const settingsAfter = await getSettings();
     expect(settingsAfter).toEqual(settingsBefore);
   });
