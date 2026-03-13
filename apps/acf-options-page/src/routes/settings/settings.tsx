@@ -51,8 +51,7 @@ export const Settings = () => {
         </Col>
         <Col>
           <ErrorAlert error={error} />
-          {loading && <Loading />}
-          <Outlet />
+          {loading ? <Loading /> : <Outlet />}
           {message && (
             <div className='mt-3 text-success' data-testid='settings-message'>
               {message}
