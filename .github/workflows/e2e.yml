@@ -56,24 +56,25 @@ jobs:
       - name: Build Options Page
         if: ${{ inputs.deploy_options_page }}
         run: |
-          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose  '--skip-nx-cache'
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose
         env:
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
           VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
+          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_SLOT }}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT }}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
           VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ github.ref_name }}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || github.ref_name }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
 
       - name: Build Extension
         run: |
-          npx nx run acf-extension:build --prod --verbose  '--skip-nx-cache'
+          npx nx run acf-extension:build --prod --verbose
         env:
           VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
@@ -82,10 +83,11 @@ jobs:
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
           VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ github.ref_name }}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || github.ref_name }}
           DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
           OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
           EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
+          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           API_SECRET: ${{ vars.API_SECRET }}
           MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}

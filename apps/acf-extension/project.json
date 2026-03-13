@@ -6,6 +6,29 @@
   "tags": ["scope:apps"],
   "// targets": "to see all targets run: nx show project acf-extension --web",
   "targets": {
+    "build": {
+      "inputs": [
+        "production",
+        "^production",
+        { "env": "VITE_PUBLIC_NAME" },
+        { "env": "VITE_PUBLIC_VARIANT" },
+        { "env": "VITE_PUBLIC_FIREBASE_API_KEY" },
+        { "env": "VITE_PUBLIC_FIREBASE_DATABASE_URL" },
+        { "env": "VITE_PUBLIC_FIREBASE_PROJECT_ID" },
+        { "env": "VITE_PUBLIC_FIREBASE_BUCKET" },
+        { "env": "VITE_PUBLIC_FIREBASE_FUNCTIONS_URL" },
+        { "env": "VITE_PUBLIC_RELEASE_VERSION" },
+        { "env": "DISCORD_CLIENT_ID" },
+        { "env": "OAUTH_CLIENT_ID" },
+        { "env": "EDGE_OAUTH_CLIENT_ID" },
+        { "env": "API_SECRET" },
+        { "env": "MEASUREMENT_ID" },
+        { "env": "VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT" },
+        { "env": "VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN" },
+        { "env": "VITE_PUBLIC_UNINSTALL_URL" },
+        { "env": "VITE_PUBLIC_URL" }
+      ]
+    },
     "serve": {
       "command": "webpack-cli build",
       "options": {

@@ -6,6 +6,25 @@
   "tags": ["scope:apps"],
   "// targets": "to see all targets run: nx show project acf-options-page --web",
   "targets": {
+    "build": {
+      "inputs": [
+        "production",
+        "^production",
+        { "env": "VITE_PUBLIC_VARIANT" },
+        { "env": "VITE_PUBLIC_CHROME_EXTENSION_ID" },
+        { "env": "VITE_PUBLIC_I18N" },
+        { "env": "VITE_PUBLIC_URL" },
+        { "env": "VITE_PUBLIC_GOOGLE_ADS_SLOT" },
+        { "env": "VITE_PUBLIC_GOOGLE_ADS_CLIENT" },
+        { "env": "VITE_PUBLIC_FIREBASE_API_KEY" },
+        { "env": "VITE_PUBLIC_FIREBASE_DATABASE_URL" },
+        { "env": "VITE_PUBLIC_FIREBASE_PROJECT_ID" },
+        { "env": "VITE_PUBLIC_FIREBASE_BUCKET" },
+        { "env": "VITE_PUBLIC_RELEASE_VERSION" },
+        { "env": "VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT" },
+        { "env": "VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN" }
+      ]
+    },
     "dev": {
       "dependsOn": [
         {
