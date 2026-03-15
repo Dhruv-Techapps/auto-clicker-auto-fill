@@ -38,10 +38,19 @@
       "continuous": true
     },
     "preview": {
-      "command": "webpack-cli build",
+      "executor": "nx:run-commands",
+      "defaultConfiguration": "production",
       "options": {
-        "cwd": "apps/acf-extension",
-        "args": ["--node-env=production"]
+        "command": "webpack-cli build",
+        "cwd": "apps/acf-extension"
+      },
+      "configurations": {
+        "development": {
+          "args": ["--node-env=development"]
+        },
+        "production": {
+          "args": ["--node-env=production"]
+        }
       }
     }
   }

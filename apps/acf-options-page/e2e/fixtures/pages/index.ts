@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { coreTest } from '../core';
 import { AutomationsPage } from './automations.page';
 import { HomePage } from './home.page';

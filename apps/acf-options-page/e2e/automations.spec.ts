@@ -125,7 +125,7 @@ test.describe('Automations page selection mode', () => {
 
     // Assert — normal mode is restored
     await expect(automationsPage.selectButton).toBeVisible();
-    await expect(automationsPage.selectAllCheckbox).not.toBeVisible();
+    await expect(automationsPage.selectAllCheckbox).toBeHidden();
   });
 
   test('should disable export and delete buttons when no automations are selected', async ({ automationsPage }) => {
