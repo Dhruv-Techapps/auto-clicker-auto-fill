@@ -1,42 +1,30 @@
 {
   "name": "acf-i18n",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/acf-i18n/src",
-  "projectType": "application",
-  "tags": ["scope:apps"],
   "targets": {
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+    "build": {
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "acf-i18n:build",
-        "runBuildTargetDependencies": false
+        "cwd": "apps/acf-i18n",
+        "commands": ["ls", "mkdir -p dist/locales", "cp -r src/locales dist/"],
+        "parallel": false
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/acf-i18n",
+        "command": "npx http-server dist -p 3333"
       },
-      "configurations": {
-        "development": {
-          "buildTarget": "acf-i18n:build:development"
-        },
-        "production": {
-          "buildTarget": "acf-i18n:build:production"
-        }
-      }
+      "dependsOn": ["build"]
     },
-    "translate-web": {
+    "serve": {
       "executor": "nx:run-commands",
-      "outputs": [],
       "options": {
-        "command": "node translate-web.mjs",
-        "cwd": "apps/acf-i18n/src"
-      }
-    },
-    "translate-message": {
-      "executor": "nx:run-commands",
-      "outputs": [],
-      "options": {
-        "command": "node translate-message.mjs",
-        "cwd": "apps/acf-i18n/src"
-      }
+        "cwd": "apps/acf-i18n",
+        "command": "npx http-server dist -p 3333"
+      },
+      "dependsOn": ["build"]
     }
   }
 }

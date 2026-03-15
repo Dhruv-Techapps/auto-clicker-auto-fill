@@ -49,6 +49,12 @@
           "envFile": ".env.production"
         }
       }
+    },
+    "preview": {
+      "command": "vite preview",
+      "options": {
+        "args": ["--port", "4200"]
+      }
     }
   }
 }
