@@ -4,9 +4,16 @@ import { workspaceRoot } from '@nx/devkit';
 import { test as base, BrowserContext, chromium, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ToastPage } from './toast.page';
 
 const extensionPath = path.join(workspaceRoot, 'apps/acf-extension/dist');
+if (!fs.existsSync(extensionPath)) {
+  throw new Error(`Extension path does not exist: ${extensionPath}`);
+}
+const manifestPath = path.join(extensionPath, 'manifest.json');
+if (!fs.existsSync(manifestPath)) {
+  throw new Error(`manifest.json not found in: ${extensionPath}`);
+}
+
 const isCI = !!process.env['CI'];
 
 // Worker-scoped fixtures are shared across all tests in the same worker process.
@@ -20,26 +27,16 @@ export interface TestFixtures {
   extensionId: string;
   getSettings: () => Promise<ISettings>;
   getAutomations: () => Promise<IConfiguration[]>;
-  toastPage: ToastPage;
+
   worker: Awaited<ReturnType<BrowserContext['serviceWorkers']>>[number];
 }
 
-export const test = base.extend<TestFixtures, WorkerFixtures>({
+export const coreTest = base.extend<TestFixtures, WorkerFixtures>({
   // Single browser instance shared across all tests in the worker
   workerContext: [
     async ({}, use) => {
-      console.log('[Fixture] Extension path:', extensionPath);
-      if (!fs.existsSync(extensionPath)) {
-        throw new Error(`Extension path does not exist: ${extensionPath}`);
-      }
-      const manifestPath = path.join(extensionPath, 'manifest.json');
-      if (!fs.existsSync(manifestPath)) {
-        throw new Error(`manifest.json not found in: ${extensionPath}`);
-      }
-      console.log('[Fixture] ✓ Extension validated');
       const ciArgs = isCI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
       const args = ['--headless=new', `--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`, '--no-first-run', '--disable-default-apps', ...ciArgs];
-
       const context = await chromium.launchPersistentContext('', {
         headless: false,
         args
@@ -58,7 +55,6 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
         worker = await workerContext.waitForEvent('serviceworker');
       }
       const extensionId = worker.url().split('/')[2];
-      console.log('[Fixture] Extension ID:', extensionId);
       await use(extensionId);
     },
     { scope: 'worker' }
@@ -80,10 +76,6 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
 
   getAutomations: async ({ worker }, use) => {
     await use(() => worker.evaluate<IConfiguration[], string>((key) => chrome.storage.local.get(key).then((r) => r[key] as IConfiguration[]), LOCAL_STORAGE_KEY.CONFIGS));
-  },
-
-  toastPage: async ({ page }, use) => {
-    await use(new ToastPage(page));
   },
 
   // Returns the extension service worker, waking it up if Chrome stopped it

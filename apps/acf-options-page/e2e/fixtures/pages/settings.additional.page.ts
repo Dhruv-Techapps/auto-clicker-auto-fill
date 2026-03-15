@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
-import { URLS } from '../fixtures/base-url';
+import { URLS } from '../base-url';
 
 export class SettingsAdditionalPage {
   readonly form: Locator;

@@ -45,7 +45,7 @@ export const Automations = () => {
   };
 
   return (
-    <Container className='p-4'>
+    <Container className='p-4' data-testid='automations-page'>
       <h4 className='my-4 d-flex justify-content-between align-items-center'>
         {t('automations.title')}
         <Button variant='primary' size='sm' className='ms-auto' onClick={onAddAutomation} data-testid='automations-add-automation'>
