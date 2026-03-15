@@ -1,6 +1,6 @@
 import { IConfiguration, LOCAL_STORAGE_KEY } from '@dhruv-techapps/acf-common';
+import { expect, pageTest as test } from './fixtures';
 import { URLS } from './fixtures/base-url';
-import { expect, test } from './fixtures/extension';
 const UUID_REGEX = /\/automations\/[a-f0-9-]{36}/;
 const TEST_URL = 'https://test.getautoclicker.com';
 

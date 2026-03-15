@@ -1,70 +1,57 @@
-import { test as baseTest, expect } from '../fixtures/extension';
-import { ToastPage } from '../fixtures/toast.page';
-import { SettingsNotificationsPage } from './settings.notifications.page';
-
-const test = baseTest.extend<{ notificationsPage: SettingsNotificationsPage; toastPage: ToastPage }>({
-  notificationsPage: async ({ page }, use) => {
-    const notificationsPage = new SettingsNotificationsPage(page);
-    await notificationsPage.goto();
-    await use(notificationsPage);
-  },
-  toastPage: async ({ page }, use) => {
-    await use(new ToastPage(page));
-  }
-});
+import { expect, pageTest as test } from '../fixtures';
 
 test.describe('Settings — Notifications', () => {
   test.describe.configure({ mode: 'serial' });
 
-  test('should render all notification elements', async ({ notificationsPage }) => {
+  test('should render all notification elements', async ({ settingsNotificationsPage }) => {
     // Assert — notification container and all switches are visible
-    await expect(notificationsPage.container).toBeVisible();
-    await expect(notificationsPage.onError).toBeVisible();
-    await expect(notificationsPage.onAction).toBeVisible();
-    await expect(notificationsPage.onBatch).toBeVisible();
-    await expect(notificationsPage.onConfig).toBeVisible();
-    await expect(notificationsPage.sound).toBeVisible();
+    await expect(settingsNotificationsPage.container).toBeVisible();
+    await expect(settingsNotificationsPage.onError).toBeVisible();
+    await expect(settingsNotificationsPage.onAction).toBeVisible();
+    await expect(settingsNotificationsPage.onBatch).toBeVisible();
+    await expect(settingsNotificationsPage.onConfig).toBeVisible();
+    await expect(settingsNotificationsPage.sound).toBeVisible();
   });
 
-  test('should toggle onError and save to extension storage', async ({ notificationsPage, getSettings, toastPage }) => {
+  test('should toggle onError and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
     // Act
-    await notificationsPage.toggleOnError();
+    await settingsNotificationsPage.toggleOnError();
 
     // Assert
     await toastPage.waitForSuccess();
     await expect.poll(async () => (await getSettings())?.notifications?.onError, { timeout: 5000 }).toBe(true);
   });
 
-  test('should toggle onAction and save to extension storage', async ({ notificationsPage, getSettings, toastPage }) => {
+  test('should toggle onAction and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
     // Act
-    await notificationsPage.toggleOnAction();
+    await settingsNotificationsPage.toggleOnAction();
 
     // Assert
     await toastPage.waitForSuccess();
     await expect.poll(async () => (await getSettings())?.notifications?.onAction, { timeout: 5000 }).toBe(true);
   });
 
-  test('should toggle onBatch and save to extension storage', async ({ notificationsPage, getSettings, toastPage }) => {
+  test('should toggle onBatch and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
     // Act
-    await notificationsPage.toggleOnBatch();
+    await settingsNotificationsPage.toggleOnBatch();
 
     // Assert
     await toastPage.waitForSuccess();
     await expect.poll(async () => (await getSettings())?.notifications?.onBatch, { timeout: 5000 }).toBe(true);
   });
 
-  test('should toggle onConfig and save to extension storage', async ({ notificationsPage, getSettings, toastPage }) => {
+  test('should toggle onConfig and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
     // Act
-    await notificationsPage.toggleOnConfig();
+    await settingsNotificationsPage.toggleOnConfig();
 
     // Assert
     await toastPage.waitForSuccess();
     await expect.poll(async () => (await getSettings())?.notifications?.onConfig, { timeout: 5000 }).toBe(true);
   });
 
-  test('should toggle sound and save to extension storage', async ({ notificationsPage, getSettings, toastPage }) => {
+  test('should toggle sound and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
     // Act
-    await notificationsPage.toggleSound();
+    await settingsNotificationsPage.toggleSound();
 
     // Assert
     await toastPage.waitForSuccess();

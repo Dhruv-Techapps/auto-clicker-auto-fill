@@ -1,105 +1,81 @@
-import type { Page } from '@playwright/test';
-
-import { URLS } from './fixtures/base-url';
-import { expect, test } from './fixtures/extension';
-
-const openThemeMenu = async (page: Page) => {
-  await page.locator('#user-dropdown').click();
-  await page.locator('.bi-palette').click();
-};
-
-const openLanguageMenu = async (page: Page) => {
-  await page.locator('#user-dropdown').click();
-  await page.locator('.bi-translate').click();
-};
+import { expect, pageTest as test } from './fixtures';
 
 test.describe('Language and Theme change', () => {
-  test('should apply dark theme and persist after reload when dark theme is selected', async ({ page }) => {
+  test('should apply dark theme and persist after reload when dark theme is selected', async ({ homePage }) => {
     // Arrange
-    await page.goto(URLS.AUTOMATIONS);
+    await homePage.goto();
 
-    // Act — open user dropdown, open theme submenu, select dark
-    await openThemeMenu(page);
-    await page.getByText('Dark', { exact: true }).click();
+    // Act
+    await homePage.selectTheme('Dark');
 
     // Assert — HTML element has dark theme attribute
-    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
 
     // Assert — theme is persisted in localStorage
-    const storedTheme = await page.evaluate(() => localStorage.getItem('theme'));
-    expect(storedTheme).toBe('dark');
+    expect(await homePage.getStoredTheme()).toBe('dark');
 
     // Act — reload and verify persistence
-    await page.reload();
+    await homePage.page.reload();
 
     // Assert — dark theme is still applied after reload
-    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
   });
 
-  test('should apply light theme and persist after reload when light theme is selected', async ({ page }) => {
+  test('should apply light theme and persist after reload when light theme is selected', async ({ homePage }) => {
     // Arrange
-    await page.goto(URLS.AUTOMATIONS);
+    await homePage.goto();
 
-    // Act — open user dropdown, open theme submenu, select light
-    await openThemeMenu(page);
-    await page.getByText('Light', { exact: true }).click();
+    // Act
+    await homePage.selectTheme('Light');
 
     // Assert — HTML element has light theme attribute
-    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
+    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
 
     // Assert — theme is persisted in localStorage
-    const storedTheme = await page.evaluate(() => localStorage.getItem('theme'));
-    expect(storedTheme).toBe('light');
+    expect(await homePage.getStoredTheme()).toBe('light');
 
     // Act — reload and verify persistence
-    await page.reload();
+    await homePage.page.reload();
 
     // Assert — light theme is still applied after reload
-    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
+    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
   });
 
-  test('should store French language and persist after reload when French is selected', async ({ page }) => {
+  test('should store French language and persist after reload when French is selected', async ({ homePage }) => {
     // Arrange — ensure the UI starts in English for this test
-    await page.goto(URLS.AUTOMATIONS);
-    await page.evaluate(() => localStorage.setItem('language', 'en'));
-    await page.reload();
+    await homePage.goto();
+    await homePage.setStoredLanguage('en');
+    await homePage.page.reload();
 
-    // Act — open user dropdown, open language submenu, select French
-    await openLanguageMenu(page);
-    await page.getByText('French', { exact: true }).click();
+    // Act
+    await homePage.selectLanguage('French');
 
     // Assert — language is persisted in localStorage
-    const storedLanguage = await page.evaluate(() => localStorage.getItem('language'));
-    expect(storedLanguage).toBe('fr');
+    expect(await homePage.getStoredLanguage()).toBe('fr');
 
     // Act — reload and verify persistence
-    await page.reload();
+    await homePage.page.reload();
 
     // Assert — language is still French after reload
-    const languageAfterReload = await page.evaluate(() => localStorage.getItem('language'));
-    expect(languageAfterReload).toBe('fr');
+    expect(await homePage.getStoredLanguage()).toBe('fr');
   });
 
-  test('should store English language and persist after reload when switching from French to English', async ({ page }) => {
+  test('should store English language and persist after reload when switching from French to English', async ({ homePage }) => {
     // Arrange — ensure the UI starts in French for this test
-    await page.goto(URLS.AUTOMATIONS);
-    await page.evaluate(() => localStorage.setItem('language', 'fr'));
-    await page.reload();
+    await homePage.goto();
+    await homePage.setStoredLanguage('fr');
+    await homePage.page.reload();
 
-    // Act — open user dropdown, open language submenu
-    // Note: the UI is in French, so 'English' appears as 'Anglais' in the language list
-    await openLanguageMenu(page);
-    await page.getByText('Anglais', { exact: true }).click();
+    // Act — Note: the UI is in French, so 'English' appears as 'Anglais'
+    await homePage.selectLanguage('Anglais');
 
     // Assert — language is persisted in localStorage
-    const storedLanguage = await page.evaluate(() => localStorage.getItem('language'));
-    expect(storedLanguage).toBe('en');
+    expect(await homePage.getStoredLanguage()).toBe('en');
 
     // Act — reload and verify persistence
-    await page.reload();
+    await homePage.page.reload();
 
     // Assert — language is still English after reload
-    const languageAfterReload = await page.evaluate(() => localStorage.getItem('language'));
-    expect(languageAfterReload).toBe('en');
+    expect(await homePage.getStoredLanguage()).toBe('en');
   });
 });

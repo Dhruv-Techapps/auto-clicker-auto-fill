@@ -9,6 +9,7 @@
     "e2e": "nx run-many -t e2e",
     "typecheck": "nx run-many -t typecheck",
     "build": "nx run-many -t build",
+    "preview": "nx run-many -t preview",
     "format:check": "nx format check",
     "format:write": "nx format:write",
     "local": "npm run lint && npm run typecheck && npm run format:write && npm run build && npm run test && npm run e2e",

@@ -36,6 +36,13 @@
         "args": ["--node-env=production", "--watch"]
       },
       "continuous": true
+    },
+    "preview": {
+      "command": "webpack-cli build",
+      "options": {
+        "cwd": "apps/acf-extension",
+        "args": ["--node-env=production"]
+      }
     }
   }
 }
