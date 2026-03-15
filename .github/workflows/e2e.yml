@@ -10,11 +10,6 @@ on:
         type: environment
         default: Development
         required: true
-      deploy_options_page:
-        description: 'Build & deploy options page to Firebase'
-        type: boolean
-        default: true
-        required: false
       grep:
         description: 'Filter tests by name (e.g. feat-a)'
         type: string
@@ -59,7 +54,6 @@ jobs:
       - run: npx nx report
 
       - name: Build Options Page
-        if: ${{ inputs.deploy_options_page }}
         run: |
           npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose
         env:
@@ -78,7 +72,6 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
 
       - name: Upload Options Page Artifact
-        if: ${{ inputs.deploy_options_page }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
@@ -86,7 +79,6 @@ jobs:
           retention-days: 7
 
       - name: Determine Firebase Target
-        if: ${{ inputs.deploy_options_page }}
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
           TARGET="auto-clicker-auto-fill-$VARIANT"
@@ -94,7 +86,6 @@ jobs:
 
       - name: Deploy Options Page to Firebase Hosting
         id: deploy
-        if: ${{ inputs.deploy_options_page }}
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
