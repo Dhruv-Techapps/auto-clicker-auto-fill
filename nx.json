@@ -90,7 +90,6 @@
       "dependsOn": ["^build"]
     },
     "@nx/js:swc": {
-      "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
@@ -165,5 +164,5 @@
       "preVersionCommand": "npx nx run-many --targets=lint,test,build"
     }
   },
-  "nxCloudId": "681267b172b61fd02e1e2666"
+  "neverConnectToCloud": true
 }
