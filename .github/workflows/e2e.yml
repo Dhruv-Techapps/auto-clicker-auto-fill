@@ -55,7 +55,7 @@ jobs:
 
       - name: Build Options Page
         run: |
-          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
@@ -96,7 +96,7 @@ jobs:
       - name: Build Extension
         if: ${{ !inputs.use_artifact }}
         run: |
-          npx nx run acf-extension:build --prod --verbose
+          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
