@@ -95,6 +95,9 @@
     },
     {
       "path": "./packages/core/types"
+    },
+    {
+      "path": "./apps/acf-e2e"
     }
   ]
 }

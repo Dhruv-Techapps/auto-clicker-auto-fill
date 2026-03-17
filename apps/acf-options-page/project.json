@@ -32,29 +32,6 @@
           "target": "serve"
         }
       ]
-    },
-    "e2e": {
-      "dependsOn": [
-        {
-          "projects": ["acf-common"],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "configurations": {
-        "development": {
-          "envFile": ".env.development"
-        },
-        "production": {
-          "envFile": ".env.production"
-        }
-      }
-    },
-    "preview": {
-      "command": "vite preview",
-      "options": {
-        "args": ["--port", "4200"]
-      }
     }
   }
 }

@@ -51,7 +51,8 @@
         "production": {
           "args": ["--node-env=production"]
         }
-      }
+      },
+      "dependsOn": ["build"]
     }
   }
 }
