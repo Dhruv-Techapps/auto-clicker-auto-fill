@@ -1,15 +1,10 @@
-name: E2E [Build, Deploy & Test]
-run-name: E2E Deploy to ${{ inputs.environment || 'Development' }} by @${{ github.actor }}
+name: Pull Request
+run-name: Pull Request for Development by @${{ github.actor }}
 
 on:
-  push:
+  pull_request:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Environment of release'
-        type: environment
-        default: Development
-        required: true
       version:
         description: 'Version (v5.0.0.0)'
         type: string
@@ -24,7 +19,7 @@ jobs:
   main:
     name: Build, Deploy & E2E
     environment:
-      name: ${{ inputs.environment || 'Development' }}
+      name: Development
       url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     permissions:
       contents: 'read'
@@ -50,6 +45,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - run: npx nx report
+
+      - run: npx nx format:check --verbose --skip-nx-cache
+      - run: npx nx affected --target=lint --parallel=3 --verbose --skip-nx-cache
+      - run: npx nx affected --target=test --parallel=3 --verbose --coverage --skip-nx-cache
 
       - name: Build Options Page
         run: |
@@ -135,16 +134,34 @@ jobs:
 
       - name: Run E2E Tests
         continue-on-error: true
-        run: npx nx run acf-options-page:e2e --skip-nx-cache
+        run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
           CI: 'true'
 
       - name: Publish E2E Report to Firebase Hosting
         id: report
-        if: always()
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
           target: auto-clicker-auto-fill-playwright
           channelId: live
+
+      - name: Check for coverage reports
+        id: coverage-check
+        run: |
+          if compgen -G 'packages/**/**/test-output/vitest/coverage/lcov.info' > /dev/null 2>&1; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 # v1.3.0
+        if: ${{ github.actor != 'dependabot[bot]' && steps.coverage-check.outputs.found == 'true' }}
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          # or
+          api-token: ${{ secrets.CODACY_API_TOKEN }}
+          coverage-reports: 'packages/**/**/test-output/vitest/coverage/lcov.info'
+          # or a comma-separated list for multiple reports
+          # coverage-reports: <PATH_TO_REPORT>, <PATH_TO_REPORT>
