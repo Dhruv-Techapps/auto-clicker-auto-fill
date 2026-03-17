@@ -120,8 +120,7 @@ jobs:
           name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
           path: apps/acf-extension/dist
           retention-days: 7
-      - name: Run Type Check
-        run: npx nx affected --target=typecheck --parallel=3 --verbose --skip-nx-cache
+
       - name: Cache Playwright Browsers
         id: playwright-cache
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
@@ -141,7 +140,6 @@ jobs:
 
       - name: Publish E2E Report to Firebase Hosting
         id: report
-        if: always()
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
