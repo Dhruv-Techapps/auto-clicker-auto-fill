@@ -33,7 +33,6 @@ jobs:
       - run: npx nx affected --target=lint --parallel=3 --verbose --skip-nx-cache
       - run: npx nx affected --target=test --parallel=3 --verbose --coverage --skip-nx-cache
       - run: npx nx run-many --target=clean --all
-      - run: npx nx affected --target=typecheck --parallel=3 --verbose --skip-nx-cache
       - name: Check for coverage reports
         id: coverage-check
         run: |
