@@ -1,6 +1,5 @@
 import { nxE2EPreset } from '@nx/playwright/preset';
 import { defineConfig, devices } from '@playwright/test';
-import { BASE_URL } from './e2e/fixtures/base-url';
 
 const config = nxE2EPreset(__filename, { testDir: './e2e' });
 
@@ -22,7 +21,6 @@ export default defineConfig({
   ],
   timeout: 30_000,
   use: {
-    baseURL: BASE_URL,
     channel: 'chromium', // use full Chrome binary, not headless-shell (headless-shell does not support extensions)
     trace: 'on-first-retry',
     screenshot: process.env['CI'] ? 'on' : 'off'
