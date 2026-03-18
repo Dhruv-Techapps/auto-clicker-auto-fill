@@ -1,5 +1,8 @@
 name: Pull Request
 
+permissions:
+  contents: read
+
 run-name: Pull Request for Development by @${{ github.actor }}
 
 on:
