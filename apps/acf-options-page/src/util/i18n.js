@@ -24,7 +24,7 @@ i18n
   .init({
     fallbackLng: 'en',
     ns: 'web-new',
-    debug: true,
+    debug: import.meta.env.VITE_PUBLIC_I18N_DEBUG === 'true',
     defaultNS: 'web-new',
     lng,
     backend: {
