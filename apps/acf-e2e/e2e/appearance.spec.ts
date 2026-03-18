@@ -1,81 +1,81 @@
 import { expect, pageTest as test } from './fixtures';
 
 test.describe('Language and Theme change', () => {
-  test('should apply dark theme and persist after reload when dark theme is selected', async ({ homePage }) => {
+  test('should apply dark theme and persist after reload when dark theme is selected', async ({ page, homePage, appearancePage }) => {
     // Arrange
     await homePage.goto();
 
     // Act
-    await homePage.selectTheme('Dark');
+    await appearancePage.selectTheme('Dark');
 
     // Assert — HTML element has dark theme attribute
-    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
 
     // Assert — theme is persisted in localStorage
-    expect(await homePage.getStoredTheme()).toBe('dark');
+    expect(await appearancePage.getStoredTheme()).toBe('dark');
 
     // Act — reload and verify persistence
-    await homePage.page.reload();
+    await page.reload();
 
     // Assert — dark theme is still applied after reload
-    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
   });
 
-  test('should apply light theme and persist after reload when light theme is selected', async ({ homePage }) => {
+  test('should apply light theme and persist after reload when light theme is selected', async ({ page, homePage, appearancePage }) => {
     // Arrange
     await homePage.goto();
 
     // Act
-    await homePage.selectTheme('Light');
+    await appearancePage.selectTheme('Light');
 
     // Assert — HTML element has light theme attribute
-    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
 
     // Assert — theme is persisted in localStorage
-    expect(await homePage.getStoredTheme()).toBe('light');
+    expect(await appearancePage.getStoredTheme()).toBe('light');
 
     // Act — reload and verify persistence
-    await homePage.page.reload();
+    await page.reload();
 
     // Assert — light theme is still applied after reload
-    await expect(homePage.page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
   });
 
-  test('should store French language and persist after reload when French is selected', async ({ homePage }) => {
+  test('should store French language and persist after reload when French is selected', async ({ page, homePage, appearancePage }) => {
     // Arrange — ensure the UI starts in English for this test
     await homePage.goto();
-    await homePage.setStoredLanguage('en');
-    await homePage.page.reload();
+    await appearancePage.setStoredLanguage('en');
+    await page.reload();
 
     // Act
-    await homePage.selectLanguage('French');
+    await appearancePage.selectLanguage('French');
 
     // Assert — language is persisted in localStorage
-    expect(await homePage.getStoredLanguage()).toBe('fr');
+    expect(await appearancePage.getStoredLanguage()).toBe('fr');
 
     // Act — reload and verify persistence
-    await homePage.page.reload();
+    await page.reload();
 
     // Assert — language is still French after reload
-    expect(await homePage.getStoredLanguage()).toBe('fr');
+    expect(await appearancePage.getStoredLanguage()).toBe('fr');
   });
 
-  test('should store English language and persist after reload when switching from French to English', async ({ homePage }) => {
+  test('should store English language and persist after reload when switching from French to English', async ({ page, homePage, appearancePage }) => {
     // Arrange — ensure the UI starts in French for this test
     await homePage.goto();
-    await homePage.setStoredLanguage('fr');
-    await homePage.page.reload();
+    await appearancePage.setStoredLanguage('fr');
+    await page.reload();
 
     // Act — Note: the UI is in French, so 'English' appears as 'Anglais'
-    await homePage.selectLanguage('Anglais');
+    await appearancePage.selectLanguage('Anglais');
 
     // Assert — language is persisted in localStorage
-    expect(await homePage.getStoredLanguage()).toBe('en');
+    expect(await appearancePage.getStoredLanguage()).toBe('en');
 
     // Act — reload and verify persistence
-    await homePage.page.reload();
+    await page.reload();
 
     // Assert — language is still English after reload
-    expect(await homePage.getStoredLanguage()).toBe('en');
+    expect(await appearancePage.getStoredLanguage()).toBe('en');
   });
 });

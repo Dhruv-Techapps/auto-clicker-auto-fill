@@ -4,6 +4,7 @@ test.describe('Settings — Notifications', () => {
   test.describe.configure({ mode: 'serial' });
 
   test('should render all notification elements', async ({ settingsNotificationsPage }) => {
+    await settingsNotificationsPage.goto();
     // Assert — notification container and all switches are visible
     await expect(settingsNotificationsPage.container).toBeVisible();
     await expect(settingsNotificationsPage.onError).toBeVisible();
@@ -14,6 +15,7 @@ test.describe('Settings — Notifications', () => {
   });
 
   test('should toggle onError and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
+    await settingsNotificationsPage.goto();
     // Act
     await settingsNotificationsPage.toggleOnError();
 
@@ -23,6 +25,7 @@ test.describe('Settings — Notifications', () => {
   });
 
   test('should toggle onAction and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
+    await settingsNotificationsPage.goto();
     // Act
     await settingsNotificationsPage.toggleOnAction();
 
@@ -32,6 +35,7 @@ test.describe('Settings — Notifications', () => {
   });
 
   test('should toggle onBatch and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
+    await settingsNotificationsPage.goto();
     // Act
     await settingsNotificationsPage.toggleOnBatch();
 
@@ -41,6 +45,7 @@ test.describe('Settings — Notifications', () => {
   });
 
   test('should toggle onConfig and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
+    await settingsNotificationsPage.goto();
     // Act
     await settingsNotificationsPage.toggleOnConfig();
 
@@ -50,6 +55,7 @@ test.describe('Settings — Notifications', () => {
   });
 
   test('should toggle sound and save to extension storage', async ({ settingsNotificationsPage, getSettings, toastPage }) => {
+    await settingsNotificationsPage.goto();
     // Act
     await settingsNotificationsPage.toggleSound();
 

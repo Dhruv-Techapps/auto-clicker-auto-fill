@@ -25,6 +25,8 @@ async function loadConfig(loadType: ELoadTypes) {
       if (autoConfig) {
         if (autoConfig.loadType === loadType || (autoConfig.triggerUrlChange && loadType === ELoadTypes.URL_CHANGE)) {
           const { host } = document.location;
+
+          console.log(JSON.stringify(autoConfig, null, 2));
           console.debug(host, loadType);
           await ConfigProcessor.checkStartType(manualConfigs, autoConfig);
           console.debug(host, 'END');

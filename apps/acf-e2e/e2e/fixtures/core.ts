@@ -27,7 +27,7 @@ export interface TestFixtures {
   extensionId: string;
   getSettings: () => Promise<ISettings>;
   getAutomations: () => Promise<IConfiguration[]>;
-
+  clearAutomations: () => Promise<void>;
   worker: Awaited<ReturnType<BrowserContext['serviceWorkers']>>[number];
 }
 
@@ -76,6 +76,11 @@ export const coreTest = base.extend<TestFixtures, WorkerFixtures>({
 
   getAutomations: async ({ worker }, use) => {
     await use(() => worker.evaluate<IConfiguration[], string>((key) => chrome.storage.local.get(key).then((r) => r[key] as IConfiguration[]), LOCAL_STORAGE_KEY.CONFIGS));
+  },
+
+  clearAutomations: async ({ worker }, use) => {
+    await worker.evaluate<void, string>((key) => chrome.storage.local.set({ [key]: [] }), LOCAL_STORAGE_KEY.CONFIGS);
+    await use(() => Promise.resolve());
   },
 
   // Returns the extension service worker, waking it up if Chrome stopped it

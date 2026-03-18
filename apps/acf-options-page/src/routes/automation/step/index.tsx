@@ -45,38 +45,38 @@ function Step() {
         <Row className='p-2'>
           <Col className='d-flex align-items-center text-body-tertiary'>{t('step.title')}</Col>
           <Col xs='auto' className='d-flex align-items-center'>
-            <Button size='sm' className='me-2' variant='link' onClick={() => setExpand((prev: boolean) => !prev)}>
+            <Button size='sm' className='me-2' variant='link' onClick={() => setExpand((prev: boolean) => !prev)} data-testid='toggle-step-expand-btn'>
               <i className={`bi bi-arrows-${expand ? 'collapse' : 'expand'}-vertical`} />
             </Button>
             <Dropdown className='ml-2' id='acton-column-filter-wrapper'>
-              <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 me-3' aria-label='Toggle Action Column'>
+              <Dropdown.Toggle as={DropdownToggle} id='acton-column-filter' className='p-0 me-3' aria-label='Toggle Step Column' data-testid='step-column-filter-btn'>
                 <i className='bi bi-filter fs-4' />
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={onColumnChange} data-column='name' active={columnVisibility.name}>
+                <Dropdown.Item onClick={onColumnChange} data-column='name' active={columnVisibility.name} data-testid='column-name'>
                   {t('step.name')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={onColumnChange} data-column='initWait' active={columnVisibility.initWait}>
+                <Dropdown.Item onClick={onColumnChange} data-column='initWait' active={columnVisibility.initWait} data-testid='column-initWait'>
                   {t('step.initWait')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={onColumnChange} data-column='repeat' active={columnVisibility.repeat}>
+                <Dropdown.Item onClick={onColumnChange} data-column='repeat' active={columnVisibility.repeat} data-testid='column-repeat'>
                   {t('step.repeat')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={onColumnChange} data-column='repeatInterval' active={columnVisibility.repeatInterval}>
+                <Dropdown.Item onClick={onColumnChange} data-column='repeatInterval' active={columnVisibility.repeatInterval} data-testid='column-repeatInterval'>
                   {t('step.repeatInterval')}
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown as={ButtonGroup} size='sm'>
-              <Button onClick={onAddAction} variant='outline-primary'>
+              <Button onClick={onAddAction} variant='outline-primary' data-testid='add-step-btn'>
                 {t('common.add')}
               </Button>
               <Dropdown.Toggle id='step-add' variant='outline-primary'></Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={onAddAction}>
+                <Dropdown.Item onClick={onAddAction} data-testid='dropdown-add-step-btn'>
                   <i className='bi bi-plus-circle me-2' /> {t('step.add')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={onAddUserscript}>
+                <Dropdown.Item onClick={onAddUserscript} data-testid='dropdown-add-userscript-btn'>
                   <i className='bi bi-plus-circle me-2' /> {t('userscript.add')}
                 </Dropdown.Item>
               </Dropdown.Menu>

@@ -5,6 +5,7 @@ test.describe('Settings — Retry', () => {
   test.describe.configure({ mode: 'serial' });
 
   test('should render all retry form elements', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await expect(settingsRetryPage.form).toBeVisible();
     await expect(settingsRetryPage.retryInput).toBeVisible();
     await expect(settingsRetryPage.unlimitedBtn).toBeVisible();
@@ -18,16 +19,19 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should have save button disabled when form is pristine', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await expect(settingsRetryPage.saveBtn).toBeDisabled();
   });
 
   test('should enable save button after changing retry count', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.setRetryCount('6');
 
     await expect(settingsRetryPage.saveBtn).toBeEnabled();
   });
 
   test('should reset form to original values on cancel', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     const originalValue = await settingsRetryPage.getRetryCount();
 
     await settingsRetryPage.setRetryCount('99');
@@ -38,6 +42,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should disable input and show "unlimited" when infinity button is clicked', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.toggleUnlimited();
 
     // list attr is removed when unlimited → role changes from combobox to textbox
@@ -47,6 +52,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should re-enable input when infinity button is clicked again', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.toggleUnlimited();
     await settingsRetryPage.toggleUnlimited();
 
@@ -54,12 +60,14 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should show second interval input when range button is clicked', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await expect(settingsRetryPage.intervalInput).toBeVisible();
     await settingsRetryPage.toggleRange();
     await expect(settingsRetryPage.intervalInputRange).toBeVisible();
   });
 
   test('should hide second interval input when range button is clicked again', async ({ settingsRetryPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.toggleRange();
     await settingsRetryPage.toggleRange();
 
@@ -78,6 +86,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should save retry count to extension storage', async ({ settingsRetryPage, getSettings, toastPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.setRetryCount('3');
     await settingsRetryPage.save();
 
@@ -86,6 +95,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should save unlimited retry to extension storage', async ({ settingsRetryPage, getSettings, toastPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.toggleUnlimited();
     await settingsRetryPage.save();
 
@@ -94,6 +104,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should save retry interval to extension storage', async ({ settingsRetryPage, getSettings, toastPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.setInterval('2');
     await settingsRetryPage.save();
 
@@ -102,6 +113,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should save retry interval range to extension storage', async ({ settingsRetryPage, getSettings, toastPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.setIntervalRange('1', '5');
     await settingsRetryPage.save();
 
@@ -110,6 +122,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should save retryOption SKIP to extension storage', async ({ settingsRetryPage, getSettings, toastPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.optionSkip.click();
     await settingsRetryPage.save();
 
@@ -118,6 +131,7 @@ test.describe('Settings — Retry', () => {
   });
 
   test('should save retryOption RELOAD to extension storage', async ({ settingsRetryPage, getSettings, toastPage }) => {
+    await settingsRetryPage.goto();
     await settingsRetryPage.optionReload.click();
     await settingsRetryPage.save();
 
