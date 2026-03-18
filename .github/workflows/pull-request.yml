@@ -6,6 +6,11 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
+      environment:
+        description: 'Environment of release'
+        type: environment
+        default: Development
+        required: true
       version:
         description: 'Version (v5.0.0.0)'
         type: string
@@ -130,6 +135,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || 'Development' }}
     permissions:
       contents: read
     needs: [setup, lint, unit-test]
