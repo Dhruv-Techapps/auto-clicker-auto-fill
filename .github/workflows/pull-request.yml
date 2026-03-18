@@ -1,8 +1,5 @@
 name: Pull Request
 
-permissions:
-  contents: read
-
 run-name: Pull Request for Development by @${{ github.actor }}
 
 on:
@@ -39,6 +36,8 @@ jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       cache-key: ${{ steps.cache-key.outputs.key }}
     steps:
@@ -68,6 +67,8 @@ jobs:
   lint:
     name: Lint & Format
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: setup
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -91,6 +92,8 @@ jobs:
   unit-test:
     name: Unit Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: setup
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -127,6 +130,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: [setup, lint, unit-test]
     if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
     env:
