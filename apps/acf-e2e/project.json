@@ -2,7 +2,7 @@
   "name": "@dhruv-techapps/acf-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "targets": {
-    "e2e":{
+    "e2e": {
       "dependsOn": [
         {
           "projects": ["acf-common"],
