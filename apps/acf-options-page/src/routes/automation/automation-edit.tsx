@@ -43,7 +43,7 @@ export const AutomationEdit = ({ onDone }: AutomationEditProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} data-testid='automation-edit-form'>
       <Container fluid className='border-bottom p-2'>
         <Row className='align-items-end p-1'>
           <Col xs='auto'>

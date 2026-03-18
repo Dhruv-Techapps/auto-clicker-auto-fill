@@ -1,7 +1,15 @@
-import { AppearancePage } from './appearance.page';
+import { Page } from '@playwright/test';
+import { URLS } from '../base-url';
 
-export class HomePage extends AppearancePage {
-  constructor(page: AppearancePage['page']) {
-    super(page);
+export class HomePage {
+  constructor(private readonly page: Page) {}
+
+  async goto() {
+    await this.page.goto(URLS.HOME);
+  }
+
+  async openNewUrl(url: string) {
+    await this.page.context().newPage();
+    await this.page.goto(url);
   }
 }

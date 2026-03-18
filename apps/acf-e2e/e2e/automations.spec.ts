@@ -5,21 +5,21 @@ const REORDER_URL_REGEX = /\/automations\/reorder/;
 test.describe('Automations page rendering', () => {
   test('should display My Automations heading when navigating to automations page', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Assert
     await expect(automationsPage.heading).toBeVisible();
   });
 
   test('should display search input when navigating to automations page', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Assert
     await expect(automationsPage.searchInput).toBeVisible();
   });
 
   test('should display New and Import buttons when navigating to automations page', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Assert
     await expect(automationsPage.addButton).toBeVisible();
     await expect(automationsPage.importButton).toBeVisible();
@@ -27,14 +27,14 @@ test.describe('Automations page rendering', () => {
 
   test('should display automations count text when navigating to automations page', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Assert — the "N automations within extension" text is shown
     await expect(automationsPage.automationsCount).toBeVisible();
   });
 
   test('should display Select and Reorder buttons in normal mode', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Assert
     await expect(automationsPage.selectButton).toBeVisible();
     await expect(automationsPage.reorderButton).toBeVisible();
@@ -42,7 +42,7 @@ test.describe('Automations page rendering', () => {
 
   test('should display pre-loaded automation list items on initial load', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Assert — at least one list item is rendered
     await expect(automationsPage.listItems.first()).toBeVisible();
     expect(await automationsPage.listItems.count()).toBeGreaterThan(0);
@@ -52,7 +52,7 @@ test.describe('Automations page rendering', () => {
 test.describe('Automations page search', () => {
   test('should filter automations by name when search term is entered', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     const totalBefore = await automationsPage.listItems.count();
     expect(totalBefore).toBeGreaterThan(1);
 
@@ -66,7 +66,7 @@ test.describe('Automations page search', () => {
 
   test('should filter automations by URL when search term matches URL', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Act — ?ab=12 appears only in the "Query Param" demo automation URL
     await automationsPage.searchInput.fill('?ab=12');
 
@@ -77,7 +77,7 @@ test.describe('Automations page search', () => {
 
   test('should restore full list when search is cleared', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     const totalBefore = await automationsPage.listItems.count();
     await automationsPage.searchInput.fill('Google Sheets');
     await expect(automationsPage.listItems).toHaveCount(1);
@@ -91,6 +91,7 @@ test.describe('Automations page search', () => {
 
   test('should show no items when search term matches nothing', async ({ automationsPage }) => {
     // Arrange
+    await automationsPage.goto();
 
     // Act
     await automationsPage.searchInput.fill('zzz-no-match-zzz');
@@ -103,7 +104,7 @@ test.describe('Automations page search', () => {
 test.describe('Automations page selection mode', () => {
   test('should enter selection mode when Select button is clicked', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Act
     await automationsPage.enterSelectionMode();
 
@@ -116,7 +117,7 @@ test.describe('Automations page selection mode', () => {
 
   test('should exit selection mode when cancel button is clicked', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
     await expect(automationsPage.selectAllCheckbox).toBeVisible();
 
@@ -130,7 +131,7 @@ test.describe('Automations page selection mode', () => {
 
   test('should disable export and delete buttons when no automations are selected', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Act
     await automationsPage.enterSelectionMode();
 
@@ -141,7 +142,7 @@ test.describe('Automations page selection mode', () => {
 
   test('should enable export and delete buttons when an automation is selected', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
 
     // Act — check the first item checkbox
@@ -154,7 +155,7 @@ test.describe('Automations page selection mode', () => {
 
   test('should toggle automation selection off when checkbox is unchecked', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
     await automationsPage.itemCheckboxes().first().check();
     await expect(automationsPage.exportButton).toBeEnabled();
@@ -169,7 +170,7 @@ test.describe('Automations page selection mode', () => {
 
   test('should select all automations when select-all checkbox is clicked', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
     const checkboxes = automationsPage.itemCheckboxes();
     const total = await checkboxes.count();
@@ -188,7 +189,7 @@ test.describe('Automations page selection mode', () => {
 
   test('should deselect all automations when select-all is clicked a second time', async ({ automationsPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
     await automationsPage.selectAllCheckbox.click();
     const checkboxes = automationsPage.itemCheckboxes();
@@ -210,7 +211,7 @@ test.describe('Automations page selection mode', () => {
 test.describe('Automations page export', () => {
   test('should show export success toast when exporting selected automations', async ({ automationsPage, toastPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
     await automationsPage.itemCheckboxes().first().check();
 
@@ -223,7 +224,7 @@ test.describe('Automations page export', () => {
 
   test('should export multiple selected automations and show count in toast body', async ({ automationsPage, toastPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     await automationsPage.enterSelectionMode();
 
     // Select first two items
@@ -242,7 +243,7 @@ test.describe('Automations page export', () => {
 test.describe('Automations page delete', () => {
   test('should delete selected automation and reduce list count by one', async ({ automationsPage, toastPage }) => {
     // Arrange
-
+    await automationsPage.goto();
     const initialCount = await automationsPage.listItems.count();
     expect(initialCount).toBeGreaterThan(0);
     await automationsPage.enterSelectionMode();
@@ -262,7 +263,7 @@ test.describe('Automations page delete', () => {
 test.describe('Automations page navigation', () => {
   test('should navigate to reorder page when Reorder button is clicked', async ({ automationsPage, page }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Act
     await automationsPage.reorderButton.click();
 
@@ -273,7 +274,7 @@ test.describe('Automations page navigation', () => {
 
   test('should navigate to new automation when New button is clicked', async ({ automationsPage, page }) => {
     // Arrange
-
+    await automationsPage.goto();
     // Act
     await automationsPage.addButton.click();
 

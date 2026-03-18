@@ -4,6 +4,7 @@ test.describe('Settings — Additional', () => {
   test.describe.configure({ mode: 'serial' });
 
   test('should render all additional form elements', async ({ settingsAdditionalPage }) => {
+    await settingsAdditionalPage.goto();
     // Assert — all form controls and action buttons are visible
     await expect(settingsAdditionalPage.form).toBeVisible();
     await expect(settingsAdditionalPage.checkiFrames).toBeVisible();
@@ -18,10 +19,12 @@ test.describe('Settings — Additional', () => {
   });
 
   test('should have save button disabled when form is pristine', async ({ settingsAdditionalPage }) => {
+    await settingsAdditionalPage.goto();
     await expect(settingsAdditionalPage.saveBtn).toBeDisabled();
   });
 
   test('should enable save button after toggling checkiFrames', async ({ settingsAdditionalPage }) => {
+    await settingsAdditionalPage.goto();
     // Act
     await settingsAdditionalPage.toggleCheckiFrames();
 
@@ -30,6 +33,7 @@ test.describe('Settings — Additional', () => {
   });
 
   test('should reset form to original values on cancel', async ({ settingsAdditionalPage }) => {
+    await settingsAdditionalPage.goto();
     // Act
     await settingsAdditionalPage.toggleCheckiFrames();
     await settingsAdditionalPage.cancel();
@@ -39,6 +43,7 @@ test.describe('Settings — Additional', () => {
   });
 
   test('should save checkiFrames to extension storage', async ({ settingsAdditionalPage, getSettings, toastPage }) => {
+    await settingsAdditionalPage.goto();
     // Act
     await settingsAdditionalPage.toggleCheckiFrames();
     await settingsAdditionalPage.save();
@@ -49,6 +54,7 @@ test.describe('Settings — Additional', () => {
   });
 
   test('should save reloadOnError to extension storage', async ({ settingsAdditionalPage, getSettings, toastPage }) => {
+    await settingsAdditionalPage.goto();
     // Act
     await settingsAdditionalPage.toggleReloadOnError();
     await settingsAdditionalPage.save();
@@ -59,6 +65,7 @@ test.describe('Settings — Additional', () => {
   });
 
   test('should save statusBar position to extension storage', async ({ settingsAdditionalPage, getSettings, toastPage }) => {
+    await settingsAdditionalPage.goto();
     // Act
     await settingsAdditionalPage.selectStatusBar('top-left');
     await settingsAdditionalPage.save();
