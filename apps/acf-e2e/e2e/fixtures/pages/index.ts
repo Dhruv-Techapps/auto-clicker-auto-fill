@@ -54,8 +54,7 @@ export const pageTest = coreTest.extend<PagesFixtures>({
   },
   sidebarPage: async ({ page }, use) => {
     await use(new SidebarPage(page));
-  },
-
+  }
 });
 
 export { AppearancePage } from './appearance.page';

@@ -1,7 +1,7 @@
 import { expect, pageTest as test } from './fixtures';
 
 test.describe('Language and Theme change', () => {
-  test('should apply dark theme and persist after reload when dark theme is selected', async ({ page, homePage,appearancePage }) => {
+  test('should apply dark theme and persist after reload when dark theme is selected', async ({ page, homePage, appearancePage }) => {
     // Arrange
     await homePage.goto();
 
@@ -60,7 +60,7 @@ test.describe('Language and Theme change', () => {
     expect(await appearancePage.getStoredLanguage()).toBe('fr');
   });
 
-  test('should store English language and persist after reload when switching from French to English', async ({page, homePage, appearancePage }) => {
+  test('should store English language and persist after reload when switching from French to English', async ({ page, homePage, appearancePage }) => {
     // Arrange — ensure the UI starts in French for this test
     await homePage.goto();
     await appearancePage.setStoredLanguage('fr');

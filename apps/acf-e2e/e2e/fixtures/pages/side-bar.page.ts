@@ -5,7 +5,7 @@ export class SidebarPage {
   readonly addAutomationButton: Locator;
   readonly automationList: Locator;
   readonly userDropdown: Locator;
-  
+
   constructor(public readonly page: Page) {
     this.addAutomationButton = this.page.getByTestId('sidebar-add-automation');
     this.automationList = this.page.locator('[data-testid="sidebar-automation-list"]');
