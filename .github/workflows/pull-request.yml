@@ -175,7 +175,7 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
 
       - name: Upload Options Page Artifact
-        uses: actions/upload-artifact@c6a366c94c3e0affe28c06c8df20a878f24da3cf
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
           path: apps/acf-options-page/dist
@@ -209,7 +209,7 @@ jobs:
           zip -r ../../../acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip .
 
       - name: Upload Extension Artifact
-        uses: actions/upload-artifact@c6a366c94c3e0affe28c06c8df20a878f24da3cf
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
           path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
