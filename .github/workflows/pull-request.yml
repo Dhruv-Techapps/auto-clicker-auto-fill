@@ -207,6 +207,9 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     needs: build
     if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
     steps:
@@ -246,8 +249,9 @@ jobs:
       name: Development
       url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     permissions:
-      contents: 'read'
+      contents: 'write'
       actions: 'read'
+      discussions: 'write'
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
