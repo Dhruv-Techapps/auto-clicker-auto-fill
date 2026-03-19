@@ -164,7 +164,7 @@ jobs:
           key: ${{ needs.setup.outputs.cache-key }}
 
       - name: Build Extension and Options Page
-        run: npx nx run-many -t build --projects acf-options-page acf-extension acf-i18n --prod --verbose --skip-nx-cache
+        run: npx nx run-many -t build --projects acf-options-page acf-extension --prod --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
           VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
@@ -199,7 +199,7 @@ jobs:
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-i18n/dist
+          path: apps/acf-i18n/src
           retention-days: 7
       - name: Upload Extension Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
@@ -243,8 +243,6 @@ jobs:
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
-      - run: |
-          ls -la
       - name: Download Options Page Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
@@ -254,14 +252,12 @@ jobs:
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-i18n/dist
+          path: apps/acf-i18n/src
       - name: Download Extension Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
           path: apps/acf-extension/dist
-      - run: |
-          ls -la
       - name: Run E2E Tests
         run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
@@ -288,6 +284,7 @@ jobs:
       contents: read
       actions: read
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4.2.2
       - name: Determine Firebase Target
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
@@ -303,13 +300,21 @@ jobs:
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-i18n/dist
+          path: apps/acf-i18n/src
 
       - name: Download Extension Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
           path: apps/acf-extension/dist
+
+      - name: Deploy I18n to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-auto-fill-static
+          channelId: live   
 
       - name: Deploy Options Page to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
