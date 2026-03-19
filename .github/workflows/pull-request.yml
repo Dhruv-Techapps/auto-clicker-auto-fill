@@ -142,7 +142,7 @@ jobs:
   # ── 2. Build ──────────────────────────────────────────────────────────────
   build:
     name: Build
-    timeout-minutes: 15 
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
@@ -217,7 +217,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
-      url: ${{ steps.firebase-deploy.outputs.details_url }}  # <-- set env URL
+      url: ${{ steps.firebase-deploy.outputs.details_url }} # <-- set env URL
     outputs:
       deploy-url: ${{ steps.firebase-deploy.outputs.details_url }}
     permissions:
@@ -270,7 +270,7 @@ jobs:
           CI: 'true'
           VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
       - name: Publish E2E Report to Firebase Hosting
-        id: firebase-deploy       
+        id: firebase-deploy
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
