@@ -36,6 +36,10 @@ env:
   FORCE_COLOR: 2
   NODE: 24
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # ── 0. Setup ──────────────────────────────────────────────────────────────
   setup:
@@ -64,6 +68,8 @@ jobs:
         with:
           path: node_modules
           key: ${{ steps.cache-key.outputs.key }}
+          restore-keys: |
+            node-modules-
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -158,7 +164,7 @@ jobs:
           key: ${{ needs.setup.outputs.cache-key }}
 
       - name: Build Extension and Options Page
-        run: npx nx run-many -t build --projects acf-options-page acf-extension --prod --verbose --skip-nx-cache
+        run: npx nx run-many -t build --projects acf-options-page acf-extension acf-i18n --prod --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
           VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
@@ -183,35 +189,27 @@ jobs:
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
           KEY: ${{ secrets.KEY }}
 
-      - name: Upload Options Page Artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
-          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: apps/acf-options-page/dist
-          retention-days: 7
-
-      - name: Zip Extension
-        run: |
-          cd apps/acf-extension/dist
-          zip -r ../../../acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip .
-
-      - name: Upload Extension Artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
-        with:
-          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
+          name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: |
+            apps/acf-options-page/dist
+            apps/acf-extension/dist
+            apps/acf-i18n/dist
           retention-days: 7
 
   # ── 3. E2E Tests ──────────────────────────────────────────────────────────
   e2e:
     name: E2E Tests
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
     permissions:
       contents: read
       actions: read
-    needs: [setup, build]
+    needs: [setup, build, lint, unit-test]
     if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -237,14 +235,13 @@ jobs:
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
-      - name: Download Extension Artifact
+      - name: Download Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
-          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
-      - name: Unzip Extension
-        run: unzip acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
+          name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: .
       - name: Run E2E Tests
-        run: npx nx run acf-e2e:e2e --grep=test --skip-nx-cache
+        run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
           CI: 'true'
           VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
@@ -266,26 +263,19 @@ jobs:
       name: Development
       url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     permissions:
-      contents: 'write'
-      actions: 'read'
-      discussions: 'write'
+      contents: read
+      actions: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
-        with:
-          node-version: '${{ env.NODE }}'
-          cache: 'npm'
-
       - name: Determine Firebase Target
         run: |
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
           echo "TARGET=auto-clicker-auto-fill-$VARIANT" >> $GITHUB_ENV
 
-      - name: Download Options Page Artifact
+      - name: Download Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
-          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: apps/acf-options-page/dist
+          name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: .
 
       - name: Deploy Options Page to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
@@ -295,19 +285,10 @@ jobs:
           target: ${{ env.TARGET }}
           channelId: live
 
-      - name: Publish E2E Report to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
-        with:
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: auto-clicker-autofill
-          target: auto-clicker-auto-fill-playwright
-          channelId: live
-
-      - name: Download Extension Artifact
-        if: inputs.upload_extension == true
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
-        with:
-          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
+      - name: Zip Extension
+        run: |
+          cd apps/acf-extension/dist
+          zip -r ../../../acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip .
 
       - name: Upload to Chrome Web Store
         if: inputs.upload_extension == true
@@ -321,10 +302,18 @@ jobs:
           publish: ${{ inputs.publish_extension }}
           glob: true
 
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+      discussions: write
+    steps:
       - name: Release to GitHub
-        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe
-        if: startsWith(github.ref, 'refs/tags/')
         id: release
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe
         with:
           prerelease: ${{ vars.VITE_PUBLIC_VARIANT == 'BETA' || vars.VITE_PUBLIC_VARIANT == 'DEV' }}
           generate_release_notes: true
