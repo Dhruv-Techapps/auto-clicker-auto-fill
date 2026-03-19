@@ -157,33 +157,13 @@ jobs:
           path: node_modules
           key: ${{ needs.setup.outputs.cache-key }}
 
-      - name: Build Options Page
-        run: npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
+      - name: Build Extension and Options Page
+        run: npx nx run-many -t build --projects acf-options-page acf-extension --prod --verbose --skip-nx-cache
         env:
-          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
           VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_SLOT }}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT }}
-          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
-          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
-          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
-          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0' }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
-
-      - name: Upload Options Page Artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
-        with:
-          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: apps/acf-options-page/dist
-          retention-days: 7
-
-      - name: Build Extension
-        run: npx nx run acf-extension:build --prod --verbose --skip-nx-cache
-        env:
           VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
@@ -202,6 +182,13 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
           KEY: ${{ secrets.KEY }}
+
+      - name: Upload Options Page Artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
+          path: apps/acf-options-page/dist
+          retention-days: 7
 
       - name: Zip Extension
         run: |
@@ -254,6 +241,8 @@ jobs:
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
+      - name: Unzip Extension
+        run: unzip acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
       - name: Run E2E Tests
         run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:

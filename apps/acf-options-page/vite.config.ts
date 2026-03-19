@@ -6,6 +6,7 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(() => ({
+  base: process.env.VITE_PUBLIC_URL || '/',
   root: __dirname,
   resolve: {
     alias: {
