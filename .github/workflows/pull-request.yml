@@ -248,6 +248,13 @@ jobs:
         env:
           CI: 'true'
           VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+      - name: Publish E2E Report to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-auto-fill-playwright
+          channelId: live
 
   # ── 4. Deploy ─────────────────────────────────────────────────────────────
   deploy:
