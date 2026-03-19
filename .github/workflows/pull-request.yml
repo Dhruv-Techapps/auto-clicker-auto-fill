@@ -247,6 +247,7 @@ jobs:
         run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
           CI: 'true'
+          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
 
   # ── 4. Deploy ─────────────────────────────────────────────────────────────
   deploy:
