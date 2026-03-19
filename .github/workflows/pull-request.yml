@@ -108,7 +108,7 @@ jobs:
     needs: setup
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-        with:
+        with: 
           fetch-depth: 0
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
@@ -189,16 +189,24 @@ jobs:
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
           KEY: ${{ secrets.KEY }}
 
-      - name: Upload Artifact
+      - name: Upload Options Page Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
-          name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: |
-            apps/acf-options-page/dist
-            apps/acf-extension/dist
-            apps/acf-i18n/dist
+          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-options-page/dist
           retention-days: 7
-
+      - name : Upload I18n Artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }} 
+          path: apps/acf-i18n/dist
+          retention-days: 7
+      - name : Upload Extension Artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-extension/dist
+          retention-days: 7
   # ── 3. E2E Tests ──────────────────────────────────────────────────────────
   e2e:
     name: E2E Tests
@@ -237,10 +245,21 @@ jobs:
         run: npx playwright install chromium
       - run: |
           ls -la
-      - name: Download Artifact
+      - name: Download Options Page Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
-          name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-options-page/dist
+      - name: Download I18n Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-i18n/dist
+      - name: Download Extension Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}  
+          path: apps/acf-extension/dist
       - run: |
           ls -la
       - name: Run E2E Tests
@@ -274,11 +293,23 @@ jobs:
           VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
           echo "TARGET=auto-clicker-auto-fill-$VARIANT" >> $GITHUB_ENV
 
-      - name: Download Artifact
+      - name: Download Options Page Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
-          name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: .
+          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-options-page/dist
+
+      - name: Download I18n Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-i18n/dist
+
+      - name: Download Extension Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}  
+          path: apps/acf-extension/dist
 
       - name: Deploy Options Page to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
