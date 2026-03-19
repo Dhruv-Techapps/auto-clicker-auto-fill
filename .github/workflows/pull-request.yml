@@ -314,7 +314,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
           target: auto-clicker-auto-fill-static
-          channelId: live   
+          channelId: live
 
       - name: Deploy Options Page to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
