@@ -219,6 +219,8 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || 'Development' }}
     permissions:
       contents: read
       actions: read
@@ -248,6 +250,10 @@ jobs:
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
+      - name: Download Extension Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
       - name: Run E2E Tests
         run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
@@ -301,6 +307,7 @@ jobs:
           channelId: live
 
       - name: Download Extension Artifact
+        if: inputs.upload_extension == true
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}

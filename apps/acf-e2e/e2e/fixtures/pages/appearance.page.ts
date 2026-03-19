@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { URLS } from '../base-url';
+import { URLS } from '../../helpers/base-url';
 
 export class AppearancePage {
   constructor(public readonly page: Page) {}
