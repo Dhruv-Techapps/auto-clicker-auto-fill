@@ -1,4 +1,23 @@
 {
   "name": "@dhruv-techapps/acf-e2e",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json"
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "e2e": {
+      "dependsOn": [
+        {
+          "projects": ["acf-common"],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "configurations": {
+        "development": {
+          "envFile": ".env.development"
+        },
+        "production": {
+          "envFile": ".env.production"
+        }
+      }
+    }
+  }
 }

@@ -6,6 +6,7 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(() => ({
+  base: process.env.VITE_PUBLIC_URL || '/',
   root: __dirname,
   resolve: {
     alias: {
@@ -61,13 +62,57 @@ export default defineConfig(() => ({
     commonjsOptions: {
       transformMixedEsModules: true
     },
+    chunkSizeWarningLimit: 600, // react-vendor is intentionally large due to React and its dependencies, so we set a higher warning limit
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-          return 'main';
+          if (!id.includes('node_modules')) return;
+
+          if (id.includes('@monaco-editor') || id.includes('state-local')) return 'monaco';
+
+          if (
+            id.includes('react-markdown') ||
+            id.includes('remark-') ||
+            id.includes('rehype-') ||
+            id.includes('micromark') ||
+            id.includes('mdast-') ||
+            id.includes('hast-') ||
+            id.includes('unified') ||
+            id.includes('unist-') ||
+            id.includes('vfile') ||
+            id.includes('trough') ||
+            id.includes('bail')
+          )
+            return 'markdown';
+
+          if (id.includes('firebase') || id.includes('@firebase')) return 'firebase';
+
+          if (
+            id.includes('react') ||
+            id.includes('scheduler') ||
+            id.includes('redux') ||
+            id.includes('reselect') ||
+            id.includes('immer') ||
+            id.includes('@restart/') ||
+            id.includes('@popperjs') ||
+            id.includes('dom-helpers') ||
+            id.includes('@dnd-kit') ||
+            id.includes('@tanstack') ||
+            id.includes('react-transition-group') ||
+            id.includes('prop-types') ||
+            id.includes('classnames') ||
+            id.includes('uncontrollable') ||
+            id.includes('warning') ||
+            id.includes('invariant') ||
+            id.includes('@swc/helpers') ||
+            id.includes('@babel/runtime') ||
+            id.includes('@react-aria') ||
+            id.includes('use-sync-external-store')
+          )
+            return 'react-vendor';
+
+          // No return here — Vite decides where unmatched node_modules go
+          // This breaks the circular dependency between vendor <-> react-vendor
         }
       }
     }

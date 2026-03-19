@@ -1,100 +1,175 @@
 name: Pull Request
+
 run-name: Pull Request for Development by @${{ github.actor }}
 
 on:
   pull_request:
   workflow_dispatch:
     inputs:
+      environment:
+        description: 'Environment of release'
+        type: environment
+        default: Development
+        required: true
       version:
         description: 'Version (v5.0.0.0)'
         type: string
         default: 'v5.0.0.0'
         required: false
+      upload_extension:
+        description: 'Upload extension to Chrome Webstore'
+        type: boolean
+        default: false
+        required: true
+      publish_extension:
+        description: 'Publish extension'
+        type: boolean
+        default: false
+        required: true
+      deploy:
+        description: 'Deploy to Firebase'
+        type: boolean
+        default: true
+        required: true
 
 env:
   FORCE_COLOR: 2
   NODE: 24
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  main:
-    name: Build, Deploy & E2E
-    environment:
-      name: Development
-      url: 'https://auto-clicker-auto-fill-playwright.web.app/'
-    permissions:
-      contents: 'read'
-      actions: 'read'
+  # ── 0. Setup ──────────────────────────────────────────────────────────────
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
-    env:
-      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+    permissions:
+      contents: read
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
     steps:
-      - name: Clone repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
           node-version: '${{ env.NODE }}'
           cache: 'npm'
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
-
-      - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
+      - name: Generate cache key
+        id: cache-key
+        run: echo "key=node-modules-${{ hashFiles('package-lock.json') }}" >> $GITHUB_OUTPUT
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ steps.cache-key.outputs.key }}
+          restore-keys: |
+            node-modules-
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-      - run: npx nx report
 
+  # ── 1a. Lint & Format ─────────────────────────────────────────────────────
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: setup
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: '${{ env.NODE }}'
+          cache: 'npm'
+      - uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+      - run: npx nx report
       - run: npx nx format:check --verbose --skip-nx-cache
       - run: npx nx affected --target=lint --parallel=3 --verbose --skip-nx-cache
-      - run: npx nx affected --target=test --parallel=3 --verbose --coverage --skip-nx-cache
 
-      - name: Build Options Page
+  # ── 1b. Unit Tests ────────────────────────────────────────────────────────
+  unit-test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: setup
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: '${{ env.NODE }}'
+          cache: 'npm'
+      - uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+      - run: npx nx affected --target=test --parallel=3 --verbose --coverage --skip-nx-cache
+      - name: Check for coverage reports
+        id: coverage-check
         run: |
-          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
+          if compgen -G 'packages/**/test-output/vitest/coverage/lcov.info' > /dev/null 2>&1; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Upload coverage to Codacy
+        uses: codacy/codacy-coverage-reporter-action@a38818475bb21847788496e9f0fddaa4e84955ba
+        if: ${{ github.actor != 'dependabot[bot]' && steps.coverage-check.outputs.found == 'true' }}
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          api-token: ${{ secrets.CODACY_API_TOKEN }}
+          coverage-reports: 'packages/**/test-output/vitest/coverage/lcov.info'
+
+  # ── 2. Build ──────────────────────────────────────────────────────────────
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || 'Development' }}
+    permissions:
+      contents: read
+    needs: [setup, lint, unit-test]
+    if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
+    env:
+      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: '${{ env.NODE }}'
+          cache: 'npm'
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Build Extension and Options Page
+        run: npx nx run-many -t build --projects acf-options-page acf-extension acf-i18n --prod --verbose --skip-nx-cache
         env:
-          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
           VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_SLOT }}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT }}
-          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
-          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
-          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
-          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0' }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
-
-      - name: Upload Options Page Artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: acf-options-page-${{ vars.VITE_PUBLIC_VARIANT }}
-          path: apps/acf-options-page/dist
-          retention-days: 7
-
-      - name: Determine Firebase Target
-        run: |
-          VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
-          TARGET="auto-clicker-auto-fill-$VARIANT"
-          echo "TARGET=$TARGET" >> $GITHUB_ENV
-
-      - name: Deploy Options Page to Firebase Hosting
-        id: deploy
-        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
-        with:
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: auto-clicker-autofill
-          target: ${{ env.TARGET }}
-          channelId: live
-
-      - name: Build Extension
-        if: ${{ !inputs.use_artifact }}
-        run: |
-          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
-        env:
           VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
           VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
@@ -102,7 +177,7 @@ jobs:
           VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
           VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
           VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0'}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0' }}
           DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
           OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
           EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
@@ -114,54 +189,166 @@ jobs:
           VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
           KEY: ${{ secrets.KEY }}
 
-      - name: Upload Extension Artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload Options Page Artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
-          name: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}
+          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-options-page/dist
+          retention-days: 7
+      - name: Upload I18n Artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-i18n/dist
+          retention-days: 7
+      - name: Upload Extension Artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
           path: apps/acf-extension/dist
           retention-days: 7
-
+  # ── 3. E2E Tests ──────────────────────────────────────────────────────────
+  e2e:
+    name: E2E Tests
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || 'Development' }}
+    permissions:
+      contents: read
+      actions: read
+    needs: [setup, build, lint, unit-test]
+    if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: '${{ env.NODE }}'
+          cache: 'npm'
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
       - name: Cache Playwright Browsers
         id: playwright-cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
         with:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ hashFiles('**/package-lock.json') }}
-
+          restore-keys: |
+            playwright-chromium-
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
-
+      - run: |
+          ls -la
+      - name: Download Options Page Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-options-page/dist
+      - name: Download I18n Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-i18n/dist
+      - name: Download Extension Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-extension/dist
+      - run: |
+          ls -la
       - name: Run E2E Tests
-        continue-on-error: true
         run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
           CI: 'true'
-
+          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
       - name: Publish E2E Report to Firebase Hosting
-        id: report
-        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
           target: auto-clicker-auto-fill-playwright
           channelId: live
 
-      - name: Check for coverage reports
-        id: coverage-check
+  # ── 4. Deploy ─────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: e2e
+    if: (github.base_ref == 'main' || github.event_name == 'workflow_dispatch') && inputs.deploy != false
+    environment:
+      name: Development
+      url: 'https://auto-clicker-auto-fill-playwright.web.app/'
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Determine Firebase Target
         run: |
-          if compgen -G 'packages/**/**/test-output/vitest/coverage/lcov.info' > /dev/null 2>&1; then
-            echo "found=true" >> $GITHUB_OUTPUT
-          else
-            echo "found=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 # v1.3.0
-        if: ${{ github.actor != 'dependabot[bot]' && steps.coverage-check.outputs.found == 'true' }}
+          VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
+          echo "TARGET=auto-clicker-auto-fill-$VARIANT" >> $GITHUB_ENV
+
+      - name: Download Options Page Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          # or
-          api-token: ${{ secrets.CODACY_API_TOKEN }}
-          coverage-reports: 'packages/**/**/test-output/vitest/coverage/lcov.info'
-          # or a comma-separated list for multiple reports
-          # coverage-reports: <PATH_TO_REPORT>, <PATH_TO_REPORT>
+          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-options-page/dist
+
+      - name: Download I18n Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-i18n/dist
+
+      - name: Download Extension Artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
+          path: apps/acf-extension/dist
+
+      - name: Deploy Options Page to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: ${{ env.TARGET }}
+          channelId: live
+
+      - name: Zip Extension
+        run: |
+          cd apps/acf-extension/dist
+          zip -r ../../../acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip .
+
+      - name: Upload to Chrome Web Store
+        if: inputs.upload_extension == true
+        uses: mnao305/chrome-extension-upload@cbba77bc133c3cdc6e0e4248abb5f093ec7e3bd1
+        with:
+          file-path: acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip
+          extension-id: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          publish: ${{ inputs.publish_extension }}
+          glob: true
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+      discussions: write
+    steps:
+      - name: Release to GitHub
+        id: release
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe
+        with:
+          prerelease: ${{ vars.VITE_PUBLIC_VARIANT == 'BETA' || vars.VITE_PUBLIC_VARIANT == 'DEV' }}
+          generate_release_notes: true
+          discussion_category_name: 'Release'

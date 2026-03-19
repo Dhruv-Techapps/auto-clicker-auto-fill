@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
-import { URLS } from '../base-url';
+import { URLS } from '../../helpers/base-url';
 
 export class SettingsPage {
   readonly nav: Locator;
