@@ -235,13 +235,13 @@ jobs:
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
+      - run: |
+          ls -la
       - name: Download Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: acf-artifacts-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: .
       - run: |
-          ls
           ls -la
       - name: Run E2E Tests
         run: npx nx run acf-e2e:e2e --skip-nx-cache
