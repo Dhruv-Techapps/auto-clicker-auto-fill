@@ -244,10 +244,10 @@ jobs:
       - name: Unzip Extension
         run: unzip acf-extension-${{ vars.VITE_PUBLIC_VARIANT }}.zip -d apps/acf-extension/dist
       - name: Run E2E Tests
-        run: npx nx run acf-e2e:e2e --skip-nx-cache
+        run: npx nx run acf-e2e:e2e --grep=test --skip-nx-cache
         env:
           CI: 'true'
-          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
+          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
 
   # ── 4. Deploy ─────────────────────────────────────────────────────────────
   deploy:
