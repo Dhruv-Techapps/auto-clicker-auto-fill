@@ -4,6 +4,8 @@ run-name: Pull Request for Development by @${{ github.actor }}
 
 on:
   pull_request:
+  push:
+    tags: ['v*']
   workflow_dispatch:
     inputs:
       environment:
@@ -44,6 +46,7 @@ jobs:
   # ── 0. Setup ──────────────────────────────────────────────────────────────
   setup:
     name: Setup
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,11 +54,9 @@ jobs:
       cache-key: ${{ steps.cache-key.outputs.key }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
-          node-version: '${{ env.NODE }}'
+          node-version: ${{ env.NODE }}
           cache: 'npm'
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
@@ -87,7 +88,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
-          node-version: '${{ env.NODE }}'
+          node-version: ${{ env.NODE }}
           cache: 'npm'
       - uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1
       - name: Restore node_modules
@@ -103,6 +104,7 @@ jobs:
   unit-test:
     name: Unit Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     needs: setup
@@ -112,7 +114,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
-          node-version: '${{ env.NODE }}'
+          node-version: ${{ env.NODE }}
           cache: 'npm'
       - uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1
       - name: Restore node_modules
@@ -140,6 +142,7 @@ jobs:
   # ── 2. Build ──────────────────────────────────────────────────────────────
   build:
     name: Build
+    timeout-minutes: 15 
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
@@ -155,7 +158,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
-          node-version: '${{ env.NODE }}'
+          node-version: ${{ env.NODE }}
           cache: 'npm'
       - name: Restore node_modules
         uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
@@ -194,19 +197,19 @@ jobs:
         with:
           name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
           path: apps/acf-options-page/dist
-          retention-days: 7
+          retention-days: 30
       - name: Upload I18n Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
           path: apps/acf-i18n/src
-          retention-days: 7
+          retention-days: 30
       - name: Upload Extension Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: acf-extension-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
           path: apps/acf-extension/dist
-          retention-days: 7
+          retention-days: 30
   # ── 3. E2E Tests ──────────────────────────────────────────────────────────
   e2e:
     name: E2E Tests
@@ -214,6 +217,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
+      url: ${{ steps.firebase-deploy.outputs.details_url }}  # <-- set env URL
+    outputs:
+      deploy-url: ${{ steps.firebase-deploy.outputs.details_url }}
     permissions:
       contents: read
       actions: read
@@ -225,7 +231,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
-          node-version: '${{ env.NODE }}'
+          node-version: ${{ env.NODE }}
           cache: 'npm'
       - name: Restore node_modules
         uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
@@ -264,12 +270,13 @@ jobs:
           CI: 'true'
           VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
       - name: Publish E2E Report to Firebase Hosting
+        id: firebase-deploy       
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
           target: auto-clicker-auto-fill-playwright
-          channelId: live
+          channelId: pr-${{ github.event.pull_request.number || 'manual' }}
 
   # ── 4. Deploy ─────────────────────────────────────────────────────────────
   deploy:
@@ -278,7 +285,7 @@ jobs:
     needs: e2e
     if: (github.base_ref == 'main' || github.event_name == 'workflow_dispatch') && inputs.deploy != false
     environment:
-      name: Development
+      name: ${{ inputs.environment || 'Development' }}
       url: 'https://auto-clicker-auto-fill-playwright.web.app/'
     permissions:
       contents: read
