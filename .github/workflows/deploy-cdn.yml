@@ -1,0 +1,26 @@
+name: Deploy [CDN]
+run-name: Deploy to CDN by @${{ github.actor }} on ${{ inputs.version || github.ref_name }}
+
+on:
+  workflow_dispatch:
+
+jobs:
+  main:
+    name: I18n deploy to firebase hosting
+    environment:
+      name: ${{inputs.environment}}
+      url: ${{ steps.release.outputs.url}}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+      discussions: write
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4.2.2
+      - uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-auto-fill-static
+          channelId: live

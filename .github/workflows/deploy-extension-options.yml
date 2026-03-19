@@ -1,0 +1,132 @@
+name: Deploy [Extension & Options Page]
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }} on ${{ inputs.version || github.ref_name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment of release'
+        type: environment
+        default: Development
+        required: true
+      upload_extension:
+        description: 'Extension to chrome webstore'
+        type: boolean
+        default: false
+        required: true
+      publish_extension:
+        description: 'Publish extension'
+        type: boolean
+        default: false
+        required: true
+      version:
+        description: 'Version (v4.0.0.0)'
+        type: string
+
+env:
+  FORCE_COLOR: 2
+  NODE: 24
+
+jobs:
+  main:
+    name: Build & Bundle & Publish
+    environment:
+      name: ${{inputs.environment}}
+      url: ${{ steps.release.outputs.url}}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+      discussions: write
+    env:
+      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4.2.2
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v4.4.0
+        with:
+          node-version: '${{ env.NODE }}'
+          registry-url: https://npm.pkg.github.com
+          scope: ${{github.repository_owner}}
+          cache: 'npm'
+      - uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1 # v4
+      - run: npm ci
+      - run: npx nx report
+      - name: Build Options Page
+        run: |
+          npx nx run acf-options-page:build --prod --base ${{ vars.VITE_PUBLIC_URL }} --verbose --skip-nx-cache
+        env:
+          VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
+          VITE_PUBLIC_CHROME_EXTENSION_ID: ${{vars.VITE_PUBLIC_CHROME_EXTENSION_ID}}
+          VITE_PUBLIC_I18N: ${{vars.VITE_PUBLIC_I18N}}
+          VITE_PUBLIC_URL: ${{vars.VITE_PUBLIC_URL}}
+          VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_SLOT}}
+          VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT}}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
+      - name: Build Extension
+        run: |
+          npx nx run acf-extension:build --prod --verbose --skip-nx-cache
+        env:
+          VITE_PUBLIC_NAME: ${{vars.VITE_PUBLIC_NAME}}
+          VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
+          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
+          OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
+          EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
+          VITE_PUBLIC_URL: ${{vars.VITE_PUBLIC_URL}}
+          API_SECRET: ${{vars.API_SECRET}}
+          MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
+          VITE_PUBLIC_UNINSTALL_URL: ${{vars.VITE_PUBLIC_UNINSTALL_URL}}
+      - name: Determine Firebase Target
+        run: |
+          VARIANT=$(echo "${{ vars.VITE_PUBLIC_VARIANT }}" | tr '[:upper:]' '[:lower:]')
+          TARGET="auto-clicker-auto-fill-$VARIANT"
+          echo "TARGET=$TARGET" >> $GITHUB_ENV
+      - name: Options Page to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: ${{ env.TARGET }}
+          channelId: live
+      - name: Bundle Projects
+        run: |
+          cd apps/acf-extension/dist
+          zip -r ../../../acf-extension-${{vars.VITE_PUBLIC_VARIANT}}.zip .
+          cd ../../../
+      - name: Extension to Chrome Webstore
+        if: ${{ inputs.upload_extension }}
+        uses: mnao305/chrome-extension-upload@4008e29e13c144d0f6725462cbd49b7c291b4928 # v5.0.0
+        id: chrome-extension-upload
+        with:
+          file-path: acf-extension-${{vars.VITE_PUBLIC_VARIANT}}.zip
+          extension-id: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          publish: ${{inputs.publish_extension}}
+          glob: true
+      - name: Release to Github
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836 # v2
+        if: startsWith(github.ref, 'refs/tags/')
+        id: release
+        with:
+          prerelease: ${{ vars.VITE_PUBLIC_VARIANT == 'BETA' || vars.VITE_PUBLIC_VARIANT == 'DEV'}}
+          generate_release_notes: true
+          discussion_category_name: 'Release'
