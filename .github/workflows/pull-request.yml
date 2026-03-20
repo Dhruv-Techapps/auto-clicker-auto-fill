@@ -148,10 +148,13 @@ jobs:
       name: ${{ inputs.environment || 'Development' }}
     permissions:
       contents: read
+    outputs:
+      deploy-i18n-url: ${{ steps.deploy-i18n.outputs.details_url }}
+      deploy-options-url: ${{ steps.deploy-options.outputs.details_url }}
     needs: [setup, lint, unit-test]
     if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
     env:
-      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+      VITE_PUBLIC_URL: ${{ steps.deploy-options.outputs.deploy-options-url }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
@@ -166,44 +169,63 @@ jobs:
           path: node_modules
           key: ${{ needs.setup.outputs.cache-key }}
 
-      - name: Build Extension and Options Page
-        run: npx nx run-many -t build --projects acf-options-page acf-extension --prod --verbose --skip-nx-cache
+      - name: Deploy I18n to Firebase Hosting
+        id: deploy-i18n
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: auto-clicker-auto-fill-static
+          expires: 15d
+          channelId: pr-${{ github.event.pull_request.number || 'manual' }}-i18n
+      
+      - name: Build Options Page
+        run: npx nx build acf-options-page --prod --verbose --skip-nx-cache
         env:
-          VITE_PUBLIC_CHROME_EXTENSION_ID: ${{ vars.VITE_PUBLIC_CHROME_EXTENSION_ID }}
-          VITE_PUBLIC_I18N: ${{ vars.VITE_PUBLIC_I18N }}
-          VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_SLOT }}
-          VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{ vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT }}
-          VITE_PUBLIC_NAME: ${{ vars.VITE_PUBLIC_NAME }}
-          VITE_PUBLIC_VARIANT: ${{ vars.VITE_PUBLIC_VARIANT }}
-          VITE_PUBLIC_FIREBASE_API_KEY: ${{ vars.VITE_PUBLIC_FIREBASE_API_KEY }}
-          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{ vars.VITE_PUBLIC_FIREBASE_DATABASE_URL }}
-          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.VITE_PUBLIC_FIREBASE_PROJECT_ID }}
-          VITE_PUBLIC_FIREBASE_BUCKET: ${{ vars.VITE_PUBLIC_FIREBASE_BUCKET }}
-          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{ vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL }}
-          VITE_PUBLIC_RELEASE_VERSION: ${{ inputs.version || 'v5.0.0.0' }}
-          DISCORD_CLIENT_ID: ${{ vars.DISCORD_CLIENT_ID }}
-          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
-          EDGE_OAUTH_CLIENT_ID: ${{ vars.EDGE_OAUTH_CLIENT_ID }}
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
-          API_SECRET: ${{ vars.API_SECRET }}
-          MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT }}
-          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{ secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN }}
-          VITE_PUBLIC_UNINSTALL_URL: ${{ vars.VITE_PUBLIC_UNINSTALL_URL }}
-          KEY: ${{ secrets.KEY }}
+          VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
+          VITE_PUBLIC_CHROME_EXTENSION_ID: ${{vars.VITE_PUBLIC_CHROME_EXTENSION_ID}}
+          VITE_PUBLIC_I18N: ${{steps.deploy-i18n.outputs.deploy-i18n-url}}
+          VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_SLOT}}
+          VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT}}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
+      
+      - name: Deploy Options Page to Firebase Hosting
+        id: deploy-options
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
+        with:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: auto-clicker-autofill
+          target: ${{ env.TARGET }}
+          expires: 15d
+          channelId: pr-${{ github.event.pull_request.number || 'manual' }}-options
 
-      - name: Upload Options Page Artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
-        with:
-          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-options-page/dist
-          retention-days: 30
-      - name: Upload I18n Artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
-        with:
-          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-i18n/src
-          retention-days: 30
+      - name: Build Extension
+        run: npx nx build acf-extension --prod --verbose --skip-nx-cache
+        env:
+          VITE_PUBLIC_NAME: ${{vars.VITE_PUBLIC_NAME}}
+          VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
+          VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
+          VITE_PUBLIC_FIREBASE_DATABASE_URL: ${{vars.VITE_PUBLIC_FIREBASE_DATABASE_URL}}
+          VITE_PUBLIC_FIREBASE_PROJECT_ID: ${{vars.VITE_PUBLIC_FIREBASE_PROJECT_ID}}
+          VITE_PUBLIC_FIREBASE_BUCKET: ${{vars.VITE_PUBLIC_FIREBASE_BUCKET}}
+          VITE_PUBLIC_FIREBASE_FUNCTIONS_URL: ${{vars.VITE_PUBLIC_FIREBASE_FUNCTIONS_URL}}
+          VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
+          DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
+          OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
+          EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
+          VITE_PUBLIC_URL: ${{steps.deploy-options.outputs.deploy-options-url}}
+          API_SECRET: ${{vars.API_SECRET}}
+          MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
+          VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
+          VITE_PUBLIC_UNINSTALL_URL: ${{vars.VITE_PUBLIC_UNINSTALL_URL}}
+      
       - name: Upload Extension Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
@@ -249,16 +271,7 @@ jobs:
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
-      - name: Download Options Page Artifact
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
-        with:
-          name: acf-options-page-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-options-page/dist
-      - name: Download I18n Artifact
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
-        with:
-          name: acf-i18n-artifact-${{ vars.VITE_PUBLIC_VARIANT }}-${{ github.sha }}
-          path: apps/acf-i18n/src
+      
       - name: Download Extension Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
@@ -268,7 +281,7 @@ jobs:
         run: npx nx run acf-e2e:e2e --skip-nx-cache
         env:
           CI: 'true'
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+          VITE_PUBLIC_URL: ${{ needs.build.outputs.deploy-options-url }}
       - name: Publish E2E Report to Firebase Hosting
         id: firebase-deploy
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
