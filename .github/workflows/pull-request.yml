@@ -1,6 +1,6 @@
 name: Pull Request
 
-run-name: Pull Request for Development by @${{ github.actor }}
+run-name: Pull Request for E2E by @${{ github.actor }}
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ on:
       environment:
         description: 'Environment of release'
         type: environment
-        default: Development
+        default: E2E
         required: true
       version:
         description: 'Version (v5.0.0.0)'
@@ -169,7 +169,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment || 'Development' }}
+      name: ${{ inputs.environment || 'E2E' }}
       url: ${{ steps.deploy-i18n.outputs.details_url }} # <-- set env URL
     permissions:
       contents: read
@@ -204,7 +204,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment || 'Development' }}
+      name: ${{ inputs.environment || 'E2E' }}
       url: ${{ steps.deploy-options.outputs.details_url }} # <-- set env URL
     permissions:
       contents: read
@@ -255,7 +255,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment || 'Development' }}
+      name: ${{ inputs.environment || 'E2E' }}
       url: ${{ steps.firebase-deploy.outputs.details_url }} # <-- set env URL
     permissions:
       contents: read
@@ -310,7 +310,7 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment || 'Development' }}
+      name: ${{ inputs.environment || 'E2E' }}
       url: ${{ steps.firebase-deploy.outputs.details_url }} # <-- set env URL
     outputs:
       deploy-url: ${{ steps.firebase-deploy.outputs.details_url }}
