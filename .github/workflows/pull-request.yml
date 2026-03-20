@@ -184,7 +184,7 @@ jobs:
         env:
           VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{vars.VITE_PUBLIC_CHROME_EXTENSION_ID}}
-          VITE_PUBLIC_I18N: ${{steps.deploy-i18n.outputs.deploy-i18n-url}}
+          VITE_PUBLIC_I18N: ${{steps.deploy-i18n.outputs.details_url}}
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_SLOT}}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT}}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
@@ -219,7 +219,7 @@ jobs:
           DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
           OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
           EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
-          VITE_PUBLIC_URL: ${{steps.deploy-options.outputs.deploy-options-url}}
+          VITE_PUBLIC_URL: ${{steps.deploy-options.outputs.details_url}}
           API_SECRET: ${{vars.API_SECRET}}
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
