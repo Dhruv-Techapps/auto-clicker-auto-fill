@@ -73,11 +73,13 @@ jobs:
             node-modules-
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: |
+          npm ci
+          npx nx report
 
-  # ── 1a. Lint & Format ─────────────────────────────────────────────────────
+  # ── 1a. Lint ─────────────────────────────────────────────────────
   lint:
-    name: Lint & Format
+    name: Lint
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -96,11 +98,31 @@ jobs:
         with:
           path: node_modules
           key: ${{ needs.setup.outputs.cache-key }}
-      - run: npx nx report
-      - run: npx nx format:check --verbose --skip-nx-cache
       - run: npx nx affected --target=lint --parallel=3 --verbose --skip-nx-cache
+    
+  # -─ 1b. Format ─────────────────────────────────────────────────────
+  format:
+    name: Format
+    permissions:
+      contents: read
+    needs: setup
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: ${{ env.NODE }}
+          cache: 'npm'
+      - uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+      - run: npx nx format:check --verbose --skip-nx-cache
 
-  # ── 1b. Unit Tests ────────────────────────────────────────────────────────
+  # ── 1c. Unit Tests ────────────────────────────────────────────────────────
   unit-test:
     name: Unit Tests
     runs-on: ubuntu-latest
@@ -138,22 +160,19 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           api-token: ${{ secrets.CODACY_API_TOKEN }}
           coverage-reports: 'packages/**/test-output/vitest/coverage/lcov.info'
-
-  # ── 2. Build ──────────────────────────────────────────────────────────────
-  build:
-    name: Build
+  
+  i18n:
+    name: Deploy I18n to Firebase Hosting
     timeout-minutes: 15
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
-      url: ${{ steps.firebase-deploy.outputs.details_url }} # <-- set env URL
+      url: ${{ steps.deploy-i18n.outputs.details_url }} # <-- set env URL
     permissions:
       contents: read
     outputs:
-      deploy-i18n-url: ${{ steps.deploy-i18n.outputs.details_url }}
-      deploy-options-url: ${{ steps.deploy-options.outputs.details_url }}
-    needs: [setup]
-    if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
+      url: ${{ steps.deploy-i18n.outputs.details_url }}
+    needs: setup
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
@@ -167,7 +186,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ needs.setup.outputs.cache-key }}
-
       - name: Deploy I18n to Firebase Hosting
         id: deploy-i18n
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0
@@ -178,12 +196,37 @@ jobs:
           expires: 15d
           channelId: pr-${{ github.event.pull_request.number || 'manual' }}-i18n
 
+  options_page:
+    name: Build & Deploy Options Page
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || 'Development' }}
+      url: ${{ steps.deploy-options.outputs.details_url }} # <-- set env URL
+    permissions:
+      contents: read
+    outputs:
+      url: ${{ steps.deploy-options.outputs.details_url }}
+    needs: [setup, i18n]
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: ${{ env.NODE }}
+          cache: 'npm'
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
       - name: Build Options Page
         run: npx nx build acf-options-page --prod --verbose --skip-nx-cache
         env:
           VITE_PUBLIC_VARIANT: ${{vars.VITE_PUBLIC_VARIANT}}
           VITE_PUBLIC_CHROME_EXTENSION_ID: ${{vars.VITE_PUBLIC_CHROME_EXTENSION_ID}}
-          VITE_PUBLIC_I18N: ${{ steps.deploy-i18n.outputs.details_url }}/locales
+          VITE_PUBLIC_I18N: ${{ needs.i18n.outputs.url }}/locales
           VITE_PUBLIC_GOOGLE_ADS_SLOT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_SLOT}}
           VITE_PUBLIC_GOOGLE_ADS_CLIENT: ${{vars.VITE_PUBLIC_GOOGLE_ADS_CLIENT}}
           VITE_PUBLIC_FIREBASE_API_KEY: ${{vars.VITE_PUBLIC_FIREBASE_API_KEY}}
@@ -193,7 +236,6 @@ jobs:
           VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || 'v5.0.0.0'}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
-
       - name: Deploy Options Page to Firebase Hosting
         id: deploy-options
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
@@ -204,6 +246,33 @@ jobs:
           expires: 15d
           channelId: pr-${{ github.event.pull_request.number || 'manual' }}-options
 
+  # ── 2. Build ──────────────────────────────────────────────────────────────
+  extension:
+    name: Build & Upload Extension
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || 'Development' }}
+      url: ${{ steps.firebase-deploy.outputs.details_url }} # <-- set env URL
+    permissions:
+      contents: read
+    outputs:
+      deploy-i18n-url: ${{ steps.deploy-i18n.outputs.details_url }}
+      deploy-options-url: ${{ steps.deploy-options.outputs.details_url }}
+    needs: [setup, i18n, options_page]
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: ${{ env.NODE }}
+          cache: 'npm'
+      - name: Restore node_modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
       - name: Build Extension
         run: npx nx build acf-extension --prod --verbose --skip-nx-cache
         env:
@@ -218,12 +287,13 @@ jobs:
           DISCORD_CLIENT_ID: ${{vars.DISCORD_CLIENT_ID}}
           OAUTH_CLIENT_ID: ${{vars.OAUTH_CLIENT_ID}}
           EDGE_OAUTH_CLIENT_ID: ${{vars.EDGE_OAUTH_CLIENT_ID}}
-          VITE_PUBLIC_URL: ${{steps.deploy-options.outputs.details_url}}
+          VITE_PUBLIC_URL: ${{needs.options_page.outputs.url}}
           API_SECRET: ${{vars.API_SECRET}}
           MEASUREMENT_ID: ${{vars.MEASUREMENT_ID}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
           VITE_PUBLIC_UNINSTALL_URL: ${{vars.VITE_PUBLIC_UNINSTALL_URL}}
+          KEY: ${{ secrets.KEY }}
 
       - name: Upload Extension Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
@@ -244,7 +314,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    needs: [setup, build]
+    needs: [setup, i18n, options_page, extension]
     if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -281,7 +351,7 @@ jobs:
         continue-on-error: true
         env:
           CI: 'true'
-          VITE_PUBLIC_URL: ${{ needs.build.outputs.deploy-options-url }}
+          VITE_PUBLIC_URL: ${{ needs.options_page.outputs.url }}
       - name: Publish E2E Report to Firebase Hosting
         id: firebase-deploy
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
