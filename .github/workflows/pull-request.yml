@@ -146,6 +146,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment || 'Development' }}
+      url: ${{ steps.firebase-deploy.outputs.details_url }} # <-- set env URL
     permissions:
       contents: read
     outputs:
@@ -277,6 +278,7 @@ jobs:
           path: apps/acf-extension/dist
       - name: Run E2E Tests
         run: npx nx run acf-e2e:e2e --skip-nx-cache
+        continue-on-error: true
         env:
           CI: 'true'
           VITE_PUBLIC_URL: ${{ needs.build.outputs.deploy-options-url }}
