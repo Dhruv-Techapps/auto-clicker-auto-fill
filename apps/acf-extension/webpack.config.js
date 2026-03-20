@@ -21,7 +21,6 @@ function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RE
     manifest.key = KEY;
   }
 
-
   return JSON.stringify(manifest, null, 2);
 }
 
