@@ -2,29 +2,19 @@
   "name": "acf-i18n",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "targets": {
-    "build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "apps/acf-i18n",
-        "commands": ["ls", "mkdir -p dist/locales", "cp -r src/locales dist/"],
-        "parallel": false
-      }
-    },
     "preview": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/acf-i18n",
-        "command": "npx http-server dist -p 3333"
-      },
-      "dependsOn": ["build"]
+        "command": "npx http-server src -p 3333"
+      }
     },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/acf-i18n",
-        "command": "npx http-server dist -p 3333"
-      },
-      "dependsOn": ["build"]
+        "command": "npx http-server src -p 3333"
+      }
     }
   }
 }

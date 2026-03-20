@@ -5,12 +5,15 @@ const path = require('path');
 const { BannerPlugin } = require('webpack');
 const fs = require('fs');
 //const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RELEASE_VERSION }) {
+function modify(buffer, { KEY, VITE_PUBLIC_NAME, OAUTH_CLIENT_ID, VITE_PUBLIC_RELEASE_VERSION, VITE_PUBLIC_URL }) {
   // copy-webpack-plugin passes a buffer
   const manifest = JSON.parse(buffer.toString());
   // make any modifications you like, such as
   manifest.version = VITE_PUBLIC_RELEASE_VERSION.replace('v', '');
   manifest.name = VITE_PUBLIC_NAME;
+  if (VITE_PUBLIC_URL) {
+    manifest.externally_connectable.matches.push(VITE_PUBLIC_URL + '/*');
+  }
   if (OAUTH_CLIENT_ID) {
     manifest.oauth2.client_id = OAUTH_CLIENT_ID;
   }
