@@ -100,7 +100,7 @@ jobs:
           path: node_modules
           key: ${{ needs.setup.outputs.cache-key }}
       - run: npx nx affected --target=lint --parallel=3 --verbose --skip-nx-cache
-    
+
   # -─ 1b. Format ─────────────────────────────────────────────────────
   format:
     name: Format
@@ -163,7 +163,7 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           api-token: ${{ secrets.CODACY_API_TOKEN }}
           coverage-reports: 'packages/**/test-output/vitest/coverage/lcov.info'
-  
+
   i18n:
     name: Deploy I18n to Firebase Hosting
     timeout-minutes: 15
