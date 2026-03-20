@@ -201,7 +201,7 @@ jobs:
         with:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: auto-clicker-autofill
-          target: ${{ env.TARGET }}
+          target: auto-clicker-auto-fill-dev
           expires: 15d
           channelId: pr-${{ github.event.pull_request.number || 'manual' }}-options
 
