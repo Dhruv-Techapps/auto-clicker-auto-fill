@@ -84,7 +84,7 @@
     "@nx/vite": "22.5.4",
     "@nx/vitest": "22.5.4",
     "@nx/web": "22.5.4",
-    "@nx/webpack": "22.5.4",
+    "@nx/webpack": "22.6.1",
     "@nx/workspace": "22.5.4",
     "@playwright/test": "^1.58.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.1",
