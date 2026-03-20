@@ -81,6 +81,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     needs: setup
@@ -103,6 +104,8 @@ jobs:
   # -─ 1b. Format ─────────────────────────────────────────────────────
   format:
     name: Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     needs: setup

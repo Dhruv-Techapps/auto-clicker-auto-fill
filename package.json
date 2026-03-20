@@ -120,7 +120,6 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "express": "^4.17.1",
-    "firebase-tools": "^15.11.0",
     "htmlparser2": "^10.0.0",
     "jiti": "2.5.1",
     "jsdom": "^28.1.0",
