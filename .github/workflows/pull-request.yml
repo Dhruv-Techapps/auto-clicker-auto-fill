@@ -178,7 +178,7 @@ jobs:
           target: auto-clicker-auto-fill-static
           expires: 15d
           channelId: pr-${{ github.event.pull_request.number || 'manual' }}-i18n
-      
+
       - name: Build Options Page
         run: npx nx build acf-options-page --prod --verbose --skip-nx-cache
         env:
@@ -194,7 +194,7 @@ jobs:
           VITE_PUBLIC_RELEASE_VERSION: ${{inputs.version || github.ref_name}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
-      
+
       - name: Deploy Options Page to Firebase Hosting
         id: deploy-options
         uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
@@ -225,7 +225,7 @@ jobs:
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: ${{vars.VITE_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT}}
           VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN: ${{secrets.VITE_PUBLIC_OTEL_EXPORTER_OTLP_TOKEN}}
           VITE_PUBLIC_UNINSTALL_URL: ${{vars.VITE_PUBLIC_UNINSTALL_URL}}
-      
+
       - name: Upload Extension Artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
@@ -271,7 +271,7 @@ jobs:
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
-      
+
       - name: Download Extension Artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
