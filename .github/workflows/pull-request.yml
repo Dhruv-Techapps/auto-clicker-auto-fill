@@ -153,8 +153,6 @@ jobs:
       deploy-options-url: ${{ steps.deploy-options.outputs.details_url }}
     needs: [setup, lint, unit-test]
     if: github.base_ref == 'main' || github.event_name == 'workflow_dispatch'
-    env:
-      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
