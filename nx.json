@@ -164,5 +164,6 @@
       "preVersionCommand": "npx nx run-many --targets=lint,test,build"
     }
   },
-  "neverConnectToCloud": true
+  "neverConnectToCloud": true,
+  "analytics": true
 }
