@@ -48,6 +48,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["wizard.js"],
+      "all_frames": true,
       "run_at": "document_end"
     }
   ],
