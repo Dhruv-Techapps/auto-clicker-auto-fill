@@ -18,21 +18,6 @@ on:
         type: string
         default: 'v5.0.0.0'
         required: false
-      upload_extension:
-        description: 'Upload extension to Chrome Webstore'
-        type: boolean
-        default: false
-        required: true
-      publish_extension:
-        description: 'Publish extension'
-        type: boolean
-        default: false
-        required: true
-      deploy:
-        description: 'Deploy to Firebase'
-        type: boolean
-        default: true
-        required: true
 
 env:
   FORCE_COLOR: 2
