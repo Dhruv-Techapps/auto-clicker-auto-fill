@@ -67,3 +67,6 @@ _site
 
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md
+
+.claude/worktrees
+.claude/settings.local.json
